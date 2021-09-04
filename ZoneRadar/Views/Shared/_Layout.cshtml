@@ -7,10 +7,9 @@
 
     <link href="~/Assets/CSS/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Assets/CSS/layout/navbar-footer.css" rel="stylesheet" />
-    @*<link href="~/Assets/CSS/fontawsome.min.css" rel="stylesheet" />*@
-    @*<link href="~/Assets/CSS/layout/fontawesome1.css" rel="stylesheet" />*@
+    <link href="~/Assets/CSS/all.min.css" rel="stylesheet" integrity='sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==' />
+    <!-- fontawesome CDN -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-
     @*@Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")*@
     @RenderSection("topCSS", required: false)
@@ -57,9 +56,9 @@
                             </h2>
                             <div id="collapseMyaccount" class="accordion-collapse collapse" aria-labelledby="headingMyaccount">
                                 <div class="accordion-body p-0">
-                                    <a class="nav-link" href="#">買家中心</a>
-                                    <a class="nav-link" href="#">賣家中心</a>
-                                    <a class="nav-link" href="#">修改個人資訊</a>
+                                    <a class="nav-link" href="~/MemberCenter/Pending">買家中心</a>
+                                    <a class="nav-link" href="~/MemberCenter/SellerCenter">賣家中心</a>
+                                    <a class="nav-link" href="~/MemberCenter/ProfileInfo">修改個人資訊</a>
                                     <a class="nav-link" href="#">登出</a>
                                 </div>
                             </div>
@@ -72,9 +71,9 @@
                                 <i class="far fa-user"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">買家中心</a></li>
-                                <li><a class="dropdown-item" href="#">賣家中心</a></li>
-                                <li><a class="dropdown-item" href="#">修改個人資訊</a></li>
+                                <li><a class="dropdown-item" href="~/MemberCenter/Pending">買家中心</a></li>
+                                <li><a class="dropdown-item" href="~/MemberCenter/SellerCenter">賣家中心</a></li>
+                                <li><a class="dropdown-item" href="~/MemberCenter/ProfileInfo">修改個人資訊</a></li>
                                 <li><a class="dropdown-item" href="#">登出</a></li>
                             </ul>
                         </div>
@@ -188,7 +187,7 @@
                 <div class="d-block d-md-none col-12 col-md-2 col-lg-2">
                     <p class="mb-0 py-3 fw-bolder" data-bs-toggle="collapse" data-bs-target="#company">公司</p>
                     <ul class="collapse list-unstyled m-0 py-3 border-bottom border-dark" id="company">
-                        <li class="mb-2 mb-lg-2"><a href="#">關於我們</a></li>
+                        <li class="mb-2 mb-lg-2"><a href="/Home/AboutZoneRadar">關於我們</a></li>
                         <li class="mb-2 mb-lg-2"><a href="#">常見問題</a></li>
                         <li class="mb-2 mb-lg-2"><a href="#">媒體報導</a></li>
                         <li class="mb-2 mb-lg-2"><a href="#">線上徵才</a></li>
