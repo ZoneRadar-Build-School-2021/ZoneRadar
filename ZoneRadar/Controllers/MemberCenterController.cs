@@ -25,5 +25,18 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+        public ActionResult Pending()
+        {
+            return View();
+        }
+        public ActionResult Processing()
+        {
+            return View();
+        }
+        public ActionResult Completed()
+        {
+            return View();
+        }
+
     }
 }

@@ -212,6 +212,11 @@
     <Content Include="Assets\CSS\leaflet.css" />
     <Content Include="Assets\CSS\material_blue.css" />
     <Content Include="Assets\CSS\membercenter.css" />
+    <Content Include="Assets\CSS\member_card\memberstyle_buyer.css" />
+    <Content Include="Assets\CSS\member_card\memberstyle_seller.css" />
+    <Content Include="Assets\CSS\order_state\membercenter_completedstyle.css" />
+    <Content Include="Assets\CSS\order_state\membercenter_pending.css" />
+    <Content Include="Assets\CSS\order_state\membercenter_processing.css" />
     <Content Include="Assets\CSS\profile.css" />
     <Content Include="Assets\CSS\static\StaticPage.css" />
     <Content Include="Assets\CSS\swiper-bundle.min.css" />
@@ -239,6 +244,9 @@
     <Content Include="Assets\IMG\icons\toilet.svg" />
     <Content Include="Assets\IMG\icons\whiteboard.svg" />
     <Content Include="Assets\IMG\icons\wifi.svg" />
+    <Content Include="Assets\IMG\member_card\Jetset Sound AV, LLC J..jpg" />
+    <Content Include="Assets\IMG\member_card\Nicky K..jpg" />
+    <Content Include="Assets\IMG\member_card\Sandro K..jpg" />
     <Content Include="Assets\IMG\static\fistbump-over-desk.jpg" />
     <Content Include="Assets\IMG\ZONERadar.png" />
     <Content Include="Assets\JS\booking\booking.js" />
@@ -312,6 +320,11 @@
     <Content Include="Views\Home\AboutZoneRadar.cshtml" />
     <Content Include="Views\MemberCenter\ProfileInfo.cshtml" />
     <Content Include="Views\Booking\BookingPage.cshtml" />
+    <Content Include="Views\MemberCenter\Pending.cshtml" />
+    <Content Include="Views\MemberCenter\Processing.cshtml" />
+    <Content Include="Views\MemberCenter\Completed.cshtml" />
+    <Content Include="Views\Booking\SellerCard.cshtml" />
+    <Content Include="Views\Booking\BuyerCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
