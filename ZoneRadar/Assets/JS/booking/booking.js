@@ -1,7 +1,7 @@
 ;
 (function () {
   // Swiper
-  const swiper = new Swiper('.swiper', {
+    const swiper = new Swiper('.venue-img-group.swiper', {
     // Optional parameters
     loop: true,
 
@@ -23,16 +23,14 @@
     },
   });
 
-  // Flatepickr中文化
+  // Flatepickr
   flatpickr.localize(flatpickr.l10ns.zh_tw);
-  // 選擇日期
   const chooseDatePicker = flatpickr("#date", {
     altInput: true,
     altFormat: "F j, Y",
     dateFormat: "Y-m-d",
     disableMobile: "true"
   });
-  // 選擇時間
   const startTimePicker = flatpickr("#start-time", {
     altInput: true,
     enableTime: true,
@@ -50,7 +48,7 @@
     disableMobile: "true"
   });
 
-  // 地圖
+
   const map = L.map('map', {
     center: [25.041824011585646, 121.53629849747963],
     zoom: 17

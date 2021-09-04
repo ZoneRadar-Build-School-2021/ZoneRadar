@@ -199,7 +199,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\CSS\booking.css" />
+    <Content Include="Assets\CSS\all.min.css" />
+    <Content Include="Assets\CSS\booking\booking.css" />
     <Content Include="Assets\CSS\bootstrap-icons.css" />
     <Content Include="Assets\CSS\bootstrap.min.css" />
     <Content Include="Assets\CSS\flatpickr.min.css" />
@@ -240,7 +241,7 @@
     <Content Include="Assets\IMG\icons\wifi.svg" />
     <Content Include="Assets\IMG\static\fistbump-over-desk.jpg" />
     <Content Include="Assets\IMG\ZONERadar.png" />
-    <Content Include="Assets\JS\booking.js" />
+    <Content Include="Assets\JS\booking\booking.js" />
     <Content Include="Assets\JS\bootstrap.bundle.min.js" />
     <Content Include="Assets\JS\flatpickr.js" />
     <Content Include="Assets\JS\index\index.js" />
@@ -309,12 +310,12 @@
     <Content Include="Views\MemberCenter\AddSpace.cshtml" />
     <Content Include="Views\Home\Policy.cshtml" />
     <Content Include="Views\Home\AboutZoneRadar.cshtml" />
-    <Content Include="Views\MemberCenter\PersonalInfo.cshtml" />
+    <Content Include="Views\MemberCenter\ProfileInfo.cshtml" />
+    <Content Include="Views\Booking\BookingPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
-    <Folder Include="Views\Booking\" />
     <Folder Include="Views\Searching\" />
   </ItemGroup>
   <ItemGroup>

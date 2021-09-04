@@ -21,7 +21,7 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
-        public ActionResult PersonalInfo()
+        public ActionResult ProfileInfo()
         {
             return View();
         }
