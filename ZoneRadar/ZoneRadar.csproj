@@ -211,8 +211,10 @@
     <Content Include="Assets\CSS\leaflet.css" />
     <Content Include="Assets\CSS\material_blue.css" />
     <Content Include="Assets\CSS\membercenter.css" />
+    <Content Include="Assets\CSS\profile.css" />
     <Content Include="Assets\CSS\static\StaticPage.css" />
     <Content Include="Assets\CSS\swiper-bundle.min.css" />
+    <Content Include="Assets\IMG\head.png" />
     <Content Include="Assets\IMG\icons\apple_tv.svg" />
     <Content Include="Assets\IMG\icons\breakout_room.svg" />
     <Content Include="Assets\IMG\icons\chair.svg" />
@@ -307,6 +309,7 @@
     <Content Include="Views\MemberCenter\AddSpace.cshtml" />
     <Content Include="Views\Home\Policy.cshtml" />
     <Content Include="Views\Home\AboutZoneRadar.cshtml" />
+    <Content Include="Views\MemberCenter\PersonalInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
