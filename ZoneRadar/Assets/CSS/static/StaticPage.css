@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.about-text-pic {
+    max-width: 100%;
+    width: 100%;
+    min-height: 70%
+}
+
+.about-text {
+    margin: 0;
+}
+
+/* .join-our-team {
+    background-image: url("./image/fistbump-over-desk.jpg");
+    background-position: top center;
+    background-size: cover;
+    min-height: 400px;
+} */
+.join-our-team {
+    object-fit: cover;
+    height: 65vh;
+    background-image: url(/Assets/IMG/static/fistbump-over-desk.jpg);
+    background-size: cover;
+}
+
+.container-fluid {
+    width: 100%;
+}
+
+@media only screen and (min-width: 960px) {
+    .about-text {
+        margin: 60px 0 60px;
+    }
+}
+
+/* Serve */
+a,
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.list-group li:hover {
+    flex-wrap: wrap;
+    padding: 0;
+    margin-bottom: 0;
+    list-style: none;
+    background-color: #ffa042;
+}
+
+.list-group {
+    margin: 20px 0 10px;
+    flex-wrap: wrap;
+    padding-left: 0;
+    list-style: none;
+    text-align: center;
+}
+
+h2,
+h3 {
+    font-size: 30px;
+    color: #ffa042;
+}
+
+.Inside {
+    font-size: 17px;
+}
+
+.InsideList li {
+    list-style-type: decimal;
+}
+
+/* summary
+{
+    text-indent: 25%;
+} */
+.QuestionPage,
+.AboutPage,
+.ServePage {
+    margin: 20px 0 10px;
+}
+
+li {
+    list-style-type: none;
+}
+
+body {
+    word-break: break-all;
+}

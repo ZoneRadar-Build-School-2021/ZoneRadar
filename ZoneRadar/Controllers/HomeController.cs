@@ -26,5 +26,15 @@ namespace ZoneRadar.Controllers
 
             return View();
         }
+
+        public ActionResult Policy()
+        {
+            return View();
+        }
+
+        public ActionResult AboutZoneRadar()
+        {
+            return View();
+        }
     }
 }

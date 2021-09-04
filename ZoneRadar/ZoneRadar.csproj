@@ -211,6 +211,7 @@
     <Content Include="Assets\CSS\leaflet.css" />
     <Content Include="Assets\CSS\material_blue.css" />
     <Content Include="Assets\CSS\membercenter.css" />
+    <Content Include="Assets\CSS\static\StaticPage.css" />
     <Content Include="Assets\CSS\swiper-bundle.min.css" />
     <Content Include="Assets\IMG\icons\apple_tv.svg" />
     <Content Include="Assets\IMG\icons\breakout_room.svg" />
@@ -235,6 +236,7 @@
     <Content Include="Assets\IMG\icons\toilet.svg" />
     <Content Include="Assets\IMG\icons\whiteboard.svg" />
     <Content Include="Assets\IMG\icons\wifi.svg" />
+    <Content Include="Assets\IMG\static\fistbump-over-desk.jpg" />
     <Content Include="Assets\IMG\ZONERadar.png" />
     <Content Include="Assets\JS\booking.js" />
     <Content Include="Assets\JS\bootstrap.bundle.min.js" />
@@ -303,6 +305,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\MemberCenter\SellerCenter.cshtml" />
     <Content Include="Views\MemberCenter\AddSpace.cshtml" />
+    <Content Include="Views\Home\Policy.cshtml" />
+    <Content Include="Views\Home\AboutZoneRadar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
