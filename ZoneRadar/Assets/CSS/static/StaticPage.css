@@ -61,15 +61,16 @@ a:hover {
 
 h2,
 h3 {
+    word-wrap: break-word;
     font-size: 30px;
     color: #ffa042;
 }
 
-.Inside {
+.Inside-static {
     font-size: 17px;
 }
 
-.InsideList li {
+.Inside-static-List li {
     list-style-type: decimal;
 }
 
@@ -89,4 +90,19 @@ li {
 
 body {
     word-break: break-all;
+}
+
+p {
+    word-wrap: break-word;
+    padding-left: 30px;
+}
+
+li p {
+    padding: 0 0;
+}
+
+@media only screen and (max-width: 500px) {
+    h2, h3 {
+        white-space: pre;
+    }
 }
