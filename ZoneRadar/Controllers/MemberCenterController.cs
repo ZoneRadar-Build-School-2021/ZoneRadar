@@ -13,5 +13,13 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+        public ActionResult SellerCenter()
+        {
+            return View();
+        }
+        public ActionResult AddSpace()
+        {
+            return View();
+        }
     }
 }
