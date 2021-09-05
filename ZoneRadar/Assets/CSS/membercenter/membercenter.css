@@ -204,8 +204,9 @@
 .SpaceCardBody>p {
 	color: #555555;
 }
-
-
+.fa-star{
+	font-size:24px;
+}
 /* 商品卡手機 */
 @media screen and (max-width:767px) {
 	.SpaceCardimg {
