@@ -13,5 +13,10 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+
+        public ActionResult SearchingPage()
+        {
+            return View();
+        }
     }
 }

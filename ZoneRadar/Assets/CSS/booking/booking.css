@@ -21,7 +21,7 @@ p {
 
 a {
   text-decoration: none;
-  color: black;
+  color: inherit;
 }
 
 a:hover {
@@ -34,7 +34,6 @@ a:hover {
 
 .container {
   max-width: 1100px;
-  margin-top: 85px;
 }
 
 .venue-img-group.swiper {
@@ -67,10 +66,6 @@ a:hover {
 
 .btn-save:hover::before {
   font-weight: 900;
-}
-
-.venue-img-group-wrapper.venue-img-wrapper {
-  position: relative;
 }
 
 .venue-img {
@@ -114,15 +109,6 @@ a:hover {
 
 .review-link:hover {
   color: #cccccc;
-}
-
-.venue-info > li::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 100%;
-  background-color: #cccccc;
 }
 
 .review-brief .user-pic {
@@ -174,7 +160,10 @@ a:hover {
   background: var(--gray-btn-hover);
 }
 
-.booking-card {
+
+.booking-card.sticky-top {
+  top: 5.5rem;
+  border-radius: 5px;
   border: 1px solid #cccccc;
 }
 
@@ -352,11 +341,6 @@ a:hover {
   color: #9b9b9b;
 }
 
-.booking-card.sticky-top {
-  top: 2rem;
-  border-radius: 5px;
-}
-
 .venue-price::after {
   content: " / 小時";
   font-size: 18px;
@@ -417,6 +401,7 @@ a:hover {
   .map-wrapper {
     padding-bottom: 55%;
   }
+
 }
 
 @media screen and (min-width: 1200px) {
