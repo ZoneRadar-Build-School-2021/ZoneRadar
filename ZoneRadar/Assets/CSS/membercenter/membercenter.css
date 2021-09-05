@@ -6,7 +6,7 @@
 	margin-top: 50px;
 }
 .containerForAdd{
-	max-width:800px;
+	max-width:1100px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 50px;
@@ -143,12 +143,25 @@
 }
 
 /* 增加場地 */
-.containerForAdd>.row{
-	border-bottom: #EEEEEE 0.5px solid;
-	
-} 
+.containerForAddOut{
+	min-width: 1100px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+
+}
+
 .containerForAdd>.row:last-child{
 		border-bottom: 0px ;
+}
+.imgBox{
+	border: #cccccc 0.2px solid;
+	background-color: #ffffff;
+	border-radius: 5px;
+	font-size: 16px;
+	padding: 8px 15px;
+	color: #555555;
+
 }
 .fa-lightbulb {
 	font-size: 25px;
@@ -202,11 +215,46 @@
 		font-size: 14px;
 	}
 }
+.bi-cart-x-fill,
 .form-check-input:focus,
 .form-control:focus,
 .form-select:focus,
-.deleteBtn:focus {
+.deleteBtn:focus,
+.accordion-button:focus{
 	box-shadow: none;
+}
+.accordion-button:not(.collapsed){
+	background-color:#ffffff;
+}
+.accordion-item{
+	border: 0px;
+}
+.accordion-button {
+	border-bottom: 1px solid #049DD9;
+}
+/* .accordion-button:focus {
+	border-bottom: 1px solid #049DD9;
+} */
+.accordion-button:not(.collapsed) {
+	color: #049DD9;
+}
+.bi-cart-x-fill:not(.collapsed),
+.bi-bricks:not(.collapsed) {
+	color: #555555;
+}
+.bi-cart-x-fill{width: 50px;}
+.addphoto{
+	width: 40px;
+}
+.location{
+	width: 30px;}
+.cleaning{
+	width: 40px;
+	}
+.enhanced{
+}
+.speed-square {
+	width: 40px;
 }
 /* switch radio 自定義 */
 .radioGroup {
@@ -286,4 +334,11 @@
 	text-align: center;
 	font-size: 18px;
 	color: #aaaaaa;
+}
+.accordion-item:first-of-type .accordion-button{
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+.operating_hours_time{
+	width: 80PX;
 }
