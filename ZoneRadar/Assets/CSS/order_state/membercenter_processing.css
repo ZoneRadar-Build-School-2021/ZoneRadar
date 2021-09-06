@@ -1,172 +1,157 @@
 img {
-  max-width: 100%;
-  height: auto;
-  vertical-align: middle;
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
 }
 
 .member_container {
-  max-width: 1140px;
+    max-width: 1140px;
 }
 
-.memberbuyer_container{
-  margin-top: -50px;
+.memberbuyer_container {
+    margin-top: -50px;
 }
 
-.btn:focus{
-  box-shadow: none;
+.memberbuyer_title {
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: -20px;
+}
+
+.btn:focus {
+    box-shadow: none;
 }
 
 
 .memberbuyer_state {
-  list-style: none;
+    list-style: none;
 }
 
-.memberbuyer_state a {
-  text-decoration: none;
-  color: #000;
-  border-bottom: 2px solid transparent;
-}
+    .memberbuyer_state a {
+        text-decoration: none;
+        color: #000;
+        border-bottom: 2px solid transparent;
+    }
 
-.memberbuyer_state a:hover {
-  color: #cccccc;
-  border-bottom: 2px solid #D9831A;
-}
+        .memberbuyer_state a:hover {
+            color: #cccccc;
+            border-bottom: 2px solid #D9831A;
+        }
 
 .fa-star {
-  color: #D9831A;
+    color: #D9831A;
 }
 
 .memberbuyer_processing {
-  border: 1px solid #D9831A;
-  border-radius: 5px;
-}
-
-.memberbuyer_processing_num,
-.memberbuyer_processing_pic,
-.memberbuyer_processing_txt {
-  border-bottom: 0.5px solid #D9831A;
+    border-bottom: 1px solid #CCCCCC;
 }
 
 .memberbuyer_processing_num {
-  color: #D9831A;
+    color: #D9831A;
 }
 
-.memberbuyer_processing_num a {
-  text-decoration: none;
-  color: #fff;
-  background-color: #D9831A;
-  border-radius: 10px;
-}
+    .memberbuyer_processing_num a {
+        text-decoration: none;
+        color: #fff;
+        background-color: #D9831A;
+        border-radius: 10px;
+    }
 
-.memberbuyer_processing_num a:hover {
-  background-color: #be7418;
-}
+        .memberbuyer_processing_num a:hover {
+            background-color: #be7418;
+        }
 
 .memberbuyer_processing_nun_date {
-  display: inline-block;
-  text-align: right;
+    display: inline-block;
+    text-align: right;
 }
 
 .memberbuyer_processing_pic img {
-  width: 100%;
+    width: 100%;
 }
 
 .memberbuyer_processing_txt_title a {
-  text-decoration: none;
-  color: #000;
+    text-decoration: none;
+    color: #000;
 }
 
-.memberbuyer_processing_txt_title a:hover {
-  color: #cccccc
-}
+    .memberbuyer_processing_txt_title a:hover {
+        color: #cccccc
+    }
 
-.fa-wifi,
-.fa-video,
-.fa-briefcase-medical {
-  background-color: #D9831A;
-  color: #fff;
-  border-radius: 10px;
-}
 
 .memberbuyer_processing_txt_price {
-  display: inline-block;
-  margin-top: auto;
-  margin-bottom: auto;
+    display: inline-block;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .memberbuyer_processing_txt_price_title {
-  color: #D9831A;
-  font-weight: bolder;
-  text-align: right;
-  margin: 0px;
+    color: #D9831A;
+    font-weight: bolder;
+    text-align: right;
+    margin: 0px;
 }
 
 .memberbuyer_processing_txt_price {
-  color: #D9831A;
-  font-weight: bolder;
-  font-size: 35px;
+    color: #D9831A;
+    font-weight: bolder;
+    font-size: 35px;
 }
 
 .memberbuyer_processing_txt_iconprice {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 
 .memberbuyer_processing_btn .btn {
-  background-color: #fff;
-  border: 1px solid #cccccc;
-  color: #000;
+    background-color: #fff;
+    border: 1px solid #cccccc;
+    color: #000;
 }
 
-.memberbuyer_processing_btn .btn:hover {
-  background-color: #CCCCCC;
-  border: 1px solid #cccccc;
-  color: #fff;
-}
+    .memberbuyer_processing_btn .btn:hover {
+        background-color: #CCCCCC;
+        border: 1px solid #cccccc;
+        color: #fff;
+    }
 
-.memberbuyer_processing_btn .btn:nth-child(2) {
-  background-color: #D9831A;
-  color: #fff;
-}
+    .memberbuyer_processing_btn .btn:nth-child(2) {
+        background-color: #D9831A;
+        color: #fff;
+    }
 
-.memberbuyer_processing_btn .btn:nth-child(2):hover {
-  background-color: #be7418;
-
-}
+        .memberbuyer_processing_btn .btn:nth-child(2):hover {
+            background-color: #be7418;
+        }
 
 @media (max-width:767px) {
-  .memberbuyer_processing_num_ordernum {
-    text-align: left;
-  }
+    .memberbuyer_processing_num_ordernum {
+        text-align: left;
+    }
 
-  .memberbuyer_processing_nun_date {
-    text-align: left;
-  }
+    .memberbuyer_processing_nun_date {
+        text-align: left;
+    }
 
-  .fa-wifi,
-  .fa-video,
-  .fa-briefcase-medical {
-    padding: 10px !important;
-  }
+    .fa-wifi,
+    .fa-video,
+    .fa-briefcase-medical {
+        padding: 10px !important;
+    }
 
-  .memberbuyer_processing_txt_price_title {
-    font-size: 10px;
-  }
+    .memberbuyer_processing_txt_price_title {
+        font-size: 10px;
+    }
 
-  .memberbuyer_processing_txt_price {
-    font-size: 25px;
-  }
+    .memberbuyer_processing_txt_price {
+        font-size: 25px;
+    }
 
-
-  .memberbuyer_processing {
-    border: 1px solid #D9831A;
-    border-radius: 5px;
-  }
-
-  .memberbuyer_processing_num,
-  .memberbuyer_processing_pic,
-  .memberbuyer_processing_txt {
-    border-bottom: none;
-  }
+    .memberbuyer_processing_num,
+    .memberbuyer_processing_pic,
+    .memberbuyer_processing_txt {
+        border-bottom: none;
+    }
 }
