@@ -29,23 +29,25 @@ img {
     cursor: pointer;
     color: #049DD9;
 }
+
 .myplace_space_card {
     position: relative;
 }
-.myplace_space_card img {
-    width: 100%;
-}
+
+    .myplace_space_card img {
+        width: 100%;
+    }
 
 .myplace_title {
     border-bottom: 1px solid #CCCCCC;
 }
 
-.fa-pencil-alt{
+.fa-pencil-alt {
     color: #049DD9;
 }
-.fa-times{
+
+.fa-times {
     color: #E82953;
-    
 }
 
 .space_card_title {
@@ -59,58 +61,66 @@ img {
     cursor: pointer;
 }
 
-.space_card_title:hover {
-    color: #049DD9;
-}
+    .space_card_title:hover {
+        color: #049DD9;
+    }
 
 .space_card_location {
     cursor: pointer;
 }
 
-.space_card_location:hover {
-    color: #CCCCCC;
-}
+    .space_card_location:hover {
+        color: #CCCCCC;
+    }
 
-.fa-star{
+.fa-star {
     color: #D9831A;
 }
 
-.reviewsfromhost_review_card{
+.reviewsfromhost_review_card {
     border-bottom: 1px solid #CCCCCC;
 }
 
-.reviewsfromhost_review_card img{
-    width: 75px;
-    height: 75px;
-    border-radius: 100%;
-    border: 2px solid #049DD9;
-    display: block;
-    margin: auto;
-}
+    .reviewsfromhost_review_card img {
+        width: 75px;
+        height: 75px;
+        border-radius: 100%;
+        border: 2px solid #049DD9;
+        display: block;
+        margin: auto;
+    }
 
-.reviewsfromhost_review_card_txt a:nth-child(1){
+.reviewsfromhost_review_card_txt a:nth-child(1) {
     color: #000;
 }
 
-.reviewsfromhost_review_card_txt a:nth-child(1):hover{
+    .reviewsfromhost_review_card_txt a:nth-child(1):hover {
+        color: #CCCCCC;
+    }
+
+.reviewsfromhost_review_card_txt_location_a span {
     color: #CCCCCC;
 }
 
-.reviewsfromhost_review_card_txt a{
+    .reviewsfromhost_review_card_txt_location_a span:hover {
+        color: #838282;
+    }
+
+.reviewsfromhost_review_card_txt a {
     text-decoration: none;
     color: #CCCCCC;
 }
 
-.reviewsfromhost_review_card_txt a:hover{
-    color:#838282;
-}
+    .reviewsfromhost_review_card_txt a:hover {
+        color: #838282;
+    }
 
 .reviewsfromhost_review_card_txt_date {
     margin: 0px;
     color: #CCCCCC;
 }
 
-.reviewsfromhost_review_card_txt_place{
+.reviewsfromhost_review_card_txt_place {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -128,16 +138,15 @@ img {
         padding-right: 20px;
     }
 
-    .reviewsfromhost_review_card_txt_name{
-        text-align: center;
-    }
-    
-    .reviewsfromhost_review_card_txt_star{
+    .reviewsfromhost_review_card_txt_name {
         text-align: center;
     }
 
-    .reviewsfromhost_review_card_txt_check{
+    .reviewsfromhost_review_card_txt_star {
         text-align: center;
     }
 
+    .reviewsfromhost_review_card_txt_check {
+        text-align: center;
+    }
 }
