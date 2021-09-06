@@ -199,7 +199,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\CSS\all.min.css" />
+    <Content Include="Assets\CSS\all.css" />
     <Content Include="Assets\CSS\booking\booking.css" />
     <Content Include="Assets\CSS\bootstrap-icons.css" />
     <Content Include="Assets\CSS\bootstrap.min.css" />
@@ -250,6 +250,7 @@
     <Content Include="Assets\IMG\icons\toilet.svg" />
     <Content Include="Assets\IMG\icons\whiteboard.svg" />
     <Content Include="Assets\IMG\icons\wifi.svg" />
+    <Content Include="Assets\IMG\index\woman.jfif" />
     <Content Include="Assets\IMG\member_card\Jetset Sound AV, LLC J..jpg" />
     <Content Include="Assets\IMG\member_card\Nicky K..jpg" />
     <Content Include="Assets\IMG\member_card\Sandro K..jpg" />
