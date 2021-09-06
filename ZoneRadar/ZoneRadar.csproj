@@ -211,25 +211,31 @@
     <Content Include="Assets\CSS\layout\navbar-footer.css" />
     <Content Include="Assets\CSS\leaflet.css" />
     <Content Include="Assets\CSS\material_blue.css" />
-    <Content Include="Assets\CSS\membercenter.css" />
+    <Content Include="Assets\CSS\membercenter\membercenter.css" />
+    <Content Include="Assets\CSS\membercenter\Seller_completedstyle.css" />
     <Content Include="Assets\CSS\member_card\memberstyle_buyer.css" />
     <Content Include="Assets\CSS\member_card\memberstyle_seller.css" />
     <Content Include="Assets\CSS\order_state\membercenter_completedstyle.css" />
     <Content Include="Assets\CSS\order_state\membercenter_pending.css" />
     <Content Include="Assets\CSS\order_state\membercenter_processing.css" />
-    <Content Include="Assets\CSS\profile.css" />
+    <Content Include="Assets\CSS\profile\profile.css" />
+    <Content Include="Assets\CSS\searching\searching.css" />
     <Content Include="Assets\CSS\static\StaticPage.css" />
     <Content Include="Assets\CSS\swiper-bundle.min.css" />
     <Content Include="Assets\IMG\head.png" />
+    <Content Include="Assets\IMG\icons\addphoto.png" />
     <Content Include="Assets\IMG\icons\apple_tv.svg" />
     <Content Include="Assets\IMG\icons\breakout_room.svg" />
     <Content Include="Assets\IMG\icons\chair.svg" />
     <Content Include="Assets\IMG\icons\cleaning-solution.svg" />
     <Content Include="Assets\IMG\icons\coffee.svg" />
+    <Content Include="Assets\IMG\icons\dollar.svg" />
+    <Content Include="Assets\IMG\icons\filter-gray.svg" />
     <Content Include="Assets\IMG\icons\gift-box.svg" />
     <Content Include="Assets\IMG\icons\handicap_access.svg" />
     <Content Include="Assets\IMG\icons\kitchen.svg" />
     <Content Include="Assets\IMG\icons\lighting.svg" />
+    <Content Include="Assets\IMG\icons\location-icon.svg" />
     <Content Include="Assets\IMG\icons\monitor.svg" />
     <Content Include="Assets\IMG\icons\parking.svg" />
     <Content Include="Assets\IMG\icons\person.svg" />
@@ -258,8 +264,9 @@
     <Content Include="Assets\JS\layout\navbar-footer.js" />
     <Content Include="Assets\JS\leaflet.js" />
     <Content Include="Assets\JS\leaflet.markercluster.js" />
+    <Content Include="Assets\JS\searching\searching.js" />
     <Content Include="Assets\JS\swiper-bundle.min.js" />
-    <Content Include="Assets\JS\swiper-locale zh-tw.js" />
+    <Content Include="Assets\JS\zh-tw.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -326,11 +333,13 @@
     <Content Include="Views\MemberCenter\Completed.cshtml" />
     <Content Include="Views\Booking\SellerCard.cshtml" />
     <Content Include="Views\Booking\BuyerCard.cshtml" />
+    <Content Include="Views\Searching\SearchingPage.cshtml" />
+    <Content Include="Views\MemberCenter\SellerOrder.cshtml" />
+    <Content Include="Views\MemberCenter\SellerOrderCompleted.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
-    <Folder Include="Views\Searching\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

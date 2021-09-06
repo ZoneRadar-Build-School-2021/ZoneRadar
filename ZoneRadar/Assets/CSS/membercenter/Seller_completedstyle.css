@@ -1,0 +1,211 @@
+.main{
+    margin-left: auto;
+    
+}
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+.member_container {
+    max-width: 1140px;
+}
+
+.memberSeller_container{
+    margin-top: -50px;
+}
+
+.memberSeller_state {
+    list-style: none;
+}
+
+.memberSeller_state a {
+    text-decoration: none;
+    color: #000;
+    border-bottom: 2px solid transparent;
+}
+
+.memberSeller_state a:hover {
+    color: #cccccc;
+    border-bottom: 2px solid #049DD9;
+}
+
+.fa-star {
+    color: #049DD9;
+}
+
+.memberSeller_completed{
+  border: 1px solid #049DD9;
+  border-radius: 5px;
+}
+
+.memberSeller_completed_num,
+.membeSeller_completed_txt{
+  border-bottom: 0.5px solid #049DD9;
+}
+
+.memberSeller_completed_num {
+    color: #049DD9;
+}
+
+.memberSeller_completed_num a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #049DD9;
+    border-radius: 10px;
+}
+
+.memberSeller_completed_num a:hover {
+    background-color: #049DD9;
+}
+
+.memberSeller_completed_num_completed {
+    display: inline-block;
+    text-align: right;
+}
+
+.memberSeller_completed_pic img {
+    width: 100%;
+}
+
+.memberSeller_completed_txt_title a {
+    text-decoration: none;
+    color: #000;
+}
+
+.memberSeller_completed_txt_title a:hover {
+    color: #cccccc
+}
+
+.fa-wifi,
+.fa-video,
+.fa-briefcase-medical {
+    background-color: #049DD9;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.memberSeller_completed_txt_price {
+    display: inline-block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.memberSeller_completed_txt_price_title{
+    color: #049DD9;
+    font-weight: bolder;
+    text-align: right;
+    margin: 0px;
+}
+
+.memberSeller_completed_txt_price{
+    color: #049DD9;
+    font-weight:bolder;
+    font-size: 35px;
+}
+
+.memberSeller_completed_txt_iconprice{
+  display: flex;
+  justify-content:space-between;
+}
+
+.memberSeller_completed_btn .btn:first-child{
+    background-color: #049DD9;
+    border: 1px solid #cccccc;
+    color: #fff;
+}
+.memberSeller_completed_btn .btn{
+    background-color: #fff;
+    border: 1px solid #cccccc;
+    color: #cccccc;
+}
+
+ .memberSeller_completed_btn .btn:hover{
+    background-color: #fff;
+    border: 1px solid #cccccc;
+    color: #cccccc;
+}
+
+.memberSeller_completed_btn .btn:nth-child(2){
+    background-color: #049DD9;
+    color: #fff;
+}
+
+.memberSeller_completed_btn .btn:nth-child(2):hover{
+    background-color: #049DD9;
+}
+.G{
+    background-color: #049DD9;
+    color: #fff;
+}
+.btn:focus{
+    box-shadow: none;
+}
+
+.btn_close{
+    background-color: #fff;
+    border: 1px solid #cccccc;
+    color: #000;
+}
+
+.btn_close:hover{
+    background-color: #CCCCCC;
+    border: 1px solid #cccccc;
+    color: #fff;
+}
+
+.btn_sendout{
+    background-color: #d9831a;
+    color: #fff;
+}
+
+.btn_sendout:hover{
+    background-color: #be7418;
+    color: #fff;
+}
+
+
+@media (max-width:767px) {
+  .memberSeller_completed_num_ordernum{
+    text-align: left;
+  }
+  .memberSeller_completed_num_completed{
+    text-align: left;
+  }
+
+  .fa-wifi,
+  .fa-video,
+  .fa-briefcase-medical{
+    padding: 10px !important;
+  }
+
+  .memberSeller_completed_txt_price_title{
+    font-size: 10px;
+  }
+
+  .memberSeller_completed_txt_price{
+    font-size: 25px;
+  }
+
+
+  .memberSeller_completed{
+    border: 1px solid #049DD9;
+    border-radius: 5px;
+  }
+  .memberSeller_completed_pic{
+      border: 0px;
+  }
+  .memberSeller_completed_num,
+  .memberSeller_completed_pic,
+  .memberSeller_completed_txt{
+    border-bottom: none;
+  }
+  .B{
+    background-color: #049DD9;
+    color: #fff;
+  }
+}
+.rowunderline{
+    border-bottom: #049DD9 0.5px solid;
+}

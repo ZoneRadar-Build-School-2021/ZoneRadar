@@ -17,6 +17,16 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+        //賣家中心的訂單
+        public ActionResult SellerOrder()
+        {
+            return View();
+        }
+        public ActionResult SellerOrderCompleted()
+        {
+            return View();
+        }
+        //賣家中心的場地管理 新增場地
         public ActionResult AddSpace()
         {
             return View();

@@ -1,0 +1,34 @@
+.container {
+    width: 100%;
+    max-width: 810px;
+}
+
+.profile-title {
+    margin-top: 20px;
+}
+
+.profile-photo,
+.basic-info-title,
+.email-preferences {
+    margin-top: 30px;
+    padding-top: 30px;
+}
+
+.photo-upload {
+    margin-top: 30px;
+}
+
+@media (min-width: 768px) {
+    .col-form-label {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.saved-button {
+    margin-top: 5px;
+}
+
+.email-information {
+    margin-bottom: 30px;
+}

@@ -15,7 +15,7 @@ img {
     border: 3px solid #049DD9;
 }
 
-.myplace_space_card_distinct{
+.myplace_space_card_distinct {
     padding: 10px 30px;
     background-color: rgba(4, 157, 217, .3);
     box-shadow: 0 5px 15px rgba(0, 0, 0, .7);
@@ -39,9 +39,11 @@ img {
     cursor: pointer;
     color: #049DD9;
 }
+
 .myplace_space_card {
     position: relative;
 }
+
 .myplace_space_card img {
     width: 100%;
 }
@@ -66,18 +68,22 @@ img {
 }
 
 .space_card_title:hover {
-    color: #049DD9;
+     color: #049DD9;
 }
 
-.space_card_location {
-    cursor: pointer;
+.space_card_location_a {
+    text-decoration: none;
 }
 
-.space_card_location:hover {
+.space_card_location_a span {
+    color: #000;
+}
+
+.space_card_location_a span:hover {
     color: #CCCCCC;
 }
 
-.fa-star{
+.fa-star {
     color: #D9831A;
 }
 
