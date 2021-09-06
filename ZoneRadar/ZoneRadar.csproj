@@ -199,7 +199,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\CSS\all.min.css" />
+    <Content Include="Assets\CSS\all.css" />
     <Content Include="Assets\CSS\booking\booking.css" />
     <Content Include="Assets\CSS\bootstrap-icons.css" />
     <Content Include="Assets\CSS\bootstrap.min.css" />
