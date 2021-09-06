@@ -204,6 +204,7 @@
     <Content Include="Assets\CSS\bootstrap-icons.css" />
     <Content Include="Assets\CSS\bootstrap.min.css" />
     <Content Include="Assets\CSS\flatpickr.min.css" />
+    <Content Include="Assets\CSS\fontawesome\all.min.css" />
     <Content Include="Assets\CSS\fontawsome.min.css" />
     <Content Include="Assets\CSS\index\index.css" />
     <Content Include="Assets\CSS\index\swiper-bundle.min.css" />
@@ -222,6 +223,9 @@
     <Content Include="Assets\CSS\searching\searching.css" />
     <Content Include="Assets\CSS\static\StaticPage.css" />
     <Content Include="Assets\CSS\swiper-bundle.min.css" />
+    <Content Include="Assets\CSS\webfonts\fa-brands-400.svg" />
+    <Content Include="Assets\CSS\webfonts\fa-regular-400.svg" />
+    <Content Include="Assets\CSS\webfonts\fa-solid-900.svg" />
     <Content Include="Assets\IMG\head.png" />
     <Content Include="Assets\IMG\icons\addphoto.png" />
     <Content Include="Assets\IMG\icons\apple_tv.svg" />
@@ -277,6 +281,18 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Assets\CSS\webfonts\fa-brands-400.eot" />
+    <Content Include="Assets\CSS\webfonts\fa-brands-400.ttf" />
+    <Content Include="Assets\CSS\webfonts\fa-brands-400.woff" />
+    <Content Include="Assets\CSS\webfonts\fa-brands-400.woff2" />
+    <Content Include="Assets\CSS\webfonts\fa-regular-400.eot" />
+    <Content Include="Assets\CSS\webfonts\fa-regular-400.ttf" />
+    <Content Include="Assets\CSS\webfonts\fa-regular-400.woff" />
+    <Content Include="Assets\CSS\webfonts\fa-regular-400.woff2" />
+    <Content Include="Assets\CSS\webfonts\fa-solid-900.eot" />
+    <Content Include="Assets\CSS\webfonts\fa-solid-900.ttf" />
+    <Content Include="Assets\CSS\webfonts\fa-solid-900.woff" />
+    <Content Include="Assets\CSS\webfonts\fa-solid-900.woff2" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
