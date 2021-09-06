@@ -92,7 +92,7 @@ body {
     word-break: break-all;
 }
 
-p {
+.ServePage p {
     word-wrap: break-word;
     padding-left: 30px;
 }
