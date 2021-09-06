@@ -212,6 +212,7 @@
     <Content Include="Assets\CSS\leaflet.css" />
     <Content Include="Assets\CSS\material_blue.css" />
     <Content Include="Assets\CSS\membercenter\membercenter.css" />
+    <Content Include="Assets\CSS\membercenter\Seller_completedstyle.css" />
     <Content Include="Assets\CSS\member_card\memberstyle_buyer.css" />
     <Content Include="Assets\CSS\member_card\memberstyle_seller.css" />
     <Content Include="Assets\CSS\order_state\membercenter_completedstyle.css" />
@@ -332,6 +333,8 @@
     <Content Include="Views\Booking\SellerCard.cshtml" />
     <Content Include="Views\Booking\BuyerCard.cshtml" />
     <Content Include="Views\Searching\SearchingPage.cshtml" />
+    <Content Include="Views\MemberCenter\SellerOrder.cshtml" />
+    <Content Include="Views\MemberCenter\SellerOrderCompleted.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
