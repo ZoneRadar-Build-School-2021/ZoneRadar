@@ -23,6 +23,9 @@
         display: flex;
         justify-content: flex-end;
     }
+    .form-control {
+        width: 50%;
+    }
 }
 
 .saved-button {
