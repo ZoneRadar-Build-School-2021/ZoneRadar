@@ -220,6 +220,7 @@
     <Content Include="Assets\CSS\order_state\membercenter_processing.css" />
     <Content Include="Assets\CSS\profile\profile.css" />
     <Content Include="Assets\CSS\searching\searching.css" />
+    <Content Include="Assets\CSS\static\QA.css" />
     <Content Include="Assets\CSS\static\StaticPage.css" />
     <Content Include="Assets\CSS\swiper-bundle.min.css" />
     <Content Include="Assets\CSS\webfonts\fa-brands-400.svg" />

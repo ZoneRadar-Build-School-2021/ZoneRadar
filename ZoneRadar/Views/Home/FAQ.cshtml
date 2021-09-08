@@ -4,62 +4,92 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!-- QA-Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-8 offset-2 text-center py-5">
-            <h2> 有什麼問題嗎？您來對地方了 </h2>
+<div class="content">
+    <!-- QA-Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-10 offset-1 text-center py-5 d-none d-sm-block">
+                <h2> 有什麼問題嗎？您來對地方了 </h2>
+            </div>
+            <div class="col-10 offset-1 text-center py-5 d-block d-sm-none">
+                <h2> 有什麼問題嗎？<br> 您來對地方了 </h2>
+            </div>
+        </div>
+    </div>
+    <!-- 電腦版 -->
+    <div class="container d-none d-lg-block d-flex justify-content-center">
+        <div class="row ">
+            <div class="flex-column">
+
+                <div class="btn static-btn col-2 offset-2" id="btn1">
+                    <i class="fas fa-book-open"></i> 服務說明
+                </div>
+                <div class="btn static-btn col-2" id="btn2">
+                    <i class="fas fa-user-friends"></i>註冊/會員資料
+                </div>
+                <div class="btn static-btn col-2" id="btn3">
+                    <i class="fas fa-search"></i>場地搜尋
+                </div>
+                <div class="btn static-btn col-2" id="btn4">
+                    <i class="fas fa-map-marker-alt"></i>場地預定
+                </div>
+
+                <div class="btn static-btn col-2 offset-2 mt-2" id="btn5">
+                    <i class="fas fa-hand-holding-usd"></i>付款
+                </div>
+                <div class="btn static-btn col-2 mt-2" id="btn6">
+                    <i class="fas fa-clipboard-list"></i>訂單查詢/修改
+                </div>
+                <div class="btn static-btn col-2 mt-2" id="btn7">
+                    <i class="fas fa-times-circle"></i>取消預定
+                </div>
+                <div class="btn static-btn col-2 mt-2" id="btn8">
+                    <i class="fas fa-comments"></i>場地評論
+                </div>
+
+                <div class="btn static-btn col-2 offset-2 mt-2" id="btn9">
+                    <i class="fas fa-phone-volume"></i>聯絡ZoneRadar
+                </div>
+                <div class="btn static-btn col-2 mt-2" id="btn10">
+                    <i class="fas fa-comment-slash"></i>場地資訊錯誤回報
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 手機板 -->
+    <div class="col-12 d-block d-lg-none">
+        <div class="row bg-light py-3 shadow-sm">
+            <div class="col-10 offset-1">
+                <div class="select-block sticky-top no-label mb-0 p-0 added">
+                    <select class="form-select QA-select" aria-label="Default select example">
+                        <option value="0"> 請選擇</option>
+                        <option value="1">服務說</option>
+                        <option value="2">註冊/會員資料</option>
+                        <option value="3">場地搜尋</option>
+                        <option value="4">場地預訂</option>
+                        <option value="5">付款</option>
+                        <option value="6">訂單查詢/修改</option>
+                        <option value="7">取消預定</option>
+                        <option value="8">回饋機制/場地評論</option>
+                        <option value="9">聯絡場地家</option>
+                        <option value="10">場地資訊錯誤回報</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- QA -->
+    <div class="container QA-content">
+        <div class="row QA-List">
+            <div class="static-btn-showd">
+                <div class="col-10 offset-1 p-0">
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<!-- 電腦版 -->
-<div class="container d-none d-lg-block">
-    <div class="row">
-        <div class="btn btn-outline-danger col-2 offset-2 text-center" id="btn1">
-            <i class="fas fa-book-open"></i> 服務說明
-        </div>
-        <div class="btn btn-outline-danger col-2 text-center " id="btn2">
-            <i class="fas fa-user-friends"></i> 註冊/會員資料
-        </div>
-        <div class="btn btn-outline-danger col-2 text-center " id="btn3">
-            <i class="fas fa-search"></i> 場地搜尋
-        </div>
-        <div class="btn btn-outline-danger col-2 text-center " id="btn4">
-            <i class="fas fa-map-marker-alt"></i> 場地預定
-        </div>
-
-        <div class="btn btn-outline-danger col-2 offset-2 mt-2 text-center " id="btn5">
-            <i class="fas fa-hand-holding-usd"></i> 付款
-        </div>
-        <div class="btn btn-outline-danger col-2 mt-2 text-center " id="btn6">
-            <i class="fas fa-clipboard-list"></i> 訂單查詢/修改
-        </div>
-        <div class="btn btn-outline-danger col-2 mt-2 text-center " id="btn7">
-            <i class="fas fa-times-circle"></i> 取消預定
-        </div>
-        <div class="btn btn-outline-danger col-2 mt-2 text-center " id="btn8">
-            <i class="fas fa-comments"></i> 場地評論
-        </div> 
-
-        <div class="btn btn-outline-danger col-2 offset-2 mt-2 text-center " id="btn9">
-            <i class="fas fa-phone-volume"></i> 聯絡ZoneRadar
-        </div>
-
-        <div class="btn btn-outline-danger col-2 mt-2 text-center " id="btn10">
-            <i class="fas fa-comment-slash"></i> 場地資訊錯誤回報
-        </div>
-    </div>
-</div>
-
-<!-- QA -->
-<div class="container">
-    <div class="row QA-List">
-        <div class="col-8 offset-2 p-0">
-
-        </div>
-    </div>
-</div>
-
 
 <!-- Accordion Model -->
 <!-- QA 服務說明 -->
@@ -71,13 +101,13 @@
                 <!-- QA1 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
                                 aria-controls="flush-collapseOne">
                         </button>
                     </h2>
 
-                    <div id="flush-collapseOne" class="accordion-collapse collapse"
+                    <div id="flush-collapseOne" class=" collapse"
                          aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             <div class="border-top py-3 px-3">
@@ -91,7 +121,7 @@
                 <!-- QA2 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingTwo">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                 aria-controls="flush-collapseTwo">
                         </button>
@@ -121,7 +151,7 @@
                 <!-- QA1 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
                                 aria-controls="flush-collapseOne">
                         </button>
@@ -141,7 +171,7 @@
                 <!-- QA2 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingTwo">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                 aria-controls="flush-collapseTwo">
                         </button>
@@ -160,7 +190,7 @@
                 <!-- QA3 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingThree">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"
                                 aria-controls="flush-collapseThree">
                         </button>
@@ -179,7 +209,7 @@
                 <!-- QA4 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingFour">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false"
                                 aria-controls="flush-collapseFour">
                         </button>
@@ -198,7 +228,7 @@
                 <!-- QA5 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingFive">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false"
                                 aria-controls="flush-collapseFive">
                         </button>
@@ -227,7 +257,7 @@
                 <!-- QA1 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
                                 aria-controls="flush-collapseOne">
                         </button>
@@ -247,7 +277,7 @@
                 <!-- QA2 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingTwo">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                 aria-controls="flush-collapseTwo">
                         </button>
@@ -266,7 +296,7 @@
                 <!-- QA3 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingThree">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"
                                 aria-controls="flush-collapseThree">
                         </button>
@@ -285,7 +315,7 @@
                 <!-- QA4 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingFour">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false"
                                 aria-controls="flush-collapseFour">
                         </button>
@@ -304,7 +334,7 @@
                 <!-- QA5 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingFive">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false"
                                 aria-controls="flush-collapseFive">
                         </button>
@@ -323,7 +353,7 @@
                 <!-- QA6 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingSix">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false"
                                 aria-controls="flush-collapseSix">
                         </button>
@@ -341,7 +371,7 @@
                 <!-- QA7 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingSeven">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false"
                                 aria-controls="flush-collapseSeven">
                         </button>
@@ -359,7 +389,7 @@
                 <!-- QA8 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingEight">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false"
                                 aria-controls="flush-collapseEight">
                         </button>
@@ -377,7 +407,7 @@
                 <!-- QA9 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingNine">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false"
                                 aria-controls="flush-collapseNine">
                         </button>
@@ -394,7 +424,7 @@
                 </div>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingTen">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false"
                                 aria-controls="flush-collapseTen">
                         </button>
@@ -422,7 +452,7 @@
                 <!-- QA1 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
                                 aria-controls="flush-collapseOne">
                         </button>
@@ -442,7 +472,7 @@
                 <!-- QA2 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingTwo">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
                                 aria-controls="flush-collapseTwo">
                         </button>
@@ -461,7 +491,7 @@
                 <!-- QA3 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingThree">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"
                                 aria-controls="flush-collapseThree">
                         </button>
@@ -480,7 +510,7 @@
                 <!-- QA4 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingFour">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false"
                                 aria-controls="flush-collapseFour">
                         </button>
@@ -499,7 +529,7 @@
                 <!-- QA5 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingFive">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false"
                                 aria-controls="flush-collapseFive">
                         </button>
@@ -518,7 +548,7 @@
                 <!-- QA6 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingSix">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false"
                                 aria-controls="flush-collapseSix">
                         </button>
@@ -536,7 +566,7 @@
                 <!-- QA7 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingSeven">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false"
                                 aria-controls="flush-collapseSeven">
                         </button>
@@ -554,7 +584,7 @@
                 <!-- QA8 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingEight">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false"
                                 aria-controls="flush-collapseEight">
                         </button>
@@ -572,7 +602,7 @@
                 <!-- QA9 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingNine">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false"
                                 aria-controls="flush-collapseNine">
                         </button>
@@ -590,7 +620,7 @@
                 <!-- QA-Ten -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingTen">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false"
                                 aria-controls="flush-collapseTen">
                         </button>
@@ -608,7 +638,7 @@
                 <!-- QA-11 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingEleven">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false"
                                 aria-controls="flush-collapseEleven">
                         </button>
@@ -626,7 +656,7 @@
                 <!-- QA-12 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingTwelve">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false"
                                 aria-controls="flush-collapseTwelve">
                         </button>
@@ -644,7 +674,7 @@
                 <!-- QA-13 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingThirteen">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseThirteen" aria-expanded="false"
                                 aria-controls="flush-collapseThirteen">
                         </button>
@@ -662,7 +692,7 @@
                 <!-- QA-14 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingFourteen">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseFourteen" aria-expanded="false"
                                 aria-controls="flush-collapseFourteen">
                         </button>
@@ -680,7 +710,7 @@
                 <!-- QA-15 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingFifteen">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseFifteen" aria-expanded="false"
                                 aria-controls="flush-collapseFifteen">
                         </button>
@@ -698,7 +728,7 @@
                 <!-- QA-16 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingSixteen">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseSixteen" aria-expanded="false"
                                 aria-controls="flush-collapseSixteen">
                         </button>
@@ -716,7 +746,7 @@
                 <!-- QA-17 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingSeventeen">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseSeventeen"
                                 aria-expanded="false" aria-controls="flush-collapseSeventeen">
                         </button>
@@ -734,7 +764,7 @@
                 <!-- QA-18 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingEighteen">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseEighteen" aria-expanded="false"
                                 aria-controls="flush-collapseEighteen">
                         </button>
@@ -752,7 +782,7 @@
                 <!-- QA-19 -->
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingNineteen">
-                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                        <button class="accordion-button btn  collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseNineteen" aria-expanded="false"
                                 aria-controls="flush-collapseNineteen">
                         </button>
@@ -775,4 +805,9 @@
 @section endJS
 {
     <script src="~/Assets/JS/static/Q&A.js"></script>
+}
+
+@section topCSS
+{
+    <link href="~/Assets/CSS/static/QA.css" rel="stylesheet" />
 }
