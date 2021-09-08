@@ -113,6 +113,11 @@ nav.shared-navbar {
         top: calc(100% - 1px);
     }
 
+    nav.shared-navbar .nav-item .dropdown-menu {
+        border: none;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, .18);
+    }
+
     nav.shared-navbar .nav-item .dropdown-item {
         font-size: 18px;
         padding: .75rem 1rem;
@@ -122,6 +127,22 @@ nav.shared-navbar {
             background-color: white;
             color: #049DD9;
         }
+
+    nav.shared-navbar .user .accordion-member .accordion-button {
+        line-height: 35px;
+    }
+
+    nav.shared-navbar .user .accordion-member .accordion-collapse {
+        font-size: 18px;
+    }
+
+    nav.shared-navbar .nav-item.d-md-none .accordion-member .accordion-button {
+        background-color: #f8f9fa;
+    }
+
+    nav.shared-navbar .nav-item.d-md-none .accordion-member {
+        background-color: #f3f3f3;
+    }
 /* #endregion */
 /* #region footer */
 footer.shared-footer {
@@ -181,6 +202,10 @@ footer.shared-footer {
 
 .modal::-webkit-scrollbar-thumb {
     background: rgba(170, 170, 170, .7);
+}
+
+.btn-close:focus {
+    box-shadow: none;
 }
 
 #login-modal .modal-header, #register-modal .modal-header {
@@ -283,7 +308,7 @@ footer.shared-footer {
             display: block;
         }
 
-        nav.shared-navbar li {
+        nav.shared-navbar ul.navbar-nav > li {
             border-left: 1px solid #dde0e6;
             line-height: 35px;
         }
