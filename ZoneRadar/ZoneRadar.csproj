@@ -268,6 +268,8 @@
     <Content Include="Assets\JS\layout\navbar-footer.js" />
     <Content Include="Assets\JS\leaflet.js" />
     <Content Include="Assets\JS\leaflet.markercluster.js" />
+    <Content Include="Assets\JS\order_state\membercenter_pending.js" />
+    <Content Include="Assets\JS\order_state\membercenter_processing.js" />
     <Content Include="Assets\JS\searching\searching.js" />
     <Content Include="Assets\JS\static\Q&amp;A.js" />
     <Content Include="Assets\JS\swiper-bundle.min.js" />
