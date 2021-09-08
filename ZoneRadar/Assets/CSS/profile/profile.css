@@ -23,11 +23,15 @@
         display: flex;
         justify-content: flex-end;
     }
-    .form-control {
+    .form-control-info {
         width: 50%;
     }
 }
-
+@media (max-width: 767px) {
+    .form-control-info {
+        width: 100%;
+    }
+}
 .saved-button {
     margin-top: 5px;
 }

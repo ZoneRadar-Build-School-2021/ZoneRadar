@@ -1,0 +1,778 @@
+﻿
+@{
+    ViewBag.Title = "FAQ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- QA-Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2 text-center py-5">
+            <h2> 有什麼問題嗎？您來對地方了 </h2>
+        </div>
+    </div>
+</div>
+<!-- 電腦版 -->
+<div class="container d-none d-lg-block">
+    <div class="row">
+        <div class="btn btn-outline-danger col-2 offset-2 text-center" id="btn1">
+            <i class="fas fa-book-open"></i> 服務說明
+        </div>
+        <div class="btn btn-outline-danger col-2 text-center " id="btn2">
+            <i class="fas fa-user-friends"></i> 註冊/會員資料
+        </div>
+        <div class="btn btn-outline-danger col-2 text-center " id="btn3">
+            <i class="fas fa-search"></i> 場地搜尋
+        </div>
+        <div class="btn btn-outline-danger col-2 text-center " id="btn4">
+            <i class="fas fa-map-marker-alt"></i> 場地預定
+        </div>
+
+        <div class="btn btn-outline-danger col-2 offset-2 mt-2 text-center " id="btn5">
+            <i class="fas fa-hand-holding-usd"></i> 付款
+        </div>
+        <div class="btn btn-outline-danger col-2 mt-2 text-center " id="btn6">
+            <i class="fas fa-clipboard-list"></i> 訂單查詢/修改
+        </div>
+        <div class="btn btn-outline-danger col-2 mt-2 text-center " id="btn7">
+            <i class="fas fa-times-circle"></i> 取消預定
+        </div>
+        <div class="btn btn-outline-danger col-2 mt-2 text-center " id="btn8">
+            <i class="fas fa-comments"></i> 場地評論
+        </div> 
+
+        <div class="btn btn-outline-danger col-2 offset-2 mt-2 text-center " id="btn9">
+            <i class="fas fa-phone-volume"></i> 聯絡ZoneRadar
+        </div>
+
+        <div class="btn btn-outline-danger col-2 mt-2 text-center " id="btn10">
+            <i class="fas fa-comment-slash"></i> 場地資訊錯誤回報
+        </div>
+    </div>
+</div>
+
+<!-- QA -->
+<div class="container">
+    <div class="row QA-List">
+        <div class="col-8 offset-2 p-0">
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Accordion Model -->
+<!-- QA 服務說明 -->
+<template id="QA-2">
+    <div class="container py-5 QA">
+        <h1 class="text-center py-5 mb-0"> </h1>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <ol>
+                <!-- QA1 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                aria-controls="flush-collapseOne">
+                        </button>
+                    </h2>
+
+                    <div id="flush-collapseOne" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA2 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                aria-controls="flush-collapseTwo">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </ol>
+        </div>
+    </div>
+</template>
+
+<template id="QA-5">
+    <div class="container py-5 QA">
+        <h1 class="text-center py-5 mb-0"> </h1>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <ol>
+                <!-- QA1 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                aria-controls="flush-collapseOne">
+                        </button>
+                    </h2>
+
+                    <div id="flush-collapseOne" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA2 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                aria-controls="flush-collapseTwo">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA3 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                aria-controls="flush-collapseThree">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA4 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFour">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false"
+                                aria-controls="flush-collapseFour">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFour" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA5 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFive">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false"
+                                aria-controls="flush-collapseFive">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFive" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ol>
+        </div>
+    </div>
+</template>
+
+<template id="QA-10">
+    <div class="container py-5 QA">
+        <h1 class="text-center py-5 mb-0"> </h1>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <ol>
+                <!-- QA1 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                aria-controls="flush-collapseOne">
+                        </button>
+                    </h2>
+
+                    <div id="flush-collapseOne" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA2 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                aria-controls="flush-collapseTwo">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA3 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                aria-controls="flush-collapseThree">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA4 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFour">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false"
+                                aria-controls="flush-collapseFour">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFour" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA5 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFive">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false"
+                                aria-controls="flush-collapseFive">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFive" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA6 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingSix">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false"
+                                aria-controls="flush-collapseSix">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSix" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA7 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingSeven">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false"
+                                aria-controls="flush-collapseSeven">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSeven" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA8 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingEight">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false"
+                                aria-controls="flush-collapseEight">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseEight" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA9 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingNine">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false"
+                                aria-controls="flush-collapseNine">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseNine" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTen">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false"
+                                aria-controls="flush-collapseTen">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTen" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ol>
+        </div>
+    </div>
+</template>
+
+<template id="QA-19">
+    <div class="container py-5 QA">
+        <h1 class="text-center py-5 mb-0"> </h1>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <ol>
+                <!-- QA1 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                aria-controls="flush-collapseOne">
+                        </button>
+                    </h2>
+
+                    <div id="flush-collapseOne" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA2 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                aria-controls="flush-collapseTwo">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA3 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                aria-controls="flush-collapseThree">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA4 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFour">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false"
+                                aria-controls="flush-collapseFour">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFour" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA5 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFive">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false"
+                                aria-controls="flush-collapseFive">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFive" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA6 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingSix">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false"
+                                aria-controls="flush-collapseSix">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSix" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA7 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingSeven">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false"
+                                aria-controls="flush-collapseSeven">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSeven" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA8 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingEight">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false"
+                                aria-controls="flush-collapseEight">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseEight" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA9 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingNine">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false"
+                                aria-controls="flush-collapseNine">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseNine" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA-Ten -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTen">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false"
+                                aria-controls="flush-collapseTen">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTen" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA-11 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingEleven">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false"
+                                aria-controls="flush-collapseEleven">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseEleven" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingEleven" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA-12 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwelve">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false"
+                                aria-controls="flush-collapseTwelve">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwelve" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingTwelve" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA-13 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingThirteen">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseThirteen" aria-expanded="false"
+                                aria-controls="flush-collapseThirteen">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThirteen" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingThirteen" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA-14 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFourteen">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseFourteen" aria-expanded="false"
+                                aria-controls="flush-collapseFourteen">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFourteen" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingFourteen" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA-15 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFifteen">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseFifteen" aria-expanded="false"
+                                aria-controls="flush-collapseFifteen">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFifteen" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingFifteen" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA-16 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingSixteen">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseSixteen" aria-expanded="false"
+                                aria-controls="flush-collapseSixteen">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSixteen" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingSixteen" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA-17 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingSeventeen">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseSeventeen"
+                                aria-expanded="false" aria-controls="flush-collapseSeventeen">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSeventeen" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingSeventeen" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA-18 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingEighteen">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseEighteen" aria-expanded="false"
+                                aria-controls="flush-collapseEighteen">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseEighteen" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingEighteen" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- QA-19 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingNineteen">
+                        <button class="accordion-button btn btn-outline-secondary collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#flush-collapseNineteen" aria-expanded="false"
+                                aria-controls="flush-collapseNineteen">
+                        </button>
+                    </h2>
+                    <div id="flush-collapseNineteen" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingNineteen" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <div class="border-top py-3 px-3">
+                                <p class="mb-0 text-secondary">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ol>
+        </div>
+    </div>
+</template>
+
+@section endJS
+{
+    <script src="~/Assets/JS/static/Q&A.js"></script>
+}

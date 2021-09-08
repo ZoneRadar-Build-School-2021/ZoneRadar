@@ -265,7 +265,10 @@
     <Content Include="Assets\JS\layout\navbar-footer.js" />
     <Content Include="Assets\JS\leaflet.js" />
     <Content Include="Assets\JS\leaflet.markercluster.js" />
+    <Content Include="Assets\JS\order_state\membercenter_pending.js" />
+    <Content Include="Assets\JS\order_state\membercenter_processing.js" />
     <Content Include="Assets\JS\searching\searching.js" />
+    <Content Include="Assets\JS\static\Q&amp;A.js" />
     <Content Include="Assets\JS\swiper-bundle.min.js" />
     <Content Include="Assets\JS\zh-tw.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -349,6 +352,7 @@
     <Content Include="Views\Searching\SearchingPage.cshtml" />
     <Content Include="Views\MemberCenter\SellerOrder.cshtml" />
     <Content Include="Views\MemberCenter\SellerOrderCompleted.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

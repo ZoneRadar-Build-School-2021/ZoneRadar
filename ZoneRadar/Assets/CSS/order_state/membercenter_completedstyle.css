@@ -18,7 +18,6 @@ img {
     margin-bottom: -20px;
 }
 
-
 .memberbuyer_state {
     list-style: none;
 }
@@ -34,6 +33,11 @@ img {
             border-bottom: 2px solid #D9831A;
         }
 
+.active {
+    color: #000;
+    border-bottom: 2px solid #D9831A;
+}
+
 .fa-star {
     color: #D9831A;
 }
@@ -41,7 +45,6 @@ img {
 .memberbuyer_completed {
     border-bottom: 1px solid #DEE2E6;
 }
-
 
 .memberbuyer_completed_num {
     color: #D9831A;
@@ -96,12 +99,6 @@ img {
     font-size: 35px;
 }
 
-.memberbuyer_completed_txt_iconprice {
-    display: flex;
-    justify-content: space-between;
-}
-
-
 .memberbuyer_completed_btn .btn {
     background-color: #fff;
     border: 1px solid #cccccc;
@@ -148,6 +145,17 @@ img {
         background-color: #be7418;
         color: #fff;
     }
+
+.text-decoration-line-through {
+    color: #CCCCCC;
+}
+
+.cancel,
+.cancel p,
+.cancel a {
+    text-decoration: line-through;
+    color: #CCCCCC;
+}
 
 
 @media (max-width:767px) {

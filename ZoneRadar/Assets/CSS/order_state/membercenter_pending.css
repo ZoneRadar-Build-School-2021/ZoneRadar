@@ -32,10 +32,16 @@ img {
         border-bottom: 2px solid transparent;
     }
 
-        .memberbuyer_state a:hover {
-            color: #cccccc;
-            border-bottom: 2px solid #D9831A;
-        }
+.active {
+    color: #000;
+    border-bottom: 2px solid #D9831A;
+}
+
+.memberbuyer_state a:hover {
+    color: #cccccc;
+    border-bottom: 2px solid #D9831A;
+}
+
 
 .fa-star {
     color: #D9831A;
@@ -93,7 +99,6 @@ img {
 .memberbuyer_pending_txt_price_title {
     color: #D9831A;
     font-weight: bolder;
-    text-align: right;
     margin: 0px;
 }
 
@@ -103,12 +108,6 @@ img {
     font-size: 35px;
 }
 
-.memberbuyer_pending_txt_iconprice {
-    display: flex;
-    justify-content: space-between;
-}
-
-
 .memberbuyer_pending_btn .btn {
     background-color: #fff;
     border: 1px solid #cccccc;
@@ -116,7 +115,7 @@ img {
 }
 
     .memberbuyer_pending_btn .btn:hover {
-        background-color: #CCCCCC;
+        background-color: #E72A54;
         border: 1px solid #cccccc;
         color: #fff;
     }
@@ -129,6 +128,48 @@ img {
         .memberbuyer_pending_btn .btn:nth-child(2):hover {
             background-color: #be7418;
         }
+
+.btn_close {
+    background-color: #fff;
+    border: 1px solid #E72A54;
+    color: #E72A54;
+}
+
+    .btn_close:hover {
+        background-color: #E72A54;
+        border: 1px solid #cccccc;
+        color: #fff;
+    }
+
+.btn_sendout {
+    background-color: #d9831a;
+    color: #fff;
+}
+
+    .btn_sendout:hover {
+        background-color: #be7418;
+        color: #fff;
+    }
+
+.form-select:focus {
+    box-shadow: none;
+    border-color: #be7418;
+}
+
+.modify_rent_date input,
+.modify_rentback_date input,
+.modify_rent_time input,
+.modify_rentback_time input {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #be7418;
+    text-align: center;
+}
+
+.form-select_people {
+    border-radius: 5px;
+    border: 1px solid #be7418;
+}
 
 
 @media (max-width:767px) {
