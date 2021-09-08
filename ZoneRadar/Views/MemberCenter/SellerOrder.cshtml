@@ -19,103 +19,88 @@
 </div>
 
 <div class="memberSeller_container container mt-2">
-    <div class="memberSeller_completed row mt-5 mb-3">
-        <div class="col-12">
-            <div class="row rowunderline">
-                <div class="memberSeller_completed_num col-12 mt-3">
-                    <div class="memberSeller_completed_num_row row">
-                        <div class="memberSeller_completed_num_ordernum col-sm-12 col-md-6 col-lg-4">
-                            <p>
-                                訂單編號：
-                                <span class="ms-1">2109020001</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="memberSeller_completed_pic col-sm-12 col-md-6 col-lg-3">
-                    <a href="~/Booking/BookingPage">
-                        <img class="p-2 mt-2" src="https://picsum.photos/300/200/?random=1">
-                    </a>
-                </div>
-                <div class="mb-auto mt-auto memberSeller_completed_txt  col-md-6 col-lg-6 p-3">
-                    <div class="memberSeller_completed_txt_title mt-3">
-                        <a href="~/Booking/BookingPage">
-                            <h3>場地名稱:Good Space</h3>
-                        </a>
-                    </div>
-                    <div class="memberSeller_completed_txt_introduce mt-3">
-                        <h4>
-                            訂購人:<span>王曉明</span>
-                        </h4>
-                    </div>
-                    <div class="memberSeller_completed_txt_introduce mt-3">
-                        <h4>
-                            預訂日期:<span>2021/10/01</span>-<span>2021/10/03</span>
-                        </h4>
-                    </div>
-                </div>
-                <div class="col-md-6  col-lg-3 mt-auto mb-auto  ">
-                    <div class="memberSeller_completed_txt_iconprice">
-                        <p class="memberSeller_completed_txt_price_title">
-                            訂單價格：
-                            <span class="memberSeller_completed_txt_price">$10000</span>
-                        </p>
-                    </div>
+    <div class=" row d-flex border-top  justify-content-end pt-3">
+        <div class="col-12 col-lg-4 mt-1 ">
+            <p>訂單編號：<span>2109020001</span></p>
+        </div>
+        <div class="col-12 col-lg-8 mt-1 text-start  text-lg-end">
+            訂單狀態：<span class="me-2 CurrentState">尚未過取消期限</span><span class="me-2 d-lg-inline d-none notCurrentState">已過取消期限</span><span class=" notCurrentState d-lg-inline d-none">正在使用中</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col memberSeller_completed_pic col-12 col-lg-12 col-xl-3 ">
+            <div>
+                <img class="p-2 mt-2" src="https://picsum.photos/300/200/?random=2">
+            </div>
+
+        </div>
+        <div class="memberSeller_completed_txt_title col-12 col-lg-12  col-xl-5   mb-2">
+            <h6>場地名稱:Good Space</h6>
+            <p>訂購人:<span>王曉明</span></p>
+            <p>預約時間:<span class="me-2">2021年10月01日<br class="d-md-none"></span><span class="me-2">星期二</span><span class="me-2 ">09:00</span></p>
+            <!-- <p><span class="textms  d-inline d-md-none d-lg-none">星期二</span><span class="ms-2 d-inline d-md-none d-lg-none" >09:00</span></p></p> -->
+
+            <p>租借時間:<span class="me-2">2021年10月01日<br class="d-md-none"></span><span class="me-2">星期二</span><span class="me-2">13:00</span></p>
+            <!-- <p><span class="textms  d-inline d-md-none d-lg-none">星期二</span><span class="ms-2 d-inline d-md-none d-lg-none" >13:00</span></p></p> -->
+            <div class="row">
+                <div class="price col-12 d-flex   d-md-none d-lg-flex d-xl-none justify-content-end align-text-bottom  text-end">
+                    <p class="fs18 ZoneRadarB">
+                        訂單價格：
+                        <span class=" memberSeller_completed_txt_price ">TWD1,000元</span>
+                    </p>
                 </div>
             </div>
         </div>
-        <div class="  col-lg-12 memberSeller_completed_btn d-lg-flex d-none mt-2 mb-2  justify-content-end">
-            <p class="me-2 mt-auto mb-auto ">訂單狀態:</p>
-            <button class="btn  me-2" disabled>尚未過訂單取消期限</button>
-            <button class="btn  me-2" disabled data-bs-toggle="modal" data-bs-target="#order_Modal">已過訂單取消期限</button>
-            <button class="btn  me-2" disabled data-bs-toggle="modal" data-bs-target="#order_Modal">訂單已取消</button>
-        </div>
-        <div class="col-12 col-md-2 d-lg-none mt-2">
-            <p class="me-2 mt-auto mb-auto ">訂單狀態:</p>
-        </div>
-        <div class="col-12 col-md-4 memberSeller_completed_btn d-lg-none mt-1 " disabled>
-            <button class="btn memberSeller_completed_btn B me-2">尚未過訂單取消期限</button>
-        </div>
-        <div class="col-12 col-md-4 d-lg-none">
-            <button class="btn G me-2" disabled data-bs-toggle="modal" data-bs-target="#order_Modal">已過訂單取消期限</button>
-        </div>
-        <div class="col-12 col-md-6 d-lg-none">
-        </div>
-        <div class="col-12 col-md-6 d-lg-none">
-            <button class="btn G  me-2" disabled data-bs-toggle="modal" data-bs-target="#order_Modal">訂單已取消</button>
+        <div class="col-12 d-none d-md-flex d-lg-none d-xl-flex  col-lg-6 col-xl-4  justify-content-end align-text-bottom  mt-auto text-end">
+            <p class="fs18 ZoneRadarB">
+                訂單價格：
+                <span class=" memberSeller_completed_txt_price ">TWD1,000元</span>
+            </p>
         </div>
     </div>
 </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="order_Modal" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered ">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>2109020001</span></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="memberSeller_container container mt-2">
+    <div class=" row d-flex border-top  justify-content-end pt-3">
+        <div class="col-12 col-lg-4 mt-1 ">
+            <p>訂單編號：<span>2109020001</span></p>
+        </div>
+        <div class="col-12 col-lg-8 mt-1 text-start  text-lg-end">
+            訂單狀態：<span class="me-2 CurrentState">尚未過取消期限</span><span class="me-2 d-lg-inline d-none notCurrentState">已過取消期限</span><span class=" notCurrentState d-lg-inline d-none">正在使用中</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col memberSeller_completed_pic col-12 col-lg-12 col-xl-3 ">
+            <div>
+                <img class="p-2 mt-2" src="https://picsum.photos/300/200/?random=2">
             </div>
-            <div class="modal-body">
-                <div class="score_star mt-2">
-                    <p>您對於這次的場地的滿意度為幾顆星：</p>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <i class="far fa-star"></i>
+
+        </div>
+        <div class="memberSeller_completed_txt_title col-12 col-lg-12  col-xl-5   mb-2">
+            <h6>場地名稱:Good Space</h6>
+            <p>訂購人:<span>王曉明</span></p>
+            <p>預約時間:<span class="me-2">2021年10月01日<br class="d-md-none"></span><span class="me-2">星期二</span><span class="me-2 ">09:00</span></p>
+            <!-- <p><span class="textms  d-inline d-md-none d-lg-none">星期二</span><span class="ms-2 d-inline d-md-none d-lg-none" >09:00</span></p></p> -->
+
+            <p>租借時間:<span class="me-2">2021年10月01日<br class="d-md-none"></span><span class="me-2">星期二</span><span class="me-2">13:00</span></p>
+            <!-- <p><span class="textms  d-inline d-md-none d-lg-none">星期二</span><span class="ms-2 d-inline d-md-none d-lg-none" >13:00</span></p></p> -->
+            <div class="row">
+                <div class="price col-12 d-flex   d-md-none d-lg-flex d-xl-none justify-content-end align-text-bottom  text-end">
+                    <p class="fs18 ZoneRadarB">
+                        訂單價格：
+                        <span class=" memberSeller_completed_txt_price ">TWD1,000元</span>
+                    </p>
                 </div>
-                <div class="customer_evaluation mt-3">
-                    <p>您對於這次的場地有什麼需要改進或是想對我們說的話？</p>
-                    <textarea class="form-control" aria-label="With textarea"></textarea>
-                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn_close" data-bs-dismiss="modal">關閉</button>
-                <button type="button" class="btn btn_sendout">送出</button>
-            </div>
+        </div>
+        <div class="col-12 d-none d-md-flex d-lg-none d-xl-flex  col-lg-6 col-xl-4  justify-content-end align-text-bottom  mt-auto text-end">
+            <p class="fs18 ZoneRadarB">
+                訂單價格：
+                <span class=" memberSeller_completed_txt_price ">TWD1,000元</span>
+            </p>
         </div>
     </div>
 </div>
+
 
 @section topCSS
 {

@@ -157,7 +157,7 @@ html, body {
         bottom: 10%;
     }
 
-[class*="swiper-button"] {
+div.swiper-button-next, div.swiper-button-prev {
     width: 40px;
     height: 40px;
     background-color: rgb(236, 236, 236);
@@ -168,17 +168,17 @@ html, body {
     box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
 }
 
-.swiper-button-next {
-    right: -10px !important;
+div.swiper-button-next {
+    right: -10px;
 }
 
-.swiper-button-prev {
-    left: -10px !important;
+div.swiper-button-prev {
+    left: -10px;
 }
 
-    .swiper-button-next::after, .swiper-button-prev::after {
-        line-height: 40px !important;
-        font-size: 15px !important;
+    div.swiper-button-next::after, div.swiper-button-prev::after {
+        line-height: 40px;
+        font-size: 15px;
     }
 /* #endregion */
 
@@ -403,25 +403,22 @@ html, body {
         justify-content: center;
         -webkit-box-align: center;
         -ms-flex-align: center;
-        color: black;
-        /* background-color: rgb(231, 231, 231); */
-        background-image: linear-gradient(rgb(245, 245, 245), rgb(231, 231, 231));
+        color: white;
+        /* background-color: white; */
+        /* background-image: linear-gradient(rgb(245, 245, 245), rgb(231, 231, 231)); */
         border-radius: 2px;
     }
 
     .swiper-comment .content {
         font-size: 16px;
-        overflow: auto;
+        overflow: hidden;
     }
-
-        .swiper-comment .content::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        .swiper-comment .content::-webkit-scrollbar-thumb {
-            background: rgba(170, 170, 170, .7);
-        }
-
+    /* .swiper-comment .content::-webkit-scrollbar {
+  width: 5px;
+}
+.swiper-comment .content::-webkit-scrollbar-thumb {
+    background: rgba(170, 170, 170, .7);
+  } */
     .swiper-comment .star {
         color: #eba755;
     }

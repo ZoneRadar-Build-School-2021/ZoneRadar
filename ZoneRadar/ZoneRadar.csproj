@@ -207,8 +207,6 @@
     <Content Include="Assets\CSS\fontawesome\all.min.css" />
     <Content Include="Assets\CSS\fontawsome.min.css" />
     <Content Include="Assets\CSS\index\index.css" />
-    <Content Include="Assets\CSS\index\swiper-bundle.min.css" />
-    <Content Include="Assets\CSS\layout\fontawesome1.css" />
     <Content Include="Assets\CSS\layout\navbar-footer.css" />
     <Content Include="Assets\CSS\leaflet.css" />
     <Content Include="Assets\CSS\material_blue.css" />
@@ -265,7 +263,6 @@
     <Content Include="Assets\JS\bootstrap.bundle.min.js" />
     <Content Include="Assets\JS\flatpickr.js" />
     <Content Include="Assets\JS\index\index.js" />
-    <Content Include="Assets\JS\index\swiper-bundle.min.js" />
     <Content Include="Assets\JS\layout\navbar-footer.js" />
     <Content Include="Assets\JS\leaflet.js" />
     <Content Include="Assets\JS\leaflet.markercluster.js" />

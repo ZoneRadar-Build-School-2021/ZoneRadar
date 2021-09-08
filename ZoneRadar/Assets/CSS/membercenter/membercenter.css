@@ -230,10 +230,11 @@
 .accordion-item{
 	border: 0px;
 }
-.accordion-button {
+.containerForAdd .accordion-button {
 	border-bottom: 1px solid #049DD9;
 }
-/* .accordion-button:focus {
+/*
+.accordion-button:focus {
 	border-bottom: 1px solid #049DD9;
 } */
 .accordion-button:not(.collapsed) {
