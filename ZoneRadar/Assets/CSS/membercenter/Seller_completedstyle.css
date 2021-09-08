@@ -1,7 +1,7 @@
-.main{
-    margin-left: auto;
-    
+.ZoneRadarB{
+    color: #049DD9;
 }
+
 img {
     max-width: 100%;
     height: auto;
@@ -39,12 +39,23 @@ img {
   border: 1px solid #049DD9;
   border-radius: 5px;
 }
-
+.CurrentState {
+    color: #049DD9;
+}
+.notCurrentState{
+    color: #cccccc;
+}
+.underline{
+    border-bottom: #049DD9 1px solid;
+}
 .memberSeller_completed_num,
 .membeSeller_completed_txt{
   border-bottom: 0.5px solid #049DD9;
 }
-
+.textms{
+    margin-left: 105px;
+}
+.memberSellertext,
 .memberSeller_completed_num {
     color: #049DD9;
 }
@@ -110,24 +121,20 @@ img {
   justify-content:space-between;
 }
 
-.memberSeller_completed_btn .btn:first-child{
-    background-color: #049DD9;
-    border: 1px solid #cccccc;
-    color: #fff;
-}
+
 .memberSeller_completed_btn .btn{
     background-color: #fff;
     border: 1px solid #cccccc;
-    color: #cccccc;
+    color: #000;
 }
 
  .memberSeller_completed_btn .btn:hover{
-    background-color: #fff;
+    background-color: #CCCCCC;
     border: 1px solid #cccccc;
-    color: #cccccc;
+    color: #fff;
 }
 
-.memberSeller_completed_btn .btn:nth-child(2){
+.B, .memberSeller_completed_btn .btn:nth-child(2){
     background-color: #049DD9;
     color: #fff;
 }
@@ -200,10 +207,6 @@ img {
   .memberSeller_completed_pic,
   .memberSeller_completed_txt{
     border-bottom: none;
-  }
-  .B{
-    background-color: #049DD9;
-    color: #fff;
   }
 }
 .rowunderline{
