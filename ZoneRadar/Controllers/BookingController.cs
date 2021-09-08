@@ -23,7 +23,11 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
-        public ActionResult BuyerCard()
+        public ActionResult BuyerEvaluationCard()
+        {
+            return View();
+        }
+        public ActionResult BuyerCollectCard()
         {
             return View();
         }

@@ -21,33 +21,47 @@ img {
     margin-bottom: 5px;
 }
 
-.fa-check {
-    color: #049DD9;
+.member_choose{
+    border-bottom: 1px solid #CCCCCC;
 }
 
 .fa-comment-dots {
     cursor: pointer;
     color: #049DD9;
 }
-
 .myplace_space_card {
     position: relative;
 }
-
-    .myplace_space_card img {
-        width: 100%;
-    }
+.myplace_space_card img {
+    width: 100%;
+}
 
 .myplace_title {
-    border-bottom: 1px solid #CCCCCC;
+    border-bottom: 2px solid transparent;
 }
 
-.fa-pencil-alt {
+.myplace_title:hover{
+    color: #67cbf3;
+    border-bottom: 3px solid #049DD9;
+}
+
+.myplace_title{
+    text-decoration: none;
+    color: #000;
+}
+
+.active {
+    border-bottom: 2px solid #049DD9;
+}
+
+.fa-pencil-alt,
+.fa-check,
+.fa-heart{
     color: #049DD9;
 }
-
-.fa-times {
+.fa-times{
     color: #E82953;
+    
 }
 
 .space_card_title {
@@ -61,71 +75,68 @@ img {
     cursor: pointer;
 }
 
-    .space_card_title:hover {
-        color: #049DD9;
-    }
-
-.space_card_location {
-    cursor: pointer;
+.space_card_title:hover {
+    color: #049DD9;
 }
 
-    .space_card_location:hover {
-        color: #CCCCCC;
-    }
-
-.fa-star {
-    color: #D9831A;
-}
-
-.reviewsfromhost_review_card {
-    border-bottom: 1px solid #CCCCCC;
-}
-
-    .reviewsfromhost_review_card img {
-        width: 75px;
-        height: 75px;
-        border-radius: 100%;
-        border: 2px solid #049DD9;
-        display: block;
-        margin: auto;
-    }
-
-.reviewsfromhost_review_card_txt a:nth-child(1) {
-    color: #000;
-}
-
-    .reviewsfromhost_review_card_txt a:nth-child(1):hover {
-        color: #CCCCCC;
-    }
-
-.reviewsfromhost_review_card_txt_location_a span {
+.space_card_location:hover {
     color: #CCCCCC;
 }
 
-    .reviewsfromhost_review_card_txt_location_a span:hover {
-        color: #838282;
-    }
+.fa-star{
+    color: #D9831A;
+}
 
-.reviewsfromhost_review_card_txt a {
+.reviewsfromhost_review_card{
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.reviewsfromhost_review_card img{
+    width: 75px;
+    height: 75px;
+    border-radius: 100%;
+    border: 2px solid #049DD9;
+    display: block;
+    margin: auto;
+}
+
+.reviewsfromhost_review_card_txt a:nth-child(1){
+    color: #000;
+}
+
+.reviewsfromhost_review_card_txt_location_a span{
+    color: #CCCCCC;
+}
+
+.reviewsfromhost_review_card_txt a:nth-child(1):hover,
+.reviewsfromhost_review_card_txt_location_a span:hover,
+.reviewsfromhost_review_card_txt a:hover{
+    color: #049DD9;
+}
+
+.reviewsfromhost_review_card_txt a{
     text-decoration: none;
     color: #CCCCCC;
 }
 
-    .reviewsfromhost_review_card_txt a:hover {
-        color: #838282;
-    }
-
 .reviewsfromhost_review_card_txt_date {
-    margin: 0px;
+    margin-bottom: 0px;
     color: #CCCCCC;
 }
 
-.reviewsfromhost_review_card_txt_place {
+.reviewsfromhost_review_card_txt_place{
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+}
+
+
+@media (max-width:480px) {
+    .myplace_title{
+        font-size: large;
+    }
 }
 
 
@@ -138,15 +149,16 @@ img {
         padding-right: 20px;
     }
 
-    .reviewsfromhost_review_card_txt_name {
+    .reviewsfromhost_review_card_txt_name{
+        text-align: center;
+    }
+    
+    .reviewsfromhost_review_card_txt_star{
         text-align: center;
     }
 
-    .reviewsfromhost_review_card_txt_star {
+    .reviewsfromhost_review_card_txt_check{
         text-align: center;
     }
 
-    .reviewsfromhost_review_card_txt_check {
-        text-align: center;
-    }
 }

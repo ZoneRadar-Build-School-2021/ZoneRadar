@@ -48,29 +48,22 @@
 </div>
 
 <div class="member_container container mt-5">
-    <h4 class="myplace_title pb-2">
-        <i class="me-2 fas fa-pencil-alt"></i>來自賣家的評價
-    </h4>
-    <div class="reviewsfromhost row justify-content-center p-3 mt-2">
-        <div class="reviewsfromhost_avgstar col-12">
-            <p>
-                平均評價：
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="ms-2 me-1 fas fs-5 fa-check"></i>
-                <span class="me-1">
-                    2
-                </span>
-                |
-                <i class="ms-2 me-1 fs-5 fas fa-times"></i>
-                <span>
-                    1
-                </span>
-            </p>
+    <div class="member_choose row">
+        <div class="col-6 text-center">
+            <h4 class="pb-2">
+                <a href="BuyerEvaluationCard" class="myplace_title active">
+                    <i class="me-2 fas fa-pencil-alt"></i>來自賣家的評價
+                </a>
+            </h4>
         </div>
+        <div class="col-6 text-center">
+            <h4 class="pb-2">
+                <a href="BuyerCollectCard" class="myplace_title">
+                    <i class="me-2 fas fa-heart"></i>我的收藏
+                </a>
+            </h4>
+        </div>
+    </div>
         <div class="reviewsfromhost_review col-12">
             <div class="reviewsfromhost_review_card row mt-4">
                 <div class="reviewsfromhost_review_card_pic mb-3 col-sm-2 col-md-2 col-lg-2">
@@ -225,5 +218,5 @@
     </div>
 </div>
 @section topCSS{
-    <link href="~/Assets/CSS/member_card/memberstyle_buyer.css" rel="stylesheet" />
+    <link href="~/Assets/CSS/member_card/memberstyle_buyer_evaluation.css" rel="stylesheet" />
 }
