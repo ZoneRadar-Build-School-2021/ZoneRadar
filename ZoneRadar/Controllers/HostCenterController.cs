@@ -6,35 +6,26 @@ using System.Web.Mvc;
 
 namespace ZoneRadar.Controllers
 {
-    public class HomeController : Controller
+    public class HostCenterController : Controller
     {
+        // GET: HostCenter
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-        public ActionResult Policy()
+        public ActionResult AddSpace()
         {
             return View();
         }
-        public ActionResult FAQ()
+        public ActionResult EditSpace()
         {
             return View();
         }
-        public ActionResult NotFound404()
+        public ActionResult Processing()
+        {
+            return View();
+        }
+        public ActionResult Completed()
         {
             return View();
         }

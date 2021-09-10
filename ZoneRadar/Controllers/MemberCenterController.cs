@@ -6,35 +6,38 @@ using System.Web.Mvc;
 
 namespace ZoneRadar.Controllers
 {
-    public class HomeController : Controller
+    public class MemberCenterController : Controller
     {
+        // GET: MemberCenter
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-        public ActionResult Policy()
+        public ActionResult ForgetPassword()
         {
             return View();
         }
-        public ActionResult FAQ()
+        public ActionResult EmailCheck()
         {
             return View();
         }
-        public ActionResult NotFound404()
+        public ActionResult NewPassword()
+        {
+            return View();
+        }
+        public ActionResult EditProfile()
+        {
+            return View();
+        }
+        public ActionResult SavedPlace()
+        {
+            return View();
+        }
+        public ActionResult UserInfo()
+        {
+            return View();
+        }
+        public ActionResult HostInfo()
         {
             return View();
         }
