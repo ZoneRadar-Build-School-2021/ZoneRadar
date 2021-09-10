@@ -1,0 +1,215 @@
+﻿
+@{
+    ViewBag.Title = "Processing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="membercenter_processing container mt-5 border-bottom">
+    <div class="memberbuyer row">
+        <h3 class="memberbuyer_title me-4">訂單管理</h3>
+        <ul class="memberbuyer_state d-flex justify-content-start mt-5">
+            <a class="me-4" href="Pending">
+            <li class="p-2">待處理</li>
+            </a>
+            <a class="me-4" href="Processing">
+            <li class="p-2">處理中</li>
+            </a>
+            <a class="me-4" href="Completed">
+            <li class="p-2">歷史訂單</li>
+            </a>
+        </ul>
+    </div>
+</div>
+<div class="memberbuyer_container container mt-1">
+    <div class="memberbuyer_processing row mt-5 mb-3">
+        <div class="col-12">
+            <div class="row">
+                <div class="memberbuyer_processing_num col-12 mt-3">
+                    <div class="memberbuyer_processing_num_row row">
+                        <div class="memberbuyer_processing_num_ordernum col-sm-12 col-md-6 col-lg-6">
+                            <p>
+                                訂單編號：
+                                <span class="ms-1">2109020001</span>
+                                <a class="p-2 ms-3" href="#">
+                                    <i class="far fa-comment-dots me-1"></i>聯繫我
+                                </a>
+                            </p>
+                        </div>
+                        <div class="memberbuyer_processing_nun_date col-sm-12 col-md-6 col-lg-6">
+                            <p>
+                                下單日期：
+                                <span>2021年9月2日</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="memberbuyer_processing_pic col-sm-12 col-md-12 col-lg-3">
+                    <a href="#">
+                        <img class="p-2 mt-2" src="https://picsum.photos/300/200/?random=1">
+                    </a>
+                </div>
+                <div class="memberbuyer_processing_txt col-sm-12 col-md-12 col-lg-9 p-3">
+                    <div class="memberbuyer_processing_txt_title">
+                        <a href="#">
+                            高手網易然而安排傳奇目光英文優質，庫存
+                        </a>
+                    </div>
+                    <div class="memberbuyer_processing_txt_rent mt-5">
+                        <p>
+                            租借時間：
+                            <span class="memberbuyer_pending_txt_rent_date ms-1 fw-bold">2021年9月7日星期二</span>
+                            <span class="memberbuyer_pending_txt_rent_time ms-1 fw-bold">10:00</span>
+                        </p>
+                    </div>
+                    <div class="memberbuyer_processing_txt_rentback mt-3">
+                        <p>
+                            租還時間：
+                            <span class="memberbuyer_pending_txt_rentback_date ms-1 fw-bold">2021年9月7日星期二</span>
+                            <span class="memberbuyer_pending_txt_rentback_time ms-1 fw-bold">21:00</span>
+                        </p>
+                    </div>
+                    <div class="memberbuyer_processing_txt_people mt-3">
+                        <p>
+                            預約人數：
+                            <span class="memberbuyer_pending_txt_people_howmuch ms-1 me-1 fw-bold">10</span>人
+                        </p>
+                    </div>
+                    <div class="memberbuyer_processing_txt_iconprice text-end">
+                        <p class="memberbuyer_processing_txt_price_title">
+                            訂單價格：
+                            <span class="memberbuyer_processing_txt_price">TWD3,678</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="memberbuyer_processing_btn col-12 mt-3 mb-5 d-flex justify-content-end">
+            <button class="btn me-2" data-bs-toggle="modal" data-bs-target="#order_Modal">取消 / 修改</button>
+        </div>
+    </div>
+
+    <div class="memberbuyer_processing row mt-5 mb-3">
+        <div class="col-12">
+            <div class="row">
+                <div class="memberbuyer_processing_num col-12 mt-3">
+                    <div class="memberbuyer_processing_num_row row">
+                        <div class="memberbuyer_processing_num_ordernum col-sm-12 col-md-6 col-lg-6">
+                            <p>
+                                訂單編號：
+                                <span class="ms-1">2109020001</span>
+                                <a class="p-2 ms-3" href="#">
+                                    <i class="far fa-comment-dots me-1"></i>聯繫我
+                                </a>
+                            </p>
+                        </div>
+                        <div class="memberbuyer_processing_nun_date col-sm-12 col-md-6 col-lg-6">
+                            <p>
+                                下單日期：
+                                <span>2021年9月2日</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="memberbuyer_processing_pic col-sm-12 col-md-12 col-lg-3">
+                    <a href="#">
+                        <img class="p-2 mt-2" src="https://picsum.photos/300/200/?random=2">
+                    </a>
+                </div>
+                <div class="memberbuyer_processing_txt col-sm-12 col-md-12 col-lg-9 p-3">
+                    <div class="memberbuyer_processing_txt_title">
+                        <a href="#">
+                            高手網易然而安排傳奇目光英文優質，庫存
+                        </a>
+                    </div>
+                    <div class="memberbuyer_processing_txt_rent mt-5">
+                        <p>
+                            租借時間：
+                            <span class="memberbuyer_pending_txt_rent_date ms-1 fw-bold">2021年9月7日星期二</span>
+                            <span class="memberbuyer_pending_txt_rent_time ms-1 fw-bold">10:00</span>
+                        </p>
+                    </div>
+                    <div class="memberbuyer_processing_txt_rentback mt-3">
+                        <p>
+                            租還時間：
+                            <span class="memberbuyer_pending_txt_rentback_date ms-1 fw-bold">2021年9月7日星期二</span>
+                            <span class="memberbuyer_pending_txt_rentback_time ms-1 fw-bold">21:00</span>
+                        </p>
+                    </div>
+                    <div class="memberbuyer_processing_txt_people mt-3">
+                        <p>
+                            預約人數：
+                            <span class="memberbuyer_pending_txt_people_howmuch ms-1 me-1 fw-bold">10</span>人
+                        </p>
+                    </div>
+                    <div class="memberbuyer_processing_txt_iconprice text-end">
+                        <p class="memberbuyer_processing_txt_price_title">
+                            訂單價格：
+                            <span class="memberbuyer_processing_txt_price">TWD7,878</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="memberbuyer_processing_btn col-12 mt-3 mb-5 d-flex justify-content-end">
+            <button class="btn me-2" data-bs-toggle="modal" data-bs-target="#order_Modal">取消 / 修改</button>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="order_Modal" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>2109020001</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modify_rent_date mt-2">
+                        <p>更改預約日期：</p>
+                        <input type="text" id="basicDate_rent" placeholder="更改租借日期" data-input>
+                    </div>
+                    <div class="modify_rentback_date mt-2">
+                        <p>更改租還日期：</p>
+                        <input type="text" id="basicDate_rentback" placeholder="更改租借日期" data-input>
+                    </div>
+                    <div class="modify_rent_time mt-2">
+                        <p>更預約時間：</p>
+                        <input type="text" id="timePicker_rent" placeholder="更改時間">
+                    </div>
+                    <div class="modify_rentback_time mt-2">
+                        <p>更租還時間：</p>
+                        <input type="text" id="timePicker_rentback" placeholder="更改時間">
+                    </div>
+                    <div class="modify_people mt-2">
+                        <p>更改預約人數：</p>
+                        <select class="form-select form-select" aria-label=".form-select-sm example">
+                            <option selected class="d-none">選擇人數</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn_close" data-bs-dismiss="modal">取消訂單</button>
+                    <button type="button" class="btn btn_sendout">確認修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section topCSS{
+    <link href="~/Assets/CSS/order_state/membercenter_processing.css" rel="stylesheet" />
+    <link href="~/Assets/CSS/flatpickr.min.css" rel="stylesheet" />
+}
+
+@section endJS{
+    <script src="~/Assets/JS/flatpickr.js"></script>
+    <script src="~/Assets/JS/order_state/membercenter_processing.js"></script>
+}

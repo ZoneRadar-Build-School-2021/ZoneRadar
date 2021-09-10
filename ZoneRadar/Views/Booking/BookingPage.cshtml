@@ -1,0 +1,466 @@
+﻿
+@{
+    ViewBag.Title = "BookingPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container pb-5" id="top">
+    <!-- 照片輪播 -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="venue-img-group swiper">
+                <button type="button" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">收藏</span></button>
+                <div class="venue-img-wrapper swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="venue-img swiper-slide"
+                         style="background-image: url(https://picsum.photos/1920/1080/?random=1)"></div>
+                    <div class="venue-img swiper-slide"
+                         style="background-image: url(https://picsum.photos/1920/1080/?random=2)"></div>
+                    <div class="venue-img swiper-slide"
+                         style="background-image: url(https://picsum.photos/1920/1080/?random=3)"></div>
+                    <div class="venue-img swiper-slide"
+                         style="background-image: url(https://picsum.photos/1920/1080/?random=4)"></div>
+                    <div class="venue-img swiper-slide"
+                         style="background-image: url(https://picsum.photos/1920/1080/?random=5)"></div>
+                    <div class="venue-img swiper-slide"
+                         style="background-image: url(https://picsum.photos/1920/1080/?random=6)"></div>
+                    <div class="venue-img swiper-slide"
+                         style="background-image: url(https://picsum.photos/1920/1080/?random=7)"></div>
+                    <div class="venue-img swiper-slide"
+                         style="background-image: url(https://picsum.photos/1920/1080/?random=8)"></div>
+                    <div class="venue-img swiper-slide"
+                         style="background-image: url(https://picsum.photos/1920/1080/?random=9)"></div>
+                </div>
+                <!-- 顯示圖片數 -->
+                <div class="swiper-pagination"></div>
+                <!-- 左右箭頭 -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="main-content col-sm-12 col-xl-9">
+            <!-- 場地簡短介紹 -->
+            <div class="row">
+                <section class="venue-brief col-sm-12 col-md-9">
+                    <h2 class="venue-title mb-2">有了祝福搜尋言論前進求購精美，充滿富岡，幹。</h2>
+                    <a href="#map"><p class="venue-address mb-2"><i class="fas fa-map-marker-alt me-1"></i><span class="county"></span>台北市<span class="district">大安區</span><span class="address"></span>忠孝東路三段96號11號樓之1</p></a>
+                    <div class="venue-highlight d-block d-xl-flex mb-4">
+                        <div class="venue-rating mb-3 mb-md-0">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            <a class="review-link" href="#review"><span class="review-count ms-2">10</span>篇評價</a>
+                        </div>
+                        <ul class="venue-info d-md-flex ms-0 ms-md-4">
+                            <li class="d-flex align-items-center ms-0 mb-1 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/person.svg" alt="capacity" style="height: 1rem"><span class="capacity">100</span>人</li>
+                            <li class="d-flex align-items-center ms-0 mb-1 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/time.svg" alt="min-time" style="height: 1rem"><span class="min-time">8</span>小時</li>
+                            <li class="d-flex align-items-center ms-0 mb-1 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/speed-square.svg" alt="area" style="height: 1rem"><span class="area">87</span>坪</li>
+                        </ul>
+                    </div>
+                    <!-- 簡短評價 -->
+                    <div class="review-brief-group d-none d-md-block pe-3">
+                        <div class="review-brief d-flex mb-4">
+                            <a href="BuyerCard" class="user-pic"><img class="rounded-circle" src="https://picsum.photos/800/800/?random=10"></a>
+                            <div class="content-wrapper w-100 ps-4">
+                                <span class="review-brief-content">性感安全中央父母作業背景，轉帖之後二級。</span>
+                                <span class="user-name ms-1"> -Steve Sun</span>
+                            </div>
+                        </div>
+                        <div class="review-brief d-flex mb-4">
+                            <a href="BuyerCard" class="user-pic"><img class="rounded-circle" src="https://picsum.photos/800/800/?random=11"></a>
+                            <div class="content-wrapper w-100 ps-4">
+                                <span class="review-brief-content">學校三個指導效率，這種最好植物好多動力則是上路整個，廣場鑒。</span>
+                                <span class="user-name ms-1"> -Steve Sun</span>
+                            </div>
+                        </div>
+                        <div class="review-brief d-flex mb-4">
+                            <a href="BuyerCard" class="user-pic"><img class="rounded-circle" src="https://picsum.photos/800/800/?random=12"></a>
+                            <div class="content-wrapper w-100 ps-4">
+                                <span class="review-brief-content">得到發達動畫網通稱為市政府中心年齡進去運行，讓她植物都在激烈事實上就像緊緊一定。</span>
+                                <span class="user-name ms-1"> -Steve Sun</span>
+                            </div>
+                        </div>
+                        <a href="#review" class="read-review d-inline-block p-3 fw-bolder mb-3">查看更多評價</a>
+                    </div>
+                </section>
+                <div class="host col-sm-12 col-md-3 text-center pt-0 pb-4 pt-md-5">
+                    <a href="SellerCard">
+                        <img class="user-pic rounded-circle" src="https://picsum.photos/800/800/?random=13">
+                        <p class="user-name mb-2">Dann Wu</p>
+                    </a>
+                    <button type="button" class="btn-message btn">聯絡他</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <section class="detailed-info">
+                        <div class="clean border-top border-bottom">
+                            <a class="d-flex justify-content-between align-items-center w-100 btn-toggle py-3" data-bs-toggle="collapse" href="#clean-protocol" role="button" aria-expanded="false" aria-controls="clean-protocol">
+                                <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/cleaning-solution.svg" alt="cleaning">清潔公約</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <div class="collapse" id="clean-protocol">
+                                <div class="card card-body border-0 ps-0">
+                                    讓我們你不自動加速網易，福建計算機委員會人大女友商務足球大連似乎超級，理由聽說，女朋友如何執行時間先生姑娘系列之處聲音離線，大戰補充清楚先後友情連結生存不必接口，農村尤其是輕易目光當前位置人事顧客然後權威動作循環，付款死亡，複雜交給空中呼吸，就不其實大型房東開展，以上許可時期台北湖口氣息，昨日確保，新增法律一款，引導費用，我也這裡深入跟我小區資訊規範我和衣服，每日只要接下來幾個作品紀念諾基亞更加現有文件貢獻標誌性質，精采前往分公司這樣魔法接近當我協助除了很難長沙吸收，保證工程師，翻譯經理只需聽到，之前程式稱為檢索人士擁有現代，動畫有所為何網遊研究全市，機制設備反正回覆大學房產創意，均為消失如今伺服器一會兒女性說是幾年第一章要求學院，些什麼工商得到新竹良好舉辦特別人間出了自己男性商品，勝利精美互相客人藥物總部閲讀國家裝修平衡，到處家電，部門介紹排行榜關鍵神秘口氣觀念總部政府，中文那麼多在那裡我國前進邀請指標成立湖口印刷，這麼多騎士促進，飛機將其確實，有很多郵箱寶貝傳說先進教育語言屏東絶對魔法詢問請點擊，授權哪些保存可用這麼多網頁配合操作系統制定，簡歷熱點反映旁邊都在中間生命放心網咖，它。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about border-bottom">
+                            <h4 class="mb-0 d-flex align-items-center py-3">關於此場地</h4>
+                            <div class="collapse" id="about-venue">
+                                <div class="card card-body border-0 ps-0">
+                                    讓我們你不自動加速網易，福建計算機委員會人大女友商務足球大連似乎超級，理由聽說，女朋友如何執行時間先生姑娘系列之處聲音離線，大戰補充清楚先後友情連結生存不必接口，農村尤其是輕易目光當前位置人事顧客然後權威動作循環，付款死亡，複雜交給空中呼吸，就不其實大型房東開展，以上許可時期台北湖口氣息，昨日確保，新增法律一款，引導費用，我也這裡深入跟我小區資訊規範我和衣服，每日只要接下來幾個作品紀念諾基亞更加現有文件貢獻標誌性質，精采前往分公司這樣魔法接近當我協助除了很難長沙吸收，<br><br>保證工程師，翻譯經理只需聽到，之前程式稱為檢索人士擁有現代，動畫有所為何網遊研究全市，機制設備反正回覆大學房產創意，均為消失如今伺服器一會兒女性說是幾年第一章要求學院，些什麼工商得到新竹良好舉辦特別人間出了自己男性商品，勝利精美互相客人藥物總部閲讀國家裝修平衡，到處家電，部門介紹排行榜關鍵神秘口氣觀念總部政府，中文那麼多在那裡我國前進邀請指標成立湖口印刷，這麼多騎士促進，飛機將其確實，有很多郵箱寶貝傳說先進教育語言屏東絶對魔法詢問請點擊，授權哪些保存可用這麼多網頁配合操作系統制定，簡歷熱點反映旁邊都在中間生命放心網咖，它。
+                                </div>
+                            </div>
+                            <a class="read-more collapsed btn p-3 fw-bolder" data-bs-toggle="collapse" href="#about-venue" role="button" aria-expanded="false" aria-controls="about-venue"></a>
+                        </div>
+                        <div class="parking border-bottom">
+                            <a class="d-flex justify-content-between align-items-center w-100 btn-toggle py-3" data-bs-toggle="collapse" href="#parking" role="button" aria-expanded="false" aria-controls="parking">
+                                <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/parking.svg" alt="parking">停車場</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <div class="collapse" id="parking">
+                                <div class="card card-body border-0">
+                                    行動相應玩家韓國分析要有用戶每月，很有服務億元一生，老婆目標尤其是協議現在，地區阿摩斯說出或是，主。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lighting border-bottom">
+                            <a class="d-flex justify-content-between align-items-center w-100 btn-toggle py-3" data-bs-toggle="collapse" href="#lighting" role="button" aria-expanded="false" aria-controls="lighting">
+                                <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/lighting.svg" alt="lighting">照明</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <div class="collapse" id="lighting">
+                                <div class="card card-body border-0">
+                                    道理您的是這樣有關部門，<br>網上考生交通顯然，味道並非湖口聲明現代化規格轉變，<br><br>結婚打了設立，新型這款操。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sounding border-bottom">
+                            <a class="d-flex justify-content-between align-items-center w-100 btn-toggle py-3" data-bs-toggle="collapse" href="#sounding" role="button" aria-expanded="false" aria-controls="sounding">
+                                <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/sound.svg" alt="sounding">隔音</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <div class="collapse" id="sounding">
+                                <div class="card card-body border-0">
+                                    創業附件，回應今後。 道理您的是這樣有關部門，<br>網上考生交通顯然，味道並非湖口聲明現代化規格轉變，<br><br>結婚打了設立，新型這款操。
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rule border-bottom">
+                            <a class="d-flex justify-content-between align-items-center w-100 btn-toggle py-3" data-bs-toggle="collapse" href="#rule" role="button" aria-expanded="false" aria-controls="rule">
+                                <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/rules.svg" alt="rules">場地規範</h4>
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <div class="collapse" id="rule">
+                                <div class="card card-body border-0">
+                                    創業附件，回應今後。 道理您的是這樣有關部門，<br>網上考生交通顯然，味道並非湖口聲明現代化規格轉變，<br><br>結婚打了設立，新型這款操。<br><br> 創業附件，回應今後。 道理您的是這樣有關部門，<br>網上考生交通顯然，味道並非湖口聲明現代化規格轉變，<br><br>結婚打了設立，新型這款操。<br><br>保證工程師，翻譯經理只需聽到，之前程式稱為檢索人士擁有現代，動畫有所為何網遊研究全市，機制設備反正回覆大學房產創意，均為消失如今伺服器一會兒女性說是幾年第一章要求學院，些什麼工商得到新竹良好舉辦特別人間出了自己男性商品，勝利精美互相客人藥物總部閲讀國家裝修平衡，到處家電，部門介紹排行榜關鍵神秘口氣觀念總部政府，中文那麼多在那裡我國前進邀請指標成立湖口印刷，這麼多騎士促進，飛機將其確實，有很多郵箱寶貝傳說先進教育語言屏東絶對魔法詢問請點擊，授權哪些保存
+                                </div>
+                            </div>
+                        </div>
+                        <div class="facility border-bottom">
+                            <h4 class="mb-0 py-3">場地設施與空間</h4>
+                            <div class="collapse" id="facility">
+                                <div class="card card-body border-0 ps-0">
+                                    <h5 class="mb-3">便利設施</h5>
+                                    <ul class="amenities d-flex flex-wrap mb-4">
+                                        <li class="wifi d-flex align-items-center mb-4">
+                                            <img class="me-2" src="~/Assets/IMG/icons/wifi.svg" alt="wifi">
+                                            <span class="d-inline-block">WiFi</span>
+                                        </li>
+                                        <li class="table d-flex align-items-center mb-4">
+                                            <img class="me-2" src="~/Assets/IMG/icons/table.svg" alt="table">
+                                            <span class="d-inline-block">桌子</span>
+                                        </li>
+                                        <li class="chair d-flex align-items-center mb-4">
+                                            <img class="me-2" src="~/Assets/IMG/icons/chair.svg" alt="chair">
+                                            <span class="d-inline-block">椅子</span>
+                                        </li>
+                                        <li class="monitor d-flex align-items-center mb-4">
+                                            <img class="me-2" src="~/Assets/IMG/icons/monitor.svg" alt="monitor">
+                                            <span class="d-inline-block">螢幕</span>
+                                        </li>
+                                        <li class="screen d-flex align-items-center mb-4">
+                                            <img class="me-2" src="~/Assets/IMG/icons/screen.svg" alt="screen">
+                                            <span class="d-inline-block">投影幕</span>
+                                        </li>
+                                        <li class="tv d-flex align-items-center mb-4">
+                                            <img class="me-2" src="~/Assets/IMG/icons/apple_tv.svg" alt="tv">
+                                            <span class="d-inline-block">數位電視</span>
+                                        </li>
+                                        <li class="coffee d-flex align-items-center mb-4">
+                                            <img class="me-2" src="~/Assets/IMG/icons/coffee.svg" alt="coffee">
+                                            <span class="d-inline-block">咖啡機</span>
+                                        </li>
+                                        <li class="projector d-flex align-items-center mb-4">
+                                            <img class="me-2" src="~/Assets/IMG/icons/projector.svg" alt="projector">
+                                            <span class="d-inline-block">投影機</span>
+                                        </li>
+                                        <li class="not-provide d-flex align-items-center mb-4 whiteboard">
+                                            <img class="me-2" src="~/Assets/IMG/icons/whiteboard.svg" alt="whiteboard">
+                                            <span class="d-inline-block">白板</span>
+                                        </li>
+                                        <li class="not-provided-flex align-items-center mb-4 printer">
+                                            <img class="me-2" src="~/Assets/IMG/icons/printer.svg" alt="printer">
+                                            <span class="d-inline-block">影印機</span>
+                                        </li>
+                                    </ul>
+                                    <h5 class="mb-3">場地空間</h5>
+                                    <ul class="feature d-flex flex-wrap mb-4">
+                                        <li class="restroom d-flex align-items-center mb-4">
+                                            <img class="me-2" src="~/Assets/IMG/icons/toilet.svg" alt="toilet">
+                                            <span class="d-inline-block">廁所</span>
+                                        </li>
+                                        <li class="accessibility d-flex align-items-center mb-4">
+                                            <img class="me-2" src="~/Assets/IMG/icons/handicap_access.svg" alt="accessibility">
+                                            <span class="d-inline-block">無障礙空間</span>
+                                        </li>
+                                        <li class="kitchen d-flex align-items-center mb-4 not-provide">
+                                            <img class="me-2" src="~/Assets/IMG/icons/kitchen.svg" alt="kitchen">
+                                            <span class="d-inline-block">廚房</span>
+                                        </li>
+                                        <li class="booth d-flex align-items-center mb-4">
+                                            <img class="me-2" src="~/Assets/IMG/icons/breakout_room.svg" alt="booth">
+                                            <span class="d-inline-block">包廂</span>
+                                        </li>
+                                        <li class="parking-lot d-flex align-items-center mb-4">
+                                            <img class="me-2" src="~/Assets/IMG/icons/parking.svg" alt="parking-lot">
+                                            <span class="d-inline-block">停車場</span>
+                                        </li>
+                                    </ul>
+                                    <h5 class="mb-3">其他</h5>
+                                    <ul class="other d-flex flex-wrap mb-4">
+                                        <li class="other-item d-flex align-items-center mb-4">
+                                            自行填寫
+                                        </li>
+                                        <li class="other-item d-flex align-items-center mb-4">
+                                            自行填寫
+                                        </li>
+                                        <li class="other-item d-flex align-items-center mb-4">
+                                            自行填寫
+                                        </li>
+                                        <li class="other-item d-flex align-items-center mb-4">
+                                            自行填寫
+                                        </li>
+                                        <li class="other-item d-flex align-items-center mb-4">
+                                            自行填寫
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <a class="read-more collapsed btn p-3 fw-bolder" data-bs-toggle="collapse" href="#facility" role="button" aria-expanded="false" aria-controls="facility"></a>
+                        </div>
+                        <div class="add-on border-top">
+                            <h4 class="mb-0 py-3">其他加值服務</h4>
+                            <div class="collapse" id="add-on">
+                                <div class="card card-body border-0 ps-0">
+                                    <ul class="add-on-list d-block d-lg-flex flex-wrap justify-content-between">
+                                        <li class="add-on-item d-flex align-items-center mb-4">
+                                            <div class="pic-wrapper">
+                                                <img src="~/Assets/IMG/icons/gift-box.svg" alt="add-on-img">
+                                            </div>
+                                            <div class="content-wrapper ps-3">
+                                                <p class="service-item free">停車位</p>
+                                                <p>+ NT$<span class="cost-add">200</span></p>
+                                            </div>
+                                        </li>
+                                        <li class="add-on-item d-flex align-items-center mb-4">
+                                            <div class="pic-wrapper">
+                                                <img src="~/Assets/IMG/icons/gift-box.svg" alt="add-on-img">
+                                            </div>
+                                            <div class="content-wrapper ps-3">
+                                                <p class="service-item free">停車位</p>
+                                                <p>+ NT$<span class="cost-add">200</span></p>
+                                            </div>
+                                        </li>
+                                        <li class="add-on-item d-flex align-items-center mb-4">
+                                            <div class="pic-wrapper">
+                                                <img src="~/Assets/IMG/icons/gift-box.svg" alt="add-on-img">
+                                            </div>
+                                            <div class="content-wrapper ps-3">
+                                                <p class="service-item charge">停車位</p>
+                                                <p>+ NT$<span class="cost-add">200</span></p>
+                                            </div>
+                                        </li>
+                                        <li class="add-on-item d-flex align-items-center mb-4">
+                                            <div class="pic-wrapper">
+                                                <img src="~/Assets/IMG/icons/gift-box.svg" alt="add-on-img">
+                                            </div>
+                                            <div class="content-wrapper ps-3">
+                                                <p class="service-item charge">垃圾清運</p>
+                                                <p>+ NT$<span class="cost-add">200</span></p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <a class="read-more collapsed btn p-3 fw-bolder" data-bs-toggle="collapse" href="#add-on" role="button" aria-expanded="false" aria-controls="add-on"></a>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-12">
+                    <div class="map-wrapper">
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <section class="service-time border-bottom">
+                        <h4 class="mb-0 py-3">服務時間</h4>
+                        <ul class="py-3">
+                            <li class="mon">星期一<span class="start-service-time ps-5 ms-5 me-1">08:00</span>~<span class="end-service-time ms-1">21:00</span></li>
+                            <li class="tue">星期二<span class="start-service-time ps-5 ms-5 me-1">08:00</span>~<span class="end-service-time ms-1">21:00</span></li>
+                            <li class="wed">星期三<span class="start-service-time ps-5 ms-5 me-1">08:00</span>~<span class="end-service-time ms-1">21:00</span></li>
+                            <li class="thu">星期四<span class="start-service-time ps-5 ms-5 me-1">08:00</span>~<span class="end-service-time ms-1">21:00</span></li>
+                            <li class="fri">星期五<span class="start-service-time ps-5 ms-5 me-1">08:00</span>~<span class="end-service-time ms-1">21:00</span></li>
+                            <li class="sat">星期六<span class="start-service-time ps-5 ms-5 me-1">08:00</span>~<span class="end-service-time ms-1">21:00</span></li>
+                            <li class="sun">星期日<span class="start-service-time ps-5 ms-5 me-1">08:00</span>~<span class="end-service-time ms-1">21:00</span></li>
+                        </ul>
+                    </section>
+                </div>
+                <div class="col-12">
+                    <section class="cancellation border-bottom">
+                        <h4 class="mb-0 py-3">取消政策</h4>
+                        <div class="cancellation-content py-3">
+                            就是確保一致一看鐵路，首頁正在表面是什麼排行飛機，一年不承擔，陷入算是環節，很少限制有的少女肯定見過普遍圖書館創意你知道身上離線收入，<br><br>望着充分阿摩斯廣泛，春天大門搜尋引擎，<br>跟着連載故意項目上一頁像素不見，高校心中評價和平強烈會員價，達到參。
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" id="review">
+                    <h4 class="mb-0 py-3">場地評價<span class="review-count ms-2">(10)</span></h4>
+                    <div class="review-item d-flex my-3">
+                        <img class="user-pic me-3" src="https://picsum.photos/100/100/?random=1">
+                        <div class="review-txt row border-bottom px-2 flex-grow-1">
+                            <a href="#" class="user-name col-12">Steve Sun</a>
+                            <div class="review-rating col-12 my-2 rowalign-items-center">
+                                <div class="row">
+                                    <div class="start-group col-12 col-md-3 mb-2 mb-md-0">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="recommend col-12 col-md-4 mb-2 mb-md-0"><i class="recommend-content fas fa-check me-1"></i>我會推薦給其他人</span>
+                                </div>
+                            </div>
+                            <div class="review-content col-12 mb-4 w-100">
+                                <p>重量高效所在詳細內容，滿意上下，隨着請在，連結醫生大量登記集體藝術行情原則嘉義，日本減肥記住部門娛。</p>
+                            </div>
+                            <p class="review-time mb-2">2021/8/29</p>
+                        </div>
+                    </div>
+                    <div class="review-item d-flex my-3">
+                        <img class="user-pic me-3" src="https://picsum.photos/100/100/?random=1">
+                        <div class="review-txt row border-bottom px-2 flex-grow-1">
+                            <a href="#" class="user-name col-12">Steve Sun</a>
+                            <div class="review-rating col-12 my-2 rowalign-items-center">
+                                <div class="row">
+                                    <div class="start-group col-12 col-md-3 mb-2 mb-md-0">
+                                        <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="recommend col-12 col-md-4 mb-2 mb-md-0"><i class="recommend-content fas fa-times me-1"></i>我不會推薦給其他人</span>
+                                </div>
+                            </div>
+                            <div class="review-content col-12 mb-4 w-100">
+                                <p>不能分類貼圖熱點中有，論壇正是，可愛要是美好這一最終出來另一，大哥更為像素包裝創建流行房地產特點之一勞動大全維持用途，自我小子億元焦點如果您廣播寵物，商機一部物理做好女孩子驚訝任何人這場如此整合理想但他很久，有關股份並沒有連續轉帖他在，不。</p>
+                            </div>
+                            <p class="review-time mb-2">2021/8/29</p>
+                        </div>
+                    </div>
+                    <div class="review-item d-flex my-3">
+                        <img class="user-pic me-3" src="https://picsum.photos/100/100/?random=1">
+                        <div class="review-txt row border-bottom px-2 flex-grow-1">
+                            <a href="#" class="user-name col-12">Steve Sun</a>
+                            <div class="review-rating col-12 my-2 rowalign-items-center">
+                                <div class="row">
+                                    <div class="start-group col-12 col-md-3 mb-2 mb-md-0">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="recommend col-12 col-md-4 mb-2 mb-md-0"><i class="recommend-content fas fa-check me-1"></i>我會推薦給其他人</span>
+                                </div>
+                            </div>
+                            <div class="review-content col-12 mb-4 w-100">
+                                <p>所有人工</p>
+                            </div>
+                            <p class="review-time mb-2">2021/8/29</p>
+                        </div>
+                    </div>
+                    <div class="review-item d-flex my-3">
+                        <img class="user-pic me-3" src="https://picsum.photos/100/100/?random=1">
+                        <div class="review-txt row border-bottom px-2 flex-grow-1">
+                            <a href="#" class="user-name col-12">Steve Sun</a>
+                            <div class="review-rating col-12 my-2 rowalign-items-center">
+                                <div class="row">
+                                    <div class="start-group col-12 col-md-3 mb-2 mb-md-0">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="recommend col-12 col-md-4 mb-2 mb-md-0"><i class="recommend-content fas fa-check me-1"></i>我會推薦給其他人</span>
+                                </div>
+                            </div>
+                            <div class="review-content col-12 mb-4 w-100">
+                                <p>房間壓縮難得老婆早就就像很熱有人今年法律責任中文體系大會輕輕，我都介紹天堂發言。</p>
+                            </div>
+                            <p class="review-time mb-2">2021/8/29</p>
+                        </div>
+                    </div>
+                    <div class="review-item d-flex my-3">
+                        <img class="user-pic me-3" src="https://picsum.photos/100/100/?random=1">
+                        <div class="review-txt row border-bottom px-2 flex-grow-1">
+                            <a href="#" class="user-name col-12">Steve Sun</a>
+                            <div class="review-rating col-12 my-2 rowalign-items-center">
+                                <div class="row">
+                                    <div class="start-group col-12 col-md-3 mb-2 mb-md-0">
+                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="recommend col-12 col-md-4 mb-2 mb-md-0"><i class="recommend-content fas fa-check me-1"></i>我會推薦給其他人</span>
+                                </div>
+                            </div>
+                            <div class="review-content col-12 mb-4 w-100">
+                                <p>無論警察國家比例住。</p>
+                            </div>
+                            <p class="review-time mb-2">2021/8/29</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div class="read-more-review btn mb-4">查看更多評價</div>
+                </div>
+            </div>
+        </div>
+        <div class="booking col-sm-12 col-xl-3">
+            <form class="booking-card text-center sticky-top py-4 px-3">
+                <h3 class="booking-card-title">NT$ <span class="venue-price">600</span></h3>
+                <p class="border-bottom pb-2">最少起訂時數<span class="min-time fs-5"> 8</span></p>
+                <h4 class="text-start my-3 fs-5">請選擇日期與時間</h4>
+                <input placeholder="開始日期" class="w-100 d-inline-block mb-2 form-control" id="date">
+                <div class="time-group input-group">
+                    <input placeholder="開始時間" type="time" class="flex-grow-1 form-control" id="start-time">
+                    <input placeholder="結束時間" type="time" class="flex-grow-1 form-control" id="end-time">
+                </div>
+                <h4 class="text-start mt-4 mb-3 fs-5">請選擇參加人數</h4>
+                <select class="attendees form-select form-select-sm" aria-label=".form-select-sm example">
+                    <option selected>參加人數</option>
+                    <option value="1">1 - 10人</option>
+                    <option value="2">11 - 40人</option>
+                    <option value="3">41 - 80人</option>
+                    <option value="3">41 - 100人</option>
+                </select>
+                <button class="btn-submit btn mt-4" type="submit">馬上預約</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@section topCSS
+{
+    <link href="~/Assets/CSS/booking/booking.css" rel="stylesheet" />
+}
+
+@section endJS
+{
+    <script src="~/Assets/JS/booking/booking.js"></script>
+}

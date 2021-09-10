@@ -1,0 +1,150 @@
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+.member_container {
+    max-width: 1140px;
+}
+
+.member_card img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    border: 3px solid #049DD9;
+}
+
+.member_verifcation_item {
+    background-color: #F5F5F5;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.member_choose{
+    border-bottom: 1px solid #CCCCCC;
+}
+
+.fa-comment-dots {
+    cursor: pointer;
+    color: #049DD9;
+}
+.myplace_space_card {
+    position: relative;
+}
+.myplace_space_card img {
+    width: 100%;
+}
+
+.myplace_title {
+    border-bottom: 2px solid transparent;
+}
+
+.myplace_title:hover{
+    color: #67cbf3;
+    border-bottom: 3px solid #049DD9;
+}
+
+.myplace_title{
+    text-decoration: none;
+    color: #000;
+}
+
+.active {
+    border-bottom: 2px solid #049DD9;
+}
+
+.fa-check,
+.fa-pencil-alt,
+.fa-heart{
+    color: #049DD9;
+}
+
+.myplace_space_card_distinct{
+    padding: 10px 30px;
+    background-color: rgba(4, 157, 217, .3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .7);
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 12px;
+}
+
+.member_verifcation_item {
+    background-color: #F5F5F5;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.fa-comment-dots {
+    cursor: pointer;
+    color: #049DD9;
+}
+.myplace_space_card {
+    position: relative;
+}
+
+.space_card_title {
+    color: #000;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    cursor: pointer;
+}
+
+.space_card_title:hover,
+.space_card_location_a span:hover{
+    color: #049DD9;
+}
+
+.space_card_location_a{
+    text-decoration: none;
+}
+
+.space_card_location_a span {
+    color: #000;
+}
+
+.fa-star{
+    color: #D9831A;
+}
+
+@media (max-width:480px) {
+    .myplace_title{
+        font-size: large;
+    }
+}
+
+
+@media (max-width:768px) {
+    .member_card_introduce_name {
+        text-align: center;
+    }
+
+    .member_verifcation_aboutme {
+        padding-right: 20px;
+    }
+
+    .reviewsfromhost_review_card_txt_name{
+        text-align: center;
+    }
+    
+    .reviewsfromhost_review_card_txt_star{
+        text-align: center;
+    }
+
+    .reviewsfromhost_review_card_txt_check{
+        text-align: center;
+    }
+
+    .member_card_introduce_name {
+        text-align: center;
+    }
+
+    .member_verifcation_aboutme {
+        padding-right: 20px;
+    }
+}
