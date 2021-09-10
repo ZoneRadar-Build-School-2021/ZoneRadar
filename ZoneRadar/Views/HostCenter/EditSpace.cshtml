@@ -1,0 +1,205 @@
+﻿
+@{
+    ViewBag.Title = "SellerCenter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="mymain">
+    <div class="container">
+        <div class="row row-cols-2  d-lg-flex mb-1 ">
+            <div class="col col-lg-6 ">
+                <h2 class="fs-4">場地管理</h2>
+            </div>
+            <div class="col col-lg-6  justify-content-lg-end text-end ">
+                <a href="AddSpace">
+                    <button class="AddSpaceBtn ">
+                        增加空間
+                    </button>
+                </a>
+            </div>
+        </div>
+        <div class="container">
+            <!-- 手機橫 平板直 -->
+            <div class="row SpaceCardGroup d-md-flex d-none d-lg-none d-xl-none justify-content-between">
+                <div class="col SpaceCardimg">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrxaDGTL9uO8NrEQSmy5vcO1b9wzR9vfmnfQ3cG8Bqk2G_Ze4Myu74UO-02RCXFiA3DbY&usqp=CAU">
+                </div>
+                <div class="col-md-8 mt-auto mb-auto">
+                    <div class="row">
+                        <div class="col-md-12 SpaceCardBody ">
+                            <h5>Good Space Meeting</h5>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <!-- 內容 地址 提供的服務列3項 加取消政策 -->
+                            <p>台北市內湖區文德路,提供車位,Wifi,取消政策</p>
+                        </div>
+                        <div class="col-md-12">
+                            <a href="AddSpace">
+                                <button class="EditSpaceBtn me-1 ">
+                                    編輯空間
+                                </button>
+                            </a>
+                            <button class="DeleteSpaceBtn" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                刪除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 桌機 手機直 平板橫 -->
+            <div class="row SpaceCardGroup  d-lg-flex  d-md-none justify-content-lg-between">
+                <div class="col SpaceCardimg col-12 col-lg-2 col-xl-1 ">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrxaDGTL9uO8NrEQSmy5vcO1b9wzR9vfmnfQ3cG8Bqk2G_Ze4Myu74UO-02RCXFiA3DbY&usqp=CAU">
+                </div>
+                <div class="col SpaceCardBody col-12  col-xl-6  col-lg-6 ">
+                    <h5>Good Space Meeting</h5>
+
+                    <!-- 內容 地址 提供的服務列3項 加取消政策 -->
+                    <p>台北市內湖區文德路,提供車位,Wifi,取消政策</p>
+                </div>
+                <div class="col-12  d-flex  justify-content-start d-md-none d-lg-none mb-2">
+                    <a href="AddSpace">
+                        <button class="EditSpaceBtn me-1 ">
+                            編輯空間
+                        </button>
+                    </a>
+                    <button class="DeleteSpaceBtn" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        刪除
+                    </button>
+                </div>
+                <div class=" col-xl-3  col-lg-3  justify-content-lg-end  d-lg-flex d-none  d-md-none text-end  mt-auto mb-auto  pb-2">
+                    <a href="AddSpace">
+                        <button class="EditSpaceBtn me-1">
+                            編輯空間
+                        </button>
+                    </a>
+                    <button class="DeleteSpaceBtn" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        刪除
+                    </button>
+                </div>
+            </div>
+            <!-- 按下刪除跳出的Ｍodal -->
+            <!-- 桌機 平板 手機橫 -->
+            <!-- Modal -->
+            <div class="modal fade " id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content ">
+                        <button type="button" class="btn-close CloseMbtn ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="text-center mt-3 mb-4" id="exampleModalLabel">刪除場地</h5>
+                        <div class="modalbody ms-auto me-auto">
+                            <p class=" text-center  text-md-start">您是否確定將此場地刪除？</p>
+                            <div class="form-check ms-auto me-auto w-75">
+                                <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label " for="flexCheckDefault">是的，我清楚刪除此場地相關的所有列表訊息</label>
+
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-5 mb-2 ">
+                            <button type="button" class="w-75 col-8 btn deleteBtnM " data-bs-dismiss="modal">刪除</button>
+                        </div>
+                        <div class="row justify-content-center mb-4">
+                            <button type="button" class="w-75 col-8 text-center btn cancelBtnM " data-bs-dismiss="modal" aria-label="Close">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+            <!-- 手機橫 平板直 -->
+            <div class="row SpaceCardGroup d-md-flex d-none d-lg-none d-xl-none justify-content-between">
+                <div class="col SpaceCardimg">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrxaDGTL9uO8NrEQSmy5vcO1b9wzR9vfmnfQ3cG8Bqk2G_Ze4Myu74UO-02RCXFiA3DbY&usqp=CAU">
+                </div>
+                <div class="col-md-8 mt-auto mb-auto">
+                    <div class="row">
+                        <div class="col-md-12 SpaceCardBody  ">
+                            <h5>Good Space Meeting</h5>
+                            <!-- 內容 地址 提供的服務列3項 加取消政策 -->
+                            <p>台北市內湖區文德路,提供車位,Wifi,取消政策</p>
+                        </div>
+                        <div class="col-md-12">
+                            <a href="AddSpace">
+                                <button class="EditSpaceBtn me-1 ">
+                                    編輯空間
+                                </button>
+                            </a>
+                            <button class="DeleteSpaceBtn" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                刪除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 桌機 手機直 平板橫 -->
+            <div class="row SpaceCardGroup  d-lg-flex  d-md-none justify-content-lg-between">
+                <div class="col SpaceCardimg col-12 col-lg-2 col-xl-1 ">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrxaDGTL9uO8NrEQSmy5vcO1b9wzR9vfmnfQ3cG8Bqk2G_Ze4Myu74UO-02RCXFiA3DbY&usqp=CAU">
+                </div>
+                <div class="col SpaceCardBody col-12  col-xl-6  col-lg-6 ">
+                    <h5>Good Space Meeting</h5>
+                    <!-- 內容 地址 提供的服務列3項 加取消政策 -->
+                    <p>台北市內湖區文德路,提供車位,Wifi,取消政策</p>
+                </div>
+                <div class="col-12  d-flex  justify-content-start d-md-none d-lg-none mb-2">
+                    <a href="AddSpace">
+                        <button class="EditSpaceBtn me-1 ">
+                            編輯空間
+                        </button>
+                    </a>
+                    <button class="DeleteSpaceBtn" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        刪除
+                    </button>
+                </div>
+                <div class=" col-xl-3  col-lg-3  justify-content-lg-end  d-lg-flex d-none  d-md-none text-end  mt-auto mb-auto  pb-2">
+                    <a href="AddSpace">
+                        <button class="EditSpaceBtn me-1 ">
+                            編輯空間
+                        </button>
+                    </a>
+                    <button class="DeleteSpaceBtn" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        刪除
+                    </button>
+                </div>
+            </div>
+            <!-- 按下刪除跳出的Ｍodal -->
+            <!-- 桌機 平板 手機橫 -->
+            <!-- Modal -->
+            <div class="modal fade show" id="deleteModal  " tabindex="-1" aria-labelledby="exampleModalLabel exampleModalFullscreenSmLabel" aria-hidden="true">
+                <div class="modal-dialog modal-fullscreen-sm-down ">
+                    <div class="modal-content ">
+                        <button type="button" class="btn-close CloseMbtn ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="text-center mt-3 mb-4" id="exampleModalLabel">刪除場地</h5>
+                        <div class="modalbody ms-auto me-auto">
+                            <p class=" text-center  text-md-start">您是否確定將此場地刪除？</p>
+                            <div class="form-check ms-auto me-auto w-75">
+                                <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label " for="flexCheckDefault">是的，我清楚刪除此場地相關的所有列表訊息</label>
+
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-5 mb-2 ">
+                            <button type="button" class="w-75 col-8 btn deleteBtnM " data-bs-dismiss="modal">刪除</button>
+                        </div>
+                        <div class="row justify-content-center mb-4">
+                            <button type="button" class="w-75 col-8 text-center btn cancelBtnM " data-bs-dismiss="modal" aria-label="Close">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section topCSS
+{
+    <link href="~/Assets/CSS/membercenter/membercenter.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+}
+
+
+
+

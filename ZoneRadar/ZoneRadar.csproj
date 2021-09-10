@@ -350,10 +350,13 @@
     <Content Include="Views\MemberCenter\SavedPlace.cshtml" />
     <Content Include="Views\MemberCenter\UserInfo.cshtml" />
     <Content Include="Views\MemberCenter\HostInfo.cshtml" />
+    <Content Include="Views\HostCenter\AddSpace.cshtml" />
+    <Content Include="Views\HostCenter\EditSpace.cshtml" />
+    <Content Include="Views\HostCenter\Completed.cshtml" />
+    <Content Include="Views\HostCenter\Processing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\HostCenter\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

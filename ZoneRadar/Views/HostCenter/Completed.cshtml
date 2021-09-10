@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewBag.Title = "SellerOrderCompleted";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="memberSeller_order_status container mt-5">
+    <div class="memberSeller row">
+        <ul class="memberSeller_state d-flex justify-content-start mt-5">
+            <a class="me-4" href="Processing">
+            <li class="p-2">處理中</li>
+            </a>
+            <a class="me-4" href="Completed">
+            <li class="p-2">歷史訂單</li>
+            </a>
+        </ul>
+    </div>
+</div>
+<div class="main">
+    <div class="memberSeller_container container mt-2">
+        <div class="memberSeller_completed row mt-5 mb-3">
+            <div class="col-12">
+                <div class="row rowunderline">
+                    <div class="memberSeller_completed_num col-12 mt-3">
+                        <div class="memberSeller_completed_num_row row">
+                            <div class="memberSeller_completed_num_ordernum col-sm-12 col-md-6 col-lg-4">
+                                <p>
+                                    訂單編號：
+                                    <span class="ms-1">2109020001</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="memberSeller_completed_pic col-sm-12 col-md-12 col-lg-3">
+                        <a href="~/Booking/BookingPage">
+                            <img class="p-2 mt-2" src="https://picsum.photos/300/200/?random=1">
+                        </a>
+                    </div>
+                    <div class="mb-auto mt-auto memberSeller_completed_txt col-sm-12 col-md-12 col-lg-6 p-3">
+                        <div class="memberSeller_completed_txt_title mt-3">
+                            <a href="~/Booking/BookingPage">
+                                <h3>場地名稱:Good Space</h3>
+                            </a>
+                        </div>
+                        <div class="memberSeller_completed_txt_introduce mt-3">
+                            <h4>
+                                訂購人:<span>王曉明</span>
+                            </h4>
+                        </div>
+                        <div class="memberSeller_completed_txt_introduce mt-3">
+                            <h4>
+                                預定日期:<span>2021/10/01</span>-<span>2021/10/03</span>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 mt-auto mb-auto  ">
+                        <div class="memberSeller_completed_txt_iconprice">
+                            <p class="memberSeller_completed_txt_price_title">
+                                訂單價格：
+                                <span class="memberSeller_completed_txt_price">$10000</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="memberSeller_completed_btn  col-lg-12  d-lg-flex d-none mt-2 mb-2  justify-content-end">
+                <p class="me-2 mt-auto mb-auto ">訂單已結案:</p>
+                <button class="btn me-2    " data-bs-toggle="modal" data-bs-target="#order_Modal">評價 / 評分</button>
+            </div>
+            <div class="memberSeller_completed_btn d-flex col-12 d-lg-none mt-2 justify-content-end">
+                <p class=" mt-auto mb-auto ">訂單已結案:</p>
+                <button class="btn ms-1  mb-1" data-bs-toggle="modal" data-bs-target="#order_Modal">評價 / 評分</button>
+
+            </div>
+            <!-- <div class="col-6 memberSeller_completed_btn d-lg-none mt-1 mb-1  justify-content-end ">
+                <button class="btn  mb-1" data-bs-toggle="modal" data-bs-target="#order_Modal">評價 / 評分</button>
+            </div> -->
+        </div>
+    </div>
+    <div class="memberSeller_container container mt-2">
+        <div class="memberSeller_completed row mt-5 mb-3">
+            <div class="col-12">
+                <div class="row rowunderline">
+                    <div class="memberSeller_completed_num col-12 mt-3">
+                        <div class="memberSeller_completed_num_row row">
+                            <div class="memberSeller_completed_num_ordernum col-sm-12 col-md-6 col-lg-4">
+                                <p>
+                                    訂單編號：
+                                    <span class="ms-1">2109020001</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="memberSeller_completed_pic col-sm-12 col-md-12 col-lg-3">
+                        <a href="~/Booking/BookingPage">
+                            <img class="p-2 mt-2" src="https://picsum.photos/300/200/?random=1">
+                        </a>
+                    </div>
+                    <div class="mb-auto mt-auto memberSeller_completed_txt col-sm-12 col-md-12 col-lg-6 p-3">
+                        <div class="memberSeller_completed_txt_title mt-3">
+                            <a href="~/Booking/BookingPage">
+                                <h3>場地名稱:Good Space</h3>
+                            </a>
+                        </div>
+                        <div class="memberSeller_completed_txt_introduce mt-3">
+                            <h4>
+                                訂購人:<span>王曉明</span>
+                            </h4>
+                        </div>
+                        <div class="memberSeller_completed_txt_introduce mt-3">
+                            <h4>
+                                預定日期:<span>2021/10/01</span>-<span>2021/10/03</span>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 mt-auto mb-auto  ">
+                        <div class="memberSeller_completed_txt_iconprice">
+                            <p class="memberSeller_completed_txt_price_title">
+                                訂單價格：
+                                <span class="memberSeller_completed_txt_price">$10000</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="memberSeller_completed_btn  col-lg-12  d-lg-flex d-none mt-2 mb-2  justify-content-end">
+                <p class="me-2 mt-auto mb-auto ">訂單已結案:</p>
+                <button class="btn me-2    " data-bs-toggle="modal" data-bs-target="#order_Modal">評價 / 評分</button>
+            </div>
+            <div class="memberSeller_completed_btn d-flex col-12 d-lg-none mt-2 justify-content-end">
+                <p class=" mt-auto mb-auto ">訂單已結案:</p>
+                <button class="btn ms-1  mb-1" data-bs-toggle="modal" data-bs-target="#order_Modal">評價 / 評分</button>
+
+            </div>
+            <!-- <div class="col-6 memberSeller_completed_btn d-lg-none mt-1 mb-1  justify-content-end ">
+                <button class="btn  mb-1" data-bs-toggle="modal" data-bs-target="#order_Modal">評價 / 評分</button>
+            </div> -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="order_Modal" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>2109020001</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="score_star mt-2">
+                        <p>您對於這次與客戶合作愉快程度為幾顆星：</p>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="customer_evaluation mt-3">
+                        <p>您對於這次的客戶在場地使用上有什麼需要需要注意的？</p>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn_close" data-bs-dismiss="modal">關閉</button>
+                    <button type="button" class="btn btn_sendout">送出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section topCSS
+{
+    <link href="~/Assets/CSS/membercenter/Seller_completedstyle.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+}
+
