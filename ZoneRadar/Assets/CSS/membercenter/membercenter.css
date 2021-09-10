@@ -187,8 +187,7 @@
 
 /* 場地管理的商品卡 body  */
 .SpaceCardGroup{
-	border: #049DD9 0.5px solid;
-	border-radius: 5px;
+	
 	padding: 5px;
 }
 .SpaceCardimg{
@@ -204,9 +203,8 @@
 .SpaceCardBody>p {
 	color: #555555;
 }
-.fa-star{
-	font-size:24px;
-}
+
+
 /* 商品卡手機 */
 @media screen and (max-width:767px) {
 	.SpaceCardimg {
@@ -230,11 +228,10 @@
 .accordion-item{
 	border: 0px;
 }
-.containerForAdd .accordion-button {
+.accordion-button {
 	border-bottom: 1px solid #049DD9;
 }
-/*
-.accordion-button:focus {
+/* .accordion-button:focus {
 	border-bottom: 1px solid #049DD9;
 } */
 .accordion-button:not(.collapsed) {
@@ -343,4 +340,8 @@
 }
 .operating_hours_time{
 	width: 80PX;
+}
+.addspace{
+	outline:none;
+	text-decoration:none;
 }
