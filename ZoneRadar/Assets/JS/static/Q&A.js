@@ -223,11 +223,11 @@ btn8.onclick = function () {
     let cloneContent = QA8.content.cloneNode(true);
     cloneContent.querySelector("h1").innerHTML = "場地評論"
     cloneContent.querySelector("button").innerHTML = "<li>如何分享場地評論？</li>";
-    cloneContent.querySelector("p").innerHTML = "您可以在場地頁面下方點選「評價」撰寫您對場地的心得，或者在訂單頁面點選「前往評價」，會員每對一個場地進行評論，即可獲得1點評論點數。<br>會員帳號每日最多只能評論3個場地，且每日可獲得的評論點數上限為3點。<br>詳細說明請至活動說明頁面查詢。 <a href=https://www.spaceadvisor.com/>https://www.spaceadvisor.com/</a> ";
+    cloneContent.querySelector("p").innerHTML = "您可以在場地頁面下方點選「評價」撰寫您對場地的心得，或者在訂單頁面點選「前往評價」，會員每對一個場地進行評論，即可獲得1點評論點數。<br>會員帳號每日最多只能評論3個場地，且每日可獲得的評論點數上限為3點。<br>詳細說明請至活動說明頁面查詢。 <a href=https://www.ZonRadar.com/>https://www.ZonRadar.com/</a> ";
     cloneContent.querySelector("#flush-headingTwo").querySelector("button").innerHTML = "<li>如何檢舉評論？</li>";
-    cloneContent.querySelector("#flush-collapseTwo").querySelector("p").innerHTML = "您可以在場地頁面下方點選「評價」撰寫您對場地的心得，或者在訂單頁面點選「前往評價」，會員每對一個場地進行評論，即可獲得1點評論點數。<br>會員帳號每日最多只能評論3個場地，且每日可獲得的評論點數上限為3點。<br>詳細說明請至活動說明頁面查詢。 <a href=https://www.spaceadvisor.com/ >https://www.spaceadvisor.com/ </a>";
+    cloneContent.querySelector("#flush-collapseTwo").querySelector("p").innerHTML = "您可以在場地頁面下方點選「評價」撰寫您對場地的心得，或者在訂單頁面點選「前往評價」，會員每對一個場地進行評論，即可獲得1點評論點數。<br>會員帳號每日最多只能評論3個場地，且每日可獲得的評論點數上限為3點。<br>詳細說明請至活動說明頁面查詢。 <a href=https://www.ZonRadar.com/ >https://www.ZonRadar.com/ </a>";
     cloneContent.querySelector("#flush-headingThree").querySelector("button").innerHTML = "<li>評論注意事項</li>";
-    cloneContent.querySelector("#flush-collapseThree").querySelector("p").innerHTML = "請填寫符合您真實經歷的場地評論，並評價星等，評論字數至少需50字以上，提醒您評論內容不得涉及不雅用語、人身攻擊、敏感題材或其他不適當內容。<br>請不要包含地址和電話號碼等個人信息。<br>違反審查規範或我們網站的服務條款以及其他政策的評論可能會被拒絕發布或刪除。評論前請查閱評論聲明注意事項 <a href=https://www.spaceadvisor.com/reward>https://www.spaceadvisor.com/reward</a><br><br>您的評論發布後，將經過3-5個工作天審查，一經審查通過將自動公開發佈。評論一經發布將不可刪除。";
+    cloneContent.querySelector("#flush-collapseThree").querySelector("p").innerHTML = "請填寫符合您真實經歷的場地評論，並評價星等，評論字數至少需50字以上，提醒您評論內容不得涉及不雅用語、人身攻擊、敏感題材或其他不適當內容。<br>請不要包含地址和電話號碼等個人信息。<br>違反審查規範或我們網站的服務條款以及其他政策的評論可能會被拒絕發布或刪除。評論前請查閱評論聲明注意事項 <a href=https://www.ZonRadar.com/reward>https://www.ZonRadar.com/reward</a><br><br>您的評論發布後，將經過3-5個工作天審查，一經審查通過將自動公開發佈。評論一經發布將不可刪除。";
     cloneContent.querySelector("#flush-headingFour").querySelector("button").innerHTML = "<li>場地評論的好處</li>";
     cloneContent.querySelector("#flush-collapseFour").querySelector("p").innerHTML = "透過您分享的評論，可以讓更多場地租用者事先了解場地狀況。同樣您也可以參考其他網友在場地留下的評論，找到理想中的場地喔！";
     cloneContent.querySelector("#flush-headingFive").innerHTML = "";
@@ -242,11 +242,11 @@ btn9.onclick = function () {
     cloneContent.querySelector("button").innerHTML = "<li>取消訂單</li>";
     cloneContent.querySelector("p").innerHTML = "SpaceAdvisor為您提供自助服務選項。您可以透過網站中的「我的預訂」頁面進行取消預訂。系統將為您試算應退款或產生的費用。</p><p class=mb-0 text-secondary><br><b>怎樣正確計算取消預訂日期？</b><br>取消預訂政策中所表示的取消天數規範須以您預訂場地的當地日曆天為計算標準，即表示如果過了當地時間午夜12點則須以隔天計算。</p><p class=mb-0 text-secondary><br><b>取消訂單後，折扣代碼仍可使用嗎？</b><br>取消預訂時，當筆訂單將不可再使用折扣代碼，亦不再享有折扣的優惠金額。 若您取消訂單，原折扣代碼將退還至您的帳戶中，您可於折扣代碼使用期限內使用至其他訂單中。</p><p class=mb-0 text-secondary><br><b>取消費用計算</b><br>多數訂單都包含免費取消的期限。根據場地使用時段、場地類型、促銷活動等等，每次預訂的取消政策的細節和條款均有所不同。您可以於訂單明細中查看您可免費取消的期限，如已過免費取消期限則需依據場地主的取消政策支付取消費用。</p><p class=mb-0 text-secondary><br><b>取消需要再付款的情況</b><br>若您訂單預訂時有使用折扣代碼，如欲取消將先扣除折扣代碼的優惠金額，再進行取消金額計算，若可退款的金額小於折扣代碼金額，就需要再另行支付差額。";
     cloneContent.querySelector("#flush-headingTwo").querySelector("button").innerHTML = "<li>異業合作聯絡管道</li>";
-    cloneContent.querySelector("#flush-collapseTwo").querySelector("p").innerHTML = "請洽客服中心：<a href=mailto:service@spaceadvisor.com?subject=【異業合作聯絡】>service@spaceadvisor.com</a>";
+    cloneContent.querySelector("#flush-collapseTwo").querySelector("p").innerHTML = "請洽客服中心：<a href=mailto:service@ZonRadar.com?subject=【異業合作聯絡】>service@ZonRadar.com</a>";
     cloneContent.querySelector("#flush-headingThree").querySelector("button").innerHTML = "<li>場地業者聯絡管道</li>";
-    cloneContent.querySelector("#flush-collapseThree").querySelector("p").innerHTML = "如欲申請成為場地主，請先填寫場地主申請資料：<a href=http://support@spaceadvisor.com>https://www.spaceadvisor.com/space/readme</a></p><p class=mb-0 text-secondary>如欲詢問其他事宜， 請洽場地主客戶服務中心：<a href=mailto:support@spaceadvisor.com?subject=【場地業者聯絡管道】>support@spaceadvisor.com</a>";
+    cloneContent.querySelector("#flush-collapseThree").querySelector("p").innerHTML = "如欲申請成為場地主，請先填寫場地主申請資料：<a href=http://support@ZonRadar.com>https://www.ZonRadar.com/space/readme</a></p><p class=mb-0 text-secondary>如欲詢問其他事宜， 請洽場地主客戶服務中心：<a href=mailto:support@ZonRadar.com?subject=【場地業者聯絡管道】>support@ZonRadar.com</a>";
     cloneContent.querySelector("#flush-headingFour").querySelector("button").innerHTML = "<li>一般會員聯絡管道</li>";
-    cloneContent.querySelector("#flush-collapseFour").querySelector("p").innerHTML = ">請洽客服中心：<a href=mailto:service@spaceadvisor.com>service@spaceadvisor.com</a>";
+    cloneContent.querySelector("#flush-collapseFour").querySelector("p").innerHTML = ">請洽客服中心：<a href=mailto:service@ZonRadar.com>service@ZonRadar.com</a>";
 
     cloneContent.querySelector("#flush-headingFive").innerHTML = "";
     QALsit.append(cloneContent);
@@ -460,11 +460,11 @@ QASelect.addEventListener('change', function () {
         let cloneContent = QA8.content.cloneNode(true);
         cloneContent.querySelector("h1").innerHTML = "場地評論"
         cloneContent.querySelector("button").innerHTML = "<li>如何分享場地評論？</li>";
-        cloneContent.querySelector("p").innerHTML = "您可以在場地頁面下方點選「評價」撰寫您對場地的心得，或者在訂單頁面點選「前往評價」，會員每對一個場地進行評論，即可獲得1點評論點數。<br>會員帳號每日最多只能評論3個場地，且每日可獲得的評論點數上限為3點。<br>詳細說明請至活動說明頁面查詢。 <a href=https://www.spaceadvisor.com/>https://www.spaceadvisor.com/</a> ";
+        cloneContent.querySelector("p").innerHTML = "您可以在場地頁面下方點選「評價」撰寫您對場地的心得，或者在訂單頁面點選「前往評價」，會員每對一個場地進行評論，即可獲得1點評論點數。<br>會員帳號每日最多只能評論3個場地，且每日可獲得的評論點數上限為3點。<br>詳細說明請至活動說明頁面查詢。 <a href=https://www.ZonRadar.com/>https://www.ZonRadar.com/</a> ";
         cloneContent.querySelector("#flush-headingTwo").querySelector("button").innerHTML = "<li>如何檢舉評論？</li>";
-        cloneContent.querySelector("#flush-collapseTwo").querySelector("p").innerHTML = "您可以在場地頁面下方點選「評價」撰寫您對場地的心得，或者在訂單頁面點選「前往評價」，會員每對一個場地進行評論，即可獲得1點評論點數。<br>會員帳號每日最多只能評論3個場地，且每日可獲得的評論點數上限為3點。<br>詳細說明請至活動說明頁面查詢。 <a href=https://www.spaceadvisor.com/ >https://www.spaceadvisor.com/ </a>";
+        cloneContent.querySelector("#flush-collapseTwo").querySelector("p").innerHTML = "您可以在場地頁面下方點選「評價」撰寫您對場地的心得，或者在訂單頁面點選「前往評價」，會員每對一個場地進行評論，即可獲得1點評論點數。<br>會員帳號每日最多只能評論3個場地，且每日可獲得的評論點數上限為3點。<br>詳細說明請至活動說明頁面查詢。 <a href=https://www.ZonRadar.com/ >https://www.ZonRadar.com/ </a>";
         cloneContent.querySelector("#flush-headingThree").querySelector("button").innerHTML = "<li>評論注意事項</li>";
-        cloneContent.querySelector("#flush-collapseThree").querySelector("p").innerHTML = "請填寫符合您真實經歷的場地評論，並評價星等，評論字數至少需50字以上，提醒您評論內容不得涉及不雅用語、人身攻擊、敏感題材或其他不適當內容。<br>請不要包含地址和電話號碼等個人信息。<br>違反審查規範或我們網站的服務條款以及其他政策的評論可能會被拒絕發布或刪除。評論前請查閱評論聲明注意事項 <a href=https://www.spaceadvisor.com/reward>https://www.spaceadvisor.com/reward</a><br><br>您的評論發布後，將經過3-5個工作天審查，一經審查通過將自動公開發佈。評論一經發布將不可刪除。";
+        cloneContent.querySelector("#flush-collapseThree").querySelector("p").innerHTML = "請填寫符合您真實經歷的場地評論，並評價星等，評論字數至少需50字以上，提醒您評論內容不得涉及不雅用語、人身攻擊、敏感題材或其他不適當內容。<br>請不要包含地址和電話號碼等個人信息。<br>違反審查規範或我們網站的服務條款以及其他政策的評論可能會被拒絕發布或刪除。評論前請查閱評論聲明注意事項 <a href=https://www.ZonRadar.com/reward>https://www.ZonRadar.com/reward</a><br><br>您的評論發布後，將經過3-5個工作天審查，一經審查通過將自動公開發佈。評論一經發布將不可刪除。";
         cloneContent.querySelector("#flush-headingFour").querySelector("button").innerHTML = "<li>場地評論的好處</li>";
         cloneContent.querySelector("#flush-collapseFour").querySelector("p").innerHTML = "透過您分享的評論，可以讓更多場地租用者事先了解場地狀況。同樣您也可以參考其他網友在場地留下的評論，找到理想中的場地喔！";
         cloneContent.querySelector("#flush-headingFive").innerHTML = "";
@@ -479,11 +479,11 @@ QASelect.addEventListener('change', function () {
         cloneContent.querySelector("button").innerHTML = "<li>取消訂單</li>";
         cloneContent.querySelector("p").innerHTML = "SpaceAdvisor為您提供自助服務選項。您可以透過網站中的「我的預訂」頁面進行取消預訂。系統將為您試算應退款或產生的費用。</p><p class=mb-0 text-secondary><br><b>怎樣正確計算取消預訂日期？</b><br>取消預訂政策中所表示的取消天數規範須以您預訂場地的當地日曆天為計算標準，即表示如果過了當地時間午夜12點則須以隔天計算。</p><p class=mb-0 text-secondary><br><b>取消訂單後，折扣代碼仍可使用嗎？</b><br>取消預訂時，當筆訂單將不可再使用折扣代碼，亦不再享有折扣的優惠金額。 若您取消訂單，原折扣代碼將退還至您的帳戶中，您可於折扣代碼使用期限內使用至其他訂單中。</p><p class=mb-0 text-secondary><br><b>取消費用計算</b><br>多數訂單都包含免費取消的期限。根據場地使用時段、場地類型、促銷活動等等，每次預訂的取消政策的細節和條款均有所不同。您可以於訂單明細中查看您可免費取消的期限，如已過免費取消期限則需依據場地主的取消政策支付取消費用。</p><p class=mb-0 text-secondary><br><b>取消需要再付款的情況</b><br>若您訂單預訂時有使用折扣代碼，如欲取消將先扣除折扣代碼的優惠金額，再進行取消金額計算，若可退款的金額小於折扣代碼金額，就需要再另行支付差額。";
         cloneContent.querySelector("#flush-headingTwo").querySelector("button").innerHTML = "<li>異業合作聯絡管道</li>";
-        cloneContent.querySelector("#flush-collapseTwo").querySelector("p").innerHTML = "請洽客服中心：<a href=mailto:service@spaceadvisor.com?subject=【異業合作聯絡】>service@spaceadvisor.com</a>";
+        cloneContent.querySelector("#flush-collapseTwo").querySelector("p").innerHTML = "請洽客服中心：<a href=mailto:service@ZonRadar.com?subject=【異業合作聯絡】>service@ZonRadar.com</a>";
         cloneContent.querySelector("#flush-headingThree").querySelector("button").innerHTML = "<li>場地業者聯絡管道</li>";
-        cloneContent.querySelector("#flush-collapseThree").querySelector("p").innerHTML = "如欲申請成為場地主，請先填寫場地主申請資料：<a href=http://support@spaceadvisor.com>https://www.spaceadvisor.com/space/readme</a></p><p class=mb-0 text-secondary>如欲詢問其他事宜， 請洽場地主客戶服務中心：<a href=mailto:support@spaceadvisor.com?subject=【場地業者聯絡管道】>support@spaceadvisor.com</a>";
+        cloneContent.querySelector("#flush-collapseThree").querySelector("p").innerHTML = "如欲申請成為場地主，請先填寫場地主申請資料：<a href=http://support@ZonRadar.com>https://www.ZonRadar.com/space/readme</a></p><p class=mb-0 text-secondary>如欲詢問其他事宜， 請洽場地主客戶服務中心：<a href=mailto:support@ZonRadar.com?subject=【場地業者聯絡管道】>support@ZonRadar.com</a>";
         cloneContent.querySelector("#flush-headingFour").querySelector("button").innerHTML = "<li>一般會員聯絡管道</li>";
-        cloneContent.querySelector("#flush-collapseFour").querySelector("p").innerHTML = ">請洽客服中心：<a href=mailto:service@spaceadvisor.com>service@spaceadvisor.com</a>";
+        cloneContent.querySelector("#flush-collapseFour").querySelector("p").innerHTML = ">請洽客服中心：<a href=mailto:service@ZonRadar.com>service@ZonRadar.com</a>";
 
         cloneContent.querySelector("#flush-headingFive").innerHTML = "";
         QALsit.append(cloneContent);
