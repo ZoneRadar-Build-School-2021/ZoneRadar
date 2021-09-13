@@ -19,10 +19,10 @@
                             <div class=" imgcontainer mt-1 me-2 ">
                                 <img class=" location" src="~/Assets/IMG/icons/location-icon.svg" alt="">
                             </div>
-                            <div class="textgroup d-inline-block">
+                            <span class="textgroup">
                                 <h6 class="fs18">1.位置</h6>
                                 <p class="editDetailsp ">地址</p>
-                            </div>
+                            </span>
                         </div>
                     </button>
                 </h2>
@@ -31,7 +31,7 @@
                         <div class="container containerForAdd">
                             <div class="row ">
                                 <div class="col-12 ">
-                                    <h2 class="fs-4">地址</h2>
+                                    <h2 class="fs-4">地址555</h2>
                                     <p class="fs16">您的場地完整的地址，<br>不會公開顯示在<span>ZONERadar</span>的網站列表，只有當客戶完成預定後顯示。</p>
                                 </div>
                                 <div class="col-12">
@@ -85,7 +85,7 @@
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="mb-3">
                                                 <label for="exampleFormControlInput1" class="form-label mt-3">郵遞區號</label>
-                                                <input type="ZipCode" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
                                             </div>
                                         </div>
                                     </div>
@@ -2275,13 +2275,11 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-@section topCSS
+        @section topCSS
         {
-<link href="~/Assets/CSS/membercenter/membercenter.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-}
-@section endJS{
-<script src="~/Assets/JS/AddSpace/addspace.js"></script>
-}
+        <link href="~/Assets/CSS/membercenter/membercenter.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+        }
+        @section endJS{
+        <script src="~/Assets/JS/AddSpace/addspace.js"></script>
+        }

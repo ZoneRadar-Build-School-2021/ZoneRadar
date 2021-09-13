@@ -33,7 +33,7 @@
     <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -266,6 +266,7 @@
     <Content Include="Assets\IMG\member_card\Sandro K..jpg" />
     <Content Include="Assets\IMG\static\fistbump-over-desk.jpg" />
     <Content Include="Assets\IMG\ZONERadar.png" />
+    <Content Include="Assets\JS\addspace\addspace.js" />
     <Content Include="Assets\JS\booking\booking.js" />
     <Content Include="Assets\JS\bootstrap.bundle.min.js" />
     <Content Include="Assets\JS\flatpickr.js" />
