@@ -12,7 +12,9 @@
 	margin-right: auto;
 	margin-top: 50px;
 }
-
+.AddSpaceBtn{
+	text-decoration:none
+}
 .logoS {
 	color: #049DD9;
 }
@@ -85,6 +87,7 @@
 	border: 0.2px solid #049DD9;
 	margin-top: 8px;
 	margin-bottom: auto;
+	text-decoration:none;
 }
 
 	.EditSpaceBtn:hover {
@@ -397,4 +400,7 @@
 
 .percen {
 	margin-top: 90px;
+}
+.fa-star{
+	font-size:20px;
 }
