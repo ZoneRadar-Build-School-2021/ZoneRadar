@@ -29,7 +29,7 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
-        public ActionResult SavedPlace()
+        public ActionResult MyCollection()
         {
             return View();
         }

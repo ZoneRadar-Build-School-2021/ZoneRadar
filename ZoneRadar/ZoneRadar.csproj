@@ -355,7 +355,7 @@
     <Content Include="Views\UserCenter\Processing.cshtml" />
     <Content Include="Views\UserCenter\Completed.cshtml" />
     <Content Include="Views\MemberCenter\EditProfile.cshtml" />
-    <Content Include="Views\MemberCenter\SavedPlace.cshtml" />
+    <Content Include="Views\MemberCenter\MyCollection.cshtml" />
     <Content Include="Views\MemberCenter\UserInfo.cshtml" />
     <Content Include="Views\MemberCenter\HostInfo.cshtml" />
     <Content Include="Views\HostCenter\AddSpace.cshtml" />
