@@ -4,12 +4,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<!-- body -->
 <!-- filter -->
-<div class="container-fluid border-top border-bottom py-4 py-lg-2 px-4 px-lg-5">
+<div class="container-fluid border-top border-bottom py-4 py-xl-2 px-4 px-lg-5">
     <div class="filter-row">
         <div class="my-2 d-none d-xl-inline-block me-2">
             <select class="form-select" id="web-county-filter">
                 <option selected>選擇縣市</option>
+                <option value="keelung">基隆市</option>
+                <option value="taipei">台北市</option>
+                <option value="new-taipei">新北市</option>
+                <option value="taoyuan">桃園市</option>
+                <option value="hsinchu">新竹市</option>
+            </select>
+        </div>
+        <div class="my-2 d-none d-xl-inline-block me-2">
+            <select class="form-select" id="web-district-filter">
+                <option selected>選擇鄉鎮區</option>
                 <option value="keelung">基隆市</option>
                 <option value="taipei">台北市</option>
                 <option value="new-taipei">新北市</option>
@@ -38,10 +49,13 @@
                 <option value="17">其他</option>
             </select>
         </div>
-        <div class="d-xl-inline-block me-2">
+        <div class="more-filter d-xl-inline-block me-2">
             <a type="button" class="filter-btn btn d-flex align-items-center justify-content-center" data-bs-toggle="modal" data-bs-target="#filter-modal">
                 <i class="fas fa-filter me-2"></i><span>更多條件</span>
             </a>
+        </div>
+        <div class="my-2 d-none d-xl-inline-block me-2">
+            <input id="web-date-filter" placeholder="活動日期">
         </div>
         <div class="d-none d-xl-inline-block me-2">
             <div class="serching d-flex align-items-center">
@@ -81,8 +95,8 @@
                     </div>
                     <!-- <span class="heart"></span> -->
                     <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev d-none d-xl-block"></div>
+                    <div class="swiper-button-next d-none d-xl-block"></div>
                     <div class="price-tag d-flex align-items-center justify-content-center">
                         <span class="me-1">每小時</span><span class="venue-price fs-5">NT$500</span><span class="ms-1">起</span>
                     </div>
@@ -129,8 +143,8 @@
                     </div>
                     <!-- <span class="heart"></span> -->
                     <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev d-none d-xl-block"></div>
+                    <div class="swiper-button-next d-none d-xl-block"></div>
                     <div class="price-tag d-flex align-items-center justify-content-center">
                         <span class="me-1">每小時</span><span class="venue-price fs-5">NT$500</span><span class="ms-1">起</span>
                     </div>
@@ -177,8 +191,8 @@
                     </div>
                     <!-- <span class="heart"></span> -->
                     <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev d-none d-xl-block"></div>
+                    <div class="swiper-button-next d-none d-xl-block"></div>
                     <div class="price-tag d-flex align-items-center justify-content-center">
                         <span class="me-1">每小時</span><span class="venue-price fs-5">NT$500</span><span class="ms-1">起</span>
                     </div>
@@ -225,8 +239,8 @@
                     </div>
                     <!-- <span class="heart"></span> -->
                     <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev d-none d-xl-block"></div>
+                    <div class="swiper-button-next d-none d-xl-block"></div>
                     <div class="price-tag d-flex align-items-center justify-content-center">
                         <span class="me-1">每小時</span><span class="venue-price fs-5">NT$500</span><span class="ms-1">起</span>
                     </div>
@@ -273,8 +287,8 @@
                     </div>
                     <!-- <span class="heart"></span> -->
                     <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev d-none d-xl-block"></div>
+                    <div class="swiper-button-next d-none d-xl-block"></div>
                     <div class="price-tag d-flex align-items-center justify-content-center">
                         <span class="me-1">每小時</span><span class="venue-price fs-5">NT$500</span><span class="ms-1">起</span>
                     </div>
@@ -321,8 +335,8 @@
                     </div>
                     <!-- <span class="heart"></span> -->
                     <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev d-none d-xl-block"></div>
+                    <div class="swiper-button-next d-none d-xl-block"></div>
                     <div class="price-tag d-flex align-items-center justify-content-center">
                         <span class="me-1">每小時</span><span class="venue-price fs-5">NT$500</span><span class="ms-1">起</span>
                     </div>
@@ -369,8 +383,8 @@
                     </div>
                     <!-- <span class="heart"></span> -->
                     <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev d-none d-xl-block"></div>
+                    <div class="swiper-button-next d-none d-xl-block"></div>
                     <div class="price-tag d-flex align-items-center justify-content-center">
                         <span class="me-1">每小時</span><span class="venue-price fs-5">NT$500</span><span class="ms-1">起</span>
                     </div>
@@ -417,8 +431,8 @@
                     </div>
                     <!-- <span class="heart"></span> -->
                     <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev d-none d-xl-block"></div>
+                    <div class="swiper-button-next d-none d-xl-block"></div>
                     <div class="price-tag d-flex align-items-center justify-content-center">
                         <span class="me-1">每小時</span><span class="venue-price fs-5">NT$500</span><span class="ms-1">起</span>
                     </div>
@@ -465,8 +479,8 @@
                     </div>
                     <!-- <span class="heart"></span> -->
                     <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev d-none d-xl-block"></div>
+                    <div class="swiper-button-next d-none d-xl-block"></div>
                     <div class="price-tag d-flex align-items-center justify-content-center">
                         <span class="me-1">每小時</span><span class="venue-price fs-5">NT$500</span><span class="ms-1">起</span>
                     </div>
@@ -502,7 +516,17 @@
                 <div class="row d-xl-none mb-lg-3">
                     <div class="county-filter col-12 col-lg-6 mb-3 mb-lg-4">
                         <select class="form-select" id="phone-county-filter">
-                            <option selected>請選擇縣市</option>
+                            <option selected>選擇縣市</option>
+                            <option value="keelung">基隆市</option>
+                            <option value="taipei">台北市</option>
+                            <option value="new-taipei">新北市</option>
+                            <option value="taoyuan">桃園市</option>
+                            <option value="hsinchu">新竹市</option>
+                        </select>
+                    </div>
+                    <div class="district-filter col-12 col-lg-6 mb-3 mb-lg-4">
+                        <select class="form-select" id="phone-district-filter">
+                            <option selected>選擇鄉鎮區</option>
                             <option value="keelung">基隆市</option>
                             <option value="taipei">台北市</option>
                             <option value="new-taipei">新北市</option>
@@ -531,8 +555,11 @@
                             <option value="17">其他</option>
                         </select>
                     </div>
+                    <div class="date-filter col-12 col-lg-6 mb-3 mb-lg-4">
+                        <input id="phone-date-filter" placeholder="活動日期">
+                    </div>
                 </div>
-                <div class="row d-lg-none">
+                <div class="row d-xl-none">
                     <div class="col-12 d-flex align-items-center mb-5">
                         <input class="search-bar form-control form-control" type="text" placeholder="想找什麼場地呢?" id="web-search">
                         <a class="ms-2" href="#"><i class="fas fa-search-location fs-4"></i></a>
@@ -561,7 +588,7 @@
                     </section>
                 </div>
                 <div class="row mb-5">
-                    <section class="attendee col-6 col-xl-4 me-lg-2">
+                    <section class="attendee col-6 col-xl-4 me-xl-2">
                         <h5>參加人數</h5>
                         <div class="form-floating d-flex align-items-end">
                             <input type="text" class="attendee-filter form-control" id="attendee-filter" placeholder="參加人數">
@@ -572,7 +599,7 @@
                             <span class="ms-2 d-none d-sm-inline fs-5">人</span>
                         </div>
                     </section>
-                    <section class="space col-6 col-xl-4 me-lg-2">
+                    <section class="space col-6 col-xl-4 me-xl-2">
                         <h5 class="w-100">室內坪數</h5>
                         <div class="form-floating d-flex align-items-end">
                             <input type="text" class="space-filter form-control" id="space-filter-web" placeholder="最小坪數">
@@ -605,23 +632,20 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close-btn btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="save-btn btn">Save changes</button>
+                <button type="button" class="claer-btn btn" data-bs-dismiss="modal">清除條件</button>
+                <button type="button" class="save-btn btn">確認</button>
             </div>
         </div>
     </div>
 </div>
-
 @section topCSS
 {
     <link href="~/Assets/CSS/searching/searching.css" rel="stylesheet" />
-    <link href="~/Assets/CSS/swiper-bundle.min.css" rel="stylesheet" />
 }
 
 @section endJS
 {
     <script src="~/Assets/JS/searching/searching.js"></script>
-    <script src="~/Assets/JS/swiper-bundle.min.js"></script>
 }
 
 

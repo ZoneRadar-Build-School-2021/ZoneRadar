@@ -56,12 +56,9 @@ input[type="text"]:focus {
   color: #049DD9;
 }
 
-.badge {
-  background-color: #D9831A;
-}
-
-.badge .fa-times {
-  cursor: pointer;
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #fff !important;
 }
 
 /* modal */
@@ -79,6 +76,14 @@ input[type="text"]:focus {
 .amenities .btn:hover {
   box-sizing: border-box;
   border: 2px solid #049DD9 !important;
+}
+
+.filter-modal .claer-btn {
+  color: #D9831A;
+}
+
+.filter-modal .claer-btn:hover {
+  color: #c47009;
 }
 
 .filter-modal .save-btn {
@@ -173,6 +178,12 @@ input[type="text"]:focus {
 .venue-card:hover {
   transform: translateY(-1%);
   transition: .3s;
+}
+
+@media screen and (min-width: 768px) {
+  .more-filter {
+    max-width: 30%;
+  }
 }
 
 @media screen and (min-width: 992px) {

@@ -32,8 +32,8 @@ a:hover {
   box-shadow: none;
 }
 
-.container {
-  max-width: 1100px;
+.booking-container.container {
+  max-width: 1200px;
 }
 
 .venue-img-group.swiper {
@@ -42,7 +42,7 @@ a:hover {
 }
 
 .btn-save {
-  min-width: 100;
+  min-width: 100px;
   position: absolute;
   top: 3%;
   right: 0;
@@ -160,10 +160,7 @@ a:hover {
   background: var(--gray-btn-hover);
 }
 
-
-.booking-card.sticky-top {
-  top: 5.5rem;
-  border-radius: 5px;
+.booking-card {
   border: 1px solid #cccccc;
 }
 
@@ -260,37 +257,6 @@ a:hover {
   left: 0;
 }
 
-.add-on-item {
-  cursor: pointer;
-  border-radius: 10px;
-}
-
-.add-on-item:hover {
-  background-color: #f8f9fa;
-  box-shadow: 5px 5px 0px #f8f9fa;
-}
-
-.add-on-item .content-wrapper {
-  width: 80%;
-}
-
-.add-on-item .pic-wrapper {
-  border-radius: 10px;
-  min-width: 100px;
-  min-height: 100px;
-  background-color: #f8f9fa;
-  position: relative;
-}
-
-.add-on-item img {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 .map-wrapper {
   width: 100%;
   padding-bottom: 80%;
@@ -304,20 +270,6 @@ a:hover {
   left: 0;
   bottom: 0;
   right: 0;
-}
-
-.service-item.free::before {
-  content: "免費 - ";
-}
-
-.service-item.charge::before {
-  content: "$$$ - ";
-}
-
-.review-item .user-pic {
-  width: 60px;
-  height: 60px;
-  border-radius: 100%;
 }
 
 .fas.fa-check {
@@ -341,15 +293,15 @@ a:hover {
   color: #9b9b9b;
 }
 
-.venue-price::after {
+.booking-card.sticky-xl-top {
+  top: 2rem;
+  border-radius: 5px;
+}
+
+.booking-card-title .venue-price::after {
   content: " / 小時";
   font-size: 18px;
   color: #9b9b9b;
-}
-
-.min-time::after {
-  content: " 小時";
-  font-size: 16px;
 }
 
 .attendees:focus {
@@ -373,6 +325,26 @@ a:hover {
 .btn-submit:hover {
   background-color: #048abf;
   color: #fff;
+}
+
+.border-blue {
+  border: 3px solid #049DD9;
+}
+
+.swal2-styled.swal2-confirm {
+  background-color: #049DD9 !important;
+}
+
+.swal2-styled.swal2-confirm:focus {
+  box-shadow: none !important;
+}
+
+.flatpickr-weekday,
+.flatpickr-day {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -o-user-select:none;
+  user-select:none;
 }
 
 @media screen and (min-width: 768px) {
