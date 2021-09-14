@@ -84,6 +84,10 @@ html, body {
     border: 1px solid #ced4da;
 }
 
+.homepage-search .select-date:focus {
+    outline: none;
+}
+
 #homepage-search-submit {
     font-size: 16px;
     background-color: #049DD9;
