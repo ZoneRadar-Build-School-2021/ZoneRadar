@@ -271,6 +271,7 @@
     <Content Include="Assets\JS\booking\booking.js" />
     <Content Include="Assets\JS\bootstrap.bundle.min.js" />
     <Content Include="Assets\JS\flatpickr.js" />
+    <Content Include="Assets\JS\hostSellerCompleted\SellerOrderCompleted.js" />
     <Content Include="Assets\JS\index\index.js" />
     <Content Include="Assets\JS\layout\navbar-footer.js" />
     <Content Include="Assets\JS\leaflet.js" />
