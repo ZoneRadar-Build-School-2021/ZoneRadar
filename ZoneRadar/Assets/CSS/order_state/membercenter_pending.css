@@ -66,8 +66,7 @@ img {
             background-color: #be7418;
         }
 
-.memberbuyer_pending_num_star {
-    display: inline-block;
+.memberbuyer_pending_num_date {
     text-align: right;
 }
 
@@ -166,18 +165,14 @@ img {
     text-align: center;
 }
 
-.form-select_people {
+.input_people {
+    width: 100%;
     border-radius: 5px;
     border: 1px solid #be7418;
 }
 
-
 @media (max-width:767px) {
-    .memberbuyer_pending_num_ordernum {
-        text-align: left;
-    }
-
-    .memberbuyer_pending_num_star {
+    .memberbuyer_pending_num_date {
         text-align: left;
     }
 

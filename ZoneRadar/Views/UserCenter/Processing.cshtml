@@ -163,41 +163,26 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="modify_rent_date mt-2">
-                        <p>更改預約日期：</p>
-                        <input type="text" id="basicDate_rent" placeholder="更改租借日期" data-input>
-                    </div>
-                    <div class="modify_rentback_date mt-2">
-                        <p>更改租還日期：</p>
-                        <input type="text" id="basicDate_rentback" placeholder="更改租借日期" data-input>
-                    </div>
-                    <div class="modify_rent_time mt-2">
-                        <p>更預約時間：</p>
-                        <input type="text" id="timePicker_rent" placeholder="更改時間">
-                    </div>
-                    <div class="modify_rentback_time mt-2">
-                        <p>更租還時間：</p>
-                        <input type="text" id="timePicker_rentback" placeholder="更改時間">
-                    </div>
-                    <div class="modify_people mt-2">
-                        <p>更改預約人數：</p>
-                        <select class="form-select form-select" aria-label=".form-select-sm example">
-                            <option selected class="d-none">選擇人數</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                        </select>
+                    <div class="modal_cancel">
+                        <p class="model_cancel_rentday">
+                            租借日期：
+                            <span>2021年10月13日 10:00</span>
+                        </p>
+                        <p class="model_cancel_cancelday">
+                            取消日期：
+                            <span>2021年09月13日 14:49</span>
+                        </p>
+                        <p>
+                            賣家退款政策：
+                            距離租借日期還剩下
+                            <span class="model_cancel_reduceday me-1 ms-1">30</span>
+                            天<br>依照賣家退款政策會退您新台幣
+                            <span class="model_cancel_reducemoney me-2 ms-1">3678</span>元
+                        </p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn_close" data-bs-dismiss="modal">取消訂單</button>
-                    <button type="button" class="btn btn_sendout">確認修改</button>
                 </div>
             </div>
         </div>

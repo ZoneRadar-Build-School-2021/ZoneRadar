@@ -1,21 +1,11 @@
 flatpickr("#basicDate_rent", {
-  dateFormat: "Y , F , d"
+    enableTime: true,
+    dateFormat: "Y , F , d , H:i",
+    minuteIncrement: 30,
 });
 
 flatpickr("#basicDate_rentback", {
-  dateFormat: "F, d Y"
-});
-
-flatpickr("#timePicker_rent", {
-  enableTime: true,
-  noCalendar: true,
-  time_24hr: true,
-  dateFormat: "H:i",
-});
-
-flatpickr("#timePicker_rentback", {
-  enableTime: true,
-  noCalendar: true,
-  time_24hr: true,
-  dateFormat: "H:i",
+    enableTime: true,
+    dateFormat: "Y , F , d , H:i",
+    minuteIncrement: 30,
 });
