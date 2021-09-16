@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="main">
+
     <div class="container containerForAdd">
         <div class="row">
             <div class="col mb-3 mt-3">
@@ -20,10 +20,10 @@
                             <div class=" imgcontainer mt-1 me-2 ">
                                 <img class=" location" src="~/Assets/IMG/icons/location-icon.svg" alt="">
                             </div>
-                            <span class="textgroup">
+                            <div class="textgroup">
                                 <h6 class="fs18">1.位置</h6>
                                 <p class="editDetailsp ">地址</p>
-                            </span>
+                            </div>
                         </div>
                     </button>
                 </h2>
@@ -53,7 +53,7 @@
                                     <div class="row">
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label mt-3">地址1</label>
+                                                <label for="exampleFormControlInput1" class="form-label mt-3">地址</label>
                                                 <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="請輸入地址">
                                             </div>
                                         </div>
@@ -97,42 +97,1661 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container containerForAdd">
+        <div class="row">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <div class="col-11 col-lg-9 d-flex align-items-start">
+                            <div class=" imgcontainer mt-2 me-2 ">
+                                <i class="fs-4 bi bi-bricks"></i>
+                            </div>
+                            <!-- <i class="bi bi-circle mt-3 me-3"></i> -->
+                            <span class="textgroup ">
+                                <h6 class="fs18">2.創建您的場地</h6>
+                                <p class="editDetailsp">場地類型</p>
+                            </span>
+                        </div>
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="container containerForAdd">
+                        <div class="row ">
+                            <div class="col-12">
+                                <h2 class="fs-4">說說您的場地類型</h2>
+                                <p class="fs16">
+                                    敘述最能代表您場地類型
+                                    <br><i class=" mt-4 me-1 far fa-lightbulb"></i>
+                                    例如：“公寓”、“攝影棚”、“餐廳”.....
+                                </p>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Meeting" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        會議
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Party" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        派對
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="reunion" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        聚會
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Privateconversation" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        私人談話
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="CourseLecture" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        課程講座
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="sports" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        運動
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="job" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        工作
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="exhibition" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        展覽
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="musicperformance" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        音樂/表演
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Photophotography" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        拍照/攝影
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="cosmetic" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        美容
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="cooking" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        烹飪
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Storage" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        儲物
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Presentation" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        發表會
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Familyactivities" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        親子活動
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="other" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        其他
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- 場地命名 描述 -->
+                            <div class="row mt-3">
+                                <div class="col-12 col-lg-6 ">
+                                    <h2 class="fs-4">給您的場地命名</h2>
+                                    <p class="fs16">敘述最能代表您場地類型創建一個能夠吸引客人興趣並描述您的空間的標題。 請勿包含您的公司名稱</p>
+                                    <p class="fs20">可以試試包含以下內容：</p>
+                                    <ul>
+                                        <li>位置-市區、市中心、碼頭</li>
+                                        <li>場地類型-閣樓、工作室、舞廳、頂樓公寓</li>
+                                        <li>獨特的形容詞-質感、寬敞、現代</li>
+                                    </ul>
+                                    <p><i class=" mt-2 me-1 far fa-lightbulb"></i>例如：“市中心閣樓享天際線景觀”</p>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label mt-3"></label>
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="輸入您場地的名稱">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mt-5">
+                                    <h2 class="fs-4">描述您的場地</h2>
+                                    <p>描述您對場地所有的細節，以便讓客戶知道這場地所提供的服務</p>
+                                    <p class="fs20">可以試試回答以下內容：</p>
+                                    <ul>
+                                        <li>哪些活動適合在您的場地運用？</li>
+                                        <li>您的場地格局如何？每個區域如何使用？</li>
+                                        <li>您的場地有哪些獨特的功能或便利設施？</li>
+                                    </ul>
+                                    <p>不建議：</p>
+                                    <ul>
+                                        <li>聯絡訊息-請勿包含您的電話、場地名稱、地址、電子信箱跟網路連結。</li>
+                                    </ul>
+                                </div>
+                                <div class="col ">
+                                    <div class="col col-12  pb-5">
+                                        <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 mt-3">
+                                    <h2 class="fs-4">您的場地大小</h2>
+                                    <p>描述當客戶預定您的場地時可以使用的大小</p>
+                                </div>
+                                <div class="col-12">
+                                    <p><i class=" mt-2 me-1 far fa-lightbulb"></i>例如：您的場地有80坪，但是只提供40坪空間提供給可戶使用。</p>
+                                </div>
+                                <div class="col-12 col-xl-6 d-flex">
+                                    <div class="mb-3 w-75">
+                                        <label for="exampleFormControlInput1" class="form-label mt-3"></label>
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="500">
+                                    </div>
+                                    <div class="mb-3 ">
+                                        <label for="exampleFormControlInput1" class="form-label mt-3 "></label>
+                                        <input type="text" class="form-control text-center" id="exampleFormControlInput1" placeholder="坪數" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <h5>可以容納幾個人 </h5>
+                                <div class="col col-lg-6">
+                                    <div class="form-floating">
+                                        <input class="form-control" placeholder="最大客人數" id="Discount"></input>
+                                        <label for="Discount">最大客人數</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                     <div class="col-11 col-lg-9 d-flex align-items-start">
                         <div class=" imgcontainer mt-2 me-2 ">
-                            <i class="fs-4 bi bi-bricks"></i>
+                            <img class=" speed-square" src="~/Assets/IMG/icons/speed-square.svg" alt="">
                         </div>
                         <!-- <i class="bi bi-circle mt-3 me-3"></i> -->
-                        <span class="textgroup ">
-                            <h6 class="fs18">2.創建您的場地</h6>
-                            <p class="editDetailsp">場地類型</p>
+                        <!-- <i class="bi bi-check-circle-fill "></i> -->
+                        <span class="textgroup mt-1 ">
+                            <h6 class="fs18">3.營業時間&定價</h6>
+                            <p class="editDetailsp ">營業日/定價</p>
                         </span>
                     </div>
                 </button>
             </h2>
-        </div>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-                <div class="container containerForAdd">
-                    <div class="row ">
-                        <div class="col-12">
-                            <h2 class="fs-4">說說您的場地類型</h2>
-                            <p class="fs16">
-                                敘述最能代表您場地類型
-                                <br><i class=" mt-4 me-1 far fa-lightbulb"></i>
-                                例如：“公寓”、“攝影棚”、“餐廳”.....
-                            </p>
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label mt-3"></label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="輸入您場地的類型">
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="container containerForAdd">
+                        <div class="operating_hours_row row">
+                            <div class="col-12 border-bottom">
+                                <h3 class="operating_hours_title">請問您的營業時間是？</h3>
+                                <p class="operating_hours_space_introduce mt-4">
+                                    營業時間是指您的空間對外預訂開放的日期和時間（即您的空間可以使用的時間）。 客人將無法預訂營業時間以外的時間。
+                                </p>
+                                <p class="operating_hours_space_address mt-4">您的空間地址 - <span>台北市大安區忠孝東路三段96號11號樓之1</span></p>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="row mt-4">
+                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                <p class="mt-xl-3 ">星期一</p>
+                            </div>
+                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="open" value="Monday" id="flexSwitchCheckDefault">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Mondayopen" id="flexRadioDefault1" disabled>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        全天(24hr)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                <div class="form-check">
+                                    <input class="form-check-input " type="radio" name="Mondayopen" id="flexRadioDefault1" disabled>
+                                    <label class="form-check-label fs-6" for="flexRadioDefault1">
+                                        小時
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
+                                <label for="StateMon" class="form-label  "></label>
+                                <select id="StateMon" class="form-select MonselectL " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+
+                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
+
+                            <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                <label for="StateMon" class="form-label  "></label>
+                                <select id="StateMon" class="form-select MonselectR " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 手機 -->
+                        <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
+                            <div class="col-5">
+                                <label for="StateMon" class="form-label  "></label>
+                                <select id="StateMon" class="form-select  " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                            <P class="col-2 mt-4 text-center  text-start">to</P>
+                            <div class="col-5">
+                                <label for="StateMon" class="form-label  "></label>
+                                <select id="StateMon" class="form-select MonselectR " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                <p class="mt-xl-3 ">星期二</p>
+                            </div>
+                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="open" value="Tuesday" id="flexSwitchCheckDefault">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                <div class="form-check">
+                                    <input class="form-check-input TusAllDay " type="radio" name="Tuesdayopen" id="flexRadioDefault2" disabled>
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        全天(24hr)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                <div class="form-check">
+                                    <input class="form-check-input Tushour" type="radio" name="Tuesdayopen" id="flexRadioDefault2" disabled>
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        小時
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
+                                <label for="StateTue" class="form-label  "></label>
+                                <select id="StateTue" class="form-select TusselectL" aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+
+                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
+
+                            <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                <label for="StateTue" class="form-label  "></label>
+                                <select id="StateTue" class="form-select TusselectR" aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 手機 -->
+                        <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
+                            <div class="col-5">
+                                <label for="StateTue" class="form-label  "></label>
+                                <select id="StateTue" class="form-select  TusselectL" aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                            <P class="col-2 mt-4 text-center  text-start">to</P>
+                            <div class="col-5">
+                                <label for="StateTue" class="form-label  "></label>
+                                <select id="StateTue" class="form-select TusselectR " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                <p class="mt-xl-3 ">星期三</p>
+                            </div>
+                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="open" value="Wenseday" id="flexSwitchCheckDefault">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Wensedayopen" id="flexRadioDefault3" disabled>
+                                    <label class="form-check-label" for="flexRadioDefault3">
+                                        全天(24hr)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Wensedayopen" id="flexRadioDefault3" disabled>
+                                    <label class="form-check-label" for="flexRadioDefault3">
+                                        小時
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateWed" class="form-select" aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+
+                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
+
+                            <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateWed" class="form-select" aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 手機 -->
+                        <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
+                            <div class="col-5">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateWed" class="form-select  " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                            <P class="col-2 mt-4 text-center  text-start">to</P>
+                            <div class="col-5">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateWed" class="form-select  " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                <p class="mt-xl-3 ">星期四</p>
+                            </div>
+                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="open" value="Thuresday" id="flexSwitchCheckDefault">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Thuresdayopen" id="flexRadioDefault4">
+                                    <label class="form-check-label" for="flexRadioDefault4">
+                                        全天(24hr)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Thuresdayopen" id="flexRadioDefault4" disabled>
+                                    <label class="form-check-label" for="flexRadioDefault4">
+                                        小時
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateThu" class="form-select" aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+
+                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
+
+                            <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateThu" class="form-select" aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 手機 -->
+                        <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
+                            <div class="col-5">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateThu" class="form-select  " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                            <P class="col-2 mt-4 text-center  text-start">to</P>
+                            <div class="col-5">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateThu" class="form-select  " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                <p class="mt-xl-3 ">星期五</p>
+                            </div>
+                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="open" value="Friday" id="flexSwitchCheckDefault">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Friayopen" id="flexRadioDefault5" disabled>
+                                    <label class="form-check-label" for="flexRadioDefault5">
+                                        全天(24hr)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Friayopen" id="flexRadioDefault5" disabled>
+                                    <label class="form-check-label" for="flexRadioDefault5">
+                                        小時
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateFri" class="form-select" aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+
+                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
+
+                            <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateFri" class="form-select" aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 手機 -->
+                        <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
+                            <div class="col-5">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateFri" class="form-select  " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                            <P class="col-2 mt-4 text-center  text-start">to</P>
+                            <div class="col-5">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateFri" class="form-select  " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                <p class="mt-xl-3 ">星期六</p>
+                            </div>
+                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="open" value="Saturday" id="flexSwitchCheckDefault">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Saturdayopen" id="flexRadioDefault6" disabled>
+                                    <label class="form-check-label" for="flexRadioDefault6">
+                                        全天(24hr)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Saturdayopen" id="flexRadioDefault6" disabled>
+                                    <label class="form-check-label" for="flexRadioDefault6">
+                                        小時
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateSat" class="form-select" aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+
+                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
+
+                            <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateSat" class="form-select" aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 手機 -->
+                        <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
+                            <div class="col-5">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateSat" class="form-select  " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                            <P class="col-2 mt-4 text-center  text-start">to</P>
+                            <div class="col-5">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateSat" class="form-select  " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                <p class="mt-xl-3 ">星期日</p>
+                            </div>
+                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="open" value="Sunday" id="flexSwitchCheckDefault">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Sundayopen" id="flexRadioDefault7" disabled>
+                                    <label class="form-check-label" for="flexRadioDefault7">
+                                        全天(24hr)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                <div class="form-check">
+                                    <input class="form-check-input " type="radio" name="Sundayopen" id="flexRadioDefault7" disabled>
+                                    <label class="form-check-label" for="flexRadioDefault7">
+                                        小時
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateSun" class="form-select" aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+
+                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
+
+                            <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateSun" class="form-select" aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- 手機 -->
+                        <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
+                            <div class="col-5">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateSun" class="form-select  " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                            <P class="col-2 mt-4 text-center  text-start">to</P>
+                            <div class="col-5">
+                                <label for="State" class="form-label  "></label>
+                                <select id="StateSun" class="form-select  " aria-label="Default select example" disabled>
+                                    <option selected>請選擇營業時間</option>
+                                    <option value="sixoclock">06:00</option>
+                                    <option value="sixoclockthirty">06:30</option>
+                                    <option value="sevenoclock">07:00</option>
+                                    <option value="sevenoclockthirty">07:30</option>
+                                    <option value="Eightoclock">08:00</option>
+                                    <option value="Eightoclockthirty">08:30</option>
+                                    <option value="nineoclock">09:00</option>
+                                    <option value="nineoclockthirty">09:30</option>
+                                    <option value="tenoclock">10:00</option>
+                                    <option value="tenoclockthirty">10:30</option>
+                                    <option value="elevenoclock">11:00</option>
+                                    <option value="elevenoclockthirty">11:30</option>
+                                    <option value="twelveoclock">12:00</option>
+                                    <option value="twelveoclockthirty">12:30</option>
+                                    <option value="oneoclock">01:00</option>
+                                    <option value="oneoclockthirty">01:30</option>
+                                    <option value="tweoclock">02:00</option>
+                                    <option value="tweoclockthirty">02:30</option>
+                                    <option value="threeoclock">03:00</option>
+                                    <option value="threeoclockthirty">03:30</option>
+                                    <option value="Fouroclock">04:00</option>
+                                    <option value="Fouroclockthirty">04:30</option>
+                                    <option value="Fiveoclock">05:00</option>
+                                    <option value="Fiveoclockthirty">05:30</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <h5>定價</h5>
+                                <h6>小時計費</h6>
+                            </div>
+                            <div class="col-12 col-lg-6 price mt-3">
+                                <p>對每次預訂收取 15% 的費用。 請將此費用計入您的小時費率。</p>
+                                <div class="form-floating">
+                                    <input class="form-control" placeholder="小時計費" id="SpacePrice"></input>
+                                    <label for="SpacePrice">小時計費</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 SpacePrice mt-3">
+                                <p>最低時數</p>
+                                <div class="form-floating">
+                                    <input class="form-control" placeholder="必須是1-12小時" id="SpacePrice"></input>
+                                    <label for="SpacePrice">必須是1-12小時</label>
+                                </div>
+                            </div>
+                            <div class="col-10 col-lg-6 MinPrice mt-3">
+                                <p>折扣</p>
+                                <div class="form-floating">
+                                    <input class="form-control" placeholder="幾小時折扣" id="hourDiscount"></input>
+                                    <label for="hourDiscount">逾多少小時</label>
+                                </div>
+                            </div>
+                            <div class="col-10 col-lg-5 mt-3">
+                                <p>折扣數</p>
+                                <div class="form-floating">
+                                    <input class="form-control" placeholder="多少折扣" id="Discount"></input>
+                                    <label for="Discount">享多少折扣</label>
+                                </div>
+                            </div>
+                            <p class="col-1 col-md-1 col-lg-1 percen">%off</p>
+                        </div>
+                        <div class="row mt-3">
+                            <h5>便捷設施</h5>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="Free" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        WiFi
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="Tables" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        桌子
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="Chairs" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        椅子
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="Whiteboard" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        白板
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="Chalkboard" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        黑板
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="Projector" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        投影
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="FlipCharts" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        掛畫
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="Monitor" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        監控設施
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="ConferencePhone" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        會議電話
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="ConferencePhone" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        會議電話
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="PublicTransportation" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        大眾運輸工具
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="Restrooms" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        廁所
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="WheelchairAccessible" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        無障礙通道
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="Kitchen" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        廚房
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="Coffee" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        咖啡
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="Coffee" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        咖啡
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="AppleTV" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Apple TV
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="Printer" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        印表機
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="Rooftop" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        屋頂
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="OutdoorArea" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        戶外區
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <form class="row mt-3">
+                                    <div class="col-8 col-lg-6">
+                                        <label for="Add" class="visually-hidden"></label>
+                                        <input type="text" class="form-control" id="Add" placeholder="其他設施">
+                                    </div>
+                                    <div class="col-4 col-lg-3">
+                                        <button type="submit" class="btn btn-primary mb-3">增加</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        <div class="col-11  col-lg-9 d-flex align-items-start">
+                            <div class=" imgcontainer mt-3 me-2 ">
+                                <img class=" addphoto " src="~/Assets/IMG/icons/addphoto.png" alt="">
+                            </div>
+                            <span class="textgroup  mt-2">
+                                <h6 class="fs18">4.上傳照片</h6>
+                                <p class="editDetailsp">上傳照片跟封面照</p>
+                            </span>
+                        </div>
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="container containerForAdd">
+                            <div class="row ">
+                                <div class="col-12 ">
+                                    <h2 class="fs-4">上傳場地照片</h2>
+                                    <p class="fs16">照片是首先吸引客戶注意的，建議上傳至少１０張高值感的照片</p>
+                                    <p class="fs20">照片的要求：</p>
+                                    <ul>
+                                        <li>照片的要求高解析度-至少1000象素寬（px)</li>
+                                        <li>橫式照片-勿直式照片</li>
+                                        <li>彩色照片-勿黑白</li>
+                                        <li>雜訊-勿有雜訊、浮水印</li>
+                                    </ul>
+                                </div>
+                                <div class="col ">
+                                    <div class="row imgBox">
+                                        <div class=" row justify-content-center ">
+                                            <div class="col-1 mt-5 ">
+                                                <img class=" addphoto " src="mebercenter-img/addphoto.png" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-5 justify-content-center">
+                                            <div class=" col-9 col-md-3 col-lg-3 ">
+                                                <label for="formFile" class="form-label"></label>
+                                                <input class=" " type="file" id="formFile">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p><i class=" mt-2 me-1 far fa-lightbulb"></i>第一張照片是您的封面照，請確保第一張照片是最代表您的場地的照片</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        <div class="col-11 col-lg-9 d-flex align-items-start">
+                            <div class=" imgcontainer mt-3 me-2 ">
+                                <img class=" addphoto " src="~/Assets/IMG/icons/time.svg" alt="">
+                            </div>
+                            <span class="textgroup  mt-2">
+                                <h6 class="fs18">5.其他資訊</h6>
+                                <p class="editDetailsp">交通方式/停車資訊/攝影設備</p>
+                            </span>
+                        </div>
+                    </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="container containerForAdd">
+                            <div class="row">
+                                <div class="col mt-2">
+                                    <div class="mb-3">
+                                        <h2 class="fs-4">說明如何到達您的場地</h2>
+                                        <p class="fs16">幫助您的客戶快速到達您的場地</p>
+                                        <p class="fs20">可以試試回答以下內容：</p>
+                                        <ul>
+                                            <li>到達您的場地的交通訊息、附近明顯的的地標、是否有標示通道。</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-12 pb-5">
+                                    <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <p class="fs16 mt-1"><i class="fas fa-lock p-1 "></i>不用擔心，我們僅會在客戶完成訂單提供。</p></i>
+                                </div>
+                            </div>
+
                             <div class="row mb-3">
                                 <div class="col col-12">
-                                    <h2 class="fs-4">描述停車選項</h2>
+                                    <h2 class="fs-4 mt-3">描述停車選項</h2>
                                 </div>
                                 <div class="col-7 col-lg-7 mb-auto mt-auto">
                                     <p>您的場地內或附近是否有停車場？</p>
@@ -155,7 +1774,7 @@
                                     </p>
                                 </div>
                                 <!-- 勾有停車場才會顯示 -->
-                                <div class="row">
+                                <div id="parkingPart" class="row d-none">
                                     <div class="col-12 col-lg-6 mt-1 mb-3 ">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -172,7 +1791,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col col-6 mt-3 mb-3">
+                                    <div class="col-12 col-lg-6 mt-3 mb-3">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
                                             <label class="form-check-label" for="flexCheckChecked">
@@ -204,16 +1823,14 @@
                                             </label>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3 mb-3 ">
-                                <div class="col col-12 parking">
-                                    <p>寫敘述您所勾選的選項</p>
-                                    <p class="fs16">無需敘述私人訊息，這將會公開顯示</p>
-                                </div>
-                                <div class="col col-12 parkingpart pb-5">
-                                    <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <div class="col col-12 parking">
+                                        <p>寫敘述您所勾選的選項</p>
+                                        <p class="fs16">無需敘述私人訊息，這將會公開顯示</p>
+                                    </div>
+                                    <div class="col col-12 parkingpart pb-5">
+                                        <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -227,22 +1844,24 @@
                                     <div class=" mt-auto mb-auto  ">
                                         <!-- 這邊要加一個radio -->
                                         <div class="radioGroup Yes">
-                                            <input id="Yes" type="radio" value="Yes" name="switch">
-                                            <label for="Yes">是</label>
+                                            <input id="Yesprojection" type="radio" value="Yes" name="switch">
+                                            <label for="Yesprojection">是</label>
                                         </div>
                                     </div>
                                     <div class="radioGroup No">
-                                        <input id="No" type="radio" value="Yes" name="switch">
-                                        <label for="No" class="Nolable">否</label>
+                                        <input id="Noprojection" type="radio" value="No" name="switch">
+                                        <label for="Noprojection" class="Nolable">否</label>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <p>描述您的場地所提供的任何錄影設備，如何使用細節跟注意事項</p>
-                                </div>
-                                <div class="col parking">
-                                    <div class="col col-12 parkingpart pb-5">
-                                        <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <div id="projectionPart" class="row  d-none">
+                                    <div class="col-12">
+                                        <p>描述您的場地所提供的任何錄影設備，如何使用細節跟注意事項</p>
+                                    </div>
+                                    <div class="col parking">
+                                        <div class="col col-12 parkingpart pb-5">
+                                            <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -250,68 +1869,27 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    <div class="col-11 col-lg-9 d-flex align-items-start">
-                        <div class=" imgcontainer mt-2 me-2 ">
-                            <img class=" speed-square" src="~/Assets/IMG/icons/speed-square.svg" alt="">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingEight">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                        <div class="col-11 col-lg-9 d-flex align-items-start">
+                            <div class=" imgcontainer mt-1 me-2 ">
+                                <img class=" location" src="~/Assets/IMG/icons/rules.svg" alt="">
+                            </div>
+                            <span class="textgroup ">
+                                <h6 class="fs18">6.場地規範</h6>
+                                <p class="editDetailsp ">場地使用規範</p>
+                            </span>
                         </div>
-                        <!-- <i class="bi bi-circle mt-3 me-3"></i> -->
-                        <!-- <i class="bi bi-check-circle-fill "></i> -->
-                        <span class="textgroup mt-1 ">
-                            <h6 class="fs18">3.場地大小</h6>
-                            <p class="editDetailsp ">坪數</p>
-                        </span>
-                    </div>
-                </button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <div class="container containerForAdd  ">
-                        <div class="row ">
-                            <div class="col-12 ">
-                                <h2 class="fs-4">給您的場地命名</h2>
-                                <p class="fs16">敘述最能代表您場地類型創建一個能夠吸引客人興趣並描述您的空間的標題。 請勿包含您的公司名稱</p>
-                                <p class="fs20">可以試試包含以下內容：</p>
-                                <ul>
-                                    <li>位置-市區、市中心、碼頭</li>
-                                    <li>場地類型-閣樓、工作室、舞廳、頂樓公寓</li>
-                                    <li>獨特的形容詞-質感、寬敞、現代</li>
-                                </ul>
-                                <p><i class=" mt-2 me-1 far fa-lightbulb"></i>例如：“市中心格樓享天際線景觀”</p>
-                                <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label mt-3"></label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="輸入您場地的名稱">
-                                </div>
-                            </div>
-                        </div>
+                    <div class="container containerForAdd">
                         <div class="row">
-                            <div class="col-12 mt-5">
-                                <h2 class="fs-4">描述您的場地</h2>
-                                <p>描述您對場地所有的細節，以便讓客戶知道這場地所提供的服務</p>
-                                <p class="fs20">可以試試回答以下內容：</p>
-                                <ul>
-                                    <li>哪些活動適合在您的場地運用？</li>
-                                    <li>您的場地格局如何？每個區域如何使用？</li>
-                                    <li>您的場地有哪些獨特的功能或便利設施？</li>
-                                </ul>
-                                <p>不建議：</p>
-                                <ul>
-                                    <li>聯絡訊息-請勿包含您的電話、場地名稱、地址、電子信箱跟網路連結。</li>
-                                </ul>
-                            </div>
-                            <div class="col ">
-                                <div class="col col-12  pb-5">
-                                    <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 mt-5">
-                                <h2 class="fs-4">您的場地使用規範</h2>
+                            <div class="col-12">
+                                <h2 class="fs-4">6.您的場地使用規範</h2>
                                 <p>描述您的場地使用規範，包含客戶在你的場地禁止從事的活動</p>
                                 <p class="fs20">建議條例：</p>
                                 <ul>
@@ -333,372 +1911,31 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-12 mt-5">
-                                <h2 class="fs-4">您的場地大小</h2>
-                                <p>描述當客戶預定您的場地時可以使用的大小</p>
+                            <div class="col">
+                                <h5>場地清潔費</h5>
                             </div>
-                            <div class="col-12">
-                                <p><i class=" mt-2 me-1 far fa-lightbulb"></i>例如：您的場地有80坪，但是只提供40坪空間提供給可戶使用。</p>
-                            </div>
-                            <div class="col-12 col-xl-5 d-flex">
-                                <div class="mb-3 w-50">
-                                    <label for="exampleFormControlInput1" class="form-label mt-3"></label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="500">
-                                </div>
-                                <div class="mb-3 ">
-                                    <label for="exampleFormControlInput1" class="form-label mt-3 "></label>
-                                    <input type="text" class="form-control text-center" id="exampleFormControlInput1" placeholder="坪數" disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mt-5">
-                                <div class="mb-3">
-                                    <h2 class="fs-4">說明如何到達您的場地</h2>
-                                    <p class="fs16">幫助您的客戶快速到達您的場地</p>
-                                    <p class="fs20">可以試試回答以下內容：</p>
-                                    <ul>
-                                        <li>到達您的場地的交通訊息、附近明顯的的地標、是否有標示通道。</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-12 pb-5">
-                                <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                <p class="fs16 mt-1"><i class="fas fa-lock p-1 "></i>不用擔心，我們僅會在客戶完成訂單提供。</p></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingFour">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                    <div class="col-11 col-lg-9 d-flex align-items-start">
-                        <div class=" imgcontainer mt-3 me-2 ">
-                            <img class=" addphoto " src="~/Assets/IMG/icons/addphoto.png" alt="">
-                        </div>
-                        <span class="textgroup  mt-2">
-                            <h6 class="fs18">4.上傳照片</h6>
-                            <p class="editDetailsp">上傳照片跟封面照</p>
-                        </span>
-                    </div>
-                </button>
-            </h2>
-            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <div class="container containerForAdd">
-                        <div class="row ">
-                            <div class="col-12 ">
-                                <h2 class="fs-4">上傳場地照片</h2>
-                                <p class="fs16">照片是首先吸引客戶注意的，建議上傳至少１０張高值感的照片</p>
-                                <p class="fs20">照片的要求：</p>
-                                <ul>
-                                    <li>照片的要求高解析度-至少1000象素寬（px)</li>
-                                    <li>橫式照片-勿直式照片</li>
-                                    <li>彩色照片-勿黑白</li>
-                                    <li>雜訊-勿有雜訊、浮水印</li>
-                                </ul>
-                            </div>
-                            <div class="col ">
-                                <div class="row imgBox">
-                                    <div class=" row justify-content-center ">
-                                        <div class="col-1 mt-5 ">
-                                            <img class=" addphoto " src="~/Assets/IMG/icons/addphoto.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-5 justify-content-center">
-                                        <div class=" col-9 col-lg-3 ">
-                                            <label for="formFile" class="form-label"></label>
-                                            <input class=" " type="file" id="formFile">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p><i class=" mt-2 me-1 far fa-lightbulb"></i>第一張照片是您的封面照，請確保第一張照片是最代表您的場地的照片</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Nick貼進來 -->
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingFive">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                    <div class="col-11 col-lg-9 d-flex align-items-start">
-                        <div class=" imgcontainer mt-3 me-2 ">
-                            <img class=" addphoto " src="~/Assets/IMG/icons/time.svg" alt="">
-                        </div>
-                        <span class="textgroup  mt-2">
-                            <h6 class="fs18">5.營業時間</h6>
-                            <p class="editDetailsp">詳細說明營業時間</p>
-                        </span>
-                    </div>
-                </button>
-            </h2>
-            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <div class="container containerForAdd">
-                        <div class="operating_hours_row row">
-                            <div class="col-12 border-bottom">
-                                <h3 class="operating_hours_title">請問您的營業時間是？</h3>
-                                <p class="operating_hours_space_introduce mt-4">
-                                    營業時間是指您的空間對外預訂開放的日期和時間（即您的空間可以使用的時間）。 客人將無法預訂營業時間以外的時間。
+                            <div class="col-12 col-lg-12 MinPrice mt-3">
+                                <p>
+                                    您有責任在每次預訂後進行清潔。 您可以收取費用以支付相關費用。
                                 </p>
-                                <p class="operating_hours_space_address mt-4">您的空間地址 - <span>台北市大安區忠孝東路三段96號11號樓之1</span></p>
                             </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <p class="mt-xl-3 ">星期一</p>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="open" value="Monday" id="flexSwitchCheckDefault">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
-                                </div>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                            <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="AllDay" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="IncludedInHourly" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
-                                        全天(24hr)
+                                        包含在每小時計費中
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
+                            <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="hour" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="Additionalflatfee" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
-                                        小時
+                                        額外的固定費用
                                     </label>
                                 </div>
                             </div>
-                            <input class="mt-2 d-none col-xl-1 d-xl-block  mt-auto mb-auto " type="time">
-                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
-                            <input class="mt-2 d-none col-xl-1 d-xl-block  mt-auto mb-auto " type="time">
                         </div>
-                        <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4 justify-content-between">
-                            <input class="mt-2  col-5 mt-auto mb-auto" type="time">
-                            <P class="col-2 mt-auto mb-auto text-center text-start">to</P>
-                            <input class="mt-2 col-5  mt-auto mb-auto " type="time">
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <p class="mt-xl-3 ">星期二</p>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="open" value="Tuesday" id="flexSwitchCheckDefault">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
-                                </div>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="AllDay" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        全天(24hr)
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="hour" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        小時
-                                    </label>
-                                </div>
-                            </div>
-                            <input class="mt-2 d-none col-xl-1 d-xl-block  mt-auto mb-auto " type="time">
-                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
-                            <input class="mt-2 d-none col-xl-1 d-xl-block  mt-auto mb-auto " type="time">
-                        </div>
-                        <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4 justify-content-between">
-                            <input class="mt-2  col-5 mt-auto mb-auto" type="time">
-                            <P class="col-2 mt-auto mb-auto text-center text-start">to</P>
-                            <input class="mt-2 col-5  mt-auto mb-auto " type="time">
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <p class="mt-xl-3 ">星期三</p>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" name="open" value="Wednesday" type="checkbox" id="flexSwitchCheckDefault">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
-                                </div>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Allday" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        全天(24hr)
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="hour" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        小時
-                                    </label>
-                                </div>
-                            </div>
-                            <input class="mt-2 d-none col-xl-1 d-xl-block  mt-auto mb-auto " type="time">
-                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
-                            <input class="mt-2 d-none col-xl-1 d-xl-block  mt-auto mb-auto " type="time">
-                        </div>
-                        <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4 justify-content-between">
-                            <input class="mt-2  col-5 mt-auto mb-auto" type="time">
-                            <P class="col-2 mt-auto mb-auto text-center text-start">to</P>
-                            <input class="mt-2 col-5  mt-auto mb-auto " type="time">
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <p class="mt-xl-3 ">星期四</p>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" name="open" value="Thursday" type="checkbox" id="flexSwitchCheckDefault">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
-                                </div>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="AllDay" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        全天(24hr)
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="hour" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        小時
-                                    </label>
-                                </div>
-                            </div>
-                            <input class="mt-2 d-none col-xl-1 d-xl-block  mt-auto mb-auto " type="time">
-                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
-                            <input class="mt-2 d-none col-xl-1 d-xl-block  mt-auto mb-auto " type="time">
-                        </div>
-                        <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4 justify-content-between">
-                            <input class="mt-2  col-5 mt-auto mb-auto" type="time">
-                            <P class="col-2 mt-auto mb-auto text-center text-start">to</P>
-                            <input class="mt-2 col-5  mt-auto mb-auto " type="time">
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <p class="mt-xl-3 ">星期五</p>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" name="open" value="Friday" type="checkbox" id="flexSwitchCheckDefault">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
-                                </div>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="AllDay" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        全天(24hr)
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="hour" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        小時
-                                    </label>
-                                </div>
-                            </div>
-                            <input class="mt-2 d-none col-xl-1 d-xl-block  mt-auto mb-auto " type="time">
-                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
-                            <input class="mt-2 d-none col-xl-1 d-xl-block  mt-auto mb-auto " type="time">
-                        </div>
-                        <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4 justify-content-between">
-                            <input class="mt-2  col-5 mt-auto mb-auto" type="time">
-                            <P class="col-2 mt-auto mb-auto text-center text-start">to</P>
-                            <input class="mt-2 col-5  mt-auto mb-auto " type="time">
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <p class="mt-xl-3 ">星期六</p>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="open" value="Saturday" id="flexSwitchCheckDefault">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
-                                </div>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="AllDay" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        全天(24hr)
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="hour" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        小時
-                                    </label>
-                                </div>
-                            </div>
-                            <input class="mt-2 d-none col-xl-1 d-xl-block  mt-auto mb-auto " type="time">
-                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
-                            <input class="mt-2 d-none col-xl-1 d-xl-block  mt-auto mb-auto " type="time">
-                        </div>
-                        <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4 justify-content-between">
-                            <input class="mt-2  col-5 mt-auto mb-auto" type="time">
-                            <P class="col-2 mt-auto mb-auto text-center text-start">to</P>
-                            <input class="mt-2 col-5  mt-auto mb-auto " type="time">
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <p class="mt-xl-3 ">星期日</p>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="open" value="Sunday" id="flexSwitchCheckDefault">
-                                    <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
-                                </div>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="AllDay" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        全天(24hr)
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="hour" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        小時
-                                    </label>
-                                </div>
-                            </div>
-                            <input class="mt-2 d-none col-xl-1 d-xl-block  mt-auto mb-auto " type="time">
-                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
-                            <input class="mt-2 d-none col-xl-1 d-xl-block  mt-auto mb-auto " type="time">
-                        </div>
-                        <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4 justify-content-between">
-                            <input class="mt-2  col-5 mt-auto mb-auto" type="time">
-                            <P class="col-2 mt-auto mb-auto text-center text-start">to</P>
-                            <input class="mt-2 col-5  mt-auto mb-auto " type="time">
-                        </div>
-
                     </div>
                 </div>
             </div>
@@ -710,7 +1947,7 @@
                                 <img class=" cleaning " src="~/Assets/IMG/icons/cleaning-solution.svg" alt="">
                             </div>
                             <span class="textgroup  mt-2">
-                                <h6 class="fs18">6.清潔條款</h6>
+                                <h6 class="fs18">7.清潔條款</h6>
                                 <p class="editDetailsp">為客人指定清潔方案</p>
                             </span>
                         </div>
@@ -931,7 +2168,7 @@
                             </div>
                             <!-- <i class="bi bi-circle mt-3 me-3"></i> -->
                             <span class="textgroup ">
-                                <h6 class="fs18">7.取消政策</h6>
+                                <h6 class="fs18">8.取消政策</h6>
                                 <p class="editDetailsp">選擇您的取消政策</p>
                             </span>
                         </div>
@@ -970,7 +2207,8 @@
                                 </div>
                                 <div class="col-12 col-lg-12">
                                     <p class="ms-3">
-                                        客人可以在活動開始時間前 24 小時取消預訂，並將獲得預訂價格的全額退款（包括所有費用）。在活動開始時間前 24 小時內提交的預訂取消不予退款。
+                                        客人可以在活動開始時間前 24 小時取消預訂，並將獲得預訂價格的全額退款（包括所有費用）。
+                                        <br>在活動開始時間前 24 小時內提交的預訂取消不予退款。
                                     </p>
                                 </div>
                             </div>
@@ -1030,291 +2268,21 @@
                 </div>
             </div>
         </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingEight">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                    <div class="col-11 col-lg-9 d-flex align-items-start">
-                        <div class=" imgcontainer mt-1 me-2 ">
-                            <img class=" location" src="~/Assets/IMG/icons/rules.svg" alt="">
-                        </div>
-                        <span class="textgroup ">
-                            <h6 class="fs18">8.定價策略/其他設施</h6>
-                            <p class="editDetailsp ">定價方案</p>
-                        </span>
-                    </div>
-                </button>
-            </h2>
-            <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <div class="container containerForAdd">
-                        <div class="row">
-                            <div class="col-12 border-bottom">
-                                <h3>您將會舉辦哪些活動?</h3>
-                                <p class=" mt-4">
-                                    選擇您要舉辦的活動類型。 對於每個選擇，我們將為該活動創建一個獨特的定制列表。
-                                    客人將無法預訂營業時間以外的時間
-                                </p>
-                                <p class="fs16">
-                                    敘述最能代表您場地類型
-                                    <br><i class=" mt-4 me-1 far fa-lightbulb"></i>
-                                    選擇您要舉辦的活動類型。 對於每個選擇，我們將為該活動創建一個獨特的定制列表。
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-12">
-                                <h5>定價</h5>
-                                <h6>小時計費</h6>
-                            </div>
-                            <div class="col-12 col-lg-9 price">
-                                <p>對每次預訂收取 15% 的費用。 請將此費用計入您的小時費率。</p>
-                                <div class="form-floating">
-                                    <input class="form-control" placeholder="小時計費" id="SpacePrice"></input>
-                                    <label for="SpacePrice">小時計費</label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3 SpacePrice">
-                                <p>必須是1-12小時</p>
-                                <div class="form-floating">
-                                    <input class="form-control" placeholder="最低時數 id="SpacePrice"></input>
-                                    <label for="SpacePrice">最低時數</label>
-                                </div>
-                            </div>
-                            <div class="col-10 col-lg-6 MinPrice mt-3">
-                                <div class="form-floating">
-                                    <input class="form-control" placeholder="逾8小時折扣" id="Discount"></input>
-                                    <label for="Discount">逾8小時折扣</label>
-                                </div>
-                            </div>
-                            <div class="col-2 col-lg-2 ">
-                                <p class="pt-5">%off</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <h5>場地清潔費</h5>
-                            </div>
-                            <div class="col-12 col-lg-12 MinPrice mt-3">
-                                <p>
-                                    您有責任在每次預訂後進行清潔。 您可以收取費用以支付相關費用。
-                                </p>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="IncludedInHourly" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        包含在每小時計費中
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Additionalflatfee" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        額外的固定費用
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <h5>可以容納幾個人 </h5>
-                            <div class="col">
-                                <div class="form-floating">
-                                    <input class="form-control" placeholder="最大客人數" id="Discount"></input>
-                                    <label for="Discount">最大客人數</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <h5>便捷設施</h5>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Free" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        WiFi
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Tables" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        桌子
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Chairs" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        椅子
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Whiteboard" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        白板
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Chalkboard" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        黑板
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Projector" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        投影
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="FlipCharts" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        掛畫
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Monitor" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        監控設施
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="ConferencePhone" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        會議電話
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="ConferencePhone" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        會議電話
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="PublicTransportation" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        大眾運輸工具
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Restrooms" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        廁所
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="WheelchairAccessible" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        無障礙通道
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Kitchen" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        廚房
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Coffee" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        咖啡
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Coffee" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        咖啡
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="AppleTV" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        Apple TV
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Printer" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        印表機
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Rooftop" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        屋頂
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="OutdoorArea" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        戶外區
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <form class="row mt-3">
-                                    <div class="col-8 col-lg-9">
-                                        <label for="Add" class="visually-hidden"></label>
-                                        <input type="text" class="form-control" id="Add" placeholder="其他設施">
-                                    </div>
-                                    <div class="col-4 col-lg-3">
-                                        <button type="submit" class="btn btn-primary mb-3">增加</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+    </div>
+
+        <div class="container containerForAdd">
+            <div class="row mt-5 mb-5">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn deleteBtn">完成</button>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container containerForAdd">
-        <div class="row mt-5 mb-5">
-            <div class="col-12 text-center">
-                <button type="submit" class="btn deleteBtn">完成</button>
-            </div>
-        </div>
-    </div>
-</div>
-@section topCSS
-{
-    <link href="~/Assets/CSS/membercenter/membercenter.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-}
+        @section topCSS
+        {
+            <link href="~/Assets/CSS/membercenter/membercenter.css" rel="stylesheet" />
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+        }
+        @section endJS{
+            <script src="~/Assets/JS/addspace/addspace.js"></script>
+        }
 
