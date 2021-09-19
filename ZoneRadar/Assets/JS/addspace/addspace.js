@@ -143,7 +143,10 @@
             let StateWed=document.querySelectorAll("#StateWed")[0];
             let StateWed2=document.querySelectorAll("#StateWed")[1];
             let StateWed3=document.querySelectorAll("#StateWed")[2];
-            let StateWed4=document.querySelectorAll("#StateWed")[3];
+            let StateWed4 = document.querySelectorAll("#StateWed")[3];
+
+               //選擇時間
+               //
             StateWed.disabled=true;
             StateWed2.disabled=true;
             StateWed3.document=true;

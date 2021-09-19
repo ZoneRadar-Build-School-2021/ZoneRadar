@@ -1,4 +1,5 @@
 ﻿
+@model IEnumerable<ZoneRadar.ViewModels.SpaceVM>
 @{
     ViewBag.Title = "AddSpace";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,7 +23,8 @@
                             </div>
                             <div class="textgroup">
                                 <h6 class="fs18">1.位置</h6>
-                                <p class="editDetailsp ">地址</p>
+                                <p class="editDetailsp "> </p>
+                                        
                             </div>
                         </div>
                     </button>
@@ -108,10 +110,10 @@
                                 <i class="fs-4 bi bi-bricks"></i>
                             </div>
                             <!-- <i class="bi bi-circle mt-3 me-3"></i> -->
-                            <span class="textgroup ">
+                            <div class="textgroup ">
                                 <h6 class="fs18">2.創建您的場地</h6>
                                 <p class="editDetailsp">場地類型</p>
-                            </span>
+                            </div>
                         </div>
                     </button>
                 </h2>
@@ -322,7 +324,7 @@
                                 <h5>可以容納幾個人 </h5>
                                 <div class="col col-lg-6">
                                     <div class="form-floating">
-                                        <input class="form-control" placeholder="最大客人數" id="Discount"></input>
+                                        <input class="form-control" placeholder="最大客人數" id="Discount">
                                         <label for="Discount">最大客人數</label>
                                     </div>
                                 </div>
@@ -340,12 +342,10 @@
                         <div class=" imgcontainer mt-2 me-2 ">
                             <img class=" speed-square" src="~/Assets/IMG/icons/speed-square.svg" alt="">
                         </div>
-                        <!-- <i class="bi bi-circle mt-3 me-3"></i> -->
-                        <!-- <i class="bi bi-check-circle-fill "></i> -->
-                        <span class="textgroup mt-1 ">
+                        <div class="textgroup mt-1 ">
                             <h6 class="fs18">3.營業時間&定價</h6>
                             <p class="editDetailsp ">營業日/定價</p>
-                        </span>
+                        </div>
                     </div>
                 </button>
             </h2>
@@ -1455,28 +1455,28 @@
                             <div class="col-12 col-lg-6 price mt-3">
                                 <p>對每次預訂收取 15% 的費用。 請將此費用計入您的小時費率。</p>
                                 <div class="form-floating">
-                                    <input class="form-control" placeholder="小時計費" id="SpacePrice"></input>
+                                    <input class="form-control" placeholder="小時計費" id="SpacePrice">
                                     <label for="SpacePrice">小時計費</label>
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6 SpacePrice mt-3">
                                 <p>最低時數</p>
                                 <div class="form-floating">
-                                    <input class="form-control" placeholder="必須是1-12小時" id="SpacePrice"></input>
+                                    <input class="form-control" placeholder="必須是1-12小時" id="SpacePrice">
                                     <label for="SpacePrice">必須是1-12小時</label>
                                 </div>
                             </div>
                             <div class="col-10 col-lg-6 MinPrice mt-3">
                                 <p>折扣</p>
                                 <div class="form-floating">
-                                    <input class="form-control" placeholder="幾小時折扣" id="hourDiscount"></input>
+                                    <input class="form-control" placeholder="幾小時折扣" id="hourDiscount">
                                     <label for="hourDiscount">逾多少小時</label>
                                 </div>
                             </div>
                             <div class="col-10 col-lg-5 mt-3">
                                 <p>折扣數</p>
                                 <div class="form-floating">
-                                    <input class="form-control" placeholder="多少折扣" id="Discount"></input>
+                                    <input class="form-control" placeholder="多少折扣" id="Discount">
                                     <label for="Discount">享多少折扣</label>
                                 </div>
                             </div>
@@ -1666,10 +1666,10 @@
                             <div class=" imgcontainer mt-3 me-2 ">
                                 <img class=" addphoto " src="~/Assets/IMG/icons/addphoto.png" alt="">
                             </div>
-                            <span class="textgroup  mt-2">
+                            <div class="textgroup  mt-2">
                                 <h6 class="fs18">4.上傳照片</h6>
                                 <p class="editDetailsp">上傳照片跟封面照</p>
-                            </span>
+                            </div>
                         </div>
                     </button>
                 </h2>
@@ -1721,10 +1721,10 @@
                             <div class=" imgcontainer mt-3 me-2 ">
                                 <img class=" addphoto " src="~/Assets/IMG/icons/time.svg" alt="">
                             </div>
-                            <span class="textgroup  mt-2">
+                            <div class="textgroup  mt-2">
                                 <h6 class="fs18">5.其他資訊</h6>
                                 <p class="editDetailsp">交通方式/停車資訊/攝影設備</p>
-                            </span>
+                            </div>
                         </div>
                     </button>
                 </h2>
@@ -1745,7 +1745,7 @@
                                 <div class="col-12 pb-5">
                                     <label for="exampleFormControlTextarea1" class="form-label"></label>
                                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                    <p class="fs16 mt-1"><i class="fas fa-lock p-1 "></i>不用擔心，我們僅會在客戶完成訂單提供。</p></i>
+                                    <p class="fs16 mt-1"><i class="fas fa-lock p-1 "></i>不用擔心，我們僅會在客戶完成訂單提供。</p>
                                 </div>
                             </div>
 
@@ -1876,10 +1876,10 @@
                             <div class=" imgcontainer mt-1 me-2 ">
                                 <img class=" location" src="~/Assets/IMG/icons/rules.svg" alt="">
                             </div>
-                            <span class="textgroup ">
+                            <div class="textgroup ">
                                 <h6 class="fs18">6.場地規範</h6>
                                 <p class="editDetailsp ">場地使用規範</p>
-                            </span>
+                            </div>
                         </div>
                     </button>
                 </h2>
@@ -1946,10 +1946,10 @@
                             <div class=" imgcontainer mt-3 me-2 ">
                                 <img class=" cleaning " src="~/Assets/IMG/icons/cleaning-solution.svg" alt="">
                             </div>
-                            <span class="textgroup  mt-2">
+                            <div class="textgroup  mt-2">
                                 <h6 class="fs18">7.清潔條款</h6>
                                 <p class="editDetailsp">為客人指定清潔方案</p>
-                            </span>
+                            </div>
                         </div>
                     </button>
                 </h2>
@@ -2167,10 +2167,10 @@
                                 <i class="bi fs-3 bi-cart-x-fill"></i>
                             </div>
                             <!-- <i class="bi bi-circle mt-3 me-3"></i> -->
-                            <span class="textgroup ">
+                            <div class="textgroup ">
                                 <h6 class="fs18">8.取消政策</h6>
                                 <p class="editDetailsp">選擇您的取消政策</p>
-                            </span>
+                            </div>
                         </div>
                     </button>
                 </h2>
