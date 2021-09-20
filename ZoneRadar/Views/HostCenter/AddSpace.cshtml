@@ -5,18 +5,22 @@
 }
 
 
-    <div class="container containerForAdd">
+<div class="main">
+    <div class="container containerForAdd ">
+        <!-- 開頭問候文區 -->
         <div class="row">
             <div class="col mb-3 mt-3">
                 <h5 class="fs-3"> <span>庭瑜</span> ,你好！說說你的場地吧！</h5>
                 <p>場地內容分享越詳細，能幫你拿到更多訂單</p>
             </div>
         </div>
+
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <div class="col-4 col-lg-9 d-flex align-items-start">
+                    <button class="accordion-button accordion-buttonAdd" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <div class="col-12 col-lg-9 d-flex align-items-start">
                             <div class=" imgcontainer mt-1 me-2 ">
                                 <img class=" location" src="~/Assets/IMG/icons/location-icon.svg" alt="">
                             </div>
@@ -27,67 +31,71 @@
                         </div>
                     </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <div class="container containerForAdd">
-                            <div class="row ">
-                                <div class="col-12 ">
-                                    <h2 class="fs-4">地址</h2>
-                                    <p class="fs16">您的場地完整的地址，<br>不會公開顯示在<span>ZONERadar</span>的網站列表，只有當客戶完成預定後顯示。</p>
+                        <div class="row mt-5 ">
+                            <div class="col-12 ">
+                                <h2 class="fs-4">地址</h2>
+                                <p class="fs16">您的場地完整的地址，<br>不會公開顯示在<span>ZONERadar</span>的網站列表，只有當客戶完成預定後顯示。</p>
+                            </div>
+                            <div class="col-12">
+                                <div class="row mb-3">
+                                    <div class="col-12 col-md-6 col-xl-6">
+                                        <label for="country" class="form-label">國家</label>
+                                        <select id="country" class="form-select"
+                                                aria-label="Default select example">
+                                            <option selected>請選擇國家</option>
+                                            <option value="1">美國</option>
+                                            <option value="2">中國</option>
+                                            <option value="3">英國</option>
+                                            <option value="4">日本</option>
+                                            <option value="5">台灣</option>
+                                            <option value="6">泰國</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="row mb-3">
-                                        <div class="col-12 col-md-6 col-xl-6">
-                                            <label for="country" class="form-label">國家</label>
-                                            <select id="country" class="form-select" aria-label="Default select example">
-                                                <option selected>請選擇國家</option>
-                                                <option value="1">美國</option>
-                                                <option value="2">中國</option>
-                                                <option value="3">英國</option>
-                                                <option value="4">日本</option>
-                                                <option value="5">台灣</option>
-                                                <option value="6">泰國</option>
-                                            </select>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-xl-6">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label mt-3">地址</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                                   placeholder="請輸入地址">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-6 col-xl-6">
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label mt-3">地址</label>
-                                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="請輸入地址">
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-xl-6">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label mt-3">城市</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                                   placeholder="ex:台北市，新北市，台中市...">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-6 col-xl-6">
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label mt-3">城市</label>
-                                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ex:台北市，新北市，台中市...">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6 col-xl-6 mb-3">
-                                            <label for="State" class="form-label mt-3">行政區</label>
-                                            <select id="State" class="form-select" aria-label="Default select example">
-                                                <option selected>請選擇行政區</option>
-                                                <option value="1">大安區</option>
-                                                <option value="2">中正區</option>
-                                                <option value="3">信義區</option>
-                                                <option value="4">萬華區</option>
-                                                <option value="5">泰安區</option>
-                                                <option value="6">中和區</option>
-                                                <option value="7">永和區</option>
-                                                <option value="8">新店區</option>
-                                                <option value="9">板橋區</option>
-                                                <option value="10">土城區</option>
-                                            </select>
-                                        </div>
+                                    <div class="col-12 col-md-6 col-xl-6 mb-3">
+                                        <label for="State" class="form-label mt-3">行政區</label>
+                                        <select id="State" class="form-select" aria-label="Default select example">
+                                            <option selected>請選擇行政區</option>
+                                            <option value="1">大安區</option>
+                                            <option value="2">中正區</option>
+                                            <option value="3">信義區</option>
+                                            <option value="4">萬華區</option>
+                                            <option value="5">泰安區</option>
+                                            <option value="6">中和區</option>
+                                            <option value="7">永和區</option>
+                                            <option value="8">新店區</option>
+                                            <option value="9">板橋區</option>
+                                            <option value="10">土城區</option>
+                                        </select>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-6 col-xl-6">
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlInput1" class="form-label mt-3">郵遞區號</label>
-                                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-xl-6">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlInput1"
+                                                   class="form-label mt-3">郵遞區號</label>
+                                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                                   placeholder="">
                                         </div>
                                     </div>
                                 </div>
@@ -96,31 +104,27 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container containerForAdd">
-        <div class="row">
+
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <button class="accordion-button accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         <div class="col-11 col-lg-9 d-flex align-items-start">
                             <div class=" imgcontainer mt-2 me-2 ">
-                                <i class="fs-4 bi bi-bricks"></i>
+                                <i class="fs-4 bi bi-bricks mt-3"></i>
                             </div>
-                            <!-- <i class="bi bi-circle mt-3 me-3"></i> -->
-                            <span class="textgroup ">
+                            <div class="textgroup mt-3 ">
                                 <h6 class="fs18">2.創建您的場地</h6>
                                 <p class="editDetailsp">場地類型</p>
-                            </span>
+                            </div>
                         </div>
                     </button>
                 </h2>
-            </div>
 
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <div class="container containerForAdd">
-                        <div class="row ">
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                     data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="row mt-5">
                             <div class="col-12">
                                 <h2 class="fs-4">說說您的場地類型</h2>
                                 <p class="fs16">
@@ -131,7 +135,8 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="Meeting" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="Meeting"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         會議
                                     </label>
@@ -140,7 +145,8 @@
 
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="Party" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="Party"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         派對
                                     </label>
@@ -148,7 +154,8 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="reunion" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="reunion"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         聚會
                                     </label>
@@ -156,7 +163,8 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="Privateconversation" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="Privateconversation"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         私人談話
                                     </label>
@@ -164,7 +172,8 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="CourseLecture" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="CourseLecture"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         課程講座
                                     </label>
@@ -172,7 +181,8 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="sports" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="sports"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         運動
                                     </label>
@@ -180,7 +190,8 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="job" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="job"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         工作
                                     </label>
@@ -188,7 +199,8 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="exhibition" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="exhibition"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         展覽
                                     </label>
@@ -196,7 +208,8 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="musicperformance" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="musicperformance"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         音樂/表演
                                     </label>
@@ -204,7 +217,8 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="Photophotography" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="Photophotography"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         拍照/攝影
                                     </label>
@@ -212,7 +226,8 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="cosmetic" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="cosmetic"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         美容
                                     </label>
@@ -220,7 +235,8 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="cooking" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="cooking"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         烹飪
                                     </label>
@@ -228,7 +244,8 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="Storage" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="Storage"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         儲物
                                     </label>
@@ -236,7 +253,8 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="Presentation" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="Presentation"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         發表會
                                     </label>
@@ -244,7 +262,8 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="Familyactivities" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="Familyactivities"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         親子活動
                                     </label>
@@ -252,113 +271,118 @@
                             </div>
                             <div class="mb-3 col-lg-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="other" id="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="other"
+                                           id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         其他
                                     </label>
                                 </div>
                             </div>
-                            <!-- 場地命名 描述 -->
-                            <div class="row mt-3">
-                                <div class="col-12 col-lg-6 ">
-                                    <h2 class="fs-4">給您的場地命名</h2>
-                                    <p class="fs16">敘述最能代表您場地類型創建一個能夠吸引客人興趣並描述您的空間的標題。 請勿包含您的公司名稱</p>
-                                    <p class="fs20">可以試試包含以下內容：</p>
-                                    <ul>
-                                        <li>位置-市區、市中心、碼頭</li>
-                                        <li>場地類型-閣樓、工作室、舞廳、頂樓公寓</li>
-                                        <li>獨特的形容詞-質感、寬敞、現代</li>
-                                    </ul>
-                                    <p><i class=" mt-2 me-1 far fa-lightbulb"></i>例如：“市中心閣樓享天際線景觀”</p>
-                                    <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label mt-3"></label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="輸入您場地的名稱">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 mt-5">
-                                    <h2 class="fs-4">描述您的場地</h2>
-                                    <p>描述您對場地所有的細節，以便讓客戶知道這場地所提供的服務</p>
-                                    <p class="fs20">可以試試回答以下內容：</p>
-                                    <ul>
-                                        <li>哪些活動適合在您的場地運用？</li>
-                                        <li>您的場地格局如何？每個區域如何使用？</li>
-                                        <li>您的場地有哪些獨特的功能或便利設施？</li>
-                                    </ul>
-                                    <p>不建議：</p>
-                                    <ul>
-                                        <li>聯絡訊息-請勿包含您的電話、場地名稱、地址、電子信箱跟網路連結。</li>
-                                    </ul>
-                                </div>
-                                <div class="col ">
-                                    <div class="col col-12  pb-5">
-                                        <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-12 mt-3">
-                                    <h2 class="fs-4">您的場地大小</h2>
-                                    <p>描述當客戶預定您的場地時可以使用的大小</p>
-                                </div>
-                                <div class="col-12">
-                                    <p><i class=" mt-2 me-1 far fa-lightbulb"></i>例如：您的場地有80坪，但是只提供40坪空間提供給可戶使用。</p>
-                                </div>
-                                <div class="col-12 col-xl-6 d-flex">
-                                    <div class="mb-3 w-75">
-                                        <label for="exampleFormControlInput1" class="form-label mt-3"></label>
-                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="500">
-                                    </div>
-                                    <div class="mb-3 ">
-                                        <label for="exampleFormControlInput1" class="form-label mt-3 "></label>
-                                        <input type="text" class="form-control text-center" id="exampleFormControlInput1" placeholder="坪數" disabled>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <h5>可以容納幾個人 </h5>
-                                <div class="col col-lg-6">
-                                    <div class="form-floating">
-                                        <input class="form-control" placeholder="最大客人數" id="Discount"></input>
-                                        <label for="Discount">最大客人數</label>
-                                    </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-12 col-lg-6 mt-5 ">
+                                <h2 class="fs-4">給您的場地命名</h2>
+                                <p class="fs16">敘述最能代表您場地類型創建一個能夠吸引客人興趣並描述您的空間的標題。 請勿包含您的公司名稱</p>
+                                <p class="fs20">可以試試包含以下內容：</p>
+                                <ul>
+                                    <li>位置-市區、市中心、碼頭</li>
+                                    <li>場地類型-閣樓、工作室、舞廳、頂樓公寓</li>
+                                    <li>獨特的形容詞-質感、寬敞、現代</li>
+                                </ul>
+                                <p><i class="me-1 far fa-lightbulb"></i>例如：“市中心閣樓享天際線景觀”</p>
+                                <div class="SpaceName">
+                                    <label for="exampleFormControlInput1" class="form-label "></label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                           placeholder="輸入您場地的名稱">
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12 mt-5">
+                                <h2 class="fs-4">描述您的場地</h2>
+                                <p>描述您對場地所有的細節，以便讓客戶知道這場地所提供的服務</p>
+                                <p class="fs20">可以試試回答以下內容：</p>
+                                <ul>
+                                    <li>哪些活動適合在您的場地運用？</li>
+                                    <li>您的場地格局如何？每個區域如何使用？</li>
+                                    <li>您的場地有哪些獨特的功能或便利設施？</li>
+                                </ul>
+                                <p>不建議：</p>
+                                <ul>
+                                    <li>聯絡訊息-請勿包含您的電話、場地名稱、地址、電子信箱跟網路連結。</li>
+                                </ul>
+                            </div>
+                            <div class="col ">
+                                <div class="col col-12  pb-5">
+                                    <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                    <textarea name="textPartType" class="form-control"
+                                              id="exampleFormControlTextarea1" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 mt-3">
+                                <h2 class="fs-4">您的場地大小</h2>
+                                <p>描述當客戶預定您的場地時可以使用的大小</p>
+                            </div>
+                            <div class="col-12">
+                                <p><i class=" mt-2 me-1 far fa-lightbulb"></i>例如：您的場地有80坪，但是只提供40坪空間提供給可戶使用。</p>
+                            </div>
+                            <div class="col-12 col-xl-6 d-flex">
+                                <div class="mb-3 w-75">
+                                    <label for="exampleFormControlInput1" class="form-label mt-3"></label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                           placeholder="500">
+                                </div>
+                                <div class="mb-3 ">
+                                    <label for="exampleFormControlInput1" class="form-label mt-3 "></label>
+                                    <input type="text" class="form-control text-center"
+                                           id="exampleFormControlInput1" placeholder="坪數" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <h5>可以容納幾個人 </h5>
+                            <div class="col col-lg-6">
+                                <div class="form-floating">
+                                    <input class="form-control" placeholder="最大客人數" id="Discount">
+                                    <label for="Discount">最大客人數</label>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    <div class="col-11 col-lg-9 d-flex align-items-start">
-                        <div class=" imgcontainer mt-2 me-2 ">
-                            <img class=" speed-square" src="~/Assets/IMG/icons/speed-square.svg" alt="">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <div class="col-11 col-lg-9 d-flex align-items-start">
+                            <div class=" imgcontainer mt-3 me-2 ">
+                                <img class=" speed-square" src="~/Assets/IMG/icons/time.svg" alt="">
+                            </div>
+                            <div class="textgroup mt-3 ">
+                                <h6 class="fs18">3.營業時間&定價</h6>
+                                <p class="editDetailsp ">營業日/定價</p>
+                            </div>
                         </div>
-                        <!-- <i class="bi bi-circle mt-3 me-3"></i> -->
-                        <!-- <i class="bi bi-check-circle-fill "></i> -->
-                        <span class="textgroup mt-1 ">
-                            <h6 class="fs18">3.營業時間&定價</h6>
-                            <p class="editDetailsp ">營業日/定價</p>
-                        </span>
-                    </div>
-                </button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <div class="container containerForAdd">
-                        <div class="operating_hours_row row">
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                     data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="operating_hours_row mt-5 row">
                             <div class="col-12 border-bottom">
-                                <h3 class="operating_hours_title">請問您的營業時間是？</h3>
+                                <h2 class="fs-4 operating_hours_title ">請問您的營業時間是？</h2>
                                 <p class="operating_hours_space_introduce mt-4">
                                     營業時間是指您的空間對外預訂開放的日期和時間（即您的空間可以使用的時間）。 客人將無法預訂營業時間以外的時間。
                                 </p>
-                                <p class="operating_hours_space_address mt-4">您的空間地址 - <span>台北市大安區忠孝東路三段96號11號樓之1</span></p>
+                                <p class="operating_hours_space_address mt-4">
+                                    您的空間地址 -
+                                    <span>台北市大安區忠孝東路三段96號11號樓之1</span>
+                                </p>
                             </div>
                         </div>
                         <div class="row mt-4">
@@ -367,13 +391,15 @@
                             </div>
                             <div class="col-6 col-xl-2  mt-auto mb-auto">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="open" value="Monday" id="flexSwitchCheckDefault">
+                                    <input class="form-check-input" type="checkbox" name="open" value="Monday"
+                                           id="flexSwitchCheckDefault">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
                                 </div>
                             </div>
                             <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Mondayopen" id="flexRadioDefault1" disabled>
+                                    <input class="form-check-input" type="radio" name="Mondayopen"
+                                           id="flexRadioDefault1" disabled>
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         全天(24hr)
                                     </label>
@@ -381,8 +407,9 @@
                             </div>
                             <div class="col-6 col-xl-1  mt-auto mb-auto">
                                 <div class="form-check">
-                                    <input class="form-check-input " type="radio" name="Mondayopen" id="flexRadioDefault1" disabled>
-                                    <label class="form-check-label fs-6" for="flexRadioDefault1">
+                                    <input class="form-check-input " type="radio" name="Mondayopen"
+                                           id="flexRadioDefault1" disabled>
+                                    <label class="form-check-label" for="flexRadioDefault1">
                                         小時
                                     </label>
                                 </div>
@@ -390,7 +417,8 @@
 
                             <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
                                 <label for="StateMon" class="form-label  "></label>
-                                <select id="StateMon" class="form-select MonselectL " aria-label="Default select example" disabled>
+                                <select id="StateMon" class="form-select MonselectL "
+                                        aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -419,11 +447,14 @@
                                 </select>
                             </div>
 
-                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
+                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">
+                                to
+                            </P>
 
                             <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
                                 <label for="StateMon" class="form-label  "></label>
-                                <select id="StateMon" class="form-select MonselectR " aria-label="Default select example" disabled>
+                                <select id="StateMon" class="form-select MonselectR "
+                                        aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -456,7 +487,8 @@
                         <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
                             <div class="col-5">
                                 <label for="StateMon" class="form-label  "></label>
-                                <select id="StateMon" class="form-select  " aria-label="Default select example" disabled>
+                                <select id="StateMon" class="form-select  " aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -487,7 +519,8 @@
                             <P class="col-2 mt-4 text-center  text-start">to</P>
                             <div class="col-5">
                                 <label for="StateMon" class="form-label  "></label>
-                                <select id="StateMon" class="form-select MonselectR " aria-label="Default select example" disabled>
+                                <select id="StateMon" class="form-select MonselectR "
+                                        aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -523,13 +556,15 @@
                             </div>
                             <div class="col-6 col-xl-2  mt-auto mb-auto">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="open" value="Tuesday" id="flexSwitchCheckDefault">
+                                    <input class="form-check-input" type="checkbox" name="open" value="Tuesday"
+                                           id="flexSwitchCheckDefault">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
                                 </div>
                             </div>
                             <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
                                 <div class="form-check">
-                                    <input class="form-check-input TusAllDay " type="radio" name="Tuesdayopen" id="flexRadioDefault2" disabled>
+                                    <input class="form-check-input TusAllDay " type="radio" name="Tuesdayopen"
+                                           id="flexRadioDefault2" disabled>
                                     <label class="form-check-label" for="flexRadioDefault2">
                                         全天(24hr)
                                     </label>
@@ -537,7 +572,8 @@
                             </div>
                             <div class="col-6 col-xl-1  mt-auto mb-auto">
                                 <div class="form-check">
-                                    <input class="form-check-input Tushour" type="radio" name="Tuesdayopen" id="flexRadioDefault2" disabled>
+                                    <input class="form-check-input Tushour" type="radio" name="Tuesdayopen"
+                                           id="flexRadioDefault2" disabled>
                                     <label class="form-check-label" for="flexRadioDefault2">
                                         小時
                                     </label>
@@ -545,7 +581,8 @@
                             </div>
                             <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
                                 <label for="StateTue" class="form-label  "></label>
-                                <select id="StateTue" class="form-select TusselectL" aria-label="Default select example" disabled>
+                                <select id="StateTue" class="form-select TusselectL"
+                                        aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -574,11 +611,14 @@
                                 </select>
                             </div>
 
-                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
+                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">
+                                to
+                            </P>
 
                             <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
                                 <label for="StateTue" class="form-label  "></label>
-                                <select id="StateTue" class="form-select TusselectR" aria-label="Default select example" disabled>
+                                <select id="StateTue" class="form-select TusselectR"
+                                        aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -611,7 +651,8 @@
                         <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
                             <div class="col-5">
                                 <label for="StateTue" class="form-label  "></label>
-                                <select id="StateTue" class="form-select  TusselectL" aria-label="Default select example" disabled>
+                                <select id="StateTue" class="form-select  TusselectL"
+                                        aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -642,7 +683,8 @@
                             <P class="col-2 mt-4 text-center  text-start">to</P>
                             <div class="col-5">
                                 <label for="StateTue" class="form-label  "></label>
-                                <select id="StateTue" class="form-select TusselectR " aria-label="Default select example" disabled>
+                                <select id="StateTue" class="form-select TusselectR "
+                                        aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -678,13 +720,15 @@
                             </div>
                             <div class="col-6 col-xl-2  mt-auto mb-auto">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="open" value="Wenseday" id="flexSwitchCheckDefault">
+                                    <input class="form-check-input" type="checkbox" name="open" value="Wenseday"
+                                           id="flexSwitchCheckDefault">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
                                 </div>
                             </div>
                             <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Wensedayopen" id="flexRadioDefault3" disabled>
+                                    <input class="form-check-input" type="radio" name="Wensedayopen"
+                                           id="flexRadioDefault3" disabled>
                                     <label class="form-check-label" for="flexRadioDefault3">
                                         全天(24hr)
                                     </label>
@@ -692,7 +736,8 @@
                             </div>
                             <div class="col-6 col-xl-1  mt-auto mb-auto">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Wensedayopen" id="flexRadioDefault3" disabled>
+                                    <input class="form-check-input" type="radio" name="Wensedayopen"
+                                           id="flexRadioDefault3" disabled>
                                     <label class="form-check-label" for="flexRadioDefault3">
                                         小時
                                     </label>
@@ -701,7 +746,8 @@
 
                             <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateWed" class="form-select" aria-label="Default select example" disabled>
+                                <select id="StateWed" class="form-select" aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -730,11 +776,14 @@
                                 </select>
                             </div>
 
-                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
+                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">
+                                to
+                            </P>
 
                             <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateWed" class="form-select" aria-label="Default select example" disabled>
+                                <select id="StateWed" class="form-select" aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -766,8 +815,9 @@
                         <!-- 手機 -->
                         <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
                             <div class="col-5">
-                                <label for="State" class="form-label  "></label>
-                                <select id="StateWed" class="form-select  " aria-label="Default select example" disabled>
+                                <label for="State" class="form-label "></label>
+                                <select id="StateWed" class="form-select  " aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -798,7 +848,8 @@
                             <P class="col-2 mt-4 text-center  text-start">to</P>
                             <div class="col-5">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateWed" class="form-select  " aria-label="Default select example" disabled>
+                                <select id="StateWed" class="form-select  " aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -833,13 +884,15 @@
                             </div>
                             <div class="col-6 col-xl-2  mt-auto mb-auto">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="open" value="Thuresday" id="flexSwitchCheckDefault">
+                                    <input class="form-check-input" type="checkbox" name="open" value="Thuresday"
+                                           id="flexSwitchCheckDefault">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
                                 </div>
                             </div>
                             <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Thuresdayopen" id="flexRadioDefault4">
+                                    <input class="form-check-input" type="radio" name="Thuresdayopen"
+                                           id="flexRadioDefault4">
                                     <label class="form-check-label" for="flexRadioDefault4">
                                         全天(24hr)
                                     </label>
@@ -847,7 +900,8 @@
                             </div>
                             <div class="col-6 col-xl-1  mt-auto mb-auto">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Thuresdayopen" id="flexRadioDefault4" disabled>
+                                    <input class="form-check-input" type="radio" name="Thuresdayopen"
+                                           id="flexRadioDefault4" disabled>
                                     <label class="form-check-label" for="flexRadioDefault4">
                                         小時
                                     </label>
@@ -856,7 +910,8 @@
 
                             <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateThu" class="form-select" aria-label="Default select example" disabled>
+                                <select id="StateThu" class="form-select" aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -885,11 +940,14 @@
                                 </select>
                             </div>
 
-                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
+                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">
+                                to
+                            </P>
 
                             <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateThu" class="form-select" aria-label="Default select example" disabled>
+                                <select id="StateThu" class="form-select" aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -922,7 +980,8 @@
                         <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
                             <div class="col-5">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateThu" class="form-select  " aria-label="Default select example" disabled>
+                                <select id="StateThu" class="form-select  " aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -953,7 +1012,8 @@
                             <P class="col-2 mt-4 text-center  text-start">to</P>
                             <div class="col-5">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateThu" class="form-select  " aria-label="Default select example" disabled>
+                                <select id="StateThu" class="form-select  " aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -988,13 +1048,15 @@
                             </div>
                             <div class="col-6 col-xl-2  mt-auto mb-auto">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="open" value="Friday" id="flexSwitchCheckDefault">
+                                    <input class="form-check-input" type="checkbox" name="open" value="Friday"
+                                           id="flexSwitchCheckDefault">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
                                 </div>
                             </div>
                             <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Friayopen" id="flexRadioDefault5" disabled>
+                                    <input class="form-check-input" type="radio" name="Friayopen"
+                                           id="flexRadioDefault5" disabled>
                                     <label class="form-check-label" for="flexRadioDefault5">
                                         全天(24hr)
                                     </label>
@@ -1002,7 +1064,8 @@
                             </div>
                             <div class="col-6 col-xl-1  mt-auto mb-auto">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Friayopen" id="flexRadioDefault5" disabled>
+                                    <input class="form-check-input" type="radio" name="Friayopen"
+                                           id="flexRadioDefault5" disabled>
                                     <label class="form-check-label" for="flexRadioDefault5">
                                         小時
                                     </label>
@@ -1011,7 +1074,8 @@
 
                             <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateFri" class="form-select" aria-label="Default select example" disabled>
+                                <select id="StateFri" class="form-select" aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -1040,11 +1104,14 @@
                                 </select>
                             </div>
 
-                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
+                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">
+                                to
+                            </P>
 
                             <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateFri" class="form-select" aria-label="Default select example" disabled>
+                                <select id="StateFri" class="form-select" aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -1077,7 +1144,8 @@
                         <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
                             <div class="col-5">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateFri" class="form-select  " aria-label="Default select example" disabled>
+                                <select id="StateFri" class="form-select  " aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -1108,7 +1176,8 @@
                             <P class="col-2 mt-4 text-center  text-start">to</P>
                             <div class="col-5">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateFri" class="form-select  " aria-label="Default select example" disabled>
+                                <select id="StateFri" class="form-select  " aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -1143,13 +1212,15 @@
                             </div>
                             <div class="col-6 col-xl-2  mt-auto mb-auto">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="open" value="Saturday" id="flexSwitchCheckDefault">
+                                    <input class="form-check-input" type="checkbox" name="open" value="Saturday"
+                                           id="flexSwitchCheckDefault">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
                                 </div>
                             </div>
                             <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Saturdayopen" id="flexRadioDefault6" disabled>
+                                    <input class="form-check-input" type="radio" name="Saturdayopen"
+                                           id="flexRadioDefault6" disabled>
                                     <label class="form-check-label" for="flexRadioDefault6">
                                         全天(24hr)
                                     </label>
@@ -1157,7 +1228,8 @@
                             </div>
                             <div class="col-6 col-xl-1  mt-auto mb-auto">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Saturdayopen" id="flexRadioDefault6" disabled>
+                                    <input class="form-check-input" type="radio" name="Saturdayopen"
+                                           id="flexRadioDefault6" disabled>
                                     <label class="form-check-label" for="flexRadioDefault6">
                                         小時
                                     </label>
@@ -1166,7 +1238,8 @@
 
                             <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateSat" class="form-select" aria-label="Default select example" disabled>
+                                <select id="StateSat" class="form-select" aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -1195,11 +1268,14 @@
                                 </select>
                             </div>
 
-                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
+                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">
+                                to
+                            </P>
 
                             <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateSat" class="form-select" aria-label="Default select example" disabled>
+                                <select id="StateSat" class="form-select" aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -1232,7 +1308,8 @@
                         <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
                             <div class="col-5">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateSat" class="form-select  " aria-label="Default select example" disabled>
+                                <select id="StateSat" class="form-select  " aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -1263,7 +1340,8 @@
                             <P class="col-2 mt-4 text-center  text-start">to</P>
                             <div class="col-5">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateSat" class="form-select  " aria-label="Default select example" disabled>
+                                <select id="StateSat" class="form-select  " aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -1298,13 +1376,15 @@
                             </div>
                             <div class="col-6 col-xl-2  mt-auto mb-auto">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" name="open" value="Sunday" id="flexSwitchCheckDefault">
+                                    <input class="form-check-input" type="checkbox" name="open" value="Sunday"
+                                           id="flexSwitchCheckDefault">
                                     <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
                                 </div>
                             </div>
                             <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="Sundayopen" id="flexRadioDefault7" disabled>
+                                    <input class="form-check-input" type="radio" name="Sundayopen"
+                                           id="flexRadioDefault7" disabled>
                                     <label class="form-check-label" for="flexRadioDefault7">
                                         全天(24hr)
                                     </label>
@@ -1312,7 +1392,8 @@
                             </div>
                             <div class="col-6 col-xl-1  mt-auto mb-auto">
                                 <div class="form-check">
-                                    <input class="form-check-input " type="radio" name="Sundayopen" id="flexRadioDefault7" disabled>
+                                    <input class="form-check-input " type="radio" name="Sundayopen"
+                                           id="flexRadioDefault7" disabled>
                                     <label class="form-check-label" for="flexRadioDefault7">
                                         小時
                                     </label>
@@ -1321,7 +1402,8 @@
 
                             <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateSun" class="form-select" aria-label="Default select example" disabled>
+                                <select id="StateSun" class="form-select" aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -1350,11 +1432,14 @@
                                 </select>
                             </div>
 
-                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">to</P>
+                            <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">
+                                to
+                            </P>
 
                             <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateSun" class="form-select" aria-label="Default select example" disabled>
+                                <select id="StateSun" class="form-select" aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -1387,7 +1472,8 @@
                         <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
                             <div class="col-5">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateSun" class="form-select  " aria-label="Default select example" disabled>
+                                <select id="StateSun" class="form-select  " aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -1418,7 +1504,8 @@
                             <P class="col-2 mt-4 text-center  text-start">to</P>
                             <div class="col-5">
                                 <label for="State" class="form-label  "></label>
-                                <select id="StateSun" class="form-select  " aria-label="Default select example" disabled>
+                                <select id="StateSun" class="form-select  " aria-label="Default select example"
+                                        disabled>
                                     <option selected>請選擇營業時間</option>
                                     <option value="sixoclock">06:00</option>
                                     <option value="sixoclockthirty">06:30</option>
@@ -1455,28 +1542,27 @@
                             <div class="col-12 col-lg-6 price mt-3">
                                 <p>對每次預訂收取 15% 的費用。 請將此費用計入您的小時費率。</p>
                                 <div class="form-floating">
-                                    <input class="form-control" placeholder="小時計費" id="SpacePrice"></input>
-                                    <label for="SpacePrice">小時計費</label>
+                                    <input class="form-control" placeholder="小時計費" id="SpacePrice">
                                 </div>
                             </div>
                             <div class="col-12 col-lg-6 SpacePrice mt-3">
                                 <p>最低時數</p>
                                 <div class="form-floating">
-                                    <input class="form-control" placeholder="必須是1-12小時" id="SpacePrice"></input>
+                                    <input class="form-control" placeholder="必須是1-12小時" id="SpacePrice">
                                     <label for="SpacePrice">必須是1-12小時</label>
                                 </div>
                             </div>
                             <div class="col-10 col-lg-6 MinPrice mt-3">
                                 <p>折扣</p>
                                 <div class="form-floating">
-                                    <input class="form-control" placeholder="幾小時折扣" id="hourDiscount"></input>
+                                    <input class="form-control" placeholder="幾小時折扣" id="hourDiscount">
                                     <label for="hourDiscount">逾多少小時</label>
                                 </div>
                             </div>
                             <div class="col-10 col-lg-5 mt-3">
                                 <p>折扣數</p>
                                 <div class="form-floating">
-                                    <input class="form-control" placeholder="多少折扣" id="Discount"></input>
+                                    <input class="form-control" placeholder="多少折扣" id="Discount">
                                     <label for="Discount">享多少折扣</label>
                                 </div>
                             </div>
@@ -1486,7 +1572,8 @@
                             <h5>便捷設施</h5>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="Free" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="Free" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         WiFi
                                     </label>
@@ -1494,7 +1581,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="Tables" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="Tables" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         桌子
                                     </label>
@@ -1502,7 +1590,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="Chairs" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="Chairs" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         椅子
                                     </label>
@@ -1510,7 +1599,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="Whiteboard" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="Whiteboard" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         白板
                                     </label>
@@ -1518,7 +1608,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="Chalkboard" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="Chalkboard" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         黑板
                                     </label>
@@ -1526,7 +1617,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="Projector" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="Projector" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         投影
                                     </label>
@@ -1534,7 +1626,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="FlipCharts" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="FlipCharts" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         掛畫
                                     </label>
@@ -1542,7 +1635,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="Monitor" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="Monitor" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         監控設施
                                     </label>
@@ -1550,7 +1644,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="ConferencePhone" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="ConferencePhone" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         會議電話
                                     </label>
@@ -1558,15 +1653,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="ConferencePhone" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        會議電話
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="PublicTransportation" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="PublicTransportation" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         大眾運輸工具
                                     </label>
@@ -1574,7 +1662,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="Restrooms" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="Restrooms" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         廁所
                                     </label>
@@ -1582,7 +1671,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="WheelchairAccessible" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="WheelchairAccessible" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         無障礙通道
                                     </label>
@@ -1590,7 +1680,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="Kitchen" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="Kitchen" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         廚房
                                     </label>
@@ -1598,7 +1689,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="Coffee" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="Coffee" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         咖啡
                                     </label>
@@ -1606,15 +1698,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="Coffee" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        咖啡
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="AppleTV" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="AppleTV" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Apple TV
                                     </label>
@@ -1622,7 +1707,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="Printer" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="Printer" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         印表機
                                     </label>
@@ -1630,7 +1716,8 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="Rooftop" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="Rooftop" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         屋頂
                                     </label>
@@ -1638,57 +1725,56 @@
                             </div>
                             <div class="col-12 col-lg-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" value="OutdoorArea" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" value="OutdoorArea" type="checkbox"
+                                           name="flexRadioDefault" id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         戶外區
                                     </label>
                                 </div>
                             </div>
-                            <div class="col">
-                                <form class="row mt-3">
-                                    <div class="col-8 col-lg-6">
-                                        <label for="Add" class="visually-hidden"></label>
-                                        <input type="text" class="form-control" id="Add" placeholder="其他設施">
-                                    </div>
-                                    <div class="col-4 col-lg-3">
-                                        <button type="submit" class="btn btn-primary mb-3">增加</button>
-                                    </div>
-                                </form>
-                            </div>
                         </div>
+                        <form class="row mt-3">
+                            <div class="col-8 col-lg-6">
+                                <label for="Add" class="visually-hidden"></label>
+                                <input type="text" class="form-control" id="Add" placeholder="其他設施">
+                            </div>
+                            <div class="col-4 col-lg-3">
+                                <button type="submit" class="btn btn-primary mb-3">增加</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingFour">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        <div class="col-11  col-lg-9 d-flex align-items-start">
-                            <div class=" imgcontainer mt-3 me-2 ">
-                                <img class=" addphoto " src="~/Assets/IMG/icons/addphoto.png" alt="">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <div class="col-11  col-lg-9 d-flex align-items-start">
+                                <div class=" imgcontainer mt-3 me-2 ">
+                                    <img class=" addphoto " src="~/Assets/IMG/icons/addphoto.png" alt="">
+                                </div>
+                                <div class="textgroup  mt-2">
+                                    <h6 class="fs18">4.上傳照片</h6>
+                                    <p class="editDetailsp">上傳照片跟封面照</p>
+                                </div>
                             </div>
-                            <span class="textgroup  mt-2">
-                                <h6 class="fs18">4.上傳照片</h6>
-                                <p class="editDetailsp">上傳照片跟封面照</p>
-                            </span>
-                        </div>
-                    </button>
-                </h2>
-                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class="container containerForAdd">
-                            <div class="row ">
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingTFour"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="row mt-5">
                                 <div class="col-12 ">
                                     <h2 class="fs-4">上傳場地照片</h2>
-                                    <p class="fs16">照片是首先吸引客戶注意的，建議上傳至少１０張高值感的照片</p>
+                                    <p class="fs16">照片是首先吸引客戶注意的，最多可以上傳10張高質感的照片</p>
                                     <p class="fs20">照片的要求：</p>
                                     <ul>
-                                        <li>照片的要求高解析度-至少1000象素寬（px)</li>
+                                        <li>照片的要求高解析度-至少1000象素寬(px)</li>
                                         <li>橫式照片-勿直式照片</li>
                                         <li>彩色照片-勿黑白</li>
                                         <li>雜訊-勿有雜訊、浮水印</li>
                                     </ul>
                                 </div>
-                                <div class="col ">
+                                <div class="col-12 ">
                                     <div class="row imgBox">
                                         <div class=" row justify-content-center ">
                                             <div class="col-1 mt-5 ">
@@ -1696,42 +1782,40 @@
                                             </div>
                                         </div>
                                         <div class="row mb-5 justify-content-center">
-                                            <div class=" col-9 col-md-3 col-lg-3 ">
-                                                <label for="formFile" class="form-label"></label>
-                                                <input class=" " type="file" id="formFile">
-                                            </div>
+                                            上傳照片
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <p><i class=" mt-2 me-1 far fa-lightbulb"></i>第一張照片是您的封面照，請確保第一張照片是最代表您的場地的照片</p>
+                                        <p>
+                                            <i class=" mt-2 me-1 far fa-lightbulb"></i>第一張照片是您的封面照，請確保第一張照片是最代表您的場地的照片
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingFive">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                        <div class="col-11 col-lg-9 d-flex align-items-start">
-                            <div class=" imgcontainer mt-3 me-2 ">
-                                <img class=" addphoto " src="~/Assets/IMG/icons/time.svg" alt="">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFive">
+                        <button class="accordion-button accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <div class="col-11 col-lg-9 d-flex align-items-start">
+                                <div class=" imgcontainer mt-3 me-2 ">
+                                    <img class=" addphoto " src="~/Assets/IMG/icons/parking.svg" alt="">
+                                </div>
+                                <div class="textgroup  mt-3">
+                                    <h6 class="fs18">5.其他資訊</h6>
+                                    <p class="editDetailsp">交通方式/停車資訊/攝影設備</p>
+                                </div>
                             </div>
-                            <span class="textgroup  mt-2">
-                                <h6 class="fs18">5.其他資訊</h6>
-                                <p class="editDetailsp">交通方式/停車資訊/攝影設備</p>
-                            </span>
-                        </div>
-                    </button>
-                </h2>
-                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class="container containerForAdd">
-                            <div class="row">
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="row mt-5">
                                 <div class="col mt-2">
                                     <div class="mb-3">
                                         <h2 class="fs-4">說明如何到達您的場地</h2>
@@ -1744,8 +1828,9 @@
                                 </div>
                                 <div class="col-12 pb-5">
                                     <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                    <p class="fs16 mt-1"><i class="fas fa-lock p-1 "></i>不用擔心，我們僅會在客戶完成訂單提供。</p></i>
+                                    <textarea name="textPartTransportation" class="form-control"
+                                              id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <p class="fs16 mt-1"><i class="fas fs-6 fa-lock p-1 "></i>不用擔心，僅會在客戶完成訂單提供。</p>
                                 </div>
                             </div>
 
@@ -1777,7 +1862,8 @@
                                 <div id="parkingPart" class="row d-none">
                                     <div class="col-12 col-lg-6 mt-1 mb-3 ">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="flexCheckDefault">
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 免費現場停車
                                             </label>
@@ -1785,7 +1871,8 @@
                                     </div>
                                     <div class="col-12 col-lg-6 mt-1 mb-3">
                                         <div class="form-check ">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="flexCheckChecked">
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 付費停車
                                             </label>
@@ -1793,7 +1880,8 @@
                                     </div>
                                     <div class="col-12 col-lg-6 mt-3 mb-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="flexCheckChecked">
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 免費路邊停車
                                             </label>
@@ -1801,7 +1889,8 @@
                                     </div>
                                     <div class="col-12 col-lg-6 mt-3 mb-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="flexCheckChecked">
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 計時路邊停車
                                             </label>
@@ -1809,7 +1898,8 @@
                                     </div>
                                     <div class="col-12 col-lg-6 mt-3 mb-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="flexCheckChecked">
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 代客停車
                                             </label>
@@ -1817,7 +1907,8 @@
                                     </div>
                                     <div class="col-12 col-lg-6 mt-3 mb-3">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="flexCheckChecked">
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 附近停車場
                                             </label>
@@ -1829,7 +1920,8 @@
                                     </div>
                                     <div class="col col-12 parkingpart pb-5">
                                         <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        <textarea name="textPartPark" class="form-control"
+                                                  id="exampleFormControlTextarea1" rows="3"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -1842,7 +1934,6 @@
                                 </div>
                                 <div class="col col-5 d-flex mt-auto mb-auto justify-content-end">
                                     <div class=" mt-auto mb-auto  ">
-                                        <!-- 這邊要加一個radio -->
                                         <div class="radioGroup Yes">
                                             <input id="Yesprojection" type="radio" value="Yes" name="switch">
                                             <label for="Yesprojection">是</label>
@@ -1860,325 +1951,316 @@
                                     <div class="col parking">
                                         <div class="col col-12 parkingpart pb-5">
                                             <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            <textarea name="textPartProjection" class="form-control"
+                                                      id="exampleFormControlTextarea1" rows="3"></textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingEight">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                        <div class="col-11 col-lg-9 d-flex align-items-start">
-                            <div class=" imgcontainer mt-1 me-2 ">
-                                <img class=" location" src="~/Assets/IMG/icons/rules.svg" alt="">
-                            </div>
-                            <span class="textgroup ">
-                                <h6 class="fs18">6.場地規範</h6>
-                                <p class="editDetailsp ">場地使用規範</p>
-                            </span>
-                        </div>
-                    </button>
-                </h2>
-            </div>
-            <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <div class="container containerForAdd">
-                        <div class="row">
-                            <div class="col-12">
-                                <h2 class="fs-4">6.您的場地使用規範</h2>
-                                <p>描述您的場地使用規範，包含客戶在你的場地禁止從事的活動</p>
-                                <p class="fs20">建議條例：</p>
-                                <ul>
-                                    <li>禁止吸煙</li>
-                                    <li>可以帶外食食用</li>
-                                    <li>8點後禁止飲酒</li>
-                                </ul>
-                                <p>不建議：</p>
-                                <ul>
-                                    <li>清潔費-清潔是場地主的責任不該額外收取費用，如有收取您可以在後面的部分添加。</li>
-                                    <li>合同-<span class="logoS">ZONERadar</span>預定包含在我們的服務協議中。不要附在您的合同、取消政策或責任政策。</li>
-                                </ul>
-                            </div>
-                            <div class="col ">
-                                <div class="col col-12  pb-5">
-                                    <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingEight">
+                            <button class="accordion-button accordion-buttonAdd  collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                <div class="col-11 col-lg-9 d-flex align-items-start">
+                                    <div class=" imgcontainer mt-3 me-2  ">
+                                        <img class=" rules" src="~/Assets/IMG/icons/rules.svg" alt="">
+                                    </div>
+                                    <div class="textgroup mt-3">
+                                        <h6 class="fs18">6.場地規範</h6>
+                                        <p class="editDetailsp ">場地使用規範</p>
+                                    </div>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="row ">
+                                    <div class="col-12  mt-5">
+                                        <h2 class="fs-4">您的場地使用規範</h2>
+                                        <p>描述您的場地使用規範，包含客戶在你的場地禁止從事的活動</p>
+                                        <p class="fs20">建議條例：</p>
+                                        <ul>
+                                            <li>禁止吸煙</li>
+                                            <li>可以帶外食食用</li>
+                                            <li>8點後禁止飲酒</li>
+                                        </ul>
+                                        <p>不建議：</p>
+                                        <ul>
+                                            <li>清潔費-清潔是場地主的責任不該額外收取費用，如有收取您可以在後面的部分添加。</li>
+                                            <li>
+                                                合同-<span class="logoS">ZONERadar</span>預定包含在我們的服務協議中。不要附在您的合同、取消政策或責任政策。
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col ">
+                                        <div class="col col-12  pb-5">
+                                            <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                            <textarea name="textPartRule" class="form-control"
+                                                      id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <h5>場地清潔費</h5>
-                            </div>
-                            <div class="col-12 col-lg-12 MinPrice mt-3">
-                                <p>
-                                    您有責任在每次預訂後進行清潔。 您可以收取費用以支付相關費用。
-                                </p>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="IncludedInHourly" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        包含在每小時計費中
-                                    </label>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSix">
+                            <button class="accordion-button accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                <div class="col-11 col-lg-9 d-flex align-items-start mt-2">
+                                    <div class=" imgcontainer mt-3 me-2 ">
+                                        <img class=" cleaning " src="~/Assets/IMG/icons/cleaning-solution.svg"
+                                             alt="">
+                                    </div>
+                                    <div class="textgroup  mt-2">
+                                        <h6 class="fs18">7.清潔條款</h6>
+                                        <p class="editDetailsp">為客人指定清潔方案</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-lg-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" value="Additionalflatfee" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
-                                        額外的固定費用
-                                    </label>
+                            </button>
+                        </h2>
+                        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col-12  mt-5">
+                                        <h2 class="fs-4">清潔與安全設施</h2>
+                                        <p class="fs16">填寫表格以將您的清潔協議和其他健康和安全措施添加到您的列表頁面</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-12  mt-5">
+                                        <h2 class="fs-4">您採取哪些額外額外措施來保持來保持空間來保持空間清潔？</h2>
+                                        <p class="fs16">選擇有符合條件的條件的選項</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-12 col-lg-12 mt-1 mb-3 ">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    根據當地衛生當局的指導方針對空間進行清潔和消毒
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-12 col-lg-12 mt-1 mb-3">
+                                            <div class="form-check ">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    高接觸表面和共用設施已消毒
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-12 col-lg-12 mt-3 mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked" chcked>
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    柔軟的多孔材料已被正確清潔或移除
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-12 col-lg-12mt-3 mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    兩次預訂之間聘請專業清潔工
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-12 col-lg-12mt-3 mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    預訂間隔開以加強清潔
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col  mt-5">
+                                        <h2 class="fs-4">您為客人提供哪些額外的防護裝備？</h2>
+                                        <p class="fs16">選擇有符合條件的條件的選項</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-12 col-lg-12 mt-1 mb-3 ">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    消毒濕巾或噴霧劑和紙巾
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-12 col-lg-12 mt-1 mb-3">
+                                            <div class="form-check ">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    高接觸表面和共用設施已消毒
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-12 col-lg-12mt-3 mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    一次性手套
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-12 col-lg-12 mt-3 mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    一次性口罩/面罩
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-6 mt-3 mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    消毒洗手液
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12  mt-5">
+                                        <h2 class="fs-4">你做了什麼來幫助客人在你的空間內保持物理距離？</h2>
+                                        <p class="fs16">選擇有符合條件的條件的選項</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-12 col-lg-12mt-1 mb-3">
+                                            <div class="form-check ">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    空間可以使用室外空氣通風
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-12 col-lg-12 mt-3 mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    有空氣過濾器
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-12 col-lg-12 mt-3 mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    空間有額外的戶外空間
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-12 col-lg-12mt-3 mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    空間已重新配置以允許物理距離
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col  mt-5">
+                                        <h2 class="fs-4">您添加了什麼標示來讓您的客人了解情況？</h2>
+                                        <p class="fs16">選擇有符合條件的條件的選項</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col col-12 col-lg-12 mt-1 mb-3 ">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    更新清潔程序的詳細清單
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-12 col-lg-12mt-1 mb-3">
+                                            <div class="form-check ">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    COVID-19 訪客指南打印出來
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-12 col-lg-12 mt-3 mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    公共區域的地板上有 6 英尺（2 米）的標記
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col col-12 col-lg-12mt-3 mb-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckChecked">
+                                                <label class="form-check-label" for="flexCheckChecked">
+                                                    狹窄的通道有雙向通行的箭頭
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3 mb-3  mt-5">
+                                    <div class="col col-12 col-lg-12">
+                                        <h2 class="fs-4">告訴您的客人更多有關您的清潔過程的信息</h2>
+                                    </div>
+                                    <div class="col col-12 parkingpart pb-5">
+                                        <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                        <textarea name="textPartClean" class="form-control"
+                                                  id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingSix">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                        <div class="col-11 col-lg-9 d-flex align-items-start">
-                            <div class=" imgcontainer mt-3 me-2 ">
-                                <img class=" cleaning " src="~/Assets/IMG/icons/cleaning-solution.svg" alt="">
-                            </div>
-                            <span class="textgroup  mt-2">
-                                <h6 class="fs18">7.清潔條款</h6>
-                                <p class="editDetailsp">為客人指定清潔方案</p>
-                            </span>
-                        </div>
-                    </button>
-                </h2>
-                <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class="container containerForAdd">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingSeven">
+                        <button class="accordion-button accordion-buttonAdd accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
                             <div class="row">
-                                <div class="col-12 ">
-                                    <h2 class="fs-4">清潔與安全設施</h2>
-                                    <p class="fs16">填寫表格以將您的清潔協議和其他健康和安全措施添加到您的列表頁面</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col col-12 d-flex justify-item-start">
-                                    <img class="enhanced " src="mebercenter-img/enhanced-badge.svg" alt="">
-                                    <p class="mt-auto mb-auto">
-                                        從以下每個類別中至少選擇 1 個以獲得增強型 COVID-19 措施徽章。 此徽章將顯示在您的列表中。
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col col-12">
-                                    <h2 class="fs-4">您採取哪些額外額外措施來保持來保持空間來保持空間清潔？</h2>
-                                    <p class="fs16">選擇有符合條件的條件的選項</p>
-                                </div>
-                                <div class="row">
-                                    <div class="col col-12 col-lg-12 mt-1 mb-3 ">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                根據當地衛生當局的指導方針對空間進行清潔和消毒
-                                            </label>
-                                        </div>
+                                <div class="col-12 col-lg-12 d-flex align-items-start">
+                                    <div class=" imgcontainer me-2 mt-3 ">
+                                        <i class="bi fs-3 bi-cart-x-fill"></i>
                                     </div>
-                                    <div class="col col-12 col-lg-12 mt-1 mb-3">
-                                        <div class="form-check ">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                高接觸表面和共用設施已消毒
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-12 col-lg-12 mt-3 mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" chcked>
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                柔軟的多孔材料已被正確清潔或移除
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-12 col-lg-12mt-3 mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                兩次預訂之間聘請專業清潔工
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-12 col-lg-12mt-3 mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                預訂間隔開以加強清潔
-                                            </label>
-                                        </div>
+                                    <div class="textgroup mt-3 ">
+                                        <h6 class="fs18">8.取消政策</h6>
+                                        <p class="editDetailsp">選擇您的取消政策</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <h2 class="fs-4">您為客人提供哪些額外的防護裝備？</h2>
-                                    <p class="fs16">選擇有符合條件的條件的選項</p>
-                                </div>
-                                <div class="row">
-                                    <div class="col col-12 col-lg-12 mt-1 mb-3 ">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                消毒濕巾或噴霧劑和紙巾
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-12 col-lg-12 mt-1 mb-3">
-                                        <div class="form-check ">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                高接觸表面和共用設施已消毒
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-12 col-lg-12mt-3 mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                一次性手套
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-12 col-lg-12 mt-3 mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                一次性口罩/面罩
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-6 mt-3 mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                消毒洗手液
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <h2 class="fs-4">你做了什麼來幫助客人在你的空間內保持物理距離？</h2>
-                                    <p class="fs16">選擇有符合條件的條件的選項</p>
-                                </div>
-                                <div class="row">
-                                    <div class="col col-12 col-lg-12mt-1 mb-3">
-                                        <div class="form-check ">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                空間可以使用室外空氣通風
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-12 col-lg-12 mt-3 mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                有空氣過濾器
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-12 col-lg-12 mt-3 mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                空間有額外的戶外空間
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-12 col-lg-12mt-3 mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                空間已重新配置以允許物理距離
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <h2 class="fs-4">您添加了什麼標示來讓您的客人了解情況？</h2>
-                                    <p class="fs16">選擇有符合條件的條件的選項</p>
-                                </div>
-                                <div class="row">
-                                    <div class="col col-12 col-lg-12 mt-1 mb-3 ">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                更新清潔程序的詳細清單
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-12 col-lg-12mt-1 mb-3">
-                                        <div class="form-check ">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                COVID-19 訪客指南打印出來
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-12 col-lg-12 mt-3 mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                公共區域的地板上有 6 英尺（2 米）的標記
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col col-12 col-lg-12mt-3 mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                狹窄的通道有雙向通行的箭頭
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3 mb-3 ">
-                                <div class="col col-12 col-lg-12">
-                                    <h2 class="fs-4">告訴您的客人更多有關您的清潔過程的信息</h2>
-                                </div>
-                                <div class="col col-12 parkingpart pb-5">
-                                    <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingSeven">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                        <div class="col-11 col-lg-9 d-flex align-items-start mt-2">
-                            <div class=" imgcontainer me-2 ">
-                                <i class="bi fs-3 bi-cart-x-fill"></i>
-                            </div>
-                            <!-- <i class="bi bi-circle mt-3 me-3"></i> -->
-                            <span class="textgroup ">
-                                <h6 class="fs18">8.取消政策</h6>
-                                <p class="editDetailsp">選擇您的取消政策</p>
-                            </span>
-                        </div>
-                    </button>
-                </h2>
-                <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class="container containerForAdd">
+                        </button>
+                    </h2>
+                    <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+                         data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
                             <div class="row ">
-                                <div class="col col-11 ">
+                                <div class="col col-11  mt-5">
                                     <h2 class="fs-4">選擇您的取消政策</h2>
                                 </div>
                             </div>
@@ -2194,13 +2276,15 @@
                                 <div class="col-lg-12">
                                     <p>
                                         <strong>取消寬限期：</strong>
-                                        所有預訂均受 <span class="logoS">ZONERadar</span>的寬限期政策約束，該政策為在收到預訂確認後 24 小時內但不遲於活動開始時間前 48 小時取消的預訂提供全額退款。
+                                        所有預訂均受 <span class="logoS">ZONERadar</span>的寬限期政策約束，該政策為在收到預訂確認後 24
+                                        小時內但不遲於活動開始時間前 48 小時取消的預訂提供全額退款。
                                     </p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-check col-12 col-lg-2">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                           id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         非常靈活
                                     </label>
@@ -2214,7 +2298,8 @@
                             </div>
                             <div class="row">
                                 <div class="form-check col-12 col-lg-2">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                           id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         靈活
                                     </label>
@@ -2231,7 +2316,8 @@
                             </div>
                             <div class="row">
                                 <div class="form-check col-12 col-lg-2">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                           id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         標準30天
                                     </label>
@@ -2248,7 +2334,8 @@
                             </div>
                             <div class="row">
                                 <div class="form-check col-12 col-lg-2">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                           id="flexRadioDefault1">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         標準90天
                                     </label>
@@ -2269,20 +2356,23 @@
             </div>
         </div>
     </div>
+</div>
 
-        <div class="container containerForAdd">
-            <div class="row mt-5 mb-5">
-                <div class="col-12 text-center">
-                    <button type="submit" class="btn deleteBtn">完成</button>
-                </div>
-            </div>
+<div class="container containerForAdd">
+    <div class="row mt-5 mb-5">
+        <div class="col-12 text-center">
+            <button type="submit" class="btn deleteBtn">完成</button>
         </div>
-        @section topCSS
+    </div>
+</div>
+@section topCSS
         {
-            <link href="~/Assets/CSS/membercenter/membercenter.css" rel="stylesheet" />
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-        }
-        @section endJS{
-            <script src="~/Assets/JS/addspace/addspace.js"></script>
-        }
+    <link href="~/Assets/CSS/membercenter/membercenter.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+}
+@section endJS{
+    <script src="~/Assets/JS/addspace/ckeditor.js"></script>
+    <script src="~/Assets/JS/addspace/addspace.js"></script>
+    <script src="~/Assets/JS/addspace/text.js"></script>
+}
 
