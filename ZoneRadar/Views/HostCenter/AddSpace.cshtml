@@ -46,29 +46,23 @@
                                         <select id="country" class="form-select"
                                                 aria-label="Default select example">
                                             <option selected>請選擇國家</option>
-                                            <option value="1">美國</option>
-                                            <option value="2">中國</option>
-                                            <option value="3">英國</option>
-                                            <option value="4">日本</option>
                                             <option value="5">台灣</option>
-                                            <option value="6">泰國</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 col-md-6 col-xl-6">
                                         <div class="mb-3">
-                                            <label for="exampleFormControlInput1" class="form-label mt-3">地址</label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
-                                                   placeholder="請輸入地址">
+                                            <label for="address" class="form-label mt-3">地址</label>
+                                            <input type="text"required="required"  class="form-control" id="address"  value="" placeholder="請輸入地址"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 col-md-6 col-xl-6">
                                         <div class="mb-3">
-                                            <label for="exampleFormControlInput1" class="form-label mt-3">城市</label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                            <label for="city" class="form-label mt-3">城市</label>
+                                            <input type="text"required class="form-control" id="city"
                                                    placeholder="ex:台北市，新北市，台中市...">
                                         </div>
                                     </div>
@@ -92,9 +86,9 @@
                                 <div class="row">
                                     <div class="col-12 col-md-6 col-xl-6">
                                         <div class="mb-3">
-                                            <label for="exampleFormControlInput1"
+                                            <label for="ZodeCode"
                                                    class="form-label mt-3">郵遞區號</label>
-                                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                            <input type="text"required class="form-control" id="ZodeCode"
                                                    placeholder="">
                                         </div>
                                     </div>
@@ -291,8 +285,8 @@
                                 </ul>
                                 <p><i class="me-1 far fa-lightbulb"></i>例如：“市中心閣樓享天際線景觀”</p>
                                 <div class="SpaceName">
-                                    <label for="exampleFormControlInput1" class="form-label "></label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                    <label for="SpaceName" class="form-label "></label>
+                                    <input type="text" class="form-control" id="SpaceName"
                                            placeholder="輸入您場地的名稱">
                                 </div>
                             </div>
@@ -331,8 +325,8 @@
                             </div>
                             <div class="col-12 col-xl-6 d-flex">
                                 <div class="mb-3 w-75">
-                                    <label for="exampleFormControlInput1" class="form-label mt-3"></label>
-                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                    <label for="area" class="form-label mt-3"></label>
+                                    <input type="text" class="form-control" id="area"
                                            placeholder="500">
                                 </div>
                                 <div class="mb-3 ">
@@ -346,8 +340,8 @@
                             <h5>可以容納幾個人 </h5>
                             <div class="col col-lg-6">
                                 <div class="form-floating">
-                                    <input class="form-control" placeholder="最大客人數" id="Discount">
-                                    <label for="Discount">最大客人數</label>
+                                    <input class="form-control" placeholder="最大客人數" id="Maxpeople">
+                                    <label for="Maxpeople">最大客人數</label>
                                 </div>
                             </div>
                         </div>
@@ -1548,8 +1542,8 @@
                             <div class="col-12 col-lg-6 SpacePrice mt-3">
                                 <p>最低時數</p>
                                 <div class="form-floating">
-                                    <input class="form-control" placeholder="必須是1-12小時" id="SpacePrice">
-                                    <label for="SpacePrice">必須是1-12小時</label>
+                                    <input class="form-control" placeholder="必須是1-12小時" id="minSpacePrice">
+                                    <label for="minSpacePrice">必須是1-12小時</label>
                                 </div>
                             </div>
                             <div class="col-10 col-lg-6 MinPrice mt-3">
@@ -2361,7 +2355,7 @@
 <div class="container containerForAdd">
     <div class="row mt-5 mb-5">
         <div class="col-12 text-center">
-            <button type="submit" class="btn deleteBtn">完成</button>
+            <button type="submit" class="btn submitAdd deleteBtn"onclick="alertcheck()">完成</button>
         </div>
     </div>
 </div>
@@ -2374,5 +2368,6 @@
     <script src="~/Assets/JS/addspace/ckeditor.js"></script>
     <script src="~/Assets/JS/addspace/addspace.js"></script>
     <script src="~/Assets/JS/addspace/text.js"></script>
+    <script src="~/Assets/JS/addspace/checkPhoneNumber.js"></script>
 }
 
