@@ -9,10 +9,10 @@ namespace ZoneRadar.Repositories
 
     public class ZoneRadarRepository
     {
-        private readonly ZONERadar _ctx;
+        private readonly ZoneRadarDataContext _ctx;
         public ZoneRadarRepository()
         {
-            _ctx = new ZONERadar();
+            _ctx = new ZoneRadarDataContext();
         }
         public List<Space> ReadSpaceData()
         {
