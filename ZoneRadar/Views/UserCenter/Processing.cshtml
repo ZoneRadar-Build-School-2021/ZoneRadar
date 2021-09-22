@@ -5,17 +5,17 @@
 }
 
 <div class="membercenter_processing container mt-5 border-bottom">
-    <div class="memberbuyer row">
+    <div class="memberbuyer row mt-5">
         <h3 class="memberbuyer_title me-4">訂單管理</h3>
         <ul class="memberbuyer_state d-flex justify-content-start mt-5">
             <a class="me-4" href="Pending">
-            <li class="p-2">待處理</li>
+            <li class="p-2 order_state">已付款</li>
             </a>
             <a class="me-4" href="Processing">
-            <li class="p-2">處理中</li>
+            <li class="p-2 order_state active">使用中</li>
             </a>
             <a class="me-4" href="Completed">
-            <li class="p-2">歷史訂單</li>
+            <li class="p-2 order_state">歷史訂單</li>
             </a>
         </ul>
     </div>
@@ -37,8 +37,8 @@
                         </div>
                         <div class="memberbuyer_processing_nun_date col-sm-12 col-md-6 col-lg-6">
                             <p>
-                                下單日期：
-                                <span>2021年9月2日</span>
+                                付款日期：
+                                <span>2021年9月16日 11:19</span>
                             </p>
                         </div>
                     </div>
@@ -54,7 +54,17 @@
                             高手網易然而安排傳奇目光英文優質，庫存
                         </a>
                     </div>
-                    <div class="memberbuyer_processing_txt_rent mt-5">
+                    <div class="memberbuyer_pending_num_star mt-3">
+                        <p>
+                            場地評價：
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </p>
+                    </div>
+                    <div class="memberbuyer_processing_txt_rent mt-3">
                         <p>
                             租借時間：
                             <span class="memberbuyer_pending_txt_rent_date ms-1 fw-bold">2021年9月7日星期二</span>
@@ -83,9 +93,6 @@
                 </div>
             </div>
         </div>
-        <div class="memberbuyer_processing_btn col-12 mt-3 mb-5 d-flex justify-content-end">
-            <button class="btn me-2" data-bs-toggle="modal" data-bs-target="#order_Modal">取消 / 修改</button>
-        </div>
     </div>
 
     <div class="memberbuyer_processing row mt-5 mb-3">
@@ -104,8 +111,8 @@
                         </div>
                         <div class="memberbuyer_processing_nun_date col-sm-12 col-md-6 col-lg-6">
                             <p>
-                                下單日期：
-                                <span>2021年9月2日</span>
+                                付款日期：
+                                <span>2021年9月16日 11:19</span>
                             </p>
                         </div>
                     </div>
@@ -121,7 +128,17 @@
                             高手網易然而安排傳奇目光英文優質，庫存
                         </a>
                     </div>
-                    <div class="memberbuyer_processing_txt_rent mt-5">
+                    <div class="memberbuyer_pending_num_star mt-3">
+                        <p>
+                            場地評價：
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </p>
+                    </div>
+                    <div class="memberbuyer_processing_txt_rent mt-3">
                         <p>
                             租借時間：
                             <span class="memberbuyer_pending_txt_rent_date ms-1 fw-bold">2021年9月7日星期二</span>
@@ -147,42 +164,6 @@
                             <span class="memberbuyer_processing_txt_price">TWD7,878</span>
                         </p>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="memberbuyer_processing_btn col-12 mt-3 mb-5 d-flex justify-content-end">
-            <button class="btn me-2" data-bs-toggle="modal" data-bs-target="#order_Modal">取消 / 修改</button>
-        </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="order_Modal" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>2109020001</span></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="modal_cancel">
-                        <p class="model_cancel_rentday">
-                            租借日期：
-                            <span>2021年10月13日 10:00</span>
-                        </p>
-                        <p class="model_cancel_cancelday">
-                            取消日期：
-                            <span>2021年09月13日 14:49</span>
-                        </p>
-                        <p>
-                            賣家退款政策：
-                            距離租借日期還剩下
-                            <span class="model_cancel_reduceday me-1 ms-1">30</span>
-                            天<br>依照賣家退款政策會退您新台幣
-                            <span class="model_cancel_reducemoney me-2 ms-1">3678</span>元
-                        </p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn_close" data-bs-dismiss="modal">取消訂單</button>
                 </div>
             </div>
         </div>
