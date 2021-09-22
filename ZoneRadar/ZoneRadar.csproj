@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -188,6 +190,21 @@
     <Compile Include="Controllers\MemberCenterController.cs" />
     <Compile Include="Controllers\SearchingController.cs" />
     <Compile Include="Controllers\UserCenterController.cs" />
+    <Compile Include="DataModels\AmenityDetail.cs" />
+    <Compile Include="DataModels\City.cs" />
+    <Compile Include="DataModels\Collection.cs" />
+    <Compile Include="DataModels\Country.cs" />
+    <Compile Include="DataModels\District.cs" />
+    <Compile Include="DataModels\Member.cs" />
+    <Compile Include="DataModels\Model1.cs" />
+    <Compile Include="DataModels\Operating.cs" />
+    <Compile Include="DataModels\OrderDetail.cs" />
+    <Compile Include="DataModels\Orders.cs" />
+    <Compile Include="DataModels\Review.cs" />
+    <Compile Include="DataModels\Space.cs" />
+    <Compile Include="DataModels\SpaceAmenity.cs" />
+    <Compile Include="DataModels\SpacePhoto.cs" />
+    <Compile Include="DataModels\sysdiagrams.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -372,7 +389,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\DataModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
