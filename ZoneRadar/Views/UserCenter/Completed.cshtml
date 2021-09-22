@@ -9,10 +9,10 @@
         <h3 class="memberbuyer_title me-4">訂單管理</h3>
         <ul class="memberbuyer_state d-flex justify-content-start mt-5">
             <a class="me-4" href="Pending">
-            <li class="p-2 order_state">待處理</li>
+            <li class="p-2 order_state">已付款</li>
             </a>
             <a class="me-4" href="Processing">
-            <li class="p-2 order_state">處理中</li>
+            <li class="p-2 order_state">使用中</li>
             </a>
             <a class="me-4" href="Completed">
             <li class="p-2 order_state active">歷史訂單</li>
@@ -194,6 +194,21 @@
                         <div class="customer_evaluation mt-3">
                             <p>您對於這次的場地有什麼需要改進或是想對我們說的話？</p>
                             <textarea class="form-control" aria-label="With textarea"></textarea>
+                        </div>
+                        <div class="customer_eveluation_recommend mt-3">
+                            <p>您是否會推薦其他人</p>
+                            <div class="customer_evelution_radio form-check">
+                                <input class="form-check-input" type="radio" name="customer_evelution_recommend_radio_option" id="flexRadioDefault1">
+                                <label class="form-check-label ms-1" for="flexRadioDefault1">
+                                    <i class="fas fa-check me-1"></i>我會推薦給其他人
+                                </label>
+                            </div>
+                            <div class="customer_evelution_radio form-check">
+                                <input class="form-check-input" type="radio" name="customer_evelution_recommend_radio_option" id="flexRadioDefault2">
+                                <label class="form-check-label ms-1" for="flexRadioDefault2">
+                                    <i class="fas fa-times me-2"></i>我不會推薦給其他人
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

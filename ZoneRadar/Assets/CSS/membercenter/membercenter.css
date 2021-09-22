@@ -12,8 +12,9 @@
 	margin-right: auto;
 	margin-top: 50px;
 }
-.AddSpaceBtn{
-	text-decoration:none
+.AddSpaceBtn {
+	text-decoration: none;
+	-webkit-appearance: none;
 }
 .logoS {
 	color: #049DD9;
@@ -45,18 +46,19 @@
 }
 
 .AddSpaceBtn {
-	border: #049DD9 0.2px solid;
-	background-color: #ffffff;
+	background-color: #cccccc;
 	border-radius: 5px;
 	font-size: 16px;
 	padding: 8px 15px;
-	color: #049DD9;
+	color: #000000;
 	outline: none;
 	margin-bottom: auto;
+	
 }
 
 	.AddSpaceBtn:hover {
-		background-color: #EEEEEE;
+		background-color: #C7C7C7;
+		color:#000000;
 	}
 
 .form-check-input:checked {
@@ -81,31 +83,30 @@
 	background-color: #049DD9;
 	border-radius: 5px;
 	font-size: 16px;
-	padding: 8px 15px;
+	padding: 10px 15px;
 	color: #FFFFFF;
 	outline: none;
 	border: 0.2px solid #049DD9;
-	margin-top: 8px;
+	margin-top: 0px;
 	margin-bottom: auto;
 	text-decoration:none;
 }
 
 	.EditSpaceBtn:hover {
-		background-color: #ffffff;
-		border: #049DD9 0.2px solid;
-		color: #049DD9;
+		background-color: #0077a7;
+		color: #FFFFFF;
 	}
 
 .DeleteSpaceBtn {
-	border: #cccccc 0.2px solid;
-	background-color: #ffffff;
+	background-color: #de6868;
 	border-radius: 5px;
 	font-size: 16px;
 	padding: 8px 15px;
-	color: #555555;
+	color: #ffffff;
 	outline: none;
-	margin-top: 8px;
+	margin-top: 0px;
 	margin-bottom: auto;
+	
 }
 
 .SpaceCardBody {
@@ -114,7 +115,8 @@
 }
 
 .DeleteSpaceBtn:hover {
-	color: #cccccc;
+	color: #ffffff;
+	background-color: #982626;
 }
 
 /* 桌機 平板 模板內的Ｃlose x */
@@ -134,6 +136,10 @@
 .deleteBtnM {
 	background-color: #de6868;
 	color: rgb(255, 255, 255);
+}
+.deleteBtnM:hover {
+	background-color: #982626;
+	color:#ffffff;
 }
 
 .cancelBtnM {
@@ -174,7 +180,7 @@
 	font-size: 16px;
 }
 
-@media screen and(min-with:768px) {
+@media screen and (min-with:768px) {
 	.deleteWmd {
 		width: 25% !important;
 	}
@@ -202,7 +208,7 @@
 }
 
 .fa-lightbulb {
-	font-size: 25px;
+	font-size: 20px;
 	color: #D9831A;
 }
 /* 按鈕手機 */
@@ -212,14 +218,13 @@
 	}
 
 	.DeleteSpaceBtn {
-		border: #cccccc 0.2px solid;
-		background-color: #ffffff;
+		background-color: #de6868;
 		border-radius: 5px;
 		font-size: 16px;
 		padding: 8px 15px;
-		color: #555555;
+		color: #ffffff;
 		outline: none;
-		margin-top: 8px;
+		margin-top: 0px;
 		margin-bottom: auto;
 	}
 }
@@ -256,17 +261,26 @@
 		font-size: 14px;
 	}
 }
-
+.btn:focus {
+	box-shadow: none;
+}
+.btn:hover {
+	box-shadow: none;
+	
+}
+.DeleteSpaceBtn:focus {
+	box-shadow: none;
+}
 .bi-cart-x-fill,
 .form-check-input:focus,
 .form-control:focus,
 .form-select:focus,
 .deleteBtn:focus,
-.accordion-button:focus {
+.accordion-buttonAdd:focus {
 	box-shadow: none;
 }
 
-.accordion-button:not(.collapsed) {
+.accordion-buttonAdd:not(.collapsed) {
 	background-color: #ffffff;
 }
 
@@ -274,13 +288,14 @@
 	border: 0px;
 }
 
-.accordion-button {
+.accordion-buttonAdd  {
 	border-bottom: 1px solid #049DD9;
+	border-radius:0px;
 }
 	/* .accordion-button:focus {
 	border-bottom: 1px solid #049DD9;
 } */
-	.accordion-button:not(.collapsed) {
+	.accordion-buttonAdd:not(.collapsed) {
 		color: #049DD9;
 	}
 
@@ -290,7 +305,7 @@
 }
 
 .bi-cart-x-fill {
-	width: 50px;
+	width: 40px;
 }
 
 .addphoto {
@@ -299,7 +314,7 @@
 
 .rules,
 .location {
-	width: 30px;
+	width: 40px;
 }
 
 .cleaning {
