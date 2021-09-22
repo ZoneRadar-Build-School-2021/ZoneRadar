@@ -8,21 +8,23 @@ var SpacePrice = document.querySelector("#SpacePrice");
 var minSpacePrice = document.querySelector("#minSpacePrice");
 var hourDiscount = document.querySelector("#hourDiscount");
 var Discount = document.querySelector("#Discount");
-
 var submitAdd = document.querySelector("#submitAdd");
-function alertcheck() {
-    var addressStr = address.value;
-    var cityStr = city.value;
-    var ZodeCodeStr = ZodeCode.value;
-    var SpaceNameStr = SpaceName.value;
-    var areaStr = area.value;
-    var MaxpeopleStr = Maxpeople.value;
-    var SpacePriceStr = SpacePrice.value;
-    var minSpacePriceStr = minSpacePrice.value;
-    var hourDiscountStr = hourDiscount.value;
-    var DiscountStr = Discount.value;
 
- 
+var addressStr = address.value;
+var cityStr = city.value;
+var ZodeCodeStr = ZodeCode.value;
+var SpaceNameStr = SpaceName.value;
+var areaStr = area.value;
+var MaxpeopleStr = Maxpeople.value;
+var SpacePriceStr = SpacePrice.value;
+var minSpacePriceStr = minSpacePrice.value;
+var hourDiscountStr = hourDiscount.value;
+var DiscountStr = Discount.value;
+
+
+
+function alertcheck() {
+    
     if (addressStr == "") {
         alert("地址未填寫");
         return;
