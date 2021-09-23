@@ -251,7 +251,7 @@
                 StateFri3.disabled=false;
                 StateFri4.disabled=false;
        })
-
+2
        //saturday
        let flexSwitchCheckDefaultSat=document.querySelectorAll("#flexSwitchCheckDefault")[5];
        let SatAllday=document.querySelectorAll("#flexRadioDefault6")[0];
@@ -330,4 +330,24 @@
                 StateSun4.disabled=false;
        });
 
-     
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+//表單沒填寫
+(function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+})()
