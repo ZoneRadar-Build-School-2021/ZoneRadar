@@ -32,8 +32,7 @@
                             </div>
                         </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                         data-bs-parent="#accordionExample">
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="row mt-5 ">
                                 <div class="col-12 ">
@@ -95,7 +94,7 @@
                                     <div class="row">
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="mb-3">
-                                                <label for="ZodeCode"
+                                                <label for="ZideCode"
                                                        class="form-label mt-3">郵遞區號</label>
                                                 <input type="text" required class="form-control" id="ZodeCode" placeholder="">
                                             </div>
@@ -294,7 +293,7 @@
                                     <p><i class="me-1 far fa-lightbulb"></i>例如：“市中心閣樓享天際線景觀”</p>
                                     <div class="SpaceName">
                                         <label for="SpaceName" class="form-label "></label>
-                                        <input type="text" class="form-control" id="SpaceName"
+                                        <input type="text"required class="form-control" id="SpaceName"
                                                placeholder="輸入您場地的名稱">
                                     </div>
                                 </div>
@@ -334,7 +333,7 @@
                                 <div class="col-12 col-xl-6 d-flex">
                                     <div class="mb-3 w-75">
                                         <label for="area" class="form-label mt-3"></label>
-                                        <input type="text" class="form-control" id="area"
+                                        <input type="text"required class="form-control" id="area"
                                                placeholder="500">
                                     </div>
                                     <div class="mb-3 ">
@@ -348,7 +347,7 @@
                                 <h5>可以容納幾個人 </h5>
                                 <div class="col col-lg-6">
                                     <div class="form-floating">
-                                        <input class="form-control" placeholder="最大客人數" id="Maxpeople">
+                                        <input class="form-control"required placeholder="最大客人數" id="Maxpeople">
                                         <label for="Maxpeople">最大客人數</label>
                                     </div>
                                 </div>
@@ -1550,14 +1549,14 @@
                                 <div class="col-12 col-lg-6 SpacePrice mt-3">
                                     <p>最低時數</p>
                                     <div class="form-floating">
-                                        <input class="form-control" placeholder="必須是1-12小時" id="minSpacePrice">
+                                        <input class="form-control"required placeholder="必須是1-12小時" id="minSpacePrice">
                                         <label for="minSpacePrice">必須是1-12小時</label>
                                     </div>
                                 </div>
                                 <div class="col-10 col-lg-6 MinPrice mt-3">
                                     <p>折扣</p>
                                     <div class="form-floating">
-                                        <input class="form-control" placeholder="幾小時折扣" id="hourDiscount">
+                                        <input class="form-control"required placeholder="幾小時折扣" id="hourDiscount">
                                         <label for="hourDiscount">逾多少小時</label>
                                     </div>
                                 </div>
@@ -2285,7 +2284,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-check col-12 col-lg-2">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        <input class="form-check-input" required type="radio" name="flexRadioDefault"
                                                id="flexRadioDefault1">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             非常靈活
@@ -2300,7 +2299,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-check col-12 col-lg-2">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        <input class="form-check-input"required type="radio" name="flexRadioDefault"
                                                id="flexRadioDefault1">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             靈活
@@ -2318,7 +2317,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-check col-12 col-lg-2">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        <input class="form-check-input"required type="radio" name="flexRadioDefault"
                                                id="flexRadioDefault1">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             標準30天
@@ -2336,7 +2335,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-check col-12 col-lg-2">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        <input class="form-check-input"required type="radio" name="flexRadioDefault"
                                                id="flexRadioDefault1">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             標準90天
@@ -2362,7 +2361,7 @@
     <div class="container containerForAdd">
         <div class="row mt-5 mb-5">
             <div class="col-12 text-center">
-                <button type="submit" class="btn submitAdd deleteBtn" onclick="alertcheck()">完成</button>
+                <button type="submit" class="btn submitAdd deleteBtn" >完成</button>
             </div>
         </div>
     </div>
