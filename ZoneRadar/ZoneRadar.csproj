@@ -194,24 +194,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AmenityDetail.cs" />
-    <Compile Include="Models\City.cs" />
-    <Compile Include="Models\Collection.cs" />
-    <Compile Include="Models\Country.cs" />
-    <Compile Include="Models\District.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Member.cs" />
-    <Compile Include="Models\Operating.cs" />
-    <Compile Include="Models\OrderDetail.cs" />
-    <Compile Include="Models\Orders.cs" />
-    <Compile Include="Models\Review.cs" />
-    <Compile Include="Models\Space.cs" />
-    <Compile Include="Models\SpaceAmenity.cs" />
-    <Compile Include="Models\SpacePhoto.cs" />
-    <Compile Include="Models\sysdiagrams.cs" />
-    <Compile Include="Models\ZONERadar.cs" />
-    <Compile Include="Models\ZoneRadarDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
