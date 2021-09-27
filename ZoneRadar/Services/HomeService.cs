@@ -148,60 +148,60 @@ namespace ZoneRadar.Services
         //    _repository.SaveChanges();
         //    _repository.Dispose();
         //}
-        public void TestMethod()
-        {
-            List<SpacePhoto> spacePhotos = new List<SpacePhoto>
-            {
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1980/1200/?random=1"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=2"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=3"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=4"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=5"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1000/800/?random=6"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=7"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/400/300/?random=8"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/800/600/?random=9"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=10"},
-                new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=11"},
-                new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=12"},
-                new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=13"},
-                new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=14"},
-                new SpacePhoto{SpaceID = 82, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=15"},
-                new SpacePhoto{SpaceID = 82, SpacePhotoUrl = "https://picsum.photos/500/700/?random=16"},
-                new SpacePhoto{SpaceID = 82, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=17"},
-                new SpacePhoto{SpaceID = 89, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=18"},
-                new SpacePhoto{SpaceID = 89, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=19"},
-                new SpacePhoto{SpaceID = 89, SpacePhotoUrl = "https://picsum.photos/500/700/?random=20"},
-                new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=21"},
-                new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=22"},
-                new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/500/700/?random=23"},
-                new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/300/400/?random=24"},
-                new SpacePhoto{SpaceID = 157, SpacePhotoUrl = "https://picsum.photos/300/400/?random=25"},
-                new SpacePhoto{SpaceID = 157, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=26"},
-                new SpacePhoto{SpaceID = 157, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=27"},
-                new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=28"},
-                new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=29"},
-                new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=30"},
-                new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=31"},
-                new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=32"},
-                new SpacePhoto{SpaceID = 163, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=33"},
-                new SpacePhoto{SpaceID = 163, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=34"},
-                new SpacePhoto{SpaceID = 163, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=35"},
-                new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=36"},
-                new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1000/900/?random=37"},
-                new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=38"},
-                new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=39"},
-                new SpacePhoto{SpaceID = 171, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=40"},
-                new SpacePhoto{SpaceID = 171, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=41"},
-                new SpacePhoto{SpaceID = 171, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=42"},
-                new SpacePhoto{SpaceID = 173, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=43"},
-                new SpacePhoto{SpaceID = 173, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=44"},
-                new SpacePhoto{SpaceID = 173, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=45"}
-            };
-            _repository.CreateRange(spacePhotos);
-            _repository.SaveChanges();
-            _repository.Dispose();
-        }
+        //public void TestMethod()
+        //{
+        //    List<SpacePhoto> spacePhotos = new List<SpacePhoto>
+        //    {
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1980/1200/?random=1"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=2"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=3"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=4"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=5"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1000/800/?random=6"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=7"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/400/300/?random=8"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/800/600/?random=9"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=10"},
+        //        new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=11"},
+        //        new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=12"},
+        //        new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=13"},
+        //        new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=14"},
+        //        new SpacePhoto{SpaceID = 82, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=15"},
+        //        new SpacePhoto{SpaceID = 82, SpacePhotoUrl = "https://picsum.photos/500/700/?random=16"},
+        //        new SpacePhoto{SpaceID = 82, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=17"},
+        //        new SpacePhoto{SpaceID = 89, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=18"},
+        //        new SpacePhoto{SpaceID = 89, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=19"},
+        //        new SpacePhoto{SpaceID = 89, SpacePhotoUrl = "https://picsum.photos/500/700/?random=20"},
+        //        new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=21"},
+        //        new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=22"},
+        //        new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/500/700/?random=23"},
+        //        new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/300/400/?random=24"},
+        //        new SpacePhoto{SpaceID = 157, SpacePhotoUrl = "https://picsum.photos/300/400/?random=25"},
+        //        new SpacePhoto{SpaceID = 157, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=26"},
+        //        new SpacePhoto{SpaceID = 157, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=27"},
+        //        new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=28"},
+        //        new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=29"},
+        //        new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=30"},
+        //        new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=31"},
+        //        new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=32"},
+        //        new SpacePhoto{SpaceID = 163, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=33"},
+        //        new SpacePhoto{SpaceID = 163, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=34"},
+        //        new SpacePhoto{SpaceID = 163, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=35"},
+        //        new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=36"},
+        //        new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1000/900/?random=37"},
+        //        new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=38"},
+        //        new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=39"},
+        //        new SpacePhoto{SpaceID = 171, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=40"},
+        //        new SpacePhoto{SpaceID = 171, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=41"},
+        //        new SpacePhoto{SpaceID = 171, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=42"},
+        //        new SpacePhoto{SpaceID = 173, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=43"},
+        //        new SpacePhoto{SpaceID = 173, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=44"},
+        //        new SpacePhoto{SpaceID = 173, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=45"}
+        //    };
+        //    _repository.CreateRange(spacePhotos);
+        //    _repository.SaveChanges();
+        //    _repository.Dispose();
+        //}
         //public List<Space> GetSpace(int? id)
         //{
         //    var space = spaces.Where(x => x.SpaceID == id).ToList();

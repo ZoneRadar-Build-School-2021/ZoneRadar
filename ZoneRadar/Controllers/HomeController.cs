@@ -66,7 +66,7 @@ namespace ZoneRadar.Controllers
         }
         public ActionResult AddTest()
         {
-            _service.TestMethod();
+            //_service.TestMethod();
 
             return Content("新增完成");
         }
