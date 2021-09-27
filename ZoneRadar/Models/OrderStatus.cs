@@ -6,26 +6,21 @@ namespace ZoneRadar.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("District")]
-    public partial class District
+    public partial class OrderStatus
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public District()
+        public OrderStatus()
         {
-            Space = new HashSet<Space>();
+            Order = new HashSet<Order>();
         }
 
-        public int DistrictID { get; set; }
+        public int OrderStatusID { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string DistrictName { get; set; }
-
-        public int CityID { get; set; }
-
-        public virtual City City { get; set; }
+        public string OrderStatusDetail { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Space> Space { get; set; }
+        public virtual ICollection<Order> Order { get; set; }
     }
 }

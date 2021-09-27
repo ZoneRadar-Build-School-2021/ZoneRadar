@@ -1,4 +1,4 @@
-namespace ZoneRadar.Data
+namespace ZoneRadar.Models
 {
     using System;
     using System.Collections.Generic;

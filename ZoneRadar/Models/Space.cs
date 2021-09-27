@@ -1,4 +1,4 @@
-namespace ZoneRadar.Data
+namespace ZoneRadar.Models
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace ZoneRadar.Data
         public Space()
         {
             Operating = new HashSet<Operating>();
-            Orders = new HashSet<Orders>();
+            Order = new HashSet<Order>();
             SpaceAmenity = new HashSet<SpaceAmenity>();
             SpacePhoto = new HashSet<SpacePhoto>();
         }
@@ -41,6 +41,7 @@ namespace ZoneRadar.Data
         public int MinHours { get; set; }
 
         [Required]
+        [StringLength(100)]
         public string Discount { get; set; }
 
         [Required]
@@ -78,7 +79,7 @@ namespace ZoneRadar.Data
         [StringLength(50)]
         public string Longitude { get; set; }
 
-        public virtual CancellationDetail CancellationDetail { get; set; }
+        public virtual Cancellation Cancellation { get; set; }
 
         public virtual City City { get; set; }
 
@@ -92,7 +93,7 @@ namespace ZoneRadar.Data
         public virtual ICollection<Operating> Operating { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<Order> Order { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SpaceAmenity> SpaceAmenity { get; set; }

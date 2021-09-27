@@ -1,4 +1,4 @@
-namespace ZoneRadar.Data
+namespace ZoneRadar.Models
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace ZoneRadar.Data
         public Member()
         {
             Collection = new HashSet<Collection>();
-            Orders = new HashSet<Orders>();
+            Order = new HashSet<Order>();
             Space = new HashSet<Space>();
         }
 
@@ -47,7 +47,7 @@ namespace ZoneRadar.Data
         public virtual ICollection<Collection> Collection { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<Order> Order { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Space> Space { get; set; }

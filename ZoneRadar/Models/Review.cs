@@ -1,4 +1,4 @@
-namespace ZoneRadar.Data
+namespace ZoneRadar.Models
 {
     using System;
     using System.Collections.Generic;
@@ -24,6 +24,6 @@ namespace ZoneRadar.Data
 
         public bool Recommend { get; set; }
 
-        public virtual Orders Orders { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

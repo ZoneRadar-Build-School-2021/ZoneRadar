@@ -1,4 +1,4 @@
-namespace ZoneRadar.Data
+namespace ZoneRadar.Models
 {
     using System;
     using System.Collections.Generic;
@@ -6,26 +6,24 @@ namespace ZoneRadar.Data
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("CancellationDetail")]
-    public partial class CancellationDetail
+    [Table("Cancellation")]
+    public partial class Cancellation
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CancellationDetail()
+        public Cancellation()
         {
             Space = new HashSet<Space>();
         }
 
-        [Key]
         public int CancellationID { get; set; }
 
         [Required]
         [StringLength(20)]
         public string CancellationTitle { get; set; }
 
-        [Column("CancellationDetail")]
         [Required]
         [StringLength(300)]
-        public string CancellationDetail1 { get; set; }
+        public string CancellationDetail { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Space> Space { get; set; }

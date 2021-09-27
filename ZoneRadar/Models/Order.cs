@@ -1,4 +1,4 @@
-namespace ZoneRadar.Data
+namespace ZoneRadar.Models
 {
     using System;
     using System.Collections.Generic;
@@ -6,16 +6,16 @@ namespace ZoneRadar.Data
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Orders
+    [Table("Order")]
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Orders()
+        public Order()
         {
             OrderDetail = new HashSet<OrderDetail>();
             Review = new HashSet<Review>();
         }
 
-        [Key]
         public int OrderID { get; set; }
 
         public int? OrderNumber { get; set; }
@@ -23,8 +23,6 @@ namespace ZoneRadar.Data
         public int SpaceID { get; set; }
 
         public int MemberID { get; set; }
-
-        public bool Paid { get; set; }
 
         public DateTime? PaymentDate { get; set; }
 
@@ -38,14 +36,16 @@ namespace ZoneRadar.Data
         [StringLength(50)]
         public string ContactPhone { get; set; }
 
-        public int? OrderStatus { get; set; }
+        public int OrderStatusID { get; set; }
 
         public virtual Member Member { get; set; }
+
+        public virtual Space Space { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }
 
-        public virtual Space Space { get; set; }
+        public virtual OrderStatus OrderStatus { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review> Review { get; set; }
