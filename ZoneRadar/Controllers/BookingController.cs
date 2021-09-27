@@ -17,6 +17,5 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
-
     }
 }

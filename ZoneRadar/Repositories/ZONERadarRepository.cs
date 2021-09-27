@@ -10,6 +10,7 @@ namespace ZoneRadar.Repositories
     public class ZONERadarRepository
     {
         private readonly ZONERadarContext _context;
+
         public ZONERadarRepository()
         {
             _context = new ZONERadarContext();
