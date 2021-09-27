@@ -1,4 +1,4 @@
-﻿@model ZoneRadar.Models.ViewModel.FormAreaViewModel
+﻿
 @{
     ViewBag.Title = "AddSpace";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -55,8 +55,8 @@
                                     <div class="row">
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="mb-3">
-                                                <label for="address" id="addresslabel" class="form-label mt-3">地址</label>
-                                                <input type="text" required  class="form-control" id="address" value="" placeholder="請輸入地址" />
+                                                <label for="exampleFormControlInput1" class="form-label mt-3">地址</label>
+                                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="請輸入地址">
                                             </div>
                                         </div>
                                     </div>
@@ -295,11 +295,10 @@
                                         <li>場地類型-閣樓、工作室、舞廳、頂樓公寓</li>
                                         <li>獨特的形容詞-質感、寬敞、現代</li>
                                     </ul>
-                                    <p><i class="me-1 far fa-lightbulb"></i>例如：“市中心閣樓享天際線景觀”</p>
-                                    <div class="SpaceName">
-                                        <label for="SpaceName" class="form-label "></label>
-                                        <input type="text"required class="form-control" id="SpaceName"
-                                               placeholder="輸入您場地的名稱">
+                                    <p><i class=" mt-2 me-1 far fa-lightbulb"></i>例如：“市中心閣樓享天際線景觀”</p>
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlInput1" class="form-label mt-3"></label>
+                                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="輸入您場地的名稱">
                                     </div>
                                 </div>
                             </div>
