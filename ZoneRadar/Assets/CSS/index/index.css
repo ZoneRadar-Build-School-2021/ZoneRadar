@@ -96,6 +96,9 @@ html, body {
     #homepage-search-submit:hover {
         background-color: #0077a7;
     }
+    #homepage-search-submit:focus {
+        box-shadow: none;
+    }
 /* #endregion */
 
 /* #region Swiper：活動類別圖片 */
@@ -391,12 +394,15 @@ div.swiper-button-prev {
 /* #endregion */
 
 /* #region 精選場地 */
-.selected-space img {
+.selected-space .img {
     border-radius: 2px;
     transition: .3s;
+    background-size: cover;
+    background-position: center center;
+    padding-top: 75%;
 }
 
-    .selected-space img:hover {
+    .selected-space .img:hover {
         opacity: .8;
         transition: .3s;
         box-shadow: 0 3px 7px 2px rgba(0, 0, 0, .8);
@@ -442,65 +448,66 @@ div.swiper-button-prev {
     height: 300px;
 }
 
-    .swiper-comment .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        /* Center slide text vertically */
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        flex-direction: column;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        color: white;
-        /* background-color: white; */
-        /* background-image: linear-gradient(rgb(245, 245, 245), rgb(231, 231, 231)); */
-        border-radius: 2px;
-        transition: .3s;
-    }
+.swiper-comment .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    color: white;
+    /* background-color: white; */
+    /* background-image: linear-gradient(rgb(245, 245, 245), rgb(231, 231, 231)); */
+    border-radius: 2px;
+    transition: .3s;
+}
 
-        .swiper-comment .swiper-slide:hover {
-            background-color: #D9831A;
-            transition: .3s;
-        }
+.swiper-comment .swiper-slide:hover {
+    background-color: #D9831A;
+    transition: .3s;
+}
 
-    .swiper-comment .content {
-        font-size: 16px;
-        overflow: hidden;
-    }
+.swiper-comment .content {
+    font-size: 16px;
+    overflow: hidden;
+}
     /* .swiper-comment .content::-webkit-scrollbar {
   width: 5px;
 }
 .swiper-comment .content::-webkit-scrollbar-thumb {
     background: rgba(170, 170, 170, .7);
   } */
-    .swiper-comment .star {
-        color: #eba755;
-    }
+.swiper-comment .star {
+    color: #eba755;
+}
 /* #endregion */
 
 /* #region 場地主介紹 */
 .host-introduction {
     border: 10px solid rgb(231, 231, 231);
+    border-radius: 5px;
 }
 
-    .host-introduction i {
-        color: #049DD9;
-    }
+.host-introduction i {
+    color: #049DD9;
+}
 
-    .host-introduction .div-sm-img {
-        width: 50px;
-        height: 50px;
-    }
+.host-introduction .div-sm-img {
+    width: 50px;
+    height: 50px;
+}
 
-    .host-introduction div.d-md-none p {
-        font-size: 12px;
-    }
+.host-introduction div.d-md-none p {
+    font-size: 12px;
+}
 /* #endregion */
 
 /* #region 尋找場地 */
@@ -509,28 +516,31 @@ div.swiper-button-prev {
     padding: 50px 10px;
 }
 
-    .leaseholder-section .pic-border {
-        border: 4px solid #D9831A;
-        border-radius: 3px;
-        padding: calc(var(--bs-gutter-x) * .5);
-    }
+.leaseholder-section .pic-border {
+    border: 4px solid #D9831A;
+    border-radius: 3px;
+    padding: calc(var(--bs-gutter-x) * .5);
+}
 
-    .leaseholder-section .pic {
-        background: url("https://images.unsplash.com/photo-1616627987907-4893fae79457?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=758&q=80") center center;
-        background-size: cover;
-        padding-top: 70px;
-        padding-bottom: 70px;
-        border-radius: 5px;
-    }
+.leaseholder-section .pic {
+    background: url("https://images.unsplash.com/photo-1616627987907-4893fae79457?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=758&q=80") center center;
+    background-size: cover;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    border-radius: 5px;
+}
 
-    .leaseholder-section a {
-        background-color: #D9831A;
-        padding: 12px 32px;
-    }
+.leaseholder-section a {
+    background-color: #D9831A;
+    padding: 12px 32px;
+}
 
-        .leaseholder-section a:hover {
-            background-color: #BE7418;
-        }
+.leaseholder-section a:hover {
+    background-color: #BE7418;
+}
+.leaseholder-section a:focus {
+    box-shadow: none;
+}
 /* #endregion */
 
 /* #region 成為場地主 */
@@ -542,19 +552,22 @@ div.swiper-button-prev {
     border-radius: 5px;
 }
 
-    .host-section span, .leaseholder-section span {
-        background-color: rgba(255, 255, 255, 0.7);
-        box-shadow: 0px 0px 20px 9px rgba(255, 255, 255, 0.9);
-    }
+.host-section span, .leaseholder-section span {
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0px 0px 20px 9px rgba(255, 255, 255, 0.9);
+}
 
-    .host-section a {
-        background-color: #049DD9;
-        padding: 16px 32px;
-    }
+.host-section a {
+    background-color: #049DD9;
+    padding: 16px 32px;
+}
 
-        .host-section a:hover {
-            background-color: #0077a7;
-        }
+.host-section a:hover {
+    background-color: #0077a7;
+}
+.host-section a:focus {
+    box-shadow: none;
+}
 /* #endregion */
 
 
@@ -608,6 +621,10 @@ div.swiper-button-prev {
 
     .location-category .row {
         height: 300px;
+    }
+
+    .host-introduction img {
+        border-radius: 5px;
     }
 
     .leaseholder-section {
