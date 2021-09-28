@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ZoneRadar.Service;
+using ZoneRadar.Services;
+using ZoneRadar.Models;
 
 namespace ZoneRadar.Controllers
 {
     
     public class HostCenterController : Controller
     {
-        private readonly addressAreaService _areaService;
+        private readonly AmenityService _amenityService;
         // GET: HostCenter
        public HostCenterController() 
         {
-            _areaService = new addressAreaService();
+            _amenityService = new AmenityService();
         }
         public ActionResult Index()
         {
@@ -22,7 +23,7 @@ namespace ZoneRadar.Controllers
         }
         public ActionResult AddSpace()
         {
-            var model = _areaService.readFormAreaSelect();
+            var model = _amenityService.ShowSelectofCheckBox();
             return View(model);
         }
         public ActionResult EditSpace()

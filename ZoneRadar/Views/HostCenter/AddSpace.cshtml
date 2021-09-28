@@ -1,12 +1,12 @@
-﻿@using ZoneRadar.ViewModels
-@model List<SpaceVM>
+﻿@model ZoneRadar.Models.ViewModels.FormAreaViewModel
 @{
     ViewBag.Title = "AddSpace";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var cards = Model.adreessList;
+    var cards = Model.AmenityList;
 }
-
-<form class="needs-validation" novalidate>
+@using (Html.BeginForm())
+{
+    @*<form class="needs-validation" novalidate>*@
     <div class="main">
         <div class="container containerForAdd ">
             <!-- 開頭問候文區 -->
@@ -33,7 +33,7 @@
                             </div>
                         </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"data-bs-parent="#accordionExample">
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div class="row mt-5 ">
                                 <div class="col-12 ">
@@ -46,7 +46,7 @@
                                             <label for="country" class="form-label">國家</label>
                                             <select class="form-select" id="country" required>
                                                 <option selected disabled value="">請選擇國家</option>
-                                                <option value="5">台灣</option>
+                                                <option value="1">台灣</option>
                                             </select>
                                             <div class="invalid-feedback">
                                                 請選擇國家
@@ -56,17 +56,11 @@
                                     <div class="row">
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="mb-3">
-                                                <label for="address" id="addresslabel" class="form-label mt-3">地址</label>
-                                                <input type="text" required class="form-control" id="address" value="" placeholder="請輸入地址" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12 col-md-6 col-xl-6">
-                                            <div class="mb-3">
                                                 <label for="city" class="form-label mt-3">城市</label>
-                                                <input type="text" required class="form-control" id="city"
-                                                       placeholder="ex:台北市，新北市，台中市...">
+                                                <select class="form-select" id="State" required>
+                                                    <option selected disabled value="">請選擇縣市</option>
+                                                </select>
+
                                             </div>
                                             <div class="invalid-feedback">
                                                 請填寫縣市
@@ -76,21 +70,6 @@
                                             <label for="State" class="form-label">行政區</label>
                                             <select class="form-select" id="State" required>
                                                 <option selected disabled value="">請選擇行政區</option>
-                                                @foreach (var card in cards)
-                                                {
-                                                <option value="@card.DistrictId">@card.DistricName</option>
-                                                }
-                                                @*<option selected disabled value="">請選擇行政區</option>
-                                                <option value="1">大安區</option>
-                                                <option value="2">中正區</option>
-                                                <option value="3">信義區</option>
-                                                <option value="4">萬華區</option>
-                                                <option value="5">泰安區</option>
-                                                <option value="6">中和區</option>
-                                                <option value="7">永和區</option>
-                                                <option value="8">新店區</option>
-                                                <option value="9">板橋區</option>
-                                                <option value="10">土城區</option>*@
                                             </select>
                                             <div class="invalid-feedback">
                                                 請選擇行政區
@@ -103,6 +82,12 @@
                                                 <label for="ZideCode"
                                                        class="form-label mt-3">郵遞區號</label>
                                                 <input type="text" required class="form-control" id="ZodeCode" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-6">
+                                            <div class="mb-3">
+                                                <label for="address" id="addresslabel" class="form-label mt-3">地址</label>
+                                                <input type="text" required class="form-control" id="address" value="" placeholder="請輸入地址，從路名開始即可，例:中正路283巷45弄11號4樓" />
                                             </div>
                                         </div>
                                     </div>
@@ -339,7 +324,7 @@
                                 <div class="col-12 col-xl-6 d-flex">
                                     <div class="mb-3 w-75">
                                         <label for="area" class="form-label mt-3"></label>
-                                        <input type="text"required class="form-control" id="area"
+                                        <input type="text" required class="form-control" id="area"
                                                placeholder="500">
                                     </div>
                                     <div class="mb-3 ">
@@ -353,7 +338,7 @@
                                 <h5>可以容納幾個人 </h5>
                                 <div class="col col-lg-6">
                                     <div class="form-floating">
-                                        <input class="form-control"required placeholder="最大客人數" id="Maxpeople">
+                                        <input class="form-control" required placeholder="最大客人數" id="Maxpeople">
                                         <label for="Maxpeople">最大客人數</label>
                                     </div>
                                 </div>
@@ -1555,14 +1540,14 @@
                                 <div class="col-12 col-lg-6 SpacePrice mt-3">
                                     <p>最低時數</p>
                                     <div class="form-floating">
-                                        <input class="form-control"required placeholder="必須是1-12小時" id="minSpacePrice">
+                                        <input class="form-control" required placeholder="必須是1-12小時" id="minSpacePrice">
                                         <label for="minSpacePrice">必須是1-12小時</label>
                                     </div>
                                 </div>
                                 <div class="col-10 col-lg-6 MinPrice mt-3">
                                     <p>折扣</p>
                                     <div class="form-floating">
-                                        <input class="form-control"required placeholder="幾小時折扣" id="hourDiscount">
+                                        <input class="form-control" required placeholder="幾小時折扣" id="hourDiscount">
                                         <label for="hourDiscount">逾多少小時</label>
                                     </div>
                                 </div>
@@ -1577,178 +1562,26 @@
                             </div>
                             <div class="row mt-3">
                                 <h5>便利設施</h5>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="Free" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            WiFi
-                                        </label>
+                                @foreach (var card in cards)
+                                {
+                                    <div class="col-12 col-lg-3 ">
+                                        <div class="form-check">
+                                            <input class="form-check-input" value="@card.AmenityDetailID" type="checkbox"
+                                                   name="flexRadioDefault" id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                @card.Amenity
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="Tables" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            桌子
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="Chairs" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            椅子
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="Whiteboard" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            白板
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="Chalkboard" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            黑板
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="Projector" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            投影
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="FlipCharts" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            掛畫
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="Monitor" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            監控設施
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="ConferencePhone" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            會議電話
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="PublicTransportation" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            大眾運輸工具
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="Restrooms" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            廁所
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="WheelchairAccessible" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            無障礙通道
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="Kitchen" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            廚房
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="Coffee" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            咖啡
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="AppleTV" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            Apple TV
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="Printer" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            印表機
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="Rooftop" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            屋頂
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="OutdoorArea" type="checkbox"
-                                               name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            戶外區
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                           
-                                <div class="col-8 col-lg-6">
+                                }
+                                <div class="col-6 col-lg-6">
                                     <label for="Add" class="visually-hidden"></label>
                                     <input type="text" class="form-control" id="Add" placeholder="其他設施">
                                 </div>
                                 <div class="col-4 col-lg-3">
                                     <button type="submit" class="btn btn-primary mb-3">增加</button>
                                 </div>
-                           
+                            </div>
                         </div>
                     </div>
                     <div class="accordion-item">
@@ -2305,7 +2138,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-check col-12 col-lg-2">
-                                        <input class="form-check-input"required type="radio" name="flexRadioDefault"
+                                        <input class="form-check-input" required type="radio" name="flexRadioDefault"
                                                id="flexRadioDefault1">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             靈活
@@ -2323,7 +2156,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-check col-12 col-lg-2">
-                                        <input class="form-check-input"required type="radio" name="flexRadioDefault"
+                                        <input class="form-check-input" required type="radio" name="flexRadioDefault"
                                                id="flexRadioDefault1">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             標準30天
@@ -2341,7 +2174,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-check col-12 col-lg-2">
-                                        <input class="form-check-input"required type="radio" name="flexRadioDefault"
+                                        <input class="form-check-input" required type="radio" name="flexRadioDefault"
                                                id="flexRadioDefault1">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             標準90天
@@ -2367,18 +2200,18 @@
     <div class="container containerForAdd">
         <div class="row mt-5 mb-5">
             <div class="col-12 text-center">
-                <button type="submit" class="btn submitAdd deleteBtn" >完成</button>
+                <button type="submit" class="btn submitAdd deleteBtn">完成</button>
             </div>
         </div>
     </div>
-</form>
+    @*</form>*@}
 
-    @section topCSS
+@section topCSS
         {
-        <link href="~/Assets/CSS/membercenter/membercenter.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    }
-    @section endJS{
-        <script src="~/Assets/JS/addspace/addspace.js"></script>
-    }
+    <link href="~/Assets/CSS/membercenter/membercenter.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+}
+@section endJS{
+    <script src="~/Assets/JS/addspace/addspace.js"></script>
+}
 

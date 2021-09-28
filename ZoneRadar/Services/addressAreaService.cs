@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ZoneRadar.Repositories;
-using ZoneRadar.Models.ViewModel;
+using ZoneRadar.Models.ViewModels;
 
-namespace ZoneRadar.Service
+namespace ZoneRadar.Services
 {
     public class addressAreaService
     {
@@ -29,6 +29,11 @@ namespace ZoneRadar.Service
                 };
                 result.adreessList.Add(districtTemp);
             }
+            List<SpaceType> SpaceTypeList = new List<SpaceType>()
+            {
+
+            };
+
             return result;
         }
     }
