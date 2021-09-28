@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ZoneRadar.Models
+namespace ZoneRadar.Models.ViewModels
 {
     public class ExternalLoginConfirmationViewModel
     {
