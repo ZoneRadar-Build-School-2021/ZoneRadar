@@ -1,46 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using ZoneRadar.Data;
+using ZoneRadar.Models;
 
 namespace ZoneRadar.Repositories
 {
-    public class ZONERadarRepository
+    public class ZoneRadarRepository
     {
-        private readonly ZONERadarContext _context;
-        public ZONERadarRepository()
+        private readonly ZoneRadarContext _ctx;
+        public ZoneRadarRepository()
         {
-            _context = new ZONERadarContext();
+            _ctx = new ZoneRadarContext();
         }
         public IQueryable<T> GetAll<T>() where T : class
         {
-            return _context.Set<T>();
+            return _ctx.Set<T>();
         }
-        public void Create<T>(T value) where T : class
+        public List<Space> ReadSpaceData()
         {
-            _context.Entry(value).State = EntityState.Added;
+            return _ctx.Space.ToList();
         }
-        public void CreateRange<T>(IEnumerable<T> value) where T : class
+        public List<Orders> ReadOrdersData()
         {
-            _context.Set<T>().AddRange(value);
+            return _ctx.Orders.ToList();
         }
-        public void Update<T>(T value) where T : class
+        public List<City> ReadCityData()
         {
-            _context.Entry(value).State = EntityState.Modified;
-        }
-        public void Delete<T>(T value) where T : class
-        {
-            _context.Entry(value).State = EntityState.Deleted;
-        }
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
-        public void Dispose()
-        {
-            _context.Dispose();
+            return _ctx.City.ToList();
         }
     }
 }

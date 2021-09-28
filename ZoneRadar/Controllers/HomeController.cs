@@ -12,7 +12,15 @@ namespace ZoneRadar.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var model = new HomeViewModel
+            {
+                SelectedSpaces = _service.GetSelectedSpace(),
+                ToSpaceReviews = _service.GetSpaceReview(),
+                TyoeOptions = _service.GetTypeOption(),
+                CityOptions = _service.GetCityOption(),
+                MemberPhoto = _service.GetMemberPhoto()
+            };
+            return View(model);
         }
 
         public ActionResult About()
