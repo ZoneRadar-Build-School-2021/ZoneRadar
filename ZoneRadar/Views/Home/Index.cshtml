@@ -1,11 +1,11 @@
-﻿@model HomeViewModel
+﻿@model AllViewModel
 @{
     ViewBag.Title = "Home Page";
-    ViewBag.memberPhoto = Model.MemberPhoto;
-    var selectedSpaces = Model.SelectedSpaces;
-    var toSpaceReviews = Model.ToSpaceReviews;
-    var typeOptions = Model.TyoeOptions;
-    var cityOptions = Model.CityOptions;
+    ViewBag.memberPhoto = Model.HomeVM.MemberPhoto;
+    var selectedSpaces = Model.HomeVM.SelectedSpaces;
+    var toSpaceReviews = Model.HomeVM.ToSpaceReviews;
+    var typeOptions = Model.HomeVM.TyoeOptions;
+    var cityOptions = Model.HomeVM.CityOptions;
 
 
 

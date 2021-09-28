@@ -18,14 +18,25 @@ namespace ZoneRadar.Controllers
 
         public ActionResult Index()
         {
-            var model = new HomeViewModel
+            var model = new AllViewModel
             {
-                SelectedSpaces = _service.GetSelectedSpace(),
-                ToSpaceReviews = _service.GetSpaceReview(),
-                TyoeOptions = _service.GetTypeOption(),
-                CityOptions = _service.GetCityOption(),
-                MemberPhoto = _service.GetMemberPhoto()
+                HomeVM = new HomeViewModel
+                {
+                    SelectedSpaces = _service.GetSelectedSpace(),
+                    ToSpaceReviews = _service.GetSpaceReview(),
+                    TyoeOptions = _service.GetTypeOption(),
+                    CityOptions = _service.GetCityOption(),
+                    MemberPhoto = _service.GetMemberPhoto()
+                }
             };
+            //var model = new HomeViewModel
+            //{
+            //    SelectedSpaces = _service.GetSelectedSpace(),
+            //    ToSpaceReviews = _service.GetSpaceReview(),
+            //    TyoeOptions = _service.GetTypeOption(),
+            //    CityOptions = _service.GetCityOption(),
+            //    MemberPhoto = _service.GetMemberPhoto()
+            //};
             return View(model);
         }
 

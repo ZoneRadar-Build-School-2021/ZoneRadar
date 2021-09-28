@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model AllViewModel
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -164,9 +165,9 @@
                     </a>
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email</div>
                     <form action="#" name="login-form" class="mb-3">
-                        <input type="email" id="input-email-login" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
-                        <input type="password" id="input-password-login" class="form-control form-control-lg d-block mb-3" placeholder="密碼" aria-label="password" aria-describedby="basic-addon2" required>
-                        <a href="#" id="login-submit" class="d-block text-decoration-none text-white">登入</a>
+                        <input type="email" id="input-email-login" name="" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
+                        <input type="password" id="input-password-login" name="" class="form-control form-control-lg d-block mb-3" placeholder="密碼" aria-label="password" aria-describedby="basic-addon2" required>
+                        <button id="login-submit" class="w-100 text-decoration-none text-white">登入</button>
                     </form>
                     <a href="#" id="forget-password" class="text-decoration-none d-inline-block mb-4">忘記密碼</a>
                     <p class="mb-5">還沒有ZONERadar帳號？<a href="#" id="a-register-modal" data-bs-toggle="modal" data-bs-target="#register-modal" class="text-decoration-none">立即註冊</a></p>
@@ -194,10 +195,15 @@
                         Facebook 註冊
                     </a>
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email註冊</div>
-                    <form action="#" name="register-form" class="mb-3">
-                        <input type="email" id="input-email-register" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
-                        <input type="password" id="input-password-register" class="form-control form-control-lg d-block mb-3" placeholder="密碼" aria-label="password" aria-describedby="basic-addon2" required>
-                        <a href="#" id="register-submit" class="d-block text-decoration-none text-white">以Email註冊</a>
+                    <form action="~/MemberCenter/Register" method="post" class="mb-3">
+                        @Html.AntiForgeryToken()
+                        <input type="text" id="input-name-register" name="name" class="form-control form-control-lg d-block mb-3" placeholder="姓名" aria-label="password" aria-describedby="basic-addon2" required>
+                        <input type="email" id="input-email-register" name="email" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
+                        <input type="password" id="input-password-register" name="password" class="form-control form-control-lg d-block mb-3" placeholder="密碼" aria-label="password" aria-describedby="basic-addon2" required>
+                        @*@Html.EditorFor(model => model.RegisterZONERadarVM.Name, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "text", placeholder = "姓名", required = "true" } })
+                        @Html.EditorFor(model => model.RegisterZONERadarVM.Email, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "email", placeholder = "Email", required = "true" } })
+                        @Html.EditorFor(model => model.RegisterZONERadarVM.Password, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "password", placeholder = "密碼", required = "true" } })*@
+                        <button type="submit" id="register-submit" class="w-100 text-decoration-none text-white">以Email註冊</button>
                     </form>
                     <p class="mb-5">當您註冊時，代表您已同意ZONERadar的服務條款及隱私權政策</p>
                     <p class="mb-5">已有ZONERadar帳號？<a href="#" id="a-login-modal" data-bs-toggle="modal" data-bs-target="#login-modal" class="text-decoration-none">登入</a></p>
@@ -284,6 +290,7 @@
     <script src="~/Assets/JS/bootstrap.bundle.min.js"></script>
     <script src="~/Assets/JS/sweetalert2.js"></script>
     <script src="~/Assets/JS/layout/navbar-footer.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
     @RenderSection("endCSS", required: false)
     @RenderSection("endJS", required: false)
