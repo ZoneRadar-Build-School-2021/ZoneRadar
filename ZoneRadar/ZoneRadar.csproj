@@ -214,6 +214,7 @@
     <Compile Include="Models\ViewModels\HomeViewModel.cs" />
     <Compile Include="Data\ZONERadarContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ZONERadarRepository.cs" />
     <Compile Include="Services\HomeService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -388,7 +389,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
