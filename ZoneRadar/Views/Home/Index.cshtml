@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<SpaceVM>
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -279,13 +280,17 @@
 <div class="container selected-space mt-5">
     <h3 class="text-center fs-2 fw-bolder mb-5">精選場地</h3>
     <div class="row justify-content-between p-3 p-md-0">
-        <div class="col-12 col-md-6 col-lg-4 mb-3 position-relative">
-            <a href="#" class="text-decoration-none">
-                <img src="https://picsum.photos/400/300/?random=1" alt="space" class="w-100">
-                <span class="distinct position-absolute">台北市．10人</span>
-                <span class="price position-absolute">$400 / hr</span>
-            </a>
-        </div>
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-4 mb-3 position-relative">
+                <a href="#" class="text-decoration-none">
+                    <img src="https://picsum.photos/400/300/?random=1" alt="space" class="w-100">
+                    <span class="distinct position-absolute">@Html.DisplayFor(modelItem => item.City)．@Html.DisplayFor(modelItem => item.Capacity)人</span>
+                    <span class="price position-absolute">@Html.DisplayFor(modelItem => item.PricePerHour) / hr</span>
+                </a>
+            </div>
+        }
+
         <div class="col-12 col-md-6 col-lg-4 mb-3 position-relative">
             <a href="#" class="text-decoration-none">
                 <img src="https://picsum.photos/400/300/?random=2" alt="space" class="w-100">

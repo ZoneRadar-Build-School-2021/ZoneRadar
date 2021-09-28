@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -192,10 +194,31 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AmenityDetail.cs" />
+    <Compile Include="Models\City.cs" />
+    <Compile Include="Models\Collection.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\District.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Member.cs" />
+    <Compile Include="Models\Operating.cs" />
+    <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\Orders.cs" />
+    <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\Space.cs" />
+    <Compile Include="Models\SpaceAmenity.cs" />
+    <Compile Include="Models\SpacePhoto.cs" />
+    <Compile Include="Models\sysdiagrams.cs" />
+    <Compile Include="Models\ZoneRadarContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ProfileRepository.cs" />
+    <Compile Include="Repositories\ZoneRadarRepository.cs" />
+    <Compile Include="Services\IndexService.cs" />
+    <Compile Include="Services\ProfileService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\SpaceVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\CSS\booking\booking.css" />
@@ -365,6 +388,7 @@
     <Content Include="Views\HostCenter\EditSpace.cshtml" />
     <Content Include="Views\HostCenter\Completed.cshtml" />
     <Content Include="Views\HostCenter\Processing.cshtml" />
+    <Content Include="Views\Shared\_Layoutnoheaderfooter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

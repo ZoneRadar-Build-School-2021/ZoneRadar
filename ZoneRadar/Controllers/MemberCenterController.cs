@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ZoneRadar.Services;
 
 namespace ZoneRadar.Controllers
 {
     public class MemberCenterController : Controller
     {
+        private readonly ProfileService _qaz;
+        public MemberCenterController()
+        {
+            _qaz = new ProfileService();
+        }
         // GET: MemberCenter
         public ActionResult Index()
         {
@@ -27,7 +33,7 @@ namespace ZoneRadar.Controllers
         }
         public ActionResult EditProfile()
         {
-            return View();
+            return View(_qaz.GetProfileVMData());
         }
         public ActionResult MyCollection()
         {
