@@ -1,6 +1,13 @@
-﻿@model IEnumerable<SpaceVM>
-@{
+﻿@{
     ViewBag.Title = "Home Page";
+    ViewBag.memberPhoto = Model.MemberPhoto;
+    var selectedSpaces = Model.SelectedSpaces;
+    var toSpaceReviews = Model.ToSpaceReviews;
+    var typeOptions = Model.TyoeOptions;
+    var cityOptions = Model.CityOptions;
+
+
+
 }
 
 <!-- 幻燈片 -->
@@ -20,61 +27,19 @@
     <h2 class="main-title position-absolute text-white fw-bolder">starts here</h2>
     <!-- 首頁搜尋列 -->
     <div class="homepage-search w-100">
-        <form action="" class="row justify-content-center justify-content-md-start mx-0 py-3 py-md-0">
+        <form action="~/Home/SearchSpace" method="post" class="row justify-content-center justify-content-md-start mx-0 py-3 py-md-0">
+            @Html.AntiForgeryToken()
             <!--活動性質-->
-            <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0 ms-md-5">
-                <select class="select-activity form-select form-select-lg" aria-label="choose-activity">
-                    <option selected class="d-none">活動性質</option>
-                    <option value="meeting">會議</option>
-                    <option value="party">派對</option>
-                    <option value="dinner">聚會</option>
-                    <option value="conversation">私人談話</option>
-                    <option value="lecture">課程講座</option>
-                    <option value="exercise">運動</option>
-                    <option value="work">工作</option>
-                    <option value="exhibition">展覽</option>
-                    <option value="concert">音樂/表演</option>
-                    <option value="wedding">婚禮</option>
-                    <option value="photograph">拍照/攝影</option>
-                    <option value="cosmetology">美容</option>
-                    <option value="cooking">烹飪</option>
-                    <option value="store">儲物</option>
-                    <option value="announce">發表會</option>
-                    <option value="parentchild">親子活動</option>
-                    <option value="other">其他</option>
-                </select>
+            <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0 ms-md-5">                
+                @Html.DropDownListFor(model => model.HomepageSearchVM.Type, typeOptions, "活動性質", new { @class = "select-activity form-select form-select-lg" })
             </div>
             <!--地點-->
             <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0">
-                <select class="select-county form-select form-select-lg" aria-label="choose-county">
-                    <option selected class="d-none">地點</option>
-                    <option value="Taipei">台北市</option>
-                    <option value="NewTaipeiCity">新北市</option>
-                    <option value="Tauyuan">桃園市</option>
-                    <option value="HsinchuCity">新竹市</option>
-                    <option value="HsinchuCounty">新竹縣</option>
-                    <option value="Miaoli">苗栗縣</option>
-                    <option value="Taichung">台中市</option>
-                    <option value="Nantou">南投縣</option>
-                    <option value="Changhua">彰化縣</option>
-                    <option value="Yunlin">雲林縣</option>
-                    <option value="ChiayiCity">嘉義市</option>
-                    <option value="ChiayiCounty">嘉義縣</option>
-                    <option value="Tainan">台南市</option>
-                    <option value="Kaohsiung">高雄市</option>
-                    <option value="Pingtung">屏東縣</option>
-                    <option value="Keelung">基隆市</option>
-                    <option value="Yilan">宜蘭縣</option>
-                    <option value="Hualien">花蓮縣</option>
-                    <option value="Taitung">台東縣</option>
-                    <option value="Matsu">連江縣</option>
-                    <option value="Kinmen">金門縣</option>
-                    <option value="Penghu">澎湖縣</option>
-                </select>
+                @Html.DropDownListFor(model => model.HomepageSearchVM.CityId, cityOptions, "地點", new { @class = "select-county form-select form-select-lg" })
             </div>
             <!--日期-->
             <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0">
-                <input class="select-date flatpickr flatpickr-input px-3 py-2 w-100" type="text" placeholder="選擇時間" readonly="readonly">
+                @Html.EditorFor(model => model.HomepageSearchVM.Date, new { htmlAttributes = new { @class = "select-date flatpickr flatpickr-input px-3 py-2 w-100", type = "text", placeholder = "選擇時間", @readonly = "readonly" } })
             </div>
             <div class="col-11 col-md-2"><button class="btn text-white w-100 h-100" id="homepage-search-submit" type="submit">找場地</button></div>
         </form>
@@ -87,42 +52,42 @@
     <div class="swiper swiper-activity">
         <div class="swiper-wrapper">
             <div class="swiper-slide swiper-slide-lecture">
-                <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
                     <span class="">課程講座</span>
                 </a>
             </div>
             <div class="swiper-slide swiper-slide-party">
-                <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
                     <span class="">派對</span>
                 </a>
             </div>
             <div class="swiper-slide swiper-slide-meeting">
-                <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
                     <span class="">會議</span>
                 </a>
             </div>
             <div class="swiper-slide swiper-slide-dinner">
-                <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
                     <span class="">聚會餐敘</span>
                 </a>
             </div>
             <div class="swiper-slide swiper-slide-photograph">
-                <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
                     <span class="">拍攝攝影</span>
                 </a>
             </div>
             <div class="swiper-slide swiper-slide-announce">
-                <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
                     <span class="">發表會</span>
                 </a>
             </div>
             <div class="swiper-slide swiper-slide-concert">
-                <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
                     <span class="">音樂表演</span>
                 </a>
             </div>
             <div class="swiper-slide swiper-slide-exhibition">
-                <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
                     <span class="">靜態展覽</span>
                 </a>
             </div>
@@ -163,7 +128,7 @@
     <div class="row text-center px-3 px-md-0">
         <div class="col-12 col-md-5 position-relative mb-2 mb-md-0 pe-md-0">
             <div class="max-slide Taipei h-100">
-                <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                <a href="~/Searching/SearchingPage/2" class="d-block w-100 h-100 text-decoration-none text-white">
                     <span class="">台北</span>
                 </a>
             </div>
@@ -172,12 +137,12 @@
             <div class="swiper swiper-location">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide NewTaipeiCity">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/3" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">新北</span>
                         </a>
                     </div>
                     <div class="swiper-slide Tauyuan">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/4" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">桃園</span>
                         </a>
                     </div>
@@ -187,27 +152,27 @@
                         </a>
                     </div>
                     <div class="swiper-slide Miaoli">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/11" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">苗栗</span>
                         </a>
                     </div>
                     <div class="swiper-slide Taichung">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/6" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">台中</span>
                         </a>
                     </div>
                     <div class="swiper-slide Nantou">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/13" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">南投</span>
                         </a>
                     </div>
                     <div class="swiper-slide Changhua">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/12" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">彰化</span>
                         </a>
                     </div>
                     <div class="swiper-slide Yunlin">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/14" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">雲林</span>
                         </a>
                     </div>
@@ -217,52 +182,52 @@
                         </a>
                     </div>
                     <div class="swiper-slide Tainan">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/7" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">台南</span>
                         </a>
                     </div>
                     <div class="swiper-slide Kaohsiung">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/9" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">高雄</span>
                         </a>
                     </div>
                     <div class="swiper-slide Pingtung">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/16" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">屏東</span>
                         </a>
                     </div>
                     <div class="swiper-slide Keelung">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/1" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">基隆</span>
                         </a>
                     </div>
                     <div class="swiper-slide Yilan">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/17" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">宜蘭</span>
                         </a>
                     </div>
                     <div class="swiper-slide Hualien">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/18" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">花蓮</span>
                         </a>
                     </div>
                     <div class="swiper-slide Taitung">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/19" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">台東</span>
                         </a>
                     </div>
                     <div class="swiper-slide Matsu">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/22" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">連江</span>
                         </a>
                     </div>
                     <div class="swiper-slide Kinmen">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/21" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">金門</span>
                         </a>
                     </div>
                     <div class="swiper-slide Penghu">
-                        <a href="#" class="d-block w-100 h-100 text-decoration-none text-white">
+                        <a href="~/Searching/SearchingPage/20" class="d-block w-100 h-100 text-decoration-none text-white">
                             <span class="">澎湖</span>
                         </a>
                     </div>
@@ -279,53 +244,17 @@
 <!-- 精選場地 -->
 <div class="container selected-space mt-5">
     <h3 class="text-center fs-2 fw-bolder mb-5">精選場地</h3>
-    <div class="row justify-content-between p-3 p-md-0">
-        @foreach (var item in Model)
+    <div class="row p-3 p-md-0">
+        @foreach (var item in selectedSpaces)
         {
             <div class="col-12 col-md-6 col-lg-4 mb-3 position-relative">
-                <a href="#" class="text-decoration-none">
-                    <img src="https://picsum.photos/400/300/?random=1" alt="space" class="w-100">
-                    <span class="distinct position-absolute">@Html.DisplayFor(modelItem => item.City)．@Html.DisplayFor(modelItem => item.Capacity)人</span>
-                    <span class="price position-absolute">@Html.DisplayFor(modelItem => item.PricePerHour) / hr</span>
+                <a href="~/Booking/BookingPage/@item.SpaceId" class="text-decoration-none">
+                    <div class="img w-100" style="background-image: url(@item.SpacePhoto);"></div>
+                    <span class="distinct position-absolute">@item.CityName．@item.Capacity 人</span>
+                    <span class="price position-absolute">$@Html.DisplayFor(modelItem => item.PricePerHour) / hr</span>
                 </a>
             </div>
-        }
-
-        <div class="col-12 col-md-6 col-lg-4 mb-3 position-relative">
-            <a href="#" class="text-decoration-none">
-                <img src="https://picsum.photos/400/300/?random=2" alt="space" class="w-100">
-                <span class="distinct position-absolute">台北市．10人</span>
-                <span class="price position-absolute">$400 / hr</span>
-            </a>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-3 position-relative">
-            <a href="#" class="text-decoration-none">
-                <img src="https://picsum.photos/400/300/?random=3" alt="space" class="w-100">
-                <span class="distinct position-absolute">台北市．10人</span>
-                <span class="price position-absolute">$400 / hr</span>
-            </a>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-3 position-relative">
-            <a href="#" class="text-decoration-none">
-                <img src="https://picsum.photos/400/300/?random=4" alt="space" class="w-100">
-                <span class="distinct position-absolute">台北市．10人</span>
-                <span class="price position-absolute">$400 / hr</span>
-            </a>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-3 position-relative">
-            <a href="#" class="text-decoration-none">
-                <img src="https://picsum.photos/400/300/?random=5" alt="space" class="w-100">
-                <span class="distinct position-absolute">台北市．10人</span>
-                <span class="price position-absolute">$400 / hr</span>
-            </a>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-3 position-relative">
-            <a href="#" class="text-decoration-none">
-                <img src="https://picsum.photos/400/300/?random=6" alt="space" class="w-100">
-                <span class="distinct position-absolute">台北市．10人</span>
-                <span class="price position-absolute">$400 / hr</span>
-            </a>
-        </div>
+        }        
     </div>
 </div>
 
@@ -336,116 +265,22 @@
         <div class="row px-3 px-md-0">
             <div class="col-12">
                 <div class="swiper swiper-comment">
-                    <div class="swiper-wrapper">
-                        <a href="#" class="swiper-slide text-decoration-none">
-                            <h5 class="name m-0 p-3 fw-bolder">王小明</h5>
-                            <p class="content flex-grow-1 m-0 px-3 text-start">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. In, animi ut. Ad laudantium consequatur commodi repellat corrupti quia et libero beatae rerum ratione, natus quam molestiae, impedit nobis cum nostrum!
-                                Eum, fugit harum?
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. In, animi ut. Ad laudantium consequatur commodi repellat corrupti quia et libero beatae rerum ratione, natus quam molestiae, impedit nobis cum nostrum!
-                                Eum, fugit harum?
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. In, animi ut. Ad laudantium consequatur commodi repellat corrupti quia et libero beatae rerum ratione, natus quam molestiae, impedit nobis cum nostrum!
-                                Eum, fugit harum?
-                            </p>
-                            <div class="star p-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="swiper-slide text-decoration-none">
-                            <h5 class="name m-0 p-3 fw-bolder">王小明</h5>
-                            <p class="content flex-grow-1 m-0 px-3 text-start">
-                                夢幻畢竟表示本週市政府我說並不是群眾時候身體此處，宅宅始終，請在深深她是進步真實改善及其幾次接受可見，顏色配件網際網路，在於分為坐在這一如同，因而簡歷高中歲月回憶女子歐美理解報價發佈時間主席國家升。
-                            </p>
-                            <div class="star p-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="swiper-slide text-decoration-none">
-                            <h5 class="name m-0 p-3 fw-bolder">王小明</h5>
-                            <p class="content flex-grow-1 m-0 px-3 text-start">
-                                夢幻畢竟表示本週市政府我說並不是群眾時候身體此處，宅宅始終，請在深深她是進步真實改善及其幾次接受可見，顏色配件網際網路，在於分為坐在這一如同，因而簡歷高中歲月回憶女子歐美理解報價發佈時間主席國家升。
-                            </p>
-                            <div class="star p-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="swiper-slide text-decoration-none">
-                            <h5 class="name m-0 p-3 fw-bolder">王小明</h5>
-                            <p class="content flex-grow-1 m-0 px-3 text-start">
-                                夢幻畢竟表示本週市政府我說並不是群眾時候身體此處，宅宅始終，請在深深她是進步真實改善及其幾次接受可見，顏色配件網際網路，在於分為坐在這一如同，因而簡歷高中歲月回憶女子歐美理解報價發佈時間主席國家升。
-                            </p>
-                            <div class="star p-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="swiper-slide text-decoration-none">
-                            <h5 class="name m-0 p-3 fw-bolder">王小明</h5>
-                            <p class="content flex-grow-1 m-0 px-3 text-start">
-                                夢幻畢竟表示本週市政府我說並不是群眾時候身體此處，宅宅始終，請在深深她是進步真實改善及其幾次接受可見，顏色配件網際網路，在於分為坐在這一如同，因而簡歷高中歲月回憶女子歐美理解報價發佈時間主席國家升。
-                            </p>
-                            <div class="star p-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="swiper-slide text-decoration-none">
-                            <h5 class="name m-0 p-3 fw-bolder">王小明</h5>
-                            <p class="content flex-grow-1 m-0 px-3 text-start">
-                                夢幻畢竟表示本週市政府我說並不是群眾時候身體此處，宅宅始終，請在深深她是進步真實改善及其幾次接受可見，顏色配件網際網路，在於分為坐在這一如同，因而簡歷高中歲月回憶女子歐美理解報價發佈時間主席國家升。
-                            </p>
-                            <div class="star p-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="swiper-slide text-decoration-none">
-                            <h5 class="name m-0 p-3 fw-bolder">王小明</h5>
-                            <p class="content flex-grow-1 m-0 px-3 text-start">
-                                夢幻畢竟表示本週市政府我說並不是群眾時候身體此處，宅宅始終，請在深深她是進步真實改善及其幾次接受可見，顏色配件網際網路，在於分為坐在這一如同，因而簡歷高中歲月回憶女子歐美理解報價發佈時間主席國家升。
-                            </p>
-                            <div class="star p-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="swiper-slide text-decoration-none">
-                            <h5 class="name m-0 p-3 fw-bolder">王小明</h5>
-                            <p class="content flex-grow-1 m-0 px-3 text-start">
-                                夢幻畢竟表示本週市政府我說並不是群眾時候身體此處，宅宅始終，請在深深她是進步真實改善及其幾次接受可見，顏色配件網際網路，在於分為坐在這一如同，因而簡歷高中歲月回憶女子歐美理解報價發佈時間主席國家升。
-                            </p>
-                            <div class="star p-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </a>
+                    <div class="swiper-wrapper">                        
+                        @foreach (var item in toSpaceReviews)
+                        {
+                            <a href="~/Booking/BookingPage/@item.SpaceId" class="swiper-slide text-decoration-none">
+                                <h5 class="name m-0 p-3 fw-bolder">@item.MemberName</h5>
+                                <p class="content flex-grow-1 m-0 px-3 text-start">
+                                    @item.ReviewContent
+                                </p>
+                                <div class="star p-3">
+                                    @for (int i = 0; i < item.Score; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                </div>
+                            </a>
+                        }                        
                     </div>
                 </div>
             </div>
@@ -509,14 +344,13 @@
     <a href="#" class="btn text-white fs-4">成為場地主</a>
 </div>
 
+
 @section topCSS
 {
     <link href="~/Assets/CSS/index/index.css" rel="stylesheet" />
-    <link href="~/Assets/CSS/swiper-bundle.min.css" rel="stylesheet" />
 }
 
 @section endJS
 {
     <script src="~/Assets/JS/index/index.js"></script>
-    <script src="~/Assets/JS/swiper-bundle.min.js"></script>
 }

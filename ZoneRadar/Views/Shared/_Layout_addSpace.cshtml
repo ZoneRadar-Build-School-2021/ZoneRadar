@@ -12,6 +12,7 @@
     <link href="~/Assets/CSS/fontawesome/all.min.css" rel="stylesheet" />
     <link href="~/Assets/CSS/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Assets/CSS/layout/navbar-footer.css" rel="stylesheet" />
+    
     @RenderSection("topCSS", required: false)
     @RenderSection("topJS", required: false)
 </head>
@@ -54,7 +55,7 @@
                             <h2 class="accordion-header" id="headingMyaccount">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMyaccount" aria-expanded="false" aria-controls="collapseMyaccount">
                                     <div class="user-pic d-inline-block overflow-hidden me-1">
-                                        <img class="h-100 align-top" src="@ViewBag.memberPhoto">
+                                        <img class="h-100 align-top" src="https://picsum.photos/50/50/?random=9">
                                     </div>
                                 </button>
                             </h2>
@@ -68,25 +69,12 @@
                                         </h2>
                                         <div id="collapseMember" class="accordion-collapse collapse" aria-labelledby="headingMember">
                                             <div class="accordion-body p-0">
-                                                <a class="nav-link" href="#">訂購單</a>
                                                 <a class="nav-link" href="~/UserCenter/Pending">訂單管理</a>
-                                                <a class="nav-link" href="~/MemberCenter/UserInfo">評價和收藏</a>
+                                                <a class="nav-link" href="~/MemberCenter/MyCollection">我的收藏</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item accordion-host">
-                                        <h2 class="accordion-header" id="headingHost">
-                                            <button class="accordion-button dropdown-item collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHost" aria-expanded="false" aria-controls="collapseHost">
-                                                場地主
-                                            </button>
-                                        </h2>
-                                        <div id="collapseHost" class="accordion-collapse collapse" aria-labelledby="headingHost">
-                                            <div class="accordion-body p-0">
-                                                <a class="nav-link" href="~/HostCenter/Processing">訂單管理</a>
-                                                <a class="nav-link" href="~/HostCenter/EditSpace">場地管理</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <a class="nav-link" href="~/HostCenter/EditSpace">場地主</a>
                                     <a class="nav-link" href="~/MemberCenter/EditProfile">修改個人資訊</a>
                                     <a class="nav-link" href="#">登出</a>
                                 </div>
@@ -98,7 +86,7 @@
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                                 <div class="user-pic d-inline-block overflow-hidden me-1">
-                                    <img class="h-100 align-top" src="@ViewBag.memberPhoto">
+                                    <img class="h-100 align-top" src="https://picsum.photos/50/50/?random=9">
                                 </div>
                                 <i class="fas fa-chevron-down"></i>
                             </a>
@@ -112,28 +100,13 @@
                                         </h2>
                                         <div id="collapseMember" class="accordion-collapse collapse" aria-labelledby="headingMember">
                                             <div class="accordion-body p-0">
-                                                <a class="nav-link" href="#">訂購單</a>
                                                 <a class="nav-link" href="~/UserCenter/Pending">訂單管理</a>
-                                                <a class="nav-link" href="~/MemberCenter/UserInfo">評價和收藏</a>
+                                                <a class="nav-link" href="~/MemberCenter/MyCollection">我的收藏</a>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="accordion-item accordion-host">
-                                        <h2 class="accordion-header" id="headingHost">
-                                            <button class="accordion-button dropdown-item collapsed justify-content-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHost" aria-expanded="false" aria-controls="collapseHost">
-                                                場地主
-                                            </button>
-                                        </h2>
-                                        <div id="collapseHost" class="accordion-collapse collapse" aria-labelledby="headingHost">
-                                            <div class="accordion-body p-0">
-                                                <a class="nav-link" href="~/HostCenter/Processing">訂單管理</a>
-                                                <a class="nav-link" href="~/HostCenter/EditSpace">場地管理</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                                <li><a class="dropdown-item" href="~/HostCenter/EditSpace">場地主</a></li>
                                 <li><a class="dropdown-item" href="~/MemberCenter/EditProfile">修改個人資訊</a></li>
                                 <li><a class="dropdown-item" href="#">登出</a></li>
                             </ul>
@@ -284,9 +257,11 @@
     <script src="~/Assets/JS/bootstrap.bundle.min.js"></script>
     <script src="~/Assets/JS/sweetalert2.js"></script>
     <script src="~/Assets/JS/layout/navbar-footer.js"></script>
-    @RenderSection("scripts", required: false)
+    <script src="~/Assets/JS/addspace/ckeditor.js"></script>
     @RenderSection("endCSS", required: false)
     @RenderSection("endJS", required: false)
+    @RenderSection("scripts", required: false)
+
 
 </body>
 </html>

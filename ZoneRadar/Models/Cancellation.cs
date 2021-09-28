@@ -6,24 +6,24 @@ namespace ZoneRadar.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("District")]
-    public partial class District
+    [Table("Cancellation")]
+    public partial class Cancellation
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public District()
+        public Cancellation()
         {
             Space = new HashSet<Space>();
         }
 
-        public int DistrictID { get; set; }
+        public int CancellationID { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string DistrictName { get; set; }
+        [StringLength(20)]
+        public string CancellationTitle { get; set; }
 
-        public int CityID { get; set; }
-
-        public virtual City City { get; set; }
+        [Required]
+        [StringLength(300)]
+        public string CancellationDetail { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Space> Space { get; set; }

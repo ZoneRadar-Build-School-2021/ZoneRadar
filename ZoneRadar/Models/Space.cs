@@ -13,7 +13,7 @@ namespace ZoneRadar.Models
         public Space()
         {
             Operating = new HashSet<Operating>();
-            Orders = new HashSet<Orders>();
+            Order = new HashSet<Order>();
             SpaceAmenity = new HashSet<SpaceAmenity>();
             SpacePhoto = new HashSet<SpacePhoto>();
         }
@@ -27,6 +27,9 @@ namespace ZoneRadar.Models
         public string SpaceName { get; set; }
 
         [Required]
+        public string Type { get; set; }
+
+        [Required]
         public string Introduction { get; set; }
 
         public decimal MeasureOfArea { get; set; }
@@ -38,25 +41,8 @@ namespace ZoneRadar.Models
         public int MinHours { get; set; }
 
         [Required]
+        [StringLength(100)]
         public string Discount { get; set; }
-
-        public int CountryID { get; set; }
-
-        public int CityID { get; set; }
-
-        public int DistrictID { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Address { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Latitude { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Longitude { get; set; }
 
         [Required]
         public string CleaningProtocol { get; set; }
@@ -67,18 +53,33 @@ namespace ZoneRadar.Models
         [Required]
         public string Traffic { get; set; }
 
-        [Required]
+        public string Parking { get; set; }
+
         public string ShootingEquipment { get; set; }
+
+        public int CancellationID { get; set; }
+
+        public int CountryID { get; set; }
+
+        public int CityID { get; set; }
+
+        public int DistrictID { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string Cancellation { get; set; }
+        public string Address { get; set; }
 
-        [Required]
-        public string Parking { get; set; }
+        public DateTime PublishTime { get; set; }
 
-        [Required]
-        public string Type { get; set; }
+        public bool Discontinued { get; set; }
+
+        [StringLength(50)]
+        public string Latitude { get; set; }
+
+        [StringLength(50)]
+        public string Longitude { get; set; }
+
+        public virtual Cancellation Cancellation { get; set; }
 
         public virtual City City { get; set; }
 
@@ -92,7 +93,7 @@ namespace ZoneRadar.Models
         public virtual ICollection<Operating> Operating { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<Order> Order { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SpaceAmenity> SpaceAmenity { get; set; }

@@ -12,6 +12,7 @@ namespace ZoneRadar.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Country()
         {
+            City = new HashSet<City>();
             Space = new HashSet<Space>();
         }
 
@@ -20,6 +21,9 @@ namespace ZoneRadar.Models
         [Required]
         [StringLength(50)]
         public string CountryName { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<City> City { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Space> Space { get; set; }

@@ -1,198 +1,199 @@
 img {
-    max-width: 100%;
-    height: auto;
-    vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
 }
 
 .member_container {
-    max-width: 1140px;
+  max-width: 1140px;
 }
 
 .memberbuyer_container {
-    margin-top: -50px;
+  margin-top: -50px;
 }
 
 .memberbuyer_title {
-    font-size: 40px;
-    font-weight: 600;
-    margin-bottom: -20px;
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: -20px;
 }
 
 .btn:focus {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 .memberbuyer_state {
-    list-style: none;
+  list-style: none;
 }
 
-    .memberbuyer_state a {
-        text-decoration: none;
-        color: #000;
-        border-bottom: 2px solid transparent;
-    }
+.memberbuyer_state a {
+  text-decoration: none;
+  color: #000;
+  border-bottom: 2px solid transparent;
+}
 
-.active {
-    color: #000;
-    border-bottom: 2px solid #D9831A;
+.active{
+  color: #000;
+  border-bottom: 2px solid #D9831A;
 }
 
 .memberbuyer_state a:hover {
-    color: #cccccc;
-    border-bottom: 2px solid #D9831A;
+  color: #cccccc;
+  border-bottom: 2px solid #D9831A;
 }
 
 
 .fa-star {
-    color: #D9831A;
+  color: #D9831A;
 }
 
 .memberbuyer_pending {
-    border-bottom: 1px solid #DEE2E6;
+  border-bottom: 1px solid #DEE2E6;
+
 }
 
 .memberbuyer_pending_num {
-    color: #D9831A;
+  color: #D9831A;
 }
 
-    .memberbuyer_pending_num a {
-        text-decoration: none;
-        color: #fff;
-        background-color: #D9831A;
-        border-radius: 10px;
-    }
+.memberbuyer_pending_num a {
+  text-decoration: none;
+  color: #fff;
+  background-color: #D9831A;
+  border-radius: 10px;
+}
 
-        .memberbuyer_pending_num a:hover {
-            background-color: #be7418;
-        }
+.memberbuyer_pending_num a:hover {
+  background-color: #be7418;
+}
 
-.memberbuyer_pending_num_date {
-    text-align: right;
+.memberbuyer_pending_num_date{
+  text-align: right;
 }
 
 .memberbuyer_pending_pic img {
-    width: 100%;
+  width: 100%;
 }
 
 .memberbuyer_pending_txt_title a {
-    text-decoration: none;
-    color: #000;
+  text-decoration: none;
+  color: #000;
 }
 
-    .memberbuyer_pending_txt_title a:hover {
-        color: #cccccc
-    }
+.memberbuyer_pending_txt_title a:hover {
+  color: #cccccc
+}
 
 .fa-wifi,
 .fa-video,
 .fa-briefcase-medical {
-    color: #000;
+  color: #000;
 }
 
 .memberbuyer_pending_txt_price {
-    display: inline-block;
-    margin-top: auto;
-    margin-bottom: auto;
+  display: inline-block;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .memberbuyer_pending_txt_price_title {
-    color: #D9831A;
-    font-weight: bolder;
-    margin: 0px;
+  color: #D9831A;
+  font-weight: bolder;
+  margin: 0px;
 }
 
 .memberbuyer_pending_txt_price {
-    color: #D9831A;
-    font-weight: bolder;
-    font-size: 35px;
+  color: #D9831A;
+  font-weight: bolder;
+  font-size: 35px;
 }
 
 .memberbuyer_pending_btn .btn {
-    background-color: #fff;
-    border: 1px solid #cccccc;
-    color: #000;
+  background-color: #fff;
+  border: 1px solid #cccccc;
+  color: #000;
 }
 
-    .memberbuyer_pending_btn .btn:hover {
-        background-color: #E72A54;
-        border: 1px solid #cccccc;
-        color: #fff;
-    }
-
-    .memberbuyer_pending_btn .btn:nth-child(2) {
-        background-color: #D9831A;
-        color: #fff;
-    }
-
-        .memberbuyer_pending_btn .btn:nth-child(2):hover {
-            background-color: #be7418;
-        }
-
-.btn_close {
-    background-color: #fff;
-    border: 1px solid #E72A54;
-    color: #E72A54;
+.memberbuyer_pending_btn .btn:hover {
+  background-color: #E72A54;
+  border: 1px solid #cccccc;
+  color: #fff;
 }
 
-    .btn_close:hover {
-        background-color: #E72A54;
-        border: 1px solid #cccccc;
-        color: #fff;
-    }
-
-.btn_sendout {
-    background-color: #d9831a;
-    color: #fff;
+.memberbuyer_pending_btn .btn:nth-child(2) {
+  background-color: #D9831A;
+  color: #fff;
 }
 
-    .btn_sendout:hover {
-        background-color: #be7418;
-        color: #fff;
-    }
+.memberbuyer_pending_btn .btn:nth-child(2):hover {
+  background-color: #be7418;
+}
+
+.btn_close{
+  background-color: #fff;
+  border: 1px solid #E72A54;
+  color: #E72A54;
+}
+
+.btn_close:hover{
+  background-color: #E72A54;
+  border: 1px solid #cccccc;
+  color: #fff;
+}
+
+.btn_sendout{
+  background-color: #d9831a;
+  color: #fff;
+}
+
+.btn_sendout:hover{
+  background-color: #be7418;
+  color: #fff;
+}
 
 .form-select:focus {
-    box-shadow: none;
-    border-color: #be7418;
+  box-shadow: none;
+  border-color: #be7418;
 }
 
 .modify_rent_date input,
 .modify_rentback_date input,
 .modify_rent_time input,
-.modify_rentback_time input {
-    width: 100%;
-    border-radius: 5px;
-    border: 1px solid #be7418;
-    text-align: center;
+.modify_rentback_time input{
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #be7418;
+  text-align: center;
 }
 
-.input_people {
-    width: 100%;
-    border-radius: 5px;
-    border: 1px solid #be7418;
+.input_people{
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #be7418;
 }
 
 @media (max-width:767px) {
-    .memberbuyer_pending_num_date {
-        text-align: left;
-    }
+  .memberbuyer_pending_num_date{
+    text-align: left;
+  }
 
-    .fa-wifi,
-    .fa-video,
-    .fa-briefcase-medical {
-        padding: 10px !important;
-    }
+  .fa-wifi,
+  .fa-video,
+  .fa-briefcase-medical {
+    padding: 10px !important;
+  }
 
-    .memberbuyer_pending_txt_price_title {
-        font-size: 10px;
-    }
+  .memberbuyer_pending_txt_price_title {
+    font-size: 10px;
+  }
 
-    .memberbuyer_pending_txt_price {
-        font-size: 25px;
-    }
+  .memberbuyer_pending_txt_price {
+    font-size: 25px;
+  }
 
-    .memberbuyer_pending_num,
-    .memberbuyer_pending_pic,
-    .memberbuyer_pending_txt {
-        border-bottom: none;
-    }
+  .memberbuyer_pending_num,
+  .memberbuyer_pending_pic,
+  .memberbuyer_pending_txt {
+    border-bottom: none;
+  }
 }

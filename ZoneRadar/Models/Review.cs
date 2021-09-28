@@ -20,11 +20,10 @@ namespace ZoneRadar.Models
         [Required]
         public string ReviewContent { get; set; }
 
-        [Column(TypeName = "datetime2")]
         public DateTime ReviewDate { get; set; }
 
         public bool Recommend { get; set; }
 
-        public virtual Orders Orders { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

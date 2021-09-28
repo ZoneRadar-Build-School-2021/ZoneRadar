@@ -13,14 +13,12 @@ namespace ZoneRadar.Models
 
         public int OrderID { get; set; }
 
-        [Column(TypeName = "datetime2")]
         public DateTime StartDateTime { get; set; }
 
-        [Column(TypeName = "datetime2")]
         public DateTime EndDateTime { get; set; }
 
         public int Participants { get; set; }
 
-        public virtual Orders Orders { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

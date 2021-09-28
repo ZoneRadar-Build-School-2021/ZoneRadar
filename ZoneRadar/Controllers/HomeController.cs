@@ -3,21 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Services;
 
 namespace ZoneRadar.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IndexService _ser;
-        public HomeController()
-        {
-            _ser = new IndexService();
-        }
-
         public ActionResult Index()
         {
-            return View(_ser.GetSpaceVMData());
+            return View();
         }
 
         public ActionResult About()
@@ -45,5 +40,35 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult SearchSpace(HomepageSearchViewModel homepageSearchVM)
+        {
+            if (ModelState.IsValid)
+            {
+                return Content("成功接收");
+            }
+
+            return null;
+        }
+        public ActionResult AddTest()
+        {
+            //_service.TestMethod();
+
+            return Content("新增完成");
+        }
+        //public ActionResult BookingInfo(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    var space = _ser.GetSpace(id);
+
+        //    if (space.Count() == 0)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(space);
+        //}
     }
 }

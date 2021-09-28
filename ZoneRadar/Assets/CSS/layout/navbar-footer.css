@@ -56,7 +56,7 @@ nav.shared-navbar {
     }
 
         nav.shared-navbar .nav-item .become-host-link:hover {
-            color: #eba755;
+            color: #BE7418;
         }
 
     nav.shared-navbar .nav-item .accordion-item {
@@ -128,19 +128,19 @@ nav.shared-navbar {
             color: #049DD9;
         }
 
-    nav.shared-navbar .user .accordion-member .accordion-button {
+    nav.shared-navbar .user .accordion-member .accordion-button, nav.shared-navbar .user .accordion-host .accordion-button {
         line-height: 35px;
     }
 
-    nav.shared-navbar .user .accordion-member .accordion-collapse {
+    nav.shared-navbar .user .accordion-member .accordion-collapse, nav.shared-navbar .user .accordion-host .accordion-collapse {
         font-size: 18px;
     }
 
-    nav.shared-navbar .nav-item.d-md-none .accordion-member .accordion-button {
+    nav.shared-navbar .nav-item.d-md-none .accordion-member .accordion-button, nav.shared-navbar .nav-item.d-md-none .accordion-host .accordion-button {
         background-color: #f8f9fa;
     }
 
-    nav.shared-navbar .nav-item.d-md-none .accordion-member {
+    nav.shared-navbar .nav-item.d-md-none .accordion-member, nav.shared-navbar .nav-item.d-md-none .accordion-host {
         background-color: #f3f3f3;
     }
 /* #endregion */

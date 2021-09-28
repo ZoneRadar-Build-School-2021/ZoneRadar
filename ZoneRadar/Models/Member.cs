@@ -13,6 +13,7 @@ namespace ZoneRadar.Models
         public Member()
         {
             Collection = new HashSet<Collection>();
+            Order = new HashSet<Order>();
             Space = new HashSet<Space>();
         }
 
@@ -38,14 +39,15 @@ namespace ZoneRadar.Models
 
         public bool ReceiveEDM { get; set; }
 
-        [Column(TypeName = "datetime2")]
         public DateTime SignUpDateTime { get; set; }
 
-        [Column(TypeName = "datetime2")]
         public DateTime LastLogin { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Collection> Collection { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Order { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Space> Space { get; set; }
