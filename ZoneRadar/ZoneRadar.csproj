@@ -310,7 +310,8 @@
     <Content Include="Assets\IMG\ZONERadar.png" />
     <Content Include="Assets\JS\addspace\addspace.js" />
     <Content Include="Assets\JS\addspace\CityandDistrictandZipcodeJavaScript.js" />
-    <Content Include="Assets\JS\addspace\html.js" />
+    <Content Include="Assets\JS\addspace\CKEDITOR.js" />
+    <Content Include="Assets\JS\addspace\Validation.js" />
     <Content Include="Assets\JS\booking\booking.js" />
     <Content Include="Assets\JS\bootstrap.bundle.min.js" />
     <Content Include="Assets\JS\flatpickr.js" />
