@@ -193,7 +193,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AddSpace.cs" />
     <Compile Include="Models\AmenityDetail.cs" />
     <Compile Include="Models\Cancellation.cs" />
@@ -221,7 +220,6 @@
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\HomeViewModel.cs" />
     <Compile Include="Data\ZONERadarContext.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Operating.cs" />
     <Compile Include="Models\Order.cs" />
@@ -232,15 +230,12 @@
     <Compile Include="Models\SpaceAmenity.cs" />
     <Compile Include="Models\SpacePhoto.cs" />
     <Compile Include="Models\SpaceType.cs" />
-    <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Models\ViewModels\FormAreaViewModel.cs" />
-    <Compile Include="Data\ZoneRadarDB.cs" />
+    <Compile Include="Models\ViewModels\SpaceViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ZONERadarRepository.cs" />
     <Compile Include="Services\HomeService.cs" />
-    <Compile Include="Repositories\zoneRadarRepository.cs" />
-    <Compile Include="Services\addressAreaService.cs" />
-    <Compile Include="Services\AmenityService.cs" />
+    <Compile Include="Services\SpaceService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -314,6 +309,8 @@
     <Content Include="Assets\IMG\static\fistbump-over-desk.jpg" />
     <Content Include="Assets\IMG\ZONERadar.png" />
     <Content Include="Assets\JS\addspace\addspace.js" />
+    <Content Include="Assets\JS\addspace\CityandDistrictandZipcode.js" />
+    <Content Include="Assets\JS\addspace\CityandDistrictandZipcodeJavaScript.js" />
     <Content Include="Assets\JS\booking\booking.js" />
     <Content Include="Assets\JS\bootstrap.bundle.min.js" />
     <Content Include="Assets\JS\flatpickr.js" />

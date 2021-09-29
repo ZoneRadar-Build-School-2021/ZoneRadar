@@ -5,17 +5,19 @@ using System.Web;
 using System.Web.Mvc;
 using ZoneRadar.Services;
 using ZoneRadar.Models;
+using ZoneRadar.Repositories;
+using ZoneRadar.Models.ViewModels;
 
 namespace ZoneRadar.Controllers
 {
-    
     public class HostCenterController : Controller
     {
-        private readonly AmenityService _amenityService;
+        private readonly SpaceService _spaceService;
+
         // GET: HostCenter
        public HostCenterController() 
         {
-            _amenityService = new AmenityService();
+            _spaceService = new SpaceService();
         }
         public ActionResult Index()
         {
@@ -23,7 +25,19 @@ namespace ZoneRadar.Controllers
         }
         public ActionResult AddSpace()
         {
-            var model = _amenityService.ShowSelectofCheckBox();
+
+            var model = new SpaceViewModel
+            {
+                Spacetype = _spaceService.ShowSpaceType(),
+                Parking=_spaceService.ShowParking(),
+                amenityAraeList=_spaceService.ShowSpaceSelect().amenityAraeList,
+                cancellationAraesList=_spaceService.ShowSpaceSelect().cancellationAraesList,
+                CleanFisrtPart=_spaceService.ShowCleanFisrt(),
+                CleanSecPart=_spaceService.ShowCleanSec(),
+                CleanThirdPart=_spaceService.ShowCleanThird(),
+                CleanFourthPart=_spaceService.ShowCleanFourth(),
+                Operating= _spaceService.Operating()
+            };
             return View(model);
         }
         public ActionResult EditSpace()

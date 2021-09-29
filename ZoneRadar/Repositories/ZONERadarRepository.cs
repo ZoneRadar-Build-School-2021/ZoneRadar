@@ -7,6 +7,7 @@ using ZoneRadar.Data;
 
 namespace ZoneRadar.Repositories
 {
+  
     public class ZONERadarRepository
     {
         private readonly ZONERadarContext _context;
