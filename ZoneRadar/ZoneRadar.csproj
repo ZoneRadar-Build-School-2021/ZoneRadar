@@ -309,7 +309,6 @@
     <Content Include="Assets\IMG\static\fistbump-over-desk.jpg" />
     <Content Include="Assets\IMG\ZONERadar.png" />
     <Content Include="Assets\JS\addspace\addspace.js" />
-    <Content Include="Assets\JS\addspace\CityandDistrictandZipcode.js" />
     <Content Include="Assets\JS\addspace\CityandDistrictandZipcodeJavaScript.js" />
     <Content Include="Assets\JS\booking\booking.js" />
     <Content Include="Assets\JS\bootstrap.bundle.min.js" />

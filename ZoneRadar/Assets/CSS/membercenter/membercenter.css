@@ -303,7 +303,10 @@
 .bi-bricks:not(.collapsed) {
 	color: #555555;
 }
-
+.bi-bricks {
+	margin-top:30px;
+	width: 50px;
+}
 .bi-cart-x-fill {
 	width: 40px;
 }
