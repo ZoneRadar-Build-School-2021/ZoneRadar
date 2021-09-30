@@ -15,6 +15,7 @@ namespace ZoneRadar.Models.ViewModels
         public HomeViewModel HomeVM { get; set; }
         public HomepageSearchViewModel HomepageSearchVM { get; set; }
         public RegisterZONERadarViewModel RegisterZONERadarVM { get; set; }
+        public LoginZONERadarViewModel LoginZONERadarVM { get; set; }
     }
     /// <summary>
     /// 首頁的ViewModel

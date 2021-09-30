@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ZoneRadar.Models.ViewModels;
@@ -29,6 +30,7 @@ namespace ZoneRadar.Controllers
                     MemberPhoto = _service.GetMemberPhoto()
                 }
             };
+            ViewBag.IsLogin = TempData["IsLogin"];
             //var model = new HomeViewModel
             //{
             //    SelectedSpaces = _service.GetSelectedSpace(),
@@ -57,6 +59,8 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+
+        [Authorize]
         public ActionResult FAQ()
         {
             return View();
@@ -75,25 +79,19 @@ namespace ZoneRadar.Controllers
 
             return null;
         }
-        public ActionResult AddTest()
+        public ActionResult SearchByCity(int? id)
         {
-            _service.TestMethod();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var space = _service.GetSpaceByCity(id.Value);
 
-            return Content("新增完成");
+            if (space.Count() == 0)
+            {
+                return HttpNotFound();
+            }
+            return View(space);
         }
-        //public ActionResult BookingInfo(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    var space = _ser.GetSpace(id);
-
-        //    if (space.Count() == 0)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(space);
-        //}
     }
 }

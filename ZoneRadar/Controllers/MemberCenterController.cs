@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Services;
 
@@ -58,7 +59,7 @@ namespace ZoneRadar.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(string email, string password, string name)
+        public ActionResult Register(AllViewModel allVM)
         {
             if (!ModelState.IsValid)
             {
@@ -68,9 +69,9 @@ namespace ZoneRadar.Controllers
             {
                 var registerVM = new RegisterZONERadarViewModel
                 {
-                    Email = email,
-                    Password = password,
-                    Name = name
+                    Name = allVM.RegisterZONERadarVM.Name,
+                    Email = allVM.RegisterZONERadarVM.Email,
+                    Password = allVM.RegisterZONERadarVM.Password
                 };
                 var isSuccessful = _service.RegisterMember(registerVM);
                 if (isSuccessful)
@@ -87,13 +88,49 @@ namespace ZoneRadar.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            return RedirectToAction("index", "Home");
+            TempData["IsLogin"] = FormsAuthentication.IsEnabled;
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
-        public ActionResult Login(string email, string password)
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(AllViewModel allVM)
         {
-            return RedirectToAction("index", "Home");
+            //若未通過Model驗證
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+           
+            var loginVM = new LoginZONERadarViewModel
+            {
+                Email = allVM.LoginZONERadarVM.Email,
+                Password = allVM.LoginZONERadarVM.Password
+            };
+
+            var user = _service.UserLogin(loginVM);
+                       
+            //找不到則彈回Login頁
+            if (user == null)
+            {
+                ModelState.AddModelError("Password", "無效的帳號或密碼");
+                return View();
+            }
+
+            //建造加密表單驗證票證
+            var encryptedTicket = _service.CreateEncryptedTicket(user);
+
+            //建造cookie
+            _service.CreateCookie(encryptedTicket, Response);
+
+            //導向使用者原先欲造訪的路由
+            return Redirect(_service.GetUrl(user));
+        }
+
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

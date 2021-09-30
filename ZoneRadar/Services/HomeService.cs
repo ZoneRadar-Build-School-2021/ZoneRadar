@@ -16,6 +16,11 @@ namespace ZoneRadar.Services
         {
             _repository = new ZONERadarRepository();
         }
+
+        /// <summary>
+        /// 找出精選場地
+        /// </summary>
+        /// <returns></returns>
         public List<SelectedSpaceViewModel> GetSelectedSpace()
         {
             var spaces = _repository.GetAll<Space>().ToList();
@@ -51,6 +56,11 @@ namespace ZoneRadar.Services
 
             return topSelectedSpaces;
         }
+
+        /// <summary>
+        /// 找出分數較高的場地評論
+        /// </summary>
+        /// <returns></returns>
         public List<ToSpaceReviewViewModel> GetSpaceReview()
         {
             var members = _repository.GetAll<Member>().ToList();
@@ -75,6 +85,11 @@ namespace ZoneRadar.Services
 
             return topSpaceReviews;
         }
+
+        /// <summary>
+        /// 取得使用者的照片
+        /// </summary>
+        /// <returns></returns>
         public string GetMemberPhoto()
         {
             var members = _repository.GetAll<Member>();
@@ -83,6 +98,11 @@ namespace ZoneRadar.Services
 
             return memberPhoto == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : memberPhoto;
         }
+
+        /// <summary>
+        /// 產生活動選單
+        /// </summary>
+        /// <returns></returns>
         public List<SelectListItem> GetTypeOption()
         {
             var typeOptions = new List<SelectListItem>
@@ -108,6 +128,11 @@ namespace ZoneRadar.Services
 
             return typeOptions;
         }
+
+        /// <summary>
+        /// 產生地點選單
+        /// </summary>
+        /// <returns></returns>
         public List<SelectListItem> GetCityOption()
         {
             var cities = _repository.GetAll<City>().ToList();
@@ -119,6 +144,10 @@ namespace ZoneRadar.Services
 
             return cityOptions;
         }
+
+        /// <summary>
+        /// 關閉資料庫連線
+        /// </summary>
         public void DisposeCtx()
         {
             _repository.Dispose();
@@ -148,64 +177,134 @@ namespace ZoneRadar.Services
         //    _repository.SaveChanges();
         //    _repository.Dispose();
         //}
-        public void TestMethod()
-        {
-            List<SpacePhoto> spacePhotos = new List<SpacePhoto>
-            {
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1980/1200/?random=1"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=2"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=3"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=4"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=5"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1000/800/?random=6"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=7"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/400/300/?random=8"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/800/600/?random=9"},
-                new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=10"},
-                new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=11"},
-                new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=12"},
-                new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=13"},
-                new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=14"},
-                new SpacePhoto{SpaceID = 82, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=15"},
-                new SpacePhoto{SpaceID = 82, SpacePhotoUrl = "https://picsum.photos/500/700/?random=16"},
-                new SpacePhoto{SpaceID = 82, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=17"},
-                new SpacePhoto{SpaceID = 89, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=18"},
-                new SpacePhoto{SpaceID = 89, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=19"},
-                new SpacePhoto{SpaceID = 89, SpacePhotoUrl = "https://picsum.photos/500/700/?random=20"},
-                new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=21"},
-                new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=22"},
-                new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/500/700/?random=23"},
-                new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/300/400/?random=24"},
-                new SpacePhoto{SpaceID = 157, SpacePhotoUrl = "https://picsum.photos/300/400/?random=25"},
-                new SpacePhoto{SpaceID = 157, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=26"},
-                new SpacePhoto{SpaceID = 157, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=27"},
-                new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=28"},
-                new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=29"},
-                new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=30"},
-                new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=31"},
-                new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=32"},
-                new SpacePhoto{SpaceID = 163, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=33"},
-                new SpacePhoto{SpaceID = 163, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=34"},
-                new SpacePhoto{SpaceID = 163, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=35"},
-                new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=36"},
-                new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1000/900/?random=37"},
-                new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=38"},
-                new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=39"},
-                new SpacePhoto{SpaceID = 171, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=40"},
-                new SpacePhoto{SpaceID = 171, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=41"},
-                new SpacePhoto{SpaceID = 171, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=42"},
-                new SpacePhoto{SpaceID = 173, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=43"},
-                new SpacePhoto{SpaceID = 173, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=44"},
-                new SpacePhoto{SpaceID = 173, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=45"}
-            };
-            _repository.CreateRange(spacePhotos);
-            _repository.SaveChanges();
-            _repository.Dispose();
-        }
-        //public List<Space> GetSpace(int? id)
+        //public void TestMethod()
         //{
-        //    var space = spaces.Where(x => x.SpaceID == id).ToList();
-        //    return space;
+        //    List<SpacePhoto> spacePhotos = new List<SpacePhoto>
+        //    {
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1980/1200/?random=1"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=2"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=3"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=4"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=5"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1000/800/?random=6"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=7"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/400/300/?random=8"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/800/600/?random=9"},
+        //        new SpacePhoto{SpaceID = 45, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=10"},
+        //        new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=11"},
+        //        new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=12"},
+        //        new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=13"},
+        //        new SpacePhoto{SpaceID = 60, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=14"},
+        //        new SpacePhoto{SpaceID = 82, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=15"},
+        //        new SpacePhoto{SpaceID = 82, SpacePhotoUrl = "https://picsum.photos/500/700/?random=16"},
+        //        new SpacePhoto{SpaceID = 82, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=17"},
+        //        new SpacePhoto{SpaceID = 89, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=18"},
+        //        new SpacePhoto{SpaceID = 89, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=19"},
+        //        new SpacePhoto{SpaceID = 89, SpacePhotoUrl = "https://picsum.photos/500/700/?random=20"},
+        //        new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=21"},
+        //        new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=22"},
+        //        new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/500/700/?random=23"},
+        //        new SpacePhoto{SpaceID = 139, SpacePhotoUrl = "https://picsum.photos/300/400/?random=24"},
+        //        new SpacePhoto{SpaceID = 157, SpacePhotoUrl = "https://picsum.photos/300/400/?random=25"},
+        //        new SpacePhoto{SpaceID = 157, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=26"},
+        //        new SpacePhoto{SpaceID = 157, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=27"},
+        //        new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=28"},
+        //        new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=29"},
+        //        new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=30"},
+        //        new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=31"},
+        //        new SpacePhoto{SpaceID = 160, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=32"},
+        //        new SpacePhoto{SpaceID = 163, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=33"},
+        //        new SpacePhoto{SpaceID = 163, SpacePhotoUrl = "https://picsum.photos/1200/800/?random=34"},
+        //        new SpacePhoto{SpaceID = 163, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=35"},
+        //        new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=36"},
+        //        new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1000/900/?random=37"},
+        //        new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=38"},
+        //        new SpacePhoto{SpaceID = 168, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=39"},
+        //        new SpacePhoto{SpaceID = 171, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=40"},
+        //        new SpacePhoto{SpaceID = 171, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=41"},
+        //        new SpacePhoto{SpaceID = 171, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=42"},
+        //        new SpacePhoto{SpaceID = 173, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=43"},
+        //        new SpacePhoto{SpaceID = 173, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=44"},
+        //        new SpacePhoto{SpaceID = 173, SpacePhotoUrl = "https://picsum.photos/1920/1080/?random=45"}
+        //    };
+        //    _repository.CreateRange(spacePhotos);
+        //    _repository.SaveChanges();
+        //    _repository.Dispose();
         //}
+
+
+
+        /// <summary>
+        /// 搜尋符合條件的場地(首頁搜尋列)
+        /// </summary>
+        /// <param name="homepageSearchVM"></param>
+        public void SearchSpace(HomepageSearchViewModel homepageSearchVM)
+        {
+            var orders = _repository.GetAll<Order>().ToList();
+            var operatings = _repository.GetAll<Operating>().ToList();
+            var orderDetails = _repository.GetAll<OrderDetail>().ToList();
+
+            //1. 找到符合「類型」和「城市」的場地
+            var spacesByCityAndType = _repository.GetAll<Space>().Where(x => x.Type == homepageSearchVM.Type && x.City.CityID == homepageSearchVM.CityId).ToList();
+
+            //2. 找到符合「時間」條件的場地，並轉成ViewModel
+            foreach (var space in spacesByCityAndType)
+            {
+                //找到該場地的未完成訂單
+                var unfinishedOrders = orders.Where(x => x.SpaceID == space.SpaceID && x.OrderStatus.OrderStatusID == 2);
+                //找到該場地的未完成訂單被訂走的日期
+                var bookedDate = new List<DateTime>();
+                foreach (var order in unfinishedOrders)
+                {
+                    bookedDate.AddRange(orderDetails.Where(x => x.OrderID == order.OrderID).Select(x => x.StartDateTime.Date).ToList());
+                }
+                //找到該場地的營業星期
+                var operatingWeekDay = operatings.Where(x => x.SpaceID == space.SpaceID).Select(x => x.OperatingDay).ToList();
+                //將營業星期陣列中的7改成0(為了符合DayOfWeek列舉)
+                if (operatingWeekDay.Remove(7))
+                {
+                    operatingWeekDay.Add(0);
+                }
+                //判斷該場地是否符合「時間」的條件
+                var isBooked = bookedDate.Contains(homepageSearchVM.Date.Date); //該天被訂走
+                var isOperating = operatingWeekDay.Contains((int)homepageSearchVM.Date.DayOfWeek); //該天有營業
+                //若該場地符合所有條件，則轉換成ViewModel並加進ViewModel的List中
+                if (!isBooked && isOperating)
+                {
+
+                }
+            }
+        }
+
+        /// <summary>
+        /// 按照縣市地名圖片搜尋場地(首頁)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<Space> GetSpaceByCity(int id)
+        {
+            var spaces = _repository.GetAll<Space>().ToList();
+            var spacesByCity = new List<Space>();
+            //若選擇新竹，則搜尋新竹市和新竹縣
+            if (id == 5 || id == 10)
+            {
+                spacesByCity.AddRange(spaces.Where(x => x.CityID == 5 && x.CityID == 10));
+            }
+            //若選擇嘉義，則搜尋嘉義市和嘉義縣
+            else if (id == 8 || id == 15)
+            {
+                spacesByCity.AddRange(spaces.Where(x => x.CityID == 8 && x.CityID == 15));
+            }
+            else
+            {
+                spacesByCity.AddRange(spaces.Where(x => x.CityID == id).ToList());
+            }
+            //轉換成ViewModel
+            foreach (var item in spacesByCity)
+            {
+
+            }
+            return null;
+        }
     }
 }

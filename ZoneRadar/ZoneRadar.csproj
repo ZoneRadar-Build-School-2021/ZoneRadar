@@ -389,6 +389,7 @@
     <Content Include="Views\HostCenter\Completed.cshtml" />
     <Content Include="Views\HostCenter\Processing.cshtml" />
     <Content Include="Views\MemberCenter\Register.cshtml" />
+    <Content Include="Views\Shared\_LoginStatusPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
