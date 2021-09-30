@@ -11,10 +11,10 @@ namespace ZoneRadar.Services
 {
     public class HomeService
     {
-        private readonly ZONERadarRepository _repository;
+        private readonly ZoneRadarRepository _repository;
         public HomeService()
         {
-            _repository = new ZONERadarRepository();
+            _repository = new ZoneRadarRepository();
         }
         public List<SelectedSpaceViewModel> GetSelectedSpace()
         {
@@ -119,10 +119,7 @@ namespace ZoneRadar.Services
 
             return cityOptions;
         }
-        public void DisposeCtx()
-        {
-            _repository.Dispose();
-        }
+        
         //public void AddTestMethod()
         //{
         //    List<Space> spacesss = new List<Space>

@@ -12,10 +12,13 @@ namespace ZoneRadar.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Space()
         {
+            CleaningProtocol = new HashSet<CleaningProtocol>();
             Operating = new HashSet<Operating>();
             Order = new HashSet<Order>();
             SpaceAmenity = new HashSet<SpaceAmenity>();
+            SpaceDiscount = new HashSet<SpaceDiscount>();
             SpacePhoto = new HashSet<SpacePhoto>();
+            SpaceType = new HashSet<SpaceType>();
         }
 
         public int SpaceID { get; set; }
@@ -27,9 +30,6 @@ namespace ZoneRadar.Models
         public string SpaceName { get; set; }
 
         [Required]
-        public string Type { get; set; }
-
-        [Required]
         public string Introduction { get; set; }
 
         public decimal MeasureOfArea { get; set; }
@@ -39,13 +39,6 @@ namespace ZoneRadar.Models
         public decimal PricePerHour { get; set; }
 
         public int MinHours { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        public string Discount { get; set; }
-
-        [Required]
-        public string CleaningProtocol { get; set; }
 
         [Required]
         public string HostRules { get; set; }
@@ -83,6 +76,9 @@ namespace ZoneRadar.Models
 
         public virtual City City { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CleaningProtocol> CleaningProtocol { get; set; }
+
         public virtual Country Country { get; set; }
 
         public virtual District District { get; set; }
@@ -99,6 +95,12 @@ namespace ZoneRadar.Models
         public virtual ICollection<SpaceAmenity> SpaceAmenity { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SpaceDiscount> SpaceDiscount { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SpacePhoto> SpacePhoto { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SpaceType> SpaceType { get; set; }
     }
 }

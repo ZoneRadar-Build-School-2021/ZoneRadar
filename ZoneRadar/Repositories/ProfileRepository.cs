@@ -2,24 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ZoneRadar.Data;
 using ZoneRadar.Models;
 
 namespace ZoneRadar.Repositories
 {
     public class ProfileRepository
     {
-        private readonly ZoneRadarContext _ctx;
+        private readonly ZONERadarContext _ctx;
         public ProfileRepository()
         {
-            _ctx = new ZoneRadarContext();
+            _ctx = new ZONERadarContext();
         }
-        public IQueryable<T> GetAll<T>() where T : class
+        public IQueryable<Member> GetAll()
         {
-            return _ctx.Set<T>();
-        }
-        public List<Member> GetProfileData()
-        {
-            return _ctx.Member.ToList();
+            return _ctx.Member;
         }
     }
 }

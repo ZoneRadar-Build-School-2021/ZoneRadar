@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SpaceVM>
+﻿@model IEnumerable<HomeViewModel>
 
 @{
     ViewBag.Title = "Home Page";
@@ -30,15 +30,15 @@
             @Html.AntiForgeryToken()
             <!--活動性質-->
             <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0 ms-md-5">                
-                @Html.DropDownListFor(model => model.SpaceVM.Type, typeOptions, "活動性質", new { @class = "select-activity form-select form-select-lg" })
+                @Html.DropDownListFor(model => model.HomepageSearchViewModel.Type, typeOptions, "活動性質", new { @class = "select-activity form-select form-select-lg" })
             </div>
             <!--地點-->
             <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0">
-                @Html.DropDownListFor(model => model.SpacehVM.CityId, cityOptions, "地點", new { @class = "select-county form-select form-select-lg" })
+                @Html.DropDownListFor(model => model.HomepageSearchViewModel.CityId, cityOptions, "地點", new { @class = "select-county form-select form-select-lg" })
             </div>
             <!--日期-->
             <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0">
-                @Html.EditorFor(model => model.SpaceVM.Date, new { htmlAttributes = new { @class = "select-date flatpickr flatpickr-input px-3 py-2 w-100", type = "text", placeholder = "選擇時間", @readonly = "readonly" } })
+                @Html.EditorFor(model => model.HomepageSearchViewModel.Date, new { htmlAttributes = new { @class = "select-date flatpickr flatpickr-input px-3 py-2 w-100", type = "text", placeholder = "選擇時間", @readonly = "readonly" } })
             </div>
             <div class="col-11 col-md-2"><button class="btn text-white w-100 h-100" id="homepage-search-submit" type="submit">找場地</button></div>
         </form>

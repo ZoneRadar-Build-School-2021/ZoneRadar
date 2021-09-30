@@ -13,9 +13,13 @@ namespace ZoneRadar.Data
         {
         }
 
+        public virtual DbSet<AmenityCategoryDetail> AmenityCategoryDetail { get; set; }
         public virtual DbSet<AmenityDetail> AmenityDetail { get; set; }
         public virtual DbSet<Cancellation> Cancellation { get; set; }
         public virtual DbSet<City> City { get; set; }
+        public virtual DbSet<CleaningCategory> CleaningCategory { get; set; }
+        public virtual DbSet<CleaningOption> CleaningOption { get; set; }
+        public virtual DbSet<CleaningProtocol> CleaningProtocol { get; set; }
         public virtual DbSet<Collection> Collection { get; set; }
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<District> District { get; set; }
@@ -27,7 +31,10 @@ namespace ZoneRadar.Data
         public virtual DbSet<Review> Review { get; set; }
         public virtual DbSet<Space> Space { get; set; }
         public virtual DbSet<SpaceAmenity> SpaceAmenity { get; set; }
+        public virtual DbSet<SpaceDiscount> SpaceDiscount { get; set; }
         public virtual DbSet<SpacePhoto> SpacePhoto { get; set; }
+        public virtual DbSet<SpaceType> SpaceType { get; set; }
+        public virtual DbSet<TypeDetail> TypeDetail { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -49,6 +56,16 @@ namespace ZoneRadar.Data
             modelBuilder.Entity<City>()
                 .HasMany(e => e.Space)
                 .WithRequired(e => e.City)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<CleaningCategory>()
+                .HasMany(e => e.CleaningOption)
+                .WithRequired(e => e.CleaningCategory)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<CleaningOption>()
+                .HasMany(e => e.CleaningProtocol)
+                .WithRequired(e => e.CleaningOption)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Country>()
@@ -101,6 +118,11 @@ namespace ZoneRadar.Data
                 .HasPrecision(18, 1);
 
             modelBuilder.Entity<Space>()
+                .HasMany(e => e.CleaningProtocol)
+                .WithRequired(e => e.Space)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Space>()
                 .HasMany(e => e.Operating)
                 .WithRequired(e => e.Space)
                 .WillCascadeOnDelete(false);
@@ -116,8 +138,27 @@ namespace ZoneRadar.Data
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Space>()
+                .HasMany(e => e.SpaceDiscount)
+                .WithRequired(e => e.Space)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Space>()
                 .HasMany(e => e.SpacePhoto)
                 .WithRequired(e => e.Space)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Space>()
+                .HasMany(e => e.SpaceType)
+                .WithRequired(e => e.Space)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<SpaceDiscount>()
+                .Property(e => e.Discount)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<TypeDetail>()
+                .HasMany(e => e.SpaceType)
+                .WithRequired(e => e.TypeDetail)
                 .WillCascadeOnDelete(false);
         }
     }

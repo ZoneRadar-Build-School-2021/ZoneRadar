@@ -13,27 +13,38 @@ namespace ZoneRadar.Services
         private readonly ProfileRepository _repo;
         public ProfileService()
         {
-            _repo = new ProfileRepository();
+            _repo = new ProfileRepository();        
         }
-        public List<ProfileViewModel> GetProfileVMData()
+        public ProfileViewModel GetProfileData()
         {
-            List<Member> profiledata = _repo.GetProfileData();
+            int memberID = 28;
+            var p = _repo.GetAll().ToList().FirstOrDefault(x => x.MemberID == memberID);
+            var result = new ProfileViewModel() 
+            {
+                Photo = p.Photo,
+                Name = p.Name,
+                Phone = p.Phone,
+                Email = p.Email,
+                Description = p.Description
+            };
 
-            List<ProfileViewModel> profileVMList = new List<ProfileViewModel>();
-
+            /*
+            var profiledata = _repo.GetAll().Where(x => x.MemberID == 1).ToList();
             foreach (var m in profiledata)
             {
-                profileVMList.Add(new ProfileViewModel 
+                var profileVM = new ProfileViewModel 
                 { 
                     Photo= m.Photo, 
                     Name = m.Name, 
                     Phone = m.Phone, 
                     Email = m.Email, 
                     Description = m.Description 
-                });
+                };
+                result = profileVM;
             }
+            */
 
-            return profileVMList;
+            return result;
         }
     }
 }

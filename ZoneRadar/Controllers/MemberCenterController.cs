@@ -33,7 +33,8 @@ namespace ZoneRadar.Controllers
         }
         public ActionResult EditProfile()
         {
-            return View(_qaz.GetProfileVMData());
+            var model = _qaz.GetProfileData();
+            return View(model);
         }
         public ActionResult MyCollection()
         {

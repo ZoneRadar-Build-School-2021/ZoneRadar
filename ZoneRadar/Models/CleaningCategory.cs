@@ -6,26 +6,21 @@ namespace ZoneRadar.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("AmenityDetail")]
-    public partial class AmenityDetail
+    [Table("CleaningCategory")]
+    public partial class CleaningCategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AmenityDetail()
+        public CleaningCategory()
         {
-            SpaceAmenity = new HashSet<SpaceAmenity>();
+            CleaningOption = new HashSet<CleaningOption>();
         }
 
-        public int AmenityDetailID { get; set; }
+        public int CleaningCategoryID { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string Amenity { get; set; }
-
-        public int? AmenityCategoryID { get; set; }
-
-        public virtual AmenityCategoryDetail AmenityCategoryDetail { get; set; }
+        public string Category { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SpaceAmenity> SpaceAmenity { get; set; }
+        public virtual ICollection<CleaningOption> CleaningOption { get; set; }
     }
 }
