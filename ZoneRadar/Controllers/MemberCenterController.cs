@@ -71,12 +71,15 @@ namespace ZoneRadar.Controllers
                 {
                     Name = allVM.RegisterZONERadarVM.Name,
                     Email = allVM.RegisterZONERadarVM.Email,
-                    Password = allVM.RegisterZONERadarVM.Password
+                    Password = allVM.RegisterZONERadarVM.Password,
+                    ConfirmPassword = allVM.RegisterZONERadarVM.ConfirmPassword
                 };
-                var isSuccessful = _service.RegisterMember(registerVM);
-                if (isSuccessful)
+                var registerStatus = _service.RegisterMember(registerVM);
+                if (registerStatus.IsSuccessful)
                 {
-                    return RedirectToAction("index", "Home");
+                    var encryptedTicket = _service.CreateEncryptedTicket(registerStatus.user);
+                    _service.CreateCookie(encryptedTicket, Response);
+                    return Redirect(_service.GetUrl(registerStatus.user));
                 }
                 else
                 {
@@ -125,7 +128,7 @@ namespace ZoneRadar.Controllers
 
             //導向使用者原先欲造訪的路由
             return Redirect(_service.GetUrl(user));
-        }
+        }        
 
         public ActionResult SignOut()
         {

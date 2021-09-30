@@ -11,10 +11,10 @@ namespace ZoneRadar.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly HomeService _service;
+        private readonly HomeService _homeService;
         public HomeController()
         {
-            _service = new HomeService();
+            _homeService = new HomeService();
         }
 
         public ActionResult Index()
@@ -23,11 +23,11 @@ namespace ZoneRadar.Controllers
             {
                 HomeVM = new HomeViewModel
                 {
-                    SelectedSpaces = _service.GetSelectedSpace(),
-                    ToSpaceReviews = _service.GetSpaceReview(),
-                    TyoeOptions = _service.GetTypeOption(),
-                    CityOptions = _service.GetCityOption(),
-                    MemberPhoto = _service.GetMemberPhoto()
+                    SelectedSpaces = _homeService.GetSelectedSpace(),
+                    ToSpaceReviews = _homeService.GetSpaceReview(),
+                    TyoeOptions = _homeService.GetTypeOption(),
+                    CityOptions = _homeService.GetCityOption(),
+                    MemberPhoto = _homeService.GetMemberPhoto()
                 }
             };
             ViewBag.IsLogin = TempData["IsLogin"];
@@ -74,10 +74,11 @@ namespace ZoneRadar.Controllers
         {
             if (ModelState.IsValid)
             {
+                _homeService.SearchSpace(homepageSearchVM);
                 return Content("成功接收");
             }
 
-            return null;
+            throw new NotImplementedException();
         }
         public ActionResult SearchByCity(int? id)
         {
@@ -85,7 +86,7 @@ namespace ZoneRadar.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var space = _service.GetSpaceByCity(id.Value);
+            var space = _homeService.GetSpaceByCity(id.Value);
 
             if (space.Count() == 0)
             {

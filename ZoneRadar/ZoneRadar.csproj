@@ -219,6 +219,7 @@
     <Compile Include="Services\HomeService.cs" />
     <Compile Include="Services\MemberService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\HashService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\CSS\booking\booking.css" />
@@ -389,7 +390,6 @@
     <Content Include="Views\HostCenter\Completed.cshtml" />
     <Content Include="Views\HostCenter\Processing.cshtml" />
     <Content Include="Views\MemberCenter\Register.cshtml" />
-    <Content Include="Views\Shared\_LoginStatusPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

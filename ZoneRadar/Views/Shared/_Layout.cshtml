@@ -1,6 +1,15 @@
 ﻿@model AllViewModel
 @{ 
     bool? IsLogin = ViewBag.IsLogin;
+
+    HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
+
+    string userid = "";
+    if (cookie != null)
+    {
+        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
+        userid = ticket.UserData;
+    }
 }
 <!DOCTYPE html>
 <html>
@@ -206,14 +215,16 @@
                     <form action="/MemberCenter/Register" method="post" class="mb-3">
                         @Html.AntiForgeryToken()
                         @*<input type="text" id="input-name-register" name="RegisterZONERadarVM.Name" class="form-control form-control-lg d-block mb-3" placeholder="Name" aria-label="password" aria-describedby="basic-addon2" required>
-                            <input type="email" id="input-email-register" name="RegisterZONERadarVM.Email" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
-                            <input type="password" id="input-password-register" name="RegisterZONERadarVM.Password" class="form-control form-control-lg d-block mb-3" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" required>*@
+        <input type="email" id="input-email-register" name="RegisterZONERadarVM.Email" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
+        <input type="password" id="input-password-register" name="RegisterZONERadarVM.Password" class="form-control form-control-lg d-block mb-3" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" required>*@
                         @Html.EditorFor(model => model.RegisterZONERadarVM.Name, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "text", placeholder = "Name", required = "true" } })
                         @Html.ValidationMessageFor(model => model.RegisterZONERadarVM.Name, "", new { @class = "text-danger d-block text-start mt-n2 mb-1" })
                         @Html.EditorFor(model => model.RegisterZONERadarVM.Email, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "email", placeholder = "Email", required = "true" } })
                         @Html.ValidationMessageFor(model => model.RegisterZONERadarVM.Email, "", new { @class = "text-danger d-block text-start mt-n2 mb-1" })
                         @Html.EditorFor(model => model.RegisterZONERadarVM.Password, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "password", placeholder = "Password", required = "true" } })
                         @Html.ValidationMessageFor(model => model.RegisterZONERadarVM.Password, "", new { @class = "text-danger d-block text-start mt-n2 mb-1" })
+                        @Html.EditorFor(model => model.RegisterZONERadarVM.ConfirmPassword, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "password", placeholder = "Confirm Password", required = "true" } })
+                        @Html.ValidationMessageFor(model => model.RegisterZONERadarVM.ConfirmPassword, "", new { @class = "text-danger d-block text-start mt-n2 mb-1" })
                         <button type="submit" id="register-submit" class="w-100 text-decoration-none text-white">以Email註冊</button>
                     </form>
                     <p class="mb-5">當您註冊時，代表您已同意ZONERadar的服務條款及隱私權政策</p>
@@ -308,8 +319,8 @@
     @if (IsLogin != null)
     {
         <script>
-            let register_modal = document.querySelector("#register-modal");
-            let modal = bootstrap.Modal.getOrCreateInstance(register_modal);
+            let login_modal = document.querySelector("#login-modal");
+            let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
             modal.show();
         </script>
     }

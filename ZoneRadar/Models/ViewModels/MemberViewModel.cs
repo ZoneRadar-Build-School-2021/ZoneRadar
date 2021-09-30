@@ -21,7 +21,13 @@ namespace ZoneRadar.Models.ViewModels
 
         [Required(ErrorMessage = "此欄為必填")]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
-        public string Password { get; set; }        
+        public string Password { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
+        [Compare("Password", ErrorMessage = "密碼不一致")]
+        public string ConfirmPassword { get; set; }
     }
     public class LoginZONERadarViewModel
     {
@@ -31,5 +37,10 @@ namespace ZoneRadar.Models.ViewModels
         [Required(ErrorMessage = "此欄為必填")]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
         public string Password { get; set; }
+    }
+    public class RegisterStatus
+    {
+        public Member user { get; set; }
+        public bool IsSuccessful { get; set; }
     }
 }

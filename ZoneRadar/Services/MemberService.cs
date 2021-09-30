@@ -21,17 +21,25 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="registerVM"></param>
         /// <returns>註冊成功則回傳true，反之回傳flase</returns>
-        public bool RegisterMember(RegisterZONERadarViewModel registerVM)
+        public RegisterStatus RegisterMember(RegisterZONERadarViewModel registerVM)
         {
+            var registerStatus = new RegisterStatus
+            {
+                user = null,
+                IsSuccessful = false
+            };
+
             registerVM.Name = HttpUtility.HtmlEncode(registerVM.Name);
             registerVM.Email = HttpUtility.HtmlEncode(registerVM.Email);
             registerVM.Password = HttpUtility.HtmlEncode(registerVM.Password);
+            registerVM.ConfirmPassword = HttpUtility.HtmlEncode(registerVM.ConfirmPassword);
 
+            var isSamePassword = registerVM.Password == registerVM.ConfirmPassword;
             var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.Email.ToUpper());
 
-            if (isSameEmail || registerVM == null)
+            if (isSameEmail || !isSamePassword || registerVM == null)
             {
-                return false;
+                return registerStatus;
             }
             else
             {
@@ -46,7 +54,9 @@ namespace ZoneRadar.Services
                 };
                 _repository.Create<Member>(member);
                 _repository.SaveChanges();
-                return true;
+                registerStatus.user = member;
+                registerStatus.IsSuccessful = true;
+                return registerStatus;
             }           
         }
         /// <summary>
