@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using ZoneRadar.Models;
+using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Repositories;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Data;
@@ -13,15 +16,34 @@ namespace ZoneRadar.Services
 
     public class SpaceService
     {
-        private readonly ZONERadarRepository _zONERadarRepository;
+        private readonly ZONERadarRepository _repository;
         public SpaceService()
         {
-            _zONERadarRepository = new ZONERadarRepository();
+            _repository = new ZONERadarRepository();
         }
+        public List<SelectedSpaceViewModel> GetSelectedSpace()
         public SpaceViewModel ShowSpaceSelect()
         {
+            var spaces = _repository.GetAll<Space>().ToList();
+            var orders = _repository.GetAll<Order>().Where(x => x.OrderStatus.OrderStatusID == 2).ToList();
+            var reviews = _repository.GetAll<Review>().Where(x => x.ToHost).ToList();
+            var spacePhotos = _repository.GetAll<SpacePhoto>().ToList();
+
+            var selectedSpaces = new List<SelectedSpaceViewModel>();
+
+            foreach (var item in spaces)
             var result = new SpaceViewModel()
             {
+                //計算場地平均分數
+                var spaceReview = orders.Where(x => x.SpaceID == item.SpaceID).Select(x => reviews.FirstOrDefault(y => y.OrderID == x.OrderID)).OfType<Review>().ToList();
+                double scoreAvg = spaceReview.Count() == 0 ? 0 : spaceReview.Average(x => x.Score);
+
+                //場地圖片資料表還沒建好，先寫防呆程式
+                var spacePhoto = spacePhotos.FirstOrDefault(x => x.SpaceID == item.SpaceID);
+                var spacePhotoUrl = spacePhoto == null ? "" : spacePhoto.SpacePhotoUrl;
+
+                selectedSpaces.Add(
+                    new SelectedSpaceViewModel
                 amenityAraeList=new List<AmenityArae>(),
                 cancellationAraesList = new List<CancellationArae>()
             };
@@ -30,7 +52,14 @@ namespace ZoneRadar.Services
             /// </summary>
             var amenities = _zONERadarRepository.GetAll<AmenityDetail>().Select(x => x).ToList();
             foreach (var amenity in amenities) 
-            {
+                    {
+                        SpaceId = item.SpaceID,
+                        CityName = item.City.CityName,
+                        Capacity = item.Capacity,
+                        PricePerHour = item.PricePerHour,
+                        SpacePhoto = spacePhotoUrl,
+                        Score = scoreAvg
+                    });
                 var amenitiestemp = new AmenityArae
                 {
                     AmenityId=amenity.AmenityDetailID,
@@ -51,7 +80,11 @@ namespace ZoneRadar.Services
                     CancellationDetail=cancellation.CancellationDetail
                 };
                 result.cancellationAraesList.Add(cancellationtemp);
-            }
+
+            var topSelectedSpaces = selectedSpaces.OrderByDescending(x => x.Score).Take(6).ToList();
+
+            return topSelectedSpaces;
+        }
             return result;
         }
         /// <summary>
@@ -59,8 +92,10 @@ namespace ZoneRadar.Services
         /// </summary>
         
         public List<SelectListItem> ShowSpaceType()
+        public List<SelectListItem> GetTypeOption()
         {
             var Spacetype = new List<SelectListItem>
+            var typeOptions = new List<SelectListItem>
             {
                 new SelectListItem { Value = "會議", Text = "會議" },
                 new SelectListItem { Value = "派對", Text = "派對" },
@@ -82,7 +117,7 @@ namespace ZoneRadar.Services
             };
             return Spacetype;
         }
-        
+
         /// <summary>
         ///  停車資訊 6種
         /// </summary>
@@ -164,6 +199,8 @@ namespace ZoneRadar.Services
         /// </summary>
         public List<SelectListItem> Operating()
         {
+            var cities = _repository.GetAll<City>().ToList();
+            var cityOptions = cities.Select(x => new SelectListItem
             var Operating = new List<SelectListItem>
             {
                 new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
@@ -188,7 +225,12 @@ namespace ZoneRadar.Services
             };
             return Operating;
         }
+                Value = x.CityID.ToString(),
+                Text = x.CityName
+            }).ToList();
 
+            return cityOptions;
+        }
     }
 
 }

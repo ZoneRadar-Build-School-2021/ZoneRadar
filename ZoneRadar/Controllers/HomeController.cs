@@ -10,21 +10,22 @@ namespace ZoneRadar.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly HomeService _service;
+        private readonly SpaceService _spaceService;
+        private readonly ReviewService _reviewService;
         public HomeController()
         {
-            _service = new HomeService();
+            _spaceService = new SpaceService();
+            _reviewService = new ReviewService();
         }
 
         public ActionResult Index()
         {
             var model = new HomeViewModel
             {
-                SelectedSpaces = _service.GetSelectedSpace(),
-                ToSpaceReviews = _service.GetSpaceReview(),
-                TyoeOptions = _service.GetTypeOption(),
-                CityOptions = _service.GetCityOption(),
-                MemberPhoto = _service.GetMemberPhoto()
+                SelectedSpaces = _spaceService.GetSelectedSpace(),
+                ToSpaceReviews = _reviewService.GetSpaceReview(),
+                TyoeOptions = _spaceService.GetTypeOption(),
+                CityOptions = _spaceService.GetCityOption()
             };
             return View(model);
         }
