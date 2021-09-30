@@ -193,43 +193,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AddSpace.cs" />
-    <Compile Include="Models\AmenityDetail.cs" />
-    <Compile Include="Models\Cancellation.cs" />
-    <Compile Include="Models\City.cs" />
-    <Compile Include="Models\Collection.cs" />
-    <Compile Include="Models\Country.cs" />
-    <Compile Include="Models\District.cs" />
-    <Compile Include="Models\AmenityDetail.cs" />
-    <Compile Include="Models\Cancellation.cs" />
-    <Compile Include="Models\City.cs" />
-    <Compile Include="Models\Collection.cs" />
-    <Compile Include="Models\Country.cs" />
-    <Compile Include="Models\District.cs" />
-    <Compile Include="Models\Member.cs" />
-    <Compile Include="Models\Operating.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\OrderDetail.cs" />
-    <Compile Include="Models\OrderStatus.cs" />
-    <Compile Include="Models\Review.cs" />
-    <Compile Include="Models\Space.cs" />
-    <Compile Include="Models\SpaceAmenity.cs" />
-    <Compile Include="Models\SpacePhoto.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\HomeViewModel.cs" />
-    <Compile Include="Data\ZONERadarContext.cs" />
-    <Compile Include="Models\Member.cs" />
-    <Compile Include="Models\Operating.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\OrderDetail.cs" />
-    <Compile Include="Models\OrderStatus.cs" />
-    <Compile Include="Models\Review.cs" />
-    <Compile Include="Models\Space.cs" />
-    <Compile Include="Models\SpaceAmenity.cs" />
-    <Compile Include="Models\SpacePhoto.cs" />
-    <Compile Include="Models\SpaceType.cs" />
     <Compile Include="Models\ViewModels\FormAreaViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -412,6 +378,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
