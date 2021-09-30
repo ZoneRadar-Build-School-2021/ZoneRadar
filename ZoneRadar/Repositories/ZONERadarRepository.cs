@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ZoneRadar.Data;
 using ZoneRadar.Models;
 
 namespace ZoneRadar.Repositories
 {
     public class ZoneRadarRepository
     {
-        private readonly ZoneRadarContext _ctx;
+        private readonly ZONERadarContext _ctx;
         public ZoneRadarRepository()
         {
-            _ctx = new ZoneRadarContext();
+            _ctx = new ZONERadarContext();
         }
         public IQueryable<T> GetAll<T>() where T : class
         {
@@ -20,10 +21,6 @@ namespace ZoneRadar.Repositories
         public List<Space> ReadSpaceData()
         {
             return _ctx.Space.ToList();
-        }
-        public List<Orders> ReadOrdersData()
-        {
-            return _ctx.Orders.ToList();
         }
         public List<City> ReadCityData()
         {
