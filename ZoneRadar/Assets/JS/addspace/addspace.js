@@ -351,3 +351,15 @@
             }, false)
         })
 })()
+///文字編輯器 
+
+CKEDITOR.replace('textPartType');
+CKEDITOR.replace('textPartRule');
+CKEDITOR.replace('textPartPark');
+CKEDITOR.replace('textPartProjection');
+CKEDITOR.replace('textPartClean');
+CKEDITOR.replace('textPartTransportation');
+
+
+///上傳照片
+FilePond.parse(document.body);
