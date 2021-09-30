@@ -6,6 +6,7 @@ using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Repositories;
 using ZoneRadar.Models;
 using System.Web.Security;
+using Newtonsoft.Json;
 
 namespace ZoneRadar.Services
 {
@@ -85,6 +86,12 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public string CreateEncryptedTicket(Member user)
         {
+            var userInfo = new UserInfo
+            {
+                MemberId = user.MemberID,
+                MemberPhoto = user.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : user.Photo
+            };
+            var jsonUserInfo = JsonConvert.SerializeObject(userInfo);
             //建立FormsAuthenticationTicket
             var ticket = new FormsAuthenticationTicket(
             version: 1,
@@ -92,7 +99,7 @@ namespace ZoneRadar.Services
             issueDate: DateTime.UtcNow,//現在UTC時間
             expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
             isPersistent: true,// 是否要記住我 true or false
-            userData: user.MemberID.ToString(), //可以放使用者角色名稱
+            userData: jsonUserInfo, //可以放使用者角色名稱
             cookiePath: FormsAuthentication.FormsCookiePath);
 
             //加密Ticket
@@ -108,6 +115,7 @@ namespace ZoneRadar.Services
         /// <param name="responseBase"></param>
         public void CreateCookie(string encryptedTicket, HttpResponseBase responseBase)
         {
+            //初始化Cookie的名稱和值
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
             responseBase.Cookies.Add(cookie);
         }

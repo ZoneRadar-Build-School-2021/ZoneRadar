@@ -38,9 +38,22 @@ namespace ZoneRadar.Models.ViewModels
         [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
         public string Password { get; set; }
     }
+
+    /// <summary>
+    /// 註冊的狀態(含會員資料)
+    /// </summary>
     public class RegisterStatus
     {
         public Member user { get; set; }
         public bool IsSuccessful { get; set; }
+    }
+
+    /// <summary>
+    /// 登入後，會員的資料
+    /// </summary>
+    public class UserInfo
+    {
+        public int MemberId { get; set; }
+        public string MemberPhoto { get; set; }
     }
 }

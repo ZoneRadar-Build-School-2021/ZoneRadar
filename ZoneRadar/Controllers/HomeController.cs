@@ -26,8 +26,7 @@ namespace ZoneRadar.Controllers
                     SelectedSpaces = _homeService.GetSelectedSpace(),
                     ToSpaceReviews = _homeService.GetSpaceReview(),
                     TyoeOptions = _homeService.GetTypeOption(),
-                    CityOptions = _homeService.GetCityOption(),
-                    MemberPhoto = _homeService.GetMemberPhoto()
+                    CityOptions = _homeService.GetCityOption()
                 }
             };
             ViewBag.IsLogin = TempData["IsLogin"];
@@ -36,8 +35,7 @@ namespace ZoneRadar.Controllers
             //    SelectedSpaces = _service.GetSelectedSpace(),
             //    ToSpaceReviews = _service.GetSpaceReview(),
             //    TyoeOptions = _service.GetTypeOption(),
-            //    CityOptions = _service.GetCityOption(),
-            //    MemberPhoto = _service.GetMemberPhoto()
+            //    CityOptions = _service.GetCityOption()
             //};
             return View(model);
         }
