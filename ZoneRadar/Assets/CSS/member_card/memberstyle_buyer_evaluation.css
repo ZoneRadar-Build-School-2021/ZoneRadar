@@ -87,13 +87,6 @@ img {
     color: #D9831A;
 }
 
-/*修改卡片裡的圖片大小一致*/
-.space_card_pic img {
-    width: 500px;
-    height: 300px;
-    object-fit: cover;
-}
-
 .reviewsfromhost_review_card{
     border-bottom: 1px solid #CCCCCC;
 }

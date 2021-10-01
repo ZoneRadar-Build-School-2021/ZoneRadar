@@ -87,12 +87,6 @@ img {
     color: #D9831A;
 }
 
-/*修改卡片裡的圖片大小一致*/
-.space_card_pic img {
-    width: 500px;
-    height: 300px;
-    object-fit: cover;
-}
 
 @media (max-width:768px) {
     .member_card_introduce_name {
