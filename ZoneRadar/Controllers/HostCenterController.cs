@@ -28,11 +28,12 @@ namespace ZoneRadar.Controllers
 
             var model = new SpaceViewModel
             {
-                Parking=_spaceService.ShowParking(),
-                CleanFisrtPart=_spaceService.ShowCleanFisrt(),
-                CleanSecPart=_spaceService.ShowCleanSec(),
-                CleanThirdPart=_spaceService.ShowCleanThird(),
-                CleanFourthPart=_spaceService.ShowCleanFourth(),
+                SpaceTypeAraeList=_spaceService.ShowSpaceType().SpaceTypeAraeList,
+                cancellationAraesList=_spaceService.ShowCancellations().cancellationAraesList,
+                addressAraeList=_spaceService.ShowAmenityByIdOne().addressAraeList,
+                amenityAraeOneList=_spaceService.ShowAmenityByIdOne().amenityAraeOneList,
+                amenityAraeTwoList=_spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
+                amenityAraeThreeList=_spaceService.ShowAmenityByIdThree().amenityAraeThreeList,
                 Operating= _spaceService.Operating(),
                
             };

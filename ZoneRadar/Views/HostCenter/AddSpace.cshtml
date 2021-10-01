@@ -2,14 +2,9 @@
 @{
     ViewBag.Title = "AddSpace";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var ametities = Model.amenityAraeList;
-    var spacetype = Model.Spacetype;
-    var parkings = Model.Parking;
+    var spacetype = Model.SpaceTypeAraeList;
     var cancellations = Model.cancellationAraesList;
-    var CleanFirst = Model.CleanFisrtPart;
-    var CleanSec = Model.CleanSecPart;
-    var CleanThir = Model.CleanThirdPart;
-    var CleanFourth = Model.CleanFourthPart;
+    var AmenityArae = Model.amenityAraeList;
     var Operating = Model.Operating;
 }
 
@@ -138,10 +133,10 @@
                             {
                                 <div class="mb-3 col-lg-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="@type.Value"
+                                        <input class="form-check-input" type="checkbox" value="@type.TypeDetailId"
                                                id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
-                                            @type.Text
+                                            @type.Type
                                         </label>
                                     </div>
                                 </div>
@@ -250,7 +245,7 @@
                                 </p>
                                 <p class="operating_hours_space_address mt-4">
                                     @*您的空間地址 -
-                                        <span>台北市大安區忠孝東路三段96號11號樓之1</span>*@
+                    <span>台北市大安區忠孝東路三段96號11號樓之1</span>*@
                                 </p>
                             </div>
                         </div>
@@ -879,6 +874,21 @@
                         </div>
                         <div class="row mt-3">
                             <h5>便利設施</h5>
+                            @foreach (var ametity in ametities)
+                            {
+                                <div class="col-12 col-lg-3 ">
+                                    <div class="form-check">
+                                        <input class="form-check-input" value="" type="checkbox"
+                                               name="flexRadioDefault" id="@ametity.AmenityId">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            @ametity.AmenityName
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="row mt-3">
+                            <h5>場地空間</h5>
                             @*@foreach (var ametity in ametities)
                             {
                                 <div class="col-12 col-lg-3 ">
@@ -892,6 +902,22 @@
                                 </div>
                             }*@
                         </div>
+                        <div class="row mt-3">
+                            <h5>其他設施</h5>
+                            @*@foreach (var ametity in ametities)
+                            {
+                                <div class="col-12 col-lg-3 ">
+                                    <div class="form-check">
+                                        <input class="form-check-input" value="" type="checkbox"
+                                               name="flexRadioDefault" id="@ametity.AmenityId">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            @ametity.AmenityName
+                                        </label>
+                                    </div>
+                                </div>
+                            }*@
+                        </div>
+
                         <div class="row mt-3">
                             <div class="col-6 col-lg-4">
                                 <label for="Add" class="visually-hidden"></label>
@@ -1021,7 +1047,7 @@
                                 </div>
                                 <!-- 勾有停車場才會顯示 -->
                                 <div id="parkingPart" class="row d-none">
-                                    @foreach (var parking in parkings)
+                                    @*@foreach (var parking in parkings)
                                     {
                                         <div class="col-12 col-lg-6 mt-1 mb-3 ">
                                             <div class="form-check">
@@ -1032,7 +1058,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    }
+                                    }*@
                                     <div class="col col-12 parking">
                                         <p>寫敘述您所勾選的選項</p>
                                         <p class="fs16">無需敘述私人訊息，這將會公開顯示</p>
@@ -1156,7 +1182,7 @@
                                         <p class="fs16">選擇有符合條件的條件的選項</p>
                                     </div>
                                     <div class="row">
-                                        @foreach (var cleanf in CleanFirst)
+                                        @*@foreach (var cleanf in CleanFirst)
                                         {
                                             <div class="col col-12 col-lg-12 mt-1 mb-3 ">
                                                 <div class="form-check">
@@ -1167,7 +1193,7 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                        }
+                                        }*@
 
                                         <div class="row">
                                             <div class="col  mt-5">
@@ -1175,7 +1201,7 @@
                                                 <p class="fs16">選擇有符合條件的條件的選項</p>
                                             </div>
                                             <div class="row">
-                                                @foreach (var cleanSec in CleanSec)
+                                                @*@foreach (var cleanSec in CleanSec)
                                                 {
                                                     <div class="col col-12 col-lg-12 mt-1 mb-3 ">
                                                         <div class="form-check">
@@ -1186,7 +1212,7 @@
                                                             </label>
                                                         </div>
                                                     </div>
-                                                }
+                                                }*@
                                             </div>
                                         </div>
                                         <div class="row">
@@ -1195,7 +1221,7 @@
                                                 <p class="fs16">選擇有符合條件的條件的選項</p>
                                             </div>
                                             <div class="row">
-                                                @foreach (var cleanthird in CleanThir)
+                                                @*@foreach (var cleanthird in CleanThir)
                                                 {
                                                     <div class="col col-12 col-lg-12mt-1 mb-3">
                                                         <div class="form-check ">
@@ -1206,7 +1232,7 @@
                                                             </label>
                                                         </div>
                                                     </div>
-                                                }
+                                                }*@
                                             </div>
                                         </div>
                                         <div class="row">
@@ -1215,7 +1241,7 @@
                                                 <p class="fs16">選擇有符合條件的條件的選項</p>
                                             </div>
                                             <div class="row">
-                                                @foreach (var cleanFour in CleanFourth)
+                                                @*@foreach (var cleanFour in CleanFourth)
                                                 {
                                                     <div class="col col-12 col-lg-12 mt-1 mb-3 ">
                                                         <div class="form-check">
@@ -1226,7 +1252,7 @@
                                                             </label>
                                                         </div>
                                                     </div>
-                                                }
+                                                }*@
                                             </div>
                                         </div>
                                         <div class="row mt-3 mb-3  mt-5">
@@ -1285,7 +1311,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    @*@foreach (var cancel in cancellations)
+                                    @foreach (var cancel in cancellations)
                                     {
                                         <div class="row">
                                             <div class="form-check col-12 col-lg-2">
@@ -1301,7 +1327,7 @@
                                                 </p>
                                             </div>
                                         </div>
-                                    }*@
+                                    }
                                 </div>
                             </div>
                         </div>

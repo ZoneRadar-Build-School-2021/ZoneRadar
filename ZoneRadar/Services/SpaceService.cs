@@ -98,11 +98,73 @@ namespace ZoneRadar.Services
         /// <summary>
         ///  便利設施 
         /// </summary>
-        /// 
-        /// 
+        /// 分三類
+        /// 1.
 
-
-
+        public SpaceViewModel ShowAmenityByIdOne()
+        {
+            var result = new SpaceViewModel()
+            {
+                amenityAraeOneList = new List<AmenityAraeOne>(),
+            };
+            var amenityOnes = _repository.GetAll<AmenityAraeOne>().Where(x => x.AmAmenityCategoryDetailId == 1).Select(x => x).ToList();
+            foreach (var amenityOne in amenityOnes) 
+            {
+                var amenityOneTemp = new AmenityAraeOne()
+                {
+                    AmenityId=amenityOne.AmenityId,
+                    AmenityName=amenityOne.AmenityName
+                };
+                result.amenityAraeOneList.Add(amenityOneTemp);
+            };
+            return result;
+        }
+        /// <summary>
+        ///  便利設施 
+        /// </summary>
+        /// 第二類
+        /// 場地空間
+        public SpaceViewModel ShowAmenityByIdTwo()
+        {
+            var result = new SpaceViewModel()
+            {
+                amenityAraeTwoList = new List<AmenityAraeTwo>(),
+            };
+            var amenityTwos = _repository.GetAll<AmenityAraeTwo>().Where(x => x.AmAmenityCategoryDetailId == 2).Select(x => x).ToList();
+            foreach (var amenityTwo in amenityTwos)
+            {
+                var amenityTwoTemp = new AmenityAraeTwo()
+                {
+                    AmenityId = amenityTwo.AmenityId,
+                    AmenityName = amenityTwo.AmenityName
+                };
+                result.amenityAraeTwoList.Add(amenityTwoTemp);
+            }
+            return result;
+        }
+        /// <summary>
+        ///  便利設施 
+        /// </summary>
+        /// 第三類
+        /// 其他
+        public SpaceViewModel ShowAmenityByIdThree()
+        {
+            var result = new SpaceViewModel()
+            {
+                amenityAraeThreeList = new List<AmenityAraeThree>(),
+            };
+            var amenityThrees = _repository.GetAll<AmenityAraeThree>().Where(x => x.AmAmenityCategoryDetailId == 3).Select(x => x).ToList();
+            foreach (var amenityThree in amenityThrees)
+            {
+                var amenityThreeTemp = new AmenityAraeThree()
+                {
+                    AmenityId = amenityThree.AmenityId,
+                    AmenityName = amenityThree.AmenityName
+                };
+                result.amenityAraeThreeList.Add(amenityThreeTemp);
+            }
+            return result;
+        }
 
 
         /// <summary>
@@ -150,23 +212,6 @@ namespace ZoneRadar.Services
             return result;
         }
 
-        /// <summary>
-        ///  停車資訊 6種
-        /// </summary>
-        public List<SelectListItem> ShowParking()
-        {
-            var parking = new List<SelectListItem>
-            {
-                new SelectListItem { Value = "免費現場停車", Text = "免費現場停車"},
-                new SelectListItem { Value = "付費停車", Text = "付費停車" },
-                new SelectListItem { Value = "免費路邊停車", Text = "免費路邊停車"},
-                new SelectListItem { Value = "計時路邊停車", Text = "計時路邊停車"},
-                new SelectListItem { Value = "代客停車", Text = "代客停車"},
-                new SelectListItem { Value = "附近停車場", Text = "附近停車場"},
-
-            };
-            return parking;
-        }
         /// <summary>
         ///  清潔 4大類
         ///  第一類
