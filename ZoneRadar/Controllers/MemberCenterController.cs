@@ -9,11 +9,12 @@ namespace ZoneRadar.Controllers
 {
     public class MemberCenterController : Controller
     {
-        private readonly HostInfoService _hostinfoservice;
+        private readonly MemberService _memberservice;
+        //private readonly HostInfoService _hostinfoservice;
        // private readonly MyCollectionService _myCollectionservice;
         public MemberCenterController()
         {
-            _hostinfoservice = new HostInfoService();
+            _memberservice = new MemberService();
         }
         // GET: MemberCenter
         public ActionResult Index()
@@ -36,9 +37,17 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
-        public ActionResult MyCollection()
+        public ActionResult MyCollection(int? memberId)
         {
-            return View();
+            if (!memberId.HasValue)
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            else
+            {
+                var MemCollectionSpaces = (memberId.Value);
+                return View(MemCollectionSpaces);
+            }
         }
         public ActionResult UserInfo()
         {
@@ -52,10 +61,8 @@ namespace ZoneRadar.Controllers
             }
             else 
             { 
-            
-               var MemSpace = _hostinfoservice.GetMemberSpace(memberId.Value);
-           
-            return View(MemSpace);
+               var MemSpace = _memberservice.GetMemberSpace(memberId.Value);
+               return View(MemSpace);
             }
         }
     }
