@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ZoneRadar.Services;
 
 namespace ZoneRadar.Controllers
 {
     public class MemberCenterController : Controller
     {
+        private readonly HostInfoService _hostinfoservice;
+       // private readonly MyCollectionService _myCollectionservice;
+        public MemberCenterController()
+        {
+            _hostinfoservice = new HostInfoService();
+        }
         // GET: MemberCenter
         public ActionResult Index()
         {
@@ -37,9 +44,19 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
-        public ActionResult HostInfo()
+        public ActionResult HostInfo(int? memberId)
         {
-            return View();
+            if (!memberId.HasValue)
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            else 
+            { 
+            
+               var MemSpace = _hostinfoservice.GetMemberSpace(memberId.Value);
+           
+            return View(MemSpace);
+            }
         }
     }
 }
