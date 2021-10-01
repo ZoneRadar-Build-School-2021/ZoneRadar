@@ -28,14 +28,15 @@ namespace ZoneRadar.Controllers
 
             var model = new SpaceViewModel
             {
-                Spacetype = _spaceService.ShowSpaceType(),
                 Parking=_spaceService.ShowParking(),
                 CleanFisrtPart=_spaceService.ShowCleanFisrt(),
                 CleanSecPart=_spaceService.ShowCleanSec(),
                 CleanThirdPart=_spaceService.ShowCleanThird(),
                 CleanFourthPart=_spaceService.ShowCleanFourth(),
-                Operating= _spaceService.Operating()
+                Operating= _spaceService.Operating(),
+               
             };
+            
             return View(model);
         }
         public ActionResult EditSpace()

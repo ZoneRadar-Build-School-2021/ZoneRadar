@@ -129,15 +129,26 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 場地類型 17種 
+        /// 場地類型 16種 
         /// </summary>
-        //public SpaceViewModel ShowSpaceType()
-        //{
-        //    var result = new SpaceViewModel()
-        //    {
-
-        //    };
-        //}
+        public SpaceViewModel ShowSpaceType()
+        {
+            var result = new SpaceViewModel()
+            {
+                SpaceTypeAraeList=new List<SpaceTypeArae>()
+            };
+            var spaceTypes = _repository.GetAll<TypeDetail>().Select(x => x).ToList();
+            foreach (var space in spaceTypes) 
+            {
+                var typeTemp = new SpaceTypeArae()
+                {
+                    TypeDetailId = space.TypeDetailID,
+                    Type=space.Type
+                };
+                result.SpaceTypeAraeList.Add(typeTemp);
+            }
+            return result;
+        }
 
         /// <summary>
         ///  停車資訊 6種

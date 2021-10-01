@@ -28,12 +28,11 @@ namespace ZoneRadar.Models.ViewModels
         public List<AddressArae> addressAraeList { get; set; }
         public List<AmenityArae> amenityAraeList { get; set; }
         public List<CancellationArae> cancellationAraesList { get; set; }
-        public List<>
+        public List<SpaceTypeArae> SpaceTypeAraeList { get; set; }
 
         /// <summary>
         /// 資料庫沒有的表
         /// </summary>
-        public List<SelectListItem> Spacetype { get; set; }
         public List<SelectListItem> Parking { get; set; }
         public List<SelectListItem> CleanFisrtPart { get; set; }
         public List<SelectListItem> CleanSecPart { get; set; }
@@ -61,7 +60,8 @@ namespace ZoneRadar.Models.ViewModels
     /// </summary>
     public class SpaceTypeArae
     {
-        public int 
+        public int TypeDetailId { get; set; }
+        public string Type { get; set; }
 
     }
     /// <summary>
