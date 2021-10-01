@@ -11,10 +11,12 @@ namespace ZoneRadar.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly HomeService _homeService;
+        private readonly SpaceService _spaceService;
+        private readonly ReviewService _reviewService;
         public HomeController()
         {
-            _homeService = new HomeService();
+            _spaceService = new SpaceService();
+            _reviewService = new ReviewService();
         }
 
         public ActionResult Index(string returnUrl)
@@ -23,10 +25,10 @@ namespace ZoneRadar.Controllers
             {
                 HomeVM = new HomeViewModel
                 {
-                    SelectedSpaces = _homeService.GetSelectedSpace(),
-                    ToSpaceReviews = _homeService.GetSpaceReview(),
-                    TyoeOptions = _homeService.GetTypeOption(),
-                    CityOptions = _homeService.GetCityOption()
+                    SelectedSpaces = _spaceService.GetSelectedSpace(),
+                    ToSpaceReviews = _reviewService.GetSpaceReview(),
+                    TyoeOptions = _spaceService.GetTypeOption(),
+                    CityOptions = _spaceService.GetCityOption()
                 }
             };
             if(returnUrl != null)
@@ -35,10 +37,10 @@ namespace ZoneRadar.Controllers
             }
             //var model = new HomeViewModel
             //{
-            //    SelectedSpaces = _service.GetSelectedSpace(),
-            //    ToSpaceReviews = _service.GetSpaceReview(),
-            //    TyoeOptions = _service.GetTypeOption(),
-            //    CityOptions = _service.GetCityOption()
+            //    SelectedSpaces = _spaceService.GetSelectedSpace(),
+            //    ToSpaceReviews = _reviewService.GetSpaceReview(),
+            //    TyoeOptions = _spaceService.GetTypeOption(),
+            //    CityOptions = _spaceService.GetCityOption()
             //};
             return View(model);
         }
@@ -71,23 +73,18 @@ namespace ZoneRadar.Controllers
             return View();
         }
         [HttpPost]
-        //public ActionResult SearchSpace(HomepageSearchViewModel homepageSearchVM)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _homeService.SearchSpace(homepageSearchVM);
-        //        return Content("成功接收");
-        //    }
-
-        //    throw new NotImplementedException();
-        //}
+        public ActionResult SearchSpace(HomepageSearchViewModel homepageSearchVM)
+        {
+            _spaceService.SearchSpace(homepageSearchVM);
+            throw new NotImplementedException();
+        }
         public ActionResult SearchByCity(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var space = _homeService.GetSpaceByCity(id.Value);
+            var space = _spaceService.GetSpaceByCity(id.Value);
 
             if (space.Count() == 0)
             {

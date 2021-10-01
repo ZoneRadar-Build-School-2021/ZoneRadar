@@ -74,12 +74,12 @@ namespace ZoneRadar.Controllers
                     Password = allVM.RegisterZONERadarVM.Password,
                     ConfirmPassword = allVM.RegisterZONERadarVM.ConfirmPassword
                 };
-                var registerStatus = _service.RegisterMember(registerVM);
-                if (registerStatus.IsSuccessful)
+                var registerResult = _service.RegisterMember(registerVM);
+                if (registerResult.IsSuccessful)
                 {
-                    var encryptedTicket = _service.CreateEncryptedTicket(registerStatus.user);
+                    var encryptedTicket = _service.CreateEncryptedTicket(registerResult.user);
                     _service.CreateCookie(encryptedTicket, Response);
-                    return Redirect(_service.GetUrl(registerStatus.user));
+                    return Redirect(_service.GetUrl(registerResult.user));
                 }
                 else
                 {

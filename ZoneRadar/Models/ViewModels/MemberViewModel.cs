@@ -10,6 +10,10 @@ namespace ZoneRadar.Models.ViewModels
     {
 
     }
+
+    /// <summary>
+    /// 註冊欄位的ViewModel
+    /// </summary>
     public class RegisterZONERadarViewModel
     {
         [Required(ErrorMessage = "此欄為必填")]
@@ -29,6 +33,10 @@ namespace ZoneRadar.Models.ViewModels
         [Compare("Password", ErrorMessage = "密碼不一致")]
         public string ConfirmPassword { get; set; }
     }
+
+    /// <summary>
+    /// 登入欄位的ViewModel
+    /// </summary>
     public class LoginZONERadarViewModel
     {
         [Required(ErrorMessage = "此欄為必填")]
@@ -40,16 +48,16 @@ namespace ZoneRadar.Models.ViewModels
     }
 
     /// <summary>
-    /// 註冊的狀態(含會員資料)
+    /// 註冊結果(含會員資料)
     /// </summary>
-    public class RegisterStatus
+    public class RegisterResult
     {
         public Member user { get; set; }
         public bool IsSuccessful { get; set; }
     }
 
     /// <summary>
-    /// 登入後，會員的資料
+    /// 登入後會記錄在表單驗證票證中的會員資料
     /// </summary>
     public class UserInfo
     {

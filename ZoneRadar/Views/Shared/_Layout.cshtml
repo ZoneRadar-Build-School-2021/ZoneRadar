@@ -1,6 +1,6 @@
-﻿@using ZoneRadar.Models.ViewModels 
+﻿@using ZoneRadar.Models.ViewModels
 @model AllViewModel
-@{ 
+@{
     bool? IsLogin = ViewBag.IsLogin;
 
     HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);

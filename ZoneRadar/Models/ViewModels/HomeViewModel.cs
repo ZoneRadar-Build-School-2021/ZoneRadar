@@ -56,10 +56,8 @@ namespace ZoneRadar.Models.ViewModels
     /// </summary>
     public class HomepageSearchViewModel
     {
-        public string Type { get; set; }
+        public int TypeDetailId { get; set; }
         public int CityId { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime Date { get; set; }
     }
 }

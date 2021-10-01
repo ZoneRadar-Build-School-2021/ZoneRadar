@@ -223,7 +223,8 @@
     <Compile Include="Data\ZONERadarContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ZONERadarRepository.cs" />
-    <Compile Include="Services\HomeService.cs" />
+    <Compile Include="Services\ReviewService.cs" />
+    <Compile Include="Services\SpaceService.cs" />
     <Compile Include="Services\MemberService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\HashService.cs" />

@@ -23,9 +23,9 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="registerVM"></param>
         /// <returns>回傳會員資訊及註冊是否成功</returns>
-        public RegisterStatus RegisterMember(RegisterZONERadarViewModel registerVM)
+        public RegisterResult RegisterMember(RegisterZONERadarViewModel registerVM)
         {
-            var registerStatus = new RegisterStatus
+            var registerResult = new RegisterResult
             {
                 user = null,
                 IsSuccessful = false
@@ -41,7 +41,7 @@ namespace ZoneRadar.Services
 
             if (isSameEmail || !isSamePassword || registerVM == null)
             {
-                return registerStatus;
+                return registerResult;
             }
             else
             {
@@ -51,14 +51,14 @@ namespace ZoneRadar.Services
                     Password = registerVM.Password,
                     Name = registerVM.Name,
                     ReceiveEDM = false,
-                    SignUpDateTime = DateTime.UtcNow,
-                    LastLogin = DateTime.UtcNow
+                    SignUpDateTime = DateTime.Now,
+                    LastLogin = DateTime.Now
                 };
                 _repository.Create<Member>(member);
                 _repository.SaveChanges();
-                registerStatus.user = member;
-                registerStatus.IsSuccessful = true;
-                return registerStatus;
+                registerResult.user = member;
+                registerResult.IsSuccessful = true;
+                return registerResult;
             }           
         }
         /// <summary>
@@ -76,9 +76,11 @@ namespace ZoneRadar.Services
             //以Email及Password查詢比對Member資料表記錄
             var members = _repository.GetAll<Member>().ToList();
             var user = members.SingleOrDefault(x => x.Email.ToUpper() == loginVM.Email.ToUpper() && x.Password == loginVM.Password);
+
+            //修改上次登入時間
             if(user != null)
             {
-                user.LastLogin = DateTime.UtcNow;
+                user.LastLogin = DateTime.Now;
                 _repository.Update(user);
                 _repository.SaveChanges();
             }
@@ -122,7 +124,7 @@ namespace ZoneRadar.Services
         /// <param name="responseBase"></param>
         public void CreateCookie(string encryptedTicket, HttpResponseBase responseBase)
         {
-            //初始化Cookie的名稱和值
+            //初始化Cookie的名稱和值(將加密的表單驗證票證放進Cookie裡)
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
             responseBase.Cookies.Add(cookie);
         }
