@@ -30,8 +30,6 @@ namespace ZoneRadar.Controllers
             {
                 Spacetype = _spaceService.ShowSpaceType(),
                 Parking=_spaceService.ShowParking(),
-                amenityAraeList=_spaceService.ShowSpaceSelect().amenityAraeList,
-                cancellationAraesList=_spaceService.ShowSpaceSelect().cancellationAraesList,
                 CleanFisrtPart=_spaceService.ShowCleanFisrt(),
                 CleanSecPart=_spaceService.ShowCleanSec(),
                 CleanThirdPart=_spaceService.ShowCleanThird(),

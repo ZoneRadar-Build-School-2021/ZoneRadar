@@ -56,6 +56,12 @@ namespace ZoneRadar.Services
 
             return topSelectedSpaces;
         }
+
+        internal object ShowSpaceSelect()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<SelectListItem> GetTypeOption()
         {
             var typeOptions = new List<SelectListItem>
