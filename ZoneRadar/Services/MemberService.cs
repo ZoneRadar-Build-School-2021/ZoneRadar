@@ -7,6 +7,7 @@ using ZoneRadar.Repositories;
 using ZoneRadar.Models;
 using System.Web.Security;
 using Newtonsoft.Json;
+using ZoneRadar.Utilities;
 
 namespace ZoneRadar.Services
 {
@@ -21,7 +22,7 @@ namespace ZoneRadar.Services
         /// 註冊會員
         /// </summary>
         /// <param name="registerVM"></param>
-        /// <returns>註冊成功則回傳true，反之回傳flase</returns>
+        /// <returns>回傳會員資訊及註冊是否成功</returns>
         public RegisterStatus RegisterMember(RegisterZONERadarViewModel registerVM)
         {
             var registerStatus = new RegisterStatus
@@ -30,12 +31,12 @@ namespace ZoneRadar.Services
                 IsSuccessful = false
             };
 
+            var isSamePassword = registerVM.Password == registerVM.ConfirmPassword;
+
             registerVM.Name = HttpUtility.HtmlEncode(registerVM.Name);
             registerVM.Email = HttpUtility.HtmlEncode(registerVM.Email);
-            registerVM.Password = HttpUtility.HtmlEncode(registerVM.Password);
-            registerVM.ConfirmPassword = HttpUtility.HtmlEncode(registerVM.ConfirmPassword);
+            registerVM.Password = HttpUtility.HtmlEncode(registerVM.Password).MD5Hash();
 
-            var isSamePassword = registerVM.Password == registerVM.ConfirmPassword;
             var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.Email.ToUpper());
 
             if (isSameEmail || !isSamePassword || registerVM == null)
@@ -69,12 +70,18 @@ namespace ZoneRadar.Services
         {          
             //使用HtmlEncode將帳密做HTML編碼, 去除有害的字元
             loginVM.Email = HttpUtility.HtmlEncode(loginVM.Email);
-            loginVM.Password = HttpUtility.HtmlEncode(loginVM.Password);
+            loginVM.Password = HttpUtility.HtmlEncode(loginVM.Password).MD5Hash();
 
             //EF比對資料庫帳密
             //以Email及Password查詢比對Member資料表記錄
             var members = _repository.GetAll<Member>().ToList();
             var user = members.SingleOrDefault(x => x.Email.ToUpper() == loginVM.Email.ToUpper() && x.Password == loginVM.Password);
+            if(user != null)
+            {
+                user.LastLogin = DateTime.UtcNow;
+                _repository.Update(user);
+                _repository.SaveChanges();
+            }
 
             return user;
         }

@@ -17,7 +17,7 @@ namespace ZoneRadar.Controllers
             _homeService = new HomeService();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string returnUrl)
         {
             var model = new AllViewModel
             {
@@ -29,7 +29,10 @@ namespace ZoneRadar.Controllers
                     CityOptions = _homeService.GetCityOption()
                 }
             };
-            ViewBag.IsLogin = TempData["IsLogin"];
+            if(returnUrl != null)
+            {
+                ViewBag.IsLogin = true;
+            }
             //var model = new HomeViewModel
             //{
             //    SelectedSpaces = _service.GetSelectedSpace(),
@@ -68,16 +71,16 @@ namespace ZoneRadar.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult SearchSpace(HomepageSearchViewModel homepageSearchVM)
-        {
-            if (ModelState.IsValid)
-            {
-                _homeService.SearchSpace(homepageSearchVM);
-                return Content("成功接收");
-            }
+        //public ActionResult SearchSpace(HomepageSearchViewModel homepageSearchVM)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _homeService.SearchSpace(homepageSearchVM);
+        //        return Content("成功接收");
+        //    }
 
-            throw new NotImplementedException();
-        }
+        //    throw new NotImplementedException();
+        //}
         public ActionResult SearchByCity(int? id)
         {
             if (id == null)

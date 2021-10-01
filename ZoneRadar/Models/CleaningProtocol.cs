@@ -6,17 +6,16 @@ namespace ZoneRadar.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("SpacePhoto")]
-    public partial class SpacePhoto
+    [Table("CleaningProtocol")]
+    public partial class CleaningProtocol
     {
-        public int SpacePhotoID { get; set; }
+        public int CleaningProtocolID { get; set; }
 
         public int SpaceID { get; set; }
 
-        [Required]
-        public string SpacePhotoUrl { get; set; }
+        public int CleaningOptionID { get; set; }
 
-        public int Sort { get; set; }
+        public virtual CleaningOption CleaningOption { get; set; }
 
         public virtual Space Space { get; set; }
     }

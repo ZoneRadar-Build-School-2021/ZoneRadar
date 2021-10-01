@@ -30,7 +30,7 @@
         <form action="~/Home/SearchSpace" method="post" class="row justify-content-center justify-content-md-start mx-0 py-3 py-md-0">
             @Html.AntiForgeryToken()
             <!--活動性質-->
-            <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0 ms-md-5">                
+            <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0 ms-md-5">
                 @Html.DropDownListFor(model => model.HomepageSearchVM.Type, typeOptions, "活動性質", new { @class = "select-activity form-select form-select-lg" })
             </div>
             <!--地點-->
@@ -254,7 +254,7 @@
                     <span class="price position-absolute">$@Html.DisplayFor(modelItem => item.PricePerHour) / hr</span>
                 </a>
             </div>
-        }        
+        }
     </div>
 </div>
 
@@ -265,7 +265,7 @@
         <div class="row px-3 px-md-0">
             <div class="col-12">
                 <div class="swiper swiper-comment">
-                    <div class="swiper-wrapper">                        
+                    <div class="swiper-wrapper">
                         @foreach (var item in toSpaceReviews)
                         {
                             <a href="~/Booking/BookingPage/@item.SpaceId" class="swiper-slide text-decoration-none">
@@ -280,7 +280,7 @@
                                     }
                                 </div>
                             </a>
-                        }                        
+                        }
                     </div>
                 </div>
             </div>
@@ -353,4 +353,12 @@
 @section endJS
 {
     <script src="~/Assets/JS/index/index.js"></script>
+    @if (ViewBag.IsLogin == true)
+    {
+        <script>
+            let login_modal = document.querySelector("#login-modal");
+            let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
+            modal.show();
+        </script>
+    }
 }

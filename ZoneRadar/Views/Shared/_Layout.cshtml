@@ -320,14 +320,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
 
-    @if (IsLogin != null)
-    {
-        <script>
-            let login_modal = document.querySelector("#login-modal");
-            let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
-            modal.show();
-        </script>
-    }
+    
     @if (User.Identity.IsAuthenticated)
     {
         <script>

@@ -245,7 +245,8 @@ namespace ZoneRadar.Services
             var orderDetails = _repository.GetAll<OrderDetail>().ToList();
 
             //1. 找到符合「類型」和「城市」的場地
-            var spacesByCityAndType = _repository.GetAll<Space>().Where(x => x.Type == homepageSearchVM.Type && x.City.CityID == homepageSearchVM.CityId).ToList();
+
+            var spacesByCityAndType = _repository.GetAll<Space>().Where(x => x.City.CityID == homepageSearchVM.CityId).ToList();
 
             //2. 找到符合「時間」條件的場地，並轉成ViewModel
             foreach (var space in spacesByCityAndType)
