@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ZoneRadar.Models;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Repositories;
-using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Models;
-using System.Web.Mvc;
 
 namespace ZoneRadar.Services
 {
@@ -112,36 +109,35 @@ namespace ZoneRadar.Services
         /// 取消政策 4種
         /// </summary>
         /// 
-
+        public SpaceViewModel ShowCancellations()
+        {
+            var result = new SpaceViewModel()
+            {
+                cancellationAraesList=new List<CancellationArae>(),
+            };
+            var cancels = _repository.GetAll<Cancellation>().Select(x => x).ToList();
+            foreach (var cancel in cancels)
+            {
+                var canceltemp = new CancellationArae()
+                {
+                    CancellationTitle = cancel.CancellationTitle,
+                    CancellationDetail = cancel.CancellationDetail
+                };
+                result.cancellationAraesList.Add(canceltemp);
+            }
+            return result;
+        }
 
         /// <summary>
         /// 場地類型 17種 
         /// </summary>
+        //public SpaceViewModel ShowSpaceType()
+        //{
+        //    var result = new SpaceViewModel()
+        //    {
 
-        public List<SelectListItem> ShowSpaceType() 
-        {
-            var Spacetype = new List<SelectListItem>
-            {
-                new SelectListItem { Value = "會議", Text = "會議" },
-                new SelectListItem { Value = "派對", Text = "派對" },
-                new SelectListItem { Value = "聚會", Text = "聚會" },
-                new SelectListItem { Value = "私人談話", Text = "私人談話" },
-                new SelectListItem { Value = "課程講座", Text = "課程講座" },
-                new SelectListItem { Value = "運動", Text = "運動" },
-                new SelectListItem { Value = "工作", Text = "工作" },
-                new SelectListItem { Value = "展覽", Text = "展覽" },
-                new SelectListItem { Value = "音樂/表演", Text = "音樂/表演" },
-                new SelectListItem { Value = "婚禮", Text = "婚禮" },
-                new SelectListItem { Value = "拍照/攝影", Text = "拍照/攝影" },
-                new SelectListItem { Value = "美容", Text = "美容" },
-                new SelectListItem { Value = "烹飪", Text = "烹飪" },
-                new SelectListItem { Value = "儲物", Text = "儲物" },
-                new SelectListItem { Value = "發表會", Text = "發表會" },
-                new SelectListItem { Value = "親子活動", Text = "親子活動" },
-                new SelectListItem { Value = "其他", Text = "其他" }
-            };
-            return Spacetype;
-        }
+        //    };
+        //}
 
         /// <summary>
         ///  停車資訊 6種
