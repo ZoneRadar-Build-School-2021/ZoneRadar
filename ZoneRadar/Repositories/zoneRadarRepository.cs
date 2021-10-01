@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using ZoneRadar.Data;
+using ZoneRadar.Models;
+
 
 
 namespace ZoneRadar.Repositories
