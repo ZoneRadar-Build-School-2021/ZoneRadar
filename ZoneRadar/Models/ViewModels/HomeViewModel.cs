@@ -16,6 +16,7 @@ namespace ZoneRadar.Models.ViewModels
         public HomepageSearchViewModel HomepageSearchVM { get; set; }
         public RegisterZONERadarViewModel RegisterZONERadarVM { get; set; }
         public LoginZONERadarViewModel LoginZONERadarVM { get; set; }
+        public BookingPageViewModel bookingViewModel { get; set; }
     }
     /// <summary>
     /// 首頁的ViewModel

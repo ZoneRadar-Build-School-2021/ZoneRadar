@@ -32,10 +32,12 @@ namespace ZoneRadar.Controllers
                     CityOptions = _spaceService.GetCityOptions()
                 }
             };
+
             if (returnUrl != null)
             {
                 ViewBag.IsLogin = true;
             }
+
             //ViewBag.IsLogin = TempData["IsLogin"];
             //var model = new HomeViewModel
             //{

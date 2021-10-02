@@ -39,7 +39,12 @@ namespace ZoneRadar.Controllers
                 Reviews = _reviewService.GetTargetSpaceReviews(targetSpace)
             };
 
-            return View(model);
+            var allModel = new AllViewModel
+            {
+                bookingViewModel = model
+            };
+
+            return View(allModel);
         }
 
         [HttpGet]

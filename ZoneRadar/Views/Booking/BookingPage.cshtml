@@ -1,10 +1,10 @@
-﻿@model  BookingPageViewModel
+﻿@model  AllViewModel
 @{
     ViewBag.Title = "BookingPage";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var reviews = Model.Reviews;
-    var briefs = Model.SpaceBreifInfo;
-    var details = Model.SpaceDetailInfo;
+    var reviews = Model.bookingViewModel.Reviews;
+    var briefs = Model.bookingViewModel.SpaceBreifInfo;
+    var details = Model.bookingViewModel.SpaceDetailInfo;
     float total = 0;
     float averageScore = 0;
     foreach (var review in reviews)
@@ -127,15 +127,15 @@
                             </a>
                             <div class="collapse" id="clean-protocol">
                                 <div class="card card-body border-0">
-                                    @foreach (var item in details.CleaningOptionDict.Keys)
+                                    @foreach (var cleaning in details.CleaningOptionDict)
                                     {
-                                        <h5>@item</h5>
-                                        foreach (var option in details.CleaningOptionDict.Values)
-                                        {
-                                            <ul>
-                                                <li>@option</li>  
-                                            </ul>
-                                        }
+                                        <h5>@cleaning.Key</h5>
+                                        <ul>
+                                            @foreach (var option in @cleaning.Value)
+                                            {
+                                                <li>@option</li>
+                                            }
+                                        </ul>
                                     }
                                 </div>
                             </div>
@@ -347,18 +347,18 @@
                                 <div class="review-rating">
                                     <div class="row mb-3">
                                         <div class="start-group col-12 col-xl-3 pe-0 mb-2 mb-xl-0">
-                                            @if (total != 0)
+                                            @if (review.Score != 0)
                                             {
-                                                if (total % 1 == 0)
+                                                if (review.Score % 1 == 0)
                                                 {
-                                                    for (int i = 0; i < total; i++)
+                                                    for (int i = 0; i < review.Score; i++)
                                                     {
                                                         <i class="fas fa-star"></i>
                                                     }
                                                 }
-                                                if (total % 1 != 0)
+                                                if (review.Score % 1 != 0)
                                                 {
-                                                    for (int i = 0; i < total - 1; i++)
+                                                    for (int i = 0; i < review.Score - 1; i++)
                                                     {
                                                         <i class="fas fa-star"></i>
                                                     }
