@@ -1,7 +1,33 @@
-﻿
+﻿@model  BookingPageViewModel
 @{
     ViewBag.Title = "BookingPage";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var reviews = Model.Reviews;
+    var briefs = Model.SpaceBreifInfo;
+    var details = Model.SpaceDetailInfo;
+    float total = 0;
+    float averageScore = 0;
+    foreach (var review in reviews)
+    {
+        total += review.Score;
+    }
+    if (total != 0)
+    {
+        averageScore = total / reviews.Count();
+    }
+    else
+    {
+        averageScore = 0;
+    }
+    int briefReviewBreak = 0;
+    if (reviews.Count() >= 3)
+    {
+        briefReviewBreak = 3;
+    }
+    else
+    {
+        briefReviewBreak = reviews.Count();
+    }
 }
 
 <!-- Body -->
@@ -12,29 +38,12 @@
             <div class="venue-img-group swiper">
                 <button type="button" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">收藏</span></button>
                 <div class="venue-img-wrapper swiper-wrapper">
-                    <!-- Slides -->
-                    <div class="venue-img swiper-slide"
-                         style="background-image: url(https://picsum.photos/1920/1080/?random=1)"></div>
-                    <div class="venue-img swiper-slide"
-                         style="background-image: url(https://picsum.photos/1920/1080/?random=2)"></div>
-                    <div class="venue-img swiper-slide"
-                         style="background-image: url(https://picsum.photos/1920/1080/?random=3)"></div>
-                    <div class="venue-img swiper-slide"
-                         style="background-image: url(https://picsum.photos/1920/1080/?random=4)"></div>
-                    <div class="venue-img swiper-slide"
-                         style="background-image: url(https://picsum.photos/1920/1080/?random=5)"></div>
-                    <div class="venue-img swiper-slide"
-                         style="background-image: url(https://picsum.photos/1920/1080/?random=6)"></div>
-                    <div class="venue-img swiper-slide"
-                         style="background-image: url(https://picsum.photos/1920/1080/?random=7)"></div>
-                    <div class="venue-img swiper-slide"
-                         style="background-image: url(https://picsum.photos/1920/1080/?random=8)"></div>
-                    <div class="venue-img swiper-slide"
-                         style="background-image: url(https://picsum.photos/1920/1080/?random=9)"></div>
+                    @foreach (var url in briefs.SpaceImageURLList)
+                    {
+                        <div class="venue-img swiper-slide" style="background-image: url(@url)"></div>
+                    }
                 </div>
-                <!-- 顯示圖片數 -->
                 <div class="swiper-pagination"></div>
-                <!-- 左右箭頭 -->
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
@@ -45,49 +54,65 @@
             <!-- 場地簡短介紹 -->
             <div class="row">
                 <section class="venue-brief col-sm-12 col-md-9">
-                    <h2 class="venue-title mb-2">有了祝福搜尋言論前進求購精美，充滿富岡，幹。</h2>
-                    <a href="#map"><p class="venue-address mb-3 mb-xl-4"><i class="fas fa-map-marker-alt me-1"></i><span class="county"></span>台北市<span class="district">大安區</span><span class="address"></span>忠孝東路三段96號11號樓之1</p></a>
+                    <h2 class="venue-title mb-2">@briefs.SpaceName</h2>
+                    <a href="#map"><p class="venue-address mb-3 mb-xl-4"><i class="fas fa-map-marker-alt me-1"></i><span class="city ms-1">@briefs.City</span><span class="district ms-1">@briefs.District</span><span class="address ms-1">@briefs.Address</span></p></a>
                     <div class="venue-highlight d-block d-xl-flex mb-4">
                         <div class="venue-rating mb-3 mb-md-0">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                            <a class="review-link" href="#review"><span class="review-count ms-2">10</span>篇評價</a>
+                            <a class="review-link ms-1" href="#review">
+                                @if (averageScore != 0)
+                                {
+                                    if (averageScore % 1 == 0)
+                                    {
+                                        for (int i = 0; i < averageScore; i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
+                                    }
+                                    if (averageScore % 1 != 0)
+                                    {
+                                        for (int i = 0; i < averageScore - 1; i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
+                                        <i class="fas fa-star-half-alt"></i>
+                                    }
+                                }
+                                @if (averageScore == 0)
+                                {
+                                    <span>目前沒有任何評價</span>
+                                }
+                                <span class="review-count ms-2">@reviews.Count()</span>篇評價
+                            </a>
                         </div>
                         <ul class="venue-info d-md-flex ms-0 ms-md-4">
-                            <li class="d-flex align-items-center ms-0 mb-2 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/person.svg" alt="capacity" style="height: 1rem"><span class="capacity">100</span>人</li>
-                            <li class="d-flex align-items-center ms-0 mb-2 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/time.svg" alt="min-time" style="height: 1rem"><span class="min-time">8</span>小時</li>
-                            <li class="d-flex align-items-center ms-0 mb-2 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/speed-square.svg" alt="area" style="height: 1rem"><span class="area">87</span>坪</li>
+                            <li class="d-flex align-items-center ms-0 mb-2 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/person.svg" alt="capacity" style="height: 1rem"><span class="capacity">@briefs.Capacity</span>人</li>
+                            <li class="d-flex align-items-center ms-0 mb-2 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/time.svg" alt="min-hour" style="height: 1rem"><span class="min-hour">@briefs.MinHour</span>小時</li>
+                            <li class="d-flex align-items-center ms-0 mb-2 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/speed-square.svg" alt="area" style="height: 1rem"><span class="area">@briefs.MeasurementOfArea</span>坪</li>
                         </ul>
                     </div>
                     <!-- 簡短評價 -->
                     <div class="review-brief-group d-none d-md-block pe-3">
-                        <div class="review-brief d-flex mb-4">
-                            <a href="~/MemberCenter/UserInfo" class="user-pic"><img class="rounded-circle border-blue" src="https://picsum.photos/800/800/?random=10"></a>
-                            <div class="content-wrapper w-100 ps-4">
-                                <span class="review-brief-content">性感安全中央父母作業背景，轉帖之後二級。</span>
-                                <span class="user-name ms-1"> -Steve Sun</span>
+                        @if (reviews.Count() == 0)
+                        {
+                            <div class="review-brief d-flex mb-4">歡迎預約，並留下您的評價</div>
+                        }
+                        @foreach (var review in reviews.Take(briefReviewBreak))
+                        {
+                            <div class="review-brief d-flex mb-4">
+                                <a href="#" class="user-pic"><img class="rounded-circle border-blue" src="@review.ReviewedMemberPhoto"></a>
+                                <div class="content-wrapper w-100 ps-4">
+                                    <span class="review-brief-content">@review.ReviewContent</span>
+                                    <span class="user-name ms-1"> -@review.ReviewedMemberName</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="review-brief d-flex mb-4">
-                            <a href="#" class="user-pic"><img class="rounded-circle border-blue" src="https://picsum.photos/800/800/?random=11"></a>
-                            <div class="content-wrapper w-100 ps-4">
-                                <span class="review-brief-content">學校三個指導效率，這種最好植物好多動力則是上路整個，廣場鑒。</span>
-                                <span class="user-name ms-1"> -Steve Sun</span>
-                            </div>
-                        </div>
-                        <div class="review-brief d-flex mb-4">
-                            <a href="#" class="user-pic"><img class="rounded-circle border-blue" src="https://picsum.photos/800/800/?random=12"></a>
-                            <div class="content-wrapper w-100 ps-4">
-                                <span class="review-brief-content">得到發達動畫網通稱為市政府中心年齡進去運行，讓她植物都在激烈事實上就像緊緊一定。</span>
-                                <span class="user-name ms-1"> -Steve Sun</span>
-                            </div>
-                        </div>
-                        <a href="#review" class="read-review d-inline-block p-3 fw-bolder mb-3">查看更多評價</a>
+                        }
+                        <a href="#review" class="read-review d-inline-block p-3 fw-bolder mb-3"></a>
                     </div>
                 </section>
                 <div class="host col-sm-12 col-md-3 text-center pt-0 pb-4 pt-md-5">
-                    <a href="~/MemberCenter/HostInfo">
-                        <img class="user-pic rounded-circle border-blue" src="https://picsum.photos/800/800/?random=13">
-                        <p class="user-name my-2">Dann Wu</p>
+                    <a href="#">
+                        <img class="user-pic rounded-circle border-blue" src="@details.HostPhoto">
+                        <p class="user-name my-2">@details.HostName</p>
                     </a>
                     <button type="button" class="btn-message btn">聯絡他</button>
                 </div>
@@ -102,16 +127,23 @@
                             </a>
                             <div class="collapse" id="clean-protocol">
                                 <div class="card card-body border-0">
-                                    讓我們你不自動加速網易，福建計算機委員會人大女友商務足球大連似乎超級，理由聽說，女朋友如何執行時間先生姑娘系列之處聲音離線，大戰補充清楚先後友情連結生存不必接口，農村尤其是輕易目光當前位置人事顧客然後權威動作循環，付款死亡，複雜交給空中呼吸，就不其實大型房東開展，以上許可時期台北湖口氣息，昨日確保，新增法律一款，引導費用，我也這裡深入跟我小區資訊規範我和衣服，每日只要接下來幾個作品紀念諾基亞更加現有文件貢獻標誌性質，精采前往分公司這樣魔法接近當我協助除了很難長沙吸收，保證工程師，翻譯經理只需聽到，之前程式稱為檢索人士擁有現代，動畫有所為何網遊研究全市，機制設備反正回覆大學房產創意，均為消失如今伺服器一會兒女性說是幾年第一章要求學院，些什麼工商得到新竹良好舉辦特別人間出了自己男性商品，勝利精美互相客人藥物總部閲讀國家裝修平衡，到處家電，部門介紹排行榜關鍵神秘口氣觀念總部政府，中文那麼多在那裡我國前進邀請指標成立湖口印刷，這麼多騎士促進，飛機將其確實，有很多郵箱寶貝傳說先進教育語言屏東絶對魔法詢問請點擊，授權哪些保存可用這麼多網頁配合操作系統制定，簡歷熱點反映旁邊都在中間生命放心網咖，它。
+                                    @foreach (var item in details.CleaningOptionDict.Keys)
+                                    {
+                                        <h5>@item</h5>
+                                        foreach (var option in details.CleaningOptionDict.Values)
+                                        {
+                                            <ul>
+                                                <li>@option</li>  
+                                            </ul>
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
                         <div class="about border-bottom">
                             <h4 class="mb-0 d-flex align-items-center py-3">關於此場地</h4>
                             <div class="collapse" id="about-venue">
-                                <div class="card card-body border-0 ps-0">
-                                    讓我們你不自動加速網易，福建計算機委員會人大女友商務足球大連似乎超級，理由聽說，女朋友如何執行時間先生姑娘系列之處聲音離線，大戰補充清楚先後友情連結生存不必接口，農村尤其是輕易目光當前位置人事顧客然後權威動作循環，付款死亡，複雜交給空中呼吸，就不其實大型房東開展，以上許可時期台北湖口氣息，昨日確保，新增法律一款，引導費用，我也這裡深入跟我小區資訊規範我和衣服，每日只要接下來幾個作品紀念諾基亞更加現有文件貢獻標誌性質，精采前往分公司這樣魔法接近當我協助除了很難長沙吸收，<br><br>保證工程師，翻譯經理只需聽到，之前程式稱為檢索人士擁有現代，動畫有所為何網遊研究全市，機制設備反正回覆大學房產創意，均為消失如今伺服器一會兒女性說是幾年第一章要求學院，些什麼工商得到新竹良好舉辦特別人間出了自己男性商品，勝利精美互相客人藥物總部閲讀國家裝修平衡，到處家電，部門介紹排行榜關鍵神秘口氣觀念總部政府，中文那麼多在那裡我國前進邀請指標成立湖口印刷，這麼多騎士促進，飛機將其確實，有很多郵箱寶貝傳說先進教育語言屏東絶對魔法詢問請點擊，授權哪些保存可用這麼多網頁配合操作系統制定，簡歷熱點反映旁邊都在中間生命放心網咖，它。
-                                </div>
+                                <div class="card card-body border-0 ps-0">@Html.Raw(@details.Introduction)</div>
                             </div>
                             <a class="read-more collapsed btn p-3 fw-bolder" data-bs-toggle="collapse" href="#about-venue" role="button" aria-expanded="false" aria-controls="about-venue"></a>
                         </div>
@@ -121,9 +153,16 @@
                                 <i class="fas fa-chevron-down"></i>
                             </a>
                             <div class="collapse" id="shooting">
-                                <div class="card card-body border-0">
-                                    道理您的是這樣有關部門，<br>網上考生交通顯然，味道並非湖口聲明現代化規格轉變，<br><br>結婚打了設立，新型這款操。
-                                </div>
+                                @if (@details.ShootingEquipment == null)
+                                {
+                                    <div class="card card-body border-0">
+                                        場地主沒有留下任何攝影及錄影設備的資訊
+                                    </div>
+                                }
+                                @if (@details.ShootingEquipment != null)
+                                {
+                                    <div class="card card-body border-0">@details.ShootingEquipment</div>
+                                }
                             </div>
                         </div>
                         <div class="parking border-bottom">
@@ -132,9 +171,16 @@
                                 <i class="fas fa-chevron-down"></i>
                             </a>
                             <div class="collapse" id="parking">
-                                <div class="card card-body border-0">
-                                    行動相應玩家韓國分析要有用戶每月，很有服務億元一生，老婆目標尤其是協議現在，地區阿摩斯說出或是，主。
-                                </div>
+                                @if (@details.ShootingEquipment == null)
+                                {
+                                    <div class="card card-body border-0">
+                                        場地主沒有留下任何停車資訊
+                                    </div>
+                                }
+                                @if (@details.ShootingEquipment != null)
+                                {
+                                    <div class="card card-body border-0">@Html.Raw(@details.ParkingInfo)</div>
+                                }
                             </div>
                         </div>
                         <div class="rule border-bottom">
@@ -143,9 +189,7 @@
                                 <i class="fas fa-chevron-down"></i>
                             </a>
                             <div class="collapse" id="rule">
-                                <div class="card card-body border-0">
-                                    創業附件，回應今後。 道理您的是這樣有關部門，<br>網上考生交通顯然，味道並非湖口聲明現代化規格轉變，<br><br>結婚打了設立，新型這款操。<br><br> 創業附件，回應今後。 道理您的是這樣有關部門，<br>網上考生交通顯然，味道並非湖口聲明現代化規格轉變，<br><br>結婚打了設立，新型這款操。<br><br>保證工程師，翻譯經理只需聽到，之前程式稱為檢索人士擁有現代，動畫有所為何網遊研究全市，機制設備反正回覆大學房產創意，均為消失如今伺服器一會兒女性說是幾年第一章要求學院，些什麼工商得到新竹良好舉辦特別人間出了自己男性商品，勝利精美互相客人藥物總部閲讀國家裝修平衡，到處家電，部門介紹排行榜關鍵神秘口氣觀念總部政府，中文那麼多在那裡我國前進邀請指標成立湖口印刷，這麼多騎士促進，飛機將其確實，有很多郵箱寶貝傳說先進教育語言屏東絶對魔法詢問請點擊，授權哪些保存
-                                </div>
+                                <div class="card card-body border-0">@Html.Raw(@details.HostRule)</div>
                             </div>
                         </div>
                         <div class="facility border-bottom">
@@ -186,11 +230,11 @@
                                             <img class="me-2" src="~/Assets/IMG/icons/projector.svg" alt="projector">
                                             <span class="d-inline-block">投影機</span>
                                         </li>
-                                        <li class="not-provide d-flex align-items-center mb-4 whiteboard">
+                                        <li class="whiteboard not-provide d-flex align-items-center mb-4">
                                             <img class="me-2" src="~/Assets/IMG/icons/whiteboard.svg" alt="whiteboard">
                                             <span class="d-inline-block">白板</span>
                                         </li>
-                                        <li class="not-provided-flex align-items-center mb-4 printer">
+                                        <li class="printer not-provided d-flex align-items-center mb-4">
                                             <img class="me-2" src="~/Assets/IMG/icons/printer.svg" alt="printer">
                                             <span class="d-inline-block">影印機</span>
                                         </li>
@@ -216,6 +260,14 @@
                                         <li class="parking-lot d-flex align-items-center mb-4">
                                             <img class="me-2" src="~/Assets/IMG/icons/parking.svg" alt="parking-lot">
                                             <span class="d-inline-block">停車場</span>
+                                        </li>
+                                        <li class="public-transit not-provide d-flex align-items-center mb-4">
+                                            <img class="me-2" src="~/Assets/IMG/icons/public_transit.svg" alt="public-transit">
+                                            <span class="d-inline-block">大眾運輸工具</span>
+                                        </li>
+                                        <li class="outdoor-area not-provide d-flex align-items-center mb-4" d-flex align-items-center mb-4">
+                                            <img class="me-2" src="~/Assets/IMG/icons/outdoor_area.svg" alt="outdoor-area">
+                                            <span class="d-inline-block">戶外區</span>
                                         </li>
                                     </ul>
                                     <h5 class="mb-3">其他</h5>
@@ -259,20 +311,17 @@
                         </a>
                         <div class="collapse" id="traffic">
                             <div class="card card-body border-0">
-                                創業附件，回應今後。 道理您的是這樣有關部門，<br>網上考生交通顯然，味道並非湖口聲明現代化規格轉變，<br><br>結婚打了設立，新型這款操。
+                                @details.TrafficInfo
                             </div>
                         </div>
                     </div>
                     <section class="service-time border-bottom">
                         <h4 class="mb-0 py-3">服務時間</h4>
                         <ul class="py-3">
-                            <li class="mon">星期一<span class="start-service-time ps-5 ms-5 me-1">08:00</span>~<span class="end-service-time ms-1">21:00</span></li>
-                            <li class="tue">星期二<span class="start-service-time ps-5 ms-5 me-1">08:00</span>~<span class="end-service-time ms-1">21:00</span></li>
-                            <li class="wed">星期三<span class="start-service-time ps-5 ms-5 me-1">08:00</span>~<span class="end-service-time ms-1">21:00</span></li>
-                            <li class="thu">星期四<span class="start-service-time ps-5 ms-5 me-1">08:00</span>~<span class="end-service-time ms-1">21:00</span></li>
-                            <li class="fri">星期五<span class="start-service-time ps-5 ms-5 me-1">08:00</span>~<span class="end-service-time ms-1">21:00</span></li>
-                            <li class="sat">星期六<span class="start-service-time ps-5 ms-5 me-1">08:00</span>~<span class="end-service-time ms-1">21:00</span></li>
-                            <li class="sun">星期日<span class="start-service-time ps-5 ms-5 me-1">08:00</span>~<span class="end-service-time ms-1">21:00</span></li>
+                            @for (int i = 0; i < details.OperatingDayList.Count(); i++)
+                            {
+                                <li>@details.OperatingDayList[i]<span class="start-service-time ps-5 ms-5 me-1">@details.StartTimeList[i]</span>~<span class="end-service-time ms-1">@details.EndTimeList[i]</span></li>
+                            }
                         </ul>
                     </section>
                 </div>
@@ -280,114 +329,62 @@
                     <section class="cancellation border-bottom">
                         <h4 class="mb-0 py-3">取消政策</h4>
                         <div class="cancellation-content py-3">
-                            就是確保一致一看鐵路，首頁正在表面是什麼排行飛機，一年不承擔，陷入算是環節，很少限制有的少女肯定見過普遍圖書館創意你知道身上離線收入，<br><br>望着充分阿摩斯廣泛，春天大門搜尋引擎，<br>跟着連載故意項目上一頁像素不見，高校心中評價和平強烈會員價，達到參。
+                            <h5>@details.CancellationTitle</h5>
+                            <p>@details.CancellationInfo</p>
                         </div>
                     </section>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12" id="review">
-                    <h4 class="mb-0 py-3">場地評價<span class="review-count ms-2">(10)</span></h4>
-                    <div class="review-item row mb-3 mt-3">
-                        <a href="~/MemberCenter/UserInfo" class="user-pic col-2 col-xl-1 pe-0"><img class="rounded-circle border-blue" src="https://picsum.photos/100/100/?random=1"></a>
-                        <div class="review-txt col-10 col-xl-11 ps-3 ps-xl-4">
-                            <h5 class="user-name">Steve Sun</h5>
-                            <div class="review-rating">
-                                <div class="row mb-3">
-                                    <div class="start-group col-12 col-xl-3 pe-0 mb-2 mb-xl-0">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                    <div class="recommend col-12 col-xl-9 ps-3 ps-lx-0">
-                                        <i class="fas fa-check me-1"></i><span class="recommend-content">我會推薦給其他人</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="review-content mb-3">
-                                <p>重量高效所在詳細內容，滿意上下，隨着請在，連結醫生大量登記集體藝術行情原則嘉義，日本減肥記住部門娛。</p>
-                            </div>
-                            <p class="review-time pb-3 border-bottom">2021/8/29</p>
-                        </div>
-                    </div>
-                    <div class="review-item row mb-3 mt-3">
-                        <a href="#" class="user-pic col-2 col-xl-1 pe-0"><img class="rounded-circle border-blue" src="https://picsum.photos/100/100/?random=1"></a>
-                        <div class="review-txt col-10 col-xl-11 ps-3 ps-xl-4">
-                            <h5 class="user-name">Steve Sun</h5>
-                            <div class="review-rating">
-                                <div class="row mb-3">
-                                    <div class="start-group col-12 col-xl-3 pe-0 mb-2 mb-xl-0">
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                    <div class="recommend col-12 col-xl-9 ps-3 ps-lx-0">
-                                        <i class="fas fa-times me-1"></i><span class="recommend-content">我不會推薦給其他人</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="review-content mb-3">
-                                <p>辣雞。</p>
-                            </div>
-                            <p class="review-time pb-3 border-bottom">2021/8/29</p>
-                        </div>
-                    </div>
-                    <div class="review-item row mb-3 mt-3">
-                        <a href="#" class="user-pic col-2 col-xl-1 pe-0"><img class="rounded-circle border-blue" src="https://picsum.photos/100/100/?random=1"></a>
-                        <div class="review-txt col-10 col-xl-11 ps-3 ps-xl-4">
-                            <h5 class="user-name">Steve Sun</h5>
-                            <div class="review-rating">
-                                <div class="row mb-3">
-                                    <div class="start-group col-12 col-xl-3 pe-0 mb-2 mb-xl-0">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                    <div class="recommend col-12 col-xl-9 ps-3 ps-lx-0">
-                                        <i class="fas fa-check me-1"></i><span class="recommend-content">我會推薦給其他人</span>
+                    <h4 class="mb-0 py-3">場地評價<span class="review-count ms-2">(@reviews.Count())</span></h4>
+                    @foreach (var review in reviews)
+                    {
+                        <div class="review-item row mb-3 mt-3">
+                            <a href="#" class="user-pic col-2 col-xl-1 pe-0"><img class="rounded-circle border-blue" src="@review.ReviewedMemberPhoto"></a>
+                            <div class="review-txt col-10 col-xl-11 ps-3 ps-xl-4">
+                                <h5 class="user-name">@review.ReviewedMemberName</h5>
+                                <div class="review-rating">
+                                    <div class="row mb-3">
+                                        <div class="start-group col-12 col-xl-3 pe-0 mb-2 mb-xl-0">
+                                            @if (total != 0)
+                                            {
+                                                if (total % 1 == 0)
+                                                {
+                                                    for (int i = 0; i < total; i++)
+                                                    {
+                                                        <i class="fas fa-star"></i>
+                                                    }
+                                                }
+                                                if (total % 1 != 0)
+                                                {
+                                                    for (int i = 0; i < total - 1; i++)
+                                                    {
+                                                        <i class="fas fa-star"></i>
+                                                    }
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                }
+                                            }
+                                        </div>
+                                        <div class="recommend col-12 col-xl-9 ps-3 ps-lx-0">
+                                            @if (review.IsRecommend == true)
+                                            {
+                                                <i class="fas fa-check me-1"></i><span class="recommend-content">我會推薦給其他人</span>
+                                            }
+                                            @if (review.IsRecommend != true)
+                                            {
+                                                <i class="fas fa-times me-1"></i><span class="recommend-content">我不會推薦給其他人</span>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="review-content mb-3">
-                                <p>設備一週漫畫水果長大標準取消車輛，尋找加工服務，是因為現在街道尤其是地下德國代理最新，需求空間財務該公司我要相關圖片上漲主機竟然市場，基隆性感果然是指解釋成長有了本報上傳提示訊息，指出規律涉及，生命臺灣大部分已被，參加住了升級求購註冊時間集體近日證明，無比皇帝同事成績最重要，討論區願意大師於是業主無關有着深入，充滿工廠，一片才是臉上因而本文思想必須，價值本頁轉帖一致晚上宜蘭讓他不過那麼硬體夫人大。</p>
-                            </div>
-                            <p class="review-time pb-3 border-bottom">2021/8/29</p>
-                        </div>
-                    </div>
-                    <div class="review-item row mb-3 mt-3">
-                        <a href="#" class="user-pic col-2 col-xl-1 pe-0"><img class="rounded-circle border-blue" src="https://picsum.photos/100/100/?random=1"></a>
-                        <div class="review-txt col-10 col-xl-11 ps-3 ps-xl-4">
-                            <h5 class="user-name">Steve Sun</h5>
-                            <div class="review-rating">
-                                <div class="row mb-3">
-                                    <div class="start-group col-12 col-xl-3 pe-0 mb-2 mb-xl-0">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="recommend col-12 col-xl-9 ps-3 ps-lx-0">
-                                        <i class="fas fa-check me-1"></i><span class="recommend-content">我會推薦給其他人</span>
-                                    </div>
+                                <div class="review-content mb-3">
+                                    <p>@review.ReviewContent</p>
                                 </div>
+                                <p class="review-time pb-3 border-bottom">@review.ReviewDate</p>
                             </div>
-                            <div class="review-content mb-3">
-                                <p>所有和他隱藏版在那裡控制事實舉辦保障或是沒什麼，專家外國分享清晰對比刷新前後類。</p>
-                            </div>
-                            <p class="review-time pb-3 border-bottom">2021/8/29</p>
                         </div>
-                    </div>
-                    <div class="review-item row mb-3 mt-3">
-                        <a href="#" class="user-pic col-2 col-xl-1 pe-0"><img class="rounded-circle border-blue" src="https://picsum.photos/100/100/?random=1"></a>
-                        <div class="review-txt col-10 col-xl-11 ps-3 ps-xl-4">
-                            <h5 class="user-name">Steve Sun</h5>
-                            <div class="review-rating">
-                                <div class="row mb-3">
-                                    <div class="start-group col-12 col-xl-3 pe-0 mb-2 mb-xl-0">
-                                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                    <div class="recommend col-12 col-xl-9 ps-3 ps-lx-0">
-                                        <i class="fas fa-check me-1"></i><span class="recommend-content">我會推薦給其他人</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="review-content mb-3">
-                                <p>找到貫徹措施全身兩個經驗完成眼裡能學到充滿機關，發貼多媒體改造對你風險輸入，明星只好選手定義此刻的是神經突破事故年輕組織一陣地理，靈活可憐由於簡單已被長度案件眼光喜歡需要檢索解壓戰鬥你想，不過打算，常用已經不敢工程答應認為大學生規定股權不。</p>
-                            </div>
-                            <p class="review-time pb-3 border-bottom">2021/8/29</p>
-                        </div>
-                    </div>
+                    }
                 </div>
                 <div class="text-center mt-3">
                     <div class="read-more-review btn mb-4">查看更多評價</div>
@@ -396,9 +393,9 @@
         </div>
         <div class="booking col-sm-12 col-xl-4 ps-xl-5">
             <form class="booking-card text-center sticky-xl-top py-4 px-3">
-                <h3 class="booking-card-title">NT$ <span class="venue-price">600</span></h3>
-                <p class="border-bottom pb-2">最少起訂時數<span class="min-time fs-5 px-1">8</span>小時</p>
-                <p class="border-bottom py-3 fs-5"><span class="discount-hour py-1">8</span>小時滿時優惠:<span class="ps-4 discount">85折</span></p>
+                <h3 class="booking-card-title">NT$ <span class="venue-price">@Decimal.Round(@briefs.PricePerHour)</span></h3>
+                <p class="border-bottom pb-2">最少起訂時數<span class="min-time fs-5 px-1">@briefs.MinHour</span>小時</p>
+                <p class="border-bottom py-3 fs-5"><span class="discount-hour py-1">8</span>小時滿時優惠:<span class="ps-4 discount">@details.Discount</span></p>
                 <h4 class="text-start mt-4 mb-3 fs-5 fw-bolder">日期與時間:</h4>
                 <input placeholder="開始日期" class="w-100 d-inline-block mb-2 form-control" id="start-date" readonly>
                 <input placeholder="結束日期" class="w-100 d-inline-block form-control" id="end-date" readonly>
@@ -407,10 +404,10 @@
                 <div class="calculus">
                     <div class="price-calculus mt-5 border-bottom mb-2">
                         <p class="d-flex mb-2">交易金額:<span class="ms-auto"><span class="venue-price">N$1200</span><span class="mx-1">x</span><span class="total-hour">6小時</span></span></p>
-                        <p class="d-flex mb-2">滿時優惠:<span class="ms-auto"></span><span class="discount">85折</span></p>
+                        <p class="d-flex mb-2">滿時優惠:<span class="ms-auto"><span class="discount">85折</span></span></p>
                     </div>
                     <div class="total fs-5 fw-bolder">
-                        <p class="d-flex mb-2">總共:<span class="ms-auto"></span><span class="total-price">NT$6120</span></p>
+                        <p class="d-flex mb-2">總共:<span class="ms-auto"><span class="total-price">NT$6120</span></span></p>
                     </div>
                 </div>
                 <button class="btn-submit btn mt-4" type="button">馬上預約</button>
