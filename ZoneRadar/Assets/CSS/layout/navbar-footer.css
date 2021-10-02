@@ -279,12 +279,15 @@ footer.shared-footer {
     padding: 12px 20px;
     border-radius: .3rem;
     background-color: #049DD9;
+    border: none;
 }
 
     #login-submit:hover, #register-submit:hover {
         background-color: #0077a7;
     }
-
+    #login-submit:focus, #register-submit:focus {
+        box-shadow: none;
+    }
 #register-modal form + p {
     font-size: 14px;
 }
