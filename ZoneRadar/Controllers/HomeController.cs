@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Services;
 
@@ -26,15 +27,16 @@ namespace ZoneRadar.Controllers
                 HomeVM = new HomeViewModel
                 {
                     SelectedSpaces = _spaceService.GetSelectedSpace(),
-                    ToSpaceReviews = _reviewService.GetSpaceReview(),
-                    TyoeOptions = _spaceService.GetTypeOption(),
-                    CityOptions = _spaceService.GetCityOption()
+                    ToSpaceReviews = _reviewService.GetSpaceReviews(),
+                    TyoeOptions = _spaceService.GetTypeOptions(),
+                    CityOptions = _spaceService.GetCityOptions()
                 }
             };
-            if(returnUrl != null)
+            if (returnUrl != null)
             {
                 ViewBag.IsLogin = true;
             }
+            //ViewBag.IsLogin = TempData["IsLogin"];
             //var model = new HomeViewModel
             //{
             //    SelectedSpaces = _spaceService.GetSelectedSpace(),
@@ -72,25 +74,21 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult SearchSpace(HomepageSearchViewModel homepageSearchVM)
-        {
-            _spaceService.SearchSpace(homepageSearchVM);
-            throw new NotImplementedException();
-        }
-        public ActionResult SearchByCity(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var space = _spaceService.GetSpaceByCity(id.Value);
 
-            if (space.Count() == 0)
-            {
-                return HttpNotFound();
-            }
-            return View(space);
+        /// <summary>
+        /// 測試用的Action
+        /// </summary>
+        /// <param name="homepageSearchVM"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Authorize]
+        public void SearchSpace(HomepageSearchViewModel homepageSearchVM)
+        {
+            FormsIdentity id = (FormsIdentity)User.Identity;
+            string memberId = User.Identity.Name;
+
+            _spaceService.SearchSpacesByTypeCityDate(homepageSearchVM);
+            throw new NotImplementedException();
         }
     }
 }

@@ -61,7 +61,7 @@ namespace ZoneRadar.Services
         /// 產生活動類型的SelectListItem
         /// </summary>
         /// <returns></returns>
-        public List<SelectListItem> GetTypeOption()
+        public List<SelectListItem> GetTypeOptions()
         {
             var types = _repository.GetAll<TypeDetail>().ToList();
             var typeOptions = types.Select(x => new SelectListItem
@@ -77,7 +77,7 @@ namespace ZoneRadar.Services
         /// 產生城市的SelectListItem
         /// </summary>
         /// <returns></returns>
-        public List<SelectListItem> GetCityOption()
+        public List<SelectListItem> GetCityOptions()
         {
             var cities = _repository.GetAll<City>().ToList();
             var cityOptions = cities.Select(x => new SelectListItem
@@ -96,12 +96,12 @@ namespace ZoneRadar.Services
         {
             _repository.Dispose();
         }
-        
+
         /// <summary>
-        /// 搜尋符合條件的場地(首頁搜尋列)
+        /// 搜尋符合類型、縣市、時間條件的場地(首頁搜尋列)，並轉成搜尋場地頁面的ViewModel
         /// </summary>
         /// <param name="homepageSearchVM"></param>
-        public void SearchSpace(HomepageSearchViewModel homepageSearchVM)
+        public void SearchSpacesByTypeCityDate(HomepageSearchViewModel homepageSearchVM)
         {
             var orders = _repository.GetAll<Order>().ToList();
             var targetSpaces = _repository.GetAll<Space>().ToList();
@@ -169,6 +169,7 @@ namespace ZoneRadar.Services
             {
 
             }
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -176,23 +177,23 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="cityId"></param>
         /// <returns></returns>
-        public List<Space> GetSpaceByCity(int cityId)
+        public void SearchSpacesByCity(int cityId)
         {
             var spaces = _repository.GetAll<Space>().ToList();
             var spacesByCity = new List<Space>();
             //若選擇新竹，則搜尋新竹市和新竹縣
             if (cityId == 5 || cityId == 10)
             {
-                spacesByCity.AddRange(spaces.Where(x => x.CityID == 5 && x.CityID == 10));
+                spacesByCity = spaces.Where(x => x.CityID == 5 && x.CityID == 10).ToList();
             }
             //若選擇嘉義，則搜尋嘉義市和嘉義縣
             else if (cityId == 8 || cityId == 15)
             {
-                spacesByCity.AddRange(spaces.Where(x => x.CityID == 8 && x.CityID == 15));
+                spacesByCity = spaces.Where(x => x.CityID == 8 && x.CityID == 15).ToList();
             }
             else
             {
-                spacesByCity.AddRange(spaces.Where(x => x.CityID == cityId).ToList());
+                spacesByCity = spaces.Where(x => x.CityID == cityId).ToList();
             }
             //轉換成ViewModel
             foreach (var item in spacesByCity)

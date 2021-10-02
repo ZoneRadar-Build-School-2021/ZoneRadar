@@ -59,7 +59,7 @@ namespace ZoneRadar.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(AllViewModel allVM)
+        public ActionResult Register([Bind(Include = "RegisterZONERadarVM")] AllViewModel allVM)
         {
             if (!ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace ZoneRadar.Controllers
                 {
                     var encryptedTicket = _service.CreateEncryptedTicket(registerResult.user);
                     _service.CreateCookie(encryptedTicket, Response);
-                    return Redirect(_service.GetUrl(registerResult.user));
+                    return Redirect(_service.GetReturnUrl("qwe"));
                 }
                 else
                 {
@@ -97,7 +97,7 @@ namespace ZoneRadar.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(AllViewModel allVM)
+        public ActionResult Login([Bind(Include = "LoginZONERadarVM")] AllViewModel allVM)
         {
             //若未通過Model驗證
             if (!ModelState.IsValid)
@@ -127,7 +127,7 @@ namespace ZoneRadar.Controllers
             _service.CreateCookie(encryptedTicket, Response);
 
             //導向使用者原先欲造訪的路由
-            return Redirect(_service.GetUrl(user));
+            return Redirect(_service.GetReturnUrl(user.MemberID.ToString()));
         }        
 
         public ActionResult SignOut()

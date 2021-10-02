@@ -104,7 +104,7 @@ namespace ZoneRadar.Services
             //建立FormsAuthenticationTicket
             var ticket = new FormsAuthenticationTicket(
             version: 1,
-            name: user.Name.ToString(), //可以放使用者Id
+            name: user.MemberID.ToString(), //可以放使用者Id
             issueDate: DateTime.UtcNow,//現在UTC時間
             expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
             isPersistent: true,// 是否要記住我 true or false
@@ -132,11 +132,11 @@ namespace ZoneRadar.Services
         /// <summary>
         /// 取得使用者原先欲造訪的路由
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="userName"></param>
         /// <returns></returns>
-        public string GetUrl(Member user)
+        public string GetReturnUrl(string userName)
         {
-            var url = FormsAuthentication.GetRedirectUrl(user.Name, true);
+            var url = FormsAuthentication.GetRedirectUrl(userName, true);
             return url;
         }
     }

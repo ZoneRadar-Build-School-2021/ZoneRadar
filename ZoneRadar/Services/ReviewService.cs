@@ -19,7 +19,7 @@ namespace ZoneRadar.Services
         /// 找出分數較高的場地評論
         /// </summary>
         /// <returns></returns>
-        public List<ToSpaceReviewViewModel> GetSpaceReview()
+        public List<ToSpaceReviewViewModel> GetSpaceReviews()
         {
             var members = _repository.GetAll<Member>().ToList();
             var reviews = _repository.GetAll<Review>().Where(x => x.ToHost).ToList();
