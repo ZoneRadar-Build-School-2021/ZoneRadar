@@ -110,7 +110,7 @@ namespace ZoneRadar.Utilities
                 }
             }
 
-            return sb.ToString(); ;
+            return sb.ToString();
         }
     }
 }
