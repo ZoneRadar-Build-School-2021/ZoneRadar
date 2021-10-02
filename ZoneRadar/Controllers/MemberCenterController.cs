@@ -45,7 +45,7 @@ namespace ZoneRadar.Controllers
             }
             else
             {
-                var MemCollectionSpaces = (memberId.Value);
+                var MemCollectionSpaces = _memberservice.GetMemberCollection(memberId.Value);
                 return View(MemCollectionSpaces);
             }
         }

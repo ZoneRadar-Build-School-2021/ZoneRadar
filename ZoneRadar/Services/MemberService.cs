@@ -53,9 +53,9 @@ namespace ZoneRadar.Services
                     {
                         SpaceName = s.SpaceName,
                         Address = s.Address,
-                        SpacePhoto = SpaceFirsOrDefault(sps, s).SpacePhoto.First().SpacePhotoUrl,
-                        District = SpaceFirsOrDefault(sps, s).District.DistrictName,
-                        City = SpaceFirsOrDefault(sps, s).City.CityName,
+                        SpacePhoto = sps.FirstOrDefault(x => x.SpaceID == s.SpaceID).SpacePhoto.First().SpacePhotoUrl,
+                        District = sps.FirstOrDefault(x => x.SpaceID == s.SpaceID).District.DistrictName,
+                        City = sps.FirstOrDefault(x => x.SpaceID == s.SpaceID).City.CityName,
                         PricePerHour = s.PricePerHour,
                         ReviewCount = re.Where(x => x.Order.MemberID == s.MemberID && x.ToHost == true).Select(x => x.Score).Count()
                     });
@@ -87,29 +87,33 @@ namespace ZoneRadar.Services
                     SignUpDateTime = u.SignUpDateTime,
                     Photo = u.Photo
                 };
-                //會員所收藏的場地
-                var collection = _zoneradarRepository.GetAll<Collection>().Where(x=> x.MemberID == memberId);
-                var sps = _zoneradarRepository.GetAll<Space>();
-                foreach (var c in collection)
+                if (resultMemberCollection.MyCollection == null)
                 {
-                    resultMemberCollection.MyCollection.Add(new Spaces 
-                    {
-                        SpaceName = sps.FirstOrDefault(x=>x.SpaceID == c.SpaceID).SpaceName,
-                        Address = sps.FirstOrDefault(x=>x.SpaceID == c.SpaceID).Address,
-                        SpacePhoto = sps.FirstOrDefault(x=>x.SpaceID==c.SpaceID).SpacePhoto.First().SpacePhotoUrl,
-                        District = sps.FirstOrDefault(x=>x.SpaceID==c.SpaceID).District.DistrictName,
-                        City = sps.FirstOrDefault(x=>x.SpaceID == c.SpaceID).City.CityName,
-                        PricePerHour = sps.FirstOrDefault(x=>x.SpaceID == c.SpaceID).PricePerHour,
-                        ReviewCount = sps.FirstOrDefault(x=>x.SpaceID ==c.SpaceID).Order.Select(x=>x.Review).Count()
-                        /*re.Where(x => x.Order.MemberID == s.MemberID && x.ToHost == true).Select(x => x.Score).Count()*/
-                    });
+                    return resultMemberCollection;
                 }
-                return resultMemberCollection;
+                else
+                { 
+                    //會員所收藏的場地
+                    var collection = _zoneradarRepository.GetAll<Collection>().Where(x=> x.MemberID == memberId);
+                    var sps = _zoneradarRepository.GetAll<Space>();
+                    foreach (var c in collection)
+                    {
+                        resultMemberCollection.MyCollection.Add(new Spaces 
+                        {
+                            SpaceName = sps.FirstOrDefault(x=>x.SpaceID == c.SpaceID).SpaceName,
+                            Address = sps.FirstOrDefault(x=>x.SpaceID == c.SpaceID).Address,
+                            SpacePhoto = sps.FirstOrDefault(x=>x.SpaceID==c.SpaceID).SpacePhoto.First().SpacePhotoUrl,
+                            District = sps.FirstOrDefault(x=>x.SpaceID==c.SpaceID).District.DistrictName,
+                            City = sps.FirstOrDefault(x=>x.SpaceID == c.SpaceID).City.CityName,
+                            PricePerHour = sps.FirstOrDefault(x=>x.SpaceID == c.SpaceID).PricePerHour,
+                            ReviewCount = sps.FirstOrDefault(x=>x.SpaceID ==c.SpaceID).Order.Select(x=>x.Review).Count()
+                            /*re.Where(x => x.Order.MemberID == s.MemberID && x.ToHost == true).Select(x => x.Score).Count()*/
+                        });
+                    }
+                    return resultMemberCollection;
+                }
             }
         }
-        Space SpaceFirsOrDefault(IQueryable<Space> sps, Space s)
-        {
-            return sps.FirstOrDefault(x => x.SpaceID == s.SpaceID);
-        }
+        //
     }
 }
