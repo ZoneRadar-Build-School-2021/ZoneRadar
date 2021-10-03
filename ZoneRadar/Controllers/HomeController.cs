@@ -20,7 +20,7 @@ namespace ZoneRadar.Controllers
             _reviewService = new ReviewService();
         }
 
-        public ActionResult Index(string returnUrl)
+        public ActionResult Index()
         {
             var model = new AllViewModel
             {
@@ -32,9 +32,9 @@ namespace ZoneRadar.Controllers
                     CityOptions = _spaceService.GetCityOptions()
                 }
             };
-            if (returnUrl != null)
+            if (Request.QueryString["ReturnUrl"] != null)
             {
-                ViewBag.IsLogin = true;
+                ViewBag.LoginModalPopup = true;
             }
             //ViewBag.IsLogin = TempData["IsLogin"];
             //var model = new HomeViewModel

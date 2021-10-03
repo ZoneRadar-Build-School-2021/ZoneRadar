@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Security;
 
 namespace ZoneRadar
 {
@@ -19,5 +20,13 @@ namespace ZoneRadar
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            if (Request.QueryString["ReturnUrl"] != null)
+            {
+                var currentPageUrl = Request.UrlReferrer.AbsolutePath;
+                Response.Redirect($"{Request.UrlReferrer.AbsolutePath}?ReturnUrl={Request.QueryString["ReturnUrl"].ToString()}");
+            }
+        }        
     }
 }

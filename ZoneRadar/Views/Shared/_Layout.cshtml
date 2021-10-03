@@ -184,7 +184,7 @@
                     {
                         @Html.AntiForgeryToken()
                         @*<input type="email" id="input-email-login" name="email" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
-            <input type="password" id="input-password-login" name="password" class="form-control form-control-lg d-block mb-3" placeholder="密碼" aria-label="password" aria-describedby="basic-addon2" required>*@
+                            <input type="password" id="input-password-login" name="password" class="form-control form-control-lg d-block mb-3" placeholder="密碼" aria-label="password" aria-describedby="basic-addon2" required>*@
                         @Html.EditorFor(model => model.LoginZONERadarVM.Email, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "email", placeholder = "Email", required = "true" } })
                         @Html.ValidationMessageFor(model => model.LoginZONERadarVM.Email, "", new { @class = "text-danger d-block text-start mt-n2 mb-1" })
                         @Html.EditorFor(model => model.LoginZONERadarVM.Password, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "password", placeholder = "Password", required = "true" } })
@@ -221,8 +221,8 @@
                     {
                         @Html.AntiForgeryToken()
                         @*<input type="text" id="input-name-register" name="RegisterZONERadarVM.Name" class="form-control form-control-lg d-block mb-3" placeholder="Name" aria-label="password" aria-describedby="basic-addon2" required>
-            <input type="email" id="input-email-register" name="RegisterZONERadarVM.Email" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
-            <input type="password" id="input-password-register" name="RegisterZONERadarVM.Password" class="form-control form-control-lg d-block mb-3" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" required>*@
+                            <input type="email" id="input-email-register" name="RegisterZONERadarVM.Email" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
+                            <input type="password" id="input-password-register" name="RegisterZONERadarVM.Password" class="form-control form-control-lg d-block mb-3" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" required>*@
                         @Html.EditorFor(model => model.RegisterZONERadarVM.Name, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "text", placeholder = "Name", required = "true" } })
                         @Html.ValidationMessageFor(model => model.RegisterZONERadarVM.Name, "", new { @class = "text-danger d-block text-start mt-n2 mb-1" })
                         @Html.EditorFor(model => model.RegisterZONERadarVM.Email, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "email", placeholder = "Email", required = "true" } })
@@ -322,7 +322,6 @@
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
 
-    
     @if (User.Identity.IsAuthenticated)
     {
         <script>
@@ -349,6 +348,16 @@
             })
         </script>
     }
+
+    @if (ViewBag.LoginModalPopup == true)
+    {
+        <script>
+            let login_modal = document.querySelector("#login-modal");
+            let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
+            modal.show();
+        </script>
+    }
+
     @RenderSection("endCSS", required: false)
     @RenderSection("endJS", required: false)
 
