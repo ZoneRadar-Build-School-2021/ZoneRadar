@@ -103,7 +103,7 @@ namespace ZoneRadar.Services
 
         public string GetFilterJSON ()
         {
-            var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City.CityName).ToDictionary(x => x.Key, x => x.Select(y => y.DistrictName).ToList());
+            var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City).OrderBy(x => x.Key.CityID).ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList());
             var spaceTypeList = _repository.GetAll<SpaceType>().Select(x => x.TypeDetail.Type).ToList();
             var amenityList = _repository.GetAll<AmenityDetail>().Select(x => x.Amenity).ToList();
             var result = new FilterViewModel
