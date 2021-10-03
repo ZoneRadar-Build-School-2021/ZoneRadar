@@ -100,6 +100,16 @@ namespace ZoneRadar.Services
             return cityOptions;
         }
 
+        public FilterViewModel GetSearchingFilterOptions()
+        {
+            var result = new FilterViewModel
+            {
+
+            };
+
+            return result;
+        }
+
         /// <summary>
         /// 關閉資料庫連線
         /// </summary>
@@ -337,6 +347,11 @@ namespace ZoneRadar.Services
             return result;
         }
 
+        /// <summary>
+        /// 收藏寫入資料庫
+        /// </summary>
+        /// <param name="bookingPageVM"></param>
+        /// <param name="memberID"></param>
         public void CreateCollectionInDB(BookingPageViewModel bookingPageVM, string memberID)
         {
             var collection = new Collection

@@ -186,6 +186,7 @@
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HostCenterController.cs" />
+    <Compile Include="Controllers\JSONAPIController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MemberCenterController.cs" />
     <Compile Include="Controllers\SearchingController.cs" />
