@@ -100,16 +100,6 @@ namespace ZoneRadar.Services
             return cityOptions;
         }
 
-        public FilterViewModel GetSearchingFilterOptions()
-        {
-            var result = new FilterViewModel
-            {
-
-            };
-
-            return result;
-        }
-
         /// <summary>
         /// 關閉資料庫連線
         /// </summary>
