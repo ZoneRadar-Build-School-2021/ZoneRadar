@@ -28,16 +28,16 @@ namespace ZoneRadar.Controllers
             return Ok(json);
         }
 
-        [AcceptVerbs("POST")]
-        public IHttpActionResult ReceiveFilterOption(string option)
-        {
-            var json = _spaceService.GetFilterJSON();
-            if (json == null)
-            {
-                return NotFound();
-            }
+        //[AcceptVerbs("POST")]
+        //public IHttpActionResult ReceiveFilterOption(string option)
+        //{
+        //    var json = _spaceService.GetFilterJSON();
+        //    if (json == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(json);
-        }
+        //    return Ok(json);
+        //}
     }
 }
