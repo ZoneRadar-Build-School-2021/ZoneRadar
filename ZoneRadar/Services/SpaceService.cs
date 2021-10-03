@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -99,6 +100,23 @@ namespace ZoneRadar.Services
 
             return cityOptions;
         }
+
+        public string GetFilterJSON ()
+        {
+            var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City.CityName).ToDictionary(x => x.Key, x => x.Select(y => y.DistrictName).ToList());
+            var spaceTypeList = _repository.GetAll<SpaceType>().Select(x => x.TypeDetail.Type).ToList();
+            var amenityList = _repository.GetAll<AmenityDetail>().Select(x => x.Amenity).ToList();
+            var result = new FilterViewModel
+            {
+                CityDistrictDictionary = citiesAndDistricts,
+                SpaceTypeList = spaceTypeList,
+                AmenityList = amenityList,
+            };
+
+            var json = JsonConvert.SerializeObject(result);
+            return json;
+        }
+
 
         /// <summary>
         /// 關閉資料庫連線
