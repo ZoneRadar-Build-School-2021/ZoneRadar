@@ -27,6 +27,5 @@ namespace ZoneRadar.Controllers
 
             return Ok(json);
         }
-
     }
 }

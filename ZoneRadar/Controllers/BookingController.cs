@@ -73,5 +73,6 @@ namespace ZoneRadar.Controllers
             _spaceService.CreateCollectionInDB(bookingPageVM, memberID);
             return RedirectToAction("BookingPage", bookingPageVM.SpaceBreifInfo.SpaceID);
         }
+
     }
 }
