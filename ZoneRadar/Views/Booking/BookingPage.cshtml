@@ -196,7 +196,20 @@
                             <h4 class="mb-0 py-3">場地設施與空間</h4>
                             <div class="collapse" id="facility">
                                 <div class="card card-body border-0 ps-0">
-                                    <h5 class="mb-3">便利設施</h5>
+                                    @foreach (var item in details.AmenityDictionary)
+                                    {
+                                        <h5 class="mb-3">@item.Key</h5>
+                                        <ul class="d-flex flex-wrap mb-4">
+                                            @foreach (var facility in item.Value)
+                                            {
+                                                <li class="@facility d-flex align-items-center mb-4">
+                                                    <img class="me-2" src="~/Assets/IMG/icons/@facility" alt="@facility">
+                                                    <span class="d-inline-block">@facility</span>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                    @*<h5 class="mb-3">便利設施</h5>
                                     <ul class="amenities d-flex flex-wrap mb-4">
                                         <li class="wifi d-flex align-items-center mb-4">
                                             <img class="me-2" src="~/Assets/IMG/icons/wifi.svg" alt="wifi">
@@ -287,7 +300,7 @@
                                         <li class="other-item d-flex align-items-center mb-4">
                                             自行填寫
                                         </li>
-                                    </ul>
+                                    </ul>*@
                                 </div>
                             </div>
                             <a class="read-more collapsed btn p-3 fw-bolder" data-bs-toggle="collapse" href="#facility" role="button" aria-expanded="false" aria-controls="facility"></a>

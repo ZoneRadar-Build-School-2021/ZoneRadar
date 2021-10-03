@@ -247,7 +247,6 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public SpaceDetailViewModel GetTargetSpaceDetail(Space targetSpace)
         {
-
             // 建立轉換字典
             var amenityConvertDictionary = new Dictionary<string, string>
             {
@@ -269,12 +268,6 @@ namespace ZoneRadar.Services
                 { "包廂", "breakout_room" },
                 { "停車場", "parking" },
             };
-            // 找出所有場地設施
-            
-
-
-
-            // 建立轉換字典
             var weekDayConvertDictoinary = new Dictionary<string, int>
             {
                 { "星期一", 1 },
@@ -285,18 +278,37 @@ namespace ZoneRadar.Services
                 { "星期六", 6 },
                 { "星期日", 7 }
             };
+
+            // 找出所有場地設施
+            var originAmenityList = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.AmenityDetail);
+            var convertedAmenityList = new List<AmenityDetail>();
+            foreach (var item in originAmenityList)
+            {
+                convertedAmenityList.Add(new AmenityDetail
+                {
+                    Amenity = string.Concat(item.Amenity, amenityConvertDictionary.FirstOrDefault(x => x.Key == item.Amenity).Value),
+                    AmenityCategoryDetail = item.AmenityCategoryDetail,
+                    AmenityCategoryID = item.AmenityCategoryID,
+                    AmenityDetailID = item.AmenityDetailID,
+                    SpaceAmenity = item.SpaceAmenity,
+                });
+            }
+            var amenityDictionary = convertedAmenityList.GroupBy(x => x.AmenityCategoryDetail.AmenityCategory).ToDictionary(x => x.Key, x => x.Select(y => y.Amenity).ToList());
+            
             // 找出該場地所有營業資料
             var originOperatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == targetSpace.SpaceID).ToList();
-            // 營業日期替換成中文
             var convertedOperatingDayList = new List<string>();
             foreach (var day in originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.OperatingDay).ToList())
             {
                 convertedOperatingDayList.Add(weekDayConvertDictoinary.FirstOrDefault(x => x.Value == day).Key);
             }
+
             // 找出所有清潔公約選項
             var cleaningOptionList = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.CleaningOption).ToList();
+            
             // 找出滿時優惠的時數
             var hoursForDiscount = _repository.GetAll<SpaceDiscount>().SingleOrDefault(x => x.SpaceID == targetSpace.SpaceID).Hour;
+            
             // 找出滿時優惠的折數
             var discount = _repository.GetAll<SpaceDiscount>().SingleOrDefault(x => x.SpaceID == targetSpace.SpaceID).Discount;
 
@@ -309,7 +321,7 @@ namespace ZoneRadar.Services
                 ShootingEquipment = targetSpace.ShootingEquipment,
                 ParkingInfo = targetSpace.Parking,
                 HostRule = targetSpace.HostRules,
-                AmenityList = amenityNameList,
+                AmenityDictionary = amenityDictionary,
                 Longitude = targetSpace.Longitude,
                 Latitude = targetSpace.Latitude,
                 TrafficInfo = targetSpace.Traffic,

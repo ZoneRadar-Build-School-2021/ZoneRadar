@@ -121,7 +121,7 @@ namespace ZoneRadar.Models.ViewModels
         /// <summary>
         /// 便利設施
         /// </summary>
-        public Dictionary<string, string> AmenityList { get; set; }
+        public Dictionary<string, List<string>> AmenityDictionary { get; set; }
         /// <summary>
         /// 經度
         /// </summary>
