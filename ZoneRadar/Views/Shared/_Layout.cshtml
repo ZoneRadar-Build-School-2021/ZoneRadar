@@ -1,4 +1,21 @@
-﻿<!DOCTYPE html>
+﻿@using ZoneRadar.Models.ViewModels
+@model AllViewModel
+@{
+    bool? IsLogin = ViewBag.IsLogin;
+
+    HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
+
+    int userId = 0;
+    string userPhoto = "";
+    if (cookie != null)
+    {
+        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
+        UserInfo userInfo = Json.Decode<UserInfo>(ticket.UserData);
+        userId = userInfo.MemberId;
+        userPhoto = userInfo.MemberPhoto;
+    }
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -45,16 +62,16 @@
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login-modal">登入</a>
                     </li>
                     <!-- 登入後出現 -->
-                    <li class="member-only nav-item mb-1 mb-md-0">
+                    <li class="member-only d-none nav-item mb-1 mb-md-0">
                         <a class="nav-link" href="#">訊息中心</a>
                     </li>
                     <!-- 登入後，手機出現 -->
-                    <li class="member-only nav-item d-md-none">
+                    <li class="member-only d-none nav-item d-md-none">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingMyaccount">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMyaccount" aria-expanded="false" aria-controls="collapseMyaccount">
                                     <div class="user-pic d-inline-block overflow-hidden me-1">
-                                        <img class="h-100 align-top" src="@ViewBag.memberPhoto">
+                                        <img class="h-100 align-top" src="@userPhoto">
                                     </div>
                                 </button>
                             </h2>
@@ -87,18 +104,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a class="nav-link" href="~/MemberCenter/EditProfile">修改個人資訊</a>
-                                    <a class="nav-link" href="#">登出</a>
+                                    <a class="nav-link" href="~/MemberCenter/EditProfile/@userId">修改個人資訊</a>
+                                    <a class="nav-link" href="~/MemberCenter/SignOut">登出</a>
                                 </div>
                             </div>
                         </div>
                     </li>
                     <!-- 登入後，平板+電腦出現 -->
-                    <li class="member-only user nav-item">
+                    <li class="member-only d-none user nav-item">
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                                 <div class="user-pic d-inline-block overflow-hidden me-1">
-                                    <img class="h-100 align-top" src="@ViewBag.memberPhoto">
+                                    <img class="h-100 align-top" src="@userPhoto">
                                 </div>
                                 <i class="fas fa-chevron-down"></i>
                             </a>
@@ -134,8 +151,8 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li><a class="dropdown-item" href="~/MemberCenter/EditProfile">修改個人資訊</a></li>
-                                <li><a class="dropdown-item" href="#">登出</a></li>
+                                <li><a class="dropdown-item" href="~/MemberCenter/EditProfile/@userId">修改個人資訊</a></li>
+                                <li><a class="dropdown-item" href="~/MemberCenter/SignOut">登出</a></li>
                             </ul>
                         </div>
                     </li>
@@ -163,11 +180,17 @@
                         Facebook 登入
                     </a>
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email</div>
-                    <form action="#" name="login-form" class="mb-3">
-                        <input type="email" id="input-email-login" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
-                        <input type="password" id="input-password-login" class="form-control form-control-lg d-block mb-3" placeholder="密碼" aria-label="password" aria-describedby="basic-addon2" required>
-                        <a href="#" id="login-submit" class="d-block text-decoration-none text-white">登入</a>
-                    </form>
+                    @using (Html.BeginForm("Login", "MemberCenter", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { @class = "mb-3" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @*<input type="email" id="input-email-login" name="email" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
+            <input type="password" id="input-password-login" name="password" class="form-control form-control-lg d-block mb-3" placeholder="密碼" aria-label="password" aria-describedby="basic-addon2" required>*@
+                        @Html.EditorFor(model => model.LoginZONERadarVM.Email, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "email", placeholder = "Email", required = "true" } })
+                        @Html.ValidationMessageFor(model => model.LoginZONERadarVM.Email, "", new { @class = "text-danger d-block text-start mt-n2 mb-1" })
+                        @Html.EditorFor(model => model.LoginZONERadarVM.Password, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "password", placeholder = "Password", required = "true" } })
+                        @Html.ValidationMessageFor(model => model.LoginZONERadarVM.Password, "", new { @class = "text-danger d-block text-start mt-n2 mb-1" })
+                        <button type="submit" id="login-submit" class="w-100 text-decoration-none text-white">登入</button>
+                    }
                     <a href="#" id="forget-password" class="text-decoration-none d-inline-block mb-4">忘記密碼</a>
                     <p class="mb-5">還沒有ZONERadar帳號？<a href="#" id="a-register-modal" data-bs-toggle="modal" data-bs-target="#register-modal" class="text-decoration-none">立即註冊</a></p>
                 </div>
@@ -194,11 +217,22 @@
                         Facebook 註冊
                     </a>
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email註冊</div>
-                    <form action="#" name="register-form" class="mb-3">
-                        <input type="email" id="input-email-register" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
-                        <input type="password" id="input-password-register" class="form-control form-control-lg d-block mb-3" placeholder="密碼" aria-label="password" aria-describedby="basic-addon2" required>
-                        <a href="#" id="register-submit" class="d-block text-decoration-none text-white">以Email註冊</a>
-                    </form>
+                    @using (Html.BeginForm("Register", "MemberCenter", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { @class = "mb-3" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @*<input type="text" id="input-name-register" name="RegisterZONERadarVM.Name" class="form-control form-control-lg d-block mb-3" placeholder="Name" aria-label="password" aria-describedby="basic-addon2" required>
+            <input type="email" id="input-email-register" name="RegisterZONERadarVM.Email" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
+            <input type="password" id="input-password-register" name="RegisterZONERadarVM.Password" class="form-control form-control-lg d-block mb-3" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" required>*@
+                        @Html.EditorFor(model => model.RegisterZONERadarVM.Name, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "text", placeholder = "Name", required = "true" } })
+                        @Html.ValidationMessageFor(model => model.RegisterZONERadarVM.Name, "", new { @class = "text-danger d-block text-start mt-n2 mb-1" })
+                        @Html.EditorFor(model => model.RegisterZONERadarVM.Email, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "email", placeholder = "Email", required = "true" } })
+                        @Html.ValidationMessageFor(model => model.RegisterZONERadarVM.Email, "", new { @class = "text-danger d-block text-start mt-n2 mb-1" })
+                        @Html.EditorFor(model => model.RegisterZONERadarVM.Password, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "password", placeholder = "Password", required = "true" } })
+                        @Html.ValidationMessageFor(model => model.RegisterZONERadarVM.Password, "", new { @class = "text-danger d-block text-start mt-n2 mb-1" })
+                        @Html.EditorFor(model => model.RegisterZONERadarVM.ConfirmPassword, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mb-3", type = "password", placeholder = "Confirm Password", required = "true" } })
+                        @Html.ValidationMessageFor(model => model.RegisterZONERadarVM.ConfirmPassword, "", new { @class = "text-danger d-block text-start mt-n2 mb-1" })
+                        <button type="submit" id="register-submit" class="w-100 text-decoration-none text-white">以Email註冊</button>
+                    }
                     <p class="mb-5">當您註冊時，代表您已同意ZONERadar的服務條款及隱私權政策</p>
                     <p class="mb-5">已有ZONERadar帳號？<a href="#" id="a-login-modal" data-bs-toggle="modal" data-bs-target="#login-modal" class="text-decoration-none">登入</a></p>
                 </div>
@@ -284,7 +318,37 @@
     <script src="~/Assets/JS/bootstrap.bundle.min.js"></script>
     <script src="~/Assets/JS/sweetalert2.js"></script>
     <script src="~/Assets/JS/layout/navbar-footer.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
+
+    
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script>
+            let customer_only = document.querySelectorAll(".customer-only");
+            let member_only = document.querySelectorAll(".member-only");
+            customer_only.forEach(item => {
+                item.classList.add("d-none");
+            })
+            member_only.forEach(item => {
+                item.classList.remove("d-none");
+            })
+        </script>
+    }
+    else
+    {
+        <script>
+            let customer_only = document.querySelectorAll(".customer-only");
+            let member_only = document.querySelectorAll(".member-only");
+            customer_only.forEach(item => {
+                item.classList.remove("d-none");
+            })
+            member_only.forEach(item => {
+                item.classList.add("d-none");
+            })
+        </script>
+    }
     @RenderSection("endCSS", required: false)
     @RenderSection("endJS", required: false)
 

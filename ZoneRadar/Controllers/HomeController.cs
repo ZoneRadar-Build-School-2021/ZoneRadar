@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Services;
 
@@ -18,15 +20,30 @@ namespace ZoneRadar.Controllers
             _reviewService = new ReviewService();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string returnUrl)
         {
-            var model = new HomeViewModel
+            var model = new AllViewModel
             {
-                SelectedSpaces = _spaceService.GetSelectedSpace(),
-                ToSpaceReviews = _reviewService.GetSpaceReview(),
-                TyoeOptions = _spaceService.GetTypeOption(),
-                CityOptions = _spaceService.GetCityOption()
+                HomeVM = new HomeViewModel
+                {
+                    SelectedSpaces = _spaceService.GetSelectedSpace(),
+                    ToSpaceReviews = _reviewService.GetSpaceReviews(),
+                    TyoeOptions = _spaceService.GetTypeOptions(),
+                    CityOptions = _spaceService.GetCityOptions()
+                }
             };
+            if (returnUrl != null)
+            {
+                ViewBag.IsLogin = true;
+            }
+            //ViewBag.IsLogin = TempData["IsLogin"];
+            //var model = new HomeViewModel
+            //{
+            //    SelectedSpaces = _spaceService.GetSelectedSpace(),
+            //    ToSpaceReviews = _reviewService.GetSpaceReview(),
+            //    TyoeOptions = _spaceService.GetTypeOption(),
+            //    CityOptions = _spaceService.GetCityOption()
+            //};
             return View(model);
         }
 
@@ -47,6 +64,8 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+
+        [Authorize]
         public ActionResult FAQ()
         {
             return View();
@@ -55,35 +74,21 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 測試用的Action
+        /// </summary>
+        /// <param name="homepageSearchVM"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult SearchSpace(HomepageSearchViewModel homepageSearchVM)
+        [Authorize]
+        public void SearchSpace(HomepageSearchViewModel homepageSearchVM)
         {
-            if (ModelState.IsValid)
-            {
-                return Content("成功接收");
-            }
+            FormsIdentity id = (FormsIdentity)User.Identity;
+            string memberId = User.Identity.Name;
 
-            return null;
+            _spaceService.SearchSpacesByTypeCityDate(homepageSearchVM);
+            throw new NotImplementedException();
         }
-        public ActionResult AddTest()
-        {
-            //_service.TestMethod();
-
-            return Content("新增完成");
-        }
-        //public ActionResult BookingInfo(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    var space = _ser.GetSpace(id);
-
-        //    if (space.Count() == 0)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(space);
-        //}
     }
 }

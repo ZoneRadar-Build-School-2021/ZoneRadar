@@ -15,8 +15,11 @@ namespace ZoneRadar.Services
         {
             _repository = new ZONERadarRepository();
         }
-
-        public List<ToSpaceReviewViewModel> GetSpaceReview()
+        /// <summary>
+        /// 找出分數較高的場地評論
+        /// </summary>
+        /// <returns></returns>
+        public List<ToSpaceReviewViewModel> GetSpaceReviews()
         {
             var members = _repository.GetAll<Member>().ToList();
             var reviews = _repository.GetAll<Review>().Where(x => x.ToHost).ToList();
