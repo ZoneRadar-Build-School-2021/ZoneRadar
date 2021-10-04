@@ -54,20 +54,20 @@ namespace ZoneRadar.Controllers
 
             var model = new SpaceViewModel
             {
-                SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
-                cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
-                addressAraeList = _spaceService.ShowAmenityByIdOne().addressAraeList,
+                //SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
+                //cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
+                //addressAraeList = _spaceService.ShowAmenityByIdOne().addressAraeList,
 
-                amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
-                amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
-                amenityAraeThreeList = _spaceService.ShowAmenityByIdThree().amenityAraeThreeList,
+                //amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
+                //amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
+                //amenityAraeThreeList = _spaceService.ShowAmenityByIdThree().amenityAraeThreeList,
 
-                CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
-                CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
-                CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
-                CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
+                //CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
+                //CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
+                //CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
+                //CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
 
-                Operating = _spaceService.Operating(),
+                //Operating = _spaceService.Operating(),
 
 
             };
