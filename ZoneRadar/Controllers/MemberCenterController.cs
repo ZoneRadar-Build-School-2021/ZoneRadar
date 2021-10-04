@@ -49,9 +49,17 @@ namespace ZoneRadar.Controllers
                 return View(MemCollectionSpaces);
             }
         }
-        public ActionResult UserInfo()
+        public ActionResult UserInfo(int? memberId)
         {
-            return View();
+            if (!memberId.HasValue)
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            else
+            {
+                var HostReview = _memberservice.GetHostReview(memberId.Value);
+                return View(HostReview);
+            }
         }
         public ActionResult HostInfo(int? memberId)
         {
@@ -64,6 +72,24 @@ namespace ZoneRadar.Controllers
                var MemSpace = _memberservice.GetMemberSpace(memberId.Value);
                return View(MemSpace);
             }
+        }
+        //場地主ID
+        public ActionResult HostId(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            else
+            {
+                var MemSpace = _memberservice.GetMemberSpace(id.Value);
+                return View("HostInfo",MemSpace);
+            }
+        }
+        //會員
+        public ActionResult MemberInfo(int? id)
+        {
+            return View();
         }
     }
 }

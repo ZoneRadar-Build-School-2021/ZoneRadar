@@ -6,7 +6,7 @@
     var user = Model.User;
     var spaces = Model.Spaces;
     /*https://localhost:44322/MemberCenter/hostinfo?memberId=1*/
-
+    int i = 0;
 }
 
 <div class="member member_container container mt-5 pb-3">
@@ -28,7 +28,7 @@
                     </h3>
                     <p class="mt-4">
                         加入時間：<span class="ms-3">
-                            @user.SignUpDateTime.ToString("yyyy/MM/dd")
+                            @user.SignUpDateTime.ToString("yyyy.MM.dd")
                         </span>
                     </p>
                 </div>

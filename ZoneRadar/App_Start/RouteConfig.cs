@@ -13,6 +13,13 @@ namespace ZoneRadar
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //會員
+            routes.MapRoute(
+                name: "HostInfo",
+                url: "HostInfo/{id}",
+                defaults: new { controller = "MemberCenter", action = "HostInfo", id = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
