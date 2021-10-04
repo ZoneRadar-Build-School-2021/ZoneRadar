@@ -48,7 +48,8 @@ namespace ZoneRadar.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult AddSpace([Bind(Include ="Id,Name")]Space space)
+        [ValidateAntiForgeryToken]
+        public ActionResult AddSpace(SpaceViewModel spaceVM)
         {
 
             var model = new SpaceViewModel
@@ -67,6 +68,7 @@ namespace ZoneRadar.Controllers
                 CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
 
                 Operating = _spaceService.Operating(),
+
 
             };
 
