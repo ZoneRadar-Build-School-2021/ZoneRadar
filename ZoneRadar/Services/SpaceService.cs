@@ -324,9 +324,73 @@ namespace ZoneRadar.Services
                 new SelectListItem { Value = "21:00:00.0000000", Text = "21:00"},
                 new SelectListItem { Value = "22:00:00.0000000", Text = "22:00"},
                 new SelectListItem { Value = "23:00:00.0000000", Text = "23:00"},
-                new SelectListItem { Value = "24:00:00.0000000", Text = "24:00"},
+                new SelectListItem { Value = "00:00:00.0000000", Text = "00:00"},
             };
             return Operating;
+        }
+        public SomeOnesSpaceViewModel ReadAnySpace(int spaceId)
+        {
+            var result = new SomeOnesSpaceViewModel()
+            {
+                SomeOnesSpaceList = new List<SomeOnesSpace>(),
+                SomeOnesCountryList = new List<SomeOnesCountry>(),
+                SomeOnesDistrictList=new List<SomeOnesDistrict>(),
+                SomeOnesCitytList=new List<SomeOnesCity>(),
+                SomeOnesTypeDetailList=new List<SomeOnesTypeDetail>()
+            };
+            var adds = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var add in adds)
+            {
+                var addsTemp = new SomeOnesSpace()
+                {
+                    Address = add.Address,
+                    DistrictID = add.DistrictID,
+                    Country = add.Country,
+                };
+                result.SomeOnesSpaceList.Add(addsTemp);
+            }
+            var country = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.CountryID).FirstOrDefault();
+            var countryName = _repository.GetAll<Country>().Where(x => x.CountryID == country).Select(x => x).ToList();
+            foreach (var countryname in countryName)
+            {
+                var countryNameTemp = new SomeOnesCountry()
+                {
+                    CountryName = countryname.CountryName
+                };
+                result.SomeOnesCountryList.Add(countryNameTemp);
+            };
+            
+            var district = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.DistrictID).FirstOrDefault();
+            var districtName = _repository.GetAll<District>().Where(x => x.DistrictID == district).Select(x => x).ToList();
+            foreach (var districtname in districtName)
+            {
+                var districtNameTemp = new SomeOnesDistrict()
+                {
+                    DistrictName = districtname.DistrictName
+                };
+                result.SomeOnesDistrictList.Add(districtNameTemp);
+            };
+           
+            var city = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.CityID).FirstOrDefault();
+            var cityName = _repository.GetAll<City>().Where(x => x.CityID == city).Select(x => x).ToList();
+            foreach (var cityname in cityName ) 
+            {
+                var ciytTemp = new SomeOnesCity()
+                {
+                    CityName=cityname.CityName
+                };
+                result.SomeOnesCitytList.Add(ciytTemp);
+            };
+            List<SpaceType> spacetypes =  _repository.GetAll<SpaceType>().Where(x => x.SpaceID == spaceId).ToList();
+            foreach (var item in spacetypes)
+            {
+               
+                SomeOnesTypeDetail someOnesTypeDetail=  new SomeOnesTypeDetail();
+                someOnesTypeDetail.Type = _repository.GetAll<TypeDetail>().Where(x => x.TypeDetailID == item.TypeDetailID).Select(x => x.Type).FirstOrDefault(); ;
+                result.SomeOnesTypeDetailList.Add(someOnesTypeDetail);
+            }
+       
+            return result;
         }
     }
 

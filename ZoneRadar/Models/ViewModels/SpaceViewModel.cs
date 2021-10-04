@@ -34,9 +34,6 @@ namespace ZoneRadar.Models.ViewModels
         public List<CleanThirdPart> CleanThirdPartList { get; set; }
         public List<CleanFourdPart> CleanFourdPartList { get; set; }
 
-        public List<SelectListItem> CleanSecPart { get; set; }
-        public List<SelectListItem> CleanThirdPart { get; set; }
-        public List<SelectListItem> CleanFourthPart { get; set; }
 
 
         /// <summary>
@@ -44,8 +41,6 @@ namespace ZoneRadar.Models.ViewModels
         /// </summary>
         public List<SelectListItem> Operating { get; set; }
         
-        
-
     }
     /// <summary>
     /// 場地地址區要的資料

@@ -47,7 +47,44 @@ namespace ZoneRadar.Controllers
             
             return View(model);
         }
-        public ActionResult EditSpace()
+        [HttpPost]
+        public ActionResult AddSpace([Bind(Include ="Id,Name")]Space space)
+        {
+
+            var model = new SpaceViewModel
+            {
+                SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
+                cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
+                addressAraeList = _spaceService.ShowAmenityByIdOne().addressAraeList,
+
+                amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
+                amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
+                amenityAraeThreeList = _spaceService.ShowAmenityByIdThree().amenityAraeThreeList,
+
+                CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
+                CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
+                CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
+                CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
+
+                Operating = _spaceService.Operating(),
+
+            };
+
+            return View(model);
+        }
+
+        public ActionResult EditSpace(int spaceId)
+        {
+            var model = new SomeOnesSpaceViewModel()
+            {
+                SomeOnesSpaceList=_spaceService.ReadAnySpace(spaceId).SomeOnesSpaceList,
+                SomeOnesCountryList=_spaceService.ReadAnySpace(spaceId).SomeOnesCountryList,
+                SomeOnesDistrictList=_spaceService.ReadAnySpace(spaceId).SomeOnesDistrictList,
+                SomeOnesCitytList=_spaceService.ReadAnySpace(spaceId).SomeOnesCitytList,
+            };
+            return View(model);
+        }
+        public ActionResult managementSpace()
         {
             return View();
         }
@@ -55,6 +92,7 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+        
         public ActionResult Completed()
         {
             return View();
