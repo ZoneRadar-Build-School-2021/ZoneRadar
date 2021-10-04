@@ -23,6 +23,8 @@ namespace ZoneRadar.Models
 
         public int? AmenityCategoryID { get; set; }
 
+        public string AmenityICON { get; set; }
+
         public virtual AmenityCategoryDetail AmenityCategoryDetail { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

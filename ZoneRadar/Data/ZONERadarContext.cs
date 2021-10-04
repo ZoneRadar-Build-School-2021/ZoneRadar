@@ -152,10 +152,6 @@ namespace ZoneRadar.Data
                 .WithRequired(e => e.Space)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<SpaceDiscount>()
-                .Property(e => e.Discount)
-                .HasPrecision(18, 0);
-
             modelBuilder.Entity<TypeDetail>()
                 .HasMany(e => e.SpaceType)
                 .WithRequired(e => e.TypeDetail)
