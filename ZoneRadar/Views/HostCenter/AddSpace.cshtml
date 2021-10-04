@@ -4,7 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var spacetype = Model.SpaceTypeAraeList;
     var cancellations = Model.cancellationAraesList;
-    var AmenityArae = Model.amenityAraeList;
+    var amenityAraeOne = Model.amenityAraeOneList;
+    var amenityAraeTwo = Model.amenityAraeTwoList;
+    var amenityAraeThree = Model.amenityAraeThreeList;
+    var cleaningOne = Model.CleanFisrtPartList;
+    var cleaningTwo = Model.CleanSecPartList;
+    var cleaningThree = Model.CleanThirdPartList;
+    var cleaningFour = Model.CleanFourdPartList;
     var Operating = Model.Operating;
 }
 
@@ -245,7 +251,7 @@
                                 </p>
                                 <p class="operating_hours_space_address mt-4">
                                     @*您的空間地址 -
-                    <span>台北市大安區忠孝東路三段96號11號樓之1</span>*@
+                                <span>台北市大安區忠孝東路三段96號11號樓之1</span>*@
                                 </p>
                             </div>
                         </div>
@@ -874,7 +880,7 @@
                         </div>
                         <div class="row mt-3">
                             <h5>便利設施</h5>
-                            @foreach (var ametity in ametities)
+                            @foreach (var ametity in amenityAraeOne)
                             {
                                 <div class="col-12 col-lg-3 ">
                                     <div class="form-check">
@@ -889,7 +895,7 @@
                         </div>
                         <div class="row mt-3">
                             <h5>場地空間</h5>
-                            @*@foreach (var ametity in ametities)
+                            @foreach (var ametity in amenityAraeTwo)
                             {
                                 <div class="col-12 col-lg-3 ">
                                     <div class="form-check">
@@ -900,11 +906,11 @@
                                         </label>
                                     </div>
                                 </div>
-                            }*@
+                            }
                         </div>
                         <div class="row mt-3">
                             <h5>其他設施</h5>
-                            @*@foreach (var ametity in ametities)
+                            @foreach (var ametity in amenityAraeThree)
                             {
                                 <div class="col-12 col-lg-3 ">
                                     <div class="form-check">
@@ -915,7 +921,7 @@
                                         </label>
                                     </div>
                                 </div>
-                            }*@
+                            }
                         </div>
 
                         <div class="row mt-3">
@@ -1182,18 +1188,18 @@
                                         <p class="fs16">選擇有符合條件的條件的選項</p>
                                     </div>
                                     <div class="row">
-                                        @*@foreach (var cleanf in CleanFirst)
+                                        @foreach (var cleanf in cleaningOne)
                                         {
                                             <div class="col col-12 col-lg-12 mt-1 mb-3 ">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="@cleanf.Text"
+                                                    <input class="form-check-input" type="checkbox" value="@cleanf.OptionDetail"
                                                            id="flexCheckDefault">
                                                     <label class="form-check-label" for="flexCheckDefault">
-                                                        @cleanf.Text
+                                                        @cleanf.OptionDetail
                                                     </label>
                                                 </div>
                                             </div>
-                                        }*@
+                                        }
 
                                         <div class="row">
                                             <div class="col  mt-5">
@@ -1201,18 +1207,18 @@
                                                 <p class="fs16">選擇有符合條件的條件的選項</p>
                                             </div>
                                             <div class="row">
-                                                @*@foreach (var cleanSec in CleanSec)
+                                                @foreach (var cleanSec in cleaningTwo)
                                                 {
                                                     <div class="col col-12 col-lg-12 mt-1 mb-3 ">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value=" @cleanSec.Text"
+                                                            <input class="form-check-input" type="checkbox" value=" @cleanSec.OptionDetail"
                                                                    id="flexCheckDefault">
                                                             <label class="form-check-label" for="flexCheckDefault">
-                                                                @cleanSec.Text
+                                                                @cleanSec.OptionDetail
                                                             </label>
                                                         </div>
                                                     </div>
-                                                }*@
+                                                }
                                             </div>
                                         </div>
                                         <div class="row">
@@ -1221,18 +1227,18 @@
                                                 <p class="fs16">選擇有符合條件的條件的選項</p>
                                             </div>
                                             <div class="row">
-                                                @*@foreach (var cleanthird in CleanThir)
+                                                @foreach (var cleanthird in cleaningThree)
                                                 {
                                                     <div class="col col-12 col-lg-12mt-1 mb-3">
                                                         <div class="form-check ">
-                                                            <input class="form-check-input" type="checkbox" value=" @cleanthird.Text"
+                                                            <input class="form-check-input" type="checkbox" value=" @cleanthird.OptionDetail"
                                                                    id="flexCheckChecked">
                                                             <label class="form-check-label" for="flexCheckChecked">
-                                                                @cleanthird.Text
+                                                                @cleanthird.OptionDetail
                                                             </label>
                                                         </div>
                                                     </div>
-                                                }*@
+                                                }
                                             </div>
                                         </div>
                                         <div class="row">
@@ -1241,18 +1247,18 @@
                                                 <p class="fs16">選擇有符合條件的條件的選項</p>
                                             </div>
                                             <div class="row">
-                                                @*@foreach (var cleanFour in CleanFourth)
+                                                @foreach (var cleanFour in cleaningFour)
                                                 {
                                                     <div class="col col-12 col-lg-12 mt-1 mb-3 ">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="@cleanFour.Text"
+                                                            <input class="form-check-input" type="checkbox" value="@cleanFour.OptionDetail"
                                                                    id="flexCheckDefault">
                                                             <label class="form-check-label" for="flexCheckDefault">
-                                                                @cleanFour.Text
+                                                                @cleanFour.OptionDetail
                                                             </label>
                                                         </div>
                                                     </div>
-                                                }*@
+                                                }
                                             </div>
                                         </div>
                                         <div class="row mt-3 mb-3  mt-5">

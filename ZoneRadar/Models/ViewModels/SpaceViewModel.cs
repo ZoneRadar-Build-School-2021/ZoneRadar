@@ -19,8 +19,6 @@ namespace ZoneRadar.Models.ViewModels
         public int CancellationId { get; set; }
         public string CancellationTile { get; set; }
         public string CancellationDetail { get; set; }
-        public int ParkingId { get; set; }
-        public string ParkingTitle { get; set; }
 
         /// <summary>
         /// 資料庫有的表
@@ -31,15 +29,19 @@ namespace ZoneRadar.Models.ViewModels
         public List<AmenityAraeThree> amenityAraeThreeList { get; set; }
         public List<CancellationArae> cancellationAraesList { get; set; }
         public List<SpaceTypeArae> SpaceTypeAraeList { get; set; }
+        public List<CleanFisrtPart> CleanFisrtPartList { get; set; }
+        public List<CleanSecPart> CleanSecPartList { get; set; }
+        public List<CleanThirdPart> CleanThirdPartList { get; set; }
+        public List<CleanFourdPart> CleanFourdPartList { get; set; }
+
+        public List<SelectListItem> CleanSecPart { get; set; }
+        public List<SelectListItem> CleanThirdPart { get; set; }
+        public List<SelectListItem> CleanFourthPart { get; set; }
+
 
         /// <summary>
         /// 資料庫沒有的表
         /// </summary>
-        public List<SelectListItem> Parking { get; set; }
-        public List<SelectListItem> CleanFisrtPart { get; set; }
-        public List<SelectListItem> CleanSecPart { get; set; }
-        public List<SelectListItem> CleanThirdPart { get; set; }
-        public List<SelectListItem> CleanFourthPart { get; set; }
         public List<SelectListItem> Operating { get; set; }
         
         
@@ -73,7 +75,7 @@ namespace ZoneRadar.Models.ViewModels
     {
         public int AmenityId { get; set; }
         public string AmenityName { get; set; }
-        public int AmAmenityCategoryDetailId { get; set; }
+        public int AmenityCategoryDetailId { get; set; }
     }
     /// <summary>
     /// 場地空間
@@ -82,7 +84,7 @@ namespace ZoneRadar.Models.ViewModels
     {
         public int AmenityId { get; set; }
         public string AmenityName { get; set; }
-        public int AmAmenityCategoryDetailId { get; set; }
+        public int AmenityCategoryDetailId { get; set; }
     }
     /// <summary>
     /// 其他
@@ -91,10 +93,50 @@ namespace ZoneRadar.Models.ViewModels
     {
         public int AmenityId { get; set; }
         public string AmenityName { get; set; }
-        public int AmAmenityCategoryDetailId { get; set; }
+        public int AmenityCategoryDetailId { get; set; }
     }
     /// <summary>
-    /// 取消區要的資料
+    /// 清潔條款的資料
+    /// 分四類  1.CleaningPolicy
+    /// </summary>
+    public class CleanFisrtPart
+    {
+        public int CleaningCategoryId { get; set; }
+        public int CleaningOptionId { get; set; }
+        public string OptionDetail { get; set; }
+    }
+    /// <summary>
+    /// 清潔條款的資料
+    /// 2.ProtectiveGearDetail
+    /// </summary>
+    public class CleanSecPart
+    {
+        public int CleaningCategoryId { get; set; }
+        public int CleaningOptionId { get; set; }
+        public string OptionDetail { get; set; }
+    }
+    /// <summary>
+    /// 清潔條款的資料
+    /// 3.PhysicalDistanceDetail
+    /// </summary>
+    public class CleanThirdPart
+    {
+        public int CleaningCategoryId { get; set; }
+        public int CleaningOptionId { get; set; }
+        public string OptionDetail { get; set; }
+    }
+    /// <summary>
+    /// 清潔條款的資料
+    /// 4.SignageDetail
+    /// </summary>
+    public class CleanFourdPart
+    {
+        public int CleaningCategoryId { get; set; }
+        public int CleaningOptionId { get; set; }
+        public string OptionDetail { get; set; }
+    }
+    /// <summary>
+    /// 取消區的資料
     /// </summary>
     public class CancellationArae
     {

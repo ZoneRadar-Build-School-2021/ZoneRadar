@@ -107,13 +107,13 @@ namespace ZoneRadar.Services
             {
                 amenityAraeOneList = new List<AmenityAraeOne>(),
             };
-            var amenityOnes = _repository.GetAll<AmenityAraeOne>().Where(x => x.AmAmenityCategoryDetailId == 1).Select(x => x).ToList();
+            var amenityOnes = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 1).Select(x => x).ToList();
             foreach (var amenityOne in amenityOnes) 
             {
                 var amenityOneTemp = new AmenityAraeOne()
                 {
-                    AmenityId=amenityOne.AmenityId,
-                    AmenityName=amenityOne.AmenityName
+                    AmenityId=amenityOne.AmenityDetailID,
+                    AmenityName=amenityOne.Amenity
                 };
                 result.amenityAraeOneList.Add(amenityOneTemp);
             };
@@ -130,13 +130,13 @@ namespace ZoneRadar.Services
             {
                 amenityAraeTwoList = new List<AmenityAraeTwo>(),
             };
-            var amenityTwos = _repository.GetAll<AmenityAraeTwo>().Where(x => x.AmAmenityCategoryDetailId == 2).Select(x => x).ToList();
+            var amenityTwos = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 2).Select(x => x).ToList();
             foreach (var amenityTwo in amenityTwos)
             {
                 var amenityTwoTemp = new AmenityAraeTwo()
                 {
-                    AmenityId = amenityTwo.AmenityId,
-                    AmenityName = amenityTwo.AmenityName
+                    AmenityId = amenityTwo.AmenityDetailID,
+                    AmenityName = amenityTwo.Amenity
                 };
                 result.amenityAraeTwoList.Add(amenityTwoTemp);
             }
@@ -153,13 +153,13 @@ namespace ZoneRadar.Services
             {
                 amenityAraeThreeList = new List<AmenityAraeThree>(),
             };
-            var amenityThrees = _repository.GetAll<AmenityAraeThree>().Where(x => x.AmAmenityCategoryDetailId == 3).Select(x => x).ToList();
+            var amenityThrees = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 3).Select(x => x).ToList();
             foreach (var amenityThree in amenityThrees)
             {
                 var amenityThreeTemp = new AmenityAraeThree()
                 {
-                    AmenityId = amenityThree.AmenityId,
-                    AmenityName = amenityThree.AmenityName
+                    AmenityId = amenityThree.AmenityDetailID,
+                    AmenityName = amenityThree.Amenity
                 };
                 result.amenityAraeThreeList.Add(amenityThreeTemp);
             }
@@ -214,69 +214,96 @@ namespace ZoneRadar.Services
 
         /// <summary>
         ///  清潔 4大類
-        ///  第一類
+        ///  第一類  CleaningPolicy
         /// </summary>
-        public List<SelectListItem> ShowCleanFisrt()
+        public SpaceViewModel ShowCleaningCategoryByIdOne()
         {
-            var CleanFisrt = new List<SelectListItem>
+            var result = new SpaceViewModel()
             {
-                new SelectListItem { Value = "根據當地衛生當局的指導方針對空間進行清潔和消毒", Text = "根據當地衛生當局的指導方針對空間進行清潔和消毒"},
-                new SelectListItem { Value = "高接觸表面和共用設施已消毒", Text = "高接觸表面和共用設施已消毒" },
-                new SelectListItem { Value = "柔軟的多孔材料已被正確清潔或移除", Text = "柔軟的多孔材料已被正確清潔或移除"},
-                new SelectListItem { Value = "兩次預訂之間聘請專業清潔工", Text = "兩次預訂之間聘請專業清潔工"},
-                new SelectListItem { Value = "預訂間隔開以加強清潔", Text = "預訂間隔開以加強清潔"},
+                CleanFisrtPartList =new List<CleanFisrtPart>()
             };
-            return CleanFisrt;
+            var CleanFisrtParts = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 1).Select(x => x).ToList();
+            foreach (var cleanOne in CleanFisrtParts) 
+            {
+                var cleanOneTemp = new CleanFisrtPart()
+                {
+                    CleaningOptionId=cleanOne.CleaningOptionID,
+                    OptionDetail=cleanOne.OptionDetail
+                };
+                result.CleanFisrtPartList.Add(cleanOneTemp);
+            }
+            return result;
         }
+
+
         /// <summary>
         ///  第二類
         /// </summary>
-        public List<SelectListItem> ShowCleanSec()
+        public SpaceViewModel ShowCleaningCategoryByIdTwo()
         {
-            var CleanSec = new List<SelectListItem>
+            var result = new SpaceViewModel()
             {
-                new SelectListItem { Value = "消毒濕巾或噴霧劑和紙巾", Text = "消毒濕巾或噴霧劑和紙巾"},
-                new SelectListItem { Value = "高接觸表面和共用設施已消毒", Text = "高接觸表面和共用設施已消毒" },
-                new SelectListItem { Value = "一次性手套", Text = "一次性手套"},
-                new SelectListItem { Value = "一次性口罩/面罩", Text = "一次性口罩/面罩"},
-                new SelectListItem { Value = "消毒洗手液", Text = "消毒洗手液"},
+                CleanSecPartList = new List<CleanSecPart>()
             };
-            return CleanSec;
+            var CleanSecParts = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 2).Select(x => x).ToList();
+            foreach (var cleanSec in CleanSecParts)
+            {
+                var cleanSecTemp = new CleanSecPart()
+                {
+                    CleaningOptionId = cleanSec.CleaningOptionID,
+                    OptionDetail = cleanSec.OptionDetail
+                };
+                result.CleanSecPartList.Add(cleanSecTemp);
+            }
+            return result;
         }
         /// <summary>
         ///  第三類
         /// </summary>
-        public List<SelectListItem> ShowCleanThird()
+        public SpaceViewModel ShowCleaningCategoryByIdThree()
         {
-            var CleanThird = new List<SelectListItem>
+            var result = new SpaceViewModel()
             {
-                new SelectListItem { Value = "空間可以使用室外空氣通風", Text = "空間可以使用室外空氣通風"},
-                new SelectListItem { Value = "有空氣過濾器", Text = "有空氣過濾器" },
-                new SelectListItem { Value = "空間有額外的戶外空間", Text = "空間有額外的戶外空間"},
-                new SelectListItem { Value = "空間已重新配置以允許物理距離", Text = "空間已重新配置以允許物理距離"},
+                CleanThirdPartList = new List<CleanThirdPart>()
             };
-            return CleanThird;
+            var CleanThirdParts = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 3).Select(x => x).ToList();
+            foreach (var cleanThird in CleanThirdParts)
+            {
+                var cleanThirdTemp = new CleanThirdPart()
+                {
+                    CleaningOptionId = cleanThird.CleaningOptionID,
+                    OptionDetail = cleanThird.OptionDetail
+                };
+                result.CleanThirdPartList.Add(cleanThirdTemp);
+            }
+            return result;
         }
         /// <summary>
         ///  第四類
         /// </summary>
-        public List<SelectListItem> ShowCleanFourth()
+        public SpaceViewModel ShowCleaningCategoryByIdFour()
         {
-            var CleanFourth = new List<SelectListItem>
+            var result = new SpaceViewModel()
             {
-                new SelectListItem { Value = "更新清潔程序的詳細清單", Text = "更新清潔程序的詳細清單"},
-                new SelectListItem { Value = "訪客指南印出來", Text = "訪客指南印出來" },
-                new SelectListItem { Value = "公共區域的地板上有1.5尺的標記", Text = "公共區域的地板上有1.5尺的標記"},
-                new SelectListItem { Value = "狹窄的通道有雙向通行的箭頭", Text = "狹窄的通道有雙向通行的箭頭"},
+                CleanFourdPartList = new List<CleanFourdPart>()
             };
-            return CleanFourth;
+            var CleanFourdParts = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 4).Select(x => x).ToList();
+            foreach (var cleanFourd in CleanFourdParts)
+            {
+                var cleanFourdTemp = new CleanFourdPart()
+                {
+                    CleaningOptionId = cleanFourd.CleaningOptionID,
+                    OptionDetail = cleanFourd.OptionDetail
+                };
+                result.CleanFourdPartList.Add(cleanFourdTemp);
+            }
+            return result;
         }
         /// <summary>
         ///  營業時間
         /// </summary>
         public List<SelectListItem> Operating()
         {
-            
             var Operating = new List<SelectListItem>
             {
                 new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
@@ -301,8 +328,6 @@ namespace ZoneRadar.Services
             };
             return Operating;
         }
-                
-            
     }
 
 }
