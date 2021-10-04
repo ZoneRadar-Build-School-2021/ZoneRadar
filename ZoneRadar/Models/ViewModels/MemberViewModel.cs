@@ -16,21 +16,24 @@ namespace ZoneRadar.Models.ViewModels
     /// </summary>
     public class RegisterZONERadarViewModel
     {
-        [Required(ErrorMessage = "此欄為必填")]
+        [Required(ErrorMessage = "請填寫此欄位")]
         [StringLength(20)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "此欄為必填")]
+        [Required(ErrorMessage = "請填寫此欄位")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Email輸入格式錯誤")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "此欄為必填")]
+        [Required(ErrorMessage = "請填寫此欄位")]
+        [DataType(DataType.Password)]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
-        [Compare("Password", ErrorMessage = "密碼不一致")]
+        [Compare("Password", ErrorMessage = "密碼不一致！")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -39,10 +42,13 @@ namespace ZoneRadar.Models.ViewModels
     /// </summary>
     public class LoginZONERadarViewModel
     {
-        [Required(ErrorMessage = "此欄為必填")]
+        [Required(ErrorMessage = "請填寫此欄位")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Email輸入格式錯誤")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "此欄為必填")]
+        [Required(ErrorMessage = "請填寫此欄位")]
+        [DataType(DataType.Password)]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
         public string Password { get; set; }
     }
@@ -52,7 +58,7 @@ namespace ZoneRadar.Models.ViewModels
     /// </summary>
     public class RegisterResult
     {
-        public Member user { get; set; }
+        public Member User { get; set; }
         public bool IsSuccessful { get; set; }
     }
 

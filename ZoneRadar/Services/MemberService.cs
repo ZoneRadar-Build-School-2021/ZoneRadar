@@ -27,7 +27,7 @@ namespace ZoneRadar.Services
         {
             var registerResult = new RegisterResult
             {
-                user = null,
+                User = null,
                 IsSuccessful = false
             };
 
@@ -56,7 +56,7 @@ namespace ZoneRadar.Services
                 };
                 _repository.Create<Member>(member);
                 _repository.SaveChanges();
-                registerResult.user = member;
+                registerResult.User = member;
                 registerResult.IsSuccessful = true;
                 return registerResult;
             }           

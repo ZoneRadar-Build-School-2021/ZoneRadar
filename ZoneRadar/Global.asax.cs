@@ -25,7 +25,7 @@ namespace ZoneRadar
             if (Request.QueryString["ReturnUrl"] != null)
             {
                 var currentPageUrl = Request.UrlReferrer.AbsolutePath;
-                Response.Redirect($"{Request.UrlReferrer.AbsolutePath}?ReturnUrl={Request.QueryString["ReturnUrl"].ToString()}");
+                Response.Redirect($"{Request.UrlReferrer.AbsolutePath}?ReturnUrl={Request.QueryString["ReturnUrl"]}");
             }
         }        
     }

@@ -77,7 +77,7 @@ namespace ZoneRadar.Controllers
                 var registerResult = _service.RegisterMember(registerVM);
                 if (registerResult.IsSuccessful)
                 {
-                    var encryptedTicket = _service.CreateEncryptedTicket(registerResult.user);
+                    var encryptedTicket = _service.CreateEncryptedTicket(registerResult.User);
                     _service.CreateCookie(encryptedTicket, Response);
                     return Redirect(_service.GetReturnUrl("qwe"));
                 }
@@ -91,18 +91,28 @@ namespace ZoneRadar.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            TempData["IsLogin"] = FormsAuthentication.IsEnabled;
-            return RedirectToAction("Index", "Home");
+            //(每個非授權畫面都要加這行，例：預約頁面)
+            TempData["LoginModalPopup"] = true;
+            //如果是想進入未授權畫面而跳出登入Modal
+            if (Request.QueryString["ReturnUrl"] != null)
+            {
+                return Redirect($"{Request.UrlReferrer.AbsolutePath}?ReturnUrl={Request.QueryString["ReturnUrl"]}");
+            }
+            //因Login Modal是JS控制跳出，所以一般登入步驟不會進這行
+            return Redirect(Request.UrlReferrer.AbsolutePath);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login([Bind(Include = "LoginZONERadarVM")] AllViewModel allVM)
         {
-            //若未通過Model驗證
+            //若未通過Model驗證(前端已先驗證過)
             if (!ModelState.IsValid)
             {
-                return View();
+                //回到原本頁面並跳出登入Modal
+                TempData["LoginModalPopup"] = true;
+                Response.Redirect(Request.UrlReferrer.AbsolutePath);
+                //return View();
             }
            
             var loginVM = new LoginZONERadarViewModel
@@ -113,11 +123,15 @@ namespace ZoneRadar.Controllers
 
             var user = _service.UserLogin(loginVM);
                        
-            //找不到則彈回Login頁
+            //找不到則彈回Login頁(問題：不會跳出錯誤訊息)
             if (user == null)
             {
-                ModelState.AddModelError("Password", "無效的帳號或密碼");
-                return View();
+                var xxx = ModelState["LoginZONERadarVM.Password"];
+                TempData["LoginModalPopup"] = true;
+                TempData["Email"] = loginVM.Email;
+                
+                //回到原本頁面並跳出登入Modal
+                return Redirect(Request.UrlReferrer.AbsolutePath);
             }
 
             //建造加密表單驗證票證
