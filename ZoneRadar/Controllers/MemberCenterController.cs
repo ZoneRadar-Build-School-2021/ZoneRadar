@@ -87,12 +87,13 @@ namespace ZoneRadar.Controllers
         {
             //(每個非授權畫面都要加這行，例：預約頁面)
             TempData["LoginModalPopup"] = true;
-            //如果是想進入未授權畫面而跳出登入Modal
+            //如果想進入未授權畫面
             if (Request.QueryString["ReturnUrl"] != null)
             {
+                //導回原本所在的畫面上，攜帶ReturnUrl，並跳出登入Modal
                 return Redirect($"{Request.UrlReferrer.AbsolutePath}?ReturnUrl={Request.QueryString["ReturnUrl"]}");
             }
-            //因Login Modal是JS控制跳出，所以一般登入步驟不會進這行
+            //(目前專案狀況都不會執行到這一行)
             return Redirect(Request.UrlReferrer.AbsolutePath);
         }
 

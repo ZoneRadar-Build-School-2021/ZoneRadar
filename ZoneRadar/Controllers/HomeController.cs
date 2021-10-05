@@ -20,7 +20,7 @@ namespace ZoneRadar.Controllers
             _reviewService = new ReviewService();
         }
 
-        public ActionResult Index(string returnUrl)
+        public ActionResult Index()
         {
             var model = new HomeViewModel
             {
