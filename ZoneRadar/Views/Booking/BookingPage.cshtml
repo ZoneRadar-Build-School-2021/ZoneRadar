@@ -1,10 +1,10 @@
-﻿@model  AllViewModel
+﻿@model  BookingPageViewModel
 @{
     ViewBag.Title = "BookingPage";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var reviews = Model.bookingViewModel.Reviews;
-    var briefs = Model.bookingViewModel.SpaceBreifInfo;
-    var details = Model.bookingViewModel.SpaceDetailInfo;
+    var reviews = Model.Reviews;
+    var briefs = Model.SpaceBreifInfo;
+    var details = Model.SpaceDetailInfo;
     float total = 0;
     float averageScore = 0;
     foreach (var review in reviews)
