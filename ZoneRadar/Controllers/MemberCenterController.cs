@@ -59,30 +59,21 @@ namespace ZoneRadar.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "RegisterZONERadarVM")] AllViewModel allVM)
+        public ActionResult Register([Bind(Include = "Name, Email, Password, ConfirmPassword")] RegisterZONERadarViewModel registerVM)
         {
             if (!ModelState.IsValid)
             {
                 return View("Register");
             }
             else
-            {
-                var registerVM = new RegisterZONERadarViewModel
-                {
-                    Name = allVM.RegisterZONERadarVM.Name,
-                    Email = allVM.RegisterZONERadarVM.Email,
-                    Password = allVM.RegisterZONERadarVM.Password,
-                    ConfirmPassword = allVM.RegisterZONERadarVM.ConfirmPassword
-                };
-
-
+            {               
                 var registerResult = _service.RegisterMember(registerVM);
                 //註冊成功
                 if (registerResult.IsSuccessful)
                 {
                     var encryptedTicket = _service.CreateEncryptedTicket(registerResult.User);
                     _service.CreateCookie(encryptedTicket, Response);
-                    return Redirect(_service.GetReturnUrl("qwe"));
+                    return Redirect(_service.GetReturnUrl(registerResult.User.MemberID.ToString()));
                 }
                 else
                 {
@@ -107,7 +98,7 @@ namespace ZoneRadar.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login([Bind(Include = "LoginZONERadarVM")] AllViewModel allVM)
+        public ActionResult Login([Bind(Include = "Email, Password")] LoginZONERadarViewModel loginVM)
         {
             //若未通過Model驗證(前端已先驗證過)
             if (!ModelState.IsValid)
@@ -117,12 +108,6 @@ namespace ZoneRadar.Controllers
                 Response.Redirect(Request.UrlReferrer.AbsolutePath);
                 //return View();
             }
-           
-            var loginVM = new LoginZONERadarViewModel
-            {
-                Email = allVM.LoginZONERadarVM.Email,
-                Password = allVM.LoginZONERadarVM.Password
-            };
 
             var user = _service.UserLogin(loginVM);
                        
@@ -145,7 +130,7 @@ namespace ZoneRadar.Controllers
 
             //導向使用者原先欲造訪的路由
             return Redirect(_service.GetReturnUrl(user.MemberID.ToString()));
-        }        
+        }
 
         public ActionResult SignOut()
         {

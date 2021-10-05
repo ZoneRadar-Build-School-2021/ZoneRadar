@@ -1,17 +1,11 @@
-﻿@using ZoneRadar.Models.ViewModels
-@model AllViewModel
-@{
-    bool? IsLogin = ViewBag.IsLogin;
-
+﻿@{
     HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
 
-    int userId = 0;
     string userPhoto = "";
     if (cookie != null)
     {
         FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
         UserInfo userInfo = Json.Decode<UserInfo>(ticket.UserData);
-        userId = userInfo.MemberId;
         userPhoto = userInfo.MemberPhoto;
     }
 }
@@ -104,7 +98,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a class="nav-link" href="~/MemberCenter/EditProfile/@userId">修改個人資訊</a>
+                                    <a class="nav-link" href="~/MemberCenter/EditProfile">修改個人資訊</a>
                                     <a class="nav-link" href="~/MemberCenter/SignOut">登出</a>
                                 </div>
                             </div>
@@ -151,7 +145,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li><a class="dropdown-item" href="~/MemberCenter/EditProfile/@userId">修改個人資訊</a></li>
+                                <li><a class="dropdown-item" href="~/MemberCenter/EditProfile">修改個人資訊</a></li>
                                 <li><a class="dropdown-item" href="~/MemberCenter/SignOut">登出</a></li>
                             </ul>
                         </div>
@@ -180,17 +174,7 @@
                         Facebook 登入
                     </a>
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email</div>
-                    @using (Html.BeginForm("Login", "MemberCenter", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { @class = "mb-3" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        @*<input type="email" id="input-email-login" name="email" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
-                            <input type="password" id="input-password-login" name="password" class="form-control form-control-lg d-block mb-3" placeholder="密碼" aria-label="password" aria-describedby="basic-addon2" required>*@
-                        @Html.EditorFor(model => model.LoginZONERadarVM.Email, new { htmlAttributes = new { @class = "form-control form-control-lg d-block", type = "email", placeholder = "Email", required = "true" } })
-                        @Html.ValidationMessageFor(model => model.LoginZONERadarVM.Email, "", new { @class = "text-danger d-block text-start mt-1" })
-                        @Html.EditorFor(model => model.LoginZONERadarVM.Password, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mt-3", type = "password", placeholder = "Password", required = "true" } })
-                        @Html.ValidationMessageFor(model => model.LoginZONERadarVM.Password, "", new { @class = "text-danger d-block text-start mt-1" })
-                        <button type="submit" id="login-submit" class="w-100 text-decoration-none text-white mt-3">登入</button>
-                    }
+                    @Html.Partial("_LoginModalPartial", new LoginZONERadarViewModel())
                     <a href="#" id="forget-password" class="text-decoration-none d-inline-block mb-4">忘記密碼</a>
                     <p class="mb-5">還沒有ZONERadar帳號？<a href="#" id="a-register-modal" data-bs-toggle="modal" data-bs-target="#register-modal" class="text-decoration-none">立即註冊</a></p>
                 </div>
@@ -219,22 +203,7 @@
                         Facebook 註冊
                     </a>
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email註冊</div>
-                    @using (Html.BeginForm("Register", "MemberCenter", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { @class = "mb-3" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        @*<input type="text" id="input-name-register" name="RegisterZONERadarVM.Name" class="form-control form-control-lg d-block mb-3" placeholder="Name" aria-label="password" aria-describedby="basic-addon2" required>
-                            <input type="email" id="input-email-register" name="RegisterZONERadarVM.Email" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
-                            <input type="password" id="input-password-register" name="RegisterZONERadarVM.Password" class="form-control form-control-lg d-block mb-3" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" required>*@
-                        @Html.EditorFor(model => model.RegisterZONERadarVM.Name, new { htmlAttributes = new { @class = "form-control form-control-lg d-block", type = "text", placeholder = "Name", required = "true" } })
-                        @Html.ValidationMessageFor(model => model.RegisterZONERadarVM.Name, "", new { @class = "text-danger d-block text-start mt-1" })
-                        @Html.EditorFor(model => model.RegisterZONERadarVM.Email, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mt-3", type = "email", placeholder = "Email", required = "true" } })
-                        @Html.ValidationMessageFor(model => model.RegisterZONERadarVM.Email, "", new { @class = "text-danger d-block text-start mt-1" })
-                        @Html.EditorFor(model => model.RegisterZONERadarVM.Password, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mt-3", type = "password", placeholder = "Password", required = "true" } })
-                        @Html.ValidationMessageFor(model => model.RegisterZONERadarVM.Password, "", new { @class = "text-danger d-block text-start mt-1" })
-                        @Html.EditorFor(model => model.RegisterZONERadarVM.ConfirmPassword, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mt-3", type = "password", placeholder = "Confirm Password", required = "true" } })
-                        @Html.ValidationMessageFor(model => model.RegisterZONERadarVM.ConfirmPassword, "", new { @class = "text-danger d-block text-start mt-1" })
-                        <button type="submit" id="register-submit" class="w-100 text-decoration-none text-white mt-3">以Email註冊</button>
-                    }
+                    @Html.Partial("_RegisterModalPartial", new RegisterZONERadarViewModel())
                     <p class="mb-5">當您註冊時，代表您已同意ZONERadar的服務條款及隱私權政策</p>
                     <p class="mb-5">已有ZONERadar帳號？<a href="#" id="a-login-modal" data-bs-toggle="modal" data-bs-target="#login-modal" class="text-decoration-none">登入</a></p>
                 </div>
@@ -324,6 +293,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
 
+    <!--判斷登入與否，決定導覽列顯示的介面-->
     @if (User.Identity.IsAuthenticated)
     {
         <script>
@@ -351,6 +321,7 @@
         </script>
     }
 
+    <!--判斷是否欲進入未授權畫面，跳出登入Modal-->
     @if (ViewBag.LoginModalPopup == true)
     {
         <script>

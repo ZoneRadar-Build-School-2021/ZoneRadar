@@ -22,15 +22,12 @@ namespace ZoneRadar.Controllers
 
         public ActionResult Index()
         {
-            var model = new AllViewModel
+            var model = new HomeViewModel
             {
-                HomeVM = new HomeViewModel
-                {
-                    SelectedSpaces = _spaceService.GetSelectedSpace(),
-                    ToSpaceReviews = _reviewService.GetSpaceReviews(),
-                    TyoeOptions = _spaceService.GetTypeOptions(),
-                    CityOptions = _spaceService.GetCityOptions()
-                }
+                SelectedSpaces = _spaceService.GetSelectedSpace(),
+                ToSpaceReviews = _reviewService.GetSpaceReviews(),
+                TyoeOptions = _spaceService.GetTypeOptions(),
+                CityOptions = _spaceService.GetCityOptions()
             };
             //使用者欲進入授權畫面但未登入的狀況(跳出登入Modal)
             if (Request.QueryString["ReturnUrl"] != null)
@@ -43,15 +40,9 @@ namespace ZoneRadar.Controllers
                 //新增ModelState的Error訊息(顯示後就消不掉了)
                 ModelState.AddModelError("LoginZONERadarVM.Password", "無效的帳號或密碼");
                 ViewBag.LoginModalPopup = TempData["LoginModalPopup"];
-                model.LoginZONERadarVM = new LoginZONERadarViewModel { Email = (string)TempData["Email"] };
+                //model.LoginZONERadarVM = new LoginZONERadarViewModel { Email = (string)TempData["Email"] };
             }
-            //var model = new HomeViewModel
-            //{
-            //    SelectedSpaces = _spaceService.GetSelectedSpace(),
-            //    ToSpaceReviews = _reviewService.GetSpaceReview(),
-            //    TyoeOptions = _spaceService.GetTypeOption(),
-            //    CityOptions = _spaceService.GetCityOption()
-            //};
+            
             return View(model);
         }
 
@@ -89,7 +80,6 @@ namespace ZoneRadar.Controllers
         /// <param name="homepageSearchVM"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
         public void SearchSpace(HomepageSearchViewModel homepageSearchVM)
         {
             FormsIdentity id = (FormsIdentity)User.Identity;
