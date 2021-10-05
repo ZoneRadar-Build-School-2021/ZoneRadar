@@ -20,7 +20,7 @@ namespace ZoneRadar.Controllers
             _reviewService = new ReviewService();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string returnUrl)
         {
             var model = new HomeViewModel
             {
@@ -29,6 +29,7 @@ namespace ZoneRadar.Controllers
                 TyoeOptions = _spaceService.GetTypeOptions(),
                 CityOptions = _spaceService.GetCityOptions()
             };
+
             //使用者欲進入授權畫面但未登入的狀況(跳出登入Modal)
             if (Request.QueryString["ReturnUrl"] != null)
             {
