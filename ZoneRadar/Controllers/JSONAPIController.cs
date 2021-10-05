@@ -47,7 +47,14 @@ namespace ZoneRadar.Controllers
             var highPrice = query.HighPrice;
             var amenities = query.AmenityList;
 
-            var queriedSpaces = _repository.GetAll<Space>().Where(x => x.City.CityName == city).Select(x => x).ToList();
+            var queriedSpaces = _repository.GetAll<Space>().Where(x => x.City.CityName == city).Select(x => new SpaceBriefViewModel 
+            {
+                SpaceID = x.SpaceID,
+                SpaceName = x.SpaceName,
+                SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).Select(y => y.SpacePhotoUrl).ToList(),
+                Address = x.Address,
+            }).ToList();
+            
             var json = JsonConvert.SerializeObject(queriedSpaces);
 
             return Ok(json);
