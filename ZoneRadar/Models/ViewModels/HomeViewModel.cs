@@ -16,6 +16,7 @@ namespace ZoneRadar.Models.ViewModels
         public List<ToSpaceReviewViewModel> ToSpaceReviews { get; set; }
         public List<SelectListItem> TyoeOptions { get; set; }
         public List<SelectListItem> CityOptions { get; set; }
+        public HomepageSearchViewModel HomepageSearchVM { get; set; }
     }
     /// <summary>
     /// 精選場地
