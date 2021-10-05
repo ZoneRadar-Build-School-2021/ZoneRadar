@@ -13,17 +13,16 @@ namespace ZoneRadar.Controllers
     public class MemberCenterController : Controller
     {
         private readonly MemberService _memberservice;
-        //private readonly HostInfoService _hostinfoservice;
-       // private readonly MyCollectionService _myCollectionservice;
-        public MemberCenterController()
-        {
-            _memberservice = new MemberService();
-        }
         private readonly MemberService _service;
+        //private readonly HostInfoService _hostinfoservice;
+        // private readonly MyCollectionService _myCollectionservice;
         public MemberCenterController()
         {
             _service = new MemberService();
+            _memberservice = new MemberService();
         }
+       
+       
         // GET: MemberCenter
         public ActionResult Index()
         {

@@ -22,9 +22,11 @@ namespace ZoneRadar.Services
     public class MemberService
     {
         private readonly ZONERadarRepository _zoneradarRepository;
+        private readonly ZONERadarRepository _repository;
         public MemberService()
         {
             _zoneradarRepository = new ZONERadarRepository();
+            _repository = new ZONERadarRepository();
         }
 
         //HostInfo
@@ -171,11 +173,6 @@ namespace ZoneRadar.Services
                 return resulthostinfoReview;
             }
         }
-        private readonly ZONERadarRepository _repository;
-        public MemberService()
-        {
-            _repository = new ZONERadarRepository();
-        }        
 
         public void SentEmail()
         {
