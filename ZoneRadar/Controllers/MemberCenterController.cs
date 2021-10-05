@@ -74,7 +74,10 @@ namespace ZoneRadar.Controllers
                     Password = allVM.RegisterZONERadarVM.Password,
                     ConfirmPassword = allVM.RegisterZONERadarVM.ConfirmPassword
                 };
+
+
                 var registerResult = _service.RegisterMember(registerVM);
+                //註冊成功
                 if (registerResult.IsSuccessful)
                 {
                     var encryptedTicket = _service.CreateEncryptedTicket(registerResult.User);
@@ -123,12 +126,12 @@ namespace ZoneRadar.Controllers
 
             var user = _service.UserLogin(loginVM);
                        
-            //找不到則彈回Login頁(問題：不會跳出錯誤訊息)
+            //找不到則彈回Login頁
             if (user == null)
             {
-                var xxx = ModelState["LoginZONERadarVM.Password"];
                 TempData["LoginModalPopup"] = true;
                 TempData["Email"] = loginVM.Email;
+                //TempData["Email"] = ModelState["LoginZONERadarVM.Email"];
                 
                 //回到原本頁面並跳出登入Modal
                 return Redirect(Request.UrlReferrer.AbsolutePath);

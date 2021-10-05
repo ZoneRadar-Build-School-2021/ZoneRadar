@@ -8,6 +8,11 @@ using ZoneRadar.Models;
 using System.Web.Security;
 using Newtonsoft.Json;
 using ZoneRadar.Utilities;
+using Microsoft.AspNet.Identity;
+using System.Security.Policy;
+using System.Net.Mail;
+using System.Net;
+using System.Text;
 
 namespace ZoneRadar.Services
 {
@@ -17,7 +22,40 @@ namespace ZoneRadar.Services
         public MemberService()
         {
             _repository = new ZONERadarRepository();
+        }        
+
+        public void SentEmail()
+        {
+            string account = "testing@gmail.com";
+            string Password = "test123";
+
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+            client.Credentials = new NetworkCredential(account, Password);
+            client.EnableSsl = true;
+
+            MailMessage mail = new MailMessage(account, "test1@test.com");
+            mail.Subject = "測試信";
+            mail.SubjectEncoding = Encoding.UTF8;
+            mail.IsBodyHtml = true;
+            mail.Body = "第一行<br> 第二行<br>第三行<br>";
+            mail.BodyEncoding = Encoding.UTF8;
+
+            try
+            {
+                client.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                mail.Dispose();
+                client.Dispose();
+            }
         }
+
+
         /// <summary>
         /// 註冊會員
         /// </summary>

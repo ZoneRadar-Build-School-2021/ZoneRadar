@@ -19,14 +19,6 @@ namespace ZoneRadar
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-        }
-        protected void Application_Error(object sender, EventArgs e)
-        {
-            if (Request.QueryString["ReturnUrl"] != null)
-            {
-                var currentPageUrl = Request.UrlReferrer.AbsolutePath;
-                Response.Redirect($"{Request.UrlReferrer.AbsolutePath}?ReturnUrl={Request.QueryString["ReturnUrl"]}");
-            }
-        }        
+        }                
     }
 }

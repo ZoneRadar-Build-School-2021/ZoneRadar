@@ -40,7 +40,7 @@ namespace ZoneRadar.Controllers
             //嘗試登入失敗時的狀況(重新跳出登入Modal，並將原先輸入的Email顯示在欄位裡)
             if (TempData["Email"] != null)
             {
-                //新增ModelState的Error訊息
+                //新增ModelState的Error訊息(顯示後就消不掉了)
                 ModelState.AddModelError("LoginZONERadarVM.Password", "無效的帳號或密碼");
                 ViewBag.LoginModalPopup = TempData["LoginModalPopup"];
                 model.LoginZONERadarVM = new LoginZONERadarViewModel { Email = (string)TempData["Email"] };
