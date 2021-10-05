@@ -20,32 +20,30 @@ namespace ZoneRadar.Controllers
             _reviewService = new ReviewService();
         }
 
-        public ActionResult Index(string returnUrl)
+        public ActionResult Index()
         {
-            var model = new AllViewModel
+            var model = new HomeViewModel
             {
-                HomeVM = new HomeViewModel
-                {
-                    SelectedSpaces = _spaceService.GetSelectedSpace(),
-                    ToSpaceReviews = _reviewService.GetSpaceReviews(),
-                    TyoeOptions = _spaceService.GetTypeOptions(),
-                    CityOptions = _spaceService.GetCityOptions()
-                }
+                SelectedSpaces = _spaceService.GetSelectedSpace(),
+                ToSpaceReviews = _reviewService.GetSpaceReviews(),
+                TyoeOptions = _spaceService.GetTypeOptions(),
+                CityOptions = _spaceService.GetCityOptions()
             };
 
-            if (returnUrl != null)
+            //使用者欲進入授權畫面但未登入的狀況(跳出登入Modal)
+            if (Request.QueryString["ReturnUrl"] != null)
             {
-                ViewBag.IsLogin = true;
+                ViewBag.LoginModalPopup = true;
             }
-
-            //ViewBag.IsLogin = TempData["IsLogin"];
-            //var model = new HomeViewModel
-            //{
-            //    SelectedSpaces = _spaceService.GetSelectedSpace(),
-            //    ToSpaceReviews = _reviewService.GetSpaceReview(),
-            //    TyoeOptions = _spaceService.GetTypeOption(),
-            //    CityOptions = _spaceService.GetCityOption()
-            //};
+            //嘗試登入失敗時的狀況(重新跳出登入Modal，並將原先輸入的Email顯示在欄位裡)
+            if (TempData["Email"] != null)
+            {
+                //新增ModelState的Error訊息(顯示後就消不掉了)
+                ModelState.AddModelError("LoginZONERadarVM.Password", "無效的帳號或密碼");
+                ViewBag.LoginModalPopup = TempData["LoginModalPopup"];
+                //model.LoginZONERadarVM = new LoginZONERadarViewModel { Email = (string)TempData["Email"] };
+            }
+            
             return View(model);
         }
 
@@ -83,7 +81,6 @@ namespace ZoneRadar.Controllers
         /// <param name="homepageSearchVM"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
         public void SearchSpace(HomepageSearchViewModel homepageSearchVM)
         {
             FormsIdentity id = (FormsIdentity)User.Identity;

@@ -1,10 +1,10 @@
-﻿@model AllViewModel
+﻿@model HomeViewModel
 @{
     ViewBag.Title = "Home Page";
-    var selectedSpaces = Model.HomeVM.SelectedSpaces;
-    var toSpaceReviews = Model.HomeVM.ToSpaceReviews;
-    var typeOptions = Model.HomeVM.TyoeOptions;
-    var cityOptions = Model.HomeVM.CityOptions;
+    var selectedSpaces = Model.SelectedSpaces;
+    var toSpaceReviews = Model.ToSpaceReviews;
+    var typeOptions = Model.TyoeOptions;
+    var cityOptions = Model.CityOptions;
 }
 
 <!-- 幻燈片 -->
@@ -364,12 +364,12 @@
 @section endJS
 {
     <script src="~/Assets/JS/index/index.js"></script>
-    @if (ViewBag.IsLogin == true)
+    @*@if (ViewBag.IsLogin == true)
     {
         <script>
             let login_modal = document.querySelector("#login-modal");
             let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
             modal.show();
         </script>
-    }
+    }*@
 }

@@ -59,27 +59,21 @@ namespace ZoneRadar.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "RegisterZONERadarVM")] AllViewModel allVM)
+        public ActionResult Register([Bind(Include = "Name, Email, Password, ConfirmPassword")] RegisterZONERadarViewModel registerVM)
         {
             if (!ModelState.IsValid)
             {
                 return View("Register");
             }
             else
-            {
-                var registerVM = new RegisterZONERadarViewModel
-                {
-                    Name = allVM.RegisterZONERadarVM.Name,
-                    Email = allVM.RegisterZONERadarVM.Email,
-                    Password = allVM.RegisterZONERadarVM.Password,
-                    ConfirmPassword = allVM.RegisterZONERadarVM.ConfirmPassword
-                };
+            {               
                 var registerResult = _service.RegisterMember(registerVM);
+                //註冊成功
                 if (registerResult.IsSuccessful)
                 {
-                    var encryptedTicket = _service.CreateEncryptedTicket(registerResult.user);
+                    var encryptedTicket = _service.CreateEncryptedTicket(registerResult.User);
                     _service.CreateCookie(encryptedTicket, Response);
-                    return Redirect(_service.GetReturnUrl("qwe"));
+                    return Redirect(_service.GetReturnUrl(registerResult.User.MemberID.ToString()));
                 }
                 else
                 {
@@ -91,33 +85,42 @@ namespace ZoneRadar.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            TempData["IsLogin"] = FormsAuthentication.IsEnabled;
-            return RedirectToAction("Index", "Home");
+            //(每個非授權畫面都要加這行，例：預約頁面)
+            TempData["LoginModalPopup"] = true;
+            //如果想進入未授權畫面
+            if (Request.QueryString["ReturnUrl"] != null)
+            {
+                //導回原本所在的畫面上，攜帶ReturnUrl，並跳出登入Modal
+                return Redirect($"{Request.UrlReferrer.AbsolutePath}?ReturnUrl={Request.QueryString["ReturnUrl"]}");
+            }
+            //(目前專案狀況都不會執行到這一行)
+            return Redirect(Request.UrlReferrer.AbsolutePath);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login([Bind(Include = "LoginZONERadarVM")] AllViewModel allVM)
+        public ActionResult Login([Bind(Include = "Email, Password")] LoginZONERadarViewModel loginVM)
         {
-            //若未通過Model驗證
+            //若未通過Model驗證(前端已先驗證過)
             if (!ModelState.IsValid)
             {
-                return View();
+                //回到原本頁面並跳出登入Modal
+                TempData["LoginModalPopup"] = true;
+                Response.Redirect(Request.UrlReferrer.AbsolutePath);
+                //return View();
             }
-           
-            var loginVM = new LoginZONERadarViewModel
-            {
-                Email = allVM.LoginZONERadarVM.Email,
-                Password = allVM.LoginZONERadarVM.Password
-            };
 
             var user = _service.UserLogin(loginVM);
                        
             //找不到則彈回Login頁
             if (user == null)
             {
-                ModelState.AddModelError("Password", "無效的帳號或密碼");
-                return View();
+                TempData["LoginModalPopup"] = true;
+                TempData["Email"] = loginVM.Email;
+                //TempData["Email"] = ModelState["LoginZONERadarVM.Email"];
+                
+                //回到原本頁面並跳出登入Modal
+                return Redirect(Request.UrlReferrer.AbsolutePath);
             }
 
             //建造加密表單驗證票證
@@ -128,7 +131,7 @@ namespace ZoneRadar.Controllers
 
             //導向使用者原先欲造訪的路由
             return Redirect(_service.GetReturnUrl(user.MemberID.ToString()));
-        }        
+        }
 
         public ActionResult SignOut()
         {

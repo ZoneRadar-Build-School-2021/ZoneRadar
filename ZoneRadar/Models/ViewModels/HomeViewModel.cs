@@ -8,17 +8,6 @@ using System.Web.Mvc;
 namespace ZoneRadar.Models.ViewModels
 {
     /// <summary>
-    /// 所有頁面的ViewModel
-    /// </summary>
-    public class AllViewModel
-    {
-        public HomeViewModel HomeVM { get; set; }
-        public HomepageSearchViewModel HomepageSearchVM { get; set; }
-        public RegisterZONERadarViewModel RegisterZONERadarVM { get; set; }
-        public LoginZONERadarViewModel LoginZONERadarVM { get; set; }
-        public BookingPageViewModel bookingViewModel { get; set; }
-    }
-    /// <summary>
     /// 首頁的ViewModel
     /// </summary>
     public class HomeViewModel
@@ -27,6 +16,7 @@ namespace ZoneRadar.Models.ViewModels
         public List<ToSpaceReviewViewModel> ToSpaceReviews { get; set; }
         public List<SelectListItem> TyoeOptions { get; set; }
         public List<SelectListItem> CityOptions { get; set; }
+        public HomepageSearchViewModel HomepageSearchVM { get; set; }
     }
     /// <summary>
     /// 精選場地
