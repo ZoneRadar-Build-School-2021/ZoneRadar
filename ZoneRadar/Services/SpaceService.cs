@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,17 @@ namespace ZoneRadar.Services
         public SpaceService()
         {
             _repository = new ZONERadarRepository();
+        }
+
+        /// <summary>
+        /// 根據ID找到指定場地
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Space GetSpaceByID(int? id)
+        {
+            var result = _repository.GetAll<Space>().SingleOrDefault(x => x.SpaceID == id);
+            return result;
         }
 
         /// <summary>
@@ -69,7 +81,7 @@ namespace ZoneRadar.Services
                 Value = x.TypeDetailID.ToString(),
                 Text = x.Type
             }).ToList();
-            
+
             return typeOptions;
         }
 
@@ -87,6 +99,28 @@ namespace ZoneRadar.Services
             }).ToList();
 
             return cityOptions;
+        }
+
+        /// <summary>
+        /// 產生搜尋頁篩選所需的JSON
+        /// </summary>
+        /// <returns></returns>
+        public string GetFilterJSON()
+        {
+            var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City).OrderBy(x => x.Key.CityID).ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList());
+            var spaceTypeList = _repository.GetAll<TypeDetail>().OrderBy(x => x.TypeDetailID).Select(x => x.Type).ToList();
+            var amenityList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.Amenity).ToList();
+            var result = new FilterViewModel
+            {
+                CityDistrictDictionary = citiesAndDistricts,
+                SpaceTypeList = spaceTypeList,
+                AmenityList = amenityList,
+                SelectedCity = null,
+                SelectedType = null,
+            };
+
+            var json = JsonConvert.SerializeObject(result);
+            return json;
         }
 
         /// <summary>
@@ -130,9 +164,9 @@ namespace ZoneRadar.Services
                     }
                 }
             }
-           
+
             //3. 找到符合「時間」條件的場地
-            if(homepageSearchVM.Date != new DateTime() && targetSpaces.Count() != 0)
+            if (homepageSearchVM.Date != new DateTime() && targetSpaces.Count() != 0)
             {
                 foreach (var space in targetSpaces)
                 {
@@ -154,7 +188,7 @@ namespace ZoneRadar.Services
                     //判斷該天是否被訂走或未營業
                     var isBooked = bookedDate.Contains(homepageSearchVM.Date.Date); //該天被訂走
                     var isOperating = operatingWeekDay.Contains((int)homepageSearchVM.Date.DayOfWeek); //該天有營業
-                                                                                                                     //若被訂走或未營業，則將其從targetSpaces中移除
+                                                                                                       //若被訂走或未營業，則將其從targetSpaces中移除
                     if (isBooked && !isOperating)
                     {
                         targetSpaces.Remove(space);
@@ -201,6 +235,147 @@ namespace ZoneRadar.Services
 
             }
             throw new NotImplementedException();
+        }
+        
+        /// <summary>
+        /// 找出場地簡短資訊(搜尋頁可用)
+        /// </summary>
+        /// <param name="targetSpace"></param>
+        /// <returns></returns>
+        public SpaceBriefViewModel GetTargetSpaceBriefInfo(Space targetSpace)
+        {
+            var spacePhotoList = _repository.GetAll<SpacePhoto>().Where(x => x.SpaceID == targetSpace.SpaceID).OrderBy(x => x.Sort).Select(x => x.SpacePhotoUrl).ToList();
+            var result = new SpaceBriefViewModel
+            {
+                SpaceID = targetSpace.SpaceID,
+                PricePerHour = targetSpace.PricePerHour,
+                SpaceImageURLList = spacePhotoList,
+                SpaceName = targetSpace.SpaceName,
+                Country = targetSpace.Country.CountryName,
+                City = targetSpace.City.CityName,
+                District = targetSpace.District.DistrictName,
+                Address = targetSpace.Address,
+                Capacity = targetSpace.Capacity,
+                MinHour = targetSpace.MinHours,
+                MeasurementOfArea = targetSpace.MeasureOfArea,
+            };
+
+            return result;
+        }
+
+        /// <summary>
+        /// 找出場地詳細資訊
+        /// </summary>
+        /// <param name="targetSpace"></param>
+        /// <returns></returns>
+        public SpaceDetailViewModel GetTargetSpaceDetail(Space targetSpace)
+        {
+            // 建立轉換字典
+            var amenityConvertDictionary = new Dictionary<string, string>
+            {
+                { "WiFi", "wifi" },
+                { "桌子", "table" },
+                { "椅子", "chair" },
+                { "螢幕", "monitor" },
+                { "投影幕", "screen" },
+                { "數位電視", "apple_tv" },
+                { "咖啡機", "coffee" },
+                { "投影機", "projector" },
+                { "白板", "whiteboard" },
+                { "影印機", "printer" },
+                { "大眾運輸工具", "public_transit" },
+                { "戶外區", "outdoor_area" },
+                { "廁所", "toilet" },
+                { "無障礙空間", "handicap_access" },
+                { "廚房", "kitchen" },
+                { "包廂", "breakout_room" },
+                { "停車場", "parking" },
+            };
+            var weekDayConvertDictoinary = new Dictionary<string, int>
+            {
+                { "星期一", 1 },
+                { "星期二", 2 },
+                { "星期三", 3 },
+                { "星期四", 4 },
+                { "星期五", 5 },
+                { "星期六", 6 },
+                { "星期日", 7 }
+            };
+
+            // 找出所有場地設施
+            var originAmenityList = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.AmenityDetail);
+            var convertedAmenityList = new List<AmenityDetail>();
+            foreach (var item in originAmenityList)
+            {
+                convertedAmenityList.Add(new AmenityDetail
+                {
+                    Amenity = string.Concat(item.Amenity, amenityConvertDictionary.FirstOrDefault(x => x.Key == item.Amenity).Value),
+                    AmenityCategoryDetail = item.AmenityCategoryDetail,
+                    AmenityCategoryID = item.AmenityCategoryID,
+                    AmenityDetailID = item.AmenityDetailID,
+                    SpaceAmenity = item.SpaceAmenity,
+                });
+            }
+            var amenityDictionary = convertedAmenityList.GroupBy(x => x.AmenityCategoryDetail.AmenityCategory).ToDictionary(x => x.Key, x => x.Select(y => y.Amenity).ToList());
+            
+            // 找出該場地所有營業資料
+            var originOperatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == targetSpace.SpaceID).ToList();
+            var convertedOperatingDayList = new List<string>();
+            foreach (var day in originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.OperatingDay).ToList())
+            {
+                convertedOperatingDayList.Add(weekDayConvertDictoinary.FirstOrDefault(x => x.Value == day).Key);
+            }
+
+            // 找出所有清潔公約選項
+            var cleaningOptionList = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.CleaningOption).ToList();
+            
+            // 找出滿時優惠的時數
+            var hoursForDiscount = _repository.GetAll<SpaceDiscount>().SingleOrDefault(x => x.SpaceID == targetSpace.SpaceID).Hour;
+            
+            // 找出滿時優惠的折數
+            var discount = _repository.GetAll<SpaceDiscount>().SingleOrDefault(x => x.SpaceID == targetSpace.SpaceID).Discount;
+
+            var result = new SpaceDetailViewModel
+            {
+                HostName = targetSpace.Member.Name,
+                HostPhoto = targetSpace.Member.Photo,
+                CleaningOptionDict = cleaningOptionList.GroupBy(x => x.CleaningCategory.Category).ToDictionary(x => x.Key, x => x.Select(y => y.OptionDetail).ToList()),
+                Introduction = targetSpace.Introduction,
+                ShootingEquipment = targetSpace.ShootingEquipment,
+                ParkingInfo = targetSpace.Parking,
+                HostRule = targetSpace.HostRules,
+                AmenityDictionary = amenityDictionary,
+                Longitude = targetSpace.Longitude,
+                Latitude = targetSpace.Latitude,
+                TrafficInfo = targetSpace.Traffic,
+                OperatingDayList = convertedOperatingDayList,
+                StartTimeList = originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.StartTime).ToList(),
+                EndTimeList = originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.EndTime).ToList(),
+                CancellationTitle = targetSpace.Cancellation.CancellationTitle,
+                CancellationInfo = targetSpace.Cancellation.CancellationDetail,
+                HoursForDiscount = hoursForDiscount,
+                Discount = discount,
+            };
+
+            return result;
+        }
+
+        /// <summary>
+        /// 收藏寫入資料庫
+        /// </summary>
+        /// <param name="bookingPageVM"></param>
+        /// <param name="memberID"></param>
+        public void CreateCollectionInDB(BookingPageViewModel bookingPageVM, string memberID)
+        {
+            var collection = new Collection
+            {
+                MemberID = int.Parse(memberID),
+                SpaceID = bookingPageVM.SpaceBreifInfo.SpaceID,
+            };
+
+            _repository.Create<Collection>(collection);
+            _repository.SaveChanges();
+            _repository.Dispose();
         }
     }
 }

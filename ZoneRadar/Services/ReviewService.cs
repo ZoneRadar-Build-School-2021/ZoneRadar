@@ -43,5 +43,27 @@ namespace ZoneRadar.Services
 
             return topSpaceReviews;
         }
+
+        public List<SpaceReviewViewModel> GetTargetSpaceReviews(Space targetSpace)
+        {
+            var reviewList = _repository.GetAll<Review>().Where(x => x.ToHost == true && x.Order.SpaceID == targetSpace.SpaceID).Select(x => x).ToList();
+
+            var spaceReviewList = new List<SpaceReviewViewModel>();
+
+            foreach (var review in reviewList)
+            {
+                spaceReviewList.Add(new SpaceReviewViewModel
+                {
+                    Score = review.Score,
+                    ReviewContent = review.ReviewContent,
+                    ReviewDate = review.ReviewDate,
+                    IsRecommend = review.Recommend,
+                    ReviewedMemberName = review.Order.Member.Name,
+                    ReviewedMemberPhoto = review.Order.Member.Photo,
+                });
+            }
+
+            return spaceReviewList;
+        }
     }
 }
