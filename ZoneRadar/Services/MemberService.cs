@@ -11,8 +11,11 @@ namespace ZoneRadar.Services
     public class MemberService
     {
         private readonly ZONERadarRepository _zoneradarRepository;
+        private readonly ZONERadarRepository _repository;
+
         public MemberService()
         {
+            _repository = new ZONERadarRepository();
             _zoneradarRepository = new ZONERadarRepository();
         }
 
