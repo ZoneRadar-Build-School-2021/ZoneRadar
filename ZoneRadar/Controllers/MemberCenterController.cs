@@ -14,7 +14,6 @@ namespace ZoneRadar.Controllers
        // private readonly MyCollectionService _myCollectionservice;
         public MemberCenterController()
         {
-            _service = new MemberService();
             _memberservice = new MemberService();
         }
         // GET: MemberCenter
