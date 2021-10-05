@@ -17,7 +17,6 @@ namespace ZoneRadar.Models.ViewModels
         public List<SelectListItem> TyoeOptions { get; set; }
         public List<SelectListItem> CityOptions { get; set; }
         public HomepageSearchViewModel HomepageSearchVM { get; set; }
-        public string MemberPhoto { get; set; }
     }
     /// <summary>
     /// 精選場地
@@ -48,10 +47,8 @@ namespace ZoneRadar.Models.ViewModels
     /// </summary>
     public class HomepageSearchViewModel
     {
-        public string Type { get; set; }
+        public int TypeDetailId { get; set; }
         public int CityId { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime Date { get; set; }
     }
 }

@@ -15,8 +15,11 @@ namespace ZoneRadar.Services
         {
             _repository = new ZONERadarRepository();
         }
-
-        public List<ToSpaceReviewViewModel> GetSpaceReview()
+        /// <summary>
+        /// 找出分數較高的場地評論
+        /// </summary>
+        /// <returns></returns>
+        public List<ToSpaceReviewViewModel> GetSpaceReviews()
         {
             var members = _repository.GetAll<Member>().ToList();
             var reviews = _repository.GetAll<Review>().Where(x => x.ToHost).ToList();
@@ -39,6 +42,28 @@ namespace ZoneRadar.Services
             var topSpaceReviews = spaceReviews.OrderByDescending(x => x.Score).Take(8).ToList();
 
             return topSpaceReviews;
+        }
+
+        public List<SpaceReviewViewModel> GetTargetSpaceReviews(Space targetSpace)
+        {
+            var reviewList = _repository.GetAll<Review>().Where(x => x.ToHost == true && x.Order.SpaceID == targetSpace.SpaceID).Select(x => x).ToList();
+
+            var spaceReviewList = new List<SpaceReviewViewModel>();
+
+            foreach (var review in reviewList)
+            {
+                spaceReviewList.Add(new SpaceReviewViewModel
+                {
+                    Score = review.Score,
+                    ReviewContent = review.ReviewContent,
+                    ReviewDate = review.ReviewDate,
+                    IsRecommend = review.Recommend,
+                    ReviewedMemberName = review.Order.Member.Name,
+                    ReviewedMemberPhoto = review.Order.Member.Photo,
+                });
+            }
+
+            return spaceReviewList;
         }
     }
 }

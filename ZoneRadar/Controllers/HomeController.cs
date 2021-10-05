@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Services;
 
@@ -23,10 +25,25 @@ namespace ZoneRadar.Controllers
             var model = new HomeViewModel
             {
                 SelectedSpaces = _spaceService.GetSelectedSpace(),
-                ToSpaceReviews = _reviewService.GetSpaceReview(),
-                TyoeOptions = _spaceService.GetTypeOption(),
-                CityOptions = _spaceService.GetCityOption()
+                ToSpaceReviews = _reviewService.GetSpaceReviews(),
+                TyoeOptions = _spaceService.GetTypeOptions(),
+                CityOptions = _spaceService.GetCityOptions()
             };
+
+            //使用者欲進入授權畫面但未登入的狀況(跳出登入Modal)
+            if (Request.QueryString["ReturnUrl"] != null)
+            {
+                ViewBag.LoginModalPopup = true;
+            }
+            //嘗試登入失敗時的狀況(重新跳出登入Modal，並將原先輸入的Email顯示在欄位裡)
+            if (TempData["Email"] != null)
+            {
+                //新增ModelState的Error訊息(顯示後就消不掉了)
+                ModelState.AddModelError("LoginZONERadarVM.Password", "無效的帳號或密碼");
+                ViewBag.LoginModalPopup = TempData["LoginModalPopup"];
+                //model.LoginZONERadarVM = new LoginZONERadarViewModel { Email = (string)TempData["Email"] };
+            }
+            
             return View(model);
         }
 
@@ -47,6 +64,8 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+
+        [Authorize]
         public ActionResult FAQ()
         {
             return View();
@@ -55,35 +74,20 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 測試用的Action
+        /// </summary>
+        /// <param name="homepageSearchVM"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult SearchSpace(HomepageSearchViewModel homepageSearchVM)
+        public void SearchSpace(HomepageSearchViewModel homepageSearchVM)
         {
-            if (ModelState.IsValid)
-            {
-                return Content("成功接收");
-            }
+            FormsIdentity id = (FormsIdentity)User.Identity;
+            string memberId = User.Identity.Name;
 
-            return null;
+            _spaceService.SearchSpacesByTypeCityDate(homepageSearchVM);
+            throw new NotImplementedException();
         }
-        public ActionResult AddTest()
-        {
-            //_service.TestMethod();
-
-            return Content("新增完成");
-        }
-        //public ActionResult BookingInfo(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    var space = _ser.GetSpace(id);
-
-        //    if (space.Count() == 0)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(space);
-        //}
     }
 }
