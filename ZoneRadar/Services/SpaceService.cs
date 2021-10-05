@@ -108,12 +108,12 @@ namespace ZoneRadar.Services
                 amenityAraeOneList = new List<AmenityAraeOne>(),
             };
             var amenityOnes = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 1).Select(x => x).ToList();
-            foreach (var amenityOne in amenityOnes) 
+            foreach (var amenityOne in amenityOnes)
             {
                 var amenityOneTemp = new AmenityAraeOne()
                 {
-                    AmenityId=amenityOne.AmenityDetailID,
-                    AmenityName=amenityOne.Amenity
+                    AmenityId = amenityOne.AmenityDetailID,
+                    AmenityName = amenityOne.Amenity
                 };
                 result.amenityAraeOneList.Add(amenityOneTemp);
             };
@@ -175,7 +175,7 @@ namespace ZoneRadar.Services
         {
             var result = new SpaceViewModel()
             {
-                cancellationAraesList=new List<CancellationArae>(),
+                cancellationAraesList = new List<CancellationArae>(),
             };
             var cancels = _repository.GetAll<Cancellation>().Select(x => x).ToList();
             foreach (var cancel in cancels)
@@ -197,15 +197,15 @@ namespace ZoneRadar.Services
         {
             var result = new SpaceViewModel()
             {
-                SpaceTypeAraeList=new List<SpaceTypeArae>()
+                SpaceTypeAraeList = new List<SpaceTypeArae>()
             };
             var spaceTypes = _repository.GetAll<TypeDetail>().Select(x => x).ToList();
-            foreach (var space in spaceTypes) 
+            foreach (var space in spaceTypes)
             {
                 var typeTemp = new SpaceTypeArae()
                 {
                     TypeDetailId = space.TypeDetailID,
-                    Type=space.Type
+                    Type = space.Type
                 };
                 result.SpaceTypeAraeList.Add(typeTemp);
             }
@@ -220,15 +220,15 @@ namespace ZoneRadar.Services
         {
             var result = new SpaceViewModel()
             {
-                CleanFisrtPartList =new List<CleanFisrtPart>()
+                CleanFisrtPartList = new List<CleanFisrtPart>()
             };
             var CleanFisrtParts = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 1).Select(x => x).ToList();
-            foreach (var cleanOne in CleanFisrtParts) 
+            foreach (var cleanOne in CleanFisrtParts)
             {
                 var cleanOneTemp = new CleanFisrtPart()
                 {
-                    CleaningOptionId=cleanOne.CleaningOptionID,
-                    OptionDetail=cleanOne.OptionDetail
+                    CleaningOptionId = cleanOne.CleaningOptionID,
+                    OptionDetail = cleanOne.OptionDetail
                 };
                 result.CleanFisrtPartList.Add(cleanOneTemp);
             }
@@ -334,9 +334,11 @@ namespace ZoneRadar.Services
             {
                 SomeOnesSpaceList = new List<SomeOnesSpace>(),
                 SomeOnesCountryList = new List<SomeOnesCountry>(),
-                SomeOnesDistrictList=new List<SomeOnesDistrict>(),
-                SomeOnesCitytList=new List<SomeOnesCity>(),
-                SomeOnesTypeDetailList=new List<SomeOnesTypeDetail>()
+                SomeOnesDistrictList = new List<SomeOnesDistrict>(),
+                SomeOnesCitytList = new List<SomeOnesCity>(),
+                SomeOnesTypeDetailList = new List<SomeOnesTypeDetail>(),
+                ShowAllTypeDetailList = new List<ShowAllTypeDetail>(),
+                
             };
             var adds = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var add in adds)
@@ -359,7 +361,7 @@ namespace ZoneRadar.Services
                 };
                 result.SomeOnesCountryList.Add(countryNameTemp);
             };
-            
+
             var district = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.DistrictID).FirstOrDefault();
             var districtName = _repository.GetAll<District>().Where(x => x.DistrictID == district).Select(x => x).ToList();
             foreach (var districtname in districtName)
@@ -370,28 +372,45 @@ namespace ZoneRadar.Services
                 };
                 result.SomeOnesDistrictList.Add(districtNameTemp);
             };
-           
+
             var city = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.CityID).FirstOrDefault();
             var cityName = _repository.GetAll<City>().Where(x => x.CityID == city).Select(x => x).ToList();
-            foreach (var cityname in cityName ) 
+            foreach (var cityname in cityName)
             {
                 var ciytTemp = new SomeOnesCity()
                 {
-                    CityName=cityname.CityName
+                    CityName = cityname.CityName
                 };
                 result.SomeOnesCitytList.Add(ciytTemp);
             };
-            List<SpaceType> spacetypes =  _repository.GetAll<SpaceType>().Where(x => x.SpaceID == spaceId).ToList();
+
+
+
+            //把活動類別有的撈出來
+            List<SpaceType> spacetypes = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == spaceId).ToList();
             foreach (var item in spacetypes)
             {
-               
-                SomeOnesTypeDetail someOnesTypeDetail=  new SomeOnesTypeDetail();
-                someOnesTypeDetail.Type = _repository.GetAll<TypeDetail>().Where(x => x.TypeDetailID == item.TypeDetailID).Select(x => x.Type).FirstOrDefault(); ;
+                SomeOnesTypeDetail someOnesTypeDetail = new SomeOnesTypeDetail();
+                someOnesTypeDetail.Type = _repository.GetAll<TypeDetail>().Where(x => x.TypeDetailID == item.TypeDetailID).Select(x => x.Type).FirstOrDefault();
+                someOnesTypeDetail.TypeDetailId = _repository.GetAll<TypeDetail>().Where(x => x.TypeDetailID == item.TypeDetailID).Select(x => x.TypeDetailID).FirstOrDefault();
                 result.SomeOnesTypeDetailList.Add(someOnesTypeDetail);
             }
-       
+
+            //把全部活動類別列出來
+            var showAllTypeDetail = _repository.GetAll<TypeDetail>().Select(x => x).ToList();
+
+            foreach (var item in showAllTypeDetail)
+            {
+                var showAllTypeDetailTemp = new ShowAllTypeDetail()
+                {
+                    Type = item.Type,
+                    TypeDetailId = item.TypeDetailID
+                };
+                result.ShowAllTypeDetailList.Add(showAllTypeDetailTemp);
+            }
+           
             return result;
         }
-    }
 
+    }
 }

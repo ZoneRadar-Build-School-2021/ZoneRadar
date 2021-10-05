@@ -6,6 +6,9 @@
     var country = Model.SomeOnesCountryList;
     var district = Model.SomeOnesDistrictList;
     var ciy = Model.SomeOnesCitytList;
+    var spacetype= Model.SomeOnesTypeDetailList;
+    var allspacetype = Model.ShowAllTypeDetailList;
+    //var expectedList= allspacetype.Except(spacetype);
 }
 
 @*<form class="needs-validation" novalidate action="HostCenter/EditSpace" method="post">*@
@@ -64,7 +67,7 @@
                                             <select class="form-select" name="city" id="city" required>
                                                 @foreach (var c in ciy)
                                                 {
-                                                    <option value="@c.CityName" selected>@c.CityName</option>
+                                                    <option value="@c.CityName">@c.CityName</option>
                                                 }
                                             </select>
                                         </div>
@@ -142,18 +145,33 @@
                                     例如：“公寓”、“攝影棚”、“餐廳”.....
                                 </p>
                             </div>
-                            @*@foreach (var type in spacetype)
+                     
+                            @foreach (var type in allspacetype)
                             {
                                 <div class="mb-3 col-lg-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="@type.TypeDetailId"
-                                               id="flexCheckDefault">
+
+                                        <input class="form-check-input" checked type="checkbox" value="@type.TypeDetailId" id="flexCheckDefault">
+
                                         <label class="form-check-label" for="flexCheckDefault">
                                             @type.Type
                                         </label>
                                     </div>
                                 </div>
-                            }*@
+
+                                <div class="mb-3 col-lg-6">
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="checkbox" value="@type.TypeDetailId" id="flexCheckDefault">
+
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            @type.Type
+                                        </label>
+                                    </div>
+                                </div>
+
+                            }
+
 
                         </div>
                         <div class="row ">

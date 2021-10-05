@@ -83,6 +83,9 @@ namespace ZoneRadar.Controllers
                 SomeOnesCountryList=_spaceService.ReadAnySpace(spaceId).SomeOnesCountryList,
                 SomeOnesDistrictList=_spaceService.ReadAnySpace(spaceId).SomeOnesDistrictList,
                 SomeOnesCitytList=_spaceService.ReadAnySpace(spaceId).SomeOnesCitytList,
+                SomeOnesTypeDetailList=_spaceService.ReadAnySpace(spaceId).SomeOnesTypeDetailList,
+                ShowAllTypeDetailList=_spaceService.ReadAnySpace(spaceId).ShowAllTypeDetailList
+                
             };
             return View(model);
         }

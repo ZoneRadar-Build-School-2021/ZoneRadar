@@ -15,6 +15,7 @@ namespace ZoneRadar.Models.ViewModels
         public List<SomeOnesSpaceType>SomeOnesSpaceTypeList { get; set; }
         public List<SomeOnesTypeDetail> SomeOnesTypeDetailList { get; set; }
         public List<ShowAllTypeDetail> ShowAllTypeDetailList { get; set; }
+       
     }
     public class SomeOnesSpace
     {
@@ -91,5 +92,7 @@ namespace ZoneRadar.Models.ViewModels
     {
         public int TypeDetailId { get; set; }
         public string Type { get; set; }
+        public bool check { get; set; }
     }
+  
 }
