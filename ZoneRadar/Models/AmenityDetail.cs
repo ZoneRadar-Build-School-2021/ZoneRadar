@@ -21,7 +21,7 @@ namespace ZoneRadar.Models
         [StringLength(50)]
         public string Amenity { get; set; }
 
-        public int? AmenityCategoryID { get; set; }
+        public int AmenityCategoryID { get; set; }
 
         public string AmenityICON { get; set; }
 

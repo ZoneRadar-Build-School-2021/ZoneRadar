@@ -612,6 +612,23 @@ namespace ZoneRadar.Services
             };
             return Operating;
         }
+        /// <summary>
+        ///  營業時間
+        /// </summary>
+        public List<SelectListItem> OperatingDay()
+        {
+            var Operatingday = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "1", Text = "星期一"},
+                new SelectListItem { Value = "2", Text = "星期二"},
+                new SelectListItem { Value = "3", Text = "星期三"},
+                new SelectListItem { Value = "4", Text = "星期四"},
+                new SelectListItem { Value = "5", Text = "星期五"},
+                new SelectListItem { Value = "6", Text = "星期六"},
+                new SelectListItem { Value = "7", Text = "星期日"},
+            };
+            return Operatingday;
+        }
 
         /// <summary>
         ///  編輯 讀資料庫裡的資料
@@ -628,7 +645,15 @@ namespace ZoneRadar.Services
                 SomeOnesCitytList = new List<SomeOnesCity>(),
                 SomeOnesTypeDetailList = new List<SomeOnesTypeDetail>(),
                 ShowAllTypeDetailList = new List<ShowAllTypeDetail>(),
-                SomeOnesSpaceNameList=new List<SomeOnesSpaceName>()
+                SomeOnesSpaceNameList=new List<SomeOnesSpaceName>(),
+                SomeOnesSpaceIntroductionList=new List<SomeOnesSpaceIntroduction>(),
+                SomeOnesMeasureOfAreaandCapacityList = new List<SomeOnesMeasureOfAreaandCapacity>(),
+                SomeOnesPriceList=new List<SomeOnesPrice>(),
+                SomeOnesDiscountsList=new List<SomeOnesDiscount>(),
+                amenityAraeOneList=new List<AmenityAraeOne>(),
+                amenityAraeTwoList=new List<AmenityAraeTwo>(),
+                amenityAraeThreeList=new List<AmenityAraeThree>(),
+                SomeOnesAmenityList=new List<SomeOnesAmenity>()
 
             };
             ///地址 ///
@@ -710,6 +735,76 @@ namespace ZoneRadar.Services
                 };
                 result.SomeOnesSpaceNameList.Add(someOnesSpaceTemp);
             }
+            //場地簡介
+            var spaceIntroduction = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).ToList();
+            foreach (var item in spaceIntroduction)
+            {
+                var spaceIntroductiontemp = new SomeOnesSpaceIntroduction()
+                {
+                    Introduction=item.Introduction
+                };
+
+                result.SomeOnesSpaceIntroductionList.Add(spaceIntroductiontemp);
+            };
+            //場地大小人數
+            var spaceMeasureOfAreaandCapacity = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).ToList();
+            foreach (var item in spaceMeasureOfAreaandCapacity)
+            {
+                var MeasureOfAreaandCapacityTemp = new SomeOnesMeasureOfAreaandCapacity()
+                {
+                    Capacity = item.Capacity,
+                    MeasureOfArea = item.MeasureOfArea
+
+                };
+                result.SomeOnesMeasureOfAreaandCapacityList.Add(MeasureOfAreaandCapacityTemp);
+            }
+
+            /// 營業時間
+            /// 
+            /// 
+
+            /// 定價
+            /// 
+            /// ///
+            var someonesprice = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var item in someonesprice)
+            {
+                var someonespriceTemp = new SomeOnesPrice()
+                {
+                    MinHours = item.MinHours,
+                    PricePerHour = item.PricePerHour
+
+                };
+                result.SomeOnesPriceList.Add(someonespriceTemp);
+            }
+            ///折扣 
+            ///
+            /// ///
+            var someonsdiscounts = _repository.GetAll<SpaceDiscount>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var item in someonsdiscounts)
+            {
+                var someonsdiscountsTemp = new SomeOnesDiscount()
+                {
+                    SpaceId = item.SpaceID,
+                    Discount = item.Discount,
+                    Hours = item.Hour
+                };
+                result.SomeOnesDiscountsList.Add(someonsdiscountsTemp);
+            }
+            /// 撈有的設施
+            /// 
+            /// 
+            var amenity = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            //var amenityone=amenity.Where(x=>x.)
+            foreach (var item in amenity)
+            {
+                SomeOnesAmenity amenityTemp = new SomeOnesAmenity();
+                amenityTemp.Amenity = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityDetailID == item.AmenityDetailID).Select(x => x.Amenity).FirstOrDefault();
+                amenityTemp.AmenityId = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityDetailID == item.AmenityDetailID).Select(x => x.AmenityDetailID).FirstOrDefault();
+                amenityTemp.AmenityCategoryID = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityDetailID == item.AmenityDetailID).Select(x => x.AmenityCategoryID).FirstOrDefault();
+                result.SomeOnesAmenityList.Add(amenityTemp);
+            }
+
             return result;
         }
 
