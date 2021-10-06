@@ -39,8 +39,8 @@ namespace ZoneRadar.Controllers
                 AmenityList = amenityList,
                 AmenityIconList = amenityIconList,
                 SelectedCity = "臺北市",
-                SelectedDistrict = "大安區",
-                SelectedType = "",
+                SelectedDistrict = "",
+                SelectedType = "運動",
                 SelectedDate = ""
             };
 
