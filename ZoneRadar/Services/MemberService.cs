@@ -21,11 +21,10 @@ namespace ZoneRadar.Services
 {
     public class MemberService
     {
-        private readonly ZONERadarRepository _zoneradarRepository;
         private readonly ZONERadarRepository _repository;
         public MemberService()
         {
-            _zoneradarRepository = new ZONERadarRepository();
+            
             _repository = new ZONERadarRepository();
         }
 
@@ -39,7 +38,7 @@ namespace ZoneRadar.Services
                 Spaces = new List<Spaces>()
             };
             //int memberId = 1;
-            var u = _zoneradarRepository.GetAll<Member>().FirstOrDefault(x => x.MemberID == memberId);
+            var u = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == memberId);
             if (u == null)
             {
                 return resultMember;
@@ -48,6 +47,7 @@ namespace ZoneRadar.Services
             {
                 resultMember.User = new User
                 {
+                    Id = u.MemberID,
                     Name = u.Name,
                     Email = u.Email,
                     Phone = u.Phone,
@@ -56,9 +56,9 @@ namespace ZoneRadar.Services
                     Photo = u.Photo
                 };
                 //會員所擁有的廠所有場地
-                var sps = _zoneradarRepository.GetAll<Space>().Where(x => x.MemberID == memberId);
-                var re = _zoneradarRepository.GetAll<Review>();
-                var spt = _zoneradarRepository.GetAll<SpacePhoto>();
+                var sps = _repository.GetAll<Space>().Where(x => x.MemberID == memberId);
+                var re = _repository.GetAll<Review>();
+                var spt = _repository.GetAll<SpacePhoto>();
 
                 foreach (var s in sps)
                 {
@@ -85,7 +85,7 @@ namespace ZoneRadar.Services
                 MyCollection = new List<Spaces>()
             };
 
-            var u = _zoneradarRepository.GetAll<Member>().FirstOrDefault(x => x.MemberID == memberId);
+            var u = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == memberId);
             if (u == null)
             {
                 return resultMemberCollection;
@@ -94,6 +94,7 @@ namespace ZoneRadar.Services
             {
                 resultMemberCollection.User = new User
                 {
+                    Id = u.MemberID,
                     Name = u.Name,
                     Email = u.Email,
                     Phone = u.Phone,
@@ -102,8 +103,8 @@ namespace ZoneRadar.Services
                     Photo = u.Photo
                 };
                 //會員所收藏的場地
-                var collection = _zoneradarRepository.GetAll<Collection>().Where(x => x.MemberID == memberId);
-                var sps = _zoneradarRepository.GetAll<Space>();
+                var collection = _repository.GetAll<Collection>().Where(x => x.MemberID == memberId);
+                var sps = _repository.GetAll<Space>();
 
                 foreach (var c in collection)
                 {
@@ -132,7 +133,7 @@ namespace ZoneRadar.Services
                 ToUserReview = new List<UserReview>()
             };
 
-            var u = _zoneradarRepository.GetAll<Member>().FirstOrDefault(x => x.MemberID == memberId);
+            var u = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == memberId);
             if (u == null)
             {
                 return resulthostinfoReview;
@@ -142,6 +143,7 @@ namespace ZoneRadar.Services
                 //找出會員
                 resulthostinfoReview.User = new User
                 {
+                    Id = u.MemberID,
                     Name = u.Name,
                     Email = u.Email,
                     Phone = u.Phone,
@@ -150,8 +152,8 @@ namespace ZoneRadar.Services
                     Photo = u.Photo
                 };
                 //找出會員是否有租借場地並且顯示 出被場地主的評價
-                var order = _zoneradarRepository.GetAll<Order>().Where(x => x.MemberID == u.MemberID && x.OrderStatusID == 4);
-                var sps = _zoneradarRepository.GetAll<Space>();
+                var order = _repository.GetAll<Order>().Where(x => x.MemberID == u.MemberID && x.OrderStatusID == 4);
+                var sps = _repository.GetAll<Space>();
                 foreach (var o in order)
                 {
                     resulthostinfoReview.ToUserReview.Add(new UserReview
