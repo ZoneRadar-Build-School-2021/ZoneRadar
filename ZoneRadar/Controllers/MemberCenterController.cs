@@ -12,17 +12,11 @@ namespace ZoneRadar.Controllers
 {
     public class MemberCenterController : Controller
     {
-        private readonly MemberService _memberservice;
         private readonly MemberService _service;
-        //private readonly HostInfoService _hostinfoservice;
-        // private readonly MyCollectionService _myCollectionservice;
         public MemberCenterController()
         {
             _service = new MemberService();
-            _memberservice = new MemberService();
         }
-       
-       
         // GET: MemberCenter
         public ActionResult Index()
         {
@@ -52,7 +46,7 @@ namespace ZoneRadar.Controllers
             }
             else
             {
-                var MemCollectionSpaces = _memberservice.GetMemberCollection(memberId.Value);
+                var MemCollectionSpaces = _service.GetMemberCollection(memberId.Value);
                 return View(MemCollectionSpaces);
             }
         }
@@ -64,7 +58,7 @@ namespace ZoneRadar.Controllers
             }
             else
             {
-                var HostReview = _memberservice.GetHostReview(memberId.Value);
+                var HostReview = _service.GetHostReview(memberId.Value);
                 return View(HostReview);
             }
         }
@@ -76,12 +70,12 @@ namespace ZoneRadar.Controllers
             }
             else 
             { 
-               var MemSpace = _memberservice.GetMemberSpace(memberId.Value);
+               var MemSpace = _service.GetMemberSpace(memberId.Value);
                return View(MemSpace);
             }
         }
         //場地主ID
-        public ActionResult HostId(int? id)
+        public ActionResult Host(int? id)
         {
             if (!id.HasValue)
             {
@@ -89,16 +83,36 @@ namespace ZoneRadar.Controllers
             }
             else
             {
-                var MemSpace = _memberservice.GetMemberSpace(id.Value);
-                return View("HostInfo",MemSpace);
+                var MemSpace = _service.GetMemberSpace(id.Value);
+                return View("HostInfo", MemSpace);
             }
         }
         //會員
-        public ActionResult MemberInfo(int? id)
+        public ActionResult Member(int? id)
         {
-            return View();
+            if (!id.HasValue)
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            else
+            {
+                var MemSpace = _service.GetHostReview(id.Value);
+                return View("UserInfo", MemSpace);
+            }
         }
-
+        //收藏
+        public ActionResult Collection(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            else
+            {
+                var MemCollectionSpaces = _service.GetMemberCollection(id.Value);
+                return View("MyCollection",MemCollectionSpaces);
+            }
+        }
 
         [HttpGet]
         public ActionResult Register()
