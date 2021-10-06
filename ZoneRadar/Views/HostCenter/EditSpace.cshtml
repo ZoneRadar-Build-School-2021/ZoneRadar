@@ -8,7 +8,7 @@
     var ciy = Model.SomeOnesCitytList;
     var spacetype= Model.SomeOnesTypeDetailList;
     var allspacetype = Model.ShowAllTypeDetailList;
-    //var expectedList= allspacetype.Except(spacetype);
+    var spacename = Model.SomeOnesSpaceNameList;
 }
 
 @*<form class="needs-validation" novalidate action="HostCenter/EditSpace" method="post">*@
@@ -145,30 +145,38 @@
                                     例如：“公寓”、“攝影棚”、“餐廳”.....
                                 </p>
                             </div>
-                     
+
                             @foreach (var type in allspacetype)
                             {
-                                <div class="mb-3 col-lg-6">
-                                    <div class="form-check">
+                                if (spacetype.Select(x => x.Type).Contains(type.Type))
+                                {
+                                    <div class="mb-3 col-lg-6">
+                                        <div class="form-check">
 
-                                        <input class="form-check-input" checked type="checkbox" value="@type.TypeDetailId" id="flexCheckDefault">
+                                            <input class="form-check-input" checked type="checkbox" value="@type.TypeDetailId" id="flexCheckDefault">
 
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            @type.Type
-                                        </label>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                @type.Type
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
+                                }
 
-                                <div class="mb-3 col-lg-6">
-                                    <div class="form-check">
+                                else
+                                {
 
-                                        <input class="form-check-input" type="checkbox" value="@type.TypeDetailId" id="flexCheckDefault">
+                                    <div class="mb-3 col-lg-6">
+                                        <div class="form-check">
 
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            @type.Type
-                                        </label>
+                                            <input class="form-check-input" type="checkbox" value="@type.TypeDetailId" id="flexCheckDefault">
+
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                @type.Type
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
+
+                                }
 
                             }
 
@@ -187,12 +195,17 @@
                                 <p><i class="me-1 far fa-lightbulb"></i>例如：“市中心閣樓享天際線景觀”</p>
                                 <div class="SpaceName">
                                     <label for="SpaceName" class="form-label "></label>
+                                    @foreach (var item in spacename)
+                                    {
+
+
                                     <input type="text" required class="form-control" id="SpaceName"
-                                           placeholder="輸入您場地的名稱">
+                                         value="@item.SpaceName"  placeholder="輸入您場地的名稱">
+                                    }
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+                            <div class="row">
                             <div class="col-12 mt-5">
                                 <h2 class="fs-4">描述您的場地</h2>
                                 <p>描述您對場地所有的細節，以便讓客戶知道這場地所提供的服務</p>

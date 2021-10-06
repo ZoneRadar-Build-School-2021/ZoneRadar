@@ -612,6 +612,12 @@ namespace ZoneRadar.Services
             };
             return Operating;
         }
+
+        /// <summary>
+        ///  編輯 讀資料庫裡的資料
+        /// </summary>
+        /// 參數是場地ID <param name="spaceId"></param>
+        ///
         public SomeOnesSpaceViewModel ReadAnySpace(int spaceId)
         {
             var result = new SomeOnesSpaceViewModel()
@@ -622,8 +628,10 @@ namespace ZoneRadar.Services
                 SomeOnesCitytList = new List<SomeOnesCity>(),
                 SomeOnesTypeDetailList = new List<SomeOnesTypeDetail>(),
                 ShowAllTypeDetailList = new List<ShowAllTypeDetail>(),
-                
+                SomeOnesSpaceNameList=new List<SomeOnesSpaceName>()
+
             };
+            ///地址 ///
             var adds = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var add in adds)
             {
@@ -669,7 +677,7 @@ namespace ZoneRadar.Services
             };
 
 
-
+            //活動類型
             //把活動類別有的撈出來
             List<SpaceType> spacetypes = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == spaceId).ToList();
             foreach (var item in spacetypes)
@@ -692,7 +700,16 @@ namespace ZoneRadar.Services
                 };
                 result.ShowAllTypeDetailList.Add(showAllTypeDetailTemp);
             }
-           
+            //場地名稱
+            var spaceName = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).ToList();
+            foreach (var item in spaceName)
+            {
+                var someOnesSpaceTemp = new SomeOnesSpaceName()
+                {
+                    SpaceName=item.SpaceName
+                };
+                result.SomeOnesSpaceNameList.Add(someOnesSpaceTemp);
+            }
             return result;
         }
 

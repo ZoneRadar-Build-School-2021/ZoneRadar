@@ -15,7 +15,13 @@ namespace ZoneRadar.Models.ViewModels
         public List<SomeOnesSpaceType>SomeOnesSpaceTypeList { get; set; }
         public List<SomeOnesTypeDetail> SomeOnesTypeDetailList { get; set; }
         public List<ShowAllTypeDetail> ShowAllTypeDetailList { get; set; }
-       
+        public List<SomeOnesSpaceName> SomeOnesSpaceNameList { get; set; }
+
+
+    }
+    public class SomeOnesSpaceName 
+    {
+        public string SpaceName { get; set; }
     }
     public class SomeOnesSpace
     {
