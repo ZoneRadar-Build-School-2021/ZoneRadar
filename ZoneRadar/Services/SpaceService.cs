@@ -101,27 +101,6 @@ namespace ZoneRadar.Services
             return cityOptions;
         }
 
-        /// <summary>
-        /// 產生搜尋頁篩選所需的JSON
-        /// </summary>
-        /// <returns></returns>
-        public string GetFilterJSON()
-        {
-            var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City).OrderBy(x => x.Key.CityID).ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList());
-            var spaceTypeList = _repository.GetAll<TypeDetail>().OrderBy(x => x.TypeDetailID).Select(x => x.Type).ToList();
-            var amenityList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.Amenity).ToList();
-            var result = new FilterViewModel
-            {
-                CityDistrictDictionary = citiesAndDistricts,
-                SpaceTypeList = spaceTypeList,
-                AmenityList = amenityList,
-                SelectedCity = null,
-                SelectedType = null,
-            };
-
-            var json = JsonConvert.SerializeObject(result);
-            return json;
-        }
 
         /// <summary>
         /// 關閉資料庫連線

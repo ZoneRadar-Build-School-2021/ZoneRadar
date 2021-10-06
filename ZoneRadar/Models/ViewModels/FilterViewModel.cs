@@ -11,7 +11,10 @@ namespace ZoneRadar.Models.ViewModels
         public Dictionary<string, List<string>> CityDistrictDictionary { get; set; }
         public List<string> SpaceTypeList { get; set; }
         public List<string> AmenityList { get; set; }
+        public List<string> AmenityIconList { get; set; }
         public string SelectedCity { get; set; }
+        public string SelectedDistrict { get; set; }
         public string SelectedType { get; set; }
+        public string SelectedDate { get; set; }
     }
 }

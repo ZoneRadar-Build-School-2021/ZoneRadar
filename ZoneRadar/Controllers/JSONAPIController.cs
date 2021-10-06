@@ -27,11 +27,24 @@ namespace ZoneRadar.Controllers
         [AcceptVerbs("GET")]
         public IHttpActionResult GetFilterData()
         {
-            var json = _spaceService.GetFilterJSON();
-            if (json == null)
+            var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City).OrderBy(x => x.Key.CityID).ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList());
+            var spaceTypeList = _repository.GetAll<TypeDetail>().OrderBy(x => x.TypeDetailID).Select(x => x.Type).ToList();
+            var amenityList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.Amenity).ToList();
+            var amenityIconList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.AmenityICON).ToList();
+            
+            var result = new FilterViewModel
             {
-                return NotFound();
-            }
+                CityDistrictDictionary = citiesAndDistricts,
+                SpaceTypeList = spaceTypeList,
+                AmenityList = amenityList,
+                AmenityIconList = amenityIconList,
+                SelectedCity = "臺北市",
+                SelectedDistrict = "大安區",
+                SelectedType = "",
+                SelectedDate = "",
+            };
+
+            var json = JsonConvert.SerializeObject(result);
 
             return Ok(json);
         }
@@ -54,6 +67,12 @@ namespace ZoneRadar.Controllers
                 SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).Select(y => y.SpacePhotoUrl).ToList(),
                 Address = x.Address,
                 Capacity = x.Capacity,
+                PricePerHour = x.PricePerHour,
+                Country = x.City.CityName,
+                City = x.City.CityName,
+                District = x.District.DistrictName,
+                MinHour = x.MinHours,
+                MeasurementOfArea = x.MeasureOfArea,
             }).ToList();
             
             var json = JsonConvert.SerializeObject(queriedSpaces);
