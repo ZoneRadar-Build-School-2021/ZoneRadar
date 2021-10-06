@@ -41,7 +41,7 @@ namespace ZoneRadar.Controllers
                 SelectedCity = "臺北市",
                 SelectedDistrict = "大安區",
                 SelectedType = "",
-                SelectedDate = "",
+                SelectedDate = ""
             };
 
             var json = JsonConvert.SerializeObject(result);
