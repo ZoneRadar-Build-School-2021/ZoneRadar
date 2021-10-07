@@ -7,21 +7,20 @@ using ZoneRadar.Services;
 using System.Web.Security;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Services;
+using ZoneRadar.ViewModels;
 
 namespace ZoneRadar.Controllers
 {
     public class MemberCenterController : Controller
     {
         private readonly ProfileService _qaz;
-        public MemberCenterController()
-        {
-            _qaz = new ProfileService();
-        }
         private readonly MemberService _service;
         public MemberCenterController()
         {
+            _qaz = new ProfileService();
             _service = new MemberService();
         }
+        
         // GET: MemberCenter
         public ActionResult Index()
         {

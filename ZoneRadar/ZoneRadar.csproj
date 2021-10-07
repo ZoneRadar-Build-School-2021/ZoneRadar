@@ -242,7 +242,6 @@
     <Compile Include="Services\ReviewService.cs" />
     <Compile Include="Services\SpaceService.cs" />
     <Compile Include="Repositories\ProfileRepository.cs" />
-    <Compile Include="Repositories\ZoneRadarRepository.cs" />
     <Compile Include="Services\IndexService.cs" />
     <Compile Include="Services\EditResult.cs" />
     <Compile Include="Services\ProfileService.cs" />

@@ -5,9 +5,6 @@ using System.Web;
 using ZoneRadar.Models;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Repositories;
-using ZoneRadar.Models.ViewModels;
-using ZoneRadar.Repositories;
-using ZoneRadar.Models;
 using System.Web.Security;
 using Newtonsoft.Json;
 using ZoneRadar.Utilities;
@@ -22,11 +19,9 @@ namespace ZoneRadar.Services
     public class MemberService
     {
         private readonly ZONERadarRepository _zoneradarRepository;
-        private readonly ZONERadarRepository _repository;
         public MemberService()
         {
             _zoneradarRepository = new ZONERadarRepository();
-            _repository = new ZONERadarRepository();
         }
 
         //HostInfo
@@ -225,7 +220,7 @@ namespace ZoneRadar.Services
             registerVM.Email = HttpUtility.HtmlEncode(registerVM.Email);
             registerVM.Password = HttpUtility.HtmlEncode(registerVM.Password).MD5Hash();
 
-            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.Email.ToUpper());
+            var isSameEmail = _zoneradarRepository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.Email.ToUpper());
 
             if (isSameEmail || !isSamePassword || registerVM == null)
             {
@@ -242,8 +237,8 @@ namespace ZoneRadar.Services
                     SignUpDateTime = DateTime.Now,
                     LastLogin = DateTime.Now
                 };
-                _repository.Create<Member>(member);
-                _repository.SaveChanges();
+                _zoneradarRepository.Create<Member>(member);
+                _zoneradarRepository.SaveChanges();
                 registerResult.User = member;
                 registerResult.IsSuccessful = true;
                 return registerResult;
@@ -262,15 +257,15 @@ namespace ZoneRadar.Services
 
             //EF比對資料庫帳密
             //以Email及Password查詢比對Member資料表記錄
-            var members = _repository.GetAll<Member>().ToList();
+            var members = _zoneradarRepository.GetAll<Member>().ToList();
             var user = members.SingleOrDefault(x => x.Email.ToUpper() == loginVM.Email.ToUpper() && x.Password == loginVM.Password);
 
             //修改上次登入時間
             if(user != null)
             {
                 user.LastLogin = DateTime.Now;
-                _repository.Update(user);
-                _repository.SaveChanges();
+                _zoneradarRepository.Update(user);
+                _zoneradarRepository.SaveChanges();
             }
 
             return user;
