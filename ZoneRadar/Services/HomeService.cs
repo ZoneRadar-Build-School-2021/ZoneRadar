@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ZoneRadar.Models;
-using ZoneRadar.Models.ViewModels;
+using ZoneRadar.ViewModels;
 using ZoneRadar.Repositories;
 
 namespace ZoneRadar.Services

@@ -15,7 +15,6 @@ namespace ZoneRadar.Models
 
         public int AmenityDetailID { get; set; }
 
-        public virtual AmenityDetail AmenityDetail { get; set; }
 
         public virtual Space Space { get; set; }
     }

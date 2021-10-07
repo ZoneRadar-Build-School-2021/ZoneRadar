@@ -12,9 +12,6 @@ namespace ZoneRadar.Data
             : base("name=ZONERadarContext")
         {
         }
-
-        public virtual DbSet<AmenityCategoryDetail> AmenityCategoryDetail { get; set; }
-        public virtual DbSet<AmenityDetail> AmenityDetail { get; set; }
         public virtual DbSet<Cancellation> Cancellation { get; set; }
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<CleaningCategory> CleaningCategory { get; set; }
@@ -38,10 +35,6 @@ namespace ZoneRadar.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AmenityDetail>()
-                .HasMany(e => e.SpaceAmenity)
-                .WithRequired(e => e.AmenityDetail)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Cancellation>()
                 .HasMany(e => e.Space)

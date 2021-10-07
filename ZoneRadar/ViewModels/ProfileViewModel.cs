@@ -7,6 +7,8 @@ namespace ZoneRadar.ViewModels
 {
     public class ProfileViewModel
     {
+
+        public int MemberID { get; set; }
         public string Photo { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }

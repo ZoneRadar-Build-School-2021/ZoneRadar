@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using ZoneRadar.Models;
 using ZoneRadar.Repositories;
 using ZoneRadar.ViewModels;
@@ -15,12 +17,12 @@ namespace ZoneRadar.Services
         {
             _repo = new ProfileRepository();        
         }
-        public ProfileViewModel GetProfileData()
+        public ProfileViewModel GetProfileData(int memberID)
         {
-            int memberID = 28;
             var p = _repo.GetAll().ToList().FirstOrDefault(x => x.MemberID == memberID);
             var result = new ProfileViewModel() 
             {
+                MemberID = p.MemberID,
                 Photo = p.Photo,
                 Name = p.Name,
                 Phone = p.Phone,
@@ -44,6 +46,30 @@ namespace ZoneRadar.Services
             }
             */
 
+            return result;
+        }
+        public EditResult EditProfileData(ProfileViewModel edit)
+        {
+            var result = new EditResult();
+            try
+            {
+                //抓取 --> 編輯資料
+                var p = _repo.GetAll().ToList().FirstOrDefault(x => x.MemberID == edit.MemberID);
+                p.Photo = edit.Photo;
+                p.Name = edit.Name;
+                p.Phone = edit.Phone;
+                p.Description = edit.Description;
+
+                //更新
+                _repo.Update(p);
+                _repo.SaveChanges();
+                result.IsSuccessful = true;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccessful = false;
+                result.Exception = ex;
+            }
             return result;
         }
     }

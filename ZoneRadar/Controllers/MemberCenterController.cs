@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ZoneRadar.Models;
 using ZoneRadar.Services;
+using ZoneRadar.ViewModels;
 
 namespace ZoneRadar.Controllers
 {
@@ -27,15 +29,26 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
-        public ActionResult NewPassword()
+        public ActionResult ResetPassword()
         {
             return View();
         }
+
+        [HttpGet]
         public ActionResult EditProfile()
         {
-            var model = _qaz.GetProfileData();
+            var userID = User.Identity.Name;
+            var model = _qaz.GetProfileData(2);
             return View(model);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile([Bind(Include = "Photo,Name,Phone,Description")] ProfileViewModel p)
+        {
+            var model = _qaz.EditProfileData(p);
+            return View(model);
+        }
+        
         public ActionResult MyCollection()
         {
             return View();
@@ -45,6 +58,10 @@ namespace ZoneRadar.Controllers
             return View();
         }
         public ActionResult HostInfo()
+        {
+            return View();
+        }
+        public ActionResult VerifyMail()
         {
             return View();
         }

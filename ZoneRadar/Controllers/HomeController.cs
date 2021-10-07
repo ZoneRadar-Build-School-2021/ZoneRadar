@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ZoneRadar.Models.ViewModels;
+using ZoneRadar.ViewModels;
 using ZoneRadar.Services;
 
 namespace ZoneRadar.Controllers
@@ -40,16 +40,7 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult SearchSpace(HomepageSearchViewModel homepageSearchVM)
-        {
-            if (ModelState.IsValid)
-            {
-                return Content("成功接收");
-            }
-
-            return null;
-        }
+        
         public ActionResult AddTest()
         {
             //_service.TestMethod();

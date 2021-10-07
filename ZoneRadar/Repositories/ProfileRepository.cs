@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using ZoneRadar.Data;
@@ -17,6 +18,14 @@ namespace ZoneRadar.Repositories
         public IQueryable<Member> GetAll()
         {
             return _ctx.Member;
+        }
+        public void SaveChanges()
+        {
+            _ctx.SaveChanges();
+        }
+        public void Update<T>(T value) where T : class
+        {
+            _ctx.Entry(value).State = EntityState.Modified;
         }
     }
 }
