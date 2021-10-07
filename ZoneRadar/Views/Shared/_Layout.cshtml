@@ -1,4 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@{
+    HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
+
+    string userPhoto = "";
+    if (cookie != null)
+    {
+        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
+        UserInfo userInfo = Json.Decode<UserInfo>(ticket.UserData);
+        userPhoto = userInfo.MemberPhoto;
+    }
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -45,16 +56,16 @@
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login-modal">登入</a>
                     </li>
                     <!-- 登入後出現 -->
-                    <li class="member-only nav-item mb-1 mb-md-0">
+                    <li class="member-only d-none nav-item mb-1 mb-md-0">
                         <a class="nav-link" href="#">訊息中心</a>
                     </li>
                     <!-- 登入後，手機出現 -->
-                    <li class="member-only nav-item d-md-none">
+                    <li class="member-only d-none nav-item d-md-none">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingMyaccount">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMyaccount" aria-expanded="false" aria-controls="collapseMyaccount">
                                     <div class="user-pic d-inline-block overflow-hidden me-1">
-                                        <img class="h-100 align-top" src="@ViewBag.memberPhoto">
+                                        <img class="h-100 align-top" src="@userPhoto">
                                     </div>
                                 </button>
                             </h2>
@@ -88,17 +99,17 @@
                                         </div>
                                     </div>
                                     <a class="nav-link" href="~/MemberCenter/EditProfile">修改個人資訊</a>
-                                    <a class="nav-link" href="#">登出</a>
+                                    <a class="nav-link" href="~/MemberCenter/SignOut">登出</a>
                                 </div>
                             </div>
                         </div>
                     </li>
                     <!-- 登入後，平板+電腦出現 -->
-                    <li class="member-only user nav-item">
+                    <li class="member-only d-none user nav-item">
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                                 <div class="user-pic d-inline-block overflow-hidden me-1">
-                                    <img class="h-100 align-top" src="@ViewBag.memberPhoto">
+                                    <img class="h-100 align-top" src="@userPhoto">
                                 </div>
                                 <i class="fas fa-chevron-down"></i>
                             </a>
@@ -135,7 +146,7 @@
                                     </div>
                                 </li>
                                 <li><a class="dropdown-item" href="~/MemberCenter/EditProfile">修改個人資訊</a></li>
-                                <li><a class="dropdown-item" href="#">登出</a></li>
+                                <li><a class="dropdown-item" href="~/MemberCenter/SignOut">登出</a></li>
                             </ul>
                         </div>
                     </li>
@@ -163,11 +174,7 @@
                         Facebook 登入
                     </a>
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email</div>
-                    <form action="#" name="login-form" class="mb-3">
-                        <input type="email" id="input-email-login" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
-                        <input type="password" id="input-password-login" class="form-control form-control-lg d-block mb-3" placeholder="密碼" aria-label="password" aria-describedby="basic-addon2" required>
-                        <a href="#" id="login-submit" class="d-block text-decoration-none text-white">登入</a>
-                    </form>
+                    @Html.Partial("_LoginModalPartial", new LoginZONERadarViewModel())
                     <a href="#" id="forget-password" class="text-decoration-none d-inline-block mb-4">忘記密碼</a>
                     <p class="mb-5">還沒有ZONERadar帳號？<a href="#" id="a-register-modal" data-bs-toggle="modal" data-bs-target="#register-modal" class="text-decoration-none">立即註冊</a></p>
                 </div>
@@ -186,19 +193,17 @@
                     <h3 class="fw-bolder">加入 ZONERadar</h3>
                     <p class="mb-4">和場地主訂購空間</p>
                     <a href="#" id="third-register-google" class="third-register d-block mb-3 text-decoration-none text-secondary">
+                        使用
                         <img src="https://storage.googleapis.com/support-kms-prod/ZAl1gIwyUsvfwxoW9ns47iJFioHXODBbIkrK" alt="google">
                         Google 註冊
                     </a>
                     <a href="#" id="third-register-facebook" class="third-register d-block mb-3 text-decoration-none text-secondary">
+                        使用
                         <img src="https://www.facebook.com/images/fb_icon_325x325.png" alt="facebook">
                         Facebook 註冊
                     </a>
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email註冊</div>
-                    <form action="#" name="register-form" class="mb-3">
-                        <input type="email" id="input-email-register" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
-                        <input type="password" id="input-password-register" class="form-control form-control-lg d-block mb-3" placeholder="密碼" aria-label="password" aria-describedby="basic-addon2" required>
-                        <a href="#" id="register-submit" class="d-block text-decoration-none text-white">以Email註冊</a>
-                    </form>
+                    @Html.Partial("_RegisterModalPartial", new RegisterZONERadarViewModel())
                     <p class="mb-5">當您註冊時，代表您已同意ZONERadar的服務條款及隱私權政策</p>
                     <p class="mb-5">已有ZONERadar帳號？<a href="#" id="a-login-modal" data-bs-toggle="modal" data-bs-target="#login-modal" class="text-decoration-none">登入</a></p>
                 </div>
@@ -284,7 +289,48 @@
     <script src="~/Assets/JS/bootstrap.bundle.min.js"></script>
     <script src="~/Assets/JS/sweetalert2.js"></script>
     <script src="~/Assets/JS/layout/navbar-footer.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
+
+    <!--判斷登入與否，決定導覽列顯示的介面-->
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script>
+            let customer_only = document.querySelectorAll(".customer-only");
+            let member_only = document.querySelectorAll(".member-only");
+            customer_only.forEach(item => {
+                item.classList.add("d-none");
+            })
+            member_only.forEach(item => {
+                item.classList.remove("d-none");
+            })
+        </script>
+    }
+    else
+    {
+        <script>
+            let customer_only = document.querySelectorAll(".customer-only");
+            let member_only = document.querySelectorAll(".member-only");
+            customer_only.forEach(item => {
+                item.classList.remove("d-none");
+            })
+            member_only.forEach(item => {
+                item.classList.add("d-none");
+            })
+        </script>
+    }
+
+    <!--判斷是否欲進入未授權畫面，跳出登入Modal-->
+    @if (ViewBag.LoginModalPopup == true)
+    {
+        <script>
+            let login_modal = document.querySelector("#login-modal");
+            let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
+            modal.show();
+        </script>
+    }
+
     @RenderSection("endCSS", required: false)
     @RenderSection("endJS", required: false)
 
