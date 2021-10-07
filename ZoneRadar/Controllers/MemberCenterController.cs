@@ -42,8 +42,8 @@ namespace ZoneRadar.Controllers
         [HttpGet]
         public ActionResult EditProfile()
         {
-            var userID = User.Identity.Name;
-            var model = _qaz.GetProfileData(2);
+            var userID = int.Parse(User.Identity.Name); //登入後的帳號(綁定一人)
+            var model = _qaz.GetProfileData(userID);
             return View(model);
         }
         [HttpPost]

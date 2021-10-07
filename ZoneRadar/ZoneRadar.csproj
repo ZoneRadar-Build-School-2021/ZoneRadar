@@ -188,6 +188,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HostCenterController.cs" />
@@ -242,7 +243,6 @@
     <Compile Include="Services\ReviewService.cs" />
     <Compile Include="Services\SpaceService.cs" />
     <Compile Include="Repositories\ProfileRepository.cs" />
-    <Compile Include="Services\IndexService.cs" />
     <Compile Include="Services\EditResult.cs" />
     <Compile Include="Services\ProfileService.cs" />
     <Compile Include="Startup.cs" />
