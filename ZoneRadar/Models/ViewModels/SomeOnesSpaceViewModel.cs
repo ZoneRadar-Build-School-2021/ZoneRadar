@@ -33,6 +33,7 @@ namespace ZoneRadar.Models.ViewModels
         public List<SomeOnesTraffic> SomeOnesTrafficList { get; set; }
         public List<SomeOnesParking> SomeOnesParkingList { get; set; }
         public List<SomeOnesShooting> SomeOnesShootingList { get; set; }
+        public List<SomeOnesCleanRule> SomeOnesCleanRuleList { get; set; }
 
         public List<SelectListItem> Operating { get; set; }
         public List<SelectListItem> OperatingDay { get; set; }
@@ -174,6 +175,10 @@ namespace ZoneRadar.Models.ViewModels
     public class SomeOnesShooting
     {
         public string Shooting { get; set; }
+    }
+    public class SomeOnesCleanRule 
+    {
+        public string CleanRule { get; set; }
     }
 }
     

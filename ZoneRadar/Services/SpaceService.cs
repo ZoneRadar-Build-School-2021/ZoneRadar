@@ -855,6 +855,18 @@ namespace ZoneRadar.Services
                 };
                 result.SomeOnesShootingList.Add(shootingTemp);
             }
+            ///清潔條款細節
+            /// 
+            /// 
+            //var cleanrule = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            //foreach (var item in cleanrule)
+            //{
+            //    var cleanRuleTemp = new SomeOnesCleanRule()
+            //    {
+            //        CleanRule=item.CleaningProtocol
+            //    };
+            //}
+                
             return result;
         }
 
