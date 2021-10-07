@@ -27,7 +27,7 @@ namespace ZoneRadar.Models.ViewModels
         public string CityName { get; set; }
         public int Capacity { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:N0}")]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal PricePerHour { get; set; }
         public string SpacePhoto { get; set; }
         public double Score { get; set; }

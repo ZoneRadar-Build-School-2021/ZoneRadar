@@ -13,6 +13,8 @@ using System.Security.Policy;
 using System.Net.Mail;
 using System.Net;
 using System.Text;
+using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace ZoneRadar.Services
 {
@@ -24,20 +26,77 @@ namespace ZoneRadar.Services
             _repository = new ZONERadarRepository();
         }        
 
-        public void SentEmail()
+        /// <summary>
+        /// 將未驗證的註冊資訊先存進資料庫
+        /// </summary>
+        /// <param name="registerVM"></param>
+        /// <returns>回傳會員資訊及註冊是否成功</returns>
+        public RegisterResult RegisterMember(RegisterZONERadarViewModel registerVM)
         {
-            string account = "testing@gmail.com";
-            string Password = "test123";
+            var registerResult = new RegisterResult
+            {
+                User = null,
+                IsSuccessful = false
+            };
+
+            registerVM.Name = HttpUtility.HtmlEncode(registerVM.Name);
+            registerVM.Email = HttpUtility.HtmlEncode(registerVM.Email);
+            registerVM.Password = HttpUtility.HtmlEncode(registerVM.Password).MD5Hash();
+
+            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.Email.ToUpper());
+
+            if (isSameEmail || registerVM == null)
+            {
+                return registerResult;
+            }
+            else
+            {
+                try
+                {
+                    var member = new Member
+                    {
+                        Email = registerVM.Email,
+                        Password = registerVM.Password,
+                        Name = registerVM.Name,
+                        ReceiveEDM = false,
+                        SignUpDateTime = new DateTime(1753,1,1), //未驗證時時間為西元1753年
+                        LastLogin = DateTime.Now
+                    };
+                    _repository.Create<Member>(member);
+                    _repository.SaveChanges();
+                    registerResult.User = member;
+                    registerResult.IsSuccessful = true;
+                    return registerResult;
+                }
+                catch (Exception ex)
+                {
+                    return registerResult;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 寄送驗證信
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="urlHelper"></param>
+        public void SentEmail(HttpRequestBase request, UrlHelper urlHelper, string userEmail)
+        {
+            var route = new RouteValueDictionary { { "email", userEmail } };
+            var confirmLink = urlHelper.Action("ConfirmEmail", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
+
+            string ZONERadarAccount = "swkzta3@gmail.com";
+            string ZONERadarPassword = "Minato,Naruto";
 
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
-            client.Credentials = new NetworkCredential(account, Password);
+            client.Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword);
             client.EnableSsl = true;
 
-            MailMessage mail = new MailMessage(account, "test1@test.com");
-            mail.Subject = "測試信";
+            MailMessage mail = new MailMessage(ZONERadarAccount, "nlt66884@cuoly.com");
+            mail.Subject = "ZONERadar會員確認信";
             mail.SubjectEncoding = Encoding.UTF8;
             mail.IsBodyHtml = true;
-            mail.Body = "第一行<br> 第二行<br>第三行<br>";
+            mail.Body = $"為了確保您的帳號為有效帳號，請點選下方連結驗證您的電子郵件<br><a href=\"{confirmLink}\">點擊此連結</a>";
             mail.BodyEncoding = Encoding.UTF8;
 
             try
@@ -57,48 +116,30 @@ namespace ZoneRadar.Services
 
 
         /// <summary>
-        /// 註冊會員
+        /// 點擊驗證連結後做確認，是否有此會員的註冊紀錄
         /// </summary>
-        /// <param name="registerVM"></param>
-        /// <returns>回傳會員資訊及註冊是否成功</returns>
-        public RegisterResult RegisterMember(RegisterZONERadarViewModel registerVM)
+        /// <param name="email"></param>
+        public RegisterResult ConfirmRegister(string email)
         {
             var registerResult = new RegisterResult
             {
                 User = null,
                 IsSuccessful = false
             };
-
-            var isSamePassword = registerVM.Password == registerVM.ConfirmPassword;
-
-            registerVM.Name = HttpUtility.HtmlEncode(registerVM.Name);
-            registerVM.Email = HttpUtility.HtmlEncode(registerVM.Email);
-            registerVM.Password = HttpUtility.HtmlEncode(registerVM.Password).MD5Hash();
-
-            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.Email.ToUpper());
-
-            if (isSameEmail || !isSamePassword || registerVM == null)
+            var hasThisUser = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper());
+            if (hasThisUser)
             {
-                return registerResult;
-            }
-            else
-            {
-                var member = new Member
-                {
-                    Email = registerVM.Email,
-                    Password = registerVM.Password,
-                    Name = registerVM.Name,
-                    ReceiveEDM = false,
-                    SignUpDateTime = DateTime.Now,
-                    LastLogin = DateTime.Now
-                };
-                _repository.Create<Member>(member);
+                var user = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == email.ToUpper());
+                //將會員的註冊時間改成現在時間，代表驗證成功
+                user.SignUpDateTime = DateTime.Now;
+                _repository.Update<Member>(user);
                 _repository.SaveChanges();
-                registerResult.User = member;
+                registerResult.User = user;
                 registerResult.IsSuccessful = true;
-                return registerResult;
-            }           
+            }
+            return registerResult;
         }
+
         /// <summary>
         /// 比對是否有此會員
         /// </summary>
@@ -172,7 +213,7 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public string GetReturnUrl(string userName)
+        public string GetOriginalUrl(string userName)
         {
             var url = FormsAuthentication.GetRedirectUrl(userName, true);
             return url;
