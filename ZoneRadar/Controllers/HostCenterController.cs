@@ -94,6 +94,8 @@ namespace ZoneRadar.Controllers
                 SomeOnesTrafficList=_spaceService.ReadAnySpace(spaceId).SomeOnesTrafficList,
                 SomeOnesParkingList=_spaceService.ReadAnySpace(spaceId).SomeOnesParkingList,
                 SomeOnesShootingList=_spaceService.ReadAnySpace(spaceId).SomeOnesShootingList,
+                SomeOnesCancelAllList=_spaceService.ReadAnySpace(spaceId).SomeOnesCancelAllList,
+                SomeOnesCancelList=_spaceService.ReadAnySpace(spaceId).SomeOnesCancelList
             };
             return View(model);
         }

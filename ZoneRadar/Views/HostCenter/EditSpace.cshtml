@@ -17,7 +17,8 @@
     var traffic = Model.SomeOnesTrafficList;
     var parking = Model.SomeOnesParkingList;
     var shooting = Model.SomeOnesShootingList;
-
+    var cancelAll = Model.SomeOnesCancelAllList;
+    var cancel = Model.SomeOnesCancelList;
 }
 
 @*<form class="needs-validation" novalidate action="HostCenter/EditSpace" method="post">*@
@@ -89,9 +90,7 @@
                                         <select class="form-select" name="district" id="district" required>
                                             @foreach (var d in district)
                                             {
-
                                                 <option value="@d.DistrictName">@d.DistrictName</option>
-
                                             }
                                         </select>
                                             <div class="invalid-feedback">
@@ -304,7 +303,7 @@
                                 </p>
                                 <p class="operating_hours_space_address mt-4">
                                     @*您的空間地址 -
-                    <span>台北市大安區忠孝東路三段96號11號樓之1</span>*@
+                                    <span>台北市大安區忠孝東路三段96號11號樓之1</span>*@
                                 </p>
                             </div>
                         </div>
@@ -345,9 +344,9 @@
                                         aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                    {
+                                        <option value="@open.Value">@open.Text</option>
+                                    }*@
                                 </select>
                             </div>
 
@@ -361,9 +360,9 @@
                                         aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                    {
+                                    <option value="@open.Value">@open.Text</option>
+                                    }*@
                                 </select>
                             </div>
                         </div>
@@ -429,9 +428,9 @@
                                         aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                    {
+                                    <option value="@open.Value">@open.Text</option>
+                                    }*@
                                 </select>
                             </div>
 
@@ -445,9 +444,9 @@
                                         aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                    {
+                                        <option value="@open.Value">@open.Text</option>
+                                    }*@
                                 </select>
                             </div>
                         </div>
@@ -1377,23 +1376,44 @@
                                             </p>
                                         </div>
                                     </div>
-                                    @*@foreach (var cancel in cancellations)
+                                    @foreach (var all in cancelAll)
+
                                     {
-                                        <div class="row">
-                                            <div class="form-check col-12 col-lg-2">
-                                                <input class="form-check-input" value="@cancel.CancellationId" required type="radio" name="flexRadioDefault"
-                                                       id="flexRadioDefault1">
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    @cancel.CancellationTitle
-                                                </label>
+                                        if (cancel.Select(x => x.CancellationID).Contains(all.CancellationID))
+                                        {
+                                            <div class="row">
+                                                <div class="form-check col-12 col-lg-2">
+                                                    <input class="form-check-input" value="@all.CancellationID" required type="radio" checked name="flexRadioDefault"
+                                                           id="flexRadioDefault1">
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        @all.CancellationTitle
+                                                    </label>
+                                                </div>
+                                                <div class="col-12 col-lg-12">
+                                                    <p class="ms-3">
+                                                        @all.CancellationDetail
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="col-12 col-lg-12">
-                                                <p class="ms-3">
-                                                    @cancel.CancellationDetail
-                                                </p>
+                                        }
+                                        else
+                                        {
+                                            <div class="row">
+                                                <div class="form-check col-12 col-lg-2">
+                                                    <input class="form-check-input" value="@all.CancellationID" required type="radio"  name="flexRadioDefault"
+                                                           id="flexRadioDefault1">
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        @all.CancellationTitle
+                                                    </label>
+                                                </div>
+                                                <div class="col-12 col-lg-12">
+                                                    <p class="ms-3">
+                                                        @all.CancellationDetail
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    }*@
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>

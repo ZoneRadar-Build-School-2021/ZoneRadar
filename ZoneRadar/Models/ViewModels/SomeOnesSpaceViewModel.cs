@@ -35,9 +35,15 @@ namespace ZoneRadar.Models.ViewModels
         public List<SomeOnesShooting> SomeOnesShootingList { get; set; }
         public List<SomeOnesCleanRule> SomeOnesCleanRuleList { get; set; }
 
+        public List<SomeOnesCleanRule> SomeOnesCleanRuleOneList { get; set; }
+        public List<SomeOnesCleanRule> SomeOnesCleanRuleTwoList { get; set; }
+        public List<SomeOnesCleanRule> SomeOnesCleanRuleThreeList { get; set; }
+        public List<SomeOnesCleanRule> SomeOnesCleanRuleFourList { get; set; }
+
         public List<SelectListItem> Operating { get; set; }
         public List<SelectListItem> OperatingDay { get; set; }
-
+        public List<SomeOnesCancel> SomeOnesCancelAllList { get; set; }
+        public List<SomeOnesCancel> SomeOnesCancelList { get; set; }
 
     }
 
@@ -178,7 +184,15 @@ namespace ZoneRadar.Models.ViewModels
     }
     public class SomeOnesCleanRule 
     {
-        public string CleanRule { get; set; }
+        public int CleaningCategoryID { get; set; }
+        public int CleaningOptionID { get; set; }
+        public string OptionDetail { get; set; }
+    }
+    public class SomeOnesCancel 
+    {
+        public int CancellationID { get; set; }
+        public string CancellationTitle { get; set; }
+        public string CancellationDetail { get; set; }
     }
 }
     

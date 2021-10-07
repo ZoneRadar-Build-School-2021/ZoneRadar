@@ -658,6 +658,10 @@ namespace ZoneRadar.Services
                 SomeOnesTrafficList=new List<SomeOnesTraffic>(),
                 SomeOnesParkingList=new List<SomeOnesParking>(),
                 SomeOnesShootingList = new List<SomeOnesShooting>(),
+                SomeOnesCancelAllList=new List<SomeOnesCancel>(),
+                SomeOnesCancelList=new List<SomeOnesCancel>(),
+                SomeOnesCleanRuleList = new List<SomeOnesCleanRule>(),
+                SomeOnesCleanRuleOneList = new List<SomeOnesCleanRule>(),
 
             };
             ///地址 ///
@@ -758,7 +762,6 @@ namespace ZoneRadar.Services
                 {
                     Capacity = item.Capacity,
                     MeasureOfArea = item.MeasureOfArea
-
                 };
                 result.SomeOnesMeasureOfAreaandCapacityList.Add(MeasureOfAreaandCapacityTemp);
             }
@@ -823,7 +826,7 @@ namespace ZoneRadar.Services
             }
             ///
             /// 交通資訊
-            /// ///
+            /// 
             var traffic = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var item in traffic)
             {
@@ -834,8 +837,7 @@ namespace ZoneRadar.Services
                 result.SomeOnesTrafficList.Add(trafficTemp);
             }
             ///停車
-            ///攝影
-            ///
+            
             var parking = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var item in parking)
             {
@@ -845,6 +847,7 @@ namespace ZoneRadar.Services
                 };
                 result.SomeOnesParkingList.Add(parkingTemp);
             }
+            ///攝影
 
             var shooting = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var item in shooting)
@@ -855,18 +858,43 @@ namespace ZoneRadar.Services
                 };
                 result.SomeOnesShootingList.Add(shootingTemp);
             }
+
+            ///取消政策 全部
+            var cancels = _repository.GetAll<Cancellation>().Select(x => x).ToList();
+            foreach (var item in cancels)
+            {
+                var cancelsTemp = new SomeOnesCancel()
+                {
+                   CancellationID=item.CancellationID,
+                   CancellationTitle=item.CancellationTitle,
+                   CancellationDetail=item.CancellationDetail
+                };
+                result.SomeOnesCancelAllList.Add(cancelsTemp);
+            }
+
+            ///取消政策 被選的///
+            var cancelsSelectId = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).ToList();
+            foreach (var item in cancelsSelectId)
+            {
+                SomeOnesCancel cancelTemp = new SomeOnesCancel();
+                cancelTemp.CancellationID = _repository.GetAll<Cancellation>().Where(x => x.CancellationID == item.CancellationID).Select(x => x.CancellationID).FirstOrDefault();
+                cancelTemp.CancellationTitle = _repository.GetAll<Cancellation>().Where(x => x.CancellationID == item.CancellationID).Select(x => x.CancellationTitle).FirstOrDefault();
+                cancelTemp.CancellationDetail = _repository.GetAll<Cancellation>().Where(x => x.CancellationID == item.CancellationID).Select(x => x.CancellationDetail).FirstOrDefault();
+                result.SomeOnesCancelList.Add(cancelTemp);
+            }
             ///清潔條款細節
             /// 
             /// 
-            //var cleanrule = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
-            //foreach (var item in cleanrule)
-            //{
-            //    var cleanRuleTemp = new SomeOnesCleanRule()
-            //    {
-            //        CleanRule=item.CleaningProtocol
-            //    };
-            //}
-                
+            var cleanruleone = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var item in cleanruleone)
+            {
+                SomeOnesCleanRule cleanRuleTemp = new SomeOnesCleanRule();
+                cleanRuleTemp.CleaningCategoryID = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 1).Select(x=>x.CleaningCategoryID).FirstOrDefault();
+                cleanRuleTemp.CleaningOptionID = _repository.GetAll<CleaningOption>().Where(x => x.CleaningOptionID == 1).Select(x => x.CleaningOptionID).FirstOrDefault();
+                cleanRuleTemp.OptionDetail = _repository.GetAll<CleaningOption>().Where(x => x.CleaningOptionID == 1).Select(x => x.OptionDetail).FirstOrDefault();
+                result
+            }
+
             return result;
         }
 
