@@ -359,6 +359,8 @@ namespace ZoneRadar.Services
 
         public List<SearchingPageViewModel> GetFilteredSpaces(QueryViewModel query)
         {
+
+            // AsQueryable
             var city = query.City;
             var district = query.District;
             var type = query.Type;
