@@ -34,7 +34,7 @@ namespace ZoneRadar.Models.ViewModels
         public List<CleanThirdPart> CleanThirdPartList { get; set; }
         public List<CleanFourdPart> CleanFourdPartList { get; set; }
 
-
+        
 
         /// <summary>
         /// 資料庫沒有的表

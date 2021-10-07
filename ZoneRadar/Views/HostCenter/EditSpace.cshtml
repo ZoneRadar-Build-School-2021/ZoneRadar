@@ -13,6 +13,11 @@
     var MeasureOfAreaandCapacity = Model.SomeOnesMeasureOfAreaandCapacityList;
     var SomeOnesPrice = Model.SomeOnesPriceList;
     var Discounts = Model.SomeOnesDiscountsList;
+    var rules = Model.SomeOnesRulesList;
+    var traffic = Model.SomeOnesTrafficList;
+    var parking = Model.SomeOnesParkingList;
+    var shooting = Model.SomeOnesShootingList;
+
 }
 
 @*<form class="needs-validation" novalidate action="HostCenter/EditSpace" method="post">*@
@@ -370,9 +375,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                    {
+                                        <option value="@open.Value">@open.Text</option>
+                                    }*@
                                 </select>
                             </div>
                             <P class="col-2 mt-4 text-center  text-start">to</P>
@@ -382,9 +387,9 @@
                                         aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                    {
+                                        <option value="@open.Value">@open.Text</option>
+                                    }*@
                                 </select>
                             </div>
                         </div>
@@ -707,9 +712,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                    {
+                                        <option value="@open.Value">@open.Text</option>
+                                    }*@
                                 </select>
                             </div>
                             <P class="col-2 mt-4 text-center  text-start">to</P>
@@ -1080,11 +1085,13 @@
                                 </div>
                                 <div class="col-12 pb-5">
                                     <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                    <textarea name="textPartTransportation" class="form-control"
-                                              id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea name="textPartTransportation" class="form-control" id="exampleFormControlTextarea1" rows="3">
+                                           @traffic[0].Traffic   
+                                    </textarea>
                                     <p class="fs16 mt-1"><i class="fas fs-6 fa-lock p-1 "></i>不用擔心，僅會在客戶完成訂單提供。</p>
                                 </div>
                             </div>
+
 
                             <div class="row mb-3">
                                 <div class="col col-12">
@@ -1113,25 +1120,27 @@
                                 <!-- 勾有停車場才會顯示 -->
                                 <div id="parkingPart" class="row d-none">
                                     @*@foreach (var parking in parkings)
-                                        {
-                                            <div class="col-12 col-lg-6 mt-1 mb-3 ">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="@parking.Value"
-                                                           id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        @parking.Text
-                                                    </label>
-                                                </div>
+                                    {
+                                        <div class="col-12 col-lg-6 mt-1 mb-3 ">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="@parking.Value"
+                                                       id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    @parking.Text
+                                                </label>
                                             </div>
-                                        }*@
+                                        </div>
+                                    }*@
+
                                     <div class="col col-12 parking">
-                                        <p>寫敘述您所勾選的選項</p>
+                                        <p>寫敘述停車相關資訊</p>
                                         <p class="fs16">無需敘述私人訊息，這將會公開顯示</p>
                                     </div>
                                     <div class="col col-12 parkingpart pb-5">
                                         <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                        <textarea name="textPartPark" class="form-control"
-                                                  id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        <textarea name="textPartPark" class="form-control" id="exampleFormControlTextarea1" rows="3">
+                                        @parking[0].Parking
+                                        </textarea>
                                     </div>
                                 </div>
                             </div>
@@ -1161,8 +1170,9 @@
                                     <div class="col parking">
                                         <div class="col col-12 parkingpart pb-5">
                                             <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                            <textarea name="textPartProjection" class="form-control"
-                                                      id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            <textarea name="textPartProjection" class="form-control" id="exampleFormControlTextarea1" rows="3">
+                                                @shooting[0].Shooting
+                                            </textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -1208,8 +1218,9 @@
                                     <div class="col ">
                                         <div class="col col-12  pb-5">
                                             <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                            <textarea name="textPartRule" class="form-control"
-                                                      id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            <textarea name="textPartRule" class="form-control"id="exampleFormControlTextarea1" rows="3" >
+                                                @rules[0].Rules
+                                            </textarea>
                                         </div>
                                     </div>
                                 </div>

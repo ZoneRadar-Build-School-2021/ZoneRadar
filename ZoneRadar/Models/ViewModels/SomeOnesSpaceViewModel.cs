@@ -28,7 +28,11 @@ namespace ZoneRadar.Models.ViewModels
         public List<AmenityAraeOne> amenityAraeOneList { get; set; }
         public List<AmenityAraeTwo> amenityAraeTwoList { get; set; }
         public List<AmenityAraeThree> amenityAraeThreeList { get; set; }
+        public List<SomeOnesRules> SomeOnesRulesList { get; set; }
 
+        public List<SomeOnesTraffic> SomeOnesTrafficList { get; set; }
+        public List<SomeOnesParking> SomeOnesParkingList { get; set; }
+        public List<SomeOnesShooting> SomeOnesShootingList { get; set; }
 
         public List<SelectListItem> Operating { get; set; }
         public List<SelectListItem> OperatingDay { get; set; }
@@ -86,7 +90,7 @@ namespace ZoneRadar.Models.ViewModels
         public virtual District District { get; set; }
 
         public virtual Member Member { get; set; }
-
+        
 
     }
     public class SomeOnesCountry
@@ -154,6 +158,22 @@ namespace ZoneRadar.Models.ViewModels
         public int AmenityId { get; set; }
         public int AmenityCategoryID { get; set; }
         public string Amenity { get; set; }
+    }
+    public class SomeOnesRules 
+    {
+        public string Rules { get; set; }
+    }
+    public class SomeOnesTraffic 
+    {
+        public string Traffic { get; set; }
+    }
+    public class SomeOnesParking
+    {
+        public string Parking { get; set; }
+    }
+    public class SomeOnesShooting
+    {
+        public string Shooting { get; set; }
     }
 }
     

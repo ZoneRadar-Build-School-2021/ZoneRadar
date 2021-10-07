@@ -653,7 +653,11 @@ namespace ZoneRadar.Services
                 amenityAraeOneList=new List<AmenityAraeOne>(),
                 amenityAraeTwoList=new List<AmenityAraeTwo>(),
                 amenityAraeThreeList=new List<AmenityAraeThree>(),
-                SomeOnesAmenityList=new List<SomeOnesAmenity>()
+                SomeOnesAmenityList=new List<SomeOnesAmenity>(),
+                SomeOnesRulesList=new List<SomeOnesRules>(),
+                SomeOnesTrafficList=new List<SomeOnesTraffic>(),
+                SomeOnesParkingList=new List<SomeOnesParking>(),
+                SomeOnesShootingList = new List<SomeOnesShooting>(),
 
             };
             ///地址 ///
@@ -792,7 +796,7 @@ namespace ZoneRadar.Services
                 result.SomeOnesDiscountsList.Add(someonsdiscountsTemp);
             }
             /// 撈有的設施
-            /// 
+            /// 全部
             /// 
             var amenity = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             //var amenityone=amenity.Where(x=>x.)
@@ -805,6 +809,52 @@ namespace ZoneRadar.Services
                 result.SomeOnesAmenityList.Add(amenityTemp);
             }
 
+            /// 
+            /// 場地條款
+            /// 
+            var rules = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var item in rules)
+            {
+                var rulesTemp = new SomeOnesRules()
+                {
+                    Rules=item.HostRules,
+                };
+                result.SomeOnesRulesList.Add(rulesTemp);
+            }
+            ///
+            /// 交通資訊
+            /// ///
+            var traffic = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var item in traffic)
+            {
+                var trafficTemp = new SomeOnesTraffic()
+                {
+                    Traffic=item.Traffic,
+                };
+                result.SomeOnesTrafficList.Add(trafficTemp);
+            }
+            ///停車
+            ///攝影
+            ///
+            var parking = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var item in parking)
+            {
+                var parkingTemp = new SomeOnesParking()
+                {
+                    Parking=item.Parking,
+                };
+                result.SomeOnesParkingList.Add(parkingTemp);
+            }
+
+            var shooting = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var item in shooting)
+            {
+                var shootingTemp = new SomeOnesShooting()
+                {
+                    Shooting=item.ShootingEquipment
+                };
+                result.SomeOnesShootingList.Add(shootingTemp);
+            }
             return result;
         }
 
