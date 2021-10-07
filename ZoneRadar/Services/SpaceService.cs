@@ -215,7 +215,7 @@ namespace ZoneRadar.Services
             }
             throw new NotImplementedException();
         }
-        
+
         /// <summary>
         /// 找出場地簡短資訊(搜尋頁可用)
         /// </summary>
@@ -296,7 +296,7 @@ namespace ZoneRadar.Services
                 });
             }
             var amenityDictionary = convertedAmenityList.GroupBy(x => x.AmenityCategoryDetail.AmenityCategory).ToDictionary(x => x.Key, x => x.Select(y => y.Amenity).ToList());
-            
+
             // 找出該場地所有營業資料
             var originOperatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == targetSpace.SpaceID).ToList();
             var convertedOperatingDayList = new List<string>();
@@ -307,10 +307,10 @@ namespace ZoneRadar.Services
 
             // 找出所有清潔公約選項
             var cleaningOptionList = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.CleaningOption).ToList();
-            
+
             // 找出滿時優惠的時數
             var hoursForDiscount = _repository.GetAll<SpaceDiscount>().SingleOrDefault(x => x.SpaceID == targetSpace.SpaceID).Hour;
-            
+
             // 找出滿時優惠的折數
             var discount = _repository.GetAll<SpaceDiscount>().SingleOrDefault(x => x.SpaceID == targetSpace.SpaceID).Discount;
 
@@ -355,6 +355,39 @@ namespace ZoneRadar.Services
             _repository.Create<Collection>(collection);
             _repository.SaveChanges();
             _repository.Dispose();
+        }
+
+        public List<SearchingPageViewModel> GetFilteredSpaces(QueryViewModel query)
+        {
+            var city = query.City;
+            var district = query.District;
+            var type = query.Type;
+            var Date = query.Date;
+            var lowPrice = query.LowPrice;
+            var highPrice = query.HighPrice;
+            var amenities = query.AmenityList;
+
+            var scores = _repository.GetAll<Review>().Where(x => x.Order.Space.City.CityName == city && x.ToHost == true).Select(x => x);
+            var result = _repository.GetAll<Space>().Where(x => x.City.CityName == city).Select(x => new SearchingPageViewModel
+            {
+                BriefInfo = new SpaceBriefViewModel
+                {
+                    SpaceID = x.SpaceID,
+                    SpaceName = x.SpaceName,
+                    SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).Select(y => y.SpacePhotoUrl).ToList(),
+                    Address = x.Address,
+                    Capacity = x.Capacity,
+                    PricePerHour = x.PricePerHour,
+                    Country = x.City.CityName,
+                    City = x.City.CityName,
+                    District = x.District.DistrictName,
+                    MinHour = x.MinHours,
+                    MeasurementOfArea = x.MeasureOfArea,
+                },
+                Scores = scores.Where(y => y.Order.Space.SpaceID == x.SpaceID).Select(y => y.Score).ToList()
+            }).ToList();
+
+            return result;
         }
     }
 }

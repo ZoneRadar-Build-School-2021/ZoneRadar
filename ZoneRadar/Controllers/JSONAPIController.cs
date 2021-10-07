@@ -44,40 +44,19 @@ namespace ZoneRadar.Controllers
                 SelectedDate = ""
             };
 
-            var json = JsonConvert.SerializeObject(result);
+            //var json = JsonConvert.SerializeObject(result);
 
-            return Ok(json);
+            return Ok(result);
         }
 
         [AcceptVerbs("GET", "POST")]
         public IHttpActionResult GetFilteredSpaces(QueryViewModel query)
         {
-            var city = query.City;
-            var district = query.District;
-            var type = query.Type;
-            var Date = query.Date;
-            var lowPrice = query.LowPrice;
-            var highPrice = query.HighPrice;
-            var amenities = query.AmenityList;
-
-            var queriedSpaces = _repository.GetAll<Space>().Where(x => x.City.CityName == city).Select(x => new SpaceBriefViewModel 
-            {
-                SpaceID = x.SpaceID,
-                SpaceName = x.SpaceName,
-                SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).Select(y => y.SpacePhotoUrl).ToList(),
-                Address = x.Address,
-                Capacity = x.Capacity,
-                PricePerHour = x.PricePerHour,
-                Country = x.City.CityName,
-                City = x.City.CityName,
-                District = x.District.DistrictName,
-                MinHour = x.MinHours,
-                MeasurementOfArea = x.MeasureOfArea,
-            }).ToList();
+            var queriedSpaces = _spaceService.GetFilteredSpaces(query);
             
-            var json = JsonConvert.SerializeObject(queriedSpaces);
+            //var json = JsonConvert.SerializeObject(queriedSpaces);
 
-            return Ok(json);
+            return Ok(queriedSpaces);
         }
     }
 }
