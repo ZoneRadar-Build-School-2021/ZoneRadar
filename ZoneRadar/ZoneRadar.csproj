@@ -310,6 +310,7 @@
     <Content Include="Assets\IMG\member_card\Nicky K..jpg" />
     <Content Include="Assets\IMG\member_card\Sandro K..jpg" />
     <Content Include="Assets\IMG\static\fistbump-over-desk.jpg" />
+    <Content Include="Assets\IMG\static\sent-email.png" />
     <Content Include="Assets\IMG\ZONERadar.png" />
     <Content Include="Assets\JS\addspace\addspace.js" />
     <Content Include="Assets\JS\booking\booking.js" />
@@ -349,6 +350,8 @@
     <Content Include="Assets\CSS\webfonts\fa-solid-900.ttf" />
     <Content Include="Assets\CSS\webfonts\fa-solid-900.woff" />
     <Content Include="Assets\CSS\webfonts\fa-solid-900.woff2" />
+    <Content Include="Properties\serviceDependencies.json" />
+    <Content Include="Properties\serviceDependencies.local.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -360,6 +363,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\MemberCenter\ConfirmEmailContent.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -54,7 +54,10 @@ namespace ZoneRadar.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            return RedirectToAction("index", "Home");
+            TempData["RegisterModalPopup"] = true;
+
+            //若直接輸入路由：導回原本頁面並跳出註冊Modal
+            return Redirect(Request.UrlReferrer.AbsolutePath);
         }
 
         [HttpPost]
@@ -63,6 +66,7 @@ namespace ZoneRadar.Controllers
         {
             if (!ModelState.IsValid || registerVM.Password != registerVM.ConfirmPassword)
             {
+                //輸入格式不正確或密碼不一致
                 return View("Register");
             }
             else
@@ -72,8 +76,9 @@ namespace ZoneRadar.Controllers
                 //如果註冊資訊成功儲存
                 if (registerResult.IsSuccessful)
                 {
+                    Session["ConfirmRegister"] = new List<string>() { registerResult.User.Email, DateTime.Now.AddMinutes(10).ToString() };
                     //接著寄送驗證信
-                    _service.SentEmail(Request, Url, registerResult.User.Email);
+                    _service.SentEmail(Server, Request, Url, registerResult.User.Email);
                     return View("HadSentEmail");
                 }
                 else
@@ -84,8 +89,19 @@ namespace ZoneRadar.Controllers
             }
         }
 
-        public ActionResult ConfirmEmail(string email)
+        public ActionResult ConfirmEmail(string email, string expired)
         {
+            //測試：Session是否接收的到資料？(答：收不到，是null)
+            //var test = (List<string>)Session["ConfirmRegister"];
+            //var xxx = Request.Cookies["ConfirmRegister"].Value;
+            
+            var expiredTime = new DateTime();
+            DateTime.TryParse(expired, out expiredTime);
+            //超過10分鐘無效
+            if (DateTime.Now > expiredTime)
+            {
+                return View();
+            }
             //確認是否有此註冊資訊
             var registerResult = _service.ConfirmRegister(email);
 
@@ -96,7 +112,8 @@ namespace ZoneRadar.Controllers
                 var encryptedTicket = _service.CreateEncryptedTicket(registerResult.User);
                 _service.CreateCookie(encryptedTicket, Response);
                 //導回原本的畫面
-                return Redirect(_service.GetOriginalUrl(registerResult.User.MemberID.ToString()));
+                var originalUrl = _service.GetOriginalUrl(registerResult.User.MemberID.ToString());
+                return Redirect(originalUrl);
             }
             else
             {
@@ -116,7 +133,8 @@ namespace ZoneRadar.Controllers
                 //導回原本所在的畫面上，攜帶ReturnUrl參數，並跳出登入Modal
                 return Redirect($"{Request.UrlReferrer.AbsolutePath}?ReturnUrl={Request.QueryString["ReturnUrl"]}");
             }
-            //(目前專案狀況都不會執行到這一行)
+
+            //若直接輸入路由：導回原本頁面並跳出登入Modal
             return Redirect(Request.UrlReferrer.AbsolutePath);
         }
 
