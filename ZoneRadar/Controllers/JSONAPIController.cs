@@ -13,6 +13,7 @@ using ZoneRadar.Services;
 
 namespace ZoneRadar.Controllers
 {
+    [RoutePrefix("webapi/spaces")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class JSONAPIController : ApiController
     {
@@ -24,37 +25,34 @@ namespace ZoneRadar.Controllers
             _repository = new ZONERadarRepository();
         }
 
+        [Route("GetFilterData")]
         [AcceptVerbs("GET")]
         public IHttpActionResult GetFilterData()
         {
-            var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City).OrderBy(x => x.Key.CityID).ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList());
-            var spaceTypeList = _repository.GetAll<TypeDetail>().OrderBy(x => x.TypeDetailID).Select(x => x.Type).ToList();
-            var amenityList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.Amenity).ToList();
-            var amenityIconList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.AmenityICON).ToList();
-            
+            var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City).OrderBy(x => x.Key.CityID);
+            var spaceTypeList = _repository.GetAll<TypeDetail>().OrderBy(x => x.TypeDetailID).Select(x => x.Type);
+            var amenityList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.Amenity);
+            var amenityIconList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.AmenityICON);
+
             var result = new FilterViewModel
             {
-                CityDistrictDictionary = citiesAndDistricts,
-                SpaceTypeList = spaceTypeList,
-                AmenityList = amenityList,
-                AmenityIconList = amenityIconList,
+                CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList()),
+                SpaceTypeList = spaceTypeList.ToList(),
+                AmenityList = amenityList.ToList(),
+                AmenityIconList = amenityIconList.ToList(),
                 SelectedCity = "臺北市",
-                SelectedDistrict = "",
-                SelectedType = "運動",
+                SelectedType = "",
                 SelectedDate = ""
             };
-
-            //var json = JsonConvert.SerializeObject(result);
 
             return Ok(result);
         }
 
+        [Route("GetFilteredSpaces")]
         [AcceptVerbs("GET", "POST")]
         public IHttpActionResult GetFilteredSpaces(QueryViewModel query)
         {
             var queriedSpaces = _spaceService.GetFilteredSpaces(query);
-            
-            //var json = JsonConvert.SerializeObject(queriedSpaces);
 
             return Ok(queriedSpaces);
         }

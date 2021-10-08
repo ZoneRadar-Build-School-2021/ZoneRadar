@@ -357,36 +357,90 @@ namespace ZoneRadar.Services
             _repository.Dispose();
         }
 
+        /// <summary>
+        /// 即時篩選
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public List<SearchingPageViewModel> GetFilteredSpaces(QueryViewModel query)
         {
-
-            // AsQueryable
             var city = query.City;
             var district = query.District;
-            var type = query.Type;
             var Date = query.Date;
+            var type = query.Type;
             var lowPrice = query.LowPrice;
             var highPrice = query.HighPrice;
             var amenities = query.AmenityList;
 
-            var scores = _repository.GetAll<Review>().Where(x => x.Order.Space.City.CityName == city && x.ToHost == true).Select(x => x);
-            var result = _repository.GetAll<Space>().Where(x => x.City.CityName == city).Select(x => new SearchingPageViewModel
+            var scores = _repository.GetAll<Review>();
+            var spaces = _repository.GetAll<Space>();
+            var orders = _repository.GetAll<OrderDetail>();
+            var spaceTypes = _repository.GetAll<SpaceType>();
+            var spaceAmenities = _repository.GetAll<SpaceAmenity>();
+
+
+            if (!String.IsNullOrEmpty(city))
             {
-                BriefInfo = new SpaceBriefViewModel
-                {
-                    SpaceID = x.SpaceID,
-                    SpaceName = x.SpaceName,
-                    SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).Select(y => y.SpacePhotoUrl).ToList(),
-                    Address = x.Address,
-                    Capacity = x.Capacity,
-                    PricePerHour = x.PricePerHour,
-                    Country = x.City.CityName,
-                    City = x.City.CityName,
-                    District = x.District.DistrictName,
-                    MinHour = x.MinHours,
-                    MeasurementOfArea = x.MeasureOfArea,
-                },
-                Scores = scores.Where(y => y.Order.Space.SpaceID == x.SpaceID).Select(y => y.Score).ToList()
+                spaces = spaces.Where(x => x.City.CityName == city);
+            }
+
+            if (!String.IsNullOrEmpty(district))
+            {
+                spaces = spaces.Where(x => x.District.DistrictName == district);
+            }
+
+            if (!String.IsNullOrEmpty(type))
+            {
+                spaceTypes = spaceTypes.Where(x => x.TypeDetail.Type == type).Select(x => x);
+            }
+
+            if (!String.IsNullOrEmpty(Date))
+            {
+                //var startDate = DateTime.Parse(Date);
+                //var dayOfWeek = (int)startDate.DayOfWeek;
+                //orders.Where(x => x.Order.OrderStatus.OrderStatusID != 2
+                //                        && x.Order.OrderStatus.OrderStatusID != 3
+                //                        && DateTime.Compare(x.StartDateTime, startDate) != 0
+                //                        && x.Order.Space.Operating)
+                //                        .Select(x => x.Order.Space);
+            }
+
+            if (!String.IsNullOrEmpty(lowPrice))
+            {
+                spaces = spaces.Where(x => x.PricePerHour >= decimal.Parse(lowPrice)).Select(x => x);
+            }
+
+            if (!String.IsNullOrEmpty(highPrice))
+            {
+                spaces = spaces.Where(x => x.PricePerHour <= decimal.Parse(highPrice)).Select(x => x);
+            }
+
+            if (amenities != null && amenities.Count > 0)
+            {
+                spaceAmenities = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity)).Select(x => x);
+            }
+
+            var filteredBySpace = spaces.Select(x => x);
+            var filteredByOrder = orders.Select(x => x.Order.Space).Distinct();
+            var filteredByType = spaceTypes.Select(x => x.Space).Distinct();
+            var filteredByAmenity = spaceAmenities.Select(x => x.Space).Distinct();
+
+            var insersectSpaces = filteredBySpace.Intersect(filteredByType).Intersect(filteredByAmenity);
+
+            var result = insersectSpaces.Select(x => new SearchingPageViewModel
+            {
+                SpaceID = x.SpaceID,
+                SpaceName = x.SpaceName,
+                SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).Select(y => y.SpacePhotoUrl).ToList(),
+                Address = x.Address,
+                Capacity = x.Capacity,
+                PricePerHour = x.PricePerHour,
+                Country = x.City.CityName,
+                City = x.City.CityName,
+                District = x.District.DistrictName,
+                MinHour = x.MinHours,
+                MeasurementOfArea = x.MeasureOfArea,
+                Scores = scores.Where(y => y.Order.SpaceID == x.SpaceID).Select(y => y.Score).ToList(),
             }).ToList();
 
             return result;
