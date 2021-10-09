@@ -291,6 +291,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Assets\" />
     <Folder Include="Views\Booking\" />
     <Folder Include="Views\HostCenter\" />
     <Folder Include="Views\MemberCenter\" />
