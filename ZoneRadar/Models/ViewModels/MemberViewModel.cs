@@ -60,7 +60,6 @@ namespace ZoneRadar.Models.ViewModels
     {
         public Member User { get; set; }
         public bool IsSuccessful { get; set; }
-        public string RegisterMessage { get; set; }
     }
 
     /// <summary>

@@ -18,7 +18,6 @@ using System.Net;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.IO;
 
 namespace ZoneRadar.Services
 {
@@ -231,10 +230,9 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="request"></param>
         /// <param name="urlHelper"></param>
-        public void SentEmail(HttpServerUtilityBase server, HttpRequestBase request, UrlHelper urlHelper, string userEmail)
+        public void SentEmail(HttpRequestBase request, UrlHelper urlHelper, string userEmail)
         {
-            var afterTenMinutes = DateTime.Now.AddMinutes(10).ToString();
-            var route = new RouteValueDictionary { { "email", userEmail }, { "expired", afterTenMinutes } };
+            var route = new RouteValueDictionary { { "email", userEmail } };
             var confirmLink = urlHelper.Action("ConfirmEmail", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
 
             string ZONERadarAccount = "swkzta3@gmail.com";
@@ -244,12 +242,11 @@ namespace ZoneRadar.Services
             client.Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword);
             client.EnableSsl = true;
 
-            MailMessage mail = new MailMessage(ZONERadarAccount, ZONERadarAccount);
+            MailMessage mail = new MailMessage(ZONERadarAccount, "nlt66884@cuoly.com");
             mail.Subject = "ZONERadar會員確認信";
             mail.SubjectEncoding = Encoding.UTF8;
             mail.IsBodyHtml = true;
-            string confirmEmailContent = File.ReadAllText(Path.Combine(server.MapPath("~/Views/MemberCenter/ConfirmEmailContent.html")));
-            mail.Body = confirmEmailContent.Replace("confirmLink", confirmLink);
+            mail.Body = $"為了確保您的帳號為有效帳號，請點選下方連結驗證您的電子郵件<br><a href=\"{confirmLink}\">點擊此連結</a>";
             mail.BodyEncoding = Encoding.UTF8;
 
             try
@@ -276,9 +273,9 @@ namespace ZoneRadar.Services
         {
             var registerResult = new RegisterResult
             {
+                User = null,
                 IsSuccessful = false
             };
-            
             var hasThisUser = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper());
             if (hasThisUser)
             {
@@ -289,7 +286,6 @@ namespace ZoneRadar.Services
                 _repository.SaveChanges();
                 registerResult.User = user;
                 registerResult.IsSuccessful = true;
-                registerResult.RegisterMessage = $"{user.Name}，歡迎！";
             }
             return registerResult;
         }
@@ -306,9 +302,9 @@ namespace ZoneRadar.Services
             loginVM.Password = HttpUtility.HtmlEncode(loginVM.Password).MD5Hash();
 
             //EF比對資料庫帳密
-            //以Email及Password查詢比對Member資料表記錄，且註冊時間不得為預設1753年
+            //以Email及Password查詢比對Member資料表記錄
             var members = _repository.GetAll<Member>().ToList();
-            var user = members.SingleOrDefault(x => x.Email.ToUpper() == loginVM.Email.ToUpper() && x.Password == loginVM.Password && x.SignUpDateTime.Year != 1753);
+            var user = members.SingleOrDefault(x => x.Email.ToUpper() == loginVM.Email.ToUpper() && x.Password == loginVM.Password);
 
             //修改上次登入時間
             if(user != null)
