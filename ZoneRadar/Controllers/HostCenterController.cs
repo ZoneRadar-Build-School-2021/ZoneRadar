@@ -95,7 +95,25 @@ namespace ZoneRadar.Controllers
                 SomeOnesParkingList=_spaceService.ReadAnySpace(spaceId).SomeOnesParkingList,
                 SomeOnesShootingList=_spaceService.ReadAnySpace(spaceId).SomeOnesShootingList,
                 SomeOnesCancelAllList=_spaceService.ReadAnySpace(spaceId).SomeOnesCancelAllList,
-                SomeOnesCancelList=_spaceService.ReadAnySpace(spaceId).SomeOnesCancelList
+                SomeOnesCancelList=_spaceService.ReadAnySpace(spaceId).SomeOnesCancelList,
+
+                SomeOnesAmenityList=_spaceService.ReadAnySpace(spaceId).SomeOnesAmenityList,
+                amenityAraeOneList=_spaceService.ReadAnySpace(spaceId).amenityAraeOneList,
+                
+                SomeTwoAmenityList=_spaceService.ReadAnySpace(spaceId).SomeTwoAmenityList,
+                amenityAraeTwoList=_spaceService.ReadAnySpace(spaceId).amenityAraeTwoList,
+
+                SomeThreeAmenityList=_spaceService.ReadAnySpace(spaceId).SomeThreeAmenityList,
+                amenityAraeThreeList=_spaceService.ReadAnySpace(spaceId).amenityAraeThreeList,
+
+                CleanRuleOptionsOneList= _spaceService.ReadAnySpace(spaceId).CleanRuleOptionsOneList,
+                SomeOnesCleanRuleOneList=_spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleOneList,
+                CleanRuleOptionsTwoList=_spaceService.ReadAnySpace(spaceId).CleanRuleOptionsTwoList,
+                SomeOnesCleanRuleTwoList=_spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleTwoList,
+                CleanRuleOptionsThreeList=_spaceService.ReadAnySpace(spaceId).CleanRuleOptionsThreeList,
+                SomeOnesCleanRuleThreeList=_spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleThreeList,
+                CleanRuleOptionsFourList=_spaceService.ReadAnySpace(spaceId).CleanRuleOptionsFourList,
+                SomeOnesCleanRuleFourList=_spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleFourList
             };
             return View(model);
         }

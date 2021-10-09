@@ -23,17 +23,26 @@ namespace ZoneRadar.Models.ViewModels
         public List<SomeOnesOperatingDay> SomeOnesOperatingDayList { get; set; }
         public List<SomeOnesPrice> SomeOnesPriceList { get; set; }
         public List<SomeOnesDiscount> SomeOnesDiscountsList { get; set; }
+        
         public List<SomeOnesAmenity> SomeOnesAmenityList { get; set; }
+        public List<SomeOnesAmenity> SomeTwoAmenityList { get; set; }
+        public List<SomeOnesAmenity> SomeThreeAmenityList { get; set; }
 
         public List<AmenityAraeOne> amenityAraeOneList { get; set; }
         public List<AmenityAraeTwo> amenityAraeTwoList { get; set; }
         public List<AmenityAraeThree> amenityAraeThreeList { get; set; }
+
+
         public List<SomeOnesRules> SomeOnesRulesList { get; set; }
 
         public List<SomeOnesTraffic> SomeOnesTrafficList { get; set; }
         public List<SomeOnesParking> SomeOnesParkingList { get; set; }
         public List<SomeOnesShooting> SomeOnesShootingList { get; set; }
-        public List<SomeOnesCleanRule> SomeOnesCleanRuleList { get; set; }
+        public List<SomeOnesCleanRule> CleanRuleOptionsOneList { get; set; }
+
+        public List<SomeOnesCleanRule> CleanRuleOptionsTwoList { get; set; }
+        public List<SomeOnesCleanRule> CleanRuleOptionsThreeList { get; set; }
+        public List<SomeOnesCleanRule> CleanRuleOptionsFourList { get; set; }
 
         public List<SomeOnesCleanRule> SomeOnesCleanRuleOneList { get; set; }
         public List<SomeOnesCleanRule> SomeOnesCleanRuleTwoList { get; set; }

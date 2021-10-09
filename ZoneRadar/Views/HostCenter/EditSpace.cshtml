@@ -19,6 +19,27 @@
     var shooting = Model.SomeOnesShootingList;
     var cancelAll = Model.SomeOnesCancelAllList;
     var cancel = Model.SomeOnesCancelList;
+    var Optionscleanone = Model.CleanRuleOptionsOneList;
+    var cleanone = Model.SomeOnesCleanRuleOneList;
+
+    var Optionscleantwo = Model.CleanRuleOptionsTwoList;
+    var cleantwo = Model.SomeOnesCleanRuleTwoList;
+
+    var Optionscleanthree = Model.CleanRuleOptionsThreeList;
+    var cleanthree = Model.SomeOnesCleanRuleThreeList;
+
+    var Optionscleanfour = Model.CleanRuleOptionsFourList;
+    var cleanFour = Model.SomeOnesCleanRuleFourList;
+
+    var amenityAraeOnes = Model.amenityAraeOneList;
+    var someoneamentyOne = Model.SomeOnesAmenityList;
+
+    var amenityAraeTwo = Model.amenityAraeTwoList;
+    var someTwoAmenity = Model.SomeTwoAmenityList;
+
+    var amenityAraeThree = Model.amenityAraeThreeList;
+    var someThreeAmenity = Model.SomeThreeAmenityList;
+
 }
 
 @*<form class="needs-validation" novalidate action="HostCenter/EditSpace" method="post">*@
@@ -59,10 +80,10 @@
                                 <div class="row mb-3">
                                     <div class="col-12 col-md-6 col-xl-6">
                                         <label for="country" class="form-label">國家</label>
-                                        <select  class="form-select" id="country" required >
-                                            @foreach (var cou in country )
+                                        <select class="form-select" id="country" required>
+                                            @foreach (var cou in country)
                                             {
-                                                <option value="1"selected disabled >@cou.CountryName</option>
+                                                <option value="1" selected disabled>@cou.CountryName</option>
                                             }
                                         </select>
                                         <div class="invalid-feedback">
@@ -93,10 +114,10 @@
                                                 <option value="@d.DistrictName">@d.DistrictName</option>
                                             }
                                         </select>
-                                            <div class="invalid-feedback">
-                                                請選擇行政區
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            請選擇行政區
                                         </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 col-md-6 col-xl-6">
@@ -107,7 +128,7 @@
                                             {
                                                 <input type="text" readonly class="form-control" id="ZipCode" placeholder="" value="@add.DistrictID" name="add.DistrictID">
                                             }
-                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-md-6 col-xl-6">
                                         <div class="mb-3">
@@ -169,10 +190,8 @@
                                         </div>
                                     </div>
                                 }
-
                                 else
                                 {
-
                                     <div class="mb-3 col-lg-6">
                                         <div class="form-check">
 
@@ -183,12 +202,8 @@
                                             </label>
                                         </div>
                                     </div>
-
                                 }
-
                             }
-
-
                         </div>
                         <div class="row ">
                             <div class="col-12 col-lg-6 mt-5 ">
@@ -207,13 +222,13 @@
                                     {
 
 
-                                    <input type="text" required class="form-control" id="SpaceName"
-                                         value="@item.SpaceName"  placeholder="輸入您場地的名稱">
+                                        <input type="text" required class="form-control" id="SpaceName"
+                                               value="@item.SpaceName" placeholder="輸入您場地的名稱">
                                     }
-                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
+                        </div>
+                        <div class="row">
                             <div class="col-12 mt-5">
                                 <h2 class="fs-4">描述您的場地</h2>
                                 <p>描述您對場地所有的細節，以便讓客戶知道這場地所提供的服務</p>
@@ -242,37 +257,37 @@
                         {
 
 
-                        <div class="row">
-                            <div class="col-12 mt-3">
-                                <h2 class="fs-4">您的場地大小</h2>
-                                <p>描述當客戶預定您的場地時可以使用的大小</p>
-                            </div>
-                            <div class="col-12">
-                                <p><i class=" mt-2 me-1 far fa-lightbulb"></i>例如：您的場地有80坪，但是只提供40坪空間提供給可戶使用。</p>
-                            </div>
-                            
-                            <div class="col-12 col-xl-6 d-flex">
-                                <div class="mb-3 w-75">
-                                    <label for="area" class="form-label mt-3"></label>
-                                    <input type="text" required class="form-control" id="area"
-                                           placeholder="500" value="@item.MeasureOfArea">
+                            <div class="row">
+                                <div class="col-12 mt-3">
+                                    <h2 class="fs-4">您的場地大小</h2>
+                                    <p>描述當客戶預定您的場地時可以使用的大小</p>
                                 </div>
-                                <div class="mb-3 ">
-                                    <label for="exampleFormControlInput1" class="form-label mt-3 "></label>
-                                    <input type="text" class="form-control text-center"
-                                           id="exampleFormControlInput1" placeholder="坪數" disabled>
+                                <div class="col-12">
+                                    <p><i class=" mt-2 me-1 far fa-lightbulb"></i>例如：您的場地有80坪，但是只提供40坪空間提供給可戶使用。</p>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <h5>可以容納幾個人 </h5>
-                            <div class="col col-lg-6">
-                                <div class="form-floating">
-                                    <input class="form-control" required placeholder="最大客人數" value="@item.Capacity" id="Maxpeople">
-                                    <label for="Maxpeople">最大客人數</label>
+
+                                <div class="col-12 col-xl-6 d-flex">
+                                    <div class="mb-3 w-75">
+                                        <label for="area" class="form-label mt-3"></label>
+                                        <input type="text" required class="form-control" id="area"
+                                               placeholder="500" value="@item.MeasureOfArea">
+                                    </div>
+                                    <div class="mb-3 ">
+                                        <label for="exampleFormControlInput1" class="form-label mt-3 "></label>
+                                        <input type="text" class="form-control text-center"
+                                               id="exampleFormControlInput1" placeholder="坪數" disabled>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="row mt-3">
+                                <h5>可以容納幾個人 </h5>
+                                <div class="col col-lg-6">
+                                    <div class="form-floating">
+                                        <input class="form-control" required placeholder="最大客人數" value="@item.Capacity" id="Maxpeople">
+                                        <label for="Maxpeople">最大客人數</label>
+                                    </div>
+                                </div>
+                            </div>
                         }
                     </div>
                 </div>
@@ -302,11 +317,11 @@
                                     營業時間是指您的空間對外預訂開放的日期和時間（即您的空間可以使用的時間）。 客人將無法預訂營業時間以外的時間。
                                 </p>
                                 <p class="operating_hours_space_address mt-4">
-                                    @*您的空間地址 -
-                                    <span>台北市大安區忠孝東路三段96號11號樓之1</span>*@
+                                 
                                 </p>
                             </div>
                         </div>
+
                         <div class="row mt-4">
                             <div class="col-6 col-xl-2  mt-auto mb-auto">
                                 <p class="mt-xl-3 ">星期一</p>
@@ -344,9 +359,9 @@
                                         aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                                    {
-                                        <option value="@open.Value">@open.Text</option>
-                                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
 
@@ -360,12 +375,13 @@
                                         aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                                    {
-                                    <option value="@open.Value">@open.Text</option>
-                                    }*@
+                                        {
+                                        <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                         </div>
+
                         <!-- 手機 -->
                         <div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
                             <div class="col-5">
@@ -374,9 +390,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                                    {
-                                        <option value="@open.Value">@open.Text</option>
-                                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                             <P class="col-2 mt-4 text-center  text-start">to</P>
@@ -386,9 +402,9 @@
                                         aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                                    {
-                                        <option value="@open.Value">@open.Text</option>
-                                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                         </div>
@@ -428,9 +444,9 @@
                                         aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                                    {
-                                    <option value="@open.Value">@open.Text</option>
-                                    }*@
+                                        {
+                                        <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
 
@@ -444,9 +460,9 @@
                                         aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                                    {
-                                        <option value="@open.Value">@open.Text</option>
-                                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                         </div>
@@ -458,9 +474,9 @@
                                         aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                             <P class="col-2 mt-4 text-center  text-start">to</P>
@@ -470,9 +486,9 @@
                                         aria-label="Default select example" disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                         </div>
@@ -513,9 +529,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
 
@@ -529,9 +545,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                         </div>
@@ -543,9 +559,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                             <P class="col-2 mt-4 text-center  text-start">to</P>
@@ -555,9 +571,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                         </div>
@@ -597,9 +613,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
 
@@ -613,9 +629,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                         </div>
@@ -627,9 +643,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                             <P class="col-2 mt-4 text-center  text-start">to</P>
@@ -639,9 +655,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                         </div>
@@ -681,9 +697,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
 
@@ -697,9 +713,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                         </div>
@@ -711,9 +727,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                                    {
-                                        <option value="@open.Value">@open.Text</option>
-                                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                             <P class="col-2 mt-4 text-center  text-start">to</P>
@@ -723,9 +739,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                         </div>
@@ -765,9 +781,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
 
@@ -781,9 +797,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                         </div>
@@ -795,9 +811,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                             <P class="col-2 mt-4 text-center  text-start">to</P>
@@ -807,9 +823,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                         </div>
@@ -849,9 +865,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
 
@@ -865,9 +881,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                         </div>
@@ -879,9 +895,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                             <P class="col-2 mt-4 text-center  text-start">to</P>
@@ -891,9 +907,9 @@
                                         disabled>
                                     <option selected>請選擇營業時間</option>
                                     @*@foreach (var open in Operating)
-                    {
-                        <option value="@open.Value">@open.Text</option>
-                    }*@
+                                        {
+                                            <option value="@open.Value">@open.Text</option>
+                                        }*@
                                 </select>
                             </div>
                         </div>
@@ -921,7 +937,7 @@
 
                             }
                             @foreach (var item in Discounts)
-                            { 
+                            {
                                 <div class="col-10 col-lg-6 MinPrice mt-3">
                                     <p>折扣</p>
                                     <div class="form-floating">
@@ -938,67 +954,111 @@
                                 </div>
                                 <p class="col-1 col-md-1 col-lg-1 percen">%off</p>
                             }
-                            </div>
+                        </div>
                         <div class="row mt-3">
-                          
-
                             <h5>便利設施</h5>
-                            @*@foreach (var ametity in amenityAraeOne)
+                            @foreach (var ametityOne in amenityAraeOnes)
                             {
-                                <div class="col-12 col-lg-3 ">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="" type="checkbox"
-                                               name="flexRadioDefault" id="@ametity.AmenityId">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            @ametity.AmenityName
-                                        </label>
+                                if (someoneamentyOne.Select(x => x.Amenity).Contains(ametityOne.AmenityName))
+                                {
+                                    <div class="col-12 col-lg-3 ">
+                                        <div class="form-check">
+                                            <input class="form-check-input" checked value="" type="checkbox"
+                                                   name="flexRadioDefault" id="@ametityOne.AmenityName">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                @ametityOne.AmenityName
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                            }*@
+                                }
+                                else
+                                {
+                                    <div class="col-12 col-lg-3 ">
+                                        <div class="form-check">
+                                            <input class="form-check-input" value="" type="checkbox"
+                                                   name="flexRadioDefault" id="@ametityOne.AmenityName">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                @ametityOne.AmenityName
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+                            }
                         </div>
-                            <div class="row mt-3">
-                                <h5>場地空間</h5>
-                                @*@foreach (var ametity in amenityAraeTwo)
-                {
-                    <div class="col-12 col-lg-3 ">
-                        <div class="form-check">
-                            <input class="form-check-input" value="" type="checkbox"
-                                   name="flexRadioDefault" id="@ametity.AmenityId">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                @ametity.AmenityName
-                            </label>
+                        <div class="row mt-3">
+                            <h5>場地空間</h5>
+                            @foreach (var ametityTwo in amenityAraeTwo)
+                            {
+                                if (someTwoAmenity.Select(x => x.Amenity).Contains(ametityTwo.AmenityName))
+                                {
+                                    <div class="col-12 col-lg-3 ">
+                                        <div class="form-check">
+                                            <input class="form-check-input" checked value="" type="checkbox"
+                                                   name="flexRadioDefault" id="@ametityTwo.AmenityId">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                @ametityTwo.AmenityName
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-12 col-lg-3 ">
+                                        <div class="form-check">
+                                            <input class="form-check-input"value="" type="checkbox"
+                                                   name="flexRadioDefault" id="@ametityTwo.AmenityId">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                @ametityTwo.AmenityName
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                }
+                            }
                         </div>
+                        <div class="row mt-3">
+                            <h5>其他設施</h5>
+                            @foreach (var ametityThree in amenityAraeThree)
+                            {
+                                if (someThreeAmenity.Select(x => x.Amenity).Contains(ametityThree.AmenityName))
+                                {
+                                    <div class="col-12 col-lg-3 ">
+                                        <div class="form-check">
+                                            <input class="form-check-input" checked value="" type="checkbox"
+                                                   name="flexRadioDefault" id="@ametityThree.AmenityId">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                @ametityThree.AmenityName
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-12 col-lg-3 ">
+                                        <div class="form-check">
+                                            <input class="form-check-input"  value="" type="checkbox"
+                                                   name="flexRadioDefault" id="@ametityThree.AmenityId">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                @ametityThree.AmenityName
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-6 col-lg-4">
+                                <label for="Add" class="visually-hidden"></label>
+                                <input type="text" class="form-control" id="Add" placeholder="其他設施">
+                            </div>
+                            <div class="col-4 col-lg-2">
+                                <button type="submit" class="btn btn-primary mb-3">增加</button>
+                            </div>
+
+                        </div>
+
                     </div>
-                }*@
-                            </div>
-                            <div class="row mt-3">
-                                <h5>其他設施</h5>
-                                @*@foreach (var ametity in amenityAraeThree)
-                {
-                    <div class="col-12 col-lg-3 ">
-                        <div class="form-check">
-                            <input class="form-check-input" value="" type="checkbox"
-                                   name="flexRadioDefault" id="@ametity.AmenityId">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                @ametity.AmenityName
-                            </label>
-                        </div>
-                    </div>
-                }*@
-                            </div>
-
-                            <div class="row mt-3">
-                                <div class="col-6 col-lg-4">
-                                    <label for="Add" class="visually-hidden"></label>
-                                    <input type="text" class="form-control" id="Add" placeholder="其他設施">
-                                </div>
-                                <div class="col-4 col-lg-2">
-                                    <button type="submit" class="btn btn-primary mb-3">增加</button>
-                                </div>
-
-                            </div>
-
-                        </div>
                 </div>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingFour">
@@ -1091,7 +1151,6 @@
                                 </div>
                             </div>
 
-
                             <div class="row mb-3">
                                 <div class="col col-12">
                                     <h2 class="fs-4 mt-3">描述停車選項</h2>
@@ -1118,19 +1177,6 @@
                                 </div>
                                 <!-- 勾有停車場才會顯示 -->
                                 <div id="parkingPart" class="row d-none">
-                                    @*@foreach (var parking in parkings)
-                                    {
-                                        <div class="col-12 col-lg-6 mt-1 mb-3 ">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="@parking.Value"
-                                                       id="flexCheckDefault">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    @parking.Text
-                                                </label>
-                                            </div>
-                                        </div>
-                                    }*@
-
                                     <div class="col col-12 parking">
                                         <p>寫敘述停車相關資訊</p>
                                         <p class="fs16">無需敘述私人訊息，這將會公開顯示</p>
@@ -1217,7 +1263,7 @@
                                     <div class="col ">
                                         <div class="col col-12  pb-5">
                                             <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                            <textarea name="textPartRule" class="form-control"id="exampleFormControlTextarea1" rows="3" >
+                                            <textarea name="textPartRule" class="form-control" id="exampleFormControlTextarea1" rows="3">
                                                 @rules[0].Rules
                                             </textarea>
                                         </div>
@@ -1257,18 +1303,33 @@
                                         <p class="fs16">選擇有符合條件的條件的選項</p>
                                     </div>
                                     <div class="row">
-                                        @*@foreach (var cleanf in cleaningOne)
+                                        @foreach (var Options in Optionscleanone)
                                         {
-                                            <div class="col col-12 col-lg-12 mt-1 mb-3 ">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="@cleanf.OptionDetail"
-                                                           id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        @cleanf.OptionDetail
-                                                    </label>
+                                            if (cleanone.Select(x => x.OptionDetail).Contains(Options.OptionDetail))
+                                            {
+                                                <div class="col col-12 col-lg-12 mt-1 mb-3 ">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" checked type="checkbox" value="@Options.OptionDetail"
+                                                               id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            @Options.OptionDetail
+                                                        </label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        }*@
+                                            }
+                                            else
+                                            {
+                                                <div class="col col-12 col-lg-12 mt-1 mb-3 ">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="@Options.OptionDetail"
+                                                               id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            @Options.OptionDetail
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
 
                                         <div class="row">
                                             <div class="col  mt-5">
@@ -1276,144 +1337,191 @@
                                                 <p class="fs16">選擇有符合條件的條件的選項</p>
                                             </div>
                                             <div class="row">
-                                                @*@foreach (var cleanSec in cleaningTwo)
-                                                {
-                                                    <div class="col col-12 col-lg-12 mt-1 mb-3 ">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value=" @cleanSec.OptionDetail"
-                                                                   id="flexCheckDefault">
-                                                            <label class="form-check-label" for="flexCheckDefault">
-                                                                @cleanSec.OptionDetail
-                                                            </label>
-                                                        </div>
+
+                                                @foreach (var cleansec in Optionscleantwo)
+                                                        {
+                                                            if (cleantwo.Select(x => x.OptionDetail).Contains(cleansec.OptionDetail))
+                                                            {
+                                                                <div class="col col-12 col-lg-12 mt-1 mb-3 ">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" checked type="checkbox" value=" @cleansec.OptionDetail"
+                                                                               id="flexCheckDefault">
+                                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                                            @cleansec.OptionDetail
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div class="col col-12 col-lg-12 mt-1 mb-3 ">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="checkbox" value=" @cleansec.OptionDetail"
+                                                                               id="flexCheckDefault">
+                                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                                            @cleansec.OptionDetail
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        }
                                                     </div>
-                                                }*@
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12  mt-5">
-                                                <h2 class="fs-4">你做了什麼來幫助客人在你的空間內保持物理距離？</h2>
-                                                <p class="fs16">選擇有符合條件的條件的選項</p>
                                             </div>
                                             <div class="row">
-                                                @*@foreach (var cleanthird in cleaningThree)*@
-                                                @*{
-                                                    <div class="col col-12 col-lg-12mt-1 mb-3">
-                                                        <div class="form-check ">
-                                                            <input class="form-check-input" type="checkbox" value=" @cleanthird.OptionDetail"
-                                                                   id="flexCheckChecked">
-                                                            <label class="form-check-label" for="flexCheckChecked">
-                                                                @cleanthird.OptionDetail
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                }*@
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col  mt-5">
-                                                <h2 class="fs-4">您添加了什麼標示來讓您的客人了解情況？</h2>
-                                                <p class="fs16">選擇有符合條件的條件的選項</p>
+                                                <div class="col-12  mt-5">
+                                                    <h2 class="fs-4">你做了什麼來幫助客人在你的空間內保持物理距離？</h2>
+                                                    <p class="fs16">選擇有符合條件的條件的選項</p>
+                                                </div>
+                                                <div class="row">
+                                                    @foreach (var cleanthird in Optionscleanthree)
+                                                    {
+                                                        if (cleanthree.Select(x => x.OptionDetail).Contains(cleanthird.OptionDetail))
+                                                        {
+                                                            <div class="col col-12 col-lg-12mt-1 mb-3">
+                                                                <div class="form-check ">
+                                                                    <input class="form-check-input" checked type="checkbox" value=" @cleanthird.OptionDetail"
+                                                                           id="flexCheckChecked">
+                                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                                        @cleanthird.OptionDetail
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="col col-12 col-lg-12mt-1 mb-3">
+                                                                <div class="form-check ">
+                                                                    <input class="form-check-input"  type="checkbox" value=" @cleanthird.OptionDetail"
+                                                                           id="flexCheckChecked">
+                                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                                        @cleanthird.OptionDetail
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+                                                </div>
                                             </div>
                                             <div class="row">
-                                                @*@foreach (var cleanFour in cleaningFour)
-                                                {
-                                                    <div class="col col-12 col-lg-12 mt-1 mb-3 ">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="@cleanFour.OptionDetail"
-                                                                   id="flexCheckDefault">
-                                                            <label class="form-check-label" for="flexCheckDefault">
-                                                                @cleanFour.OptionDetail
-                                                            </label>
-                                                        </div>
-                                                    </div>*@
-                                                @*}*@
+                                                <div class="col  mt-5">
+                                                    <h2 class="fs-4">您添加了什麼標示來讓您的客人了解情況？</h2>
+                                                    <p class="fs16">選擇有符合條件的條件的選項</p>
+                                                </div>
+                                                <div class="row">
+                                                    @foreach (var cleanFourth in Optionscleanfour)
+                                                    {
+                                                        if (cleanFour.Select(x => x.OptionDetail).Contains(cleanFourth.OptionDetail))
+                                                        {
+                                                            <div class="col col-12 col-lg-12 mt-1 mb-3 ">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" checked type="checkbox" value="@cleanFourth.OptionDetail"
+                                                                           id="flexCheckDefault">
+                                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                                        @cleanFourth.OptionDetail
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="col col-12 col-lg-12 mt-1 mb-3 ">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input"  type="checkbox" value="@cleanFourth.OptionDetail"
+                                                                           id="flexCheckDefault">
+                                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                                        @cleanFourth.OptionDetail
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingSeven">
-                                <button class="accordion-button accordion-buttonAdd accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                    <div class="row">
-                                        <div class="col-12 col-lg-12 d-flex align-items-start">
-                                            <div class=" imgcontainer me-2 mt-3 ">
-                                                <i class="bi fs-3 bi-cart-x-fill"></i>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingSeven">
+                                    <button class="accordion-button accordion-buttonAdd accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                        <div class="row">
+                                            <div class="col-12 col-lg-12 d-flex align-items-start">
+                                                <div class=" imgcontainer me-2 mt-3 ">
+                                                    <i class="bi fs-3 bi-cart-x-fill"></i>
+                                                </div>
+                                                <div class="textgroup mt-3 ">
+                                                    <h6 class="fs18">8.取消政策</h6>
+                                                    <p class="editDetailsp">選擇您的取消政策</p>
+                                                </div>
                                             </div>
-                                            <div class="textgroup mt-3 ">
-                                                <h6 class="fs18">8.取消政策</h6>
-                                                <p class="editDetailsp">選擇您的取消政策</p>
+                                        </div>
+                                    </button>
+                                </h2>
+                                <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="row ">
+                                            <div class="col col-11  mt-5">
+                                                <h2 class="fs-4">選擇您的取消政策</h2>
                                             </div>
                                         </div>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
-                                 data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="row ">
-                                        <div class="col col-11  mt-5">
-                                            <h2 class="fs-4">選擇您的取消政策</h2>
+                                        <div class="row">
+                                            <div class="col">
+                                                <p class="mt-auto mb-auto">
+                                                    <i class=" mt-2 me-1 far fa-lightbulb"></i>
+                                                    取消政策更靈活的房東會吸引更多預訂。
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="mt-auto mb-auto">
-                                                <i class=" mt-2 me-1 far fa-lightbulb"></i>
-                                                取消政策更靈活的房東會吸引更多預訂。
-                                            </p>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <p>
+                                                    <strong>取消寬限期：</strong>
+                                                    所有預訂均受 <span class="logoS">ZONERadar</span>的寬限期政策約束，該政策為在收到預訂確認後 24
+                                                    小時內但不遲於活動開始時間前 48 小時取消的預訂提供全額退款。
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <p>
-                                                <strong>取消寬限期：</strong>
-                                                所有預訂均受 <span class="logoS">ZONERadar</span>的寬限期政策約束，該政策為在收到預訂確認後 24
-                                                小時內但不遲於活動開始時間前 48 小時取消的預訂提供全額退款。
-                                            </p>
-                                        </div>
-                                    </div>
-                                    @foreach (var all in cancelAll)
+                                        @foreach (var all in cancelAll)
 
-                                    {
-                                        if (cancel.Select(x => x.CancellationID).Contains(all.CancellationID))
                                         {
-                                            <div class="row">
-                                                <div class="form-check col-12 col-lg-2">
-                                                    <input class="form-check-input" value="@all.CancellationID" required type="radio" checked name="flexRadioDefault"
-                                                           id="flexRadioDefault1">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        @all.CancellationTitle
-                                                    </label>
+                                            if (cancel.Select(x => x.CancellationID).Contains(all.CancellationID))
+                                            {
+                                                <div class="row">
+                                                    <div class="form-check col-12 col-lg-2">
+                                                        <input class="form-check-input" value="@all.CancellationID" required type="radio" checked name="flexRadioDefault"
+                                                               id="flexRadioDefault1">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            @all.CancellationTitle
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-12 col-lg-12">
+                                                        <p class="ms-3">
+                                                            @all.CancellationDetail
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div class="col-12 col-lg-12">
-                                                    <p class="ms-3">
-                                                        @all.CancellationDetail
-                                                    </p>
+                                            }
+                                            else
+                                            {
+                                                <div class="row">
+                                                    <div class="form-check col-12 col-lg-2">
+                                                        <input class="form-check-input" value="@all.CancellationID" required type="radio" name="flexRadioDefault"
+                                                               id="flexRadioDefault1">
+                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                            @all.CancellationTitle
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-12 col-lg-12">
+                                                        <p class="ms-3">
+                                                            @all.CancellationDetail
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            }
                                         }
-                                        else
-                                        {
-                                            <div class="row">
-                                                <div class="form-check col-12 col-lg-2">
-                                                    <input class="form-check-input" value="@all.CancellationID" required type="radio"  name="flexRadioDefault"
-                                                           id="flexRadioDefault1">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        @all.CancellationTitle
-                                                    </label>
-                                                </div>
-                                                <div class="col-12 col-lg-12">
-                                                    <p class="ms-3">
-                                                        @all.CancellationDetail
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        }
-                                    }
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1421,15 +1529,15 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container containerForAdd">
-        <div class="row mt-5 mb-5">
-            <div class="col-12 text-center">
-                <button type="submit" class="btn submitAdd deleteBtn">完成</button>
+        <div class="container containerForAdd">
+            <div class="row mt-5 mb-5">
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn submitAdd deleteBtn">完成</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
 @*</form>*@
 
 @section topCSS

@@ -650,19 +650,32 @@ namespace ZoneRadar.Services
                 SomeOnesMeasureOfAreaandCapacityList = new List<SomeOnesMeasureOfAreaandCapacity>(),
                 SomeOnesPriceList=new List<SomeOnesPrice>(),
                 SomeOnesDiscountsList=new List<SomeOnesDiscount>(),
+                
                 amenityAraeOneList=new List<AmenityAraeOne>(),
                 amenityAraeTwoList=new List<AmenityAraeTwo>(),
                 amenityAraeThreeList=new List<AmenityAraeThree>(),
+               
                 SomeOnesAmenityList=new List<SomeOnesAmenity>(),
-                SomeOnesRulesList=new List<SomeOnesRules>(),
+                SomeTwoAmenityList = new List<SomeOnesAmenity>(),
+                SomeThreeAmenityList= new List<SomeOnesAmenity>(),
+
+                SomeOnesRulesList =new List<SomeOnesRules>(),
                 SomeOnesTrafficList=new List<SomeOnesTraffic>(),
                 SomeOnesParkingList=new List<SomeOnesParking>(),
                 SomeOnesShootingList = new List<SomeOnesShooting>(),
                 SomeOnesCancelAllList=new List<SomeOnesCancel>(),
                 SomeOnesCancelList=new List<SomeOnesCancel>(),
-                SomeOnesCleanRuleList = new List<SomeOnesCleanRule>(),
-                SomeOnesCleanRuleOneList = new List<SomeOnesCleanRule>(),
+                CleanRuleOptionsOneList=new List<SomeOnesCleanRule>(),
+                CleanRuleOptionsTwoList = new List<SomeOnesCleanRule>(),
+                CleanRuleOptionsThreeList = new List<SomeOnesCleanRule>(),
 
+                CleanRuleOptionsFourList = new List<SomeOnesCleanRule>(),
+                
+                SomeOnesCleanRuleOneList = new List<SomeOnesCleanRule>(),
+                SomeOnesCleanRuleTwoList=new List<SomeOnesCleanRule>(),
+                SomeOnesCleanRuleThreeList =new List<SomeOnesCleanRule>(),
+
+                SomeOnesCleanRuleFourList=new List<SomeOnesCleanRule>()
             };
             ///地址 ///
             var adds = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
@@ -771,8 +784,6 @@ namespace ZoneRadar.Services
             /// 
 
             /// 定價
-            /// 
-            /// ///
             var someonesprice = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var item in someonesprice)
             {
@@ -785,8 +796,6 @@ namespace ZoneRadar.Services
                 result.SomeOnesPriceList.Add(someonespriceTemp);
             }
             ///折扣 
-            ///
-            /// ///
             var someonsdiscounts = _repository.GetAll<SpaceDiscount>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var item in someonsdiscounts)
             {
@@ -801,18 +810,82 @@ namespace ZoneRadar.Services
             /// 撈有的設施
             /// 全部
             /// 
-            var amenity = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
-            //var amenityone=amenity.Where(x=>x.)
-            foreach (var item in amenity)
-            {
-                SomeOnesAmenity amenityTemp = new SomeOnesAmenity();
-                amenityTemp.Amenity = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityDetailID == item.AmenityDetailID).Select(x => x.Amenity).FirstOrDefault();
-                amenityTemp.AmenityId = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityDetailID == item.AmenityDetailID).Select(x => x.AmenityDetailID).FirstOrDefault();
-                amenityTemp.AmenityCategoryID = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityDetailID == item.AmenityDetailID).Select(x => x.AmenityCategoryID).FirstOrDefault();
-                result.SomeOnesAmenityList.Add(amenityTemp);
-            }
 
+
+            
+            var amenitys = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == spaceId).Select(x=>x.AmenityDetailID).ToList();
+            var AmenityDetails = _repository.GetAll<AmenityDetail>().ToList();
+            var AmenityOptions = new List<AmenityDetail>();
+            foreach (var item in amenitys)
+            {
+                var amenityDetails = AmenityDetails.First(x => x.AmenityDetailID == item);
+                AmenityOptions.Add(amenityDetails);
+            }
+            ///便利設施
+            //////    
+            
+            var Amenity = AmenityOptions.Where(x => x.AmenityCategoryID == 1).Select(x=>x.Amenity).ToList();
+            foreach (var item in Amenity)
+            {
+                var temp = new SomeOnesAmenity()
+                {
+                    Amenity=item
+                };
+                result.SomeOnesAmenityList.Add(temp);
+            }
+            var AmenityTwo = AmenityOptions.Where(x => x.AmenityCategoryID == 2).Select(x => x.Amenity).ToList();
+            foreach (var item in AmenityTwo)
+            {
+                var temp = new SomeOnesAmenity()
+                {
+                    Amenity = item
+                };
+                result.SomeTwoAmenityList.Add(temp);
+            }
+            var AmenityThree = AmenityOptions.Where(x => x.AmenityCategoryID == 3).Select(x => x.Amenity).ToList();
+            foreach (var item in AmenityThree)
+            {
+                var temp = new SomeOnesAmenity()
+                {
+                    Amenity = item
+                };
+                result.SomeThreeAmenityList.Add(temp);
+            }
+            ///便利全部設施選項
+
+            var AmenityOptionOnes = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 1).ToList();
+            foreach (var item in AmenityOptionOnes)
+            {
+                var temp = new AmenityAraeOne()
+                {
+                    AmenityName=item.Amenity,
+                };
+                result.amenityAraeOneList.Add(temp);
+            }
+            ///
+            ///便利全部場地空間選項 ///
             /// 
+            var AmenityOptionTwo = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 2).ToList();
+            foreach (var item in AmenityOptionTwo)
+            {
+                var temp = new AmenityAraeTwo()
+                {
+                    AmenityName = item.Amenity,
+                };
+                result.amenityAraeTwoList.Add(temp);
+            }
+            ///
+            /// 其他場地空間選項 
+            /// 
+            var AmenityOptionThree = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 3).ToList();
+            foreach (var item in AmenityOptionThree)
+            {
+                var temp = new AmenityAraeThree()
+                {
+                    AmenityName = item.Amenity,
+                };
+                result.amenityAraeThreeList.Add(temp);
+            }
             /// 場地條款
             /// 
             var rules = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
@@ -883,16 +956,108 @@ namespace ZoneRadar.Services
                 result.SomeOnesCancelList.Add(cancelTemp);
             }
             ///清潔條款細節
-            /// 
-            /// 
-            var cleanruleone = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
-            foreach (var item in cleanruleone)
+            var cleanallspace = _repository.GetAll<CleaningProtocol>().Where(x=>x.SpaceID==spaceId).Select(x=>x.CleaningOptionID).ToList();
+            var cleaningOptions = _repository.GetAll<CleaningOption>().ToList();
+            var spaceOptions = new List<CleaningOption>();
+            foreach (var item in cleanallspace)
             {
-                SomeOnesCleanRule cleanRuleTemp = new SomeOnesCleanRule();
-                cleanRuleTemp.CleaningCategoryID = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 1).Select(x=>x.CleaningCategoryID).FirstOrDefault();
-                cleanRuleTemp.CleaningOptionID = _repository.GetAll<CleaningOption>().Where(x => x.CleaningOptionID == 1).Select(x => x.CleaningOptionID).FirstOrDefault();
-                cleanRuleTemp.OptionDetail = _repository.GetAll<CleaningOption>().Where(x => x.CleaningOptionID == 1).Select(x => x.OptionDetail).FirstOrDefault();
-                result
+                var cleanOption = cleaningOptions.First(x => x.CleaningOptionID == item);
+                spaceOptions.Add(cleanOption);
+            }
+            /// 同一場地///
+            /// 第一類
+            var fistcleans = spaceOptions.Where(x => x.CleaningCategoryID == 1).Select(x => x.OptionDetail).ToList();
+            foreach (var item in fistcleans)
+            {
+                var temp = new SomeOnesCleanRule()
+                {
+                    OptionDetail = item
+                };
+                result.SomeOnesCleanRuleOneList.Add(temp);
+            }
+
+
+            /// 第二類
+            var Seccleans = spaceOptions.Where(x => x.CleaningCategoryID == 2).Select(x => x.OptionDetail).ToList();
+            foreach (var item in Seccleans)
+            {
+                var temp = new SomeOnesCleanRule()
+                {
+                    OptionDetail = item
+                };
+                result.SomeOnesCleanRuleTwoList.Add(temp);
+            }
+
+            /// 第三類
+            var Thirdcleans = spaceOptions.Where(x => x.CleaningCategoryID == 3).Select(x => x.OptionDetail).ToList();
+            foreach (var item in Thirdcleans)
+            {
+                var temp = new SomeOnesCleanRule()
+                {
+                    OptionDetail = item
+                };
+                result.SomeOnesCleanRuleThreeList.Add(temp);
+            }
+
+            /// 第四類
+            var Fourcleans = spaceOptions.Where(x => x.CleaningCategoryID == 4).Select(x => x.OptionDetail).ToList();
+            foreach (var item in Fourcleans)
+            {
+                var temp = new SomeOnesCleanRule()
+                {
+                    OptionDetail = item
+                };
+                result.SomeOnesCleanRuleFourList.Add(temp);
+            }
+
+
+            //選項一類
+            var cleansAllone = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID==1).ToList();
+            foreach (var item in cleansAllone)
+            {
+                var cleanRuleTemp = new SomeOnesCleanRule()
+                {
+                    CleaningCategoryID=item.CleaningCategoryID,
+                    CleaningOptionID=item.CleaningOptionID,
+                    OptionDetail=item.OptionDetail
+                };
+                result.CleanRuleOptionsOneList.Add(cleanRuleTemp);
+            }
+            //選項二類
+            var cleansAlltwo = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 2).ToList();
+            foreach (var item in cleansAlltwo)
+            {
+                var cleanRuleTemp = new SomeOnesCleanRule()
+                {
+                    CleaningCategoryID = item.CleaningCategoryID,
+                    CleaningOptionID = item.CleaningOptionID,
+                    OptionDetail = item.OptionDetail
+                };
+                result.CleanRuleOptionsTwoList.Add(cleanRuleTemp);
+            }
+            //選項三類
+            var cleansAllthree = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 3).ToList();
+            foreach (var item in cleansAllthree)
+            {
+                var cleanRuleTemp = new SomeOnesCleanRule()
+                {
+                    CleaningCategoryID = item.CleaningCategoryID,
+                    CleaningOptionID = item.CleaningOptionID,
+                    OptionDetail = item.OptionDetail
+                };
+                result.CleanRuleOptionsThreeList.Add(cleanRuleTemp);
+            }
+            //選項四類
+            var cleansAllfour = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 4).ToList();
+            foreach (var item in cleansAllfour)
+            {
+                var cleanRuleTemp = new SomeOnesCleanRule()
+                {
+                    CleaningCategoryID = item.CleaningCategoryID,
+                    CleaningOptionID = item.CleaningOptionID,
+                    OptionDetail = item.OptionDetail
+                };
+                result.CleanRuleOptionsFourList.Add(cleanRuleTemp);
             }
 
             return result;
