@@ -21,11 +21,11 @@ namespace ZoneRadar.Services
 {
     public class MemberService
     {
-        private readonly ZONERadarRepository _repository;
+        private readonly ZONERadarRepository _zoneradarRepository;
         public MemberService()
         {
-            _repository = new ZONERadarRepository();
-        }        
+            _zoneradarRepository = new ZONERadarRepository();
+        }
 
         /// <summary>
         /// 將未驗證的註冊資訊先存進資料庫
