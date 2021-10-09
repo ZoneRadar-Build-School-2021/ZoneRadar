@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace ZoneRadar.Models
+namespace ZoneRadar.Models.ViewModels
 {
     public class IndexViewModel
     {
