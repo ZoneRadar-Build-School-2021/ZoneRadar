@@ -13,6 +13,7 @@ using ZoneRadar.Services;
 
 namespace ZoneRadar.Controllers
 {
+    [RoutePrefix("webapi/spaces")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class JSONAPIController : ApiController
     {
@@ -24,41 +25,36 @@ namespace ZoneRadar.Controllers
             _repository = new ZONERadarRepository();
         }
 
+        [Route("GetFilterData")]
         [AcceptVerbs("GET")]
         public IHttpActionResult GetFilterData()
         {
-            var json = _spaceService.GetFilterJSON();
-            if (json == null)
-            {
-                return NotFound();
-            }
+            var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City).OrderBy(x => x.Key.CityID);
+            var spaceTypeList = _repository.GetAll<TypeDetail>().OrderBy(x => x.TypeDetailID).Select(x => x.Type);
+            var amenityList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.Amenity);
+            var amenityIconList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.AmenityICON);
 
-            return Ok(json);
+            var result = new FilterViewModel
+            {
+                CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList()),
+                SpaceTypeList = spaceTypeList.ToList(),
+                AmenityList = amenityList.ToList(),
+                AmenityIconList = amenityIconList.ToList(),
+                SelectedCity = "",
+                SelectedType = "",
+                SelectedDate = ""
+            };
+
+            return Ok(result);
         }
 
+        [Route("GetFilteredSpaces")]
         [AcceptVerbs("GET", "POST")]
         public IHttpActionResult GetFilteredSpaces(QueryViewModel query)
         {
-            var city = query.City;
-            var district = query.District;
-            var type = query.Type;
-            var Date = query.Date;
-            var lowPrice = query.LowPrice;
-            var highPrice = query.HighPrice;
-            var amenities = query.AmenityList;
+            var queriedSpaces = _spaceService.GetFilteredSpaces(query);
 
-            var queriedSpaces = _repository.GetAll<Space>().Where(x => x.City.CityName == city).Select(x => new SpaceBriefViewModel 
-            {
-                SpaceID = x.SpaceID,
-                SpaceName = x.SpaceName,
-                SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).Select(y => y.SpacePhotoUrl).ToList(),
-                Address = x.Address,
-                Capacity = x.Capacity,
-            }).ToList();
-            
-            var json = JsonConvert.SerializeObject(queriedSpaces);
-
-            return Ok(json);
+            return Ok(queriedSpaces);
         }
     }
 }
