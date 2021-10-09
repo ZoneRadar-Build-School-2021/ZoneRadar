@@ -54,13 +54,14 @@ namespace ZoneRadar.Models.ViewModels
     }
 
     /// <summary>
-    /// 註冊結果(含會員資料)
+    /// 註冊/登入結果(含會員資料)
     /// </summary>
-    public class RegisterResult
+    public class MemberResult
     {
         public Member User { get; set; }
         public bool IsSuccessful { get; set; }
-        public string RegisterMessage { get; set; }
+        public string ShowMessage { get; set; }
+        public Exception Exception { get; set; }
     }
 
     /// <summary>

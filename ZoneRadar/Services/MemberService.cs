@@ -32,11 +32,10 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="registerVM"></param>
         /// <returns>回傳會員資訊及註冊是否成功</returns>
-        public RegisterResult RegisterMember(RegisterZONERadarViewModel registerVM)
+        public MemberResult RegisterMember(RegisterZONERadarViewModel registerVM)
         {
-            var registerResult = new RegisterResult
+            var memberResult = new MemberResult
             {
-                User = null,
                 IsSuccessful = false
             };
 
@@ -44,11 +43,13 @@ namespace ZoneRadar.Services
             registerVM.Email = HttpUtility.HtmlEncode(registerVM.Email);
             registerVM.Password = HttpUtility.HtmlEncode(registerVM.Password).MD5Hash();
 
-            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.Email.ToUpper());
+            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.Email.ToUpper() && x.SignUpDateTime.Year != 1753);
 
-            if (isSameEmail || registerVM == null)
+            if (isSameEmail)
             {
-                return registerResult;
+                //如果已經有一樣的Email
+                memberResult.ShowMessage = "已有相同的Email，請重新註冊！";
+                return memberResult;
             }
             else
             {
@@ -65,13 +66,16 @@ namespace ZoneRadar.Services
                     };
                     _repository.Create<Member>(member);
                     _repository.SaveChanges();
-                    registerResult.User = member;
-                    registerResult.IsSuccessful = true;
-                    return registerResult;
+                    memberResult.User = member;
+                    memberResult.IsSuccessful = true;
+                    return memberResult;
                 }
                 catch (Exception ex)
                 {
-                    return registerResult;
+                    //資料庫儲存失敗
+                    memberResult.ShowMessage = "註冊資料儲存過程中遇到錯誤，請檢查您的網路或嘗試重新註冊！";
+                    memberResult.Exception = ex;
+                    return memberResult;
                 }
             }
         }
@@ -79,21 +83,28 @@ namespace ZoneRadar.Services
         /// <summary>
         /// 寄送驗證信
         /// </summary>
+        /// <param name="server"></param>
         /// <param name="request"></param>
         /// <param name="urlHelper"></param>
+        /// <param name="userEmail"></param>
         public void SentEmail(HttpServerUtilityBase server, HttpRequestBase request, UrlHelper urlHelper, string userEmail)
         {
+            //記錄有效的期限
             var afterTenMinutes = DateTime.Now.AddMinutes(10).ToString();
             var route = new RouteValueDictionary { { "email", userEmail }, { "expired", afterTenMinutes } };
+            //製作驗證信的連結
             var confirmLink = urlHelper.Action("ConfirmEmail", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
 
+            //寄件人資訊
             string ZONERadarAccount = "swkzta3@gmail.com";
             string ZONERadarPassword = "Minato,Naruto";
 
+            //產生能寄信的SmtpClient執行個體
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword);
             client.EnableSsl = true;
 
+            //產生信件，編輯信件的相關內容
             MailMessage mail = new MailMessage(ZONERadarAccount, ZONERadarAccount);
             mail.Subject = "ZONERadar會員確認信";
             mail.SubjectEncoding = Encoding.UTF8;
@@ -108,6 +119,7 @@ namespace ZoneRadar.Services
             }
             catch (Exception ex)
             {
+                //未處理
                 throw ex;
             }
             finally
@@ -122,9 +134,9 @@ namespace ZoneRadar.Services
         /// 點擊驗證連結後做確認，是否有此會員的註冊紀錄
         /// </summary>
         /// <param name="email"></param>
-        public RegisterResult ConfirmRegister(string email)
+        public MemberResult ConfirmRegister(string email)
         {
-            var registerResult = new RegisterResult
+            var memberResult = new MemberResult
             {
                 IsSuccessful = false
             };
@@ -132,16 +144,31 @@ namespace ZoneRadar.Services
             var hasThisUser = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper());
             if (hasThisUser)
             {
-                var user = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == email.ToUpper());
-                //將會員的註冊時間改成現在時間，代表驗證成功
-                user.SignUpDateTime = DateTime.Now;
-                _repository.Update<Member>(user);
-                _repository.SaveChanges();
-                registerResult.User = user;
-                registerResult.IsSuccessful = true;
-                registerResult.RegisterMessage = $"{user.Name}，歡迎！";
+                try
+                {
+                    var user = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == email.ToUpper());
+                    //將會員的註冊時間改成現在時間，代表驗證成功
+                    user.SignUpDateTime = DateTime.Now;
+                    _repository.Update<Member>(user);
+                    _repository.SaveChanges();
+                    memberResult.User = user;
+                    memberResult.IsSuccessful = true;
+                    memberResult.ShowMessage = $"{user.Name}您好，歡迎您加入ZONERadar！";
+                    return memberResult;
+                }
+                catch (Exception ex)
+                {
+                    memberResult.ShowMessage = "註冊資料儲存過程中遇到錯誤，請檢查您的網路或嘗試重新註冊！";
+                    memberResult.Exception = ex;
+                    return memberResult;
+                }
             }
-            return registerResult;
+            else
+            {
+                //找不到這個會員
+                memberResult.ShowMessage = "驗證失敗，請重新註冊！";
+                return memberResult;
+            }
         }
 
         /// <summary>
@@ -149,8 +176,13 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="loginVM"></param>
         /// <returns></returns>
-        public Member UserLogin(LoginZONERadarViewModel loginVM)
-        {          
+        public MemberResult UserLogin(LoginZONERadarViewModel loginVM)
+        {
+            var memberResult = new MemberResult
+            {
+                IsSuccessful = false
+            };
+
             //使用HtmlEncode將帳密做HTML編碼, 去除有害的字元
             loginVM.Email = HttpUtility.HtmlEncode(loginVM.Email);
             loginVM.Password = HttpUtility.HtmlEncode(loginVM.Password).MD5Hash();
@@ -163,12 +195,30 @@ namespace ZoneRadar.Services
             //修改上次登入時間
             if(user != null)
             {
-                user.LastLogin = DateTime.Now;
-                _repository.Update(user);
-                _repository.SaveChanges();
+                try
+                {
+                    user.LastLogin = DateTime.Now;
+                    _repository.Update(user);
+                    _repository.SaveChanges();
+                    memberResult.User = user;
+                    memberResult.IsSuccessful = true;
+                    memberResult.ShowMessage = $"{user.Name}您好，歡迎您加入ZONERadar！";
+                    return memberResult;
+                }
+                catch (Exception ex)
+                {
+                    //資料庫儲存失敗
+                    memberResult.ShowMessage = "註冊資料儲存過程中遇到錯誤，請檢查您的網路或嘗試重新註冊！";
+                    memberResult.Exception = ex;
+                    return memberResult;
+                }
             }
-
-            return user;
+            else
+            {
+                //沒這個會員，或是密碼輸入錯誤
+                memberResult.ShowMessage = "帳號或密碼不符，請重新輸入！";
+                return memberResult;
+            }
         }
 
         /// <summary>
