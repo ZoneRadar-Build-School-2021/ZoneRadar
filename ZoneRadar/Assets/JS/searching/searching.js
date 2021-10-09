@@ -48,6 +48,7 @@ window.addEventListener('load', () => {
     axios.get('https://localhost:44322/webapi/spaces/GetFilterData')
         .then(response => {
             filterOptions = response.data;
+            console.log(filterOptions);
             // 抓出後端傳來篩選資料
             selectedCity = filterOptions.SelectedCity;
             selectedType = filterOptions.SelectedType;
