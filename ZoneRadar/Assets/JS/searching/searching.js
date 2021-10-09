@@ -1,6 +1,5 @@
 ;
 window.addEventListener('load', () => {
-
   // 主要節點
   const cardListNode = document.querySelector('.card-list');
 
