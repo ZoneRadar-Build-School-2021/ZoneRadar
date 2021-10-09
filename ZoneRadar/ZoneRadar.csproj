@@ -186,8 +186,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HostCenterController.cs" />
+    <Compile Include="Controllers\JSONAPIController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MemberCenterController.cs" />
+    <Compile Include="Controllers\SearchingController.cs" />
+    <Compile Include="Controllers\UserCenterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -281,6 +287,11 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Services\" />
+    <Folder Include="Views\Booking\" />
+    <Folder Include="Views\HostCenter\" />
+    <Folder Include="Views\MemberCenter\" />
+    <Folder Include="Views\Searching\" />
+    <Folder Include="Views\UserCenter\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
