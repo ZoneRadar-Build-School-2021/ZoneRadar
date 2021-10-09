@@ -403,10 +403,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Booking\BookingPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Booking\" />
     <Folder Include="Views\HostCenter\" />
     <Folder Include="Views\MemberCenter\" />
     <Folder Include="Views\Searching\" />
