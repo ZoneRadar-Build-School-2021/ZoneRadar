@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using ZoneRadar.Models;
-using ZoneRadar.Models.ViewModels;
-using ZoneRadar.Repositories;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Repositories;
 using ZoneRadar.Models;
@@ -18,163 +15,17 @@ using System.Net;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.IO;
 
 namespace ZoneRadar.Services
 {
     public class MemberService
     {
-        private readonly ZONERadarRepository _zoneradarRepository;
         private readonly ZONERadarRepository _repository;
         public MemberService()
         {
-            _zoneradarRepository = new ZONERadarRepository();
             _repository = new ZONERadarRepository();
-        }
-
-        //HostInfo
-        public HostInfoViewModel GetMemberSpace(int? memberId)
-        {
-
-            var resultMember = new HostInfoViewModel
-            {
-                User = new User(),
-                Spaces = new List<Spaces>()
-            };
-            //int memberId = 1;
-            var u = _zoneradarRepository.GetAll<Member>().FirstOrDefault(x => x.MemberID == memberId);
-            if (u == null)
-            {
-                return resultMember;
-            }
-            else
-            {
-                resultMember.User = new User
-                {
-                    Name = u.Name,
-                    Email = u.Email,
-                    Phone = u.Phone,
-                    Description = u.Description,
-                    SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo
-                };
-                //會員所擁有的廠所有場地
-                var sps = _zoneradarRepository.GetAll<Space>().Where(x => x.MemberID == memberId);
-                var re = _zoneradarRepository.GetAll<Review>();
-                var spt = _zoneradarRepository.GetAll<SpacePhoto>();
-
-                foreach (var s in sps)
-                {
-                    resultMember.Spaces.Add(new Spaces
-                    {
-                        SpaceName = s.SpaceName,
-                        Address = s.Address,
-                        SpacePhoto = sps.FirstOrDefault(x => x.SpaceID == s.SpaceID).SpacePhoto.First().SpacePhotoUrl,
-                        District = sps.FirstOrDefault(x => x.SpaceID == s.SpaceID).District.DistrictName,
-                        City = sps.FirstOrDefault(x => x.SpaceID == s.SpaceID).City.CityName,
-                        PricePerHour = s.PricePerHour,
-                        ReviewCount = re.Where(x => x.Order.MemberID == s.MemberID && x.ToHost == true).Select(x => x.Score).Count()
-                    });
-                }
-                return resultMember;
-            }
-        }
-        //MyCollection
-        public MyCollectionViewModel GetMemberCollection(int? memberId)
-        {
-            var resultMemberCollection = new MyCollectionViewModel
-            {
-                User = new User(),
-                MyCollection = new List<Spaces>()
-            };
-
-            var u = _zoneradarRepository.GetAll<Member>().FirstOrDefault(x => x.MemberID == memberId);
-            if (u == null)
-            {
-                return resultMemberCollection;
-            }
-            else
-            {
-                resultMemberCollection.User = new User
-                {
-                    Name = u.Name,
-                    Email = u.Email,
-                    Phone = u.Phone,
-                    Description = u.Description,
-                    SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo
-                };
-                //會員所收藏的場地
-                var collection = _zoneradarRepository.GetAll<Collection>().Where(x => x.MemberID == memberId);
-                var sps = _zoneradarRepository.GetAll<Space>();
-
-                foreach (var c in collection)
-                {
-                    resultMemberCollection.MyCollection.Add(new Spaces
-                    {
-                        SpaceName = sps.FirstOrDefault(x => x.SpaceID == c.SpaceID).SpaceName,
-                        Address = sps.FirstOrDefault(x => x.SpaceID == c.SpaceID).Address,
-                        SpacePhoto = sps.FirstOrDefault(x => x.SpaceID == c.SpaceID).SpacePhoto.First().SpacePhotoUrl,
-                        District = sps.FirstOrDefault(x => x.SpaceID == c.SpaceID).District.DistrictName,
-                        City = sps.FirstOrDefault(x => x.SpaceID == c.SpaceID).City.CityName,
-                        PricePerHour = sps.FirstOrDefault(x => x.SpaceID == c.SpaceID).PricePerHour,
-                        ReviewCount = sps.FirstOrDefault(x => x.SpaceID == c.SpaceID).Order.Select(x => x.Review).Count()
-                        /*re.Where(x => x.Order.MemberID == s.MemberID && x.ToHost == true).Select(x => x.Score).Count()*/
-                    });
-                }
-                return resultMemberCollection;
-            }
-
-        }
-        //HostReview
-        public UserInfoViewModel GetHostReview(int? memberId)
-        {
-            var resulthostinfoReview = new UserInfoViewModel
-            {
-                User = new User(),
-                ToUserReview = new List<UserReview>()
-            };
-
-            var u = _zoneradarRepository.GetAll<Member>().FirstOrDefault(x => x.MemberID == memberId);
-            if (u == null)
-            {
-                return resulthostinfoReview;
-            }
-            else
-            {
-                //找出會員
-                resulthostinfoReview.User = new User
-                {
-                    Name = u.Name,
-                    Email = u.Email,
-                    Phone = u.Phone,
-                    Description = u.Description,
-                    SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo
-                };
-                //找出會員是否有租借場地並且顯示 出被場地主的評價
-                var order = _zoneradarRepository.GetAll<Order>().Where(x => x.MemberID == u.MemberID && x.OrderStatusID == 4);
-                var sps = _zoneradarRepository.GetAll<Space>();
-                foreach (var o in order)
-                {
-                    resulthostinfoReview.ToUserReview.Add(new UserReview
-                    {
-                        SpaceName = sps.FirstOrDefault(x => x.SpaceID == o.SpaceID).SpaceName,
-                        SpacePhoto = sps.FirstOrDefault(x => x.SpaceID == o.SpaceID).Member.Photo,
-                        District = sps.FirstOrDefault(x => x.SpaceID == o.SpaceID).District.DistrictName,
-                        Address = sps.FirstOrDefault(x => x.SpaceID == o.SpaceID).Address,
-                        PricePerHour = sps.FirstOrDefault(x => x.SpaceID == o.SpaceID).PricePerHour,
-                        ReviewContent = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID && x.ToHost == false).ReviewContent,
-                        Recommend = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID && x.ToHost == false).Recommend,
-                        Score = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID && x.ToHost == false).Score,
-                        ReviewDate = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID && x.ToHost == false).ReviewDate,
-                        ReviewCount = o.Review.Where(x => x.OrderID == o.OrderID && x.ToHost == false).Count()
-                    });
-
-                    return resulthostinfoReview;
-                }
-                return resulthostinfoReview;
-            }
-        }
+        }        
 
         /// <summary>
         /// 將未驗證的註冊資訊先存進資料庫
@@ -230,9 +81,10 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="request"></param>
         /// <param name="urlHelper"></param>
-        public void SentEmail(HttpRequestBase request, UrlHelper urlHelper, string userEmail)
+        public void SentEmail(HttpServerUtilityBase server, HttpRequestBase request, UrlHelper urlHelper, string userEmail)
         {
-            var route = new RouteValueDictionary { { "email", userEmail } };
+            var afterTenMinutes = DateTime.Now.AddMinutes(10).ToString();
+            var route = new RouteValueDictionary { { "email", userEmail }, { "expired", afterTenMinutes } };
             var confirmLink = urlHelper.Action("ConfirmEmail", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
 
             string ZONERadarAccount = "swkzta3@gmail.com";
@@ -242,11 +94,12 @@ namespace ZoneRadar.Services
             client.Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword);
             client.EnableSsl = true;
 
-            MailMessage mail = new MailMessage(ZONERadarAccount, "nlt66884@cuoly.com");
+            MailMessage mail = new MailMessage(ZONERadarAccount, ZONERadarAccount);
             mail.Subject = "ZONERadar會員確認信";
             mail.SubjectEncoding = Encoding.UTF8;
             mail.IsBodyHtml = true;
-            mail.Body = $"為了確保您的帳號為有效帳號，請點選下方連結驗證您的電子郵件<br><a href=\"{confirmLink}\">點擊此連結</a>";
+            string confirmEmailContent = File.ReadAllText(Path.Combine(server.MapPath("~/Views/MemberCenter/ConfirmEmailContent.html")));
+            mail.Body = confirmEmailContent.Replace("confirmLink", confirmLink);
             mail.BodyEncoding = Encoding.UTF8;
 
             try
@@ -273,9 +126,9 @@ namespace ZoneRadar.Services
         {
             var registerResult = new RegisterResult
             {
-                User = null,
                 IsSuccessful = false
             };
+            
             var hasThisUser = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper());
             if (hasThisUser)
             {
@@ -286,6 +139,7 @@ namespace ZoneRadar.Services
                 _repository.SaveChanges();
                 registerResult.User = user;
                 registerResult.IsSuccessful = true;
+                registerResult.RegisterMessage = $"{user.Name}，歡迎！";
             }
             return registerResult;
         }
@@ -302,9 +156,9 @@ namespace ZoneRadar.Services
             loginVM.Password = HttpUtility.HtmlEncode(loginVM.Password).MD5Hash();
 
             //EF比對資料庫帳密
-            //以Email及Password查詢比對Member資料表記錄
+            //以Email及Password查詢比對Member資料表記錄，且註冊時間不得為預設1753年
             var members = _repository.GetAll<Member>().ToList();
-            var user = members.SingleOrDefault(x => x.Email.ToUpper() == loginVM.Email.ToUpper() && x.Password == loginVM.Password);
+            var user = members.SingleOrDefault(x => x.Email.ToUpper() == loginVM.Email.ToUpper() && x.Password == loginVM.Password && x.SignUpDateTime.Year != 1753);
 
             //修改上次登入時間
             if(user != null)
