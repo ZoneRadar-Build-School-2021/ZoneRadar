@@ -502,7 +502,12 @@ div.swiper-button-prev {
 
 .host-introduction .div-sm-img {
     width: 50px;
-    height: 50px;
+}
+
+.host-introduction .img {
+    background-size: cover;
+    background-position: center center;
+    padding-top: 100%;
 }
 
 .host-introduction div.d-md-none p {
@@ -522,13 +527,13 @@ div.swiper-button-prev {
     padding: calc(var(--bs-gutter-x) * .5);
 }
 
-.leaseholder-section .pic {
-    background: url("https://images.unsplash.com/photo-1616627987907-4893fae79457?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=758&q=80") center center;
-    background-size: cover;
-    padding-top: 70px;
-    padding-bottom: 70px;
-    border-radius: 5px;
-}
+    .leaseholder-section .pic {
+        background: url("https://images.unsplash.com/photo-1527359443443-84a48aec73d2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80") center center;
+        background-size: cover;
+        padding-top: 70px;
+        padding-bottom: 70px;
+        border-radius: 5px;
+    }
 
 .leaseholder-section a {
     background-color: #D9831A;

@@ -8,6 +8,8 @@
         UserInfo userInfo = Json.Decode<UserInfo>(ticket.UserData);
         userPhoto = userInfo.MemberPhoto;
     }
+
+    string icon = ViewBag.Icon == true ? "success" : "error";
 }
 <!DOCTYPE html>
 <html>
@@ -47,7 +49,7 @@
             <div class="collapse navbar-collapse flex-grow-0 text-center  align-items-center pt-2 pt-md-0" id="shared-navbar-content">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0 align-items-stretch">
                     <li class="nav-item">
-                        <a class="become-host-link nav-link" href="#" data-bs-toggle="modal" data-bs-target="#register-modal">成為場地主</a>
+                        <a class="become-host-link nav-link" href="~/HostCenter/AddSpace">成為場地主</a>
                     </li>
                     <li class="customer-only nav-item">
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#register-modal">註冊</a>
@@ -193,14 +195,12 @@
                     <h3 class="fw-bolder">加入 ZONERadar</h3>
                     <p class="mb-4">和場地主訂購空間</p>
                     <a href="#" id="third-register-google" class="third-register d-block mb-3 text-decoration-none text-secondary">
-                        使用
                         <img src="https://storage.googleapis.com/support-kms-prod/ZAl1gIwyUsvfwxoW9ns47iJFioHXODBbIkrK" alt="google">
-                        Google 註冊
+                        使用 Google 註冊
                     </a>
                     <a href="#" id="third-register-facebook" class="third-register d-block mb-3 text-decoration-none text-secondary">
-                        使用
                         <img src="https://www.facebook.com/images/fb_icon_325x325.png" alt="facebook">
-                        Facebook 註冊
+                        使用 Facebook 註冊
                     </a>
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email註冊</div>
                     @Html.Partial("_RegisterModalPartial", new RegisterZONERadarViewModel())
@@ -297,37 +297,71 @@
     @if (User.Identity.IsAuthenticated)
     {
         <script>
-            let customer_only = document.querySelectorAll(".customer-only");
-            let member_only = document.querySelectorAll(".member-only");
-            customer_only.forEach(item => {
-                item.classList.add("d-none");
-            })
-            member_only.forEach(item => {
-                item.classList.remove("d-none");
-            })
+            window.addEventListener("load", () => {
+                let customer_only = document.querySelectorAll(".customer-only");
+                let member_only = document.querySelectorAll(".member-only");
+                customer_only.forEach(item => {
+                    item.classList.add("d-none");
+                })
+                member_only.forEach(item => {
+                    item.classList.remove("d-none");
+                })
+            })        
         </script>
     }
     else
     {
         <script>
-            let customer_only = document.querySelectorAll(".customer-only");
-            let member_only = document.querySelectorAll(".member-only");
-            customer_only.forEach(item => {
-                item.classList.remove("d-none");
-            })
-            member_only.forEach(item => {
-                item.classList.add("d-none");
-            })
+            window.addEventListener("load", () => {
+                let customer_only = document.querySelectorAll(".customer-only");
+                let member_only = document.querySelectorAll(".member-only");
+                customer_only.forEach(item => {
+                    item.classList.remove("d-none");
+                })
+                member_only.forEach(item => {
+                    item.classList.add("d-none");
+                })
+            })         
         </script>
     }
 
-    <!--判斷是否欲進入未授權畫面，跳出登入Modal-->
+    <!--輸入註冊路由時，跳出註冊Modal-->
+    @if (ViewBag.RegisterModalPopup == true)
+    {
+        <script>
+            window.addEventListener("load", () => {
+                let register_modal = document.querySelector("#register-modal");
+                let modal = bootstrap.Modal.getOrCreateInstance(register_modal);
+                modal.show();
+            })           
+        </script>
+    }
+
+    <!--判斷是否欲進入未授權畫面或輸入登入路由時，跳出登入Modal-->
     @if (ViewBag.LoginModalPopup == true)
     {
         <script>
-            let login_modal = document.querySelector("#login-modal");
-            let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
-            modal.show();
+            window.addEventListener("load", () => {
+                let login_modal = document.querySelector("#login-modal");
+                let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
+                modal.show();
+            })            
+        </script>
+    }
+
+    @if (ViewBag.Alert == true)
+    {
+        <script>
+            window.addEventListener("load", () => {
+                Swal.fire({
+                    title: "@ViewBag.Message",
+                    icon: "@icon",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#be7418",
+                    confirmButtonText: "OK",
+                    position: "top"
+                })
+            })
         </script>
     }
 
