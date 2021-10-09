@@ -6,7 +6,8 @@
 }
 
 <form action="/MemberCenter/EditProfile" method="post">
-    <input name="MemberID" type="hidden" value="" />
+    @Html.AntiForgeryToken()
+    <input name="MemberID" type="hidden" value="@Model.MemberID"/>
 
     <div class="profile container">
         <div class="row">
@@ -25,8 +26,8 @@
                         <input id="fileid" type="file" hidden />
                     </div>
                     <!--<div class="col-12 col-md-4 fileUpload mb-2 btn btn-outline-info">
-                        <input type="file" class="upload">
-                    </div>-->
+            <input type="file" class="upload">
+        </div>-->
                 </div>
                 <div class="basic-info-title d-flex justify-content-center">
                     <h3>個人資訊</h3>
@@ -37,7 +38,7 @@
                         <label for="InputName" class="col-form-label">姓名</label>
                     </div>
                     <div class="col-12 col-md-8">
-                        <input type="name" id="InputName" type="text" value="@Model.Name" name="Name" class="form-control" aria-describedby="">
+                        <input id="InputName" type="text" value="@Model.Name" name="Name" class="form-control" aria-describedby="">
                     </div>
                 </div>
                 <div class="tel row align-items-center mb-3 d-flex justify-content-center">
@@ -45,7 +46,7 @@
                         <label for="InputTel" class="col-form-label">電話</label>
                     </div>
                     <div class="col-12 col-md-8">
-                        <input type="tel" id="InputTel" type="text" value="@Model.Phone" name="Phone" class="form-control" aria-describedby="telverify">
+                        <input id="InputTel" type="text" value="@Model.Phone" name="Phone" class="form-control" aria-describedby="telverify">
                     </div>
                     <div class="d-none verify">
                         <span id="telverify" class="text-danger ">
@@ -59,7 +60,7 @@
                         <label for="InputEmail" class="col-form-label">電子郵件</label>
                     </div>
                     <div class="col-12 col-md-8">
-                        <input type="email" id="InputEmail" type="text" readonly value="@Model.Email" class="form-control" aria-describedby="emailverify">
+                        <input id="InputEmail" type="text" readonly value="@Model.Email" class="form-control" aria-describedby="emailverify">
                     </div>
                     <div class="d-none verify">
                         <span id="emailverify" class="text-danger">
@@ -73,7 +74,7 @@
                         <label for="descript" class="col-form-label">描述</label>
                     </div>
                     <div class="col-12 col-md-8">
-                        <textarea class="form-control" id="exampleFormControlTextarea" rows="3">@Model.Description</textarea>
+                        <textarea class="form-control" id="exampleFormControlTextarea" name="Description" rows="3">@Model.Description</textarea>
                     </div>
                 </div>
                 <div class="saved-button align-items-center mb-5 mt-5 d-flex justify-content-center">
@@ -100,5 +101,4 @@
 
 @section endJS{
     <script src="~/Assets/JS/profile/profile.js"></script>
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
 }

@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using ZoneRadar.Data;
+using ZoneRadar.Models;
 
 namespace ZoneRadar.Repositories
 {
@@ -13,6 +14,10 @@ namespace ZoneRadar.Repositories
         public ZONERadarRepository()
         {
             _context = new ZONERadarContext();
+        }
+        public IQueryable<Member> GetAll()
+        {
+            return _context.Member;
         }
         public IQueryable<T> GetAll<T>() where T : class
         {

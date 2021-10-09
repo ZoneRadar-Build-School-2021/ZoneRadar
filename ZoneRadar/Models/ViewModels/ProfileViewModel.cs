@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ZoneRadar.ViewModels
+namespace ZoneRadar.Models.ViewModels
 {
     public class ProfileViewModel
     {
-
         public int MemberID { get; set; }
         public string Photo { get; set; }
         public string Name { get; set; }

@@ -227,6 +227,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\BookingPageViewModel.cs" />
     <Compile Include="Models\ViewModels\FilterViewModel.cs" />
+    <Compile Include="Models\ViewModels\ForgetPasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\HostInfoViewModel.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\HomeViewModel.cs" />
@@ -242,12 +243,10 @@
     <Compile Include="Services\PreOrderService.cs" />
     <Compile Include="Services\ReviewService.cs" />
     <Compile Include="Services\SpaceService.cs" />
-    <Compile Include="Repositories\ProfileRepository.cs" />
-    <Compile Include="Services\EditResult.cs" />
     <Compile Include="Services\ProfileService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\HashService.cs" />
-    <Compile Include="ViewModels\ProfileViewModel.cs" />
+    <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\SpaceVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -425,9 +424,9 @@
     <Content Include="Views\Shared\_Layoutnoheaderfooter.cshtml" />
     <Content Include="Views\Shared\_Layout_addSpace.cshtml" />
     <Content Include="Views\MemberCenter\AddSpace.cshtml" />
-    <Content Include="Views\MemberCenter\ForgetPassword.cshtml" />
     <Content Include="Views\MemberCenter\VerifyMail.cshtml" />
     <Content Include="Views\MemberCenter\ResetPassword.cshtml" />
+    <Content Include="Views\MemberCenter\ForgetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

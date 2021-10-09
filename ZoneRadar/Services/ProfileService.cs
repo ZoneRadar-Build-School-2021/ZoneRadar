@@ -6,24 +6,26 @@ using System.Web;
 using System.Web.Http;
 using ZoneRadar.Models;
 using ZoneRadar.Repositories;
-using ZoneRadar.ViewModels;
+using ZoneRadar.Models.ViewModels;
+using System.Web.Mvc;
 
 namespace ZoneRadar.Services
 {
     public class ProfileService
     {
-        private readonly ProfileRepository _repo;
+        private readonly ZONERadarRepository _repo;
         public ProfileService()
         {
-            _repo = new ProfileRepository();        
+            _repo = new ZONERadarRepository();        
         }
+
         public ProfileViewModel GetProfileData(int memberID)
         {
             var p = _repo.GetAll().ToList().FirstOrDefault(x => x.MemberID == memberID);
             var result = new ProfileViewModel() 
             {
                 MemberID = p.MemberID,
-                Photo = p.Photo,
+                //Photo = p.Photo,
                 Name = p.Name,
                 Phone = p.Phone,
                 Email = p.Email,
@@ -45,31 +47,23 @@ namespace ZoneRadar.Services
                 result = profileVM;
             }
             */
-
             return result;
         }
-        public EditResult EditProfileData(ProfileViewModel edit)
-        {
-            var result = new EditResult();
-            try
-            {
-                //抓取 --> 編輯資料
-                var p = _repo.GetAll().ToList().FirstOrDefault(x => x.MemberID == edit.MemberID);
-                p.Photo = edit.Photo;
-                p.Name = edit.Name;
-                p.Phone = edit.Phone;
-                p.Description = edit.Description;
 
-                //更新
-                _repo.Update(p);
-                _repo.SaveChanges();
-                result.IsSuccessful = true;
-            }
-            catch (Exception ex)
-            {
-                result.IsSuccessful = false;
-                result.Exception = ex;
-            }
+        public ProfileViewModel EditProfileData(Member edit)
+        {
+            var result = new ProfileViewModel();
+            
+            //抓取 --> 編輯資料
+            var p = _repo.GetAll().ToList().FirstOrDefault(x => x.MemberID == edit.MemberID);
+            //p.Photo = edit.Photo;
+            p.Name = edit.Name;
+            p.Phone = edit.Phone;
+            p.Description = edit.Description;
+            //更新
+            _repo.Update(p);
+            _repo.SaveChanges();
+
             return result;
         }
     }

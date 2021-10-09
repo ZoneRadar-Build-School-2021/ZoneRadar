@@ -8,6 +8,7 @@ using System.Web.Security;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Services;
 using ZoneRadar.ViewModels;
+using ZoneRadar.Models;
 
 namespace ZoneRadar.Controllers
 {
@@ -48,10 +49,17 @@ namespace ZoneRadar.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditProfile([Bind(Include = "Photo,Name,Phone,Description")] ProfileViewModel p)
+        public ActionResult EditProfile([Bind(Include ="MemberID,Name,Phone,Description")] Member edit)
         {
-            var model = _qaz.EditProfileData(p);
-            return View(model);
+            if (ModelState.IsValid)
+            {
+                return RedirectToRoute(new { controller = "MemberCenter", action = "EditProfile" });
+            }
+            else
+            {
+                var model = _qaz.EditProfileData(edit);
+                return View(model);
+            }    
         }
         public ActionResult MyCollection(int? memberId)
         {
