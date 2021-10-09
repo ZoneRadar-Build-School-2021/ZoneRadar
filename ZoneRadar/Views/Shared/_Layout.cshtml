@@ -8,8 +8,6 @@
         UserInfo userInfo = Json.Decode<UserInfo>(ticket.UserData);
         userPhoto = userInfo.MemberPhoto;
     }
-
-    string icon = ViewBag.Icon == true ? "success" : "error";
 }
 <!DOCTYPE html>
 <html>
@@ -49,7 +47,7 @@
             <div class="collapse navbar-collapse flex-grow-0 text-center  align-items-center pt-2 pt-md-0" id="shared-navbar-content">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0 align-items-stretch">
                     <li class="nav-item">
-                        <a class="become-host-link nav-link" href="~/HostCenter/AddSpace">成為場地主</a>
+                        <a class="become-host-link nav-link" href="#" data-bs-toggle="modal" data-bs-target="#register-modal">成為場地主</a>
                     </li>
                     <li class="customer-only nav-item">
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#register-modal">註冊</a>
@@ -297,71 +295,37 @@
     @if (User.Identity.IsAuthenticated)
     {
         <script>
-            window.addEventListener("load", () => {
-                let customer_only = document.querySelectorAll(".customer-only");
-                let member_only = document.querySelectorAll(".member-only");
-                customer_only.forEach(item => {
-                    item.classList.add("d-none");
-                })
-                member_only.forEach(item => {
-                    item.classList.remove("d-none");
-                })
-            })        
+            let customer_only = document.querySelectorAll(".customer-only");
+            let member_only = document.querySelectorAll(".member-only");
+            customer_only.forEach(item => {
+                item.classList.add("d-none");
+            })
+            member_only.forEach(item => {
+                item.classList.remove("d-none");
+            })
         </script>
     }
     else
     {
         <script>
-            window.addEventListener("load", () => {
-                let customer_only = document.querySelectorAll(".customer-only");
-                let member_only = document.querySelectorAll(".member-only");
-                customer_only.forEach(item => {
-                    item.classList.remove("d-none");
-                })
-                member_only.forEach(item => {
-                    item.classList.add("d-none");
-                })
-            })         
+            let customer_only = document.querySelectorAll(".customer-only");
+            let member_only = document.querySelectorAll(".member-only");
+            customer_only.forEach(item => {
+                item.classList.remove("d-none");
+            })
+            member_only.forEach(item => {
+                item.classList.add("d-none");
+            })
         </script>
     }
 
-    <!--輸入註冊路由時，跳出註冊Modal-->
-    @if (ViewBag.RegisterModalPopup == true)
-    {
-        <script>
-            window.addEventListener("load", () => {
-                let register_modal = document.querySelector("#register-modal");
-                let modal = bootstrap.Modal.getOrCreateInstance(register_modal);
-                modal.show();
-            })           
-        </script>
-    }
-
-    <!--判斷是否欲進入未授權畫面或輸入登入路由時，跳出登入Modal-->
+    <!--判斷是否欲進入未授權畫面，跳出登入Modal-->
     @if (ViewBag.LoginModalPopup == true)
     {
         <script>
-            window.addEventListener("load", () => {
-                let login_modal = document.querySelector("#login-modal");
-                let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
-                modal.show();
-            })            
-        </script>
-    }
-
-    @if (ViewBag.Alert == true)
-    {
-        <script>
-            window.addEventListener("load", () => {
-                Swal.fire({
-                    title: "@ViewBag.Message",
-                    icon: "@icon",
-                    showConfirmButton: true,
-                    confirmButtonColor: "#be7418",
-                    confirmButtonText: "OK",
-                    position: "top"
-                })
-            })
+            let login_modal = document.querySelector("#login-modal");
+            let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
+            modal.show();
         </script>
     }
 

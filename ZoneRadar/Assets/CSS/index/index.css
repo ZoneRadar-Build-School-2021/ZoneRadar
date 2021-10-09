@@ -502,12 +502,7 @@ div.swiper-button-prev {
 
 .host-introduction .div-sm-img {
     width: 50px;
-}
-
-.host-introduction .img {
-    background-size: cover;
-    background-position: center center;
-    padding-top: 100%;
+    height: 50px;
 }
 
 .host-introduction div.d-md-none p {
