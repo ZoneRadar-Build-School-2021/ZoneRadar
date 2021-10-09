@@ -4,64 +4,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!-- body -->
-<!-- filter -->
 <!-- filter -->
 <div class="container-fluid border-top border-bottom py-4 py-xl-2 px-4 px-lg-5">
     <div class="filter-row">
         <div class="my-2 d-none d-xl-inline-block me-2">
-            <select class="form-select" id="web-county-filter">
-                <option selected>選擇縣市</option>
-                <option value="keelung">基隆市</option>
-                <option value="taipei">台北市</option>
-                <option value="new-taipei">新北市</option>
-                <option value="taoyuan">桃園市</option>
-                <option value="hsinchu">新竹市</option>
-            </select>
+            <select class="form-select city-filter" id="web-city-filter"></select>
         </div>
         <div class="my-2 d-none d-xl-inline-block me-2">
-            <select class="form-select" id="web-district-filter">
-                <option selected>選擇鄉鎮區</option>
-                <option value="keelung">基隆市</option>
-                <option value="taipei">台北市</option>
-                <option value="new-taipei">新北市</option>
-                <option value="taoyuan">桃園市</option>
-                <option value="hsinchu">新竹市</option>
-            </select>
+            <select class="form-select district-filter" id="web-district-filter"></select>
         </div>
         <div class="my-2 d-none d-xl-inline-block me-2">
-            <select class="form-select" id="web-activity-filter">
-                <option selected>活動類型</option>
-                <option value="2">派對</option>
-                <option value="3">聚會</option>
-                <option value="4">私人談話</option>
-                <option value="5">課程講座</option>
-                <option value="6">運動</option>
-                <option value="7">工作</option>
-                <option value="8">展覽</option>
-                <option value="9">音樂/表演</option>
-                <option value="10">婚禮</option>
-                <option value="11">拍照/攝影</option>
-                <option value="12">美容</option>
-                <option value="13">烹飪</option>
-                <option value="14">儲物</option>
-                <option value="15">發表會</option>
-                <option value="16">親子活動</option>
-                <option value="17">其他</option>
-            </select>
+            <select class="form-select type-filter" id="web-type-filter"></select>
         </div>
         <div class="more-filter d-xl-inline-block me-2">
-            <a type="button" class="filter-btn btn d-flex align-items-center justify-content-center" data-bs-toggle="modal" data-bs-target="#filter-modal">
+            <a type="button" class="filter-btn btn d-flex align-items-center justify-content-center" id="filter-btn" data-bs-toggle="modal" data-bs-target="#filter-modal">
                 <i class="fas fa-filter me-2"></i><span>更多條件</span>
             </a>
         </div>
         <div class="my-2 d-none d-xl-inline-block me-2">
-            <input id="web-date-filter" placeholder="活動日期">
+            <input class="date-filter" id="web-date-filter" placeholder="活動日期">
         </div>
         <div class="d-none d-xl-inline-block me-2">
             <div class="serching d-flex align-items-center">
                 <input class="search-bar form-control form-control" type="text" placeholder="想找什麼場地呢?" id="web-search">
-                <a class="ms-1" href="#"><i class="fas fa-search-location fs-4 ms-2"></i></a>
+                <a class="ms-1" href="#"><i class="fas fa-search-location fs-4 ms-2" id="web-search-btn"></i></a>
             </div>
         </div>
     </div>
@@ -70,50 +36,7 @@
 <!-- 商品圖卡 -->
 <div class="container-fluid mt-3 mt-xl-5 px-4 px-lg-5">
     <!-- cards -->
-    <div class="card-list row gx-5">
-        <!-- <div class="venue-card col-sm-12 col-md-6 col-xl-3 mb-5">
-          <a class="card-link" href="#">
-            <div class="venue-img-group swiper border-0">
-              <div class="swiper-wrapper">
-                <div class="price-tag d-flex align-items-center justify-content-center">
-                  <span class="me-1">每小時</span><span class="venue-price fs-5">NT$500</span><span class="ms-1">起</span>
-                </div>
-                <div class="venue-img swiper-slide">
-                  <img src="https://picsum.photos/1920/1080/?random=1" alt="">
-                </div>
-                <div class="venue-img swiper-slide">
-                  <img src="https://picsum.photos/1920/1080/?random=2" alt="">
-                </div>
-                <div class="venue-img swiper-slide">
-                  <img src="https://picsum.photos/1920/1080/?random=3" alt="">
-                </div>
-                <div class="venue-img swiper-slide">
-                  <img src="https://picsum.photos/1920/1080/?random=4" alt="">
-                </div>
-              </div>
-              <div class="swiper-button-prev d-none d-xl-block"></div>
-              <div class="swiper-button-next d-none d-xl-block"></div>
-            </div>
-            <h4 class="venue-name fw-bolder my-3"></span>Build School忠孝復興館</h4>
-            <div class="venue-rating mb-2">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                class="fas fa-star-half-alt"></i><span class="review-count ms-2">10</span>篇評價
-            </div>
-            <ul class="venue-brief d-flex">
-              <li class="d-flex align-items-center me-3">
-                <img class="mx-1" src="~/Assets/IMG/icons/person.svg" alt="capacity" style="height: 1rem"><span
-                  class="capacity">100</span>人
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <img class="mx-1" src="~/Assets/IMG/icons/time.svg" alt="min-time" style="height: 1rem"><span class="min-time">8</span>小時
-              </li>
-              <li class="d-flex align-items-center me-3">
-                <img class="mx-1" src="~/Assets/IMG/icons/speed-square.svg" alt="area" style="height: 1rem"><span class="area">87</span>坪
-              </li>
-            </ul>
-          </a>
-        </div> -->
-    </div>
+    <div class="card-list row gx-5"></div>
 </div>
 
 <!-- Modal -->
@@ -126,55 +49,23 @@
             </div>
             <div class="modal-body">
                 <div class="row d-xl-none mb-lg-3">
-                    <div class="county-filter col-12 col-lg-6 mb-3 mb-lg-4">
-                        <select class="form-select" id="phone-county-filter">
-                            <option selected>選擇縣市</option>
-                            <option value="keelung">基隆市</option>
-                            <option value="taipei">台北市</option>
-                            <option value="new-taipei">新北市</option>
-                            <option value="taoyuan">桃園市</option>
-                            <option value="hsinchu">新竹市</option>
-                        </select>
+                    <div class="col-12 col-lg-6 mb-3 mb-lg-4">
+                        <select class="form-select city-filter" id="phone-city-filter"></select>
                     </div>
-                    <div class="district-filter col-12 col-lg-6 mb-3 mb-lg-4">
-                        <select class="form-select" id="phone-district-filter">
-                            <option selected>選擇鄉鎮區</option>
-                            <option value="keelung">基隆市</option>
-                            <option value="taipei">台北市</option>
-                            <option value="new-taipei">新北市</option>
-                            <option value="taoyuan">桃園市</option>
-                            <option value="hsinchu">新竹市</option>
-                        </select>
+                    <div class="col-12 col-lg-6 mb-3 mb-lg-4">
+                        <select class="form-select district-filter" id="phone-district-filter"></select>
                     </div>
-                    <div class="activity-filter col-12 col-lg-6 mb-3 mb-lg-4">
-                        <select class="form-select" id="phone-activity-filter">
-                            <option selected>活動類型</option>
-                            <option value="2">派對</option>
-                            <option value="3">聚會</option>
-                            <option value="4">私人談話</option>
-                            <option value="5">課程講座</option>
-                            <option value="6">運動</option>
-                            <option value="7">工作</option>
-                            <option value="8">展覽</option>
-                            <option value="9">音樂/表演</option>
-                            <option value="10">婚禮</option>
-                            <option value="11">拍照/攝影</option>
-                            <option value="12">美容</option>
-                            <option value="13">烹飪</option>
-                            <option value="14">儲物</option>
-                            <option value="15">發表會</option>
-                            <option value="16">親子活動</option>
-                            <option value="17">其他</option>
-                        </select>
+                    <div class="col-12 col-lg-6 mb-3 mb-lg-4">
+                        <select class="form-select type-filter" id="phone-type-filter"></select>
                     </div>
-                    <div class="date-filter col-12 col-lg-6 mb-3 mb-lg-4">
-                        <input id="phone-date-filter" placeholder="活動日期">
+                    <div class="col-12 col-lg-6 mb-3 mb-lg-4">
+                        <input class="date-filter" id="phone-date-filter" placeholder="活動日期">
                     </div>
                 </div>
                 <div class="row d-xl-none">
                     <div class="col-12 d-flex align-items-center mb-5">
-                        <input class="search-bar form-control form-control" type="text" placeholder="想找什麼場地呢?" id="web-search">
-                        <a class="ms-2" href="#"><i class="fas fa-search-location fs-4"></i></a>
+                        <input class="search-bar form-control form-control" type="text" placeholder="想找什麼場地呢?" id="phone-search">
+                        <a class="ms-2" href="#"><i class="fas fa-search-location fs-4" id="phone-search-btn"></i></a>
                     </div>
                 </div>
                 <div class="row mb-5">
@@ -214,9 +105,9 @@
                     <section class="space col-6 col-xl-4 me-xl-2">
                         <h5 class="w-100">室內坪數</h5>
                         <div class="form-floating d-flex align-items-end">
-                            <input type="text" class="space-filter form-control" id="space-filter-web" placeholder="最小坪數">
+                            <input type="text" class="space-filter form-control" id="area-filter" placeholder="最小坪數">
                             <label for="high-price align-items-center">
-                                <img src="~/Assets/IMG/icons/speed-square.svg" alt="square" style="height: 0.8rem"></i>
+                                <img src="~/Assets/IMG/icons/speed-square.svg" alt="square" style="height: 0.8rem">
                                 最小坪數
                             </label>
                             <span class="ms-2 d-none d-sm-inline fs-5">坪</span>
@@ -224,37 +115,20 @@
                     </section>
                 </div>
                 <div class="row mb-5">
-                    <section class="amenities col-12 d-flex flex-wrap">
+                    <section class="amenities col-12 d-flex flex-wrap" id="amenity-filter">
                         <h5 class="w-100">場地與設施</h5>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/wifi.svg" alt="wifi"><span class="d-inline-block">WiFi</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/table.svg" alt="table"><span class="d-inline-block">桌子</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/chair.svg" alt="chair"><span class="d-inline-block">椅子</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/monitor.svg" alt="monitor"><span class="d-inline-block">螢幕</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/screen.svg" alt="screen"><span class="d-inline-block">投影幕</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/apple_tv.svg" alt="tv"><span class="d-inline-block">數位電視</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/coffee.svg" alt="coffee"><span class="d-inline-block">咖啡機</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/projector.svg" alt="projector"><span class="d-inline-block">投影機</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/whiteboard.svg" alt="whiteboard"><span class="d-inline-block">白板</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/printer.svg" alt="printer"><span class="d-inline-block">影印機</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/public_transit.svg" alt="public_transit"><span class="d-inline-block">大眾運輸工具</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/outdoor_area.svg" alt="outdoor_area"><span class="d-inline-block">戶外區</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/toilet.svg" alt="toilet"><span class="d-inline-block">廁所</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/handicap_access.svg" alt="accessibility"><span class="d-inline-block">無障礙空間</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/kitchen.svg" alt="kitchen"><span class="d-inline-block">廚房</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/breakout_room.svg" alt="booth"><span class="d-inline-block">包廂</span></div>
-                        <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="~/Assets/IMG/icons/parking.svg" alt="parking-lot"><span class="d-inline-block">停車場</span></div>
                     </section>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="claer-btn btn" data-bs-dismiss="modal">清除條件</button>
+                <button type="button" class="clear-btn btn" data-bs-dismiss="modal">清除條件</button>
                 <button type="button" class="save-btn btn">確認</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- template -->
+<!-- Template -->
 <template id="placeholder-template">
     <div class="card col-sm-12 col-md-6 col-xl-3 mb-5 border-0 placeholder-wave" aria-hidden="true">
         <div class="card-img-top placeholder border-rounded"></div>
@@ -270,19 +144,19 @@
         </div>
     </div>
 </template>
-
 <template id="card-template">
     <div class="venue-card col-sm-12 col-md-6 col-xl-3 mb-5">
         <a class="card-link" href="#">
             <div class="venue-img-group swiper border-0">
                 <div class="price-tag d-flex align-items-center justify-content-center">
-                    <span class="me-1">每小時</span><span class="venue-price fs-5"></span><span class="ms-1">起</span>
+                    <span class="venue-price fs-5"></span><span class="ms-1">起</span>
                 </div>
                 <div class="swiper-wrapper"></div>
-                <div class="swiper-button-prev d-none d-xl-block"></div>
-                <div class="swiper-button-next d-none d-xl-block"></div>
+                <!-- <div class="swiper-button-prev d-none d-xl-block"></div>
+                <div class="swiper-button-next d-none d-xl-block"></div> -->
             </div>
-            <h4 class="venue-name fw-bolder my-3"></h4>
+            <h4 class="venue-name fw-bolder mt-3"></h4>
+            <p class="venue-address mb-2"><i class="fas fa-map-marker-alt me-1"></i></p>
             <div class="venue-rating mb-2">
                 <span class="review-count ms-2"></span>篇評價
             </div>
@@ -300,6 +174,14 @@
         </a>
     </div>
 </template>
+<template id="amenity-template">
+    <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="" alt=""><span class="d-inline-block"></span></div>
+</template>
+
+
+
+
+
 @section topCSS
 {
     <link href="~/Assets/CSS/searching/searching.css" rel="stylesheet" />
@@ -307,6 +189,7 @@
 
 @section endJS
 {
+    <script src="~/Assets/JS/axios.min.js"></script>
     <script src="~/Assets/JS/searching/searching.js"></script>
 }
 

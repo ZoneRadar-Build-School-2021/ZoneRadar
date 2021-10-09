@@ -243,6 +243,9 @@
     <Compile Include="Utilities\HashService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\IMG\icons\outdoor_area.svg" />
+    <Content Include="Assets\IMG\icons\public_transit.svg" />
+    <Content Include="Assets\JS\axios.min.js" />
     <Content Include="Assets\CSS\booking\booking.css" />
     <Content Include="Assets\CSS\bootstrap-icons.css" />
     <Content Include="Assets\CSS\bootstrap.min.css" />
@@ -398,7 +401,6 @@
     <Content Include="Views\Home\Policy.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Booking\BookingPage.cshtml" />
-    <Content Include="Views\Searching\SearchingPage.cshtml" />
     <Content Include="Views\UserCenter\Pending.cshtml" />
     <Content Include="Views\UserCenter\Processing.cshtml" />
     <Content Include="Views\UserCenter\Completed.cshtml" />
@@ -411,6 +413,7 @@
     <Content Include="Views\HostCenter\Completed.cshtml" />
     <Content Include="Views\HostCenter\Processing.cshtml" />
     <Content Include="Views\MemberCenter\Register.cshtml" />
+    <Content Include="Views\Searching\SearchingPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

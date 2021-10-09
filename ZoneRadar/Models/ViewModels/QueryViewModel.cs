@@ -13,6 +13,9 @@ namespace ZoneRadar.Models.ViewModels
         public string Date { get; set; }
         public string LowPrice { get; set; }
         public string HighPrice { get; set; }
-        public List<string> AmenityList { get; set; }
+        public string Attendees { get; set; }
+        public string Area { get; set; }
+        public List<string> Amenities { get; set; }
+        public string Keywords { get; set; }
     }
 }

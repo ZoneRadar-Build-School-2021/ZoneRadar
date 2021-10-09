@@ -370,12 +370,16 @@ namespace ZoneRadar.Services
             var type = query.Type;
             var lowPrice = query.LowPrice;
             var highPrice = query.HighPrice;
-            var amenities = query.AmenityList;
+            var attendees = query.Attendees;
+            var area = query.Area;
+            var amenities = query.Amenities;
+            var keywords = query.Keywords;
 
             var scores = _repository.GetAll<Review>();
             var spaces = _repository.GetAll<Space>();
             var orders = _repository.GetAll<OrderDetail>();
             var spaceTypes = _repository.GetAll<SpaceType>();
+            var operatings = _repository.GetAll<Operating>();
             var spaceAmenities = _repository.GetAll<SpaceAmenity>();
 
 
@@ -391,41 +395,67 @@ namespace ZoneRadar.Services
 
             if (!String.IsNullOrEmpty(type))
             {
-                spaceTypes = spaceTypes.Where(x => x.TypeDetail.Type == type).Select(x => x);
+                spaceTypes = spaceTypes.Where(x => x.TypeDetail.Type == type);
             }
 
             if (!String.IsNullOrEmpty(Date))
             {
-                //var startDate = DateTime.Parse(Date);
-                //var dayOfWeek = (int)startDate.DayOfWeek;
-                //orders.Where(x => x.Order.OrderStatus.OrderStatusID != 2
-                //                        && x.Order.OrderStatus.OrderStatusID != 3
-                //                        && DateTime.Compare(x.StartDateTime, startDate) != 0
-                //                        && x.Order.Space.Operating)
-                //                        .Select(x => x.Order.Space);
+                var startDate = DateTime.Parse(Date);
+                var dayOfWeek = (int)startDate.DayOfWeek;
+                if (dayOfWeek == 0)
+                {
+                    dayOfWeek = 7; 
+                }
+                operatings = operatings.Where(x => x.OperatingDay == dayOfWeek);
+                orders = orders.Where(x => DateTime.Compare(x.StartDateTime, startDate) < 0 || DateTime.Compare(x.EndDateTime, startDate) > 0);
             }
 
             if (!String.IsNullOrEmpty(lowPrice))
             {
-                spaces = spaces.Where(x => x.PricePerHour >= decimal.Parse(lowPrice)).Select(x => x);
+                var budget = decimal.Parse(lowPrice);
+                spaces = spaces.Where(x => x.PricePerHour >= budget);
             }
 
             if (!String.IsNullOrEmpty(highPrice))
             {
-                spaces = spaces.Where(x => x.PricePerHour <= decimal.Parse(highPrice)).Select(x => x);
+                var budget = decimal.Parse(highPrice);
+                spaces = spaces.Where(x => x.PricePerHour <= budget);
             }
 
-            if (amenities != null && amenities.Count > 0)
+            if (!String.IsNullOrEmpty(attendees))
             {
-                spaceAmenities = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity)).Select(x => x);
+                var people = decimal.Parse(attendees);
+                spaces = spaces.Where(x => x.Capacity >= people);
+            }
+
+            if (!String.IsNullOrEmpty(area))
+            {
+                var spaceArea = decimal.Parse(area);
+                spaces = spaces.Where(x => x.MeasureOfArea >= spaceArea);
+            }
+
+            if (amenities != null && amenities.Count != 0)
+            {
+                spaceAmenities = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity));
+            }
+
+            if (!String.IsNullOrEmpty(keywords))
+            {
+                var keywordArr = keywords.Split(' ');
+                foreach (var keyword in keywordArr)
+                {
+                    spaces = spaces.Where(x => x.SpaceName.Contains(keyword));
+                }
             }
 
             var filteredBySpace = spaces.Select(x => x);
-            var filteredByOrder = orders.Select(x => x.Order.Space).Distinct();
             var filteredByType = spaceTypes.Select(x => x.Space).Distinct();
             var filteredByAmenity = spaceAmenities.Select(x => x.Space).Distinct();
+            var filteredBytDate = operatings.Select(x => x.Space).Distinct();
+            var unbookedSpaces = orders.Select(x => x.Order.Space).Distinct();
+            var filterByDate = filteredBytDate.Union(unbookedSpaces);
 
-            var insersectSpaces = filteredBySpace.Intersect(filteredByType).Intersect(filteredByAmenity);
+            var insersectSpaces = filteredBySpace.Intersect(filteredByType).Intersect(filteredByAmenity).Intersect(filterByDate);
 
             var result = insersectSpaces.Select(x => new SearchingPageViewModel
             {

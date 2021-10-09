@@ -40,7 +40,7 @@ namespace ZoneRadar.Controllers
                 SpaceTypeList = spaceTypeList.ToList(),
                 AmenityList = amenityList.ToList(),
                 AmenityIconList = amenityIconList.ToList(),
-                SelectedCity = "臺北市",
+                SelectedCity = "",
                 SelectedType = "",
                 SelectedDate = ""
             };
