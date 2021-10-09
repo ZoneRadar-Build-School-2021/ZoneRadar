@@ -1,6 +1,6 @@
 ﻿@model UserInfoViewModel
 @{
-    ViewBag.Title = "BuyerCard";
+    ViewBag.Title = Model.User.Name +" - BuyerCard";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var user = Model.User;
     var review = Model.ToUserReview;

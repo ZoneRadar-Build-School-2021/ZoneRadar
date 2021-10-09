@@ -1,6 +1,6 @@
 ﻿@model MyCollectionViewModel
 @{
-    ViewBag.Title = "MyCollection";
+    ViewBag.Title = Model.User.Name +"- MyCollection ";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var user = Model.User;
     var Myspaces = Model.MyCollection;
