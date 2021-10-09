@@ -1,0 +1,421 @@
+/* 公用 */
+.mymain {
+	max-width: 1100px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+}
+
+.containerForAdd {
+	max-width: 1100px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+}
+.AddSpaceBtn {
+	text-decoration: none;
+	-webkit-appearance: none;
+}
+.logoS {
+	color: #049DD9;
+}
+
+.fs10 {
+	font-size: 10px;
+}
+
+.fs12 {
+	font-size: 12px;
+}
+
+.fs16 {
+	font-size: 16px;
+}
+
+.fs18 {
+	font-size: 18px;
+}
+
+.fs16 > span {
+	color: #049DD9;
+}
+/* 場地主的場地管理 */
+/* 標頭  Top*/
+.SpaceCardGroup {
+	margin-bottom: 30px;
+}
+
+.AddSpaceBtn {
+	background-color: #cccccc;
+	border-radius: 5px;
+	font-size: 16px;
+	padding: 8px 15px;
+	color: #000000;
+	outline: none;
+	margin-bottom: auto;
+	
+}
+
+	.AddSpaceBtn:hover {
+		background-color: #C7C7C7;
+		color:#000000;
+	}
+
+.form-check-input:checked {
+	background-color: #049DD9;
+}
+
+.parkingpart {
+	border-bottom: #cccccc 0.2px solid;
+	margin-bottom: 30px;
+}
+
+.parking > p:first-child {
+	margin-bottom: 0.1rem;
+}
+
+.parking > p:last-child {
+	margin-bottom: -10px;
+	color: #aaaaaa;
+}
+
+.EditSpaceBtn {
+	background-color: #049DD9;
+	border-radius: 5px;
+	font-size: 16px;
+	padding: 10px 15px;
+	color: #FFFFFF;
+	outline: none;
+	border: 0.2px solid #049DD9;
+	margin-top: 0px;
+	margin-bottom: auto;
+	text-decoration:none;
+}
+
+	.EditSpaceBtn:hover {
+		background-color: #0077a7;
+		color: #FFFFFF;
+	}
+
+.DeleteSpaceBtn {
+	background-color: #de6868;
+	border-radius: 5px;
+	font-size: 16px;
+	padding: 8px 15px;
+	color: #ffffff;
+	outline: none;
+	margin-top: 0px;
+	margin-bottom: auto;
+	
+}
+
+.SpaceCardBody {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.DeleteSpaceBtn:hover {
+	color: #ffffff;
+	background-color: #982626;
+}
+
+/* 桌機 平板 模板內的Ｃlose x */
+.CloseMbtn {
+	width: 5px;
+	height: 5px;
+	margin: 5px;
+}
+/* 模板內的checkbox  */
+@media screen and (max-width:767px) {
+}
+
+.form-check-label {
+	font-size: 18px;
+}
+
+.deleteBtnM {
+	background-color: #de6868;
+	color: rgb(255, 255, 255);
+}
+.deleteBtnM:hover {
+	background-color: #982626;
+	color:#ffffff;
+}
+
+.cancelBtnM {
+	border: #cccccc 0.2px solid;
+	background-color: #ffffff;
+	border-radius: 5px;
+	padding: 8px 15px;
+	color: #555555;
+	outline: none;
+	margin-bottom: auto;
+}
+/* 修改場地內容 */
+.editDetailsp {
+	font-size: 16px;
+}
+
+.editDetails {
+	border-bottom: #cccccc 0.2px solid;
+}
+
+	.editDetails:last-child {
+		border-bottom: #cccccc 0.2px none;
+	}
+
+.deleteBtn {
+	background-color: #de6868;
+	color: rgb(255, 255, 255);
+	outline: none;
+}
+
+	.deleteBtn:hover {
+		background-color: #982626;
+		color: rgb(255, 255, 255);
+		outline: none;
+	}
+
+.fsS {
+	font-size: 16px;
+}
+
+@media screen and (min-with:768px) {
+	.deleteWmd {
+		width: 25% !important;
+	}
+}
+
+/* 增加場地 */
+.containerForAddOut {
+	min-width: 1100px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+}
+
+.containerForAdd > .row:last-child {
+	border-bottom: 0px;
+}
+
+.imgBox {
+	border: #cccccc 0.2px solid;
+	background-color: #ffffff;
+	border-radius: 5px;
+	font-size: 16px;
+	padding: 8px 15px;
+	color: #555555;
+}
+
+.fa-lightbulb {
+	font-size: 20px;
+	color: #D9831A;
+}
+/* 按鈕手機 */
+@media screen and (max-width:767px) {
+	.AddSpaceBtn {
+		margin-left: 32px;
+	}
+
+	.DeleteSpaceBtn {
+		background-color: #de6868;
+		border-radius: 5px;
+		font-size: 16px;
+		padding: 8px 15px;
+		color: #ffffff;
+		outline: none;
+		margin-top: 0px;
+		margin-bottom: auto;
+	}
+}
+
+/* 場地管理的商品卡 body  */
+.SpaceCardGroup {
+	padding: 5px;
+}
+
+.SpaceCardimg {
+	width: 20%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+	.SpaceCardimg > img {
+		border: #EEEEEE 0.5px solid;
+		border-radius: 5px;
+		width: 100%;
+	}
+
+.SpaceCardBody > p {
+	color: #555555;
+}
+
+
+/* 商品卡手機 */
+@media screen and (max-width:767px) {
+	.SpaceCardimg {
+		width: 100%;
+	}
+
+	.SpaceCardBody > p {
+		font-size: 14px;
+	}
+}
+.btn:focus {
+	box-shadow: none;
+}
+.btn:hover {
+	box-shadow: none;
+	
+}
+.DeleteSpaceBtn:focus {
+	box-shadow: none;
+}
+.bi-cart-x-fill,
+.form-check-input:focus,
+.form-control:focus,
+.form-select:focus,
+.deleteBtn:focus,
+.accordion-buttonAdd:focus {
+	box-shadow: none;
+}
+
+.accordion-buttonAdd:not(.collapsed) {
+	background-color: #ffffff;
+}
+
+.accordion-item {
+	border: 0px;
+}
+
+.accordion-buttonAdd  {
+	border-bottom: 1px solid #049DD9;
+	border-radius:0px;
+}
+	/* .accordion-button:focus {
+	border-bottom: 1px solid #049DD9;
+} */
+	.accordion-buttonAdd:not(.collapsed) {
+		color: #049DD9;
+	}
+
+.bi-cart-x-fill:not(.collapsed),
+.bi-bricks:not(.collapsed) {
+	color: #555555;
+}
+
+.bi-cart-x-fill {
+	width: 40px;
+}
+
+.addphoto {
+	width: 40px;
+}
+
+.rules,
+.location {
+	width: 40px;
+}
+
+.cleaning {
+	width: 40px;
+}
+
+.speed-square {
+	width: 40px;
+}
+/* switch radio 自定義 */
+.radioGroup {
+	position: relative;
+	display: inline-block;
+}
+
+	.radioGroup input {
+		width: 40px;
+		height: 30px;
+		appearance: none;
+		/*清楚默认样式*/
+		-webkit-appearance: none;
+		opacity: 0;
+		outline: none;
+	}
+
+	.radioGroup label {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 1;
+		/*注意层级关系，如果不把label层级设为最低，会遮挡住input而不能单选*/
+		width: 40px;
+		height: 30px;
+		border: 1px solid #049DD9;
+		border-radius: 3px;
+	}
+
+	.radioGroup > .Nolable {
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 1;
+		/*注意层级关系，如果不把label层级设为最低，会遮挡住input而不能单选*/
+		width: 40px;
+		height: 30px;
+		border: 1px solid #aaaaaa;
+		border-radius: 3px;
+	}
+
+	.radioGroup input:checked + label {
+		background: #049DD9;
+	}
+
+	.radioGroup input:checked + .Nolable {
+		background: #aaaaaa;
+	}
+
+.Yes input:checked + label::after {
+	content: "是";
+	color: #ffffff;
+	position: absolute;
+	top: 0px;
+	left: 10px;
+	font-size: 18px;
+	text-align: start;
+}
+
+.Yes label {
+	text-align: center;
+	font-size: 18px;
+	color: #049DD9;
+}
+
+.No input:checked + label::after {
+	content: "否";
+	color: #ffffff;
+	position: absolute;
+	top: 0px;
+	left: 10px;
+	font-size: 18px;
+	text-align: start;
+}
+
+.No label {
+	text-align: center;
+	font-size: 18px;
+	color: #aaaaaa;
+}
+
+.accordion-item:first-of-type .accordion-button {
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.operating_hours_time {
+	width: 80PX;
+}
+
+.percen {
+	margin-top: 90px;
+}
+.fa-star{
+	font-size:20px;
+}

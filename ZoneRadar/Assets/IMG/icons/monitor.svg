@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="22px" viewBox="0 0 26 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>monitor</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="monitor" transform="translate(1.000000, 0.000000)" stroke="#4C4C4C" stroke-width="1.1">
+            <path d="M22.9,17.1 L1.1,17.1 C0.5,17.1 0,16.6 0,16 L0,1.9 C0,1.3 0.5,0.8 1.1,0.8 L22.8,0.8 C23.4,0.8 23.9,1.3 23.9,1.9 L23.9,16 C24,16.6 23.5,17.1 22.9,17.1 Z" id="Path" stroke-linecap="round"></path>
+            <path d="M12,17.1 L12.1,21.2" id="Path" stroke-linecap="round"></path>
+            <path d="M2.7,21.2 L21.3,21.2" id="Path" stroke-linecap="round"></path>
+            <path d="M0.1,14 L24,14" id="Path"></path>
+        </g>
+    </g>
+</svg>

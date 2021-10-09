@@ -1,0 +1,382 @@
+:root {
+    --gray-btn: #e8e8e8;
+    --gray-btn-hover: #c7c7c7
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+ul {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+    a:hover {
+        color: inherit;
+    }
+
+.btn:focus {
+    box-shadow: none;
+}
+
+.booking-container.container {
+    max-width: 1200px;
+}
+
+.venue-img-group.swiper {
+    max-width: 100%;
+    position: relative;
+}
+
+.btn-save {
+    min-width: 100px;
+    position: absolute;
+    top: 3%;
+    right: 0;
+    z-index: 10;
+    background: var(--gray-btn);
+    border-radius: 10px !important;
+}
+
+    .btn-save::before {
+        content: "\f004";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 300;
+        font-size: 16px;
+        margin-right: 0.3rem;
+        color: #FF0000;
+    }
+
+    .btn-save:hover {
+        background-color: var(--gray-btn-hover);
+    }
+
+        .btn-save:hover::before {
+            font-weight: 900;
+        }
+
+.venue-img {
+    width: 100%;
+    padding-bottom: 85%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    display: none;
+    background-color: rgba(130, 130, 130, 0.3);
+    color: #dddddd;
+    transition: .2s;
+}
+
+    .swiper-button-prev:hover,
+    .swiper-button-next:hover {
+        transition: .2s;
+        transform: scale(1.1);
+    }
+
+.swiper-pagination-bullet-active {
+    background: #cccccc;
+}
+
+.fa-map-marker-alt {
+    color: #049DD9;
+}
+
+.venue-address:hover {
+    color: #cccccc;
+}
+
+.fa-star,
+.fa-star-half-alt {
+    color: #f9c64e;
+}
+
+.review-link:hover {
+    color: #cccccc;
+}
+
+.review-brief .user-pic {
+    max-width: 50px;
+}
+
+.review-brief-content::before {
+    content: "「";
+}
+
+.review-brief-content::after {
+    content: "」";
+}
+
+.review-brief .user-name {
+    color: #9b9b9b;
+}
+
+.read-review {
+    color: #049DD9;
+}
+
+    .read-review:hover {
+        color: #048abf;
+    }
+
+.host .user-pic {
+    max-width: 80px;
+}
+
+.btn-message {
+    background: var(--gray-btn);
+}
+
+    .btn-message::after {
+        content: "\f4ad";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 300;
+        font-size: 16px;
+        margin-left: 0.3rem;
+        color: #049DD9;
+    }
+
+    .btn-message:hover::after {
+        font-weight: 900;
+    }
+
+    .btn-message:hover {
+        background: var(--gray-btn-hover);
+    }
+
+.booking-card {
+    border: 1px solid #cccccc;
+}
+
+.about .collapse:not(.show),
+.facility .collapse:not(.show) {
+    display: block;
+    height: 8rem;
+    overflow: hidden;
+    position: relative;
+}
+
+    .about .collapse:not(.show)::after,
+    .facility .collapse:not(.show)::after,
+    .add-on .collapse:not(.show)::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2rem;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(rgba(255,255,255,0),#fff);
+    }
+
+.add-on .collapse:not(.show) {
+    display: block;
+    height: 10rem;
+    overflow: hidden;
+    position: relative;
+}
+
+    .add-on .collapse:not(.show)::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2rem;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(rgba(255,255,255,0),#fff);
+    }
+
+.about .collapsing,
+.facility .collapsing,
+.add-on .collapsing {
+    height: 8rem;
+}
+
+.add-on .collapsing {
+    height: 10rem;
+}
+
+.read-more {
+    color: #049DD9;
+    border: none;
+}
+
+    .read-more:hover {
+        color: #048abf;
+    }
+
+    .read-more::after {
+        content: '閱讀更多';
+    }
+
+    .read-more:not(.collapsed)::after {
+        content: '隱藏內容';
+    }
+
+.amenities > li,
+.feature > li,
+.other > li {
+    width: 50%;
+}
+
+.add-on-list > li {
+    width: 100%;
+}
+
+.not-provide img {
+    opacity: 0.6;
+}
+
+.not-provide span {
+    color: #cccccc;
+    position: relative;
+}
+
+    .not-provide span::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: #cccccc;
+        top: 50%;
+        left: 0;
+    }
+
+.map-wrapper {
+    width: 100%;
+    padding-bottom: 80%;
+    border-radius: 5px;
+    position: relative;
+}
+
+#map {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.fas.fa-check {
+    color: #049DD9;
+}
+
+.fas.fa-times {
+    color: #FF0000;
+}
+
+.read-more-review {
+    background-color: var(--gray-btn);
+    cursor: pointer;
+}
+
+    .read-more-review:hover {
+        background-color: var(--gray-btn-hover);
+    }
+
+.review-time {
+    color: #9b9b9b;
+}
+
+.booking-card.sticky-xl-top {
+    top: 6.5rem;
+    border-radius: 5px;
+}
+
+.booking-card-title .venue-price::after {
+    content: " / 小時";
+    font-size: 18px;
+    color: #9b9b9b;
+}
+
+.attendees:focus {
+    border-color: #cccccc;
+    box-shadow: none;
+}
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #fff;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.btn-submit {
+    background-color: #049DD9;
+    color: #fff;
+}
+
+    .btn-submit:hover {
+        background-color: #048abf;
+        color: #fff;
+    }
+
+.border-blue {
+    border: 3px solid #049DD9;
+}
+
+.swal2-styled.swal2-confirm {
+    background-color: #049DD9 !important;
+}
+
+    .swal2-styled.swal2-confirm:focus {
+        box-shadow: none !important;
+    }
+
+.flatpickr-weekday,
+.flatpickr-day {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media screen and (min-width: 768px) {
+    .venue-img {
+        padding-bottom: 44%;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .map-wrapper {
+        padding-bottom: 45%;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .amenities > li,
+    .feature > li,
+    .other > li {
+        width: 33.333333%;
+    }
+
+    .add-on-list > li {
+        width: 48%;
+    }
+
+    .map-wrapper {
+        padding-bottom: 55%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: block;
+    }
+}

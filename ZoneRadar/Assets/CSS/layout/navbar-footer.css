@@ -1,0 +1,341 @@
+html, body {
+    height: 100%;
+}
+
+    html::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    html::-webkit-scrollbar-thumb {
+        background: rgba(170, 170, 170, .7);
+    }
+
+body {
+    padding-top: 3.9rem;
+}
+
+nav.shared-navbar img.logo {
+    width: 175px;
+}
+/* #region navbar */
+nav.shared-navbar {
+    z-index: 1030;
+    border-bottom: 1px solid #dde0e6;
+    background-color: white;
+    font-size: 18px;
+}
+
+    nav.shared-navbar .nav-item .nav-link {
+        color: #343840;
+        transition: color 0s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+    }
+
+    nav.shared-navbar .search-link .nav-link {
+        font-size: 20px;
+        color: #049DD9;
+    }
+
+    nav.shared-navbar .nav-item .nav-link:hover {
+        color: #049DD9;
+    }
+
+    nav.shared-navbar .search-link .nav-link:hover {
+        color: #0077a7;
+    }
+
+    nav.shared-navbar .nav-item .nav-link:hover .fa-user::after {
+        border-color: #049DD9;
+    }
+
+    nav.shared-navbar .navbar-toggler:focus {
+        box-shadow: none;
+    }
+
+    nav.shared-navbar .nav-item .become-host-link {
+        color: #D9831A;
+    }
+
+        nav.shared-navbar .nav-item .become-host-link:hover {
+            color: #BE7418;
+        }
+
+    nav.shared-navbar .nav-item .accordion-item {
+        background-color: #f8f9fa;
+        border: none;
+    }
+
+    nav.shared-navbar .nav-item .accordion-button {
+        color: #343840;
+        justify-content: center;
+        padding-top: .5rem;
+        padding-bottom: .75rem;
+        font-size: 18px;
+    }
+
+        nav.shared-navbar .nav-item .accordion-button::after {
+            margin-left: 5px;
+            width: 1rem;
+            height: 1rem;
+            background-size: cover;
+        }
+
+        nav.shared-navbar .nav-item .accordion-button:focus {
+            border-color: transparent;
+            box-shadow: none;
+        }
+
+        nav.shared-navbar .nav-item .accordion-button:not(.collapsed) {
+            color: #343840;
+            background-color: white;
+            box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+        }
+
+            nav.shared-navbar .nav-item .accordion-button:not(.collapsed)::after {
+                background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            }
+
+    nav.shared-navbar .user {
+        display: none;
+    }
+
+    nav.shared-navbar .user-pic {
+        width: 35px;
+        height: 35px;
+        border: 3px solid #049DD9;
+        border-radius: 50%;
+    }
+
+    nav.shared-navbar .nav-item .dropdown-toggle::after {
+        content: none;
+    }
+
+    nav.shared-navbar .nav-item .dropdown-menu[data-bs-popper] {
+        top: calc(100% - 1px);
+    }
+
+    nav.shared-navbar .nav-item .dropdown-menu {
+        border: none;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, .18);
+    }
+
+    nav.shared-navbar .nav-item .dropdown-item {
+        font-size: 18px;
+        padding: .75rem 1rem;
+    }
+
+        nav.shared-navbar .nav-item .dropdown-item:hover {
+            background-color: white;
+            color: #049DD9;
+        }
+
+    nav.shared-navbar .user .accordion-member .accordion-button, nav.shared-navbar .user .accordion-host .accordion-button {
+        line-height: 35px;
+    }
+
+    nav.shared-navbar .user .accordion-member .accordion-collapse, nav.shared-navbar .user .accordion-host .accordion-collapse {
+        font-size: 18px;
+    }
+
+    nav.shared-navbar .nav-item.d-md-none .accordion-member .accordion-button, nav.shared-navbar .nav-item.d-md-none .accordion-host .accordion-button {
+        background-color: #f8f9fa;
+    }
+
+    nav.shared-navbar .nav-item.d-md-none .accordion-member, nav.shared-navbar .nav-item.d-md-none .accordion-host {
+        background-color: #f3f3f3;
+    }
+/* #endregion */
+/* #region footer */
+footer.shared-footer {
+    background-color: rgb(95, 95, 95);
+    position: sticky;
+    top: 100%;
+}
+
+    footer.shared-footer .container {
+        max-width: 1100px;
+    }
+
+    footer.shared-footer img.logo {
+        max-width: 190px;
+    }
+
+    footer.shared-footer p {
+        color: #049DD9;
+        font-size: 22px;
+    }
+
+    footer.shared-footer div.d-md-none div:first-of-type p {
+        border-top: 1px solid #049DD9;
+        border-bottom: 1px solid #049DD9;
+    }
+
+    footer.shared-footer div.d-md-none div + div p {
+        border-bottom: 1px solid #049DD9;
+    }
+
+    footer.shared-footer div.d-md-none ul {
+        border-bottom: 1px solid #049DD9;
+    }
+
+    footer.shared-footer ul {
+        font-size: 20px;
+    }
+
+    footer.shared-footer a {
+        text-decoration: none;
+        color: #aaa;
+    }
+
+        footer.shared-footer a:hover {
+            color: white;
+        }
+
+    footer.shared-footer span, footer.shared-footer span a {
+        color: rgb(134, 134, 134);
+        font-size: 14px;
+    }
+/* #endregion */
+/* #region 登入/註冊 */
+.modal::-webkit-scrollbar {
+    width: 5px;
+}
+
+.modal::-webkit-scrollbar-thumb {
+    background: rgba(170, 170, 170, .7);
+}
+
+.btn-close:focus {
+    box-shadow: none;
+}
+
+#login-modal .modal-header, #register-modal .modal-header {
+    border-bottom: none;
+}
+
+#login-modal .modal-body, #register-modal .modal-body {
+    padding: 0 2rem;
+}
+
+#a-register-modal, #a-login-modal, #forget-password {
+    color: #049DD9;
+}
+
+    #a-register-modal:hover, #a-login-modal:hover, #forget-password:hover {
+        color: #0077a7;
+    }
+
+#login-modal .third-register, #register-modal .third-register {
+    padding: 12px 20px;
+    border-radius: .3rem;
+    border: 1px solid #ccc;
+}
+
+    #login-modal .third-register img, #register-modal .third-register img {
+        width: 26px;
+    }
+
+    #login-modal .third-register:hover, #register-modal .third-register:hover {
+        background-color: rgb(236, 236, 236);
+    }
+
+#login-modal .email-register-text, #register-modal .email-register-text {
+    color: rgb(153, 153, 153);
+}
+
+    #login-modal .email-register-text::before, #register-modal .email-register-text::before, #login-modal .email-register-text::after, #register-modal .email-register-text::after {
+        content: "";
+        border-top: 1px solid #ccc;
+        flex-grow: 1;
+    }
+
+    #login-modal .email-register-text::before, #register-modal .email-register-text::before {
+        margin-right: 20px;
+    }
+
+    #login-modal .email-register-text::after, #register-modal .email-register-text::after {
+        margin-left: 20px;
+    }
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+#login-modal input::placeholder, #register-modal input::placeholder {
+    font-size: 18px;
+    color: #ccc;
+}
+
+#login-modal input, #register-modal input {
+    font-size: 18px;
+    color: #343840;
+}
+
+    #login-modal input:focus, #register-modal input:focus {
+        box-shadow: 0 0 5px #049DD9;
+        border-color: #049DD9;
+    }
+
+#login-submit, #register-submit {
+    padding: 12px 20px;
+    border-radius: .3rem;
+    background-color: #049DD9;
+    border: none;
+}
+
+    #login-submit:hover, #register-submit:hover {
+        background-color: #0077a7;
+    }
+    #login-submit:focus, #register-submit:focus {
+        box-shadow: none;
+    }
+#register-modal form + p {
+    font-size: 14px;
+}
+/* #endregion */
+
+
+@media screen and (min-width: 768px) {
+    body {
+        padding-top: 4.2rem;
+    }
+
+    nav.shared-navbar {
+        padding: 0;
+    }
+
+        nav.shared-navbar .nav-item .nav-link {
+            padding: 1rem;
+        }
+
+        nav.shared-navbar .user {
+            display: block;
+        }
+
+        nav.shared-navbar ul.navbar-nav > li {
+            border-left: 1px solid #dde0e6;
+            line-height: 35px;
+        }
+
+    footer.shared-footer img.logo {
+        width: 100%;
+        max-width: 230px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    nav.shared-navbar img.logo {
+        width: 200px;
+    }
+
+    footer.shared-footer p {
+        font-size: 22px;
+    }
+
+    footer.shared-footer ul {
+        font-size: 20px;
+    }
+
+    footer.shared-footer span, footer.shared-footer span a {
+        font-size: 18px;
+    }
+}
