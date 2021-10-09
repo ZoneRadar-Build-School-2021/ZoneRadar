@@ -19,6 +19,11 @@ namespace ZoneRadar.Controllers
             _reviewService = new ReviewService();
         }
 
+        /// <summary>
+        /// 預約頁面(Steve)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult BookingPage(int? id)
         {
             if (!id.HasValue)
