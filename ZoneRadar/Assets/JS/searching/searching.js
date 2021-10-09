@@ -1,472 +1,504 @@
 ;
 window.addEventListener('load', () => {
-    // ¥D­n¸`ÂI
-    const cardListNode = document.querySelector('.card-list');
+  // ä¸»è¦ç¯€é»
+  const cardListNode = document.querySelector('.card-list');
 
-    // filter bar¸`ÂI
-    const cityOptionBarNode = document.querySelector('#web-city-filter');
-    const districtOptionBarNode = document.querySelector('#web-district-filter');
-    const typeOptionBarNode = document.querySelector('#web-type-filter');
-    const searchingBar = document.querySelector('#web-search');
-    const searchingBarBtn = document.querySelector('#web-search-btn');
-    const filterBtn = document.querySelector('#filter-btn')
+  // filter barç¯€é»
+  const cityOptionBarNode = document.querySelector('#web-city-filter');
+  const districtOptionBarNode = document.querySelector('#web-district-filter');
+  const typeOptionBarNode = document.querySelector('#web-type-filter');
+  const searchingBar = document.querySelector('#web-search');
+  const searchingBarBtn = document.querySelector('#web-search-btn');
+  const filterBtn = document.querySelector('#filter-btn')
 
-    // filter modal¸`ÂI
-    const cityOptionModalNode = document.querySelector('#phone-city-filter');
-    const districtOptionModalNode = document.querySelector('#phone-district-filter');
-    const typeOptionModalNode = document.querySelector('#phone-type-filter');
-    const lowPriceInputNode = document.querySelector('#low-price');
-    const highPriceInputNode = document.querySelector('#high-price');
-    const attendeeInputNode = document.querySelector('#attendee-filter');
-    const areaInputNode = document.querySelector('#area-filter');
-    const amenityOptionNode = document.querySelector('#amenity-filter')
-    const searchingModal = document.querySelector('#phone-search');
-    const searchingModalBtn = document.querySelector('#phone-search-btn');
+  // filter modalç¯€é»
+  const cityOptionModalNode = document.querySelector('#phone-city-filter');
+  const districtOptionModalNode = document.querySelector('#phone-district-filter');
+  const typeOptionModalNode = document.querySelector('#phone-type-filter');
+  const lowPriceInputNode = document.querySelector('#low-price');
+  const highPriceInputNode = document.querySelector('#high-price');
+  const attendeeInputNode = document.querySelector('#attendee-filter');
+  const areaInputNode = document.querySelector('#area-filter');
+  const amenityOptionNode = document.querySelector('#amenity-filter')
+  const searchingModal = document.querySelector('#phone-search');
+  const searchingModalBtn = document.querySelector('#phone-search-btn');
 
-    // Global Variables
-    let filterOptions, selectedCity, selectedDistrict, selectedType, selectedDate;
-    let highBudget, lowBudget, attendees, area, keywords;
-    let amenities = [];
-    let filter = {
-        City: selectedCity,
-        District: selectedDistrict,
-        Type: selectedType,
-        Date: selectedDate,
-        HighPrice: highBudget,
-        LowPrice: lowBudget,
-        Attendees: attendees,
-        Amenities: amenities,
-        Area: area,
-        Keywords: keywords
-    };
-    let cityDistrictList, typeList, amenityList, amenityIconList;
+  // Global Variables
+  let filterOptions, selectedCity, selectedDistrict, selectedType, selectedDate;
+  let highBudget, lowBudget, attendees, area, keywords;
+  let amenities = [];
+  let filter = {
+    City: selectedCity,
+    District: selectedDistrict,
+    Type: selectedType,
+    Date: selectedDate,
+    HighPrice: highBudget,
+    LowPrice: lowBudget,
+    Attendees: attendees,
+    Amenities: amenities,
+    Area: area,
+    Keywords: keywords
+  };
+  let cityDistrictList, typeList, amenityList, amenityIconList;
 
-    // ¤é¾ä¤¤¤å¤Æ
-    flatpickr.localize(flatpickr.l10ns.zh_tw);
+  // æ—¥æ›†ä¸­æ–‡åŒ–
+  flatpickr.localize(flatpickr.l10ns.zh_tw);
 
-    // ªì©l¤Æ
-    axios.get('https://localhost:44322/webapi/spaces/GetFilterData')
-        .then(response => {
-            filterOptions = response.data;
-            console.log(filterOptions);
-            // §ì¥X«áºİ¶Ç¨Ó¿z¿ï¸ê®Æ
-            selectedCity = filterOptions.SelectedCity;
-            selectedType = filterOptions.SelectedType;
-            selectedDate = filterOptions.SelectedDate;
-            // ¿z¿ï¤À²Õ
-            cityDistrictList = filterOptions.CityDistrictDictionary;
-            typeList = filterOptions.SpaceTypeList;
-            amenityList = filterOptions.AmenityList;
-            amenityIconList = filterOptions.AmenityIconList;
+  // åˆå§‹åŒ–
+  axios.get('https://localhost:44322/webapi/spaces/GetFilterData')
+    .then(response => {
+      filterOptions = response.data;
+      // æŠ“å‡ºå¾Œç«¯å‚³ä¾†ç¯©é¸è³‡æ–™
+      selectedCity = filterOptions.SelectedCity;
+      selectedType = filterOptions.SelectedType;
+      selectedDate = filterOptions.SelectedDate;
+      // ç¯©é¸åˆ†çµ„
+      cityDistrictList = filterOptions.CityDistrictDictionary;
+      typeList = filterOptions.SpaceTypeList;
+      amenityList = filterOptions.AmenityList;
+      amenityIconList = filterOptions.AmenityIconList;
 
-            // ³]©wFilter
-            setBarFilter();
-            setModalFilter();
+      // è¨­å®šFilter
+      setBarFilter();
+      setModalFilter();
 
-            // ´è¬V³õ¦a¦Cªí
-            requestForSpaces();
+      // æ¸²æŸ“å ´åœ°åˆ—è¡¨
+      requestForSpaces();
+    })
+    .catch(error => console.log(error));
+
+
+  function setBarFilter() {
+    // è¨­å®šæ—¥æ›†èˆ‡äº‹ä»¶ç›£è½
+    setFlatpickr('#web-date-filter');
+    // é–å®šé„‰é®å€é¸å–®
+    disableDistrictOption(districtOptionBarNode);
+    // è¨­å®šç¸£å¸‚é¸å–®èˆ‡äº‹ä»¶ç›£è½
+    setCityAndDistrictOption(cityOptionBarNode, districtOptionBarNode);
+    // è¨­å®šé¡å‹é¸å–®èˆ‡äº‹ä»¶ç›£è½
+    setTypeOption(typeOptionBarNode);
+    // è¨­å®šé—œéµå­—äº‹ä»¶ç›£è½
+    setSearchBar(searchingBar);
+    searchingBarBtn.addEventListener('click', keywordSearch);
+  }
+
+  function setModalFilter() {
+    // è¨­å®šæ—¥æ›†èˆ‡äº‹ä»¶ç›£è½
+    setFlatpickr('#phone-date-filter');
+    // é–å®šé„‰é®å€é¸å–®
+    disableDistrictOption(districtOptionModalNode);
+    // è¨­å®šç¸£å¸‚é¸å–®èˆ‡äº‹ä»¶ç›£è½
+    setCityAndDistrictOption(cityOptionModalNode, districtOptionModalNode);
+    // è¨­å®šé¡å‹é¸å–®èˆ‡äº‹ä»¶ç›£è½
+    setTypeOption(typeOptionModalNode);
+    // è¨­å®šModalå…§å…¶ä»–é¸é …èˆ‡äº‹ä»¶ç›£è½
+    filterBtn.addEventListener('click', setModalOptionAndEvent);
+    // è¨­å®šé—œéµå­—äº‹ä»¶ç›£è½
+    setSearchBar(searchingModal);
+    searchingModalBtn.addEventListener('click', keywordSearch);
+  }
+
+  function setFlatpickr(dateNode) {
+    if (selectedDate) {
+      flatpickr(dateNode, {
+        altInput: true,
+        altFormat: 'Y/m/d',
+        disableMobile: 'true',
+        defaultDate: selectedDate,
+        minDate: "today",
+        maxDate: new Date().fp_incr(60),
+        // changeäº‹ä»¶ç›£è½
+        onChange: function (selectedDates, dateStr, instance) {
+          selectedDate = dateStr;
+          requestForSpaces();
+        },
+      });
+    } else {
+      flatpickr(dateNode, {
+        altInput: true,
+        altFormat: 'Y/m/d',
+        disableMobile: 'true',
+        minDate: "today",
+        maxDate: new Date().fp_incr(60),
+        // changeäº‹ä»¶ç›£è½
+        onChange: function (selectedDates, dateStr, instance) {
+          selectedDate = dateStr;
+          requestForSpaces();
+        },
+      });
+    }
+  }
+
+  function disableDistrictOption(districtNode) {
+    let defaultOption = document.createElement('option');
+    defaultOption.innerText = 'é„‰é®å€';
+    defaultOption.setAttribute('selected', '');
+    districtNode.appendChild(defaultOption);
+
+    districtNode.setAttribute('disabled', '');
+  };
+
+  function setCityAndDistrictOption(cityNode, districtNode) {
+    let cities = Object.keys(cityDistrictList);
+
+    if (selectedCity.length === 0) {
+      let defaultOption = document.createElement('option');
+      defaultOption.innerText = 'é¸æ“‡ç¸£å¸‚';
+      defaultOption.setAttribute('selected', '');
+      cityNode.appendChild(defaultOption);
+    }
+
+    cities.forEach((city, index) => {
+      let option = document.createElement('option');
+      option.value = index + 1;
+      if (city === selectedCity) {
+        option.innerText = city;
+        option.setAttribute('selected', '');
+      }
+      option.innerText = city;
+      cityNode.appendChild(option);
+    });
+
+    cityNode.addEventListener('change', function () {
+      // æ¸²æŸ“ç•«é¢
+      selectedCity = this.querySelector(`option[value='${this.value}']`).innerText;
+      selectedDistrict = '';
+      requestForSpaces();
+
+      // è¨­å®šé„‰é®å€é¸å–®
+      districtNode.innerHTML = '';
+      districtNode.removeAttribute('disabled');
+
+      let defaultOption = document.createElement('option');
+      defaultOption.innerText = 'é¸æ“‡é„‰é®å€';
+      defaultOption.setAttribute('selected', '');
+      districtNode.appendChild(defaultOption);
+
+      cityDistrictList[selectedCity].forEach((district, index) => {
+        let option = document.createElement('option');
+        option.value = index + 1;
+        option.innerText = district;
+        districtNode.appendChild(option);
+      })
+    })
+
+    districtNode.addEventListener('change', function () {
+      selectedDistrict = this.querySelector(`option[value='${this.value}']`).innerText;
+      requestForSpaces();
+    });
+  }
+
+  function setTypeOption(typeNode) {
+    if (selectedType.length === 0) {
+      let defaultOption = document.createElement('option');
+      defaultOption.innerText = 'å ´åœ°é¡å‹';
+      defaultOption.setAttribute('selected', '');
+      typeNode.appendChild(defaultOption);
+    }
+
+    typeList.forEach((type, index) => {
+      let option = document.createElement('option');
+      option.value = index + 1;
+      option.innerText = type;
+      if (type === selectedType) {
+        option.innerText = type;
+        option.setAttribute('selected', '');
+      }
+      typeNode.appendChild(option);
+    });
+
+    typeNode.addEventListener('change', function () {
+      // æ¸²æŸ“ç•«é¢
+      selectedType = this.querySelector(`option[value='${this.value}']`).innerText;
+      requestForSpaces();
+    })
+  }
+
+  function setModalOptionAndEvent() {
+    // è¨­å®šé è¨­inputå…§å®¹èˆ‡äº‹ä»¶ç›£è½
+    setInputs();
+    // è¨­å®šè¨­æ–½é¸å–®
+    setAmenity();
+    // è¨­å®šModalå…§æ¢ä»¶çš„ç›£è½äº‹ä»¶
+    setBtnClickEvent();
+    // è¨­å®škeywordç›£è½
+
+
+    function setInputs() {
+      let nodeArr = [lowPriceInputNode, highPriceInputNode, attendeeInputNode, areaInputNode];
+      let valueArr = [lowBudget, highBudget, attendees, area];
+
+      // è¨­å®šé è¨­å€¼
+      nodeArr.forEach((node, index) => {
+        node.value = '';
+        if (valueArr[index]) {
+          node.value = valueArr[index];
+        }
+      })
+
+      // è¨­å®šäº‹ä»¶ç›£è½
+      valueArr.forEach((value, index) => {
+        nodeArr[index].addEventListener('change', function () {
+          value = this.value;
         })
-        .catch(error => console.log(error));
-
-
-    function setBarFilter() {
-        // ³]©w¤é¾ä»P¨Æ¥óºÊÅ¥
-        setFlatpickr('#web-date-filter');
-        // Âê©w¶mÂí°Ï¿ï³æ
-        disableDistrictOption(districtOptionBarNode);
-        // ³]©w¿¤¥«¿ï³æ»P¨Æ¥óºÊÅ¥
-        setCityAndDistrictOption(cityOptionBarNode, districtOptionBarNode);
-        // ³]©wÃş«¬¿ï³æ»P¨Æ¥óºÊÅ¥
-        setTypeOption(typeOptionBarNode);
-        // ³]©wÃöÁä¦r¨Æ¥óºÊÅ¥
-        setSearchBar(searchingBar);
-        searchingBarBtn.addEventListener('click', keywordSearch);
+      })
     }
 
-    function setModalFilter() {
-        // ³]©w¤é¾ä»P¨Æ¥óºÊÅ¥
-        setFlatpickr('#phone-date-filter');
-        // Âê©w¶mÂí°Ï¿ï³æ
-        disableDistrictOption(districtOptionModalNode);
-        // ³]©w¿¤¥«¿ï³æ»P¨Æ¥óºÊÅ¥
-        setCityAndDistrictOption(cityOptionModalNode, districtOptionModalNode);
-        // ³]©wÃş«¬¿ï³æ»P¨Æ¥óºÊÅ¥
-        setTypeOption(typeOptionModalNode);
-        // ³]©wModal¤º¨ä¥L¿ï¶µ»P¨Æ¥óºÊÅ¥
-        filterBtn.addEventListener('click', setModalOptionAndEvent);
-        // ³]©wÃöÁä¦r¨Æ¥óºÊÅ¥
-        setSearchBar(searchingModal);
-        searchingModalBtn.addEventListener('click', keywordSearch);
-    }
+    function setAmenity() {
+      amenityOptionNode.innerHTML = '';
 
-    function setFlatpickr(dateNode) {
-        if (selectedDate) {
-            flatpickr(dateNode, {
-                altInput: true,
-                altFormat: 'Y/m/d',
-                disableMobile: 'true',
-                defaultDate: selectedDate,
-                minDate: "today",
-                maxDate: new Date().fp_incr(60),
-                // change¨Æ¥óºÊÅ¥
-                onChange: function (selectedDates, dateStr, instance) {
-                    selectedDate = dateStr;
-                    requestForSpaces();
-                },
-            });
-        } else {
-            flatpickr(dateNode, {
-                altInput: true,
-                altFormat: 'Y/m/d',
-                disableMobile: 'true',
-                minDate: "today",
-                maxDate: new Date().fp_incr(60),
-                // change¨Æ¥óºÊÅ¥
-                onChange: function (selectedDates, dateStr, instance) {
-                    selectedDate = dateStr;
-                    requestForSpaces();
-                },
-            });
-        }
-    }
+      amenityList.forEach((amenity, index) => {
+        let amenityClone = document.querySelector('#amenity-template').content.cloneNode(true);
+        amenityClone.querySelector('img').setAttribute('src', `${amenityIconList[index]}`);
+        amenityClone.querySelector('span').innerText = amenity;
+        amenityOptionNode.appendChild(amenityClone);
+      })
 
-    function disableDistrictOption(districtNode) {
-        let defaultOption = document.createElement('option');
-        defaultOption.innerText = '¶mÂí°Ï';
-        defaultOption.setAttribute('selected', '');
-        districtNode.appendChild(defaultOption);
-
-        districtNode.setAttribute('disabled', '');
-    };
-
-    function setCityAndDistrictOption(cityNode, districtNode) {
-        let cities = Object.keys(cityDistrictList);
-
-        if (selectedCity.length === 0) {
-            let defaultOption = document.createElement('option');
-            defaultOption.innerText = '¿ï¾Ü¿¤¥«';
-            defaultOption.setAttribute('selected', '');
-            cityNode.appendChild(defaultOption);
-        }
-
-        cities.forEach((city, index) => {
-            let option = document.createElement('option');
-            option.value = index + 1;
-            if (city === selectedCity) {
-                option.innerText = city;
-                option.setAttribute('selected', '');
+      // è¨­å®šé è¨­å€¼
+      if (amenities.length !== 0) {
+        amenityOptionNode.querySelectorAll('.btn').forEach(node => {
+          amenities.forEach(item => {
+            if (node.innerText === item) {
+              node.setAttribute('style', 'border: 2px solid #049DD9');
             }
-            option.innerText = city;
-            cityNode.appendChild(option);
-        });
-
-        cityNode.addEventListener('change', function () {
-            // ´è¬Vµe­±
-            selectedCity = this.querySelector(`option[value='${this.value}']`).innerText;
-            selectedDistrict = '';
-            requestForSpaces();
-
-            // ³]©w¶mÂí°Ï¿ï³æ
-            districtNode.innerHTML = '';
-            districtNode.removeAttribute('disabled');
-
-            let defaultOption = document.createElement('option');
-            defaultOption.innerText = '¿ï¾Ü¶mÂí°Ï';
-            defaultOption.setAttribute('selected', '');
-            districtNode.appendChild(defaultOption);
-
-            cityDistrictList[selectedCity].forEach((district, index) => {
-                let option = document.createElement('option');
-                option.value = index + 1;
-                option.innerText = district;
-                districtNode.appendChild(option);
-            })
+          })
         })
-
-        districtNode.addEventListener('change', function () {
-            selectedDistrict = this.querySelector(`option[value='${this.value}']`).innerText;
-            requestForSpaces();
-        });
-    }
-
-    function setTypeOption(typeNode) {
-        if (selectedType.length === 0) {
-            let defaultOption = document.createElement('option');
-            defaultOption.innerText = '³õ¦aÃş«¬';
-            defaultOption.setAttribute('selected', '');
-            typeNode.appendChild(defaultOption);
-        }
-
-        typeList.forEach((type, index) => {
-            let option = document.createElement('option');
-            option.value = index + 1;
-            option.innerText = type;
-            if (type === selectedType) {
-                option.innerText = type;
-                option.setAttribute('selected', '');
-            }
-            typeNode.appendChild(option);
-        });
-
-        typeNode.addEventListener('change', function () {
-            // ´è¬Vµe­±
-            selectedType = this.querySelector(`option[value='${this.value}']`).innerText;
-            requestForSpaces();
+        amenityOptionNode.querySelectorAll('.btn:not([style="border: 2px solid #049DD9"])').forEach(unselected => {
+          unselected.addEventListener('click', setBorder);
         })
-    }
-
-    function setModalOptionAndEvent() {
-        // ³]©w¹w³]input¤º®e»P¨Æ¥óºÊÅ¥
-        setInputs();
-        // ³]©w³]¬I¿ï³æ
-        setAmenity();
-        // ³]©wModal¤º±ø¥óªººÊÅ¥¨Æ¥ó
-        setBtnClickEvent();
-        // ³]©wkeywordºÊÅ¥
-
-
-        function setInputs() {
-            let nodeArr = [lowPriceInputNode, highPriceInputNode, attendeeInputNode, areaInputNode];
-            let valueArr = [lowBudget, highBudget, attendees, area];
-
-            // ³]©w¹w³]­È
-            nodeArr.forEach((node, index) => {
-                node.value = '';
-                if (valueArr[index]) {
-                    node.value = valueArr[index];
-                }
-            })
-
-            // ³]©w¨Æ¥óºÊÅ¥
-            valueArr.forEach((value, index) => {
-                nodeArr[index].addEventListener('change', function () {
-                    value = this.value;
-                })
-            })
-        }
-
-        function setAmenity() {
-            amenityOptionNode.innerHTML = '';
-
-            amenityList.forEach((amenity, index) => {
-                let amenityClone = document.querySelector('#amenity-template').content.cloneNode(true);
-                amenityClone.querySelector('img').setAttribute('src', `../Assets/IMG/${amenityIconList[index]}`);
-                amenityClone.querySelector('span').innerText = amenity;
-                amenityOptionNode.appendChild(amenityClone);
-            })
-
-            // ³]©w¹w³]­È
-            if (amenities.length !== 0) {
-                amenityOptionNode.querySelectorAll('.btn').forEach(node => {
-                    amenities.forEach(item => {
-                        if (node.innerText === item) {
-                            node.setAttribute('style', 'border: 2px solid #049DD9');
-                        }
-                    })
-                })
-                amenityOptionNode.querySelectorAll('.btn:not([style="border: 2px solid #049DD9"])').forEach(unselected => {
-                    unselected.addEventListener('click', setBorder);
-                })
-                amenityOptionNode.querySelectorAll('.btn[style="border: 2px solid #049DD9"]').forEach(selected => {
-                    selected.addEventListener('click', removeBorder);
-                })
-            } else {
-                amenityOptionNode.querySelectorAll('.btn:not([style="border: 2px solid #049DD9"])').forEach(unselected => {
-                    unselected.addEventListener('click', setBorder);
-                })
-
-                amenityOptionNode.querySelectorAll('.btn[style="border: 2px solid #049DD9"]').forEach(selected => {
-                    selected.addEventListener('click', removeBorder);
-                })
-            }
-
-            function setBorder() {
-                this.setAttribute('style', 'border: 2px solid #049DD9');
-                this.addEventListener('click', removeBorder);
-            }
-
-            function removeBorder() {
-                this.removeAttribute('style');
-                this.removeEventListener('click', removeBorder);
-            }
-        }
-
-        function setBtnClickEvent() {
-            // ²M°£
-            document.querySelector('#filter-modal .clear-btn').addEventListener('click', function () {
-                highBudget = '';
-                lowBudget = '';
-                attendees = '';
-                area = '';
-                amenities = [];
-
-                requestForSpaces();
-            })
-            // ½T»{
-            document.querySelector('#filter-modal .save-btn').addEventListener('click', function () {
-                amenities = [];
-                lowBudget = lowPriceInputNode.value;
-                highBudget = highPriceInputNode.value;
-                attendees = attendeeInputNode.value;
-                area = areaInputNode.value;
-                amenityOptionNode.querySelectorAll('.btn[style="border: 2px solid #049DD9"]').forEach(amenity => {
-                    amenities.push(amenity.innerText);
-                });
-                bootstrap.Modal.getOrCreateInstance('#filter-modal').hide();
-                requestForSpaces();
-            })
-        }
-    }
-
-    function setSearchBar(node) {
-        node.addEventListener('change', function () {
-            keywords = this.value;
+        amenityOptionNode.querySelectorAll('.btn[style="border: 2px solid #049DD9"]').forEach(selected => {
+          selected.addEventListener('click', removeBorder);
+        })
+      } else {
+        amenityOptionNode.querySelectorAll('.btn:not([style="border: 2px solid #049DD9"])').forEach(unselected => {
+          unselected.addEventListener('click', setBorder);
         })
 
-        selectedCity = '';
-        selectedDistrict = '';
-        selectedType = '';
-        selectedDate = '';
+        amenityOptionNode.querySelectorAll('.btn[style="border: 2px solid #049DD9"]').forEach(selected => {
+          selected.addEventListener('click', removeBorder);
+        })
+      }
+
+      function setBorder() {
+        this.setAttribute('style', 'border: 2px solid #049DD9');
+        this.addEventListener('click', removeBorder);
+      }
+
+      function removeBorder() {
+        this.removeAttribute('style');
+        this.removeEventListener('click', removeBorder);
+      }
+    }
+
+    function setBtnClickEvent() {
+      // æ¸…é™¤
+      document.querySelector('#filter-modal .clear-btn').addEventListener('click', function () {
         highBudget = '';
         lowBudget = '';
         attendees = '';
-        amenities = '';
         area = '';
-    }
+        amenities = [];
 
-    function keywordSearch(e) {
-        e.preventDefault();
         requestForSpaces();
+      })
+      // ç¢ºèª
+      document.querySelector('#filter-modal .save-btn').addEventListener('click', function () {
+        amenities = [];
+        lowBudget = lowPriceInputNode.value;
+        highBudget = highPriceInputNode.value;
+        attendees = attendeeInputNode.value;
+        area = areaInputNode.value;
+        amenityOptionNode.querySelectorAll('.btn[style="border: 2px solid #049DD9"]').forEach(amenity => {
+          amenities.push(amenity.innerText);
+        });
+        bootstrap.Modal.getOrCreateInstance('#filter-modal').hide();
+        requestForSpaces();
+      })
+    }
+  }
+
+  function setSearchBar(node) {
+    node.addEventListener('change', function () {
+      keywords = this.value;
+    })
+
+    selectedCity = '';
+    selectedDistrict = '';
+    selectedType = '';
+    selectedDate = '';
+    highBudget = '';
+    lowBudget = '';
+    attendees = '';
+    amenities = '';
+    area = '';
+  }
+
+  function keywordSearch(e) {
+    e.preventDefault();
+    requestForSpaces();
+  }
+
+  function requestForSpaces() {
+    setPlaceholder();
+
+    filter = {
+      City: selectedCity,
+      District: selectedDistrict,
+      Type: selectedType,
+      Date: selectedDate,
+      HighPrice: highBudget,
+      LowPrice: lowBudget,
+      Attendees: attendees,
+      Amenities: amenities,
+      Area: area,
+      Keywords: keywords
     }
 
-    function requestForSpaces() {
-        setPlaceholder();
+    console.log(filter)
 
-        filter = {
-            City: selectedCity,
-            District: selectedDistrict,
-            Type: selectedType,
-            Date: selectedDate,
-            HighPrice: highBudget,
-            LowPrice: lowBudget,
-            Attendees: attendees,
-            Amenities: amenities,
-            Area: area,
-            Keywords: keywords
+    axios.post('https://localhost:44322/webapi/spaces/GetFilteredSpaces', filter)
+      .then(response => {
+        let spaceList = response.data;
+        renderSpaceCards(spaceList);
+      })
+  }
+
+  function setPlaceholder() {
+    cardListNode.innerHTML = '';
+    for (i = 0; i <= 7; i++) {
+      let placeholder = document.querySelector('#placeholder-template').content.cloneNode(true);
+      cardListNode.appendChild(placeholder);
+    }
+  }
+
+  function renderSpaceCards(spaceList) {
+    cardListNode.innerHTML = '';
+    spaceList.forEach(space => {
+      const templateClone = document.querySelector('#card-template').content.cloneNode(true);
+      const venueLink = templateClone.querySelector('.card-link');
+      const venueImgNode = templateClone.querySelector('.swiper-wrapper');
+      const venueNameNode = templateClone.querySelector('.venue-name');
+      const venueAddressNode = templateClone.querySelector('.venue-address');
+      const pricePerHourNode = templateClone.querySelector('.venue-price');
+      const ratingNode = templateClone.querySelector('.venue-rating');
+      const reviewCountNode = templateClone.querySelector('.review-count');
+      const capacityNode = templateClone.querySelector('.capacity');
+      const minHourNode = templateClone.querySelector('.min-time');
+      const areaNode = templateClone.querySelector('.area');
+
+      // è¶…é€£çµ
+      venueLink.href = `/Booking/BookingPage/${space.SpaceID}`;
+
+      // åœ–ç‰‡
+      // space.SpaceImageURLList.forEach(imgURL => {
+      //   let swiperSlide = document.createElement('div');
+      //   swiperSlide.classList = 'venue-img swiper-slide';
+      //   swiperSlide.style.backgroundImage = `url(${imgURL})`;
+
+      //   venueImgNode.appendChild(swiperSlide);
+      // });
+      let swiperSlide = document.createElement('div');
+      swiperSlide.classList = 'venue-img swiper-slide';
+      swiperSlide.style.backgroundImage = `url(${space.SpaceImageURLList[0]})`;
+      venueImgNode.appendChild(swiperSlide);
+
+      // åƒ¹æ ¼
+      pricePerHourNode.innerText = `NT$${space.PricePerHour}`;
+
+      // åç¨±
+      venueNameNode.innerText = space.SpaceName;
+
+      // åœ°å€
+      let address = document.createElement('span');
+      address.classList = 'ms-1'
+      address.innerText = `${space.City} ${space.District} ${space.Address}`;
+      venueAddressNode.appendChild(address);
+
+      // è©•åƒ¹
+      if (space.Scores.length === 0) {
+        let blank = document.createElement('span');
+        blank.innerText = 'ç›®å‰æ²’æœ‰ä»»ä½•è©•åƒ¹';
+        ratingNode.insertBefore(blank, reviewCountNode);
+      } else {
+        let avgStars = space.Scores.reduce(function (a, b) {
+          return a + b;
+        }, 0) / space.Scores.length;
+
+        if (avgStars % 1 === 0) {
+          for (let i = 1; i <= avgStars; i++) {
+            let star = document.createElement('i');
+            star.classList = 'fas fa-star';
+            ratingNode.insertBefore(star, reviewCountNode);
+          }
+        } else {
+          for (let i = 1; i < avgStars; i++) {
+            let star = document.createElement('i');
+            star.classList = 'fas fa-star';
+            ratingNode.insertBefore(star, reviewCountNode);
+          }
+          let halfStar = document.createElement('i');
+          halfStar.classList = 'fas fa-star-half-alt';
+          ratingNode.insertBefore(halfStar, reviewCountNode);
         }
+      }
 
-        console.log(filter)
+      // è©•åƒ¹æ•¸
+      reviewCountNode.innerText = space.Scores.length;
 
-        axios.post('https://localhost:44322/webapi/spaces/GetFilteredSpaces', filter)
-            .then(response => {
-                let spaceList = response.data;
-                renderSpaceCards(spaceList);
-            })
-    }
+      // ç°¡ä»‹
+      capacityNode.innerText = space.Capacity;
+      minHourNode.innerText = space.MinHour;
+      areaNode.innerText = space.MeasurementOfArea;
 
-    function setPlaceholder() {
-        cardListNode.innerHTML = '';
-        for (i = 0; i <= 7; i++) {
-            let placeholder = document.querySelector('#placeholder-template').content.cloneNode(true);
-            cardListNode.appendChild(placeholder);
-        }
-    }
+      // è¨­å®šè¼ªæ’­
+      // const swiper = new Swiper('.swiper', {
+      //   loop: true,
+      //   pagination: {
+      //     el: '.swiper-pagination',
+      //     clickable: true,
+      //   },
+      //   navigation: {
+      //     nextEl: '.swiper-button-next',
+      //     prevEl: '.swiper-button-prev',
+      //   },
+      // });
 
-    function renderSpaceCards(spaceList) {
-        cardListNode.innerHTML = '';
-        spaceList.forEach(space => {
-            const templateClone = document.querySelector('#card-template').content.cloneNode(true);
-            const venueLink = templateClone.querySelector('.card-link');
-            const venueImgNode = templateClone.querySelector('.swiper-wrapper');
-            const venueNameNode = templateClone.querySelector('.venue-name');
-            const venueAddressNode = templateClone.querySelector('.venue-address');
-            const pricePerHourNode = templateClone.querySelector('.venue-price');
-            const ratingNode = templateClone.querySelector('.venue-rating');
-            const reviewCountNode = templateClone.querySelector('.review-count');
-            const capacityNode = templateClone.querySelector('.capacity');
-            const minHourNode = templateClone.querySelector('.min-time');
-            const areaNode = templateClone.querySelector('.area');
+      cardListNode.appendChild(templateClone);
+    })
+  }
 
-            // ¶W³sµ²
-            venueLink.href = `/Booking/BookingPage/${space.SpaceID}`;
 
-            // ¹Ï¤ù
-            // space.SpaceImageURLList.forEach(imgURL => {
-            //   let swiperSlide = document.createElement('div');
-            //   swiperSlide.classList = 'venue-img swiper-slide';
-            //   swiperSlide.style.backgroundImage = `url(${imgURL})`;
 
-            //   venueImgNode.appendChild(swiperSlide);
-            // });
-            let swiperSlide = document.createElement('div');
-            swiperSlide.classList = 'venue-img swiper-slide';
-            swiperSlide.style.backgroundImage = `url(${space.SpaceImageURLList[0]})`;
-            venueImgNode.appendChild(swiperSlide);
 
-            // »ù®æ
-            pricePerHourNode.innerText = `NT$${space.PricePerHour}`;
 
-            // ¦WºÙ
-            venueNameNode.innerText = space.SpaceName;
 
-            // ¦a§}
-            let address = document.createElement('span');
-            address.classList = 'ms-1'
-            address.innerText = `${space.City} ${space.District} ${space.Address}`;
-            venueAddressNode.appendChild(address);
 
-            // µû»ù
-            if (space.Scores.length === 0) {
-                let blank = document.createElement('span');
-                blank.innerText = '¥Ø«e¨S¦³¥ô¦óµû»ù';
-                ratingNode.insertBefore(blank, reviewCountNode);
-            } else {
-                let avgStars = space.Scores.reduce(function (a, b) {
-                    return a + b;
-                }, 0) / space.Scores.length;
 
-                if (avgStars % 1 === 0) {
-                    for (let i = 1; i <= avgStars; i++) {
-                        let star = document.createElement('i');
-                        star.classList = 'fas fa-star';
-                        ratingNode.insertBefore(star, reviewCountNode);
-                    }
-                } else {
-                    for (let i = 1; i < avgStars; i++) {
-                        let star = document.createElement('i');
-                        star.classList = 'fas fa-star';
-                        ratingNode.insertBefore(star, reviewCountNode);
-                    }
-                    let halfStar = document.createElement('i');
-                    halfStar.classList = 'fas fa-star-half-alt';
-                    ratingNode.insertBefore(halfStar, reviewCountNode);
-                }
-            }
 
-            // µû»ù¼Æ
-            reviewCountNode.innerText = space.Scores.length;
 
-            // Â²¤¶
-            capacityNode.innerText = space.Capacity;
-            minHourNode.innerText = space.MinHour;
-            areaNode.innerText = space.MeasurementOfArea;
 
-            // ³]©w½ü¼½
-            // const swiper = new Swiper('.swiper', {
-            //   loop: true,
-            //   pagination: {
-            //     el: '.swiper-pagination',
-            //     clickable: true,
-            //   },
-            //   navigation: {
-            //     nextEl: '.swiper-button-next',
-            //     prevEl: '.swiper-button-prev',
-            //   },
-            // });
 
-            cardListNode.appendChild(templateClone);
-        })
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 })
