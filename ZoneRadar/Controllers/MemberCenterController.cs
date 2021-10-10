@@ -114,6 +114,10 @@ namespace ZoneRadar.Controllers
             }
         }
 
+        /// <summary>
+        /// 註冊(Get)(Jenny)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Register()
         {
@@ -122,10 +126,20 @@ namespace ZoneRadar.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// 註冊(Post)(Jenny)
+        /// </summary>
+        /// <param name="registerVM"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Register([Bind(Include = "Name, Email, Password, ConfirmPassword")] RegisterZONERadarViewModel registerVM)
         {
+            ViewBag.UserEmail = registerVM.Email;
+            return View("HadSentEmail");
+
+
+
             if (!ModelState.IsValid || registerVM.Password != registerVM.ConfirmPassword)
             {
                 //輸入格式不正確或密碼不一致
@@ -145,6 +159,8 @@ namespace ZoneRadar.Controllers
                     //Session["ConfirmRegister"] = new List<string>() { registerResult.User.Email, DateTime.Now.AddMinutes(10).ToString() };
                     //接著寄送驗證信
                     _service.SentEmail(Server, Request, Url, memberResult.User.Email);
+
+                    ViewBag.UserEmail = memberResult.User.Email;
                     return View("HadSentEmail");
                 }
                 else
@@ -158,6 +174,34 @@ namespace ZoneRadar.Controllers
             }
         }
 
+        /// <summary>
+        /// 重發驗證信(Get)(Jenny)
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ResentEmail()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 重發驗證信(Post)(Jenny)
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public string ResentEmail(string email)
+        {
+            //_service.SentEmail(Server, Request, Url, email);
+            return "已重發驗證信，請至信箱確認！";
+        }
+
+        /// <summary>
+        /// 驗證電子郵件(Jenny)
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="expired"></param>
+        /// <returns></returns>
         public ActionResult ConfirmEmail(string email, string expired)
         {
             //測試：Session是否接收的到資料？(答：收不到，是null)
@@ -169,7 +213,10 @@ namespace ZoneRadar.Controllers
             //超過10分鐘無效
             if (DateTime.Now > expiredTime)
             {
-                return View();
+                TempData["Alert"] = true;
+                TempData["Message"] = "超過10分鐘有效時間，請重新註冊！";
+                TempData["Icon"] = false;
+                return RedirectToAction("Index", "Home");
             }
             //確認是否有此註冊資訊
             var memberResult = _service.ConfirmRegister(email);
@@ -198,6 +245,10 @@ namespace ZoneRadar.Controllers
             }
         }
 
+        /// <summary>
+        /// 登入(Get)(Jenny)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Login()
         {
@@ -214,6 +265,11 @@ namespace ZoneRadar.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// 登入(Post)(Jenny)
+        /// </summary>
+        /// <param name="loginVM"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login([Bind(Include = "Email, Password")] LoginZONERadarViewModel loginVM)
@@ -223,7 +279,7 @@ namespace ZoneRadar.Controllers
             {
                 //回到原本頁面並跳出錯誤訊息
                 TempData["Alert"] = true;
-                TempData["Message"] = "輸入格式不正確，請重新註冊！";
+                TempData["Message"] = "輸入格式不正確，請重新登入！";
                 TempData["Icon"] = false;
                 return Redirect(Request.UrlReferrer.AbsolutePath);
             }
@@ -258,6 +314,10 @@ namespace ZoneRadar.Controllers
             return Redirect(originalUrl);
         }
 
+        /// <summary>
+        /// 登出(Jenny)
+        /// </summary>
+        /// <returns></returns>
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();

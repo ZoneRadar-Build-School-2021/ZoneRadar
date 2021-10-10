@@ -20,6 +20,10 @@ namespace ZoneRadar.Controllers
             _reviewService = new ReviewService();
         }
 
+        /// <summary>
+        /// ZONERadar的首頁(Jenny)
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             var model = new HomeViewModel
@@ -37,11 +41,6 @@ namespace ZoneRadar.Controllers
             ViewBag.Alert = TempData["Alert"];
             ViewBag.Message = TempData["Message"];
             ViewBag.Icon = TempData["Icon"];
-            //嘗試登入失敗時的狀況(重新跳出登入Modal，並將原先輸入的Email顯示在欄位裡)
-            //if (TempData["Email"] != null)
-            //{
-            //    ViewBag.LoginModalPopup = TempData["LoginModalPopup"];
-            //}
             
             return View(model);
         }

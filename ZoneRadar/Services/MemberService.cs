@@ -178,7 +178,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 將未驗證的註冊資訊先存進資料庫
+        /// 將未驗證的註冊資訊先存進資料庫(Jenny)
         /// </summary>
         /// <param name="registerVM"></param>
         /// <returns>回傳會員資訊及註冊是否成功</returns>
@@ -231,7 +231,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 寄送驗證信
+        /// 寄送驗證信(Jenny)
         /// </summary>
         /// <param name="server"></param>
         /// <param name="request"></param>
@@ -281,7 +281,7 @@ namespace ZoneRadar.Services
 
 
         /// <summary>
-        /// 點擊驗證連結後做確認，是否有此會員的註冊紀錄
+        /// 點擊驗證連結後做確認，是否有此會員的註冊紀錄(Jenny)
         /// </summary>
         /// <param name="email"></param>
         public MemberResult ConfirmRegister(string email)
@@ -322,7 +322,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 比對是否有此會員
+        /// 比對是否有此會員(Jenny)
         /// </summary>
         /// <param name="loginVM"></param>
         /// <returns></returns>
@@ -372,7 +372,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 建造加密表單驗證票證
+        /// 建造加密表單驗證票證(Jenny)
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
@@ -401,7 +401,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 建造Cookie
+        /// 建造Cookie(Jenny)
         /// </summary>
         /// <param name="encryptedTicket"></param>
         /// <param name="responseBase"></param>
@@ -413,7 +413,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 取得使用者原先欲造訪的路由
+        /// 取得使用者原先欲造訪的路由(Jenny)
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>

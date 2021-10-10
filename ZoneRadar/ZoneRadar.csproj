@@ -421,6 +421,7 @@
     <Content Include="Views\MemberCenter\HadSentEmail.cshtml" />
     <Content Include="Views\Shared\_LoginModalPartial.cshtml" />
     <Content Include="Views\Shared\_RegisterModalPartial.cshtml" />
+    <Content Include="Views\MemberCenter\ResentEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
