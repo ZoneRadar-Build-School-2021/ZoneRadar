@@ -409,6 +409,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Booking\BookingPage.cshtml" />
     <Content Include="Views\Searching\SearchingPage.cshtml" />
+    <Content Include="Views\Shared\_LoginModalPartial.cshtml" />
+    <Content Include="Views\Shared\_RegisterModalPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

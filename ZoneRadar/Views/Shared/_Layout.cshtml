@@ -1,9 +1,22 @@
-﻿<!DOCTYPE html>
+﻿@{
+    HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
+
+    string userPhoto = "";
+    if (cookie != null)
+    {
+        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
+        UserInfo userInfo = Json.Decode<UserInfo>(ticket.UserData);
+        userPhoto = userInfo.MemberPhoto;
+    }
+
+    string icon = ViewBag.Icon == true ? "success" : "error";
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - ZONERadar</title>
     <link rel="icon" type="image/gif" href="~/Assets/IMG/index/ZONERardar-03.ico" />
     <link href="~/Assets/CSS/flatpickr.min.css" rel="stylesheet" />
     <link href="~/Assets/CSS/material_blue.css" rel="stylesheet" />
@@ -18,9 +31,258 @@
 
 </head>
 <body>
+    <!-- navbar -->
+    <nav class="shared-navbar navbar navbar-light navbar-expand-md position-fixed w-100 top-0">
+        <div class="container-fluid">
+            <a class="navbar-brand p-0 ms-3 me-0" href="~/Home/Index">
+                <h1 class="mb-0 d-flex align-items-center">
+                    <img src="~/Assets/IMG/ZONERadar.png" alt="logo" class="logo d-inline-block align-middle">
+                </h1>
+            </a>
+            <div class="search-link nav-item list-unstyled ms-auto ms-md-0 me-md-auto">
+                <a class="nav-link px-0 px-md-4" href="~/Searching/SearchingPage">
+                    <i class="fas fa-search me-md-2"></i>
+                    <span class="d-none d-md-inline-block">Search</span>
+                </a>
+            </div>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#shared-navbar-content" aria-controls="shared-navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse flex-grow-0 text-center  align-items-center pt-2 pt-md-0" id="shared-navbar-content">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0 align-items-stretch">
+                    <li class="nav-item">
+                        <a class="become-host-link nav-link" href="~/HostCenter/AddSpace">成為場地主</a>
+                    </li>
+                    <li class="customer-only nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#register-modal">註冊</a>
+                    </li>
+                    <li class="customer-only nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login-modal">登入</a>
+                    </li>
+                    <!-- 登入後出現 -->
+                    <li class="member-only d-none nav-item mb-1 mb-md-0">
+                        <a class="nav-link" href="#">訊息中心</a>
+                    </li>
+                    <!-- 登入後，手機出現 -->
+                    <li class="member-only d-none nav-item d-md-none">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingMyaccount">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMyaccount" aria-expanded="false" aria-controls="collapseMyaccount">
+                                    <div class="user-pic d-inline-block overflow-hidden me-1">
+                                        <img class="h-100 align-top" src="@userPhoto">
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="collapseMyaccount" class="accordion-collapse collapse" aria-labelledby="headingMyaccount">
+                                <div class="accordion-body p-0">
+                                    <div class="accordion-item accordion-member">
+                                        <h2 class="accordion-header" id="headingMember">
+                                            <button class="accordion-button dropdown-item collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMember" aria-expanded="false" aria-controls="collapseMember">
+                                                活動主
+                                            </button>
+                                        </h2>
+                                        <div id="collapseMember" class="accordion-collapse collapse" aria-labelledby="headingMember">
+                                            <div class="accordion-body p-0">
+                                                <a class="nav-link" href="#">訂購單</a>
+                                                <a class="nav-link" href="~/UserCenter/Pending">訂單管理</a>
+                                                <a class="nav-link" href="~/MemberCenter/UserInfo">評價和收藏</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item accordion-host">
+                                        <h2 class="accordion-header" id="headingHost">
+                                            <button class="accordion-button dropdown-item collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHost" aria-expanded="false" aria-controls="collapseHost">
+                                                場地主
+                                            </button>
+                                        </h2>
+                                        <div id="collapseHost" class="accordion-collapse collapse" aria-labelledby="headingHost">
+                                            <div class="accordion-body p-0">
+                                                <a class="nav-link" href="~/HostCenter/Processing">訂單管理</a>
+                                                <a class="nav-link" href="~/HostCenter/EditSpace">場地管理</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="nav-link" href="~/MemberCenter/EditProfile">修改個人資訊</a>
+                                    <a class="nav-link" href="~/MemberCenter/SignOut">登出</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 登入後，平板+電腦出現 -->
+                    <li class="member-only d-none user nav-item">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                <div class="user-pic d-inline-block overflow-hidden me-1">
+                                    <img class="h-100 align-top" src="@userPhoto">
+                                </div>
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                                <li>
+                                    <div class="accordion-item accordion-member">
+                                        <h2 class="accordion-header" id="headingMember">
+                                            <button class="accordion-button dropdown-item collapsed justify-content-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMember" aria-expanded="false" aria-controls="collapseMember">
+                                                活動主
+                                            </button>
+                                        </h2>
+                                        <div id="collapseMember" class="accordion-collapse collapse" aria-labelledby="headingMember">
+                                            <div class="accordion-body p-0">
+                                                <a class="nav-link" href="#">訂購單</a>
+                                                <a class="nav-link" href="~/UserCenter/Pending">訂單管理</a>
+                                                <a class="nav-link" href="~/MemberCenter/UserInfo">評價和收藏</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="accordion-item accordion-host">
+                                        <h2 class="accordion-header" id="headingHost">
+                                            <button class="accordion-button dropdown-item collapsed justify-content-start" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHost" aria-expanded="false" aria-controls="collapseHost">
+                                                場地主
+                                            </button>
+                                        </h2>
+                                        <div id="collapseHost" class="accordion-collapse collapse" aria-labelledby="headingHost">
+                                            <div class="accordion-body p-0">
+                                                <a class="nav-link" href="~/HostCenter/Processing">訂單管理</a>
+                                                <a class="nav-link" href="~/HostCenter/EditSpace">場地管理</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a class="dropdown-item" href="~/MemberCenter/EditProfile">修改個人資訊</a></li>
+                                <li><a class="dropdown-item" href="~/MemberCenter/SignOut">登出</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 登入Modal -->
+    <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center text-secondary">
+                    <h3 class="fw-bolder">歡迎回來！</h3>
+                    <p class="mb-4">請登入</p>
+                    <a href="#" id="third-register-google" class="third-register d-block mb-3 text-decoration-none text-secondary">
+                        <img src="https://storage.googleapis.com/support-kms-prod/ZAl1gIwyUsvfwxoW9ns47iJFioHXODBbIkrK" alt="google">
+                        Google 登入
+                    </a>
+                    <a href="#" id="third-register-facebook" class="third-register d-block mb-3 text-decoration-none text-secondary">
+                        <img src="https://www.facebook.com/images/fb_icon_325x325.png" alt="facebook">
+                        Facebook 登入
+                    </a>
+                    <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email</div>
+                    @Html.Partial("_LoginModalPartial", new LoginZONERadarViewModel())
+                    <a href="#" id="forget-password" class="text-decoration-none d-inline-block mb-4">忘記密碼</a>
+                    <p class="mb-5">還沒有ZONERadar帳號？<a href="#" id="a-register-modal" data-bs-toggle="modal" data-bs-target="#register-modal" class="text-decoration-none">立即註冊</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 註冊Modal -->
+    <div class="modal fade" id="register-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center text-secondary">
+                    <h3 class="fw-bolder">加入 ZONERadar</h3>
+                    <p class="mb-4">和場地主訂購空間</p>
+                    <a href="#" id="third-register-google" class="third-register d-block mb-3 text-decoration-none text-secondary">
+                        <img src="https://storage.googleapis.com/support-kms-prod/ZAl1gIwyUsvfwxoW9ns47iJFioHXODBbIkrK" alt="google">
+                        使用 Google 註冊
+                    </a>
+                    <a href="#" id="third-register-facebook" class="third-register d-block mb-3 text-decoration-none text-secondary">
+                        <img src="https://www.facebook.com/images/fb_icon_325x325.png" alt="facebook">
+                        使用 Facebook 註冊
+                    </a>
+                    <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email註冊</div>
+                    @Html.Partial("_RegisterModalPartial", new RegisterZONERadarViewModel())
+                    <p class="mb-2">當您註冊時，代表您已同意ZONERadar的服務條款及隱私權政策</p>
+                    <a href="~/MemberCenter/ResentEmail" id="forget-password" class="text-decoration-none d-inline-block mb-4">重發驗證信</a>
+                    <p class="mb-5">已有ZONERadar帳號？<a href="#" id="a-login-modal" data-bs-toggle="modal" data-bs-target="#login-modal" class="text-decoration-none">登入</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+
+    <!-- footer -->
+    <footer class="shared-footer w-100 px-3 pb-5 pt-md-5 mt-5">
+        <div class="container">
+            <div class="row text-center justify-content-md-evenly">
+                <div class="col-12 col-md-4 col-lg-3 py-4 ps-3 ps-md-4 text-start">
+                    <img src="~/Assets/IMG/ZONERadar.png" alt="logo" class="d-md-block logo mb-md-3">
+                    <span class="d-none d-md-inline-block text-md-end">&copy; ZONERadar - <a href="~/HOME/Policy" class="text-decoration-underline">服務條款</a></span>
+                </div>
+
+                <!-- 平板+電腦出現 -->
+                <div class="d-none d-md-block col-md-2 col-lg-2">
+                    <p class="mb-0 py-1 fw-bolder">公司</p>
+                    <ul class="list-unstyled m-0 py-3">
+                        <li class="mb-1 mb-lg-2"><a href="~/Home/About">關於我們</a></li>
+                        <li class="mb-1 mb-lg-2"><a href="~/Home/FAQ">常見問題</a></li>
+                        <li class="mb-1 mb-lg-2"><a href="#">媒體報導</a></li>
+                        <li class="mb-1 mb-lg-2"><a href="#">線上徵才</a></li>
+                    </ul>
+                </div>
+                <div class="d-none d-md-block col-md-2 col-lg-2">
+                    <p class="mb-0 py-1 fw-bolder">社群媒體</p>
+                    <ul class="list-unstyled m-0 py-3">
+                        <li class="mb-1 mb-lg-2"><a href="#">Facebook</a></li>
+                        <li class="mb-1 mb-lg-2"><a href="#">Instagram</a></li>
+                        <li class="mb-1 mb-lg-2"><a href="#">Twitter</a></li>
+                    </ul>
+                </div>
+                <div class="d-none d-md-block col-md-2 col-lg-2">
+                    <p class="mb-0 py-1 fw-bolder">探索</p>
+                    <ul class="list-unstyled m-0 py-3">
+                        <li class="mb-1 mb-lg-2"><a href="~/Searching/SearchingPage">找場地</a></li>
+                        <li class="mb-1 mb-lg-2"><a href="#" data-bs-toggle="modal" data-bs-target="#register-modal">刊場地</a></li>
+                    </ul>
+                </div>
 
 
-
+                <!-- 手機出現 -->
+                <div class="d-block d-md-none col-12">
+                    <div class="col-12">
+                        <p class="mb-0 py-3 fw-bolder" data-bs-toggle="collapse" data-bs-target="#company">公司</p>
+                        <ul class="collapse list-unstyled m-0 py-3" id="company">
+                            <li class="mb-2 mb-lg-2"><a href="~/Home/About">關於我們</a></li>
+                            <li class="mb-2 mb-lg-2"><a href="~/Home/FAQ">常見問題</a></li>
+                            <li class="mb-2 mb-lg-2"><a href="#">媒體報導</a></li>
+                            <li class="mb-2 mb-lg-2"><a href="#">線上徵才</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12">
+                        <p class="mb-0 py-3 fw-bolder" data-bs-toggle="collapse" data-bs-target="#social">社群媒體</p>
+                        <ul class="collapse list-unstyled m-0 py-3" id="social">
+                            <li class="mb-2 mb-lg-2"><a href="#">Facebook</a></li>
+                            <li class="mb-2 mb-lg-2"><a href="#">Instagram</a></li>
+                            <li class="mb-2 mb-lg-2"><a href="#">Twitter</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12">
+                        <p class="mb-0 py-3 fw-bolder" data-bs-toggle="collapse" data-bs-target="#explore">探索</p>
+                        <ul class="collapse list-unstyled m-0 py-3" id="explore">
+                            <li class="mb-2 mb-lg-2"><a href="~/Searching/SearchingPage">找場地</a></li>
+                            <li class="mb-2 mb-lg-2"><a href="#" data-bs-toggle="modal" data-bs-target="#register-modal">刊場地</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <span class="col-12 d-md-none text-md-start px-4 mt-5">&copy; ZONERadar - <a href="~/HOME/Policy" class="text-decoration-underline">服務條款</a></span>
+            </div>
+        </div>
+    </footer>
 
 
     <script src="~/Assets/JS/leaflet.js"></script>
@@ -34,5 +296,81 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
+
+    <!--判斷登入與否，決定導覽列顯示的介面-->
+    @if (User.Identity.IsAuthenticated)
+    {
+        <script>
+            window.addEventListener("load", () => {
+                let customer_only = document.querySelectorAll(".customer-only");
+                let member_only = document.querySelectorAll(".member-only");
+                customer_only.forEach(item => {
+                    item.classList.add("d-none");
+                })
+                member_only.forEach(item => {
+                    item.classList.remove("d-none");
+                })
+            })
+        </script>
+    }
+    else
+    {
+        <script>
+            window.addEventListener("load", () => {
+                let customer_only = document.querySelectorAll(".customer-only");
+                let member_only = document.querySelectorAll(".member-only");
+                customer_only.forEach(item => {
+                    item.classList.remove("d-none");
+                })
+                member_only.forEach(item => {
+                    item.classList.add("d-none");
+                })
+            })
+        </script>
+    }
+
+    <!--輸入註冊路由時，跳出註冊Modal-->
+    @if (ViewBag.RegisterModalPopup == true)
+    {
+        <script>
+            window.addEventListener("load", () => {
+                let register_modal = document.querySelector("#register-modal");
+                let modal = bootstrap.Modal.getOrCreateInstance(register_modal);
+                modal.show();
+            })
+        </script>
+    }
+
+    <!--判斷是否欲進入未授權畫面或輸入登入路由時，跳出登入Modal-->
+    @if (ViewBag.LoginModalPopup == true)
+    {
+        <script>
+            window.addEventListener("load", () => {
+                let login_modal = document.querySelector("#login-modal");
+                let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
+                modal.show();
+            })
+        </script>
+    }
+
+    @if (ViewBag.Alert == true)
+    {
+        <script>
+            window.addEventListener("load", () => {
+                Swal.fire({
+                    title: "@ViewBag.Message",
+                    icon: "@icon",
+                    showConfirmButton: true,
+                    confirmButtonColor: "#be7418",
+                    confirmButtonText: "OK",
+                    position: "top"
+                })
+            })
+        </script>
+    }
+
+    @RenderSection("endCSS", required: false)
+    @RenderSection("endJS", required: false)
+
 </body>
 </html>
