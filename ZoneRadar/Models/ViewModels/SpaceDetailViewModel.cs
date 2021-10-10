@@ -14,7 +14,8 @@ namespace ZoneRadar.Models.ViewModels
         public string ShootingEquipment { get; set; }
         public string ParkingInfo { get; set; }
         public string HostRule { get; set; }
-        public Dictionary<string, List<string>> AmenityDictionary { get; set; }
+        public Dictionary<string, List<string>> AmenityDict { get; set; }
+        public Dictionary<string, List<string>> AmenityIconDict { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
         public string TrafficInfo { get; set; }
