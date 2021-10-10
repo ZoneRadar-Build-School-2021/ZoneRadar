@@ -8,9 +8,9 @@ namespace ZoneRadar.Models.ViewModels
     public class UserInfoViewModel
     {
         public User User { get; set; }
-        public List<UserReview> ToUserReview { set; get; 
+        public List<UserReview> ToUserReview { set; get; }
     }
-}
+
     public class UserReview : Spaces
     {
         public int Score { get; set; }
