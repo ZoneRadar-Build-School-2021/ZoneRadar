@@ -216,11 +216,11 @@ footer.shared-footer {
     padding: 0 2rem;
 }
 
-#a-register-modal, #a-login-modal, #forget-password {
+#a-register-modal, #a-login-modal, #forget-password, #resent-email {
     color: #049DD9;
 }
 
-    #a-register-modal:hover, #a-login-modal:hover, #forget-password:hover {
+    #a-register-modal:hover, #a-login-modal:hover, #forget-password:hover, #resent-email:hover {
         color: #0077a7;
     }
 
@@ -285,9 +285,11 @@ footer.shared-footer {
     #login-submit:hover, #register-submit:hover {
         background-color: #0077a7;
     }
+
     #login-submit:focus, #register-submit:focus {
         box-shadow: none;
     }
+
 #register-modal form + p {
     font-size: 14px;
 }
