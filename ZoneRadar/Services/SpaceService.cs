@@ -250,9 +250,13 @@ namespace ZoneRadar.Services
         public SpaceDetailViewModel GetTargetSpaceDetail(Space targetSpace)
         {
             // 找出所有場地設施
-            var amenityList = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).GroupBy(x => x.AmenityDetail.AmenityCategoryDetail.AmenityCategory).ToDictionary(x => x.Key, x => x.Select(y => y.AmenityDetail.Amenity).ToList());
-            var amenityIconList = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).GroupBy(x => x.AmenityDetail.Amenity).ToDictionary(x => x.Key, x => x.Select(y => y.AmenityDetail.AmenityICON).ToList());
-            
+            var amenityList = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.AmenityDetail)
+                              .GroupBy(x => x.AmenityCategoryDetail.AmenityCategory)
+                              .ToDictionary(x => x.Key, x => x.Select(y => y.Amenity).ToList());
+            var a = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.AmenityDetail)
+                              .GroupBy(x => x.AmenityCategoryDetail.AmenityCategory)
+                              .ToDictionary(x => x.Key, x => x.Select(y => y.AmenityICON).ToList());
+
             // 找出該場地所有營業資料
             var weekDayConverter = new Dictionary<string, int>
             {
@@ -270,7 +274,9 @@ namespace ZoneRadar.Services
             var endTimeList = operationingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.EndTime);
 
             // 找出所有清潔公約選項
-            var cleaningOptionList = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == targetSpace.SpaceID).GroupBy(x => x.CleaningOption.CleaningCategory.Category).ToDictionary(x => x.Key, x => x.Select(y => y.CleaningOption.OptionDetail).ToList());
+            var cleaningOptionList = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.CleaningOption)
+                                     .GroupBy(x => x.CleaningCategory.Category)
+                                     .ToDictionary(x => x.Key, x => x.Select(y => y.OptionDetail).ToList());
 
             // 找出滿時優惠的時數
             var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Hour;
@@ -288,7 +294,7 @@ namespace ZoneRadar.Services
                 ParkingInfo = targetSpace.Parking,
                 HostRule = targetSpace.HostRules,
                 AmenityDict = amenityList,
-                AmenityIconDict = amenityIconList,
+                AmenityIconDict = a,
                 Longitude = targetSpace.Longitude,
                 Latitude = targetSpace.Latitude,
                 TrafficInfo = targetSpace.Traffic,
