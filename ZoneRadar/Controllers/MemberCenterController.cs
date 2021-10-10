@@ -49,15 +49,13 @@ namespace ZoneRadar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditProfile([Bind(Include ="MemberID,Name,Phone,Description")] Member edit)
         {
+            //若未通過Model驗證
             if (ModelState.IsValid)
             {
-                return RedirectToRoute(new { controller = "MemberCenter", action = "EditProfile" });
+                return RedirectToAction("MemberCenter", "EditProfile");
             }
-            else
-            {
-                var model = _service.EditProfileData(edit);
-                return View(model);
-            }
+            var model = _service.EditProfileData(edit);
+            return View(model);
         }
 
         public ActionResult MyCollection(int? memberId)
