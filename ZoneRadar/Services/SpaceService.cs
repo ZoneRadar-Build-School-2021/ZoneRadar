@@ -250,8 +250,10 @@ namespace ZoneRadar.Services
         public SpaceDetailViewModel GetTargetSpaceDetail(Space targetSpace)
         {
             // 找出所有場地設施
-            var amenityList = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.AmenityDetail.Amenity);
-            var amenityIconList = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.AmenityDetail.AmenityICON);
+            var amenityList = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).GroupBy(x => x.AmenityDetail)
+                              .ToDictionary(x => x.Key.AmenityCategoryDetail.AmenityCategory, x => x.Select(y => y.AmenityDetail.Amenity).ToList());
+            var amenityIconList = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).GroupBy(x => x.AmenityDetail)
+                              .ToDictionary(x => x.Key.Amenity, x => x.Select(y => y.AmenityDetail.AmenityICON).ToList());
 
             // 找出該場地所有營業資料
             var weekDayConverter = new Dictionary<string, int>
@@ -296,7 +298,8 @@ namespace ZoneRadar.Services
                 ShootingEquipment = targetSpace.ShootingEquipment,
                 ParkingInfo = targetSpace.Parking,
                 HostRule = targetSpace.HostRules,
-                AmenityDictionary = amenityDictionary,
+                AmenityDict = amenityDictionary,
+                AmenityIconDict = ,
                 Longitude = targetSpace.Longitude,
                 Latitude = targetSpace.Latitude,
                 TrafficInfo = targetSpace.Traffic,
