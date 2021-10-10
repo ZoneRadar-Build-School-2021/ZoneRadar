@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "ConfirmEmail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="text-center px-5 my-5">
+    <img src="~/Assets/IMG/static/sent-email.png" alt="寄驗證信" />
+    <h3 id="count-down-timer" class="mt-5 mb-3"></h3>
+    <h4 class="mb-3">驗證信已寄出，請至信箱確認信件，並在10分鐘內完成身分驗證。</h4>
+    <h5>( 若未收到驗證信，請點擊 <button class="">重發驗證信</button> )</h5>
+</div>
+
+@section topCSS
+{
+    <style>
+        img {
+            width: 300px;
+        }
+        button {
+            background-color: transparent;
+            border: none;
+            color: #049DD9;
+        }
+        button:hover {
+            color: #0077a7;
+        }
+    </style>
+}
+@section endJS
+{
+    <script>
+        //#region 倒數計時器
+        let seconds_remaining;
+        function paddedFormat(num) {
+            return num < 10 ? "0" + num : num;
+        }
+
+        function startCountDown(duration, element) {
+            seconds_remaining = duration;
+            let min = 0;
+            let sec = 0;
+
+            let countInterval = setInterval(function () {
+                min = parseInt(seconds_remaining / 60);
+                sec = parseInt(seconds_remaining % 60);
+
+                element.textContent = `${paddedFormat(min)}:${paddedFormat(sec)}`;
+
+                seconds_remaining = seconds_remaining - 1;
+                if (seconds_remaining < 0) { clearInterval(countInterval) };
+            }, 1000);
+        }
+        //#endregion
+
+        function postValue() {
+            $.ajax({
+                type: "POST",
+                url: "/MemberCenter/ResentEmail",
+                data: { email: "@ViewBag.UserEmail" },
+                dataType: "text",
+                success: function (response) {
+                    alert(response);
+                }
+            });
+        }
+
+        window.onload = function () {
+            //#region 倒數計時器
+            let time_minutes = 10; // Value in minutes
+            let time_seconds = 0; // Value in seconds
+
+            let duration = time_minutes * 60 + time_seconds;
+
+            element = document.querySelector('#count-down-timer');
+            element.textContent = `${paddedFormat(time_minutes)}:${paddedFormat(time_seconds)}`;
+
+            startCountDown(--duration, element);
+            //#endregion
+
+            let btn = $("button");
+            btn.click(function () {
+                postValue();
+                seconds_remaining = 600;
+            });
+        };
+    </script>
+}

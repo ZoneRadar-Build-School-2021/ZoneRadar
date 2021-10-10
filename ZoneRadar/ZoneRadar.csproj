@@ -373,6 +373,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\MemberCenter\ConfirmEmailContent.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -411,11 +412,12 @@
     <Content Include="Views\Searching\SearchingPage.cshtml" />
     <Content Include="Views\Shared\_LoginModalPartial.cshtml" />
     <Content Include="Views\Shared\_RegisterModalPartial.cshtml" />
+    <Content Include="Views\MemberCenter\ResentEmail.cshtml" />
+    <Content Include="Views\MemberCenter\HadSentEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\HostCenter\" />
-    <Folder Include="Views\MemberCenter\" />
     <Folder Include="Views\UserCenter\" />
   </ItemGroup>
   <ItemGroup>
