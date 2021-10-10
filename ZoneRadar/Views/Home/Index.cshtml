@@ -1,31 +1,367 @@
-﻿@{
+﻿@model HomeViewModel
+@{
     ViewBag.Title = "Home Page";
+    var selectedSpaces = Model.SelectedSpaces;
+    var toSpaceReviews = Model.ToSpaceReviews;
+    var typeOptions = Model.TyoeOptions;
+    var cityOptions = Model.CityOptions;
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<!-- 幻燈片 -->
+<div class="homepage-carousel position-relative">
+    <div class="slide-img-group position-relative w-100">
+        <div class="slide-img position-absolute top-0 start-0 w-100 h-100">
+            <h2 class="main-title-location position-absolute text-white fw-bolder">lecture</h2>
+        </div>
+        <div class="slide-img position-absolute top-0 start-0 w-100 h-100">
+            <h2 class="main-title-location position-absolute text-white fw-bolder">party</h2>
+        </div>
+        <div class="slide-img position-absolute top-0 start-0 w-100 h-100">
+            <h2 class="main-title-location position-absolute text-white fw-bolder">meeting</h2>
+        </div>
+    </div>
+    <h2 class="main-title position-absolute text-white fw-bolder">Your next</h2>
+    <h2 class="main-title position-absolute text-white fw-bolder">starts here</h2>
+    <!-- 首頁搜尋列 -->
+    <div class="homepage-search w-100">
+        <form action="~/Home/SearchSpace" method="post" class="row justify-content-center justify-content-md-start mx-0 py-3 py-md-0">
+            <!--活動性質-->
+            <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0 ms-md-5">
+                <select class="select-activity form-select form-select-lg" name="HomepageSearchVM.TypeDetailId" aria-label="choose-activity">
+                    <option selected class="d-none">活動性質</option>
+                    @foreach (var item in typeOptions)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+                @*@Html.DropDownListFor(model => model.HomepageSearchVM.TypeDetailId, typeOptions, "活動性質", new { @class = "select-activity form-select form-select-lg" })*@
+            </div>
+            <!--地點-->
+            <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0">
+                <select class="select-county form-select form-select-lg" name="HomepageSearchVM.CityId" aria-label="choose-county">
+                    <option value="0" selected class="d-none">地點</option>
+                    @foreach (var item in cityOptions)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+                @*@Html.DropDownListFor(model => model.HomepageSearchVM.CityId, cityOptions, "地點", new { @class = "select-county form-select form-select-lg" })*@
+            </div>
+            <!--日期-->
+            <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0">
+                <input class="select-date flatpickr flatpickr-input px-3 py-2 w-100" name="HomepageSearchVM.Date" type="text" placeholder="選擇時間" readonly="readonly">
+                @*@Html.EditorFor(model => model.HomepageSearchVM.Date, new { htmlAttributes = new { @class = "select-date flatpickr flatpickr-input px-3 py-2 w-100", type = "text", placeholder = "選擇時間", @readonly = "readonly" } })*@
+            </div>
+            <div class="col-11 col-md-2"><button class="btn text-white w-100 h-100" id="homepage-search-submit" type="submit">找場地</button></div>
+        </form>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<!-- Swiper：活動類別圖片 -->
+<div class="container mt-5 position-relative">
+    <!-- Swiper -->
+    <div class="swiper swiper-activity">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide swiper-slide-lecture">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
+                    <span class="">課程講座</span>
+                </a>
+            </div>
+            <div class="swiper-slide swiper-slide-party">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
+                    <span class="">派對</span>
+                </a>
+            </div>
+            <div class="swiper-slide swiper-slide-meeting">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
+                    <span class="">會議</span>
+                </a>
+            </div>
+            <div class="swiper-slide swiper-slide-dinner">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
+                    <span class="">聚會餐敘</span>
+                </a>
+            </div>
+            <div class="swiper-slide swiper-slide-photograph">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
+                    <span class="">拍攝攝影</span>
+                </a>
+            </div>
+            <div class="swiper-slide swiper-slide-announce">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
+                    <span class="">發表會</span>
+                </a>
+            </div>
+            <div class="swiper-slide swiper-slide-concert">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
+                    <span class="">音樂表演</span>
+                </a>
+            </div>
+            <div class="swiper-slide swiper-slide-exhibition">
+                <a href="~/Searching/SearchingPage/" class="d-block w-100 h-100 text-decoration-none text-white">
+                    <span class="">靜態展覽</span>
+                </a>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next swiper-activity-button-next d-none d-md-inline-block"></div>
+    <div class="swiper-button-prev swiper-activity-button-prev d-none d-md-inline-block"></div>
+</div>
+
+<!-- Why ZONERadar -->
+<div class="characteristic-section w-100 mt-5 text-center text-md-start">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-img col-12 px-0 d-md-none">
+                <img src="https://images.unsplash.com/photo-1583135630256-a25ea659d1d7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80" alt="characteristic-space" class="w-100">
+            </div>
+            <div class="col-md-img col-6 d-none d-md-block">
+            </div>
+            <div class="col-text col-12 col-md-6 col-lg-4 px-5">
+                <h4 class="fw-bolder mb-5">Why <span class="logo-text">ZONERadar</span>?</h4>
+                <h6 class="fw-bolder mb-3 fs-5">獨特的空間</h6>
+                <p class="mb-4">每天我們都會有新的、有創意的空間——從社區畫廊到隱藏的屋頂等等。</p>
+                <h6 class="fw-bolder mb-3 fs-5">誠實定價</h6>
+                <p class="mb-4">我們的空間定價適合您的預算。 按小時付費，無需擔心隱藏費用。</p>
+                <h6 class="fw-bolder mb-3 fs-5">預定流程順暢</h6>
+                <p class="mb-0">不再有凌亂的合同。 我們構建了工具，使預訂空間就像單擊按鈕一樣簡單。</p>
+            </div>
+        </div>
     </div>
 </div>
+
+
+
+<!-- Swiper：地區類別圖片 -->
+<div class="container location-category mt-5">
+    <h3 class="text-center fs-2 fw-bolder mb-5">在找哪裡的場地？</h3>
+    <div class="row text-center px-3 px-md-0">
+        <div class="col-12 col-md-5 position-relative mb-2 mb-md-0 pe-md-0">
+            <div class="max-slide Taipei h-100">
+                <a href="~/Searching/SearchingPage/2" class="d-block w-100 h-100 text-decoration-none text-white">
+                    <span class="">台北</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-12 col-md-7 position-relative">
+            <div class="swiper swiper-location">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide NewTaipeiCity">
+                        <a href="~/Searching/SearchingPage/3" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">新北</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Tauyuan">
+                        <a href="~/Searching/SearchingPage/4" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">桃園</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Hsinchu">
+                        <a href="~/Searching/SearchingPage/5" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">新竹</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Miaoli">
+                        <a href="~/Searching/SearchingPage/11" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">苗栗</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Taichung">
+                        <a href="~/Searching/SearchingPage/6" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">台中</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Nantou">
+                        <a href="~/Searching/SearchingPage/13" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">南投</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Changhua">
+                        <a href="~/Searching/SearchingPage/12" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">彰化</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Yunlin">
+                        <a href="~/Searching/SearchingPage/14" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">雲林</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Chiayi">
+                        <a href="~/Searching/SearchingPage/8" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">嘉義</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Tainan">
+                        <a href="~/Searching/SearchingPage/7" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">台南</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Kaohsiung">
+                        <a href="~/Searching/SearchingPage/9" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">高雄</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Pingtung">
+                        <a href="~/Searching/SearchingPage/16" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">屏東</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Keelung">
+                        <a href="~/Searching/SearchingPage/1" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">基隆</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Yilan">
+                        <a href="~/Searching/SearchingPage/17" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">宜蘭</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Hualien">
+                        <a href="~/Searching/SearchingPage/18" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">花蓮</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Taitung">
+                        <a href="~/Searching/SearchingPage/19" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">台東</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Matsu">
+                        <a href="~/Searching/SearchingPage/22" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">連江</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Kinmen">
+                        <a href="~/Searching/SearchingPage/21" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">金門</span>
+                        </a>
+                    </div>
+                    <div class="swiper-slide Penghu">
+                        <a href="~/Searching/SearchingPage/20" class="d-block w-100 h-100 text-decoration-none text-white">
+                            <span class="">澎湖</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next swiper-location-button-next d-none d-md-inline-block"></div>
+            <div class="swiper-button-prev swiper-location-button-prev d-none d-md-inline-block"></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 精選場地 -->
+<div class="container selected-space mt-5">
+    <h3 class="text-center fs-2 fw-bolder mb-5">精選場地</h3>
+    <div class="row p-3 p-md-0">
+        @foreach (var item in selectedSpaces)
+        {
+            <div class="col-12 col-md-6 col-lg-4 mb-3 position-relative">
+                <a href="~/Booking/BookingPage/@item.SpaceId" class="text-decoration-none">
+                    <div class="img w-100" style="background-image: url(@item.SpacePhoto);"></div>
+                    <span class="distinct position-absolute">@item.CityName．@item.Capacity 人</span>
+                    <span class="price position-absolute">$@Html.DisplayFor(modelItem => item.PricePerHour) / hr</span>
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- 用戶評價 -->
+<div class="user-comment w-100 mt-5 py-5">
+    <div class="container">
+        <h3 class="text-center fs-2 fw-bolder mb-4 mb-md-5 text-white">用戶評價</h3>
+        <div class="row px-3 px-md-0">
+            <div class="col-12">
+                <div class="swiper swiper-comment">
+                    <div class="swiper-wrapper">
+                        @foreach (var item in toSpaceReviews)
+                        {
+                            <a href="~/Booking/BookingPage/@item.SpaceId" class="swiper-slide text-decoration-none">
+                                <h5 class="name m-0 p-3 fw-bolder">@item.MemberName</h5>
+                                <p class="content flex-grow-1 m-0 px-3 text-start">
+                                    @item.ReviewContent
+                                </p>
+                                <div class="star p-3">
+                                    @for (int i = 0; i < item.Score; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                </div>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 場地主介紹 -->
+<h3 class="text-center fs-2 fw-bolder mt-5">場地主評價</h3>
+<div class="container host-introduction mt-5 p-4 p-xl-5">
+    <div class="row align-items-center justify-content-md-between">
+        <div class="d-none d-md-block col-5">
+            <img src="~/Assets/IMG/index/taiwan-woman.jfif" alt="host" class="w-100 align-middle">
+        </div>
+        <div class="col-12 col-md-6">
+            <i class="fas fa-quote-left d-blcok fs-4"></i>
+            <p class="fs-4">我從沒想過 ZONERadar 會變成我的收入來源。更重要的是，當場地主很有趣、很簡單，也拓展了我對這個空間的看法。</p>
+            <p class="d-none d-md-block mb-0 fs-5 fw-bolder">Mary Lin</p>
+            <p class="d-none d-md-block text-secondary">Hosting in Taipei since 2021</p>
+        </div>
+        <div class="d-md-none col-12 d-flex align-items-center">
+            <div class="div-sm-img d-inline-block rounded-circle overflow-hidden">
+                <div class="img" style="background-image: url(~/Assets/IMG/index/taiwan-woman.jfif);"></div>
+            </div>
+            <p class="ms-3 mb-0 d-inline-block">
+                <span class="fw-bolder">Mary Lin</span>
+                <br>Hosting in Taipei since 2021
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- 尋找場地 -->
+<div class="leaseholder-section w-100 mt-5">
+    <div class="container text-center">
+        <div class="row">
+            <div class="text text-white text-center text-md-start col-12 col-md-6 col-lg-5 d-flex flex-column justify-content-md-center mb-4 mb-md-0">
+                <h4 class="fs-2 mb-4">開始尋找最適合您的場地</h4>
+                <p class="fs-5"><i class="fas fa-glass-cheers me-4"></i>舉辦一場難忘的派對</p>
+                <p class="fs-5"><i class="fas fa-camera me-4"></i>探索創意電影和照片拍攝空間</p>
+                <p class="fs-5"><i class="fas fa-ribbon me-4"></i>以時尚的方式舉辦工作活動</p>
+            </div>
+            <div class="pic-border col-12 col-md-6 col-lg-7">
+                <div class="pic">
+                    <h4 class="fs-2 fw-bolder"><span>想要找場地嗎？</span></h4>
+                    <p class="fs-4 mb-5"><span class="">有1000個以上<br>最好的場地讓您挑選</span></p>
+                    <a href="#" class="btn text-white fs-4">尋找場地</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 成為場地主 -->
+<div class="container host-section text-center mt-5">
+    <h4 class="fs-2 fw-bolder"><span>分享您的空間，開始賺錢</span></h4>
+    <p class="fs-4 mb-5"><span>免費刊登，訂定價格，並通過我們 100 萬美元的責任保險</span></p>
+    <a href="#" class="btn text-white fs-4">成為場地主</a>
+</div>
+
+
+@section topCSS
+{
+    <link href="~/Assets/CSS/index/index.css" rel="stylesheet" />
+}
+
+@section endJS
+{
+    <script src="~/Assets/JS/index/index.js"></script>
+}
