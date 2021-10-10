@@ -243,7 +243,6 @@
     <Compile Include="Services\PreOrderService.cs" />
     <Compile Include="Services\ReviewService.cs" />
     <Compile Include="Services\SpaceService.cs" />
-    <Compile Include="Services\ProfileService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\HashService.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />

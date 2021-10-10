@@ -322,5 +322,53 @@ namespace ZoneRadar.Services
             var url = FormsAuthentication.GetRedirectUrl(userName, true);
             return url;
         }
+
+        //EditProfile
+        public ProfileViewModel GetProfileData(int memberID)
+        {
+            var p = _zoneradarRepository.GetAll().ToList().FirstOrDefault(x => x.MemberID == memberID);
+            var result = new ProfileViewModel()
+            {
+                MemberID = p.MemberID,
+                //Photo = p.Photo,
+                Name = p.Name,
+                Phone = p.Phone,
+                Email = p.Email,
+                Description = p.Description
+            };
+
+            /*
+            var profiledata = _repo.GetAll().Where(x => x.MemberID == 1).ToList();
+            foreach (var m in profiledata)
+            {
+                var profileVM = new ProfileViewModel 
+                { 
+                    Photo= m.Photo, 
+                    Name = m.Name, 
+                    Phone = m.Phone, 
+                    Email = m.Email, 
+                    Description = m.Description 
+                };
+                result = profileVM;
+            }
+            */
+            return result;
+        }
+
+        public ProfileViewModel EditProfileData(Member edit)
+        {
+            var result = new ProfileViewModel();
+            //抓取 --> 編輯資料
+            var p = _zoneradarRepository.GetAll().ToList().FirstOrDefault(x => x.MemberID == edit.MemberID);
+            //p.Photo = edit.Photo;
+            p.Name = edit.Name;
+            p.Phone = edit.Phone;
+            p.Description = edit.Description;
+            //更新
+            _zoneradarRepository.Update(p);
+            _zoneradarRepository.SaveChanges();
+
+            return result;
+        }
     }
 }

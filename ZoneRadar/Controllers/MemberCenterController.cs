@@ -14,11 +14,9 @@ namespace ZoneRadar.Controllers
 {
     public class MemberCenterController : Controller
     {
-        private readonly ProfileService _qaz;
         private readonly MemberService _service;
         public MemberCenterController()
         {
-            _qaz = new ProfileService();
             _service = new MemberService();
         }
         
@@ -44,7 +42,7 @@ namespace ZoneRadar.Controllers
         public ActionResult EditProfile()
         {
             var userID = int.Parse(User.Identity.Name); //登入後的帳號(綁定一人)
-            var model = _qaz.GetProfileData(userID);
+            var model = _service.GetProfileData(userID);
             return View(model);
         }
         [HttpPost]
@@ -57,10 +55,11 @@ namespace ZoneRadar.Controllers
             }
             else
             {
-                var model = _qaz.EditProfileData(edit);
+                var model = _service.EditProfileData(edit);
                 return View(model);
-            }    
+            }
         }
+
         public ActionResult MyCollection(int? memberId)
         {
             if (!memberId.HasValue)

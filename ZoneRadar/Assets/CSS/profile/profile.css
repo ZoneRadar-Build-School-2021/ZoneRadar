@@ -11,6 +11,17 @@
     margin-top: 30px;
     padding-top: 30px;
 }
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+.photo-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    border: 3px solid #049DD9;
+}
 .photo-upload{
     margin-top: 30px;
 }
