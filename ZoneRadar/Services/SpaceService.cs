@@ -30,7 +30,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 找出精選場地
+        /// 找出精選場地(Jenny)
         /// </summary>
         /// <returns></returns>
         public List<SelectedSpaceViewModel> GetSelectedSpace()
@@ -70,7 +70,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 產生活動類型的SelectListItem
+        /// 產生活動類型的SelectListItem(Jenny)
         /// </summary>
         /// <returns></returns>
         public List<SelectListItem> GetTypeOptions()
@@ -86,7 +86,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 產生城市的SelectListItem
+        /// 產生城市的SelectListItem(Jenny)
         /// </summary>
         /// <returns></returns>
         public List<SelectListItem> GetCityOptions()
@@ -132,7 +132,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 搜尋符合類型、縣市、時間條件的場地(首頁搜尋列)，並轉成搜尋場地頁面的ViewModel
+        /// 搜尋符合類型、縣市、時間條件的場地(首頁搜尋列)，並轉成搜尋場地頁面的ViewModel(Jenny)
         /// </summary>
         /// <param name="homepageSearchVM"></param>
         public void SearchSpacesByTypeCityDate(HomepageSearchViewModel homepageSearchVM)
@@ -188,7 +188,7 @@ namespace ZoneRadar.Services
                     //判斷該天是否被訂走或未營業
                     var isBooked = bookedDate.Contains(homepageSearchVM.Date.Date); //該天被訂走
                     var isOperating = operatingWeekDay.Contains((int)homepageSearchVM.Date.DayOfWeek); //該天有營業
-                                                                                                       //若被訂走或未營業，則將其從targetSpaces中移除
+                                                                                                                     //若被訂走或未營業，則將其從targetSpaces中移除
                     if (isBooked && !isOperating)
                     {
                         targetSpaces.Remove(space);
@@ -207,7 +207,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 依照CityId搜尋場地，並轉成搜尋場地頁面的ViewModel
+        /// 依照CityId搜尋場地，並轉成搜尋場地頁面的ViewModel(Jenny)
         /// </summary>
         /// <param name="cityId"></param>
         /// <returns></returns>
