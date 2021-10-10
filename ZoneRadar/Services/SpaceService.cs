@@ -250,12 +250,7 @@ namespace ZoneRadar.Services
         public SpaceDetailViewModel GetTargetSpaceDetail(Space targetSpace)
         {
             // 找出所有場地設施
-            var amenityList = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.AmenityDetail)
-                              .GroupBy(x => x.AmenityCategoryDetail.AmenityCategory)
-                              .ToDictionary(x => x.Key, x => x.Select(y => y.Amenity).ToList());
-            var a = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.AmenityDetail)
-                              .GroupBy(x => x.AmenityCategoryDetail.AmenityCategory)
-                              .ToDictionary(x => x.Key, x => x.Select(y => y.AmenityICON).ToList());
+            var amenityList = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.AmenityDetail);
 
             // 找出該場地所有營業資料
             var weekDayConverter = new Dictionary<string, int>
@@ -277,8 +272,7 @@ namespace ZoneRadar.Services
 
             // 找出所有清潔公約選項
             var cleaningOptionList = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.CleaningOption)
-                                     .GroupBy(x => x.CleaningCategory.Category)
-                                     .ToDictionary(x => x.Key, x => x.Select(y => y.OptionDetail).ToList());
+                                     .GroupBy(x => x.CleaningCategory.Category);
 
             // 找出滿時優惠的時數
             var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Hour;
@@ -290,19 +284,19 @@ namespace ZoneRadar.Services
             {
                 HostName = targetSpace.Member.Name,
                 HostPhoto = targetSpace.Member.Photo,
-                CleaningOptionDict = cleaningOptionList,
+                CleaningOptionDict = cleaningOptionList.ToDictionary(x => x.Key, x => x.Select(y => y.OptionDetail).ToList()),
                 Introduction = targetSpace.Introduction,
                 ShootingEquipment = targetSpace.ShootingEquipment,
                 ParkingInfo = targetSpace.Parking,
                 HostRule = targetSpace.HostRules,
-                AmenityDict = amenityList,
-                AmenityIconDict = a,
+                AmenityDict = amenityList.GroupBy(x => x.AmenityCategoryDetail.AmenityCategory).ToDictionary(x => x.Key, x => x.Select(y => y.Amenity).ToList()),
+                AmenityIconDict = amenityList.ToDictionary(x => x.Amenity, x => x.AmenityICON),
                 Longitude = targetSpace.Longitude,
                 Latitude = targetSpace.Latitude,
                 TrafficInfo = targetSpace.Traffic,
-                OperatingDayList = operationgDayList.ToList(),
-                StartTimeList = startTimeList.ToList(),
-                EndTimeList = endTimeList.ToList(),
+                OperatingDayList = convertedOperatingDayList,
+                StartTimeList = originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.StartTime).ToList(),
+                EndTimeList = originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.EndTime).ToList(),
                 CancellationTitle = targetSpace.Cancellation.CancellationTitle,
                 CancellationInfo = targetSpace.Cancellation.CancellationDetail,
                 HoursForDiscount = hoursForDiscount,
