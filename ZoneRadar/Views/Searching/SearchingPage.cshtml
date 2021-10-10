@@ -1,7 +1,193 @@
 
 @{
     ViewBag.Title = "SearchingPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>SearchingPage</h2>
+<!-- filter -->
+<div class="container-fluid border-top border-bottom py-4 py-xl-2 px-4 px-lg-5">
+    <div class="filter-row">
+        <div class="my-2 d-none d-xl-inline-block me-2">
+            <select class="form-select city-filter" id="web-city-filter"></select>
+        </div>
+        <div class="my-2 d-none d-xl-inline-block me-2">
+            <select class="form-select district-filter" id="web-district-filter"></select>
+        </div>
+        <div class="my-2 d-none d-xl-inline-block me-2">
+            <select class="form-select type-filter" id="web-type-filter"></select>
+        </div>
+        <div class="more-filter d-xl-inline-block me-2">
+            <a type="button" class="filter-btn btn d-flex align-items-center justify-content-center" id="filter-btn" data-bs-toggle="modal" data-bs-target="#filter-modal">
+                <i class="fas fa-filter me-2"></i><span>更多條件</span>
+            </a>
+        </div>
+        <div class="my-2 d-none d-xl-inline-block me-2">
+            <input class="date-filter" id="web-date-filter" placeholder="活動日期">
+        </div>
+        <div class="d-none d-xl-inline-block me-2">
+            <div class="serching d-flex align-items-center">
+                <input class="search-bar form-control form-control" type="text" placeholder="想找什麼場地呢?" id="web-search">
+                <a class="ms-1" href="#"><i class="fas fa-search-location fs-4 ms-2" id="web-search-btn"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 商品圖卡 -->
+<div class="container-fluid mt-3 mt-xl-5 px-4 px-lg-5">
+    <!-- cards -->
+    <div class="card-list row gx-5"></div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade filter-modal" id="filter-modal" tabindex="-1" aria-labelledby="filter-modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title d-flex align-items-center fw-1"><img src="~/Assets/IMG/icons/filter-gray.svg" class="me-2" alt="filter">篩選條件</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row d-xl-none mb-lg-3">
+                    <div class="col-12 col-lg-6 mb-3 mb-lg-4">
+                        <select class="form-select city-filter" id="phone-city-filter"></select>
+                    </div>
+                    <div class="col-12 col-lg-6 mb-3 mb-lg-4">
+                        <select class="form-select district-filter" id="phone-district-filter"></select>
+                    </div>
+                    <div class="col-12 col-lg-6 mb-3 mb-lg-4">
+                        <select class="form-select type-filter" id="phone-type-filter"></select>
+                    </div>
+                    <div class="col-12 col-lg-6 mb-3 mb-lg-4">
+                        <input class="date-filter" id="phone-date-filter" placeholder="活動日期">
+                    </div>
+                </div>
+                <div class="row d-xl-none">
+                    <div class="col-12 d-flex align-items-center mb-5">
+                        <input class="search-bar form-control form-control" type="text" placeholder="想找什麼場地呢?" id="phone-search">
+                        <a class="ms-2" href="#"><i class="fas fa-search-location fs-4" id="phone-search-btn"></i></a>
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <section class="price col-12 co-md-8">
+                        <h5>價格區間</h5>
+                        <div class="price-range d-flex align-items-center">
+                            <div class="form-floating">
+                                <input type="text" class="price-filter form-control" id="low-price" placeholder="最低預算">
+                                <label for="low-price d-flex align-items-center">
+                                    <img src="~/Assets/IMG/icons/dollar.svg" alt="dollar" style="height: 0.8rem">
+                                    最低預算
+                                </label>
+                            </div>
+                            <span class="mx-2">~</span>
+                            <div class="form-floating">
+                                <input type="text" class="price-filter form-control" id="high-price" placeholder="最高預算">
+                                <label for="high-price d-flex align-items-center">
+                                    <img src="~/Assets/IMG/icons/dollar.svg" alt="dollar" style="height: 0.8rem">
+                                    最高預算
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="row mb-5">
+                    <section class="attendee col-6 col-xl-4 me-xl-2">
+                        <h5>參加人數</h5>
+                        <div class="form-floating d-flex align-items-end">
+                            <input type="text" class="attendee-filter form-control" id="attendee-filter" placeholder="參加人數">
+                            <label for="high-price d-flex align-items-center">
+                                <img src="~/Assets/IMG/icons/person.svg" alt="person" style="height: 0.8rem">
+                                參加人數
+                            </label>
+                            <span class="ms-2 d-none d-sm-inline fs-5">人</span>
+                        </div>
+                    </section>
+                    <section class="space col-6 col-xl-4 me-xl-2">
+                        <h5 class="w-100">室內坪數</h5>
+                        <div class="form-floating d-flex align-items-end">
+                            <input type="text" class="space-filter form-control" id="area-filter" placeholder="最小坪數">
+                            <label for="high-price align-items-center">
+                                <img src="~/Assets/IMG/icons/speed-square.svg" alt="square" style="height: 0.8rem">
+                                最小坪數
+                            </label>
+                            <span class="ms-2 d-none d-sm-inline fs-5">坪</span>
+                        </div>
+                    </section>
+                </div>
+                <div class="row mb-5">
+                    <section class="amenities col-12 d-flex flex-wrap" id="amenity-filter">
+                        <h5 class="w-100">場地與設施</h5>
+                    </section>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="clear-btn btn" data-bs-dismiss="modal">清除條件</button>
+                <button type="button" class="save-btn btn">確認</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Template -->
+<template id="placeholder-template">
+    <div class="card col-sm-12 col-md-6 col-xl-3 mb-5 border-0 placeholder-wave" aria-hidden="true">
+        <div class="card-img-top placeholder border-rounded"></div>
+        <div class="card-body p-0 placeholder-wave">
+            <h4 class="card-title placeholder col-12 my-3"></h4>
+            <p class="card-text">
+                <span class="placeholder col-4 mb-2"></span>
+                <span class="placeholder col-6 mb-2"></span>
+                <span class="placeholder col-3 me-3"></span>
+                <span class="placeholder col-3 me-3"></span>
+                <span class="placeholder col-3 me-3"></span>
+            </p>
+        </div>
+    </div>
+</template>
+<template id="card-template">
+    <div class="venue-card col-sm-12 col-md-6 col-xl-3 mb-5">
+        <a class="card-link" href="#">
+            <div class="venue-img-group swiper border-0">
+                <div class="price-tag d-flex align-items-center justify-content-center">
+                    <span class="venue-price fs-5"></span><span class="ms-1">起</span>
+                </div>
+                <div class="swiper-wrapper"></div>
+                <!-- <div class="swiper-button-prev d-none d-xl-block"></div>
+                <div class="swiper-button-next d-none d-xl-block"></div> -->
+            </div>
+            <h4 class="venue-name fw-bolder mt-3"></h4>
+            <p class="venue-address mb-2"><i class="fas fa-map-marker-alt me-1"></i></p>
+            <div class="venue-rating mb-2">
+                <span class="review-count ms-2"></span>篇評價
+            </div>
+            <ul class="venue-brief d-flex">
+                <li class="d-flex align-items-center me-3">
+                    <img class="mx-1" src="~/Assets/IMG/icons/person.svg" alt="capacity" style="height: 1rem"><span class="capacity"></span>人
+                </li>
+                <li class="d-flex align-items-center me-3">
+                    <img class="mx-1" src="~/Assets/IMG/icons/time.svg" alt="min-time" style="height: 1rem"><span class="min-time"></span>小時
+                </li>
+                <li class="d-flex align-items-center me-3">
+                    <img class="mx-1" src="~/Assets/IMG/icons/speed-square.svg" alt="area" style="height: 1rem"><span class="area"></span>坪
+                </li>
+            </ul>
+        </a>
+    </div>
+</template>
+<template id="amenity-template">
+    <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="" alt=""><span class="d-inline-block"></span></div>
+</template>
+
+
+@section topCSS
+{
+    <link href="~/Assets/CSS/searching/searching.css" rel="stylesheet" />
+}
+
+@section endJS
+{
+    <script src="~/Assets/JS/axios.min.js"></script>
+    <script src="~/Assets/JS/searching/searching.js"></script>
+}
+
 
