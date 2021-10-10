@@ -24,6 +24,10 @@ namespace ZoneRadar.Controllers
             _repository = new ZONERadarRepository();
         }
 
+        /// <summary>
+        /// 取得Filter資訊資料API(Steve)
+        /// </summary>
+        /// <returns></returns>
         [Route("GetFilterData")]
         [AcceptVerbs("GET")]
         public IHttpActionResult GetFilterData()
@@ -47,6 +51,11 @@ namespace ZoneRadar.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// 取得搜尋頁場地資訊API(Steve)
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         [Route("GetFilteredSpaces")]
         [AcceptVerbs("GET", "POST")]
         public IHttpActionResult GetFilteredSpaces(QueryViewModel query)

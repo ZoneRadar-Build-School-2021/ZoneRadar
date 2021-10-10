@@ -46,33 +46,5 @@ namespace ZoneRadar.Controllers
 
             return View(model);
         }
-
-        //[HttpGet]
-        //public ActionResult AddToCollection()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult AddToCollection(BookingPageViewModel bookingPageVM)
-        //{
-        //    var memberID = User.Identity.Name;
-        //    var collectionVM = new CollectionViewModel
-        //    {
-        //        SpaceID = bookingPageVM.SpaceBreifInfo.SpaceID,
-        //        SpaceName = bookingPageVM.SpaceBreifInfo.SpaceName,
-        //        SpaceImageURL = bookingPageVM.SpaceBreifInfo.SpaceImageURLList[0],
-        //        PricePerHour = bookingPageVM.SpaceBreifInfo.PricePerHour,
-        //        Country = bookingPageVM.SpaceBreifInfo.Country,
-        //        City = bookingPageVM.SpaceBreifInfo.City,
-        //        District = bookingPageVM.SpaceBreifInfo.District,
-        //        Address = bookingPageVM.SpaceBreifInfo.Address,
-        //        Scores = bookingPageVM.Reviews.Select(x => x.Score).ToList()
-        //    };
-
-        //    _spaceService.CreateCollectionInDB(bookingPageVM, memberID);
-        //    return RedirectToAction("BookingPage", bookingPageVM.SpaceBreifInfo.SpaceID);
-        //}
-
     }
 }
