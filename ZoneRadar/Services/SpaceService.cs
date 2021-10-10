@@ -268,10 +268,12 @@ namespace ZoneRadar.Services
                 { "星期六", 6 },
                 { "星期日", 7 }
             };
-            var operationingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == targetSpace.SpaceID);
-            var operationgDayList = operationingList.Select(x => weekDayConverter.FirstOrDefault(y => y.Value == x.OperatingDay).Key);
-            var startTimeList = operationingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.StartTime);
-            var endTimeList = operationingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.EndTime);
+            var originOperatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == targetSpace.SpaceID).ToList();
+            var convertedOperatingDayList = new List<string>();
+            foreach (var day in originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.OperatingDay).ToList())
+            {
+                convertedOperatingDayList.Add(weekDayConverter.FirstOrDefault(x => x.Value == day).Key);
+            }
 
             // 找出所有清潔公約選項
             var cleaningOptionList = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.CleaningOption)
