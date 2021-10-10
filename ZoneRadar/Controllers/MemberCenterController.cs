@@ -7,6 +7,7 @@ using ZoneRadar.Services;
 using System.Web.Security;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Services;
+using Newtonsoft.Json;
 
 namespace ZoneRadar.Controllers
 {
@@ -135,12 +136,7 @@ namespace ZoneRadar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register([Bind(Include = "Name, Email, Password, ConfirmPassword")] RegisterZONERadarViewModel registerVM)
         {
-            ViewBag.UserEmail = registerVM.Email;
-            return View("HadSentEmail");
-
-
-
-            if (!ModelState.IsValid || registerVM.Password != registerVM.ConfirmPassword)
+            if (!ModelState.IsValid || registerVM.RegisterPassword != registerVM.ConfirmPassword)
             {
                 //輸入格式不正確或密碼不一致
                 TempData["Alert"] = true;
@@ -157,6 +153,7 @@ namespace ZoneRadar.Controllers
                 {
                     //測試：用Session記錄註冊資訊
                     //Session["ConfirmRegister"] = new List<string>() { registerResult.User.Email, DateTime.Now.AddMinutes(10).ToString() };
+
                     //接著寄送驗證信
                     _service.SentEmail(Server, Request, Url, memberResult.User.Email);
 
@@ -192,8 +189,20 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public string ResentEmail(string email)
         {
-            //_service.SentEmail(Server, Request, Url, email);
-            return "已重發驗證信，請至信箱確認！";
+            var hasRegisterInfo = _service.SearchRegisterInfo(email);
+            if (hasRegisterInfo)
+            {
+                _service.SentEmail(Server, Request, Url, email);
+                var result = new { Icon = "success", Message = "已重發驗證信，請至信箱確認！" };
+                var jsonResult = JsonConvert.SerializeObject(result);
+                return jsonResult;
+            }
+            else
+            {
+                var result = new { Icon = "error", Message = "該帳號不符合未驗證條件，請重新註冊！" };
+                var jsonResult = JsonConvert.SerializeObject(result);
+                return jsonResult;
+            }
         }
 
         /// <summary>

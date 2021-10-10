@@ -60,7 +60,15 @@
                 data: { email: "@ViewBag.UserEmail" },
                 dataType: "text",
                 success: function (response) {
-                    alert(response);
+                    let result = JSON.parse(response);
+                    Swal.fire({
+                        title: result.Message,
+                        icon: result.Icon,
+                        showConfirmButton: true,
+                        confirmButtonColor: "#be7418",
+                        confirmButtonText: "OK",
+                        position: "top"
+                    })
                 }
             });
         }

@@ -262,7 +262,7 @@
                 <a href="~/Booking/BookingPage/@item.SpaceId" class="text-decoration-none">
                     <div class="img w-100" style="background-image: url(@item.SpacePhoto);"></div>
                     <span class="distinct position-absolute">@item.CityName．@item.Capacity 人</span>
-                    <span class="price position-absolute">$@Html.DisplayFor(modelItem => item.PricePerHour) / hr</span>
+                    <span class="price position-absolute">@Html.DisplayFor(modelItem => item.PricePerHour) / hr</span>
                 </a>
             </div>
         }

@@ -5,9 +5,6 @@ using System.Web;
 using ZoneRadar.Models;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Repositories;
-using ZoneRadar.Models.ViewModels;
-using ZoneRadar.Repositories;
-using ZoneRadar.Models;
 using System.Web.Security;
 using Newtonsoft.Json;
 using ZoneRadar.Utilities;
@@ -190,10 +187,10 @@ namespace ZoneRadar.Services
             };
 
             registerVM.Name = HttpUtility.HtmlEncode(registerVM.Name);
-            registerVM.Email = HttpUtility.HtmlEncode(registerVM.Email);
-            registerVM.Password = HttpUtility.HtmlEncode(registerVM.Password).MD5Hash();
+            registerVM.RegisterEmail = HttpUtility.HtmlEncode(registerVM.RegisterEmail);
+            registerVM.RegisterPassword = HttpUtility.HtmlEncode(registerVM.RegisterPassword).MD5Hash();
 
-            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.Email.ToUpper() && x.SignUpDateTime.Year != 1753);
+            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.RegisterEmail.ToUpper() && x.SignUpDateTime.Year != 1753);
 
             if (isSameEmail)
             {
@@ -207,8 +204,8 @@ namespace ZoneRadar.Services
                 {
                     var member = new Member
                     {
-                        Email = registerVM.Email,
-                        Password = registerVM.Password,
+                        Email = registerVM.RegisterEmail,
+                        Password = registerVM.RegisterPassword,
                         Name = registerVM.Name,
                         ReceiveEDM = false,
                         SignUpDateTime = new DateTime(1753,1,1), //未驗證時時間為西元1753年
@@ -279,6 +276,17 @@ namespace ZoneRadar.Services
             }
         }
 
+        /// <summary>
+        /// 確認是否有未驗證的註冊紀錄(Jenny)
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public bool SearchRegisterInfo(string email)
+        {
+            email = HttpUtility.HtmlEncode(email);
+            var hasRegisterInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.SignUpDateTime.Year == 1753);
+            return hasRegisterInfo;
+        }
 
         /// <summary>
         /// 點擊驗證連結後做確認，是否有此會員的註冊紀錄(Jenny)
@@ -334,13 +342,13 @@ namespace ZoneRadar.Services
             };
 
             //使用HtmlEncode將帳密做HTML編碼, 去除有害的字元
-            loginVM.Email = HttpUtility.HtmlEncode(loginVM.Email);
-            loginVM.Password = HttpUtility.HtmlEncode(loginVM.Password).MD5Hash();
+            loginVM.LoginEmail = HttpUtility.HtmlEncode(loginVM.LoginEmail);
+            loginVM.LoginPassword = HttpUtility.HtmlEncode(loginVM.LoginPassword).MD5Hash();
 
             //EF比對資料庫帳密
             //以Email及Password查詢比對Member資料表記錄，且註冊時間不得為預設1753年
             var members = _repository.GetAll<Member>().ToList();
-            var user = members.SingleOrDefault(x => x.Email.ToUpper() == loginVM.Email.ToUpper() && x.Password == loginVM.Password && x.SignUpDateTime.Year != 1753);
+            var user = members.SingleOrDefault(x => x.Email.ToUpper() == loginVM.LoginEmail.ToUpper() && x.Password == loginVM.LoginPassword && x.SignUpDateTime.Year != 1753);
 
             //修改上次登入時間
             if(user != null)
