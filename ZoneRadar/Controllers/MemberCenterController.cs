@@ -55,15 +55,18 @@ namespace ZoneRadar.Controllers
         {
             if (ModelState.IsValid)
             {
-                var p = _service.GetAll().ToList().FirstOrDefault(x => x.MemberID == edit.MemberID);
+                var memberID = int.Parse(User.Identity.Name);
 
-                p.Photo = edit.Photo;
+                Member p = _db.Member.FirstOrDefault(x => x.MemberID == memberID);
                 p.Name = edit.Name;
                 p.Phone = edit.Phone;
                 p.Description = edit.Description;
 
-                _db.Entry(edit).State = EntityState.Modified;
-                _db.SaveChanges();    
+                _db.Entry(p).State = EntityState.Modified;
+
+                _db.SaveChanges();
+
+                return RedirectToAction("EditProfile");
             }
             return View(edit);
         }
