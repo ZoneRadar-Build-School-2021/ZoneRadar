@@ -7,6 +7,11 @@
     var details = Model.SpaceDetailInfo;
     float total = 0;
     float averageScore = 0;
+    string discount = details.Discount.ToString().Split('.')[1];
+    if (discount.Contains('0'))
+    {
+        discount = discount.TrimEnd('0');
+    }
     foreach (var review in reviews)
     {
         total += review.Score;
@@ -315,16 +320,36 @@
             </div>
         </div>
         <div class="booking col-sm-12 col-xl-4 ps-xl-5">
-            <form class="booking-card text-center sticky-xl-top py-4 px-3">
+            <form class="booking-card text-center sticky-xl-top py-4 px-3" action="">
                 <h3 class="booking-card-title">NT$ <span class="venue-price">@Decimal.Round(@briefs.PricePerHour)</span></h3>
                 <p class="border-bottom pb-2">最少起訂時數<span class="min-time fs-5 px-1">@briefs.MinHour</span>小時</p>
-                <p class="border-bottom py-3 fs-5"><span class="discount-hour py-1">8</span>小時滿時優惠:<span class="ps-4 discount">@details.Discount</span></p>
-                <h4 class="text-start mt-4 mb-3 fs-5 fw-bolder">日期與時間:</h4>
-                <input placeholder="開始日期" class="w-100 d-inline-block mb-2 form-control" id="start-date" readonly>
-                <input placeholder="結束日期" class="w-100 d-inline-block form-control" id="end-date" readonly>
-                <h4 class="text-start mt-4 mb-3 fs-5 fw-bolder">參加人數:</h4>
-                <input placeholder="參加人數" class="attendees form-control" aria-label=".form-control attendees" id="attendee-count">
-                <div class="calculus">
+                <p class="border-bottom py-3 fs-5"><span class="discount-hour py-1">8</span>小時滿時優惠:<span class="ps-4 pe-1 discount">@discount</span>折</p>
+                <div class="order-detail-select mt-4">
+                    <h4 class="text-start mb-3 fs-5 fw-bolder">日期與時間:</h4>
+                    <div class="input-group mb-2">
+                        <input placeholder="開始日期" class="start-date form-control rounded me-1" readonly>
+                        <input placeholder="參加人數" class="attendees form-control rounded ms-1" aria-label=".form-control attendees">
+                    </div>
+                    <div class="input-group mb-2">
+                        <select class="start-time form-select rounded me-1">
+                            <option selected>開始時間</option>
+                            <option value="1">09:00</option>
+                            <option value="2">10:00</option>
+                            <option value="3">11:00</option>
+                        </select>
+                        <select class="end-time form-select rounded ms-1" id="inputGroupSelect01">
+                            <option selected>結束時間</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="other-operation d-flex justify-content-end mt-3">
+                    <button type="button" class="btn px-0 py-0 remove me-3">刪除</button>
+                    <button type="button" class="btn px-0 py-0 extend">再加一天</button>
+                </div>
+                <div class="calculation">
                     <div class="price-calculus mt-5 border-bottom mb-2">
                         <p class="d-flex mb-2">交易金額:<span class="ms-auto"><span class="venue-price">N$1200</span><span class="mx-1">x</span><span class="total-hour">6小時</span></span></p>
                         <p class="d-flex mb-2">滿時優惠:<span class="ms-auto"><span class="discount">85折</span></span></p>
