@@ -53,7 +53,7 @@ namespace ZoneRadar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditProfile([Bind(Include ="MemberID,Name,Email,Phone,Description")] ProfileViewModel edit)
         {
-            //判斷是否通過驗證
+            //判斷資料是否通過驗證
             if (ModelState.IsValid)
             {
                 //取出 ->編輯資料
