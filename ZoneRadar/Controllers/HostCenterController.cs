@@ -113,7 +113,10 @@ namespace ZoneRadar.Controllers
                 CleanRuleOptionsThreeList=_spaceService.ReadAnySpace(spaceId).CleanRuleOptionsThreeList,
                 SomeOnesCleanRuleThreeList=_spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleThreeList,
                 CleanRuleOptionsFourList=_spaceService.ReadAnySpace(spaceId).CleanRuleOptionsFourList,
-                SomeOnesCleanRuleFourList=_spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleFourList
+                SomeOnesCleanRuleFourList=_spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleFourList,
+                SpaceoperatingDaysList=_spaceService.ReadAnySpace(spaceId).SpaceoperatingDaysList,
+                _compareOperatingDay=_spaceService.ReadAnySpace(spaceId)._compareOperatingDay,
+                Operating=_spaceService.Operating(),
             };
             return View(model);
         }

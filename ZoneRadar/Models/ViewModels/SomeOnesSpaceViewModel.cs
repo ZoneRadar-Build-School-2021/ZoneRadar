@@ -19,8 +19,6 @@ namespace ZoneRadar.Models.ViewModels
         public List<SomeOnesSpaceName> SomeOnesSpaceNameList { get; set; }
         public List<SomeOnesSpaceIntroduction> SomeOnesSpaceIntroductionList { get; set; }
         public List<SomeOnesMeasureOfAreaandCapacity> SomeOnesMeasureOfAreaandCapacityList { get; set; }
-        public List<SomeOnesOperating> SomeOnesOperatingList { get; set; }
-        public List<SomeOnesOperatingDay> SomeOnesOperatingDayList { get; set; }
         public List<SomeOnesPrice> SomeOnesPriceList { get; set; }
         public List<SomeOnesDiscount> SomeOnesDiscountsList { get; set; }
         
@@ -51,9 +49,11 @@ namespace ZoneRadar.Models.ViewModels
 
         public List<SelectListItem> Operating { get; set; }
         public List<SelectListItem> OperatingDay { get; set; }
+
         public List<SomeOnesCancel> SomeOnesCancelAllList { get; set; }
         public List<SomeOnesCancel> SomeOnesCancelList { get; set; }
-
+        public List<SpaceoperatingDay> SpaceoperatingDaysList { get; set; }
+        public List<SpaceoperatingDay> _compareOperatingDay { get; set; }
     }
 
     public class SomeOnesSpaceName
@@ -107,7 +107,6 @@ namespace ZoneRadar.Models.ViewModels
 
         public virtual Member Member { get; set; }
         
-
     }
     public class SomeOnesCountry
     {
@@ -145,16 +144,6 @@ namespace ZoneRadar.Models.ViewModels
     {
         public decimal MeasureOfArea { get; set; }
         public int Capacity { get; set; }
-    }
-    public class SomeOnesOperating
-    {
-        public string Start { get; set; }
-        public string End { get; set; }
-
-    }
-    public class SomeOnesOperatingDay
-    {
-        public int Weekday { get; set; }
     }
     public class SomeOnesPrice
     {
@@ -202,6 +191,14 @@ namespace ZoneRadar.Models.ViewModels
         public int CancellationID { get; set; }
         public string CancellationTitle { get; set; }
         public string CancellationDetail { get; set; }
+    }
+    public class SpaceoperatingDay
+    {
+        public int SpaceId { get; set; }
+        public int OperatingDay { get; set; }
+        public string weekDay { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
     }
 }
     

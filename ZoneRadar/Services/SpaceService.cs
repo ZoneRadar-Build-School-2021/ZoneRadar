@@ -645,37 +645,35 @@ namespace ZoneRadar.Services
                 SomeOnesCitytList = new List<SomeOnesCity>(),
                 SomeOnesTypeDetailList = new List<SomeOnesTypeDetail>(),
                 ShowAllTypeDetailList = new List<ShowAllTypeDetail>(),
-                SomeOnesSpaceNameList=new List<SomeOnesSpaceName>(),
-                SomeOnesSpaceIntroductionList=new List<SomeOnesSpaceIntroduction>(),
+                SomeOnesSpaceNameList = new List<SomeOnesSpaceName>(),
+                SomeOnesSpaceIntroductionList = new List<SomeOnesSpaceIntroduction>(),
                 SomeOnesMeasureOfAreaandCapacityList = new List<SomeOnesMeasureOfAreaandCapacity>(),
-                SomeOnesPriceList=new List<SomeOnesPrice>(),
-                SomeOnesDiscountsList=new List<SomeOnesDiscount>(),
-                
-                amenityAraeOneList=new List<AmenityAraeOne>(),
-                amenityAraeTwoList=new List<AmenityAraeTwo>(),
-                amenityAraeThreeList=new List<AmenityAraeThree>(),
-               
-                SomeOnesAmenityList=new List<SomeOnesAmenity>(),
-                SomeTwoAmenityList = new List<SomeOnesAmenity>(),
-                SomeThreeAmenityList= new List<SomeOnesAmenity>(),
+                SomeOnesPriceList = new List<SomeOnesPrice>(),
+                SomeOnesDiscountsList = new List<SomeOnesDiscount>(),
 
-                SomeOnesRulesList =new List<SomeOnesRules>(),
-                SomeOnesTrafficList=new List<SomeOnesTraffic>(),
-                SomeOnesParkingList=new List<SomeOnesParking>(),
+                amenityAraeOneList = new List<AmenityAraeOne>(),
+                amenityAraeTwoList = new List<AmenityAraeTwo>(),
+                amenityAraeThreeList = new List<AmenityAraeThree>(),
+                SomeOnesAmenityList = new List<SomeOnesAmenity>(),
+                SomeTwoAmenityList = new List<SomeOnesAmenity>(),
+                SomeThreeAmenityList = new List<SomeOnesAmenity>(),
+                SomeOnesRulesList = new List<SomeOnesRules>(),
+                SomeOnesTrafficList = new List<SomeOnesTraffic>(),
+                SomeOnesParkingList = new List<SomeOnesParking>(),
                 SomeOnesShootingList = new List<SomeOnesShooting>(),
-                SomeOnesCancelAllList=new List<SomeOnesCancel>(),
-                SomeOnesCancelList=new List<SomeOnesCancel>(),
-                CleanRuleOptionsOneList=new List<SomeOnesCleanRule>(),
+                SomeOnesCancelAllList = new List<SomeOnesCancel>(),
+                SomeOnesCancelList = new List<SomeOnesCancel>(),
+                CleanRuleOptionsOneList = new List<SomeOnesCleanRule>(),
                 CleanRuleOptionsTwoList = new List<SomeOnesCleanRule>(),
                 CleanRuleOptionsThreeList = new List<SomeOnesCleanRule>(),
-
                 CleanRuleOptionsFourList = new List<SomeOnesCleanRule>(),
-                
                 SomeOnesCleanRuleOneList = new List<SomeOnesCleanRule>(),
-                SomeOnesCleanRuleTwoList=new List<SomeOnesCleanRule>(),
-                SomeOnesCleanRuleThreeList =new List<SomeOnesCleanRule>(),
-
-                SomeOnesCleanRuleFourList=new List<SomeOnesCleanRule>()
+                SomeOnesCleanRuleTwoList = new List<SomeOnesCleanRule>(),
+                SomeOnesCleanRuleThreeList = new List<SomeOnesCleanRule>(),
+                SomeOnesCleanRuleFourList = new List<SomeOnesCleanRule>(),
+                SpaceoperatingDaysList = new List<SpaceoperatingDay>(),
+                _compareOperatingDay = new List<SpaceoperatingDay>(),
+                Operating = new List<SelectListItem>(),
             };
             ///地址 ///
             var adds = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
@@ -721,8 +719,6 @@ namespace ZoneRadar.Services
                 };
                 result.SomeOnesCitytList.Add(ciytTemp);
             };
-
-
             //活動類型
             //把活動類別有的撈出來
             List<SpaceType> spacetypes = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == spaceId).ToList();
@@ -779,9 +775,6 @@ namespace ZoneRadar.Services
                 result.SomeOnesMeasureOfAreaandCapacityList.Add(MeasureOfAreaandCapacityTemp);
             }
 
-            /// 營業時間
-            /// 
-            /// 
 
             /// 定價
             var someonesprice = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
@@ -1009,8 +1002,6 @@ namespace ZoneRadar.Services
                 };
                 result.SomeOnesCleanRuleFourList.Add(temp);
             }
-
-
             //選項一類
             var cleansAllone = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID==1).ToList();
             foreach (var item in cleansAllone)
@@ -1059,9 +1050,59 @@ namespace ZoneRadar.Services
                 };
                 result.CleanRuleOptionsFourList.Add(cleanRuleTemp);
             }
+            ///營業時間 ///
+            ///有被選的
+            var openDays = _repository.GetAll<Operating>().Where(x => x.SpaceID == spaceId).ToList();
+            foreach (var item in openDays)
+            {
+                var operatingday = new SpaceoperatingDay()
+                {
+                    SpaceId = item.SpaceID,
+                    OperatingDay = item.OperatingDay,
+                    StartTime=item.StartTime,
+                    EndTime=item.EndTime,
+                };
+                if (operatingday.OperatingDay==1)
+                {
+                    operatingday.weekDay = "星期一";
+                }
+                else if(operatingday.OperatingDay== 2)
+                {
+                    operatingday.weekDay = "星期二";
+                }
+                else if (operatingday.OperatingDay == 3)
+                {
+                    operatingday.weekDay = "星期三";
+                }
+                else if (operatingday.OperatingDay == 4)
+                {
+                    operatingday.weekDay = "星期四";
+                }
+                else if (operatingday.OperatingDay == 5)
+                {
+                    operatingday.weekDay = "星期五";
+                }
+                else if (operatingday.OperatingDay == 6)
+                {
+                    operatingday.weekDay = "星期六";
+                }
+                else if (operatingday.OperatingDay == 7)
+                {
+                    operatingday.weekDay = "星期日";
+                }
+                
+                result.SpaceoperatingDaysList.Add(operatingday);
 
+            }
+            List<SpaceoperatingDay> _compareOperatingDay = new List<SpaceoperatingDay>();
+            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 1,weekDay = "星期一" });
+            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 2,weekDay = "星期二" });
+            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 3,weekDay = "星期三" });
+            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 4,weekDay = "星期四" });
+            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 5,weekDay = "星期五" });
+            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 6,weekDay = "星期六" });
+            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 7,weekDay = "星期日" });
             return result;
         }
-
     }
 }
