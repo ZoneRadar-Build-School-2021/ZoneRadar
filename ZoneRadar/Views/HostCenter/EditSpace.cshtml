@@ -55,11 +55,7 @@
                 <h5 class="fs-3"> <span>@owner.Select(x => x.MamberName).FirstOrDefault()</span> ,你好！說說你的場地吧！</h5>
                 <p>場地內容分享越詳細，能幫你拿到更多訂單</p>
             </div>
-            <div class="col col-lg-6  justify-content-lg-end text-end ">
-                <a href="AddSpace" class="AddSpaceBtn ">
-                        增加空間
-                </a>
-            </div>
+        </div>
 
         <div class="accordion" id="accordionExample">
             <div class="accordion-item">
@@ -69,12 +65,12 @@
                         <div class="col-12 col-lg-9 d-flex align-items-start">
                             <div class=" imgcontainer mt-1 me-2 ">
                                 <img class=" location" src="~/Assets/IMG/icons/location-icon.svg" alt="">
-        </div>
+                            </div>
                             <div class="textgroup">
                                 <h6 class="fs18">1.位置</h6>
                                 <p class="editDetailsp ">地址</p>
+                            </div>
                         </div>
-                    </div>
                     </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -180,7 +176,7 @@
                                     敘述最能代表您場地類型
                                     <br><i class=" mt-4 me-1 far fa-lightbulb"></i>
                                     例如：“公寓”、“攝影棚”、“餐廳”.....
-                        </p>
+                                </p>
                             </div>
 
                             @foreach (var type in allspacetype)
@@ -327,6 +323,7 @@
                         </div>
                         @foreach (var item in compareOpenDay)
                         {
+                            //if (spacetype.Select(x => x.Type).Contains(type.Type))
                             if (spaceOpenDay.Select(x => x.OperatingDay).Contains(item.OperatingDay))
                             {
                                 <div class="row mt-4 border-bottom">
@@ -638,9 +635,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                        <p>
+                                        <p>
                                             <i class=" mt-2 me-1 far fa-lightbulb"></i>第一張照片是您的封面照，請確保第一張照片是最代表您的場地的照片
-                        </p>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -990,7 +987,7 @@
                                             </div>
                                         </div>
                                     </div>
-                        </button>
+                                </button>
                             </h2>
                             <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
                                  data-bs-parent="#accordionExample">
@@ -1018,6 +1015,7 @@
                                         </div>
                                     </div>
                                     @foreach (var all in cancelAll)
+
                                     {
                                         if (cancel.Select(x => x.CancellationID).Contains(all.CancellationID))
                                         {
@@ -1049,44 +1047,19 @@
                                                 <div class="col-12 col-lg-12">
                                                     <p class="ms-3">
                                                         @all.CancellationDetail
-                        </p>
-                    </div>
-                    <div class="col-12 text-end border-bottom border-3 pb-5 ">
-                        <button class="DeleteSpaceBtn btn" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                            刪除
-                        </button>
-                        <a class="addspace EditSpaceBtn me-1" href="AddSpace">
-                            編輯空間
-                        </a>
-                    </div>
+                                                    </p>
+                                                </div>
+                                            </div>
                                         }
                                     }
-                </div>
-            </div>
-            <!-- 按下刪除跳出的Ｍodal -->
-            <!-- 桌機 平板 手機橫 -->
-            <!-- Modal -->
-            <div class="modal fade " id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content ">
-                        <button type="button" class="btn-close CloseMbtn ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <h5 class="text-center mt-3 mb-4" id="exampleModalLabel">刪除場地</h5>
-                        <div class="modalbody ms-auto me-auto">
-                            <p class=" text-center  text-md-start">您是否確定將此場地刪除？</p>
-                            <div class="form-check ms-auto me-auto w-75">
-                                <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label " for="flexCheckDefault">是的，我清楚刪除此場地相關的所有列表訊息</label>
-
+                                </div>
                             </div>
-                        </div>
-                        <div class="row justify-content-center mt-5 mb-2 ">
-                            <button type="button" class="w-75 col-8 btn deleteBtnM " data-bs-dismiss="modal">刪除</button>
-                        </div>
-                        <div class="row justify-content-center mb-4">
-                            <button type="button" class="w-75 col-8 text-center btn cancelBtnM " data-bs-dismiss="modal" aria-label="Close">取消</button>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
     <div class="container containerForAdd">
         <div class="row mt-5 mb-5">
             <div class="col-12 text-center">
@@ -1099,7 +1072,7 @@
 @*</form>*@
 
 @section topCSS
-{
+    {
     <link href="~/Assets/JS/addspace/CKEditor4/ckeditor/contents.css" />
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
