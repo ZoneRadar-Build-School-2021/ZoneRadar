@@ -36,13 +36,34 @@
     });
 
     // 執行區
-    extendDayBtn.addEventListener('click', extendADay);
-    removeDayBtn.addEventListener('click', removeADay);
     setMap();
     setMarker();
     setSelect();
+    extendDayBtn.addEventListener('click', extendADay);
+    removeDayBtn.addEventListener('click', removeADay);
 
     // functions定義
+    function setMap() {
+        const osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        const osm = new L.TileLayer(osmUrl, {
+            minZoom: 8,
+            maxZoom: 19
+        });
+        map.addLayer(osm);
+    }
+
+    function setMarker() {
+        const marker = L.marker([25.041824011585646, 121.53629849747963]);
+        const circle = L.circle([25.041824011585646, 121.53629849747963], {
+            color: '#D9831A',
+            fillColor: '#D9831A',
+            fillOpacity: 0.5,
+            radius: 100
+        });
+        marker.addTo(map);
+        circle.addTo(map);
+    }
+
     function setSelect() {
         const cloneNode = document.querySelector('#order-item-template').content.cloneNode(true);
         const dateNode = cloneNode.querySelector('.start-date');
@@ -231,27 +252,4 @@
         )
     }
 
-
-    // 地圖
-
-    function setMap() {
-        const osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-        const osm = new L.TileLayer(osmUrl, {
-            minZoom: 8,
-            maxZoom: 19
-        });
-        map.addLayer(osm);
-    }
-
-    function setMarker() {
-        const marker = L.marker([25.041824011585646, 121.53629849747963]);
-        const circle = L.circle([25.041824011585646, 121.53629849747963], {
-            color: '#D9831A',
-            fillColor: '#D9831A',
-            fillOpacity: 0.5,
-            radius: 100
-        });
-        marker.addTo(map);
-        circle.addTo(map);
-    }
 })()
