@@ -473,225 +473,228 @@ namespace ZoneRadar.Services
                 MeasurementOfArea = x.MeasureOfArea,
                 Scores = scores.Where(y => y.Order.SpaceID == x.SpaceID).Select(y => y.Score).ToList(),
             }).ToList();
-            /// <summary>
-            ///  便利設施 
-            ///  Amber
-            /// </summary>
-            /// 分三類
-            /// 1.
-            public SpaceViewModel ShowAmenityByIdOne()
+
+            return result;
+        }
+        /// <summary>
+        ///  便利設施 
+        ///  Amber
+        /// </summary>
+        /// 分三類
+        /// 1.
+        public SpaceViewModel ShowAmenityByIdOne()
+        {
+            var result = new SpaceViewModel()
             {
-                var result = new SpaceViewModel()
-                {
-                    amenityAraeOneList = new List<AmenityAraeOne>(),
-                };
-                var amenityOnes = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 1).Select(x => x).ToList();
-                foreach (var amenityOne in amenityOnes)
-                {
-                    var amenityOneTemp = new AmenityAraeOne()
-                    {
-                        AmenityId = amenityOne.AmenityDetailID,
-                        AmenityName = amenityOne.Amenity
-                    };
-                    result.amenityAraeOneList.Add(amenityOneTemp);
-                };
-                return result;
-            }
-            /// <summary>
-            ///  Amber 
-            /// </summary>
-            ///  便利設施 
-            /// </summary>
-            /// 第二類
-            /// 場地空間
-            public SpaceViewModel ShowAmenityByIdTwo()
+                amenityAraeOneList = new List<AmenityAraeOne>(),
+            };
+            var amenityOnes = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 1).Select(x => x).ToList();
+            foreach (var amenityOne in amenityOnes)
             {
-                var result = new SpaceViewModel()
+                var amenityOneTemp = new AmenityAraeOne()
                 {
-                    amenityAraeTwoList = new List<AmenityAraeTwo>(),
+                    AmenityId = amenityOne.AmenityDetailID,
+                    AmenityName = amenityOne.Amenity
                 };
-                var amenityTwos = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 2).Select(x => x).ToList();
-                foreach (var amenityTwo in amenityTwos)
-                {
-                    var amenityTwoTemp = new AmenityAraeTwo()
-                    {
-                        AmenityId = amenityTwo.AmenityDetailID,
-                        AmenityName = amenityTwo.Amenity
-                    };
-                    result.amenityAraeTwoList.Add(amenityTwoTemp);
-                }
-                return result;
-            }
-            /// <summary>
-            ///  便利設施 
-            ///  Amber
-            /// </summary>
-            /// 第三類
-            /// 其他
-            public SpaceViewModel ShowAmenityByIdThree()
+                result.amenityAraeOneList.Add(amenityOneTemp);
+            };
+            return result;
+        }
+        /// <summary>
+        ///  Amber 
+        /// </summary>
+        ///  便利設施 
+        /// </summary>
+        /// 第二類
+        /// 場地空間
+        public SpaceViewModel ShowAmenityByIdTwo()
+        {
+            var result = new SpaceViewModel()
             {
-                var result = new SpaceViewModel()
+                amenityAraeTwoList = new List<AmenityAraeTwo>(),
+            };
+            var amenityTwos = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 2).Select(x => x).ToList();
+            foreach (var amenityTwo in amenityTwos)
+            {
+                var amenityTwoTemp = new AmenityAraeTwo()
                 {
-                    amenityAraeThreeList = new List<AmenityAraeThree>(),
+                    AmenityId = amenityTwo.AmenityDetailID,
+                    AmenityName = amenityTwo.Amenity
                 };
-                var amenityThrees = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 3).Select(x => x).ToList();
-                foreach (var amenityThree in amenityThrees)
-                {
-                    var amenityThreeTemp = new AmenityAraeThree()
-                    {
-                        AmenityId = amenityThree.AmenityDetailID,
-                        AmenityName = amenityThree.Amenity
-                    };
-                    result.amenityAraeThreeList.Add(amenityThreeTemp);
-                }
-                return result;
+                result.amenityAraeTwoList.Add(amenityTwoTemp);
             }
+            return result;
+        }
+        /// <summary>
+        ///  便利設施 
+        ///  Amber
+        /// </summary>
+        /// 第三類
+        /// 其他
+        public SpaceViewModel ShowAmenityByIdThree()
+        {
+            var result = new SpaceViewModel()
+            {
+                amenityAraeThreeList = new List<AmenityAraeThree>(),
+            };
+            var amenityThrees = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 3).Select(x => x).ToList();
+            foreach (var amenityThree in amenityThrees)
+            {
+                var amenityThreeTemp = new AmenityAraeThree()
+                {
+                    AmenityId = amenityThree.AmenityDetailID,
+                    AmenityName = amenityThree.Amenity
+                };
+                result.amenityAraeThreeList.Add(amenityThreeTemp);
+            }
+            return result;
+        }
 
 
-            /// <summary>
-            /// 取消政策 4種
-            /// Amber
-            /// </summary>
-            /// 
-            public SpaceViewModel ShowCancellations()
+        /// <summary>
+        /// 取消政策 4種
+        /// Amber
+        /// </summary>
+        /// 
+        public SpaceViewModel ShowCancellations()
+        {
+            var result = new SpaceViewModel()
             {
-                var result = new SpaceViewModel()
+                cancellationAraesList = new List<CancellationArae>(),
+            };
+            var cancels = _repository.GetAll<Cancellation>().Select(x => x).ToList();
+            foreach (var cancel in cancels)
+            {
+                var canceltemp = new CancellationArae()
                 {
-                    cancellationAraesList = new List<CancellationArae>(),
+                    CancellationTitle = cancel.CancellationTitle,
+                    CancellationDetail = cancel.CancellationDetail
                 };
-                var cancels = _repository.GetAll<Cancellation>().Select(x => x).ToList();
-                foreach (var cancel in cancels)
-                {
-                    var canceltemp = new CancellationArae()
-                    {
-                        CancellationTitle = cancel.CancellationTitle,
-                        CancellationDetail = cancel.CancellationDetail
-                    };
-                    result.cancellationAraesList.Add(canceltemp);
-                }
-                return result;
+                result.cancellationAraesList.Add(canceltemp);
             }
+            return result;
+        }
 
-            /// <summary>
-            ///  Amber 
-            /// </summary>
-            /// 場地類型 16種 
-            /// </summary>
-            public SpaceViewModel ShowSpaceType()
+        /// <summary>
+        ///  Amber 
+        /// </summary>
+        /// 場地類型 16種 
+        /// </summary>
+        public SpaceViewModel ShowSpaceType()
+        {
+            var result = new SpaceViewModel()
             {
-                var result = new SpaceViewModel()
+                SpaceTypeAraeList = new List<SpaceTypeArae>()
+            };
+            var spaceTypes = _repository.GetAll<TypeDetail>().Select(x => x).ToList();
+            foreach (var space in spaceTypes)
+            {
+                var typeTemp = new SpaceTypeArae()
                 {
-                    SpaceTypeAraeList = new List<SpaceTypeArae>()
+                    TypeDetailId = space.TypeDetailID,
+                    Type = space.Type
                 };
-                var spaceTypes = _repository.GetAll<TypeDetail>().Select(x => x).ToList();
-                foreach (var space in spaceTypes)
-                {
-                    var typeTemp = new SpaceTypeArae()
-                    {
-                        TypeDetailId = space.TypeDetailID,
-                        Type = space.Type
-                    };
-                    result.SpaceTypeAraeList.Add(typeTemp);
-                }
-                return result;
+                result.SpaceTypeAraeList.Add(typeTemp);
             }
+            return result;
+        }
 
-            /// <summary>
-            ///  清潔 4大類
-            ///  Amber
-            ///  第一類  CleaningPolicy
-            /// </summary>
-            public SpaceViewModel ShowCleaningCategoryByIdOne()
+        /// <summary>
+        ///  清潔 4大類
+        ///  Amber
+        ///  第一類  CleaningPolicy
+        /// </summary>
+        public SpaceViewModel ShowCleaningCategoryByIdOne()
+        {
+            var result = new SpaceViewModel()
             {
-                var result = new SpaceViewModel()
+                CleanFisrtPartList = new List<CleanFisrtPart>()
+            };
+            var CleanFisrtParts = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 1).Select(x => x).ToList();
+            foreach (var cleanOne in CleanFisrtParts)
+            {
+                var cleanOneTemp = new CleanFisrtPart()
                 {
-                    CleanFisrtPartList = new List<CleanFisrtPart>()
+                    CleaningOptionId = cleanOne.CleaningOptionID,
+                    OptionDetail = cleanOne.OptionDetail
                 };
-                var CleanFisrtParts = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 1).Select(x => x).ToList();
-                foreach (var cleanOne in CleanFisrtParts)
-                {
-                    var cleanOneTemp = new CleanFisrtPart()
-                    {
-                        CleaningOptionId = cleanOne.CleaningOptionID,
-                        OptionDetail = cleanOne.OptionDetail
-                    };
-                    result.CleanFisrtPartList.Add(cleanOneTemp);
-                }
-                return result;
+                result.CleanFisrtPartList.Add(cleanOneTemp);
             }
-            /// <summary>
-            ///  第二類
-            ///  Amber
-            /// </summary>
-            public SpaceViewModel ShowCleaningCategoryByIdTwo()
+            return result;
+        }
+        /// <summary>
+        ///  第二類
+        ///  Amber
+        /// </summary>
+        public SpaceViewModel ShowCleaningCategoryByIdTwo()
+        {
+            var result = new SpaceViewModel()
             {
-                var result = new SpaceViewModel()
+                CleanSecPartList = new List<CleanSecPart>()
+            };
+            var CleanSecParts = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 2).Select(x => x).ToList();
+            foreach (var cleanSec in CleanSecParts)
+            {
+                var cleanSecTemp = new CleanSecPart()
                 {
-                    CleanSecPartList = new List<CleanSecPart>()
+                    CleaningOptionId = cleanSec.CleaningOptionID,
+                    OptionDetail = cleanSec.OptionDetail
                 };
-                var CleanSecParts = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 2).Select(x => x).ToList();
-                foreach (var cleanSec in CleanSecParts)
-                {
-                    var cleanSecTemp = new CleanSecPart()
-                    {
-                        CleaningOptionId = cleanSec.CleaningOptionID,
-                        OptionDetail = cleanSec.OptionDetail
-                    };
-                    result.CleanSecPartList.Add(cleanSecTemp);
-                }
-                return result;
+                result.CleanSecPartList.Add(cleanSecTemp);
             }
-            /// <summary>
-            ///  Amber
-            /// 第三類
-            /// </summary>
-            public SpaceViewModel ShowCleaningCategoryByIdThree()
+            return result;
+        }
+        /// <summary>
+        ///  Amber
+        /// 第三類
+        /// </summary>
+        public SpaceViewModel ShowCleaningCategoryByIdThree()
+        {
+            var result = new SpaceViewModel()
             {
-                var result = new SpaceViewModel()
+                CleanThirdPartList = new List<CleanThirdPart>()
+            };
+            var CleanThirdParts = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 3).Select(x => x).ToList();
+            foreach (var cleanThird in CleanThirdParts)
+            {
+                var cleanThirdTemp = new CleanThirdPart()
                 {
-                    CleanThirdPartList = new List<CleanThirdPart>()
+                    CleaningOptionId = cleanThird.CleaningOptionID,
+                    OptionDetail = cleanThird.OptionDetail
                 };
-                var CleanThirdParts = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 3).Select(x => x).ToList();
-                foreach (var cleanThird in CleanThirdParts)
-                {
-                    var cleanThirdTemp = new CleanThirdPart()
-                    {
-                        CleaningOptionId = cleanThird.CleaningOptionID,
-                        OptionDetail = cleanThird.OptionDetail
-                    };
-                    result.CleanThirdPartList.Add(cleanThirdTemp);
-                }
-                return result;
+                result.CleanThirdPartList.Add(cleanThirdTemp);
             }
-            /// <summary>
-            ///  第四類
-            ///  Amber
-            /// </summary>
-            public SpaceViewModel ShowCleaningCategoryByIdFour()
+            return result;
+        }
+        /// <summary>
+        ///  第四類
+        ///  Amber
+        /// </summary>
+        public SpaceViewModel ShowCleaningCategoryByIdFour()
+        {
+            var result = new SpaceViewModel()
             {
-                var result = new SpaceViewModel()
+                CleanFourdPartList = new List<CleanFourdPart>()
+            };
+            var CleanFourdParts = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 4).Select(x => x).ToList();
+            foreach (var cleanFourd in CleanFourdParts)
+            {
+                var cleanFourdTemp = new CleanFourdPart()
                 {
-                    CleanFourdPartList = new List<CleanFourdPart>()
+                    CleaningOptionId = cleanFourd.CleaningOptionID,
+                    OptionDetail = cleanFourd.OptionDetail
                 };
-                var CleanFourdParts = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 4).Select(x => x).ToList();
-                foreach (var cleanFourd in CleanFourdParts)
-                {
-                    var cleanFourdTemp = new CleanFourdPart()
-                    {
-                        CleaningOptionId = cleanFourd.CleaningOptionID,
-                        OptionDetail = cleanFourd.OptionDetail
-                    };
-                    result.CleanFourdPartList.Add(cleanFourdTemp);
-                }
-                return result;
+                result.CleanFourdPartList.Add(cleanFourdTemp);
             }
-            /// <summary>
-            ///  營業時間
-            ///  Amber
-            /// </summary>
-            public List<SelectListItem> Operating()
-            {
-                var Operating = new List<SelectListItem>
+            return result;
+        }
+        /// <summary>
+        ///  營業時間
+        ///  Amber
+        /// </summary>
+        public List<SelectListItem> Operating()
+        {
+            var Operating = new List<SelectListItem>
             {
                 new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
                 new SelectListItem { Value = "07:00:00.0000000", Text = "07:00"},
@@ -713,15 +716,15 @@ namespace ZoneRadar.Services
                 new SelectListItem { Value = "23:00:00.0000000", Text = "23:00"},
                 new SelectListItem { Value = "00:00:00.0000000", Text = "00:00"},
             };
-                return Operating;
-            }
-            /// <summary>
-            ///  營業時間 天
-            ///  Amber
-            /// </summary>
-            public List<SelectListItem> OperatingDay()
-            {
-                var Operatingday = new List<SelectListItem>
+            return Operating;
+        }
+        /// <summary>
+        ///  營業時間 天
+        ///  Amber
+        /// </summary>
+        public List<SelectListItem> OperatingDay()
+        {
+            var Operatingday = new List<SelectListItem>
             {
                 new SelectListItem { Value = "1", Text = "星期一"},
                 new SelectListItem { Value = "2", Text = "星期二"},
@@ -731,559 +734,556 @@ namespace ZoneRadar.Services
                 new SelectListItem { Value = "6", Text = "星期六"},
                 new SelectListItem { Value = "7", Text = "星期日"},
             };
-                return Operatingday;
+            return Operatingday;
+        }
+
+        /// <summary>
+        ///  Amber 
+        /// </summary>
+        /// 編輯 讀資料庫裡的資料
+        /// 參數是場地ID <param name="spaceId"></param>
+        ///
+        public SomeOnesSpaceViewModel ReadAnySpace(int spaceId)
+        {
+            var result = new SomeOnesSpaceViewModel()
+            {
+                SomeOnesSpaceList = new List<SomeOnesSpace>(),
+                SomeOnesCountryList = new List<SomeOnesCountry>(),
+                SomeOnesDistrictList = new List<SomeOnesDistrict>(),
+                SomeOnesCitytList = new List<SomeOnesCity>(),
+                SomeOnesTypeDetailList = new List<SomeOnesTypeDetail>(),
+                ShowAllTypeDetailList = new List<ShowAllTypeDetail>(),
+                SomeOnesSpaceNameList = new List<SomeOnesSpaceName>(),
+                SomeOnesSpaceIntroductionList = new List<SomeOnesSpaceIntroduction>(),
+                SomeOnesMeasureOfAreaandCapacityList = new List<SomeOnesMeasureOfAreaandCapacity>(),
+                SomeOnesPriceList = new List<SomeOnesPrice>(),
+                SomeOnesDiscountsList = new List<SomeOnesDiscount>(),
+
+                amenityAraeOneList = new List<AmenityAraeOne>(),
+                amenityAraeTwoList = new List<AmenityAraeTwo>(),
+                amenityAraeThreeList = new List<AmenityAraeThree>(),
+                SomeOnesAmenityList = new List<SomeOnesAmenity>(),
+                SomeTwoAmenityList = new List<SomeOnesAmenity>(),
+                SomeThreeAmenityList = new List<SomeOnesAmenity>(),
+                SomeOnesRulesList = new List<SomeOnesRules>(),
+                SomeOnesTrafficList = new List<SomeOnesTraffic>(),
+                SomeOnesParkingList = new List<SomeOnesParking>(),
+                SomeOnesShootingList = new List<SomeOnesShooting>(),
+                SomeOnesCancelAllList = new List<SomeOnesCancel>(),
+                SomeOnesCancelList = new List<SomeOnesCancel>(),
+                CleanRuleOptionsOneList = new List<SomeOnesCleanRule>(),
+                CleanRuleOptionsTwoList = new List<SomeOnesCleanRule>(),
+                CleanRuleOptionsThreeList = new List<SomeOnesCleanRule>(),
+                CleanRuleOptionsFourList = new List<SomeOnesCleanRule>(),
+                SomeOnesCleanRuleOneList = new List<SomeOnesCleanRule>(),
+                SomeOnesCleanRuleTwoList = new List<SomeOnesCleanRule>(),
+                SomeOnesCleanRuleThreeList = new List<SomeOnesCleanRule>(),
+                SomeOnesCleanRuleFourList = new List<SomeOnesCleanRule>(),
+                SpaceoperatingDaysList = new List<SpaceoperatingDay>(),
+                _compareOperatingDay = new List<SpaceoperatingDay>(),
+                Operating = new List<SelectListItem>(),
+                SpaceOwnerNameList = new List<SomeOnesSpaceName>(),
+            };
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            ///地址 
+
+            var adds = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var add in adds)
+            {
+                var addsTemp = new SomeOnesSpace()
+                {
+                    Address = add.Address,
+                    DistrictID = add.DistrictID,
+                    Country = add.Country,
+                };
+                result.SomeOnesSpaceList.Add(addsTemp);
+            }
+            var country = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.CountryID).FirstOrDefault();
+            var countryName = _repository.GetAll<Country>().Where(x => x.CountryID == country).Select(x => x).ToList();
+            foreach (var countryname in countryName)
+            {
+                var countryNameTemp = new SomeOnesCountry()
+                {
+                    CountryName = countryname.CountryName
+                };
+                result.SomeOnesCountryList.Add(countryNameTemp);
+            };
+            var district = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.DistrictID).FirstOrDefault();
+            var districtName = _repository.GetAll<District>().Where(x => x.DistrictID == district).Select(x => x).ToList();
+            foreach (var districtname in districtName)
+            {
+                var districtNameTemp = new SomeOnesDistrict()
+                {
+                    DistrictName = districtname.DistrictName
+                };
+                result.SomeOnesDistrictList.Add(districtNameTemp);
+            };
+
+            var city = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.CityID).FirstOrDefault();
+            var cityName = _repository.GetAll<City>().Where(x => x.CityID == city).Select(x => x).ToList();
+            foreach (var cityname in cityName)
+            {
+                var ciytTemp = new SomeOnesCity()
+                {
+                    CityName = cityname.CityName
+                };
+                result.SomeOnesCitytList.Add(ciytTemp);
+            };
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            //活動類型
+            //把活動類別有的撈出來
+            List<SpaceType> spacetypes = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == spaceId).ToList();
+            foreach (var item in spacetypes)
+            {
+                SomeOnesTypeDetail someOnesTypeDetail = new SomeOnesTypeDetail();
+                someOnesTypeDetail.Type = _repository.GetAll<TypeDetail>().Where(x => x.TypeDetailID == item.TypeDetailID).Select(x => x.Type).FirstOrDefault();
+                someOnesTypeDetail.TypeDetailId = _repository.GetAll<TypeDetail>().Where(x => x.TypeDetailID == item.TypeDetailID).Select(x => x.TypeDetailID).FirstOrDefault();
+                result.SomeOnesTypeDetailList.Add(someOnesTypeDetail);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            //把全部活動類別列出來
+            var showAllTypeDetail = _repository.GetAll<TypeDetail>().Select(x => x).ToList();
+
+            foreach (var item in showAllTypeDetail)
+            {
+                var showAllTypeDetailTemp = new ShowAllTypeDetail()
+                {
+                    Type = item.Type,
+                    TypeDetailId = item.TypeDetailID
+                };
+                result.ShowAllTypeDetailList.Add(showAllTypeDetailTemp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            //場地名稱
+            var spaceName = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.SpaceName).ToList();
+            foreach (var item in spaceName)
+            {
+                var someOnesSpaceTemp = new SomeOnesSpaceName()
+                {
+                    SpaceName = item
+                };
+                result.SomeOnesSpaceNameList.Add(someOnesSpaceTemp);
+            }
+            //場地主的名字
+            var memberID = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).FirstOrDefault();
+            var owner = _repository.GetAll<Member>().Where(x => x.MemberID == memberID.MemberID).Select(x => x.Name).ToList();
+            foreach (var item in owner)
+            {
+                var someOnesSpaceTemp = new SomeOnesSpaceName()
+                {
+                    MamberName = item
+                };
+                result.SpaceOwnerNameList.Add(someOnesSpaceTemp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            //場地簡介
+            var spaceIntroduction = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).ToList();
+            foreach (var item in spaceIntroduction)
+            {
+                var spaceIntroductiontemp = new SomeOnesSpaceIntroduction()
+                {
+                    Introduction = item.Introduction
+                };
+
+                result.SomeOnesSpaceIntroductionList.Add(spaceIntroductiontemp);
+            };
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            //場地大小人數
+            var spaceMeasureOfAreaandCapacity = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).ToList();
+            foreach (var item in spaceMeasureOfAreaandCapacity)
+            {
+                var MeasureOfAreaandCapacityTemp = new SomeOnesMeasureOfAreaandCapacity()
+                {
+                    Capacity = item.Capacity,
+                    MeasureOfArea = item.MeasureOfArea
+                };
+                result.SomeOnesMeasureOfAreaandCapacityList.Add(MeasureOfAreaandCapacityTemp);
             }
 
             /// <summary>
             ///  Amber 
             /// </summary>
-            /// 編輯 讀資料庫裡的資料
-            /// 參數是場地ID <param name="spaceId"></param>
-            ///
-            public SomeOnesSpaceViewModel ReadAnySpace(int spaceId)
+            /// 定價
+            var someonesprice = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var item in someonesprice)
             {
-                var result = new SomeOnesSpaceViewModel()
+                var someonespriceTemp = new SomeOnesPrice()
                 {
-                    SomeOnesSpaceList = new List<SomeOnesSpace>(),
-                    SomeOnesCountryList = new List<SomeOnesCountry>(),
-                    SomeOnesDistrictList = new List<SomeOnesDistrict>(),
-                    SomeOnesCitytList = new List<SomeOnesCity>(),
-                    SomeOnesTypeDetailList = new List<SomeOnesTypeDetail>(),
-                    ShowAllTypeDetailList = new List<ShowAllTypeDetail>(),
-                    SomeOnesSpaceNameList = new List<SomeOnesSpaceName>(),
-                    SomeOnesSpaceIntroductionList = new List<SomeOnesSpaceIntroduction>(),
-                    SomeOnesMeasureOfAreaandCapacityList = new List<SomeOnesMeasureOfAreaandCapacity>(),
-                    SomeOnesPriceList = new List<SomeOnesPrice>(),
-                    SomeOnesDiscountsList = new List<SomeOnesDiscount>(),
+                    MinHours = item.MinHours,
+                    PricePerHour = item.PricePerHour
 
-                    amenityAraeOneList = new List<AmenityAraeOne>(),
-                    amenityAraeTwoList = new List<AmenityAraeTwo>(),
-                    amenityAraeThreeList = new List<AmenityAraeThree>(),
-                    SomeOnesAmenityList = new List<SomeOnesAmenity>(),
-                    SomeTwoAmenityList = new List<SomeOnesAmenity>(),
-                    SomeThreeAmenityList = new List<SomeOnesAmenity>(),
-                    SomeOnesRulesList = new List<SomeOnesRules>(),
-                    SomeOnesTrafficList = new List<SomeOnesTraffic>(),
-                    SomeOnesParkingList = new List<SomeOnesParking>(),
-                    SomeOnesShootingList = new List<SomeOnesShooting>(),
-                    SomeOnesCancelAllList = new List<SomeOnesCancel>(),
-                    SomeOnesCancelList = new List<SomeOnesCancel>(),
-                    CleanRuleOptionsOneList = new List<SomeOnesCleanRule>(),
-                    CleanRuleOptionsTwoList = new List<SomeOnesCleanRule>(),
-                    CleanRuleOptionsThreeList = new List<SomeOnesCleanRule>(),
-                    CleanRuleOptionsFourList = new List<SomeOnesCleanRule>(),
-                    SomeOnesCleanRuleOneList = new List<SomeOnesCleanRule>(),
-                    SomeOnesCleanRuleTwoList = new List<SomeOnesCleanRule>(),
-                    SomeOnesCleanRuleThreeList = new List<SomeOnesCleanRule>(),
-                    SomeOnesCleanRuleFourList = new List<SomeOnesCleanRule>(),
-                    SpaceoperatingDaysList = new List<SpaceoperatingDay>(),
-                    _compareOperatingDay = new List<SpaceoperatingDay>(),
-                    Operating = new List<SelectListItem>(),
-                    SpaceOwnerNameList = new List<SomeOnesSpaceName>(),
                 };
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                ///地址 
-
-                var adds = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
-                foreach (var add in adds)
-                {
-                    var addsTemp = new SomeOnesSpace()
-                    {
-                        Address = add.Address,
-                        DistrictID = add.DistrictID,
-                        Country = add.Country,
-                    };
-                    result.SomeOnesSpaceList.Add(addsTemp);
-                }
-                var country = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.CountryID).FirstOrDefault();
-                var countryName = _repository.GetAll<Country>().Where(x => x.CountryID == country).Select(x => x).ToList();
-                foreach (var countryname in countryName)
-                {
-                    var countryNameTemp = new SomeOnesCountry()
-                    {
-                        CountryName = countryname.CountryName
-                    };
-                    result.SomeOnesCountryList.Add(countryNameTemp);
-                };
-                var district = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.DistrictID).FirstOrDefault();
-                var districtName = _repository.GetAll<District>().Where(x => x.DistrictID == district).Select(x => x).ToList();
-                foreach (var districtname in districtName)
-                {
-                    var districtNameTemp = new SomeOnesDistrict()
-                    {
-                        DistrictName = districtname.DistrictName
-                    };
-                    result.SomeOnesDistrictList.Add(districtNameTemp);
-                };
-
-                var city = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.CityID).FirstOrDefault();
-                var cityName = _repository.GetAll<City>().Where(x => x.CityID == city).Select(x => x).ToList();
-                foreach (var cityname in cityName)
-                {
-                    var ciytTemp = new SomeOnesCity()
-                    {
-                        CityName = cityname.CityName
-                    };
-                    result.SomeOnesCitytList.Add(ciytTemp);
-                };
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                //活動類型
-                //把活動類別有的撈出來
-                List<SpaceType> spacetypes = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == spaceId).ToList();
-                foreach (var item in spacetypes)
-                {
-                    SomeOnesTypeDetail someOnesTypeDetail = new SomeOnesTypeDetail();
-                    someOnesTypeDetail.Type = _repository.GetAll<TypeDetail>().Where(x => x.TypeDetailID == item.TypeDetailID).Select(x => x.Type).FirstOrDefault();
-                    someOnesTypeDetail.TypeDetailId = _repository.GetAll<TypeDetail>().Where(x => x.TypeDetailID == item.TypeDetailID).Select(x => x.TypeDetailID).FirstOrDefault();
-                    result.SomeOnesTypeDetailList.Add(someOnesTypeDetail);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                //把全部活動類別列出來
-                var showAllTypeDetail = _repository.GetAll<TypeDetail>().Select(x => x).ToList();
-
-                foreach (var item in showAllTypeDetail)
-                {
-                    var showAllTypeDetailTemp = new ShowAllTypeDetail()
-                    {
-                        Type = item.Type,
-                        TypeDetailId = item.TypeDetailID
-                    };
-                    result.ShowAllTypeDetailList.Add(showAllTypeDetailTemp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                //場地名稱
-                var spaceName = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.SpaceName).ToList();
-                foreach (var item in spaceName)
-                {
-                    var someOnesSpaceTemp = new SomeOnesSpaceName()
-                    {
-                        SpaceName = item
-                    };
-                    result.SomeOnesSpaceNameList.Add(someOnesSpaceTemp);
-                }
-                //場地主的名字
-                var memberID = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).FirstOrDefault();
-                var owner = _repository.GetAll<Member>().Where(x => x.MemberID == memberID.MemberID).Select(x => x.Name).ToList();
-                foreach (var item in owner)
-                {
-                    var someOnesSpaceTemp = new SomeOnesSpaceName()
-                    {
-                        MamberName = item
-                    };
-                    result.SpaceOwnerNameList.Add(someOnesSpaceTemp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                //場地簡介
-                var spaceIntroduction = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).ToList();
-                foreach (var item in spaceIntroduction)
-                {
-                    var spaceIntroductiontemp = new SomeOnesSpaceIntroduction()
-                    {
-                        Introduction = item.Introduction
-                    };
-
-                    result.SomeOnesSpaceIntroductionList.Add(spaceIntroductiontemp);
-                };
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                //場地大小人數
-                var spaceMeasureOfAreaandCapacity = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).ToList();
-                foreach (var item in spaceMeasureOfAreaandCapacity)
-                {
-                    var MeasureOfAreaandCapacityTemp = new SomeOnesMeasureOfAreaandCapacity()
-                    {
-                        Capacity = item.Capacity,
-                        MeasureOfArea = item.MeasureOfArea
-                    };
-                    result.SomeOnesMeasureOfAreaandCapacityList.Add(MeasureOfAreaandCapacityTemp);
-                }
-
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                /// 定價
-                var someonesprice = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
-                foreach (var item in someonesprice)
-                {
-                    var someonespriceTemp = new SomeOnesPrice()
-                    {
-                        MinHours = item.MinHours,
-                        PricePerHour = item.PricePerHour
-
-                    };
-                    result.SomeOnesPriceList.Add(someonespriceTemp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                ///折扣 
-                var someonsdiscounts = _repository.GetAll<SpaceDiscount>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
-                foreach (var item in someonsdiscounts)
-                {
-                    var someonsdiscountsTemp = new SomeOnesDiscount()
-                    {
-                        SpaceId = item.SpaceID,
-                        Discount = 100 * (item.Discount),
-                        Hours = item.Hour
-                    };
-                    result.SomeOnesDiscountsList.Add(someonsdiscountsTemp);
-                }
-                /// Amber
-                /// 撈有的設施
-                /// 全部
-                var amenitys = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == spaceId).Select(x => x.AmenityDetailID).ToList();
-                var AmenityDetails = _repository.GetAll<AmenityDetail>().ToList();
-                var AmenityOptions = new List<AmenityDetail>();
-                foreach (var item in amenitys)
-                {
-                    var amenityDetails = AmenityDetails.First(x => x.AmenityDetailID == item);
-                    AmenityOptions.Add(amenityDetails);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                ///便利設施
-                var Amenity = AmenityOptions.Where(x => x.AmenityCategoryID == 1).Select(x => x.Amenity).ToList();
-                foreach (var item in Amenity)
-                {
-                    var temp = new SomeOnesAmenity()
-                    {
-                        Amenity = item
-                    };
-                    result.SomeOnesAmenityList.Add(temp);
-                }
-                var AmenityTwo = AmenityOptions.Where(x => x.AmenityCategoryID == 2).Select(x => x.Amenity).ToList();
-                foreach (var item in AmenityTwo)
-                {
-                    var temp = new SomeOnesAmenity()
-                    {
-                        Amenity = item
-                    };
-                    result.SomeTwoAmenityList.Add(temp);
-                }
-                var AmenityThree = AmenityOptions.Where(x => x.AmenityCategoryID == 3).Select(x => x.Amenity).ToList();
-                foreach (var item in AmenityThree)
-                {
-                    var temp = new SomeOnesAmenity()
-                    {
-                        Amenity = item
-                    };
-                    result.SomeThreeAmenityList.Add(temp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                ///便利全部設施選項
-                var AmenityOptionOnes = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 1).ToList();
-                foreach (var item in AmenityOptionOnes)
-                {
-                    var temp = new AmenityAraeOne()
-                    {
-                        AmenityName = item.Amenity,
-                    };
-                    result.amenityAraeOneList.Add(temp);
-                }
-                ///
-                ///便利全部場地空間選項 ///
-                /// 
-                var AmenityOptionTwo = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 2).ToList();
-                foreach (var item in AmenityOptionTwo)
-                {
-                    var temp = new AmenityAraeTwo()
-                    {
-                        AmenityName = item.Amenity,
-                    };
-                    result.amenityAraeTwoList.Add(temp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                /// 其他場地空間選項 
-                /// 
-                var AmenityOptionThree = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 3).ToList();
-                foreach (var item in AmenityOptionThree)
-                {
-                    var temp = new AmenityAraeThree()
-                    {
-                        AmenityName = item.Amenity,
-                    };
-                    result.amenityAraeThreeList.Add(temp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                /// 場地條款
-                /// 
-                var rules = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
-                foreach (var item in rules)
-                {
-                    var rulesTemp = new SomeOnesRules()
-                    {
-                        Rules = item.HostRules,
-                    };
-                    result.SomeOnesRulesList.Add(rulesTemp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                /// 交通資訊
-                /// 
-                var traffic = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
-                foreach (var item in traffic)
-                {
-                    var trafficTemp = new SomeOnesTraffic()
-                    {
-                        Traffic = item.Traffic,
-                    };
-                    result.SomeOnesTrafficList.Add(trafficTemp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                ///停車
-                var parking = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
-                foreach (var item in parking)
-                {
-                    var parkingTemp = new SomeOnesParking()
-                    {
-                        Parking = item.Parking,
-                    };
-                    result.SomeOnesParkingList.Add(parkingTemp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                ///攝影
-                var shooting = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
-                foreach (var item in shooting)
-                {
-                    var shootingTemp = new SomeOnesShooting()
-                    {
-                        Shooting = item.ShootingEquipment
-                    };
-                    result.SomeOnesShootingList.Add(shootingTemp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                ///取消政策 全部
-                var cancels = _repository.GetAll<Cancellation>().Select(x => x).ToList();
-                foreach (var item in cancels)
-                {
-                    var cancelsTemp = new SomeOnesCancel()
-                    {
-                        CancellationID = item.CancellationID,
-                        CancellationTitle = item.CancellationTitle,
-                        CancellationDetail = item.CancellationDetail
-                    };
-                    result.SomeOnesCancelAllList.Add(cancelsTemp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                ///取消政策 被選的///
-                var cancelsSelectId = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).ToList();
-                foreach (var item in cancelsSelectId)
-                {
-                    SomeOnesCancel cancelTemp = new SomeOnesCancel();
-                    cancelTemp.CancellationID = _repository.GetAll<Cancellation>().Where(x => x.CancellationID == item.CancellationID).Select(x => x.CancellationID).FirstOrDefault();
-                    cancelTemp.CancellationTitle = _repository.GetAll<Cancellation>().Where(x => x.CancellationID == item.CancellationID).Select(x => x.CancellationTitle).FirstOrDefault();
-                    cancelTemp.CancellationDetail = _repository.GetAll<Cancellation>().Where(x => x.CancellationID == item.CancellationID).Select(x => x.CancellationDetail).FirstOrDefault();
-                    result.SomeOnesCancelList.Add(cancelTemp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                ///清潔條款細節
-                var cleanallspace = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == spaceId).Select(x => x.CleaningOptionID).ToList();
-                var cleaningOptions = _repository.GetAll<CleaningOption>().ToList();
-                var spaceOptions = new List<CleaningOption>();
-                foreach (var item in cleanallspace)
-                {
-                    var cleanOption = cleaningOptions.First(x => x.CleaningOptionID == item);
-                    spaceOptions.Add(cleanOption);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                /// 同一場地///
-                /// 第一類
-                var fistcleans = spaceOptions.Where(x => x.CleaningCategoryID == 1).Select(x => x.OptionDetail).ToList();
-                foreach (var item in fistcleans)
-                {
-                    var temp = new SomeOnesCleanRule()
-                    {
-                        OptionDetail = item
-                    };
-                    result.SomeOnesCleanRuleOneList.Add(temp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                /// 第二類
-                var Seccleans = spaceOptions.Where(x => x.CleaningCategoryID == 2).Select(x => x.OptionDetail).ToList();
-                foreach (var item in Seccleans)
-                {
-                    var temp = new SomeOnesCleanRule()
-                    {
-                        OptionDetail = item
-                    };
-                    result.SomeOnesCleanRuleTwoList.Add(temp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                /// 第三類
-                var Thirdcleans = spaceOptions.Where(x => x.CleaningCategoryID == 3).Select(x => x.OptionDetail).ToList();
-                foreach (var item in Thirdcleans)
-                {
-                    var temp = new SomeOnesCleanRule()
-                    {
-                        OptionDetail = item
-                    };
-                    result.SomeOnesCleanRuleThreeList.Add(temp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                /// 第四類
-                var Fourcleans = spaceOptions.Where(x => x.CleaningCategoryID == 4).Select(x => x.OptionDetail).ToList();
-                foreach (var item in Fourcleans)
-                {
-                    var temp = new SomeOnesCleanRule()
-                    {
-                        OptionDetail = item
-                    };
-                    result.SomeOnesCleanRuleFourList.Add(temp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                //選項一類
-                var cleansAllone = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 1).ToList();
-                foreach (var item in cleansAllone)
-                {
-                    var cleanRuleTemp = new SomeOnesCleanRule()
-                    {
-                        CleaningCategoryID = item.CleaningCategoryID,
-                        CleaningOptionID = item.CleaningOptionID,
-                        OptionDetail = item.OptionDetail
-                    };
-                    result.CleanRuleOptionsOneList.Add(cleanRuleTemp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                //選項二類
-                var cleansAlltwo = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 2).ToList();
-                foreach (var item in cleansAlltwo)
-                {
-                    var cleanRuleTemp = new SomeOnesCleanRule()
-                    {
-                        CleaningCategoryID = item.CleaningCategoryID,
-                        CleaningOptionID = item.CleaningOptionID,
-                        OptionDetail = item.OptionDetail
-                    };
-                    result.CleanRuleOptionsTwoList.Add(cleanRuleTemp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                //選項三類
-                var cleansAllthree = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 3).ToList();
-                foreach (var item in cleansAllthree)
-                {
-                    var cleanRuleTemp = new SomeOnesCleanRule()
-                    {
-                        CleaningCategoryID = item.CleaningCategoryID,
-                        CleaningOptionID = item.CleaningOptionID,
-                        OptionDetail = item.OptionDetail
-                    };
-                    result.CleanRuleOptionsThreeList.Add(cleanRuleTemp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                //選項四類
-                var cleansAllfour = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 4).ToList();
-                foreach (var item in cleansAllfour)
-                {
-                    var cleanRuleTemp = new SomeOnesCleanRule()
-                    {
-                        CleaningCategoryID = item.CleaningCategoryID,
-                        CleaningOptionID = item.CleaningOptionID,
-                        OptionDetail = item.OptionDetail
-                    };
-                    result.CleanRuleOptionsFourList.Add(cleanRuleTemp);
-                }
-                /// <summary>
-                ///  Amber 
-                /// </summary>
-                ///營業時間 ///
-                ///有被選的
-                var openDays = _repository.GetAll<Operating>().Where(x => x.SpaceID == spaceId).ToList();
-                foreach (var item in openDays)
-                {
-                    var operatingday = new SpaceoperatingDay()
-                    {
-                        SpaceId = item.SpaceID,
-                        OperatingDay = item.OperatingDay,
-                        StartTime = item.StartTime,
-                        EndTime = item.EndTime,
-                    };
-                    if (operatingday.OperatingDay == 1)
-                    {
-                        operatingday.weekDay = "星期一";
-                    }
-                    else if (operatingday.OperatingDay == 2)
-                    {
-                        operatingday.weekDay = "星期二";
-                    }
-                    else if (operatingday.OperatingDay == 3)
-                    {
-                        operatingday.weekDay = "星期三";
-                    }
-                    else if (operatingday.OperatingDay == 4)
-                    {
-                        operatingday.weekDay = "星期四";
-                    }
-                    else if (operatingday.OperatingDay == 5)
-                    {
-                        operatingday.weekDay = "星期五";
-                    }
-                    else if (operatingday.OperatingDay == 6)
-                    {
-                        operatingday.weekDay = "星期六";
-                    }
-                    else if (operatingday.OperatingDay == 7)
-                    {
-                        operatingday.weekDay = "星期日";
-                    }
-
-                    result.SpaceoperatingDaysList.Add(operatingday);
-                }
-                List<SpaceoperatingDay> _compareOperatingDay = new List<SpaceoperatingDay>();
-                result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 1, weekDay = "星期一" });
-                result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 2, weekDay = "星期二" });
-                result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 3, weekDay = "星期三" });
-                result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 4, weekDay = "星期四" });
-                result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 5, weekDay = "星期五" });
-                result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 6, weekDay = "星期六" });
-                result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 7, weekDay = "星期日" });
-                return result;
+                result.SomeOnesPriceList.Add(someonespriceTemp);
             }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            ///折扣 
+            var someonsdiscounts = _repository.GetAll<SpaceDiscount>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var item in someonsdiscounts)
+            {
+                var someonsdiscountsTemp = new SomeOnesDiscount()
+                {
+                    SpaceId = item.SpaceID,
+                    Discount = 100 * (item.Discount),
+                    Hours = item.Hour
+                };
+                result.SomeOnesDiscountsList.Add(someonsdiscountsTemp);
+            }
+            /// Amber
+            /// 撈有的設施
+            /// 全部
+            var amenitys = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == spaceId).Select(x => x.AmenityDetailID).ToList();
+            var AmenityDetails = _repository.GetAll<AmenityDetail>().ToList();
+            var AmenityOptions = new List<AmenityDetail>();
+            foreach (var item in amenitys)
+            {
+                var amenityDetails = AmenityDetails.First(x => x.AmenityDetailID == item);
+                AmenityOptions.Add(amenityDetails);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            ///便利設施
+            var Amenity = AmenityOptions.Where(x => x.AmenityCategoryID == 1).Select(x => x.Amenity).ToList();
+            foreach (var item in Amenity)
+            {
+                var temp = new SomeOnesAmenity()
+                {
+                    Amenity = item
+                };
+                result.SomeOnesAmenityList.Add(temp);
+            }
+            var AmenityTwo = AmenityOptions.Where(x => x.AmenityCategoryID == 2).Select(x => x.Amenity).ToList();
+            foreach (var item in AmenityTwo)
+            {
+                var temp = new SomeOnesAmenity()
+                {
+                    Amenity = item
+                };
+                result.SomeTwoAmenityList.Add(temp);
+            }
+            var AmenityThree = AmenityOptions.Where(x => x.AmenityCategoryID == 3).Select(x => x.Amenity).ToList();
+            foreach (var item in AmenityThree)
+            {
+                var temp = new SomeOnesAmenity()
+                {
+                    Amenity = item
+                };
+                result.SomeThreeAmenityList.Add(temp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            ///便利全部設施選項
+            var AmenityOptionOnes = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 1).ToList();
+            foreach (var item in AmenityOptionOnes)
+            {
+                var temp = new AmenityAraeOne()
+                {
+                    AmenityName = item.Amenity,
+                };
+                result.amenityAraeOneList.Add(temp);
+            }
+            ///
+            ///便利全部場地空間選項 ///
+            /// 
+            var AmenityOptionTwo = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 2).ToList();
+            foreach (var item in AmenityOptionTwo)
+            {
+                var temp = new AmenityAraeTwo()
+                {
+                    AmenityName = item.Amenity,
+                };
+                result.amenityAraeTwoList.Add(temp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            /// 其他場地空間選項 
+            /// 
+            var AmenityOptionThree = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 3).ToList();
+            foreach (var item in AmenityOptionThree)
+            {
+                var temp = new AmenityAraeThree()
+                {
+                    AmenityName = item.Amenity,
+                };
+                result.amenityAraeThreeList.Add(temp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            /// 場地條款
+            /// 
+            var rules = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var item in rules)
+            {
+                var rulesTemp = new SomeOnesRules()
+                {
+                    Rules = item.HostRules,
+                };
+                result.SomeOnesRulesList.Add(rulesTemp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            /// 交通資訊
+            /// 
+            var traffic = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var item in traffic)
+            {
+                var trafficTemp = new SomeOnesTraffic()
+                {
+                    Traffic = item.Traffic,
+                };
+                result.SomeOnesTrafficList.Add(trafficTemp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            ///停車
+            var parking = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var item in parking)
+            {
+                var parkingTemp = new SomeOnesParking()
+                {
+                    Parking = item.Parking,
+                };
+                result.SomeOnesParkingList.Add(parkingTemp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            ///攝影
+            var shooting = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+            foreach (var item in shooting)
+            {
+                var shootingTemp = new SomeOnesShooting()
+                {
+                    Shooting = item.ShootingEquipment
+                };
+                result.SomeOnesShootingList.Add(shootingTemp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            ///取消政策 全部
+            var cancels = _repository.GetAll<Cancellation>().Select(x => x).ToList();
+            foreach (var item in cancels)
+            {
+                var cancelsTemp = new SomeOnesCancel()
+                {
+                    CancellationID = item.CancellationID,
+                    CancellationTitle = item.CancellationTitle,
+                    CancellationDetail = item.CancellationDetail
+                };
+                result.SomeOnesCancelAllList.Add(cancelsTemp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            ///取消政策 被選的///
+            var cancelsSelectId = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).ToList();
+            foreach (var item in cancelsSelectId)
+            {
+                SomeOnesCancel cancelTemp = new SomeOnesCancel();
+                cancelTemp.CancellationID = _repository.GetAll<Cancellation>().Where(x => x.CancellationID == item.CancellationID).Select(x => x.CancellationID).FirstOrDefault();
+                cancelTemp.CancellationTitle = _repository.GetAll<Cancellation>().Where(x => x.CancellationID == item.CancellationID).Select(x => x.CancellationTitle).FirstOrDefault();
+                cancelTemp.CancellationDetail = _repository.GetAll<Cancellation>().Where(x => x.CancellationID == item.CancellationID).Select(x => x.CancellationDetail).FirstOrDefault();
+                result.SomeOnesCancelList.Add(cancelTemp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            ///清潔條款細節
+            var cleanallspace = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == spaceId).Select(x => x.CleaningOptionID).ToList();
+            var cleaningOptions = _repository.GetAll<CleaningOption>().ToList();
+            var spaceOptions = new List<CleaningOption>();
+            foreach (var item in cleanallspace)
+            {
+                var cleanOption = cleaningOptions.First(x => x.CleaningOptionID == item);
+                spaceOptions.Add(cleanOption);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            /// 同一場地///
+            /// 第一類
+            var fistcleans = spaceOptions.Where(x => x.CleaningCategoryID == 1).Select(x => x.OptionDetail).ToList();
+            foreach (var item in fistcleans)
+            {
+                var temp = new SomeOnesCleanRule()
+                {
+                    OptionDetail = item
+                };
+                result.SomeOnesCleanRuleOneList.Add(temp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            /// 第二類
+            var Seccleans = spaceOptions.Where(x => x.CleaningCategoryID == 2).Select(x => x.OptionDetail).ToList();
+            foreach (var item in Seccleans)
+            {
+                var temp = new SomeOnesCleanRule()
+                {
+                    OptionDetail = item
+                };
+                result.SomeOnesCleanRuleTwoList.Add(temp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            /// 第三類
+            var Thirdcleans = spaceOptions.Where(x => x.CleaningCategoryID == 3).Select(x => x.OptionDetail).ToList();
+            foreach (var item in Thirdcleans)
+            {
+                var temp = new SomeOnesCleanRule()
+                {
+                    OptionDetail = item
+                };
+                result.SomeOnesCleanRuleThreeList.Add(temp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            /// 第四類
+            var Fourcleans = spaceOptions.Where(x => x.CleaningCategoryID == 4).Select(x => x.OptionDetail).ToList();
+            foreach (var item in Fourcleans)
+            {
+                var temp = new SomeOnesCleanRule()
+                {
+                    OptionDetail = item
+                };
+                result.SomeOnesCleanRuleFourList.Add(temp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            //選項一類
+            var cleansAllone = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 1).ToList();
+            foreach (var item in cleansAllone)
+            {
+                var cleanRuleTemp = new SomeOnesCleanRule()
+                {
+                    CleaningCategoryID = item.CleaningCategoryID,
+                    CleaningOptionID = item.CleaningOptionID,
+                    OptionDetail = item.OptionDetail
+                };
+                result.CleanRuleOptionsOneList.Add(cleanRuleTemp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            //選項二類
+            var cleansAlltwo = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 2).ToList();
+            foreach (var item in cleansAlltwo)
+            {
+                var cleanRuleTemp = new SomeOnesCleanRule()
+                {
+                    CleaningCategoryID = item.CleaningCategoryID,
+                    CleaningOptionID = item.CleaningOptionID,
+                    OptionDetail = item.OptionDetail
+                };
+                result.CleanRuleOptionsTwoList.Add(cleanRuleTemp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            //選項三類
+            var cleansAllthree = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 3).ToList();
+            foreach (var item in cleansAllthree)
+            {
+                var cleanRuleTemp = new SomeOnesCleanRule()
+                {
+                    CleaningCategoryID = item.CleaningCategoryID,
+                    CleaningOptionID = item.CleaningOptionID,
+                    OptionDetail = item.OptionDetail
+                };
+                result.CleanRuleOptionsThreeList.Add(cleanRuleTemp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            //選項四類
+            var cleansAllfour = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 4).ToList();
+            foreach (var item in cleansAllfour)
+            {
+                var cleanRuleTemp = new SomeOnesCleanRule()
+                {
+                    CleaningCategoryID = item.CleaningCategoryID,
+                    CleaningOptionID = item.CleaningOptionID,
+                    OptionDetail = item.OptionDetail
+                };
+                result.CleanRuleOptionsFourList.Add(cleanRuleTemp);
+            }
+            /// <summary>
+            ///  Amber 
+            /// </summary>
+            ///營業時間 ///
+            ///有被選的
+            var openDays = _repository.GetAll<Operating>().Where(x => x.SpaceID == spaceId).ToList();
+            foreach (var item in openDays)
+            {
+                var operatingday = new SpaceoperatingDay()
+                {
+                    SpaceId = item.SpaceID,
+                    OperatingDay = item.OperatingDay,
+                    StartTime = item.StartTime,
+                    EndTime = item.EndTime,
+                };
+                if (operatingday.OperatingDay == 1)
+                {
+                    operatingday.weekDay = "星期一";
+                }
+                else if (operatingday.OperatingDay == 2)
+                {
+                    operatingday.weekDay = "星期二";
+                }
+                else if (operatingday.OperatingDay == 3)
+                {
+                    operatingday.weekDay = "星期三";
+                }
+                else if (operatingday.OperatingDay == 4)
+                {
+                    operatingday.weekDay = "星期四";
+                }
+                else if (operatingday.OperatingDay == 5)
+                {
+                    operatingday.weekDay = "星期五";
+                }
+                else if (operatingday.OperatingDay == 6)
+                {
+                    operatingday.weekDay = "星期六";
+                }
+                else if (operatingday.OperatingDay == 7)
+                {
+                    operatingday.weekDay = "星期日";
+                }
 
+                result.SpaceoperatingDaysList.Add(operatingday);
+            }
+            List<SpaceoperatingDay> _compareOperatingDay = new List<SpaceoperatingDay>();
+            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 1, weekDay = "星期一" });
+            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 2, weekDay = "星期二" });
+            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 3, weekDay = "星期三" });
+            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 4, weekDay = "星期四" });
+            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 5, weekDay = "星期五" });
+            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 6, weekDay = "星期六" });
+            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 7, weekDay = "星期日" });
             return result;
         }
     }
