@@ -20,8 +20,8 @@ namespace ZoneRadar.Models.ViewModels
         public string Latitude { get; set; }
         public string TrafficInfo { get; set; }
         public List<string> OperatingDayList { get; set; }
-        public List<TimeSpan> StartTimeList { get; set; }
-        public List<TimeSpan> EndTimeList { get; set; }
+        public List<string> StartTimeList { get; set; }
+        public List<string> EndTimeList { get; set; }
         public string CancellationTitle { get; set; }
         public string CancellationInfo { get; set; }
         public int HoursForDiscount { get; set; }
