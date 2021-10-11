@@ -331,6 +331,7 @@
     <Content Include="Assets\IMG\ZONERadar.png" />
     <Content Include="Assets\JS\addspace\addspace.js" />
     <Content Include="Assets\JS\addspace\checkPhoneNumber.js" />
+    <Content Include="Assets\JS\addspace\CityandDistrictandZipcodeJavaScript.js" />
     <Content Include="Assets\JS\addspace\ckeditor.js" />
     <Content Include="Assets\JS\addspace\text.js" />
     <Content Include="Assets\JS\axios.min.js" />
