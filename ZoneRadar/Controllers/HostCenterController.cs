@@ -117,6 +117,7 @@ namespace ZoneRadar.Controllers
                 SpaceoperatingDaysList=_spaceService.ReadAnySpace(spaceId).SpaceoperatingDaysList,
                 _compareOperatingDay=_spaceService.ReadAnySpace(spaceId)._compareOperatingDay,
                 Operating=_spaceService.Operating(),
+                SpaceOwnerNameList=_spaceService.ReadAnySpace(spaceId).SpaceOwnerNameList,
             };
             return View(model);
         }

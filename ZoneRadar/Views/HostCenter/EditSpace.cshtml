@@ -43,6 +43,7 @@
     var spaceOpenDay = Model.SpaceoperatingDaysList;
     var compareOpenDay = Model._compareOperatingDay;
     var Operating = Model.Operating;
+    var owner = Model.SpaceOwnerNameList;
 }
 
 @*<form class="needs-validation" novalidate action="HostCenter/EditSpace" method="post">*@
@@ -51,7 +52,7 @@
         <!-- 開頭問候文區 -->
         <div class="row">
             <div class="col mb-3 mt-3">
-                <h5 class="fs-3"> <span>庭瑜</span> ,你好！說說你的場地吧！</h5>
+                <h5 class="fs-3"> <span>@owner.Select(x=>x.MamberName).FirstOrDefault()</span> ,你好！說說你的場地吧！</h5>
                 <p>場地內容分享越詳細，能幫你拿到更多訂單</p>
             </div>
         </div>
@@ -477,14 +478,13 @@
                                         <label for="hourDiscount">逾多少小時</label>
                                     </div>
                                 </div>
-                                <div class="col-10 col-lg-5 mt-3">
-                                    <p>折扣數</p>
+                                <div class="col-10 col-lg-6 mt-3">
+                                    <p>折扣數(%off)</p>
                                     <div class="form-floating">
                                         <input class="form-control" placeholder="多少折扣" value="@item.Discount" id="Discount">
                                         <label for="Discount">享多少折扣</label>
                                     </div>
                                 </div>
-                                <p class="col-1 col-md-1 col-lg-1 percen">%off</p>
                             }
                         </div>
                         <div class="row mt-3">

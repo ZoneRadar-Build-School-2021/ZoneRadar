@@ -347,10 +347,10 @@ let StateMon = document.querySelectorAll("#State")[0];
 let StateMon2 = document.querySelectorAll("#State")[1];
 
 flexSwitchCheckDefault.addEventListener("click", function () {
-    if (flag == 0) {
+    if (flag == 1) {
         flexRadioDefault1.disabled = false;
         flexRadioDefault2.disabled = false;
-        flag =1;
+        flag =0;
     } else {
         flexRadioDefault1.disabled = true;
         flexRadioDefault2.disabled = true;
@@ -358,7 +358,7 @@ flexSwitchCheckDefault.addEventListener("click", function () {
         StateMon2.disabled = true;
         flexRadioDefault2.checked = false;
         flexRadioDefault1.checked = false;
-        flag =0;
+        flag =1;
     }
 });
 flexRadioDefault1.addEventListener("click", function () {

@@ -17,6 +17,8 @@ namespace ZoneRadar.Models.ViewModels
         public List<SomeOnesTypeDetail> SomeOnesTypeDetailList { get; set; }
         public List<ShowAllTypeDetail> ShowAllTypeDetailList { get; set; }
         public List<SomeOnesSpaceName> SomeOnesSpaceNameList { get; set; }
+        public List<SomeOnesSpaceName> SpaceOwnerNameList { get; set; }
+
         public List<SomeOnesSpaceIntroduction> SomeOnesSpaceIntroductionList { get; set; }
         public List<SomeOnesMeasureOfAreaandCapacity> SomeOnesMeasureOfAreaandCapacityList { get; set; }
         public List<SomeOnesPrice> SomeOnesPriceList { get; set; }
@@ -59,6 +61,8 @@ namespace ZoneRadar.Models.ViewModels
     public class SomeOnesSpaceName
     {
         public string SpaceName { get; set; }
+        public string MamberName { get; set; }
+
     }
     public class SomeOnesSpace
     {
@@ -106,6 +110,7 @@ namespace ZoneRadar.Models.ViewModels
         public virtual District District { get; set; }
 
         public virtual Member Member { get; set; }
+        
         
     }
     public class SomeOnesCountry
