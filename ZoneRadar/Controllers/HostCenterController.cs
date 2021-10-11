@@ -23,6 +23,9 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+        /// <summary>
+        ///  Amber 
+        /// </summary>
         public ActionResult AddSpace()
         {
 
@@ -74,7 +77,9 @@ namespace ZoneRadar.Controllers
 
             return View(model);
         }
-
+        /// <summary>
+        ///  Amber 
+        /// </summary>
         public ActionResult EditSpace(int spaceId)
         {
             var model = new SomeOnesSpaceViewModel()
