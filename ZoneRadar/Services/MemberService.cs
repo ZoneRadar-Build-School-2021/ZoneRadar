@@ -355,28 +355,28 @@ namespace ZoneRadar.Services
             return result;
         }
 
-        public EditResult EditProfileData(ProfileViewModel edit)
-        {
-            var editresult = new EditResult();
-            try
-            {
-                //抓取 --> 編輯資料
-                var p = _zoneradarRepository.GetAll().ToList().FirstOrDefault(x => x.MemberID == edit.MemberID);
-                //p.Photo = edit.Photo;
-                p.Name = edit.Name;
-                p.Phone = edit.Phone;
-                p.Description = edit.Description;
-                //更新
-                _zoneradarRepository.Update(p);
-                _zoneradarRepository.SaveChanges();
-                editresult.IsSuccessful = true;
-            }
-            catch (Exception ex)
-            {
-                editresult.IsSuccessful = false;
-                editresult.Exception = ex;
-            }
-            return editresult;
-        }
+        //public EditResult EditProfileData(ProfileViewModel edit)
+        //{
+        //    var editresult = new EditResult();
+        //    try
+        //    {
+        //        //抓取 --> 編輯資料
+        //        var p = _zoneradarRepository.GetAll().ToList().FirstOrDefault(x => x.MemberID == edit.MemberID);
+        //        //p.Photo = edit.Photo;
+        //        p.Name = edit.Name;
+        //        p.Phone = edit.Phone;
+        //        p.Description = edit.Description;
+        //        //更新
+        //        _zoneradarRepository.Update(p);
+        //        _zoneradarRepository.SaveChanges();
+        //        editresult.IsSuccessful = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        editresult.IsSuccessful = false;
+        //        editresult.Exception = ex;
+        //    }
+        //    return editresult;
+        //}
     }
 }

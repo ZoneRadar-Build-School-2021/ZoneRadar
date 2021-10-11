@@ -9,15 +9,19 @@ using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Services;
 using ZoneRadar.ViewModels;
 using ZoneRadar.Models;
+using ZoneRadar.Data;
+using System.Data.Entity;
 
 namespace ZoneRadar.Controllers
 {
     public class MemberCenterController : Controller
     {
         private readonly MemberService _service;
+        private readonly ZONERadarContext _db;
         public MemberCenterController()
         {
             _service = new MemberService();
+            _db = new ZONERadarContext();
         }
         
         // GET: MemberCenter
@@ -51,7 +55,15 @@ namespace ZoneRadar.Controllers
         {
             if (ModelState.IsValid)
             {
+                var p = _service.GetAll().ToList().FirstOrDefault(x => x.MemberID == edit.MemberID);
 
+                p.Photo = edit.Photo;
+                p.Name = edit.Name;
+                p.Phone = edit.Phone;
+                p.Description = edit.Description;
+
+                _db.Entry(edit).State = EntityState.Modified;
+                _db.SaveChanges();    
             }
             return View(edit);
         }
