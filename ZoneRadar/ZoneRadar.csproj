@@ -214,6 +214,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\BookingPageViewModel.cs" />
     <Compile Include="Models\ViewModels\ShopCarViewModel.cs" />
+    <Compile Include="Models\ViewModels\SomeOnesSpaceViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceDetailViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceBriefViewModel.cs" />
     <Compile Include="Models\ViewModels\FilterViewModel.cs" />
