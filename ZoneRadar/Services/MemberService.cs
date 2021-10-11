@@ -28,7 +28,10 @@ namespace ZoneRadar.Services
             _repository = new ZONERadarRepository();
         }
 
-        //HostInfo
+        /// <summary>
+        /// HostInfo (Jack)
+        /// </summary>
+        /// <returns> 取得會員資訊 & 該會員擁有的場地 </returns> 
         public HostInfoViewModel GetMemberSpace(int? memberId)
         {
 
@@ -76,7 +79,11 @@ namespace ZoneRadar.Services
                 return resultMember;
             }
         }
-        //MyCollection
+
+        /// <summary>
+        /// MyCollection (Jack)
+        /// </summary>
+        /// <returns> 取得會員資訊 & 該會員所有收藏的場地 </returns>
         public MyCollectionViewModel GetMemberCollection(int? memberId)
         {
             var resultMemberCollection = new MyCollectionViewModel
@@ -124,7 +131,11 @@ namespace ZoneRadar.Services
             }
 
         }
-        //HostReview
+
+        /// <summary>
+        /// HostTpMemberReview (Jack)
+        /// </summar>
+        /// <returns> 取得會員資訊 & 該會員所有被場地主的評價 </returns>
         public UserInfoViewModel GetHostReview(int? memberId)
         {
             var resulthostinfoReview = new UserInfoViewModel
