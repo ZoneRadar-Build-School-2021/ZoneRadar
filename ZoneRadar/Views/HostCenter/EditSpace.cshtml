@@ -327,7 +327,6 @@
                         </div>
                         @foreach (var item in compareOpenDay)
                         {
-                            //if (spacetype.Select(x => x.Type).Contains(type.Type))
                             if (spaceOpenDay.Select(x => x.OperatingDay).Contains(item.OperatingDay))
                             {
                                 <div class="row mt-4 border-bottom">
@@ -706,10 +705,10 @@
                                     </div>
                                 </div>
                                 <div class="col col-12 mt-3">
-                        <p>
+                                    <p>
                                         選擇所有符合的選項
-                        </p>
-                    </div>
+                                    </p>
+                                </div>
                                 <!-- 勾有停車場才會顯示 -->
                                 <div id="parkingPart" class="row d-none">
                                     <div class="col col-12 parking">
@@ -999,27 +998,26 @@
                                     <div class="row ">
                                         <div class="col col-11  mt-5">
                                             <h2 class="fs-4">選擇您的取消政策</h2>
-                    </div>
-                </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col">
                                             <p class="mt-auto mb-auto">
                                                 <i class=" mt-2 me-1 far fa-lightbulb"></i>
                                                 取消政策更靈活的房東會吸引更多預訂。
                                             </p>
-                        </div>
-                    </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-lg-12">
-                        <p>
+                                            <p>
                                                 <strong>取消寬限期：</strong>
                                                 所有預訂均受 <span class="logoS">ZONERadar</span>的寬限期政策約束，該政策為在收到預訂確認後 24
                                                 小時內但不遲於活動開始時間前 48 小時取消的預訂提供全額退款。
-                        </p>
+                                            </p>
                                         </div>
                                     </div>
                                     @foreach (var all in cancelAll)
-
                                     {
                                         if (cancel.Select(x => x.CancellationID).Contains(all.CancellationID))
                                         {
@@ -1034,7 +1032,7 @@
                                                 <div class="col-12 col-lg-12">
                                                     <p class="ms-3">
                                                         @all.CancellationDetail
-                        </p>
+                                                    </p>
                                                 </div>
                                             </div>
                                         }
