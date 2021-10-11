@@ -56,7 +56,7 @@
         function postValue() {
             $.ajax({
                 type: "POST",
-                url: "/MemberCenter/ResentEmail",
+                url: "/MemberCenter/ResentVerificationEmail",
                 data: { email: "@ViewBag.UserEmail" },
                 dataType: "text",
                 success: function (response) {

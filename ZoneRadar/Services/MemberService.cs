@@ -240,25 +240,36 @@ namespace ZoneRadar.Services
             var afterTenMinutes = DateTime.Now.AddMinutes(10).ToString();
             var route = new RouteValueDictionary { { "email", userEmail }, { "expired", afterTenMinutes } };
             //製作驗證信的連結
-            var confirmLink = urlHelper.Action("ConfirmEmail", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
+            var verificationLink = urlHelper.Action("ConfirmEmail", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
 
             //寄件人資訊
             string ZONERadarAccount = "swkzta3@gmail.com";
             string ZONERadarPassword = "Minato,Naruto";
 
             //產生能寄信的SmtpClient執行個體
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
-            client.Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword);
-            client.EnableSsl = true;
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587) 
+            { 
+                Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword),
+                EnableSsl = true
+            };
+            //client.Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword);
+            //client.EnableSsl = true;
 
             //產生信件，編輯信件的相關內容
-            MailMessage mail = new MailMessage(ZONERadarAccount, ZONERadarAccount);
-            mail.Subject = "ZONERadar會員確認信";
-            mail.SubjectEncoding = Encoding.UTF8;
-            mail.IsBodyHtml = true;
-            string confirmEmailContent = File.ReadAllText(Path.Combine(server.MapPath("~/Views/MemberCenter/ConfirmEmailContent.html")));
-            mail.Body = confirmEmailContent.Replace("confirmLink", confirmLink);
-            mail.BodyEncoding = Encoding.UTF8;
+            string verificationEmailContent = File.ReadAllText(Path.Combine(server.MapPath("~/Views/MemberCenter/VerificationEmailContent.html")));
+            MailMessage mail = new MailMessage(ZONERadarAccount, ZONERadarAccount) 
+            {
+                Subject = "ZONERadar會員確認信",
+                SubjectEncoding = Encoding.UTF8,
+                IsBodyHtml = true,
+                Body = verificationEmailContent.Replace("verificationLink", verificationLink),
+                BodyEncoding = Encoding.UTF8
+            };
+            //mail.Subject = "ZONERadar會員確認信";
+            //mail.SubjectEncoding = Encoding.UTF8;
+            //mail.IsBodyHtml = true;
+            //mail.Body = confirmEmailContent.Replace("confirmLink", confirmLink);
+            //mail.BodyEncoding = Encoding.UTF8;
 
             try
             {
@@ -277,15 +288,23 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 確認是否有未驗證的註冊紀錄(Jenny)
+        /// 確認是否有此帳號的紀錄(包含未驗證的和已是會員的)(Jenny)
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        public bool SearchRegisterInfo(string email)
+        public bool SearchUser(string email, bool verified)
         {
             email = HttpUtility.HtmlEncode(email);
-            var hasRegisterInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.SignUpDateTime.Year == 1753);
-            return hasRegisterInfo;
+            bool hasInfo;
+            if (verified)
+            {
+                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.SignUpDateTime.Year != 1753);
+            }
+            else
+            {
+                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.SignUpDateTime.Year == 1753);
+            }
+            return hasInfo;
         }
 
         /// <summary>
@@ -430,5 +449,66 @@ namespace ZoneRadar.Services
             var url = FormsAuthentication.GetRedirectUrl(userName, true);
             return url;
         }
+
+
+        /// <summary>
+        /// 寄送重設密碼信(Jenny)
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="request"></param>
+        /// <param name="urlHelper"></param>
+        /// <param name="userEmail"></param>
+        public void SentResetPasswordEmail(HttpServerUtilityBase server, HttpRequestBase request, UrlHelper urlHelper, string userEmail)
+        {
+            userEmail = HttpUtility.HtmlEncode(userEmail);
+            var resetCode = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == userEmail.ToUpper()).Password;
+            var route = new RouteValueDictionary { { "email", userEmail }, { "resetCode", resetCode } };
+            //製作驗證信的連結
+            var resetLink = urlHelper.Action("NewPassword", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
+
+            //寄件人資訊
+            string ZONERadarAccount = "swkzta3@gmail.com";
+            string ZONERadarPassword = "Minato,Naruto";
+
+            //產生能寄信的SmtpClient執行個體
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword),
+                EnableSsl = true
+            };
+
+            //產生信件，編輯信件的相關內容
+            string resetPasswordEmailContent = File.ReadAllText(Path.Combine(server.MapPath("~/Views/MemberCenter/ResetPasswordEmailContent.html")));
+            MailMessage mail = new MailMessage(ZONERadarAccount, ZONERadarAccount)
+            {
+                Subject = "重設您的ZONERadar密碼",
+                SubjectEncoding = Encoding.UTF8,
+                IsBodyHtml = true,
+                Body = resetPasswordEmailContent.Replace("resetLink", resetLink),
+                BodyEncoding = Encoding.UTF8
+            };
+
+            try
+            {
+                client.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                //未處理
+                throw ex;
+            }
+            finally
+            {
+                mail.Dispose();
+                client.Dispose();
+            }
+        }
+
+        public bool VerifyResetPasswordLink(string email, string resetCode)
+        {
+            var verified = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.Password == resetCode);
+            return verified;
+        }
+    
     }
 }

@@ -23,14 +23,51 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 忘記密碼(Get)(Jenny)
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult ForgetPassword()
         {
             return View();
         }
-        public ActionResult EmailCheck()
+
+        /// <summary>
+        /// 忘記密碼(Post)(Jenny)
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ForgetPassword(string email)
         {
+            //確認是否有此會員
+            var hasUserInfo = _service.SearchUser(email, true);
+            if (hasUserInfo)
+            {
+                //寄送重設密碼信
+                _service.SentResetPasswordEmail(Server, Request, Url, email);
+            }
             return View();
         }
+
+        /// <summary>
+        /// 重設密碼(Get)(Jenny)
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="resetCode"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult NewPassword(string email, string resetCode)
+        {
+            var verified = _service.VerifyResetPasswordLink(email, resetCode);
+
+            return View();
+        }
+
+
+        [HttpPost]
         public ActionResult NewPassword()
         {
             return View();
@@ -134,7 +171,7 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "Name, Email, Password, ConfirmPassword")] RegisterZONERadarViewModel registerVM)
+        public ActionResult Register([Bind(Include = "Name, RegisterEmail, RegisterPassword, ConfirmPassword")] RegisterZONERadarViewModel registerVM)
         {
             if (!ModelState.IsValid || registerVM.RegisterPassword != registerVM.ConfirmPassword)
             {
@@ -176,7 +213,7 @@ namespace ZoneRadar.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult ResentEmail()
+        public ActionResult ResentVerificationEmail()
         {
             return View();
         }
@@ -187,11 +224,13 @@ namespace ZoneRadar.Controllers
         /// <param name="email"></param>
         /// <returns></returns>
         [HttpPost]
-        public string ResentEmail(string email)
+        public string ResentVerificationEmail(string email)
         {
-            var hasRegisterInfo = _service.SearchRegisterInfo(email);
+            //確認是否有此帳號的註冊紀錄但還未驗證
+            var hasRegisterInfo = _service.SearchUser(email, false);
             if (hasRegisterInfo)
             {
+                //寄送驗證信
                 _service.SentEmail(Server, Request, Url, email);
                 var result = new { Icon = "success", Message = "已重發驗證信，請至信箱確認！" };
                 var jsonResult = JsonConvert.SerializeObject(result);
@@ -281,7 +320,7 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login([Bind(Include = "Email, Password")] LoginZONERadarViewModel loginVM)
+        public ActionResult Login([Bind(Include = "LoginEmail, LoginPassword")] LoginZONERadarViewModel loginVM)
         {
             //若未通過Model驗證(前端已先驗證過)
             if (!ModelState.IsValid)
