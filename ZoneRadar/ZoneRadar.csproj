@@ -430,6 +430,7 @@
     <Content Include="Views\UserCenter\Processing.cshtml" />
     <Content Include="Views\UserCenter\ShopCar.cshtml" />
     <Content Include="Views\HostCenter\AddSpace.cshtml" />
+    <Content Include="Views\HostCenter\EditSpace.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
