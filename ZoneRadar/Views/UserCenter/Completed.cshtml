@@ -1,0 +1,286 @@
+﻿@model IEnumerable<UsercenterCompletedViewModel>
+@{
+    ViewBag.Title = "Completed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="memberbuyer_order_status container mt-5 border-bottom">
+
+    <div class="memberbuyer row mt-5">
+        <h3 class="memberbuyer_title me-4">訂單管理</h3>
+        <ul class="memberbuyer_state d-flex justify-content-start mt-5">
+            <a class="me-4" href="Pending">
+            <li class="p-2 order_state">已付款</li>
+            </a>
+            <a class="me-4" href="Processing">
+            <li class="p-2 order_state">使用中</li>
+            </a>
+            <a class="me-4" href="Completed">
+            <li class="p-2 order_state active">歷史訂單</li>
+            </a>
+        </ul>
+    </div>
+</div>
+@foreach (var item in Model)
+{
+    if (item.OrederStatus == "訂單已完成")
+    {
+        <div class="memberbuyer_container container mt-1">
+            <div class="memberbuyer_completed row mt-5 mb-3">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="memberbuyer_completed_num col-12 mt-3">
+                            <div class="memberbuyer_completed_num_row row">
+                                <div class="memberbuyer_completed_num_ordernum col-sm-12 col-md-6 col-lg-6">
+                                    <p>
+                                        <span class="memberbuyer_completed_num_ordernumber">訂單編號：</span>
+                                        <span class="ms-1">@Html.DisplayFor(m => item.OrderNumber) </span>
+                                        <a class="p-2 ms-3" href="#">
+                                            <i class="far fa-comment-dots me-1"></i>聯繫我
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="memberbuyer_completed_num_completed col-sm-12 col-md-6 col-lg-6">
+                                    <p>
+                                        @Html.DisplayFor(m => item.OrederStatus)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="memberbuyer_completed_pic col-sm-12 col-md-12 col-lg-3">
+                            <a href="#">
+                                <img class="p-2 mt-2" src="@Html.DisplayFor(m => item.SpaceUrl)">
+                            </a>
+                        </div>
+                        <div class="memberbuyer_completed_txt col-sm-12 col-md-12 col-lg-9 p-3">
+                            <div class="memberbuyer_completed_txt_title">
+                                <a href="#">
+                                    @Html.DisplayFor(m => item.SpaceName)
+                                </a>
+                            </div>
+                            <div class="memberbuyer_completed_txt_oedertime mt-4">
+                                <p>
+                                    下單時間：
+                                    <span class="memberbuyer_completed_txt_oedertime ms-1 fw-bold">@Html.DisplayFor(m => item.PublishTime)</span>
+                                </p>
+                            </div>
+                            <div class="memberbuyer_completed_txt_rent mt-3">
+                                <p>
+                                    租借時間：
+                                    <span class="memberbuyer_completed_txt_rent_date ms-1 fw-bold">@Html.DisplayFor(m => item.RentTime)</span>
+                                </p>
+                            </div>
+                            <div class="memberbuyer_completed_txt_rentback mt-3">
+                                <p>
+                                    租還時間：
+                                    <span class="memberbuyer_completed_txt_rentback_date ms-1 fw-bold">@Html.DisplayFor(m => item.RentBackTime)</span>
+                                </p>
+                            </div>
+                            <div class="memberbuyer_completed_txt_people mt-3">
+                                <p>
+                                    預定人數：
+                                    <span class="memberbuyer_completed_txt_people_date ms-1 me-1 fw-bold">@Html.DisplayFor(m => item.People)</span>人
+                                </p>
+                            </div>
+                            <div class="memberbuyer_completed_txt_iconprice text-end">
+                                <p class="memberbuyer_completed_txt_price_title">
+                                    訂單價格：
+                                    <span class="memberbuyer_completed_txt_price">NT$ @Html.DisplayFor(m => item.Money)</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="memberbuyer_completed_btn col-12 mt-3 mb-5 d-flex justify-content-end">
+                    <button class="btn me-2">再買一次</button>
+                    @if (item.HasReview)
+                    {
+                        <button class="btn me-2" data-bs-toggle="modal" data-bs-target="#@Html.DisplayFor(m => item.SpaceName)" disabled>評價 / 評分</button>
+                    }
+                    else 
+                    {
+                        <button class="btn me-2" data-bs-toggle="modal" data-bs-target="#@Html.DisplayFor(m =>item.SpaceName)">評價 / 評分</button>
+                    }
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="@Html.DisplayFor(m =>item.SpaceName)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>@Html.DisplayFor(m => item.OrderNumber)</span></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="score_star mt-2">
+                                <p>您對於這次的場地的滿意度為幾顆星：</p>
+                                <div>
+                                    <img id="idimg1" class="star_pic" src="~/Assets/IMG/Usercenter/star.png" />
+                                    <img id="idimg2" class="star_pic" src="~/Assets/IMG/Usercenter/star.png" />
+                                    <img id="idimg3" class="star_pic" src="~/Assets/IMG/Usercenter/star.png" />
+                                    <img id="idimg4" class="star_pic" src="~/Assets/IMG/Usercenter/star.png" />
+                                    <img id="idimg5" class="star_pic" src="~/Assets/IMG/Usercenter/star.png" />
+                                    <input type="button" class="reset_score ms-2" value="重新評分" id="clean" />
+                                    <span id="score"></span>
+                                </div>
+                            </div>
+                            <div class="customer_evaluation mt-3">
+                                <p>您對於這次的場地有什麼需要改進或是想對我們說的話？</p>
+                                <textarea class="form-control" aria-label="With textarea"></textarea>
+                            </div>
+                            <div class="customer_eveluation_recommend mt-3">
+                                <p>您是否會推薦其他人：</p>
+                                <div class="customer_evelution_radio form-check">
+                                    <input class="form-check-input" type="radio" name="customer_evelution_recommend_radio_option" id="flexRadioDefault1">
+                                    <label class="form-check-label ms-1" for="flexRadioDefault1">
+                                        <i class="fas fa-check me-1"></i>我會推薦給其他人
+                                    </label>
+                                </div>
+                                <div class="customer_evelution_radio form-check">
+                                    <input class="form-check-input" type="radio" name="customer_evelution_recommend_radio_option" id="flexRadioDefault2">
+                                    <label class="form-check-label ms-1" for="flexRadioDefault2">
+                                        <i class="fas fa-times me-2"></i>我不會推薦給其他人
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn_close" data-bs-dismiss="modal">關閉</button>
+                            <button type="button" class="btn btn_sendout">送出</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="memberbuyer_container container mt-1">
+            <div class="memberbuyer_completed row mt-5 mb-3">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="memberbuyer_completed_num col-12 mt-3">
+                            <div class="memberbuyer_completed_num_row row">
+                                <div class="memberbuyer_completed_num_ordernum col-sm-12 col-md-6 col-lg-6">
+                                    <p>
+                                        <span class="memberbuyer_completed_num_ordernumber cancel">訂單編號：</span>
+                                        <span class="ms-1 cancel">@Html.DisplayFor(m => item.OrderNumber) </span>
+                                        <a class="p-2 ms-3" href="#">
+                                            <i class="far fa-comment-dots me-1"></i>聯繫我
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="memberbuyer_completed_num_completed col-sm-12 col-md-6 col-lg-6">
+                                    <p>
+                                        @Html.DisplayFor(m => item.OrederStatus)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="memberbuyer_completed_pic col-sm-12 col-md-12 col-lg-3">
+                            <a href="#">
+                                <img class="p-2 mt-2" src="@Html.DisplayFor(m =>item.SpaceUrl)">
+                            </a>
+                        </div>
+                        <div class="memberbuyer_completed_txt col-sm-12 col-md-12 col-lg-9 p-3 cancel">
+                            <div class="memberbuyer_completed_txt_title">
+                                <a href="#">
+                                    @Html.DisplayFor(m => item.SpaceName)
+                                </a>
+                            </div>
+                            <div class="memberbuyer_completed_txt_oedertime mt-4">
+                                <p>
+                                    下單時間：
+                                    <span class="memberbuyer_completed_txt_oedertime ms-1 fw-bold">@Html.DisplayFor(m => item.PublishTime)</span>
+                                </p>
+                            </div>
+                            <div class="memberbuyer_completed_txt_rent mt-3">
+                                <p>
+                                    租借時間：
+                                    <span class="memberbuyer_completed_txt_rent_date ms-1 fw-bold">@Html.DisplayFor(m => item.RentTime)</span>
+                                </p>
+                            </div>
+                            <div class="memberbuyer_completed_txt_rentback mt-3">
+                                <p>
+                                    租還時間：
+                                    <span class="memberbuyer_completed_txt_rentback_date ms-1 fw-bold">@Html.DisplayFor(m => item.RentBackTime)</span>
+                                </p>
+                            </div>
+                            <div class="memberbuyer_completed_txt_people mt-3">
+                                <p>
+                                    預定人數：
+                                    <span class="memberbuyer_completed_txt_people_date ms-1 me-1 fw-bold">@Html.DisplayFor(m => item.People)</span>人
+                                </p>
+                            </div>
+                            <div class="memberbuyer_completed_txt_iconprice text-end">
+                                <p class="memberbuyer_completed_txt_price_title">
+                                    訂單價格：
+                                    <span class="memberbuyer_completed_txt_price cancel">NT$ @Html.DisplayFor(m => item.Money)</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="memberbuyer_completed_btn col-12 mt-3 mb-5 d-flex justify-content-end">
+                    <button class="btn me-2" disabled>再買一次</button>
+                    <button class="btn me-2" data-bs-toggle="modal" data-bs-target="#@Html.DisplayFor(m =>item.SpaceName)" disabled>評價 / 評分</button>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="@Html.DisplayFor(m =>item.SpaceName)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>@Html.DisplayFor(m => item.OrderNumber)</span></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="score_star mt-2">
+                                <p>您對於這次的場地的滿意度為幾顆星：</p>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="customer_evaluation mt-3">
+                                <p>您對於這次的場地有什麼需要改進或是想對我們說的話？</p>
+                                <textarea class="form-control" aria-label="With textarea"></textarea>
+                            </div>
+                            <div class="customer_eveluation_recommend mt-3">
+                                <p>您是否會推薦其他人</p>
+                                <div class="customer_evelution_radio form-check">
+                                    <input class="form-check-input" type="radio" name="customer_evelution_recommend_radio_option" id="flexRadioDefault1">
+                                    <label class="form-check-label ms-1" for="flexRadioDefault1">
+                                        <i class="fas fa-check me-1"></i>我會推薦給其他人
+                                    </label>
+                                </div>
+                                <div class="customer_evelution_radio form-check">
+                                    <input class="form-check-input" type="radio" name="customer_evelution_recommend_radio_option" id="flexRadioDefault2">
+                                    <label class="form-check-label ms-1" for="flexRadioDefault2">
+                                        <i class="fas fa-times me-2"></i>我不會推薦給其他人
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn_close" data-bs-dismiss="modal">關閉</button>
+                            <button type="button" class="btn btn_sendout">送出</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+}
+@section topCSS{
+    <link href="~/Assets/CSS/order_state/membercenter_completedstyle.css" rel="stylesheet" />
+}
+@section endJS{
+
+    <script src="~/Assets/JS/order_state/membercenter_completed.js"></script>
+}

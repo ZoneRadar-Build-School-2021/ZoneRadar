@@ -71,8 +71,14 @@ img {
   text-align: right;
 }
 
+.memberbuyer_processing_pic {
+    max-width: 300px;
+    max-height: 200px;
+}
+
 .memberbuyer_processing_pic img {
-  width: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .memberbuyer_processing_txt_title a {

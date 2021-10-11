@@ -1,0 +1,138 @@
+﻿@model IEnumerable<ShopCarViewModel>
+@{
+    ViewBag.Title = "ShopCar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@foreach (var item in Model)
+{
+    <div class="host-order container my-5">
+        <div class="row">
+            <h2>預定單</h2>
+        </div>
+        <div class="row align-items-end">
+            <div class="order-card py-4 py-lg-5">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="venue-pic mt-2 mt-lg-0"
+                             style="background-image: url(@Html.DisplayFor(m => item.SpaceUrl));">
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-8 px-3">
+                        <a href="#" class="d-inline-block mb-3 mt-3 mt-lg-0">
+                            <h3 class="venue-name">@Html.DisplayFor(m => item.SpaceName)</h3>
+                        </a>
+                        <ul class="order-detial">
+                            <li class="mb-2 fs-5">
+                                場地主姓名:<a href="#" class="customer-name mx-2">@Html.DisplayFor(m => item.OwnerName)</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                                                                         title="連絡他"></i>
+                            </li>
+                            <li class="mb-2 fs-5">場地主電話：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.OwnerPhone)</span></li>
+                            <li class="mt-3">
+                                <div class="collapse" id="order-2109020001">
+                                    <div class="datetime-card py-2">
+                                        <div class="row">
+                                            @foreach (var rentDetail in item.RentDetailVM)
+                                            {
+                                                <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
+                                                    <i class="far fa-calendar-check me-1"></i>租借日期:
+                                                    <span class="date ms-2">@Html.DisplayFor(m => rentDetail.RentTime)</span>
+                                                </div>
+                                                <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
+                                                    <i class="far fa-calendar-check me-1"></i>租還日期:
+                                                    <span class="date ms-2">@Html.DisplayFor(m => rentDetail.RentBackTime)</span>
+                                                </div>
+                                                <div class="col-sm-12 d-flex col-lg-3 align-items-center mb-1">
+                                                    <i class="far fa-calendar-check me-1"></i>人數:
+                                                    <span class="participant ms-2 me-1">@Html.DisplayFor(m => rentDetail.People)</span>人
+                                                </div>
+                                                <div class="edit_icon col-sm-12 d-flex col-lg-1 align-items-center mb-1">
+                                                    <i class="far fa-edit" data-bs-toggle="modal" data-bs-target="#A-@Html.DisplayFor(m => rentDetail.OrderDetailId)"></i>
+                                                </div>
+
+                                                <form action="~/UserCenter/EditShopCarDetail" method="post">
+                                                    <!-- Modal -->
+                                                    <input type="hidden" value="@Html.DisplayFor(m => rentDetail.OrderDetailId)" name="OrderDetailId" />
+                                                    <input type="hidden" value="@Html.DisplayFor(m => rentDetail.OrderId)" name="OrderId" />
+                                                    <div class="modal fade" id="A-@Html.DisplayFor(m => rentDetail.OrderDetailId)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered ">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="modify_rent_date mt-2">
+                                                                        <p>更改租借日期：</p>
+                                                                        <input type="text" class="form-control" id="basicDate_rent" placeholder="更改租借日期" data-input value="@Html.DisplayFor(m=>rentDetail.RentTime)" name="RentTime">
+                                                                    </div>
+                                                                    <div class="modify_rentback_date mt-2">
+                                                                        <p>更改租還日期：</p>
+                                                                        <input type="text" class="form-control" id="basicDate_rentback" placeholder="更改租還日期" data-input value="@Html.DisplayFor(m => rentDetail.RentBackTime)" name="RentBackTime">
+                                                                    </div>
+                                                                    <div class="modify_people mt-2">
+                                                                        <p>更改預約人數：</p>
+                                                                        <input type="text" class="input_people form-control" oninput="value=value.replace(/[^\d]/g,'')" value="@Html.DisplayFor(m=> rentDetail.People)" name="People">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    @Html.ActionLink("取消此時段", "DeleteShopCarDetail", new { id = rentDetail.OrderDetailId }, new { @class = "btn btn_close" })
+                                                                    @*@Html.ActionLink("修改此時段", "EditShopCarDetail", new { id = rentDetail.OrderDetailId }, new { @class = "btn btn_save" })*@
+                                                                    <button class="btn btn_save" type="submit">修改此時段</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="toggle-btn">
+                                    <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-2109020001"
+                                       role="button" aria-expanded="false" aria-controls="order-2109020001"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12">
+                        <p class="cost text-end">
+                            訂單總額:<span class="nt ms-4 fs-2 fw-bolder">
+                                NT$
+                                <span class="total-cost fs-2 fw-bolder">
+                                    @Html.DisplayFor(m => item.Money)
+                                </span>
+                            </span>
+                        </p>
+                        <div class="col-12 text-end mt-2">
+                            @Html.ActionLink("取消預購單", "DeleteShopCarOrder", new { id = item.OrderID }, new { @class = "btn btn_close" })
+                            @*<button type="button" class="btn btn_close" data-bs-dismiss="modal">取消預購單</button>*@
+                            <button type="button" class="btn btn_sendout">前往付款</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+@section topCSS
+{
+    <link href="~/Assets/CSS/order_state/usercenter_shopcar.css" rel="stylesheet" />
+}
+@section endJS
+{
+    <script src="~/Assets/JS/order_state/usercenter_shopcar.js"></script>
+}
+
+@*<form action="UserCenter/EditShopCar" method="post">
+
+
+        <button type="submit"></button>
+    </form>*@

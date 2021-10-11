@@ -276,6 +276,7 @@
     <Content Include="Assets\CSS\order_state\membercenter_completedstyle.css" />
     <Content Include="Assets\CSS\order_state\membercenter_pending.css" />
     <Content Include="Assets\CSS\order_state\membercenter_processing.css" />
+    <Content Include="Assets\CSS\order_state\usercenter_shopcar.css" />
     <Content Include="Assets\CSS\profile\profile.css" />
     <Content Include="Assets\CSS\searching\searching.css" />
     <Content Include="Assets\CSS\static\QA.css" />
@@ -323,6 +324,8 @@
     <Content Include="Assets\IMG\member_card\Nicky K..jpg" />
     <Content Include="Assets\IMG\member_card\Sandro K..jpg" />
     <Content Include="Assets\IMG\static\fistbump-over-desk.jpg" />
+    <Content Include="Assets\IMG\Usercenter\chngstar.png" />
+    <Content Include="Assets\IMG\Usercenter\star.png" />
     <Content Include="Assets\IMG\ZONERadar.png" />
     <Content Include="Assets\JS\addspace\addspace.js" />
     <Content Include="Assets\JS\addspace\checkPhoneNumber.js" />
@@ -337,8 +340,10 @@
     <Content Include="Assets\JS\layout\navbar-footer.js" />
     <Content Include="Assets\JS\leaflet.js" />
     <Content Include="Assets\JS\leaflet.markercluster.js" />
+    <Content Include="Assets\JS\order_state\membercenter_completed.js" />
     <Content Include="Assets\JS\order_state\membercenter_pending.js" />
     <Content Include="Assets\JS\order_state\membercenter_processing.js" />
+    <Content Include="Assets\JS\order_state\usercenter_shopcar.js" />
     <Content Include="Assets\JS\searching\searching.js" />
     <Content Include="Assets\JS\static\Q&amp;A.js" />
     <Content Include="Assets\JS\sweetalert2.js" />
@@ -418,11 +423,14 @@
     <Content Include="Views\Shared\_RegisterModalPartial.cshtml" />
     <Content Include="Views\MemberCenter\ResentEmail.cshtml" />
     <Content Include="Views\MemberCenter\HadSentEmail.cshtml" />
+    <Content Include="Views\UserCenter\Pending.cshtml" />
+    <Content Include="Views\UserCenter\Completed.cshtml" />
+    <Content Include="Views\UserCenter\Processing.cshtml" />
+    <Content Include="Views\UserCenter\ShopCar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\HostCenter\" />
-    <Folder Include="Views\UserCenter\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
