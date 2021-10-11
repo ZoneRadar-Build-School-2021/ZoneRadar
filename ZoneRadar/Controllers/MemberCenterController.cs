@@ -53,17 +53,19 @@ namespace ZoneRadar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditProfile([Bind(Include ="MemberID,Name,Email,Phone,Description")] ProfileViewModel edit)
         {
+            //判斷是否通過驗證
             if (ModelState.IsValid)
             {
-                var memberID = int.Parse(User.Identity.Name);
-
-                Member p = _db.Member.FirstOrDefault(x => x.MemberID == memberID);
+                //取出 ->編輯資料
+                var userID = int.Parse(User.Identity.Name);
+                Member p = _db.Member.FirstOrDefault(x => x.MemberID == userID);
                 p.Name = edit.Name;
                 p.Phone = edit.Phone;
                 p.Description = edit.Description;
 
+                //將p的狀態設為modified
                 _db.Entry(p).State = EntityState.Modified;
-
+                //儲存資料,並向SQL Server發出update指令
                 _db.SaveChanges();
 
                 return RedirectToAction("EditProfile");
