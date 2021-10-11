@@ -112,12 +112,6 @@ img {
     color: #D9831A;
 }
 
-.space_card_pic img {
-    width: 500px;
-    height: 300px;
-    object-fit: cover;
-}
-
 @media (max-width:480px) {
     .myplace_title{
         font-size: large;
