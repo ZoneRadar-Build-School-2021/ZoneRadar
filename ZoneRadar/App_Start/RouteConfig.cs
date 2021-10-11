@@ -19,14 +19,12 @@ namespace ZoneRadar
                 url: "Member/{id}",
                 defaults: new { controller = "MemberCenter", action = "Member", id = UrlParameter.Optional }
             );
-
             //場地主
             routes.MapRoute(
                 name: "Host",
                 url: "Host/{id}",
                 defaults: new { controller = "MemberCenter", action = "Host", id = UrlParameter.Optional }
             );
-
             //收藏
             routes.MapRoute(
                 name: "Collection",

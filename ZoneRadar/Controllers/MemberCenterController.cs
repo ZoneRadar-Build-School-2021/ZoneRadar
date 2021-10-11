@@ -27,6 +27,108 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
+        /// 會員的收藏場地 (Jack)
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult MyCollection(int? memberId)
+        {
+            if (!memberId.HasValue)
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            else
+            {
+                var MemCollectionSpaces = _service.GetMemberCollection(memberId.Value);
+                return View(MemCollectionSpaces);
+            }
+        }
+
+        /// <summary>
+        /// 會員的資訊 (Jack)
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UserInfo(int? memberId)
+        {
+            if (!memberId.HasValue)
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            else
+            {
+                var HostReview = _service.GetHostReview(memberId.Value);
+                return View(HostReview);
+            }
+        }
+
+        /// <summary>
+        /// 場地主的資訊 (Jack)
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult HostInfo(int? memberId)
+        {
+            if (!memberId.HasValue)
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            else
+            {
+                var MemSpace = _service.GetMemberSpace(memberId.Value);
+                return View(MemSpace);
+            }
+        }
+
+        /// <summary>
+        /// (路由)場地主 (Jack)
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Host(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            else
+            {
+                var MemSpace = _service.GetMemberSpace(id.Value);
+                return View("HostInfo", MemSpace);
+            }
+        }
+
+        /// <summary>
+        /// (路由)會員 (Jack)
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Member(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            else
+            {
+                var MemSpace = _service.GetHostReview(id.Value);
+                return View("UserInfo", MemSpace);
+            }
+        }
+
+        /// <summary>
+        /// (路由)會員的收藏場地 (Jack)
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Collection(int? id)
+        {
+            if (!id.HasValue)
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            else
+            {
+                var MemCollectionSpaces = _service.GetMemberCollection(id.Value);
+                return View("MyCollection", MemCollectionSpaces);
+            }
+        }
+
+        /// <summary>
         /// 註冊(Get)(Jenny)
         /// </summary>
         /// <returns></returns>

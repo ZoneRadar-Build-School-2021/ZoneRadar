@@ -21,7 +21,7 @@ img {
     margin-bottom: 5px;
 }
 
-.member_choose{
+.member_choose {
     border-bottom: 1px solid #CCCCCC;
 }
 
@@ -29,23 +29,25 @@ img {
     cursor: pointer;
     color: #049DD9;
 }
+
 .myplace_space_card {
     position: relative;
 }
-.myplace_space_card img {
-    width: 100%;
-}
+
+    .myplace_space_card img {
+        width: 100%;
+    }
 
 .myplace_title {
     border-bottom: 2px solid transparent;
 }
 
-.myplace_title:hover{
-    color: #67cbf3;
-    border-bottom: 3px solid #049DD9;
-}
+    .myplace_title:hover {
+        color: #67cbf3;
+        border-bottom: 3px solid #049DD9;
+    }
 
-.myplace_title{
+.myplace_title {
     text-decoration: none;
     color: #000;
 }
@@ -56,12 +58,12 @@ img {
 
 .fa-pencil-alt,
 .fa-check,
-.fa-heart{
+.fa-heart {
     color: #049DD9;
 }
-.fa-times{
+
+.fa-times {
     color: #E82953;
-    
 }
 
 .space_card_title {
@@ -75,46 +77,52 @@ img {
     cursor: pointer;
 }
 
-.space_card_title:hover {
-    color: #049DD9;
-}
+    .space_card_title:hover {
+        color: #049DD9;
+    }
 
 .space_card_location:hover {
     color: #CCCCCC;
 }
 
-.fa-star{
+.fa-star {
     color: #D9831A;
 }
 
-.reviewsfromhost_review_card{
+@media only screen and (min-width: 600px) {
+    .space_card_pic img {
+        height: 300px;
+    }
+}
+
+.reviewsfromhost_review_card {
     border-bottom: 1px solid #CCCCCC;
 }
 
-.reviewsfromhost_review_card img{
-    width: 75px;
-    height: 75px;
-    border-radius: 100%;
-    border: 2px solid #049DD9;
-    display: block;
-    margin: auto;
-}
+    .reviewsfromhost_review_card img {
+        width: 75px;
+        height: 75px;
+        border-radius: 100%;
+        border: 2px solid #049DD9;
+        display: block;
+        margin: auto;
+    }
 
-.reviewsfromhost_review_card_txt a:nth-child(1){
+.reviewsfromhost_review_card_txt a:nth-child(1) {
     color: #000;
 }
 
-.reviewsfromhost_review_card_txt_location_a span{
+.reviewsfromhost_review_card_txt_location_a span {
     color: #CCCCCC;
 }
 
-.reviewsfromhost_review_card_txt a:nth-child(1):hover,
-.reviewsfromhost_review_card_txt_location_a span:hover,
-.reviewsfromhost_review_card_txt a:hover{
-    color: #049DD9;
-}
+    .reviewsfromhost_review_card_txt a:nth-child(1):hover,
+    .reviewsfromhost_review_card_txt_location_a span:hover,
+    .reviewsfromhost_review_card_txt a:hover {
+        color: #049DD9;
+    }
 
-.reviewsfromhost_review_card_txt a{
+.reviewsfromhost_review_card_txt a {
     text-decoration: none;
     color: #CCCCCC;
 }
@@ -124,7 +132,7 @@ img {
     color: #CCCCCC;
 }
 
-.reviewsfromhost_review_card_txt_place{
+.reviewsfromhost_review_card_txt_place {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -134,7 +142,7 @@ img {
 
 
 @media (max-width:480px) {
-    .myplace_title{
+    .myplace_title {
         font-size: large;
     }
 }
@@ -149,16 +157,15 @@ img {
         padding-right: 20px;
     }
 
-    .reviewsfromhost_review_card_txt_name{
-        text-align: center;
-    }
-    
-    .reviewsfromhost_review_card_txt_star{
+    .reviewsfromhost_review_card_txt_name {
         text-align: center;
     }
 
-    .reviewsfromhost_review_card_txt_check{
+    .reviewsfromhost_review_card_txt_star {
         text-align: center;
     }
 
+    .reviewsfromhost_review_card_txt_check {
+        text-align: center;
+    }
 }

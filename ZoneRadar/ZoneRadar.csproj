@@ -33,7 +33,7 @@
     <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -432,6 +432,10 @@
     <Content Include="Views\UserCenter\ShopCar.cshtml" />
     <Content Include="Views\HostCenter\AddSpace.cshtml" />
     <Content Include="Views\HostCenter\EditSpace.cshtml" />
+    <Content Include="Views\MemberCenter\EditProfile.cshtml" />
+    <Content Include="Views\MemberCenter\HostInfo.cshtml" />
+    <Content Include="Views\MemberCenter\MyCollection.cshtml" />
+    <Content Include="Views\MemberCenter\UserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
