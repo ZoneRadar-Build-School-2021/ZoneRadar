@@ -14,4 +14,9 @@ namespace ZoneRadar.Models.ViewModels
         public string Email { get; set; }
         public string Description { get; set; }
     }
+    public class EditResult
+    {
+        public bool IsSuccessful { get; set; }
+        public Exception Exception { get; set; }
+    }
 }
