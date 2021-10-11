@@ -12,7 +12,7 @@ namespace ZoneRadar.Models.ViewModels
     }
 
     /// <summary>
-    /// 註冊欄位的ViewModel
+    /// 註冊欄位的ViewModel(Jenny)
     /// </summary>
     public class RegisterZONERadarViewModel
     {
@@ -38,7 +38,7 @@ namespace ZoneRadar.Models.ViewModels
     }
 
     /// <summary>
-    /// 登入欄位的ViewModel
+    /// 登入欄位的ViewModel(Jenny)
     /// </summary>
     public class LoginZONERadarViewModel
     {
@@ -54,16 +54,18 @@ namespace ZoneRadar.Models.ViewModels
     }
 
     /// <summary>
-    /// 註冊結果(含會員資料)
+    /// 註冊/登入結果(含會員資料)(Jenny)
     /// </summary>
-    public class RegisterResult
+    public class MemberResult
     {
         public Member User { get; set; }
         public bool IsSuccessful { get; set; }
+        public string ShowMessage { get; set; }
+        public Exception Exception { get; set; }
     }
 
     /// <summary>
-    /// 登入後會記錄在表單驗證票證中的會員資料
+    /// 登入後會記錄在表單驗證票證中的會員資料(Jenny)
     /// </summary>
     public class UserInfo
     {

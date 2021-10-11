@@ -1,0 +1,206 @@
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: inherit;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.order-link.now {
+  border-bottom: 2px solid #D9831A;
+  pointer-events: none;
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+.host-order.container {
+  max-width: 1100px;
+}
+
+.order-card {
+  position: relative;
+}
+
+.order-card::after {
+  content: '';
+  position: absolute;
+  width: calc(100% - 24px);
+  height: 1px;
+  background-color: #cccccc;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.order-id {
+  color: #D9831A;
+}
+
+.full-refund {
+  color: #D9831A;
+}
+
+.venue-pic {
+  width: 100%;
+  padding-top: 60%;
+  border-radius: 5px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.fa-comment-dots {
+  cursor: pointer;
+  color: #D9831A;
+}
+
+.read-more {
+  padding-top: 1rem;
+  position: relative;
+  color: #D9831A;
+}
+
+.read-more::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -3px;
+  left: 50%;
+  background-color: #D9831A;
+  transform: translate(-50%, -50%);
+  transition: .3s;
+}
+
+.read-more:hover::before {
+  width: 100%;
+  transform: translateX(-50%);
+  transition: .3s;
+}
+
+.read-more::after {
+  content: '查看日期';
+}
+
+.read-more:not(.collapsed)::after {
+  content: '隱藏日期';
+}
+
+.datetime-card {
+  position: relative;
+}
+
+.datetime-card::after {
+  content: '';
+  position: absolute;
+  width: 92%;
+  height: 1px;
+  background-color: #cccccc;
+  bottom: 0;
+  left: 0;
+}
+
+.datetime-card img {
+  max-width: 1em;
+}
+
+.nt,
+.total-cost {
+  color: #D9831A;
+}
+
+.edit_order{
+  font-size: smaller;
+  border: 1px solid #D9831A;
+  padding: 5px;
+}
+.edit_order:hover{
+  background-color: #D9831A;
+  color: #fff;
+}
+
+
+.modify_rent_date input,
+.modify_rentback_date input,
+.modify_people input{
+  text-align: center;
+  width: 100%;
+  border: 1px solid #D9831A;
+  color: #000;
+  border-radius: 10px;
+}
+
+
+.form-control{
+  background-color: #fff !important; 
+}
+
+.form-control:focus{
+  box-shadow:none;
+  border: 1px solid #D9831A;
+}
+
+.fa-edit:hover{
+  color: #D9831A;
+  cursor: pointer;
+}
+
+
+.btn_close{
+  background-color: #de6868;
+  color: #fff;
+}
+.btn_close:hover{
+  background-color: #982626;
+  color: #fff;
+}
+
+.btn_save {
+    border: 1px solid #982626;
+}
+
+    .btn_save:hover {
+        background-color: #D9831A;
+        color: #fff;
+    }
+
+.btn_sendout {
+    border: 1px solid #982626;
+}
+.btn_sendout:hover{
+  background-color: #D9831A;
+  color: #fff;
+}
+.date{
+    font-size:14px;
+}
+
+
+@media (max-width:320px) {
+  .edit_icon{
+    justify-content: start;
+  }
+}
+@media (max-width:1920px) and (min-width:768px){
+    .edit_icon {
+        justify-content: center;
+    }
+}

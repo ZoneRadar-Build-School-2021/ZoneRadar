@@ -262,7 +262,7 @@
                 <a href="~/Booking/BookingPage/@item.SpaceId" class="text-decoration-none">
                     <div class="img w-100" style="background-image: url(@item.SpacePhoto);"></div>
                     <span class="distinct position-absolute">@item.CityName．@item.Capacity 人</span>
-                    <span class="price position-absolute">$@Html.DisplayFor(modelItem => item.PricePerHour) / hr</span>
+                    <span class="price position-absolute">@Html.DisplayFor(modelItem => item.PricePerHour) / hr</span>
                 </a>
             </div>
         }
@@ -305,7 +305,7 @@
 <div class="container host-introduction mt-5 p-4 p-xl-5">
     <div class="row align-items-center justify-content-md-between">
         <div class="d-none d-md-block col-5">
-            <img src="~/Assets/IMG/index/woman.jfif" alt="host" class="w-100 align-middle">
+            <img src="~/Assets/IMG/index/taiwan-woman.jfif" alt="host" class="w-100 align-middle">
         </div>
         <div class="col-12 col-md-6">
             <i class="fas fa-quote-left d-blcok fs-4"></i>
@@ -315,7 +315,7 @@
         </div>
         <div class="d-md-none col-12 d-flex align-items-center">
             <div class="div-sm-img d-inline-block rounded-circle overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="host" class="w-100">
+                <div class="img" style="background-image: url(~/Assets/IMG/index/taiwan-woman.jfif);"></div>
             </div>
             <p class="ms-3 mb-0 d-inline-block">
                 <span class="fw-bolder">Mary Lin</span>
@@ -364,12 +364,4 @@
 @section endJS
 {
     <script src="~/Assets/JS/index/index.js"></script>
-    @*@if (ViewBag.IsLogin == true)
-    {
-        <script>
-            let login_modal = document.querySelector("#login-modal");
-            let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
-            modal.show();
-        </script>
-    }*@
 }

@@ -1,13 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ZoneRadar.Data;
+using ZoneRadar.Models;
+using ZoneRadar.Models.ViewModels;
+using ZoneRadar.Services;
 
 namespace ZoneRadar.Controllers
 {
     public class UserCenterController : Controller
     {
+        private readonly OrderService _OrderService;
+        private readonly PreOrderService _PreOrderService;
+
+        private readonly ZONERadarContext _db;
+        public UserCenterController()
+        {
+            _OrderService = new OrderService();
+            _PreOrderService = new PreOrderService();
+
+            _db = new ZONERadarContext();
+        }
         // GET: UserCenter
         public ActionResult Index()
         {
@@ -15,15 +32,104 @@ namespace ZoneRadar.Controllers
         }
         public ActionResult Pending()
         {
-            return View();
+            var userId = int.Parse(User.Identity.Name);
+            var model = _OrderService.GetUsercenterPendingVM(userId);
+
+            return View(model);
         }
         public ActionResult Processing()
         {
-            return View();
+            var userid = int.Parse(User.Identity.Name);
+            var model = _OrderService.GetUsercenterProcessingVM(userid);
+
+            return View(model);
         }
         public ActionResult Completed()
         {
-            return View();
+            var userid = int.Parse(User.Identity.Name);
+            var model = _OrderService.GetUsercenterCompletedVM(userid);
+
+            return View(model);
+        }
+
+        public ActionResult ShopCar()
+        {
+            var userid = int.Parse(User.Identity.Name);
+            var model = _PreOrderService.GetShopCarVM(userid);
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult EditShopCarDetail()
+        {
+            var userid = int.Parse(User.Identity.Name);
+
+            if (userid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var model = _PreOrderService.GetShopCarVM(userid);
+
+            return View("ShopCar", model);
+        }
+        [HttpPost]
+        public ActionResult EditShopCarDetail(RentDetailViewModel model)
+        {
+            var userid = int.Parse(User.Identity.Name);
+            if (ModelState.IsValid)
+            {
+                var result = _PreOrderService.EditShopCarDetail(model);
+                return RedirectToAction("ShopCar", result);
+            }
+            var resultmodel = _PreOrderService.GetShopCarVM(userid);
+            return View("ShopCar", resultmodel);
+        }
+        public ActionResult DeleteShopCarDetail(int id)
+        {
+            var userid = int.Parse(User.Identity.Name);
+
+            var result = _PreOrderService.DeleteShopCarDetail(id);
+            return RedirectToAction("ShopCar", result);
+
+            var model = _PreOrderService.GetShopCarVM(userid);
+            return View("ShopCar", model);
+        }
+        public ActionResult DeleteShopCarOrder(int id)
+        {
+
+            var userid = int.Parse(User.Identity.Name);
+            var model = _PreOrderService.GetShopCarVM(userid);
+
+            var result = _PreOrderService.DeleteShopCarOrder(id);
+            return RedirectToAction("ShopCar", result);
+
+            return View("ShopCar", model);
+        }
+        [HttpGet]
+        public ActionResult DeletePendingOrder()
+        {
+            var userid = int.Parse(User.Identity.Name);
+
+            if (userid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var model = _OrderService.GetUsercenterPendingVM(userid);
+
+            return View("Pending", model);
+        }
+        [HttpPost]
+        public ActionResult DeletePendingOrder(UsercenterPendingViewModel model)
+        {
+            var userid = int.Parse(User.Identity.Name);
+            if (ModelState.IsValid)
+            {
+                var result = _OrderService.DeletePendingOrder(model);
+                return RedirectToAction("Pending", result);
+            }
+            var resultmodel = _OrderService.GetUsercenterPendingVM(userid);
+            return View("ShopCar", resultmodel);
         }
     }
 }

@@ -63,27 +63,31 @@ input[type="text"]:focus {
 
 /* modal */
 .filter-modal h5, .filter-modal h4 {
-    font-weight: bolder !important;
+    font-weight: bolder;
 }
 
 .amenities .btn {
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    border: 2px solid #fff !important;
+    border: 2px solid #fff;
     width: 50%;
 }
 
-    .amenities .btn:hover {
-        box-sizing: border-box;
-        border: 2px solid #049DD9 !important;
+    .amenities .btn.amenity-selected {
+        border: 2px solid #049DD9;
     }
 
-.filter-modal .claer-btn {
+    .amenities .btn:hover {
+        box-sizing: border-box;
+        border: 2px solid #049DD9;
+    }
+
+.filter-modal .clear-btn {
     color: #D9831A;
 }
 
-    .filter-modal .claer-btn:hover {
+    .filter-modal .clear-btn:hover {
         color: #c47009;
     }
 

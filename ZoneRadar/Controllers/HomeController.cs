@@ -20,6 +20,10 @@ namespace ZoneRadar.Controllers
             _reviewService = new ReviewService();
         }
 
+        /// <summary>
+        /// ZONERadar的首頁(Jenny)
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             var model = new HomeViewModel
@@ -30,20 +34,14 @@ namespace ZoneRadar.Controllers
                 CityOptions = _spaceService.GetCityOptions()
             };
 
-            //使用者欲進入授權畫面但未登入的狀況(跳出登入Modal)
-            if (Request.QueryString["ReturnUrl"] != null)
-            {
-                ViewBag.LoginModalPopup = true;
-            }
-            //嘗試登入失敗時的狀況(重新跳出登入Modal，並將原先輸入的Email顯示在欄位裡)
-            if (TempData["Email"] != null)
-            {
-                //新增ModelState的Error訊息(顯示後就消不掉了)
-                ModelState.AddModelError("LoginZONERadarVM.Password", "無效的帳號或密碼");
-                ViewBag.LoginModalPopup = TempData["LoginModalPopup"];
-                //model.LoginZONERadarVM = new LoginZONERadarViewModel { Email = (string)TempData["Email"] };
-            }
-            
+
+
+            ViewBag.RegisterModalPopup = TempData["RegisterModalPopup"];
+            ViewBag.LoginModalPopup = TempData["LoginModalPopup"];
+            ViewBag.Alert = TempData["Alert"];
+            ViewBag.Message = TempData["Message"];
+            ViewBag.Icon = TempData["Icon"];
+
             return View(model);
         }
 
@@ -76,7 +74,7 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
-        /// 測試用的Action
+        /// 測試用的Action(Jenny)
         /// </summary>
         /// <param name="homepageSearchVM"></param>
         /// <returns></returns>

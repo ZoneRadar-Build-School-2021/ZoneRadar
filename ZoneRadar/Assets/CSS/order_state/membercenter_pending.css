@@ -71,8 +71,11 @@ img {
   text-align: right;
 }
 
+
+
 .memberbuyer_pending_pic img {
-  width: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .memberbuyer_pending_txt_title a {
@@ -171,29 +174,36 @@ img {
   border-radius: 5px;
   border: 1px solid #be7418;
 }
+@media (max-width:1920px) and (min-width:768px) {
+    .memberbuyer_pending_pic {
+        max-width: 300px;
+        max-height: 200px;
+    }
 
+}
 @media (max-width:767px) {
-  .memberbuyer_pending_num_date{
-    text-align: left;
-  }
 
-  .fa-wifi,
-  .fa-video,
-  .fa-briefcase-medical {
-    padding: 10px !important;
-  }
+    .memberbuyer_pending_num_date {
+        text-align: left;
+    }
 
-  .memberbuyer_pending_txt_price_title {
-    font-size: 10px;
-  }
+    .fa-wifi,
+    .fa-video,
+    .fa-briefcase-medical {
+        padding: 10px !important;
+    }
 
-  .memberbuyer_pending_txt_price {
-    font-size: 25px;
-  }
+    .memberbuyer_pending_txt_price_title {
+        font-size: 10px;
+    }
 
-  .memberbuyer_pending_num,
-  .memberbuyer_pending_pic,
-  .memberbuyer_pending_txt {
-    border-bottom: none;
-  }
+    .memberbuyer_pending_txt_price {
+        font-size: 25px;
+    }
+
+    .memberbuyer_pending_num,
+    .memberbuyer_pending_pic,
+    .memberbuyer_pending_txt {
+        border-bottom: none;
+    }
 }

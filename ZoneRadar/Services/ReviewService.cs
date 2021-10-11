@@ -15,8 +15,9 @@ namespace ZoneRadar.Services
         {
             _repository = new ZONERadarRepository();
         }
+
         /// <summary>
-        /// 找出分數較高的場地評論
+        /// 找出分數較高的場地評論(Jenny)
         /// </summary>
         /// <returns></returns>
         public List<ToSpaceReviewViewModel> GetSpaceReviews()
@@ -44,6 +45,11 @@ namespace ZoneRadar.Services
             return topSpaceReviews;
         }
 
+        /// <summary>
+        /// 取得特定場地的評價(Steve)
+        /// </summary>
+        /// <param name="targetSpace"></param>
+        /// <returns></returns>
         public List<SpaceReviewViewModel> GetTargetSpaceReviews(Space targetSpace)
         {
             var reviewList = _repository.GetAll<Review>().Where(x => x.ToHost == true && x.Order.SpaceID == targetSpace.SpaceID).Select(x => x).ToList();

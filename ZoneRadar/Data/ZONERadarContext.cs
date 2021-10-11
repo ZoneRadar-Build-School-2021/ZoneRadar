@@ -38,6 +38,11 @@ namespace ZoneRadar.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AmenityCategoryDetail>()
+                .HasMany(e => e.AmenityDetail)
+                .WithRequired(e => e.AmenityCategoryDetail)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<AmenityDetail>()
                 .HasMany(e => e.SpaceAmenity)
                 .WithRequired(e => e.AmenityDetail)

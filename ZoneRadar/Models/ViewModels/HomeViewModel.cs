@@ -8,7 +8,7 @@ using System.Web.Mvc;
 namespace ZoneRadar.Models.ViewModels
 {
     /// <summary>
-    /// 首頁的ViewModel
+    /// 首頁的ViewModel(Jenny)
     /// </summary>
     public class HomeViewModel
     {
@@ -19,7 +19,7 @@ namespace ZoneRadar.Models.ViewModels
         public HomepageSearchViewModel HomepageSearchVM { get; set; }
     }
     /// <summary>
-    /// 精選場地
+    /// 精選場地(Jenny)
     /// </summary>
     public class SelectedSpaceViewModel
     {
@@ -27,13 +27,13 @@ namespace ZoneRadar.Models.ViewModels
         public string CityName { get; set; }
         public int Capacity { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:N0}")]
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal PricePerHour { get; set; }
         public string SpacePhoto { get; set; }
         public double Score { get; set; }
     }
     /// <summary>
-    /// 用戶給場地的評論
+    /// 用戶給場地的評論(Jenny)
     /// </summary>
     public class ToSpaceReviewViewModel
     {
@@ -43,7 +43,7 @@ namespace ZoneRadar.Models.ViewModels
         public int Score { get; set; }
     }
     /// <summary>
-    /// 首頁搜尋列的ViewModel
+    /// 首頁搜尋列的ViewModel(Jenny)
     /// </summary>
     public class HomepageSearchViewModel
     {

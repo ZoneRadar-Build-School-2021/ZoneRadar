@@ -200,6 +200,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\AmenityCategoryDetail.cs" />
     <Compile Include="Models\AmenityDetail.cs" />
     <Compile Include="Models\Cancellation.cs" />
@@ -211,6 +212,14 @@
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\District.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ViewModels\BookingPageViewModel.cs" />
+    <Compile Include="Models\ViewModels\ShopCarViewModel.cs" />
+    <Compile Include="Models\ViewModels\SpaceDetailViewModel.cs" />
+    <Compile Include="Models\ViewModels\SpaceBriefViewModel.cs" />
+    <Compile Include="Models\ViewModels\FilterViewModel.cs" />
+    <Compile Include="Models\ViewModels\HomeViewModel.cs" />
+    <Compile Include="Models\ViewModels\HostInfoViewModel.cs" />
+    <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Operating.cs" />
     <Compile Include="Models\Order.cs" />
@@ -223,17 +232,15 @@
     <Compile Include="Models\SpacePhoto.cs" />
     <Compile Include="Models\SpaceType.cs" />
     <Compile Include="Models\TypeDetail.cs" />
-    <Compile Include="Models\ViewModels\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ViewModels\BookingPageViewModel.cs" />
-    <Compile Include="Models\ViewModels\FilterViewModel.cs" />
-    <Compile Include="Models\ViewModels\HostInfoViewModel.cs" />
-    <Compile Include="Models\ViewModels\ManageViewModels.cs" />
-    <Compile Include="Models\ViewModels\HomeViewModel.cs" />
-    <Compile Include="Models\ViewModels\MemberViewModel.cs" />
     <Compile Include="Data\ZONERadarContext.cs" />
-    <Compile Include="Models\ViewModels\QueryViewModel.cs" />
+    <Compile Include="Models\ViewModels\MemberViewModel.cs" />
     <Compile Include="Models\ViewModels\MyCollectionViewModel.cs" />
+    <Compile Include="Models\ViewModels\QueryViewModel.cs" />
+    <Compile Include="Models\ViewModels\SearchingPageViewModel.cs" />
+    <Compile Include="Models\ViewModels\SpaceReviewViewModel.cs" />
+    <Compile Include="Models\ViewModels\UsercenterCompletedViewModel.cs" />
+    <Compile Include="Models\ViewModels\UsercenterPendingViewModel.cs" />
+    <Compile Include="Models\ViewModels\UsercenterProcessingViewModel.cs" />
     <Compile Include="Models\ViewModels\UserInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ZONERadarRepository.cs" />
@@ -269,6 +276,7 @@
     <Content Include="Assets\CSS\order_state\membercenter_completedstyle.css" />
     <Content Include="Assets\CSS\order_state\membercenter_pending.css" />
     <Content Include="Assets\CSS\order_state\membercenter_processing.css" />
+    <Content Include="Assets\CSS\order_state\usercenter_shopcar.css" />
     <Content Include="Assets\CSS\profile\profile.css" />
     <Content Include="Assets\CSS\searching\searching.css" />
     <Content Include="Assets\CSS\static\QA.css" />
@@ -294,10 +302,12 @@
     <Content Include="Assets\IMG\icons\lighting.svg" />
     <Content Include="Assets\IMG\icons\location-icon.svg" />
     <Content Include="Assets\IMG\icons\monitor.svg" />
+    <Content Include="Assets\IMG\icons\outdoor_area.svg" />
     <Content Include="Assets\IMG\icons\parking.svg" />
     <Content Include="Assets\IMG\icons\person.svg" />
     <Content Include="Assets\IMG\icons\printer.svg" />
     <Content Include="Assets\IMG\icons\projector.svg" />
+    <Content Include="Assets\IMG\icons\public_transit.svg" />
     <Content Include="Assets\IMG\icons\road.svg" />
     <Content Include="Assets\IMG\icons\rules.svg" />
     <Content Include="Assets\IMG\icons\screen.svg" />
@@ -308,14 +318,20 @@
     <Content Include="Assets\IMG\icons\toilet.svg" />
     <Content Include="Assets\IMG\icons\whiteboard.svg" />
     <Content Include="Assets\IMG\icons\wifi.svg" />
-    <Content Include="Assets\IMG\index\woman.jfif" />
+    <Content Include="Assets\IMG\index\taiwan-woman.jfif" />
     <Content Include="Assets\IMG\index\ZONERardar-03.ico" />
     <Content Include="Assets\IMG\member_card\Jetset Sound AV, LLC J..jpg" />
     <Content Include="Assets\IMG\member_card\Nicky K..jpg" />
     <Content Include="Assets\IMG\member_card\Sandro K..jpg" />
     <Content Include="Assets\IMG\static\fistbump-over-desk.jpg" />
+    <Content Include="Assets\IMG\Usercenter\chngstar.png" />
+    <Content Include="Assets\IMG\Usercenter\star.png" />
     <Content Include="Assets\IMG\ZONERadar.png" />
     <Content Include="Assets\JS\addspace\addspace.js" />
+    <Content Include="Assets\JS\addspace\checkPhoneNumber.js" />
+    <Content Include="Assets\JS\addspace\ckeditor.js" />
+    <Content Include="Assets\JS\addspace\text.js" />
+    <Content Include="Assets\JS\axios.min.js" />
     <Content Include="Assets\JS\booking\booking.js" />
     <Content Include="Assets\JS\bootstrap.bundle.min.js" />
     <Content Include="Assets\JS\flatpickr.js" />
@@ -324,8 +340,10 @@
     <Content Include="Assets\JS\layout\navbar-footer.js" />
     <Content Include="Assets\JS\leaflet.js" />
     <Content Include="Assets\JS\leaflet.markercluster.js" />
+    <Content Include="Assets\JS\order_state\membercenter_completed.js" />
     <Content Include="Assets\JS\order_state\membercenter_pending.js" />
     <Content Include="Assets\JS\order_state\membercenter_processing.js" />
+    <Content Include="Assets\JS\order_state\usercenter_shopcar.js" />
     <Content Include="Assets\JS\searching\searching.js" />
     <Content Include="Assets\JS\static\Q&amp;A.js" />
     <Content Include="Assets\JS\sweetalert2.js" />
@@ -364,6 +382,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\MemberCenter\ConfirmEmailContent.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -398,26 +417,20 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Home\Policy.cshtml" />
-    <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Booking\BookingPage.cshtml" />
     <Content Include="Views\Searching\SearchingPage.cshtml" />
+    <Content Include="Views\Shared\_LoginModalPartial.cshtml" />
+    <Content Include="Views\Shared\_RegisterModalPartial.cshtml" />
+    <Content Include="Views\MemberCenter\ResentEmail.cshtml" />
+    <Content Include="Views\MemberCenter\HadSentEmail.cshtml" />
     <Content Include="Views\UserCenter\Pending.cshtml" />
-    <Content Include="Views\UserCenter\Processing.cshtml" />
     <Content Include="Views\UserCenter\Completed.cshtml" />
-    <Content Include="Views\MemberCenter\EditProfile.cshtml" />
-    <Content Include="Views\MemberCenter\MyCollection.cshtml" />
-    <Content Include="Views\MemberCenter\UserInfo.cshtml" />
-    <Content Include="Views\MemberCenter\HostInfo.cshtml" />
-    <Content Include="Views\HostCenter\AddSpace.cshtml" />
-    <Content Include="Views\HostCenter\EditSpace.cshtml" />
-    <Content Include="Views\HostCenter\Completed.cshtml" />
-    <Content Include="Views\HostCenter\Processing.cshtml" />
-    <Content Include="Views\MemberCenter\Register.cshtml" />
+    <Content Include="Views\UserCenter\Processing.cshtml" />
+    <Content Include="Views\UserCenter\ShopCar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\JSONData\" />
+    <Folder Include="Views\HostCenter\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

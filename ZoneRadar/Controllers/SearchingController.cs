@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Services;
 
 namespace ZoneRadar.Controllers
@@ -16,31 +15,14 @@ namespace ZoneRadar.Controllers
             _spaceService = new SpaceService();
         }
 
-
-        // GET: Searching
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        /// <summary>
+        /// 搜尋頁(Steve)
+        /// </summary>
+        /// <returns></returns>
         public ActionResult SearchingPage()
         {
-            //var model = new FilterViewModel
-            //{
-            //    CityList = _spaceService.GetCityOptions(),
-            //    DistrictList = _spaceService
-            //    SpaceTypeList = _spaceService.GetTypeOptions(),
-
-            //}
-
-
-
             return View();
         }
 
-        public ActionResult NoResult()
-        {
-            return View();
-        }
     }
 }

@@ -13,21 +13,5 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
-        public ActionResult AddSpace()
-        {
-            return View();
-        }
-        public ActionResult EditSpace()
-        {
-            return View();
-        }
-        public ActionResult Processing()
-        {
-            return View();
-        }
-        public ActionResult Completed()
-        {
-            return View();
-        }
     }
 }
