@@ -44,9 +44,9 @@ img {
     position: relative;
 }
 
-.myplace_space_card img {
-    width: 100%;
-}
+    .myplace_space_card img {
+        width: 100%;
+    }
 
 .myplace_title {
     border-bottom: 1px solid #CCCCCC;
@@ -67,26 +67,31 @@ img {
     cursor: pointer;
 }
 
-.space_card_title:hover {
-     color: #049DD9;
-}
+    .space_card_title:hover {
+        color: #049DD9;
+    }
 
 .space_card_location_a {
     text-decoration: none;
 }
 
-.space_card_location_a span {
-    color: #000;
-}
+    .space_card_location_a span {
+        color: #000;
+    }
 
-.space_card_location_a span:hover {
-    color: #CCCCCC;
-}
+        .space_card_location_a span:hover {
+            color: #CCCCCC;
+        }
 
 .fa-star {
     color: #D9831A;
 }
 
+@media only screen and (min-width: 600px) {
+    .space_card_pic img {
+        height: 300px;
+    }
+}
 
 @media (max-width:768px) {
     .member_card_introduce_name {

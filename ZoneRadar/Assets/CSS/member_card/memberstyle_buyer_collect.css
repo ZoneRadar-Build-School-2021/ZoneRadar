@@ -21,7 +21,7 @@ img {
     margin-bottom: 5px;
 }
 
-.member_choose{
+.member_choose {
     border-bottom: 1px solid #CCCCCC;
 }
 
@@ -29,23 +29,25 @@ img {
     cursor: pointer;
     color: #049DD9;
 }
+
 .myplace_space_card {
     position: relative;
 }
-.myplace_space_card img {
-    width: 100%;
-}
+
+    .myplace_space_card img {
+        width: 100%;
+    }
 
 .myplace_title {
     border-bottom: 2px solid transparent;
 }
 
-.myplace_title:hover{
-    color: #67cbf3;
-    border-bottom: 3px solid #049DD9;
-}
+    .myplace_title:hover {
+        color: #67cbf3;
+        border-bottom: 3px solid #049DD9;
+    }
 
-.myplace_title{
+.myplace_title {
     text-decoration: none;
     color: #000;
 }
@@ -56,11 +58,11 @@ img {
 
 .fa-check,
 .fa-pencil-alt,
-.fa-heart{
+.fa-heart {
     color: #049DD9;
 }
 
-.myplace_space_card_distinct{
+.myplace_space_card_distinct {
     padding: 10px 30px;
     background-color: rgba(4, 157, 217, .3);
     box-shadow: 0 5px 15px rgba(0, 0, 0, .7);
@@ -80,6 +82,7 @@ img {
     cursor: pointer;
     color: #049DD9;
 }
+
 .myplace_space_card {
     position: relative;
 }
@@ -95,25 +98,31 @@ img {
     cursor: pointer;
 }
 
-.space_card_title:hover,
-.space_card_location_a span:hover{
-    color: #049DD9;
-}
+    .space_card_title:hover,
+    .space_card_location_a span:hover {
+        color: #049DD9;
+    }
 
-.space_card_location_a{
+.space_card_location_a {
     text-decoration: none;
 }
 
-.space_card_location_a span {
-    color: #000;
-}
+    .space_card_location_a span {
+        color: #000;
+    }
 
-.fa-star{
+.fa-star {
     color: #D9831A;
 }
 
+@media only screen and (min-width: 600px) {
+    .space_card_pic img {
+        height: 300px;
+    }
+}
+
 @media (max-width:480px) {
-    .myplace_title{
+    .myplace_title {
         font-size: large;
     }
 }
@@ -128,15 +137,15 @@ img {
         padding-right: 20px;
     }
 
-    .reviewsfromhost_review_card_txt_name{
-        text-align: center;
-    }
-    
-    .reviewsfromhost_review_card_txt_star{
+    .reviewsfromhost_review_card_txt_name {
         text-align: center;
     }
 
-    .reviewsfromhost_review_card_txt_check{
+    .reviewsfromhost_review_card_txt_star {
+        text-align: center;
+    }
+
+    .reviewsfromhost_review_card_txt_check {
         text-align: center;
     }
 
