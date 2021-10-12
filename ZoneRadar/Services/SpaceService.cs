@@ -477,11 +477,10 @@ namespace ZoneRadar.Services
             return result;
         }
         /// <summary>
-        ///  便利設施 
-        ///  Amber
+        ///  找出便利設施 (Amber)
         /// </summary>
         /// 分三類
-        /// 1.
+        /// 場地空間 第一類
         public SpaceViewModel ShowAmenityByIdOne()
         {
             var result = new SpaceViewModel()
@@ -500,13 +499,10 @@ namespace ZoneRadar.Services
             };
             return result;
         }
-        /// <summary>
-        ///  Amber 
-        /// </summary>
-        ///  便利設施 
+         /// <summary>
+        ///  找出便利設施 (Amber)
         /// </summary>
         /// 第二類
-        /// 場地空間
         public SpaceViewModel ShowAmenityByIdTwo()
         {
             var result = new SpaceViewModel()
@@ -525,9 +521,8 @@ namespace ZoneRadar.Services
             }
             return result;
         }
-        /// <summary>
-        ///  便利設施 
-        ///  Amber
+       /// <summary>
+        ///  找出便利設施 (Amber)
         /// </summary>
         /// 第三類
         /// 其他
@@ -552,10 +547,8 @@ namespace ZoneRadar.Services
 
 
         /// <summary>
-        /// 取消政策 4種
-        /// Amber
+        /// 取消政策 4種(Amber)
         /// </summary>
-        /// 
         public SpaceViewModel ShowCancellations()
         {
             var result = new SpaceViewModel()
@@ -574,11 +567,8 @@ namespace ZoneRadar.Services
             }
             return result;
         }
-
-        /// <summary>
-        ///  Amber 
         /// </summary>
-        /// 場地類型 16種 
+        /// 場地類型 16種 (Amber)
         /// </summary>
         public SpaceViewModel ShowSpaceType()
         {
@@ -600,8 +590,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        ///  清潔 4大類
-        ///  Amber
+        ///  清潔 4大類 (Amber)
         ///  第一類  CleaningPolicy
         /// </summary>
         public SpaceViewModel ShowCleaningCategoryByIdOne()
@@ -623,8 +612,7 @@ namespace ZoneRadar.Services
             return result;
         }
         /// <summary>
-        ///  第二類
-        ///  Amber
+        ///  第二類 (Amber)
         /// </summary>
         public SpaceViewModel ShowCleaningCategoryByIdTwo()
         {
@@ -645,8 +633,7 @@ namespace ZoneRadar.Services
             return result;
         }
         /// <summary>
-        ///  Amber
-        /// 第三類
+        /// 第三類 (Amber)
         /// </summary>
         public SpaceViewModel ShowCleaningCategoryByIdThree()
         {
@@ -667,8 +654,7 @@ namespace ZoneRadar.Services
             return result;
         }
         /// <summary>
-        ///  第四類
-        ///  Amber
+        ///  第四類 (Amber)
         /// </summary>
         public SpaceViewModel ShowCleaningCategoryByIdFour()
         {
@@ -689,8 +675,7 @@ namespace ZoneRadar.Services
             return result;
         }
         /// <summary>
-        ///  營業時間
-        ///  Amber
+        ///  自訂營業時間 (Amber)
         /// </summary>
         public List<SelectListItem> Operating()
         {
@@ -719,8 +704,7 @@ namespace ZoneRadar.Services
             return Operating;
         }
         /// <summary>
-        ///  營業時間 天
-        ///  Amber
+        ///  營業時間 天 (Amber)
         /// </summary>
         public List<SelectListItem> OperatingDay()
         {
@@ -738,11 +722,8 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        ///  Amber 
+        /// 編輯 讀資料庫裡的資料 (Amber)
         /// </summary>
-        /// 編輯 讀資料庫裡的資料
-        /// 參數是場地ID <param name="spaceId"></param>
-        ///
         public SomeOnesSpaceViewModel ReadAnySpace(int spaceId)
         {
             var result = new SomeOnesSpaceViewModel()
@@ -785,9 +766,8 @@ namespace ZoneRadar.Services
                 SpaceOwnerNameList = new List<SomeOnesSpaceName>(),
             };
             /// <summary>
-            ///  Amber 
+            ///找 地址( Amber) 
             /// </summary>
-            ///地址 
 
             var adds = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var add in adds)
@@ -831,11 +811,10 @@ namespace ZoneRadar.Services
                 };
                 result.SomeOnesCitytList.Add(ciytTemp);
             };
-            /// <summary>
-            ///  Amber 
+            ///<summary>
+            //活動類型 把活動類別用戶有選的撈出來(Amber)
             /// </summary>
-            //活動類型
-            //把活動類別有的撈出來
+
             List<SpaceType> spacetypes = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == spaceId).ToList();
             foreach (var item in spacetypes)
             {
@@ -845,9 +824,8 @@ namespace ZoneRadar.Services
                 result.SomeOnesTypeDetailList.Add(someOnesTypeDetail);
             }
             /// <summary>
-            ///  Amber 
+            ///  把全部活動類別列出來(Amber )
             /// </summary>
-            //把全部活動類別列出來
             var showAllTypeDetail = _repository.GetAll<TypeDetail>().Select(x => x).ToList();
 
             foreach (var item in showAllTypeDetail)
@@ -860,9 +838,8 @@ namespace ZoneRadar.Services
                 result.ShowAllTypeDetailList.Add(showAllTypeDetailTemp);
             }
             /// <summary>
-            ///  Amber 
+            /// 場地名稱( Amber )
             /// </summary>
-            //場地名稱
             var spaceName = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.SpaceName).ToList();
             foreach (var item in spaceName)
             {
@@ -884,9 +861,8 @@ namespace ZoneRadar.Services
                 result.SpaceOwnerNameList.Add(someOnesSpaceTemp);
             }
             /// <summary>
-            ///  Amber 
+            ///  場地簡介(Amber )
             /// </summary>
-            //場地簡介
             var spaceIntroduction = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).ToList();
             foreach (var item in spaceIntroduction)
             {
@@ -898,9 +874,8 @@ namespace ZoneRadar.Services
                 result.SomeOnesSpaceIntroductionList.Add(spaceIntroductiontemp);
             };
             /// <summary>
-            ///  Amber 
+            ///  場地大小人數(Amber) 
             /// </summary>
-            //場地大小人數
             var spaceMeasureOfAreaandCapacity = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).ToList();
             foreach (var item in spaceMeasureOfAreaandCapacity)
             {
@@ -913,9 +888,8 @@ namespace ZoneRadar.Services
             }
 
             /// <summary>
-            ///  Amber 
+            ///  定價(Amber)
             /// </summary>
-            /// 定價
             var someonesprice = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var item in someonesprice)
             {
@@ -928,9 +902,8 @@ namespace ZoneRadar.Services
                 result.SomeOnesPriceList.Add(someonespriceTemp);
             }
             /// <summary>
-            ///  Amber 
+            ///  折扣(Amber)
             /// </summary>
-            ///折扣 
             var someonsdiscounts = _repository.GetAll<SpaceDiscount>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var item in someonsdiscounts)
             {
@@ -942,9 +915,10 @@ namespace ZoneRadar.Services
                 };
                 result.SomeOnesDiscountsList.Add(someonsdiscountsTemp);
             }
-            /// Amber
-            /// 撈有的設施
-            /// 全部
+            /// <summary>
+            /// 撈用戶有選的設施( Amber)
+            /// </summary>
+
             var amenitys = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == spaceId).Select(x => x.AmenityDetailID).ToList();
             var AmenityDetails = _repository.GetAll<AmenityDetail>().ToList();
             var AmenityOptions = new List<AmenityDetail>();
@@ -954,9 +928,8 @@ namespace ZoneRadar.Services
                 AmenityOptions.Add(amenityDetails);
             }
             /// <summary>
-            ///  Amber 
+            ///  便利設施(Amber)
             /// </summary>
-            ///便利設施
             var Amenity = AmenityOptions.Where(x => x.AmenityCategoryID == 1).Select(x => x.Amenity).ToList();
             foreach (var item in Amenity)
             {
@@ -985,9 +958,8 @@ namespace ZoneRadar.Services
                 result.SomeThreeAmenityList.Add(temp);
             }
             /// <summary>
-            ///  Amber 
+            /// 便利全部設施選項( Amber )
             /// </summary>
-            ///便利全部設施選項
             var AmenityOptionOnes = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 1).ToList();
             foreach (var item in AmenityOptionOnes)
             {
@@ -997,9 +969,9 @@ namespace ZoneRadar.Services
                 };
                 result.amenityAraeOneList.Add(temp);
             }
-            ///
-            ///便利全部場地空間選項 ///
-            /// 
+            /// <summary>
+            ///便利全部場地空間選項( Amber ) 
+            /// </summary>
             var AmenityOptionTwo = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 2).ToList();
             foreach (var item in AmenityOptionTwo)
             {
@@ -1010,10 +982,8 @@ namespace ZoneRadar.Services
                 result.amenityAraeTwoList.Add(temp);
             }
             /// <summary>
-            ///  Amber 
+            /// 其他場地空間選項 ( Amber )
             /// </summary>
-            /// 其他場地空間選項 
-            /// 
             var AmenityOptionThree = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 3).ToList();
             foreach (var item in AmenityOptionThree)
             {
@@ -1024,10 +994,8 @@ namespace ZoneRadar.Services
                 result.amenityAraeThreeList.Add(temp);
             }
             /// <summary>
-            ///  Amber 
+            /// 場地條款( Amber )
             /// </summary>
-            /// 場地條款
-            /// 
             var rules = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var item in rules)
             {
@@ -1038,10 +1006,8 @@ namespace ZoneRadar.Services
                 result.SomeOnesRulesList.Add(rulesTemp);
             }
             /// <summary>
-            ///  Amber 
+            ///  交通資訊(Amber) 
             /// </summary>
-            /// 交通資訊
-            /// 
             var traffic = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var item in traffic)
             {
@@ -1052,9 +1018,8 @@ namespace ZoneRadar.Services
                 result.SomeOnesTrafficList.Add(trafficTemp);
             }
             /// <summary>
-            ///  Amber 
+            ///  停車(Amber) 
             /// </summary>
-            ///停車
             var parking = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var item in parking)
             {
@@ -1065,9 +1030,8 @@ namespace ZoneRadar.Services
                 result.SomeOnesParkingList.Add(parkingTemp);
             }
             /// <summary>
-            ///  Amber 
+            ///  攝影(Amber )
             /// </summary>
-            ///攝影
             var shooting = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var item in shooting)
             {
@@ -1078,9 +1042,8 @@ namespace ZoneRadar.Services
                 result.SomeOnesShootingList.Add(shootingTemp);
             }
             /// <summary>
-            ///  Amber 
+            ///  取消政策 全部(Amber )
             /// </summary>
-            ///取消政策 全部
             var cancels = _repository.GetAll<Cancellation>().Select(x => x).ToList();
             foreach (var item in cancels)
             {
@@ -1093,9 +1056,8 @@ namespace ZoneRadar.Services
                 result.SomeOnesCancelAllList.Add(cancelsTemp);
             }
             /// <summary>
-            ///  Amber 
+            ///  取消政策 被選的(Amber )
             /// </summary>
-            ///取消政策 被選的///
             var cancelsSelectId = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).ToList();
             foreach (var item in cancelsSelectId)
             {
@@ -1106,9 +1068,8 @@ namespace ZoneRadar.Services
                 result.SomeOnesCancelList.Add(cancelTemp);
             }
             /// <summary>
-            ///  Amber 
+            ///  清潔條款細節(Amber) 
             /// </summary>
-            ///清潔條款細節
             var cleanallspace = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == spaceId).Select(x => x.CleaningOptionID).ToList();
             var cleaningOptions = _repository.GetAll<CleaningOption>().ToList();
             var spaceOptions = new List<CleaningOption>();
@@ -1118,10 +1079,8 @@ namespace ZoneRadar.Services
                 spaceOptions.Add(cleanOption);
             }
             /// <summary>
-            ///  Amber 
+            ///  同一場地 第一類 (Amber) 
             /// </summary>
-            /// 同一場地///
-            /// 第一類
             var fistcleans = spaceOptions.Where(x => x.CleaningCategoryID == 1).Select(x => x.OptionDetail).ToList();
             foreach (var item in fistcleans)
             {
@@ -1132,9 +1091,8 @@ namespace ZoneRadar.Services
                 result.SomeOnesCleanRuleOneList.Add(temp);
             }
             /// <summary>
-            ///  Amber 
+            ///  第二類(Amber) 
             /// </summary>
-            /// 第二類
             var Seccleans = spaceOptions.Where(x => x.CleaningCategoryID == 2).Select(x => x.OptionDetail).ToList();
             foreach (var item in Seccleans)
             {
@@ -1145,9 +1103,8 @@ namespace ZoneRadar.Services
                 result.SomeOnesCleanRuleTwoList.Add(temp);
             }
             /// <summary>
-            ///  Amber 
+            ///   第三類(Amber) 
             /// </summary>
-            /// 第三類
             var Thirdcleans = spaceOptions.Where(x => x.CleaningCategoryID == 3).Select(x => x.OptionDetail).ToList();
             foreach (var item in Thirdcleans)
             {
@@ -1158,9 +1115,8 @@ namespace ZoneRadar.Services
                 result.SomeOnesCleanRuleThreeList.Add(temp);
             }
             /// <summary>
-            ///  Amber 
+            ///  第四類(Amber) 
             /// </summary>
-            /// 第四類
             var Fourcleans = spaceOptions.Where(x => x.CleaningCategoryID == 4).Select(x => x.OptionDetail).ToList();
             foreach (var item in Fourcleans)
             {
@@ -1171,9 +1127,8 @@ namespace ZoneRadar.Services
                 result.SomeOnesCleanRuleFourList.Add(temp);
             }
             /// <summary>
-            ///  Amber 
+            /// 選項一類( Amber) 
             /// </summary>
-            //選項一類
             var cleansAllone = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 1).ToList();
             foreach (var item in cleansAllone)
             {
@@ -1186,9 +1141,8 @@ namespace ZoneRadar.Services
                 result.CleanRuleOptionsOneList.Add(cleanRuleTemp);
             }
             /// <summary>
-            ///  Amber 
+            /// 選項二類(Amber) 
             /// </summary>
-            //選項二類
             var cleansAlltwo = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 2).ToList();
             foreach (var item in cleansAlltwo)
             {
@@ -1201,9 +1155,8 @@ namespace ZoneRadar.Services
                 result.CleanRuleOptionsTwoList.Add(cleanRuleTemp);
             }
             /// <summary>
-            ///  Amber 
+            /// 選項三類(Amber) 
             /// </summary>
-            //選項三類
             var cleansAllthree = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 3).ToList();
             foreach (var item in cleansAllthree)
             {
@@ -1216,9 +1169,8 @@ namespace ZoneRadar.Services
                 result.CleanRuleOptionsThreeList.Add(cleanRuleTemp);
             }
             /// <summary>
-            ///  Amber 
+            /// 選項四類 (Amber) 
             /// </summary>
-            //選項四類
             var cleansAllfour = _repository.GetAll<CleaningOption>().Where(x => x.CleaningCategoryID == 4).ToList();
             foreach (var item in cleansAllfour)
             {
@@ -1231,10 +1183,8 @@ namespace ZoneRadar.Services
                 result.CleanRuleOptionsFourList.Add(cleanRuleTemp);
             }
             /// <summary>
-            ///  Amber 
+            /// 營業時間 有被選的 (Amber) 
             /// </summary>
-            ///營業時間 ///
-            ///有被選的
             var openDays = _repository.GetAll<Operating>().Where(x => x.SpaceID == spaceId).ToList();
             foreach (var item in openDays)
             {
