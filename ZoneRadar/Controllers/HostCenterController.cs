@@ -22,5 +22,23 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 場地主訂單 - 處理中(Steve)
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Processing()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 場地主訂單 - 歷史訂單(Steve) --- 還沒做 @Nick
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult History()
+        {
+            return View();
+        }
     }
 }

@@ -259,6 +259,7 @@
     <Content Include="Assets\CSS\flatpickr.min.css" />
     <Content Include="Assets\CSS\fontawesome\all.min.css" />
     <Content Include="Assets\CSS\fontawsome.min.css" />
+    <Content Include="Assets\CSS\hostCenter\editplace.css" />
     <Content Include="Assets\CSS\images\layers-2x.png" />
     <Content Include="Assets\CSS\images\layers.png" />
     <Content Include="Assets\CSS\images\marker-icon-2x.png" />
@@ -431,6 +432,7 @@
     <Content Include="Views\MemberCenter\MyCollection.cshtml" />
     <Content Include="Views\MemberCenter\UserInfo.cshtml" />
     <Content Include="Views\HostCenter\EditSpace.cshtml" />
+    <Content Include="Views\HostCenter\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
