@@ -116,7 +116,7 @@
                 altFormat: 'Y/m/d',
                 disableMobile: 'true',
                 minDate: "today",
-                maxDate: new Date().fp_incr(60),
+                maxDate: new Date().fp_incr(90),
                 // change事件監聽
                 onChange: function (selectedDates, dateStr, instance) {
                     selectedDate = dateStr;
