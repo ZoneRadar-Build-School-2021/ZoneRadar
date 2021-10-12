@@ -7,6 +7,11 @@
     var details = Model.SpaceDetailInfo;
     float total = 0;
     float averageScore = 0;
+    string discount = details.Discount.ToString().Split('.')[1];
+    if (discount.Contains('0'))
+    {
+        discount = discount.TrimEnd('0');
+    }
     foreach (var review in reviews)
     {
         total += review.Score;
@@ -28,6 +33,9 @@
     {
         briefReviewBreak = reviews.Count();
     }
+    var operationDayList = details.OperatingDayList;
+    var startTimeList = details.StartTimeList;
+    var endTimeList = details.EndTimeList;
 }
 
 <!-- Body -->
@@ -36,7 +44,9 @@
     <div class="row mb-5">
         <div class="col-12">
             <div class="venue-img-group swiper">
-                <button type="button" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">收藏</span></button>
+                @*<button type="button" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">收藏</span></button>*@
+                @*<a href="#" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">收藏</span></a>*@
+                <a href="@Url.Action("BookingPage", "Booking")" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">收藏</span></a>
                 <div class="venue-img-wrapper swiper-wrapper">
                     @foreach (var url in briefs.SpaceImageURLList)
                     {
@@ -129,11 +139,11 @@
                                 <div class="card card-body border-0">
                                     @foreach (var cleaning in details.CleaningOptionDict)
                                     {
-                                        <h5>@cleaning.Key</h5>
-                                        <ul>
+                                        <h5 class="fs-4">@cleaning.Key</h5>
+                                        <ul class="mb-3">
                                             @foreach (var option in @cleaning.Value)
                                             {
-                                                <li>@option</li>
+                                                <li class="mb-2 ps-1"><i class="fas fa-check me-1"></i>@option</li>
                                             }
                                         </ul>
                                     }
@@ -196,15 +206,15 @@
                             <h4 class="mb-0 py-3">場地設施與空間</h4>
                             <div class="collapse" id="facility">
                                 <div class="card card-body border-0 ps-0">
-                                    @foreach (var item in details.AmenityDictionary)
+                                    @foreach (var category in details.AmenityDict)
                                     {
-                                        <h5 class="mb-3">@item.Key</h5>
-                                        <ul class="d-flex flex-wrap mb-4">
-                                            @foreach (var facility in item.Value)
+                                        <h5 class="mb-3">@category.Key</h5>
+                                        <ul class="amenities d-flex flex-wrap mb-4">
+                                            @foreach (var amenity in @category.Value)
                                             {
-                                                <li class="@facility d-flex align-items-center mb-4">
-                                                    <img class="me-2" src="~/Assets/IMG/icons/@facility" alt="@facility">
-                                                    <span class="d-inline-block">@facility</span>
+                                                <li class="d-flex align-items-center mb-4">
+                                                    <img class="me-2" src="~/Assets/IMG/@details.AmenityIconDict[amenity]" alt="@amenity">
+                                                    <span class="d-inline-block">@amenity</span>
                                                 </li>
                                             }
                                         </ul>
@@ -313,16 +323,16 @@
             </div>
         </div>
         <div class="booking col-sm-12 col-xl-4 ps-xl-5">
-            <form class="booking-card text-center sticky-xl-top py-4 px-3">
+            <form class="booking-card text-center sticky-xl-top py-4 px-3" action="">
                 <h3 class="booking-card-title">NT$ <span class="venue-price">@Decimal.Round(@briefs.PricePerHour)</span></h3>
                 <p class="border-bottom pb-2">最少起訂時數<span class="min-time fs-5 px-1">@briefs.MinHour</span>小時</p>
-                <p class="border-bottom py-3 fs-5"><span class="discount-hour py-1">8</span>小時滿時優惠:<span class="ps-4 discount">@details.Discount</span></p>
-                <h4 class="text-start mt-4 mb-3 fs-5 fw-bolder">日期與時間:</h4>
-                <input placeholder="開始日期" class="w-100 d-inline-block mb-2 form-control" id="start-date" readonly>
-                <input placeholder="結束日期" class="w-100 d-inline-block form-control" id="end-date" readonly>
-                <h4 class="text-start mt-4 mb-3 fs-5 fw-bolder">參加人數:</h4>
-                <input placeholder="參加人數" class="attendees form-control" aria-label=".form-control attendees" id="attendee-count">
-                <div class="calculus">
+                <p class="border-bottom py-3 fs-5"><span class="discount-hour py-1">8</span>小時滿時優惠:<span class="ps-4 pe-1 discount">@discount</span>折</p>
+                <div class="order-detail-select mt-4"></div>
+                <div class="other-operation d-flex justify-content-end mt-3">
+                    <button type="button" class="btn px-0 py-0 remove me-3 d-none">刪除</button>
+                    <button type="button" class="btn px-0 py-0 extend" disabled>加一天</button>
+                </div>
+                <div class="calculation">
                     <div class="price-calculus mt-5 border-bottom mb-2">
                         <p class="d-flex mb-2">交易金額:<span class="ms-auto"><span class="venue-price">N$1200</span><span class="mx-1">x</span><span class="total-hour">6小時</span></span></p>
                         <p class="d-flex mb-2">滿時優惠:<span class="ms-auto"><span class="discount">85折</span></span></p>
@@ -331,11 +341,25 @@
                         <p class="d-flex mb-2">總共:<span class="ms-auto"><span class="total-price">NT$6120</span></span></p>
                     </div>
                 </div>
-                <button class="btn-submit btn mt-4" type="button">馬上預約</button>
+                <button class="btn-submit btn mt-4" type="submit" disabled>馬上預約</button>
             </form>
         </div>
     </div>
 </div>
+
+<template id="order-item-template">
+    <form class="order-item mb-3 needs-validation" action="" novalidate>
+        <h4 class="text-start mb-3 fs-5 fw-bolder">日期與時間:</h4>
+        <div class="input-group mb-2">
+            <input type="text" placeholder="開始日期" class="start-date form-control rounded me-1" required>
+            <input type="text" placeholder="參加人數" class="attendees form-control rounded ms-1" aria-label=".form-control attendees" required>
+        </div>
+        <div class="input-group mb-2">
+            <input type="number" placeholder="開始時間" class="start-time form-control rounded me-1" required>
+            <input type="number" placeholder="結束時間" class="end-time form-control rounded ms-1" required>
+        </div>
+    </form>
+</template>
 
 
 @section topCSS
@@ -345,6 +369,10 @@
 
 @section endJS
 {
-    <script></script>
+    <script>
+        const operationDay = @Html.Raw(Json.Encode(@operationDayList));
+        const operationStartTime = @Html.Raw(Json.Encode(@startTimeList));
+        const operationEndTime = @Html.Raw(Json.Encode(@endTimeList));
+    </script>
     <script src="~/Assets/JS/booking/booking.js"></script>
 }
