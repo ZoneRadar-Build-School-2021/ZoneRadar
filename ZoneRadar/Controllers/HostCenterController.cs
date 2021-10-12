@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ZoneRadar.Services;
 using ZoneRadar.Models;
+using ZoneRadar.Models.ViewModels;
 
 namespace ZoneRadar.Controllers
 {
