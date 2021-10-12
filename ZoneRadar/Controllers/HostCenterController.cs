@@ -4,13 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ZoneRadar.Services;
-using ZoneRadar.Models;
 using ZoneRadar.Models.ViewModels;
 
 namespace ZoneRadar.Controllers
 {
     public class HostCenterController : Controller
     {
+        private readonly SpaceService _spaceService;
+
+        // GET: HostCenter
+        public HostCenterController()
+        {
+            _spaceService = new SpaceService();
+        }
+
         // GET: HostCenter
         public ActionResult Index()
         {
