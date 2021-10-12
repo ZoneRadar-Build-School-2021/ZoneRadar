@@ -13,5 +13,14 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 編輯場地(Steve)
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult EditSpace()
+        {
+            return View();
+        }
     }
 }

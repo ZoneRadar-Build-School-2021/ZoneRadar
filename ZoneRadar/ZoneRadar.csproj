@@ -430,10 +430,10 @@
     <Content Include="Views\MemberCenter\HostInfo.cshtml" />
     <Content Include="Views\MemberCenter\MyCollection.cshtml" />
     <Content Include="Views\MemberCenter\UserInfo.cshtml" />
+    <Content Include="Views\HostCenter\EditSpace.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\HostCenter\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
