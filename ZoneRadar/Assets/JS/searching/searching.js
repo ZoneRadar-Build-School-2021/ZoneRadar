@@ -1,9 +1,9 @@
-;
+ï»¿;
 window.addEventListener('load', () => {
-    // ¥D­n¸`ÂI
+    // ï¿½Dï¿½nï¿½`ï¿½I
     const cardListNode = document.querySelector('.card-list');
 
-    // filter bar¸`ÂI
+    // filter barï¿½`ï¿½I
     const cityOptionBarNode = document.querySelector('#web-city-filter');
     const districtOptionBarNode = document.querySelector('#web-district-filter');
     const typeOptionBarNode = document.querySelector('#web-type-filter');
@@ -11,7 +11,7 @@ window.addEventListener('load', () => {
     const searchingBarBtn = document.querySelector('#web-search-btn');
     const filterBtn = document.querySelector('#filter-btn')
 
-    // filter modal¸`ÂI
+    // filter modalï¿½`ï¿½I
     const cityOptionModalNode = document.querySelector('#phone-city-filter');
     const districtOptionModalNode = document.querySelector('#phone-district-filter');
     const typeOptionModalNode = document.querySelector('#phone-type-filter');
@@ -41,60 +41,60 @@ window.addEventListener('load', () => {
     };
     let cityDistrictList, typeList, amenityList, amenityIconList;
 
-    // ¤é¾ä¤¤¤å¤Æ
+    // ï¿½ï¿½ä¤¤ï¿½ï¿½ï¿½
     flatpickr.localize(flatpickr.l10ns.zh_tw);
 
-    // ªì©l¤Æ
+    // ï¿½ï¿½lï¿½ï¿½
     axios.get('https://localhost:44322/webapi/spaces/GetFilterData')
         .then(response => {
             filterOptions = response.data;
             console.log(filterOptions);
-            // §ì¥X«áºÝ¶Ç¨Ó¿z¿ï¸ê®Æ
+            // ï¿½ï¿½Xï¿½ï¿½Ý¶Ç¨Ó¿zï¿½ï¿½ï¿½ï¿½
             selectedCity = filterOptions.SelectedCity;
             selectedType = filterOptions.SelectedType;
             selectedDate = filterOptions.SelectedDate;
-            // ¿z¿ï¤À²Õ
+            // ï¿½zï¿½ï¿½ï¿½ï¿½ï¿½
             cityDistrictList = filterOptions.CityDistrictDictionary;
             typeList = filterOptions.SpaceTypeList;
             amenityList = filterOptions.AmenityList;
             amenityIconList = filterOptions.AmenityIconList;
 
-            // ³]©wFilter
+            // ï¿½]ï¿½wFilter
             setBarFilter();
             setModalFilter();
 
-            // ´è¬V³õ¦a¦Cªí
+            // ï¿½ï¿½Vï¿½ï¿½ï¿½aï¿½Cï¿½ï¿½
             requestForSpaces();
         })
         .catch(error => console.log(error));
 
 
     function setBarFilter() {
-        // ³]©w¤é¾ä»P¨Æ¥óºÊÅ¥
+        // ï¿½]ï¿½wï¿½ï¿½ï¿½Pï¿½Æ¥ï¿½ï¿½Å¥
         setFlatpickr('#web-date-filter');
-        // Âê©w¶mÂí°Ï¿ï³æ
+        // ï¿½ï¿½wï¿½mï¿½ï¿½ï¿½Ï¿ï¿½ï¿½
         disableDistrictOption(districtOptionBarNode);
-        // ³]©w¿¤¥«¿ï³æ»P¨Æ¥óºÊÅ¥
+        // ï¿½]ï¿½wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½Æ¥ï¿½ï¿½Å¥
         setCityAndDistrictOption(cityOptionBarNode, districtOptionBarNode);
-        // ³]©wÃþ«¬¿ï³æ»P¨Æ¥óºÊÅ¥
+        // ï¿½]ï¿½wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½Æ¥ï¿½ï¿½Å¥
         setTypeOption(typeOptionBarNode);
-        // ³]©wÃöÁä¦r¨Æ¥óºÊÅ¥
+        // ï¿½]ï¿½wï¿½ï¿½ï¿½ï¿½rï¿½Æ¥ï¿½ï¿½Å¥
         setSearchBar(searchingBar);
         searchingBarBtn.addEventListener('click', keywordSearch);
     }
 
     function setModalFilter() {
-        // ³]©w¤é¾ä»P¨Æ¥óºÊÅ¥
+        // ï¿½]ï¿½wï¿½ï¿½ï¿½Pï¿½Æ¥ï¿½ï¿½Å¥
         setFlatpickr('#phone-date-filter');
-        // Âê©w¶mÂí°Ï¿ï³æ
+        // ï¿½ï¿½wï¿½mï¿½ï¿½ï¿½Ï¿ï¿½ï¿½
         disableDistrictOption(districtOptionModalNode);
-        // ³]©w¿¤¥«¿ï³æ»P¨Æ¥óºÊÅ¥
+        // ï¿½]ï¿½wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½Æ¥ï¿½ï¿½Å¥
         setCityAndDistrictOption(cityOptionModalNode, districtOptionModalNode);
-        // ³]©wÃþ«¬¿ï³æ»P¨Æ¥óºÊÅ¥
+        // ï¿½]ï¿½wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Pï¿½Æ¥ï¿½ï¿½Å¥
         setTypeOption(typeOptionModalNode);
-        // ³]©wModal¤º¨ä¥L¿ï¶µ»P¨Æ¥óºÊÅ¥
+        // ï¿½]ï¿½wModalï¿½ï¿½ï¿½ï¿½Lï¿½ï¶µï¿½Pï¿½Æ¥ï¿½ï¿½Å¥
         filterBtn.addEventListener('click', setModalOptionAndEvent);
-        // ³]©wÃöÁä¦r¨Æ¥óºÊÅ¥
+        // ï¿½]ï¿½wï¿½ï¿½ï¿½ï¿½rï¿½Æ¥ï¿½ï¿½Å¥
         setSearchBar(searchingModal);
         searchingModalBtn.addEventListener('click', keywordSearch);
     }
@@ -108,7 +108,7 @@ window.addEventListener('load', () => {
                 defaultDate: selectedDate,
                 minDate: "today",
                 maxDate: new Date().fp_incr(60),
-                // change¨Æ¥óºÊÅ¥
+                // changeï¿½Æ¥ï¿½ï¿½Å¥
                 onChange: function (selectedDates, dateStr, instance) {
                     selectedDate = dateStr;
                     requestForSpaces();
@@ -121,7 +121,7 @@ window.addEventListener('load', () => {
                 disableMobile: 'true',
                 minDate: "today",
                 maxDate: new Date().fp_incr(60),
-                // change¨Æ¥óºÊÅ¥
+                // changeï¿½Æ¥ï¿½ï¿½Å¥
                 onChange: function (selectedDates, dateStr, instance) {
                     selectedDate = dateStr;
                     requestForSpaces();
@@ -132,7 +132,7 @@ window.addEventListener('load', () => {
 
     function disableDistrictOption(districtNode) {
         let defaultOption = document.createElement('option');
-        defaultOption.innerText = '¶mÂí°Ï';
+        defaultOption.innerText = 'ï¿½mï¿½ï¿½ï¿½ï¿½';
         defaultOption.setAttribute('selected', '');
         districtNode.appendChild(defaultOption);
 
@@ -144,7 +144,7 @@ window.addEventListener('load', () => {
 
         if (selectedCity.length === 0) {
             let defaultOption = document.createElement('option');
-            defaultOption.innerText = '¿ï¾Ü¿¤¥«';
+            defaultOption.innerText = 'ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½';
             defaultOption.setAttribute('selected', '');
             cityNode.appendChild(defaultOption);
         }
@@ -161,17 +161,17 @@ window.addEventListener('load', () => {
         });
 
         cityNode.addEventListener('change', function () {
-            // ´è¬Vµe­±
+            // ï¿½ï¿½Vï¿½eï¿½ï¿½
             selectedCity = this.querySelector(`option[value='${this.value}']`).innerText;
             selectedDistrict = '';
             requestForSpaces();
 
-            // ³]©w¶mÂí°Ï¿ï³æ
+            // ï¿½]ï¿½wï¿½mï¿½ï¿½ï¿½Ï¿ï¿½ï¿½
             districtNode.innerHTML = '';
             districtNode.removeAttribute('disabled');
 
             let defaultOption = document.createElement('option');
-            defaultOption.innerText = '¿ï¾Ü¶mÂí°Ï';
+            defaultOption.innerText = 'ï¿½ï¿½Ü¶mï¿½ï¿½ï¿½ï¿½';
             defaultOption.setAttribute('selected', '');
             districtNode.appendChild(defaultOption);
 
@@ -192,7 +192,7 @@ window.addEventListener('load', () => {
     function setTypeOption(typeNode) {
         if (selectedType.length === 0) {
             let defaultOption = document.createElement('option');
-            defaultOption.innerText = '³õ¦aÃþ«¬';
+            defaultOption.innerText = 'ï¿½ï¿½ï¿½aï¿½ï¿½ï¿½ï¿½';
             defaultOption.setAttribute('selected', '');
             typeNode.appendChild(defaultOption);
         }
@@ -209,27 +209,27 @@ window.addEventListener('load', () => {
         });
 
         typeNode.addEventListener('change', function () {
-            // ´è¬Vµe­±
+            // ï¿½ï¿½Vï¿½eï¿½ï¿½
             selectedType = this.querySelector(`option[value='${this.value}']`).innerText;
             requestForSpaces();
         })
     }
 
     function setModalOptionAndEvent() {
-        // ³]©w¹w³]input¤º®e»P¨Æ¥óºÊÅ¥
+        // ï¿½]ï¿½wï¿½wï¿½]inputï¿½ï¿½ï¿½eï¿½Pï¿½Æ¥ï¿½ï¿½Å¥
         setInputs();
-        // ³]©w³]¬I¿ï³æ
+        // ï¿½]ï¿½wï¿½]ï¿½Iï¿½ï¿½ï¿½
         setAmenity();
-        // ³]©wModal¤º±ø¥óªººÊÅ¥¨Æ¥ó
+        // ï¿½]ï¿½wModalï¿½ï¿½ï¿½ï¿½ï¿½óªººï¿½Å¥ï¿½Æ¥ï¿½
         setBtnClickEvent();
-        // ³]©wkeywordºÊÅ¥
+        // ï¿½]ï¿½wkeywordï¿½ï¿½Å¥
 
 
         function setInputs() {
             let nodeArr = [lowPriceInputNode, highPriceInputNode, attendeeInputNode, areaInputNode];
             let valueArr = [lowBudget, highBudget, attendees, area];
 
-            // ³]©w¹w³]­È
+            // ï¿½]ï¿½wï¿½wï¿½]ï¿½ï¿½
             nodeArr.forEach((node, index) => {
                 node.value = '';
                 if (valueArr[index]) {
@@ -237,7 +237,7 @@ window.addEventListener('load', () => {
                 }
             })
 
-            // ³]©w¨Æ¥óºÊÅ¥
+            // ï¿½]ï¿½wï¿½Æ¥ï¿½ï¿½Å¥
             valueArr.forEach((value, index) => {
                 nodeArr[index].addEventListener('change', function () {
                     value = this.value;
@@ -255,7 +255,7 @@ window.addEventListener('load', () => {
                 amenityOptionNode.appendChild(amenityClone);
             })
 
-            // ³]©w¹w³]­È
+            // ï¿½]ï¿½wï¿½wï¿½]ï¿½ï¿½
             if (amenities.length !== 0) {
                 amenityOptionNode.querySelectorAll('.btn').forEach(node => {
                     amenities.forEach(item => {
@@ -292,7 +292,7 @@ window.addEventListener('load', () => {
         }
 
         function setBtnClickEvent() {
-            // ²M°£
+            // ï¿½Mï¿½ï¿½
             document.querySelector('#filter-modal .clear-btn').addEventListener('click', function () {
                 highBudget = '';
                 lowBudget = '';
@@ -302,7 +302,7 @@ window.addEventListener('load', () => {
 
                 requestForSpaces();
             })
-            // ½T»{
+            // ï¿½Tï¿½{
             document.querySelector('#filter-modal .save-btn').addEventListener('click', function () {
                 amenities = [];
                 lowBudget = lowPriceInputNode.value;
@@ -387,10 +387,10 @@ window.addEventListener('load', () => {
             const minHourNode = templateClone.querySelector('.min-time');
             const areaNode = templateClone.querySelector('.area');
 
-            // ¶W³sµ²
+            // ï¿½Wï¿½sï¿½ï¿½
             venueLink.href = `/Booking/BookingPage/${space.SpaceID}`;
 
-            // ¹Ï¤ù
+            // ï¿½Ï¤ï¿½
             // space.SpaceImageURLList.forEach(imgURL => {
             //   let swiperSlide = document.createElement('div');
             //   swiperSlide.classList = 'venue-img swiper-slide';
@@ -403,22 +403,22 @@ window.addEventListener('load', () => {
             swiperSlide.style.backgroundImage = `url(${space.SpaceImageURLList[0]})`;
             venueImgNode.appendChild(swiperSlide);
 
-            // »ù®æ
+            // ï¿½ï¿½ï¿½ï¿½
             pricePerHourNode.innerText = `NT$${space.PricePerHour}`;
 
-            // ¦WºÙ
+            // ï¿½Wï¿½ï¿½
             venueNameNode.innerText = space.SpaceName;
 
-            // ¦a§}
+            // ï¿½aï¿½}
             let address = document.createElement('span');
             address.classList = 'ms-1'
             address.innerText = `${space.City} ${space.District} ${space.Address}`;
             venueAddressNode.appendChild(address);
 
-            // µû»ù
+            // ï¿½ï¿½ï¿½ï¿½
             if (space.Scores.length === 0) {
                 let blank = document.createElement('span');
-                blank.innerText = '¥Ø«e¨S¦³¥ô¦óµû»ù';
+                blank.innerText = 'ï¿½Ø«eï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
                 ratingNode.insertBefore(blank, reviewCountNode);
             } else {
                 let avgStars = space.Scores.reduce(function (a, b) {
@@ -443,15 +443,15 @@ window.addEventListener('load', () => {
                 }
             }
 
-            // µû»ù¼Æ
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             reviewCountNode.innerText = space.Scores.length;
 
-            // Â²¤¶
+            // Â²ï¿½ï¿½
             capacityNode.innerText = space.Capacity;
             minHourNode.innerText = space.MinHour;
             areaNode.innerText = space.MeasurementOfArea;
 
-            // ³]©w½ü¼½
+            // ï¿½]ï¿½wï¿½ï¿½ï¿½ï¿½
             // const swiper = new Swiper('.swiper', {
             //   loop: true,
             //   pagination: {
