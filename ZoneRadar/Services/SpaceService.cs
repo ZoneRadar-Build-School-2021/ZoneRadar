@@ -440,7 +440,9 @@ namespace ZoneRadar.Services
                 MeasurementOfArea = x.MeasureOfArea,
                 Scores = scores.Where(y => y.Order.SpaceID == x.SpaceID).Select(y => y.Score).ToList(),
             }).ToList();
-                    /// <summary>
+            return result;
+        }
+        /// <summary>
         ///  找出便利設施 (Amber)
         /// </summary>
         /// 分三類
@@ -463,7 +465,7 @@ namespace ZoneRadar.Services
             };
             return result;
         }
-         /// <summary>
+        /// <summary>
         ///  找出便利設施 (Amber)
         /// </summary>
         /// 第二類
@@ -485,7 +487,7 @@ namespace ZoneRadar.Services
             }
             return result;
         }
-       /// <summary>
+        /// <summary>
         ///  找出便利設施 (Amber)
         /// </summary>
         /// 第三類
@@ -1199,6 +1201,7 @@ namespace ZoneRadar.Services
             result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 7, weekDay = "星期日" });
 
             return result;
+
         }
     }
 }
