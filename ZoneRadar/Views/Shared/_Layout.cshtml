@@ -2,11 +2,13 @@
     HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
 
     string userPhoto = "";
+    int userId = 0;
     if (cookie != null)
     {
         FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
         UserInfo userInfo = Json.Decode<UserInfo>(ticket.UserData);
         userPhoto = userInfo.MemberPhoto;
+        userId = userInfo.MemberId;
     }
 
     string icon = ViewBag.Icon == true ? "success" : "error";
@@ -85,7 +87,7 @@
                                             <div class="accordion-body p-0">
                                                 <a class="nav-link" href="~/UserCenter/ShopCar">訂購單</a>
                                                 <a class="nav-link" href="~/UserCenter/Pending">訂單管理</a>
-                                                <a class="nav-link" href="~/MemberCenter/UserInfo">評價和收藏</a>
+                                                <a class="nav-link" href="~/MemberCenter/Member/@userId">評價和收藏</a>
                                             </div>
                                         </div>
                                     </div>
@@ -129,7 +131,7 @@
                                             <div class="accordion-body p-0">
                                                 <a class="nav-link" href="~/UserCenter/ShopCar">訂購單</a>
                                                 <a class="nav-link" href="~/UserCenter/Pending">訂單管理</a>
-                                                <a class="nav-link" href="~/MemberCenter/UserInfo">評價和收藏</a>
+                                                <a class="nav-link" href="~/MemberCenter/Member/@userId">評價和收藏</a>
                                             </div>
                                         </div>
                                     </div>
