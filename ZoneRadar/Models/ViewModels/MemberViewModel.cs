@@ -72,4 +72,21 @@ namespace ZoneRadar.Models.ViewModels
         public int MemberId { get; set; }
         public string MemberPhoto { get; set; }
     }
+
+
+    public class ResetZONERadarPasswordViewModel
+    {
+        public string UserEmail { get; set; }
+
+        [Required(ErrorMessage = "請填寫此欄位")]
+        [DataType(DataType.Password)]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
+        public string NewPassword { get; set; }
+
+        [Required(ErrorMessage = "請填寫此欄位")]
+        [DataType(DataType.Password)]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
+        [Compare("NewPassword", ErrorMessage = "密碼不一致！")]
+        public string NewConfirmPassword { get; set; }
+    }
 }

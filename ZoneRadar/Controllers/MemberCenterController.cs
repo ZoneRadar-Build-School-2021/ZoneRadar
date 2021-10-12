@@ -59,18 +59,74 @@ namespace ZoneRadar.Controllers
         /// <param name="resetCode"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult NewPassword(string email, string resetCode)
+        public ActionResult ResetPassword(string email, string resetCode, string expired)
         {
-            var verified = _service.VerifyResetPasswordLink(email, resetCode);
-
+            //測試
             return View();
+
+
+            var expiredTime = new DateTime();
+            DateTime.TryParse(expired, out expiredTime);
+            //超過10分鐘無效
+            if (DateTime.Now > expiredTime)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var user = _service.VerifyResetPasswordLink(email, resetCode);
+            if (user != null)
+            {
+                ViewBag.Email = user.Email;
+                return View();
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
-
+        /// <summary>
+        /// 重設密碼(Post)(Jenny)
+        /// </summary>
+        /// <param name="resetPasswordVM"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult NewPassword()
+        public ActionResult ResetPassword(ResetZONERadarPasswordViewModel resetPasswordVM)
         {
-            return View();
+            if (!ModelState.IsValid || resetPasswordVM.NewPassword != resetPasswordVM.NewConfirmPassword)
+            {
+                //輸入格式不正確或密碼不一致
+                TempData["Alert"] = true;
+                TempData["Message"] = "輸入格式不正確或密碼不一致，請重新輸入！";
+                TempData["Icon"] = false;
+                return View();
+            }
+
+            //修改會員密碼
+            var memberResult = _service.EditPassword(resetPasswordVM);
+            if (memberResult.IsSuccessful)
+            {
+                //讓使用者登入，呈現登入後的畫面
+                //建造加密表單驗證票證
+                var encryptedTicket = _service.CreateEncryptedTicket(memberResult.User);
+
+                //建造cookie
+                _service.CreateCookie(encryptedTicket, Response);
+
+                TempData["Alert"] = true;
+                TempData["Message"] = memberResult.ShowMessage;
+                TempData["Icon"] = memberResult.IsSuccessful;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                //密碼修改失敗，回去首頁，跳出錯誤訊息(沒寫好)
+                TempData["Alert"] = true;
+                TempData["Message"] = memberResult.ShowMessage;
+                TempData["Icon"] = memberResult.IsSuccessful;
+                return RedirectToAction("Index", "Home");
+            }
+            
+            
         }
         public ActionResult EditProfile()
         {
@@ -226,6 +282,7 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public string ResentVerificationEmail(string email)
         {
+            //Ajax
             //確認是否有此帳號的註冊紀錄但還未驗證
             var hasRegisterInfo = _service.SearchUser(email, false);
             if (hasRegisterInfo)

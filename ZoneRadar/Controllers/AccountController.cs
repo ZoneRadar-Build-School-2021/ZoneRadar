@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Mvc5Identity.Models;
 using ZoneRadar.Models;
 using ZoneRadar.Models.ViewModels;
 

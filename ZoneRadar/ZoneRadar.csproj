@@ -224,7 +224,6 @@
     <Compile Include="Models\SpaceType.cs" />
     <Compile Include="Models\TypeDetail.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\BookingPageViewModel.cs" />
     <Compile Include="Models\ViewModels\FilterViewModel.cs" />
     <Compile Include="Models\ViewModels\HostInfoViewModel.cs" />
@@ -261,7 +260,9 @@
     <Content Include="Assets\CSS\layout\navbar-footer.css" />
     <Content Include="Assets\CSS\leaflet.css" />
     <Content Include="Assets\CSS\material_blue.css" />
+    <Content Include="Assets\CSS\membercenter\ForgetPassword.css" />
     <Content Include="Assets\CSS\membercenter\membercenter.css" />
+    <Content Include="Assets\CSS\membercenter\ResetPassword.css" />
     <Content Include="Assets\CSS\membercenter\Seller_completedstyle.css" />
     <Content Include="Assets\CSS\member_card\memberstyle_buyer_collect.css" />
     <Content Include="Assets\CSS\member_card\memberstyle_buyer_evaluation.css" />
@@ -423,6 +424,8 @@
     <Content Include="Views\Shared\_LoginModalPartial.cshtml" />
     <Content Include="Views\Shared\_RegisterModalPartial.cshtml" />
     <Content Include="Views\MemberCenter\ResentVerificationEmail.cshtml" />
+    <Content Include="Views\MemberCenter\ResetPassword.cshtml" />
+    <Content Include="Views\MemberCenter\ForgetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
