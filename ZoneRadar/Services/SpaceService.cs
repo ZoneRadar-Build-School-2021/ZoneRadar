@@ -248,28 +248,11 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public SpaceDetailViewModel GetTargetSpaceDetail(Space targetSpace)
         {
-            // 建立轉換字典
-            var amenityConvertDictionary = new Dictionary<string, string>
-            {
-                { "WiFi", "wifi" },
-                { "桌子", "table" },
-                { "椅子", "chair" },
-                { "螢幕", "monitor" },
-                { "投影幕", "screen" },
-                { "數位電視", "apple_tv" },
-                { "咖啡機", "coffee" },
-                { "投影機", "projector" },
-                { "白板", "whiteboard" },
-                { "影印機", "printer" },
-                { "大眾運輸工具", "public_transit" },
-                { "戶外區", "outdoor_area" },
-                { "廁所", "toilet" },
-                { "無障礙空間", "handicap_access" },
-                { "廚房", "kitchen" },
-                { "包廂", "breakout_room" },
-                { "停車場", "parking" },
-            };
-            var weekDayConvertDictoinary = new Dictionary<string, int>
+            // 找出所有場地設施
+            var amenityList = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.AmenityDetail);
+
+            // 找出該場地所有營業資料
+            var weekDayConverter = new Dictionary<string, int>
             {
                 { "星期一", 1 },
                 { "星期二", 2 },
@@ -279,60 +262,44 @@ namespace ZoneRadar.Services
                 { "星期六", 6 },
                 { "星期日", 7 }
             };
-
-            // 找出所有場地設施
-            var originAmenityList = _repository.GetAll<SpaceAmenity>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.AmenityDetail);
-            var convertedAmenityList = new List<AmenityDetail>();
-            foreach (var item in originAmenityList)
-            {
-                convertedAmenityList.Add(new AmenityDetail
-                {
-                    Amenity = string.Concat(item.Amenity, amenityConvertDictionary.FirstOrDefault(x => x.Key == item.Amenity).Value),
-                    AmenityCategoryDetail = item.AmenityCategoryDetail,
-                    AmenityCategoryID = item.AmenityCategoryID,
-                    AmenityDetailID = item.AmenityDetailID,
-                    SpaceAmenity = item.SpaceAmenity,
-                });
-            }
-            var amenityDictionary = convertedAmenityList.GroupBy(x => x.AmenityCategoryDetail.AmenityCategory).ToDictionary(x => x.Key, x => x.Select(y => y.Amenity).ToList());
-
-            // 找出該場地所有營業資料
             var originOperatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == targetSpace.SpaceID).ToList();
             var convertedOperatingDayList = new List<string>();
             foreach (var day in originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.OperatingDay).ToList())
             {
-                convertedOperatingDayList.Add(weekDayConvertDictoinary.FirstOrDefault(x => x.Value == day).Key);
+                convertedOperatingDayList.Add(weekDayConverter.FirstOrDefault(x => x.Value == day).Key);
             }
 
             // 找出所有清潔公約選項
-            var cleaningOptionList = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.CleaningOption).ToList();
+            var cleaningOptionList = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.CleaningOption)
+                                     .GroupBy(x => x.CleaningCategory.Category);
 
             // 找出滿時優惠的時數
-            var hoursForDiscount = _repository.GetAll<SpaceDiscount>().SingleOrDefault(x => x.SpaceID == targetSpace.SpaceID).Hour;
+            var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Hour;
 
             // 找出滿時優惠的折數
-            var discount = _repository.GetAll<SpaceDiscount>().SingleOrDefault(x => x.SpaceID == targetSpace.SpaceID).Discount;
+            var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Discount;
 
             var result = new SpaceDetailViewModel
             {
                 HostName = targetSpace.Member.Name,
                 HostPhoto = targetSpace.Member.Photo,
-                CleaningOptionDict = cleaningOptionList.GroupBy(x => x.CleaningCategory.Category).ToDictionary(x => x.Key, x => x.Select(y => y.OptionDetail).ToList()),
+                CleaningOptionDict = cleaningOptionList.ToDictionary(x => x.Key, x => x.Select(y => y.OptionDetail).ToList()),
                 Introduction = targetSpace.Introduction,
                 ShootingEquipment = targetSpace.ShootingEquipment,
                 ParkingInfo = targetSpace.Parking,
                 HostRule = targetSpace.HostRules,
-                AmenityDictionary = amenityDictionary,
+                AmenityDict = amenityList.GroupBy(x => x.AmenityCategoryDetail.AmenityCategory).ToDictionary(x => x.Key, x => x.Select(y => y.Amenity).ToList()),
+                AmenityIconDict = amenityList.ToDictionary(x => x.Amenity, x => x.AmenityICON),
                 Longitude = targetSpace.Longitude,
                 Latitude = targetSpace.Latitude,
                 TrafficInfo = targetSpace.Traffic,
                 OperatingDayList = convertedOperatingDayList,
-                StartTimeList = originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.StartTime).ToList(),
-                EndTimeList = originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.EndTime).ToList(),
+                StartTimeList = originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
+                EndTimeList = originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
                 CancellationTitle = targetSpace.Cancellation.CancellationTitle,
                 CancellationInfo = targetSpace.Cancellation.CancellationDetail,
                 HoursForDiscount = hoursForDiscount,
-                Discount = discount,
+                Discount = Decimal.Round((1 - discount), 2),
             };
 
             return result;
