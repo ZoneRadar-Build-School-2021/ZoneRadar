@@ -17,11 +17,9 @@ namespace ZoneRadar.Controllers
     public class MemberCenterController : Controller
     {
         private readonly MemberService _service;
-        private readonly ZONERadarContext _db;
         public MemberCenterController()
         {
             _service = new MemberService();
-            _db = new ZONERadarContext();
         }
         
         // GET: MemberCenter
@@ -51,26 +49,14 @@ namespace ZoneRadar.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditProfile([Bind(Include ="MemberID,Name,Email,Phone,Description")] ProfileViewModel edit)
+        public ActionResult EditProfile([Bind(Include = "MemberID,Name,Email,Phone,Description")] ProfileViewModel edit)
         {
-            //判斷資料是否通過驗證
             if (ModelState.IsValid)
             {
-                //取出 ->編輯資料
-                var userID = int.Parse(User.Identity.Name);
-                Member p = _db.Member.FirstOrDefault(x => x.MemberID == userID);
-                p.Name = edit.Name;
-                p.Phone = edit.Phone;
-                p.Description = edit.Description;
-
-                //將p的狀態設為modified
-                _db.Entry(p).State = EntityState.Modified;
-                //儲存資料,並向SQL Server發出update指令
-                _db.SaveChanges();
-
-                return RedirectToAction("EditProfile");
+                var model = _service.EditProfileData(edit);
+                return View(model);
             }
-            return View(edit);
+            return View("EditProfile");
         }
 
         public ActionResult MyCollection(int? memberId)

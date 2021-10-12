@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -13,10 +14,5 @@ namespace ZoneRadar.Models.ViewModels
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Description { get; set; }
-    }
-    public class EditResult
-    {
-        public bool IsSuccessful { get; set; }
-        public Exception Exception { get; set; }
     }
 }
