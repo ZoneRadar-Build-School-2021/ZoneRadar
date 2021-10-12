@@ -412,7 +412,7 @@ namespace ZoneRadar.Services
                 var keywordArr = keywords.Split(' ');
                 foreach (var keyword in keywordArr)
                 {
-                    spaces = spaces.Where(x => x.SpaceName.Contains(keyword));
+                    spaces = spaces.Where(x => x.SpaceName.ToUpper().Contains(keyword.ToUpper()));
                 }
             }
 
