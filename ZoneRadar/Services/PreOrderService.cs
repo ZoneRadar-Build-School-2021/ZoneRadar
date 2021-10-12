@@ -15,6 +15,11 @@ namespace ZoneRadar.Services
         {
             _repository = new ZONERadarRepository();
         }
+        /// <summary>
+        /// 找出使用者(ID)的預購單資料(Nick)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public List<ShopCarViewModel> GetShopCarVM(int id)
         {
             var result = new List<ShopCarViewModel>();
@@ -97,6 +102,11 @@ namespace ZoneRadar.Services
 
             return result;
         }
+        /// <summary>
+        /// 編輯使用者預購單內的訂單細節(Nick)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public OrderDetail EditShopCarDetail(RentDetailViewModel model)
         {
             var orderDetail = new OrderDetail();
@@ -113,7 +123,11 @@ namespace ZoneRadar.Services
             }
             return orderDetail;
         }
-        
+        /// <summary>
+        /// 刪除使用者預購單內的訂單細節(Nick)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public OrderDetail DeleteShopCarDetail(int id)
         {
             //OrderDetail orderdetail = OrderDetail.Find(id);
@@ -127,6 +141,11 @@ namespace ZoneRadar.Services
 
             return orderdetail;
         }
+        /// <summary>
+        /// 刪除使用者預購單內的該筆訂單(Nick)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Order DeleteShopCarOrder(int id)
         {
             var orders = _repository.GetAll<Order>().ToList();

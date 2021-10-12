@@ -15,6 +15,11 @@ namespace ZoneRadar.Services
         {
             _repository = new ZONERadarRepository();
         }
+        /// <summary>
+        /// 找出使用者(ID)的已付款資料(Nick)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public List<UsercenterPendingViewModel> GetUsercenterPendingVM(int id)
         {
             List<UsercenterPendingViewModel> UCPendingList = new List<UsercenterPendingViewModel>();
@@ -161,7 +166,11 @@ namespace ZoneRadar.Services
             }
             return UCPendingList;
         }
-
+        /// <summary>
+        /// 找出使用者(ID)的使用中資料(Nick)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public List<UsercenterProcessingViewModel> GetUsercenterProcessingVM(int id)
         {
             List<UsercenterProcessingViewModel> UCProcessingList = new List<UsercenterProcessingViewModel>();
@@ -219,7 +228,11 @@ namespace ZoneRadar.Services
             }
             return UCProcessingList;
         }
-
+        /// <summary>
+        /// 找出使用者(ID)的已完成資料(Nick)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public List<UsercenterCompletedViewModel> GetUsercenterCompletedVM(int id)
         {
             List<UsercenterCompletedViewModel> UCCompletedList = new List<UsercenterCompletedViewModel>();
@@ -294,8 +307,11 @@ namespace ZoneRadar.Services
 
             return UCCompletedList;
         }
-
-
+        /// <summary>
+        /// 刪除已付款的訂單(Nick)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public Order DeletePendingOrder(UsercenterPendingViewModel model)
         {
             var order = new Order {

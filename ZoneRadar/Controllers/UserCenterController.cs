@@ -30,6 +30,10 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 訂單已付款頁(Nick)
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Pending()
         {
             var userId = int.Parse(User.Identity.Name);
@@ -37,6 +41,10 @@ namespace ZoneRadar.Controllers
 
             return View(model);
         }
+        /// <summary>
+        /// 訂單使用中頁(Nick)
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Processing()
         {
             var userid = int.Parse(User.Identity.Name);
@@ -44,6 +52,10 @@ namespace ZoneRadar.Controllers
 
             return View(model);
         }
+        /// <summary>
+        /// 訂單已完成頁(Nick)
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Completed()
         {
             var userid = int.Parse(User.Identity.Name);
@@ -51,7 +63,10 @@ namespace ZoneRadar.Controllers
 
             return View(model);
         }
-
+        /// <summary>
+        /// 預購單頁(Nick)
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ShopCar()
         {
             var userid = int.Parse(User.Identity.Name);
@@ -59,7 +74,10 @@ namespace ZoneRadar.Controllers
 
             return View(model);
         }
-
+        /// <summary>
+        /// (Get)編輯預購單細項頁(Nick)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult EditShopCarDetail()
         {
@@ -73,6 +91,11 @@ namespace ZoneRadar.Controllers
 
             return View("ShopCar", model);
         }
+        /// <summary>
+        /// (Post)編輯預購單細項頁(Nick)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult EditShopCarDetail(RentDetailViewModel model)
         {
@@ -85,6 +108,11 @@ namespace ZoneRadar.Controllers
             var resultmodel = _PreOrderService.GetShopCarVM(userid);
             return View("ShopCar", resultmodel);
         }
+        /// <summary>
+        /// 刪除預購單細項頁(Nick)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult DeleteShopCarDetail(int id)
         {
             var userid = int.Parse(User.Identity.Name);
@@ -95,6 +123,11 @@ namespace ZoneRadar.Controllers
             var model = _PreOrderService.GetShopCarVM(userid);
             return View("ShopCar", model);
         }
+        /// <summary>
+        /// 刪除預購單頁(Nick)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult DeleteShopCarOrder(int id)
         {
 
@@ -106,6 +139,10 @@ namespace ZoneRadar.Controllers
 
             return View("ShopCar", model);
         }
+        /// <summary>
+        /// (Get)刪除已付款訂單頁(Nick)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult DeletePendingOrder()
         {
@@ -119,6 +156,11 @@ namespace ZoneRadar.Controllers
 
             return View("Pending", model);
         }
+        /// <summary>
+        /// (Post)刪除已付款訂單頁(Nick)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult DeletePendingOrder(UsercenterPendingViewModel model)
         {
