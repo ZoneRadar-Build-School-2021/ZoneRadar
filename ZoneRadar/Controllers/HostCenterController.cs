@@ -100,7 +100,11 @@ namespace ZoneRadar.Controllers
             };
             return View(model);
         }
-        public ActionResult ManagementSpace()
+        /// <summary>
+        /// 編輯場地(Steve) 
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SpaceManage()
         {
             return View();
         }
