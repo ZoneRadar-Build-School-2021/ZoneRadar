@@ -340,7 +340,7 @@ namespace ZoneRadar.Services
             var attendees = query.Attendees;
             var area = query.Area;
             var amenities = query.Amenities;
-            var keywords = query.Keywords.ToUpper();
+            var keywords = query.Keywords;
 
             var scores = _repository.GetAll<Review>();
             var spaces = _repository.GetAll<Space>();
@@ -411,7 +411,7 @@ namespace ZoneRadar.Services
                 var keywordArr = keywords.Split(' ');
                 foreach (var keyword in keywordArr)
                 {
-                    spaces = spaces.Where(x => x.SpaceName.ToUpper().Contains(keyword));
+                    spaces = spaces.Where(x => x.SpaceName.ToUpper().Contains(keyword.ToUpper()));
                 }
             }
 
