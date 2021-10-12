@@ -423,7 +423,9 @@ namespace ZoneRadar.Services
                         Recommend = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID && x.ToHost == false).Recommend,
                         Score = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID && x.ToHost == false).Score,
                         ReviewDate = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID && x.ToHost == false).ReviewDate,
-                        ReviewCount = o.Review.Where(x => x.OrderID == o.OrderID && x.ToHost == false).Count()
+                        ReviewCount = o.Review.Where(x => x.OrderID == o.OrderID && x.ToHost == false).Count(),
+                        Name = sps.Where(x=>x.SpaceID == o.SpaceID).FirstOrDefault().Member.Name,
+                        Id = sps.Where(x=>x.SpaceID == o.SpaceID).FirstOrDefault().MemberID
                     });
 
                     return resulthostinfoReview;

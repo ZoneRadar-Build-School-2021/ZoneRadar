@@ -100,13 +100,13 @@
             {
             <div class="reviewsfromhost_review_card row mt-4">
                 <div class="reviewsfromhost_review_card_pic mb-3 col-sm-2 col-md-2 col-lg-2">
-                    <a href="HostInfo">
+                    <a href="~/MemberCenter/Host/@r.Id">
                         <img src="@r.SpacePhoto" />
                     </a>
                 </div>
                 <div class="reviewsfromhost_review_card_txt mb-4 col-sm-10 col-md-10 col-lg-10">
                     <div class="reviewsfromhost_review_card_txt_name">
-                        <a href="HostInfo">Jetset Sound AV, LLC J.</a>
+                        <a href="~/MemberCenter/Host/@r.Id">@r.Name</a>
                     </div>
                     <div class="reviewsfromhost_review_card_txt_star mt-2">
                         @for (var i = 0; i <= r.Score; i++)
