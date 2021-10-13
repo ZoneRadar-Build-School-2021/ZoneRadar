@@ -180,7 +180,7 @@ namespace ZoneRadar.Services
                     //將會員的註冊時間和登入時間改成現在時間，代表驗證成功
                     user.SignUpDateTime = DateTime.Now;
                     user.LastLogin = DateTime.Now;
-                    _repository.Update<Member>(user);
+                    _repository.Update(user);
                     _repository.SaveChanges();
                     memberResult.User = user;
                     memberResult.IsSuccessful = true;
@@ -302,6 +302,123 @@ namespace ZoneRadar.Services
         {
             var url = FormsAuthentication.GetRedirectUrl(userName, true);
             return url;
+        }
+
+        /// <summary>
+        /// 寄送重設密碼信(Jenny)
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="request"></param>
+        /// <param name="urlHelper"></param>
+        /// <param name="userEmail"></param>
+        public void SentResetPasswordEmail(HttpServerUtilityBase server, HttpRequestBase request, UrlHelper urlHelper, string userEmail)
+        {
+            userEmail = HttpUtility.HtmlEncode(userEmail);
+            var afterTenMinutes = DateTime.Now.AddMinutes(10).ToString();
+            var resetCode = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == userEmail.ToUpper()).Password;
+            var route = new RouteValueDictionary { { "email", userEmail }, { "resetCode", resetCode }, { "expired", afterTenMinutes } };
+            //製作驗證信的連結
+            var resetLink = urlHelper.Action("ResetPassword", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
+
+            //寄件人資訊
+            string ZONERadarAccount = "swkzta3@gmail.com";
+            string ZONERadarPassword = "Minato,Naruto";
+
+            //產生能寄信的SmtpClient執行個體
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword),
+                EnableSsl = true
+            };
+
+            //產生信件，編輯信件的相關內容
+            string resetPasswordEmailContent = File.ReadAllText(Path.Combine(server.MapPath("~/Views/MemberCenter/ResetPasswordEmailContent.html")));
+            MailMessage mail = new MailMessage(ZONERadarAccount, ZONERadarAccount)
+            {
+                Subject = "重設您的ZONERadar密碼",
+                SubjectEncoding = Encoding.UTF8,
+                IsBodyHtml = true,
+                Body = resetPasswordEmailContent.Replace("resetLink", resetLink),
+                BodyEncoding = Encoding.UTF8
+            };
+
+            try
+            {
+                client.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                //未處理
+                throw ex;
+            }
+            finally
+            {
+                mail.Dispose();
+                client.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// 驗證重設密碼連結(Jenny)
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="resetCode"></param>
+        /// <returns></returns>
+        public Member VerifyResetPasswordLink(string email, string resetCode)
+        {
+            var user = _repository.GetAll<Member>().FirstOrDefault(x => x.Email.ToUpper() == email.ToUpper() && x.Password == resetCode);
+            return user;
+        }
+
+        /// <summary>
+        /// 修改使用者密碼(Jenny)
+        /// </summary>
+        /// <param name="resetPasswordVM"></param>
+        /// <returns></returns>
+        public MemberResult EditPassword(ResetZONERadarPasswordViewModel resetPasswordVM)
+        {
+            var memberResult = new MemberResult
+            {
+                IsSuccessful = false
+            };
+
+            //使用HtmlEncode將帳密做HTML編碼, 去除有害的字元
+            resetPasswordVM.UserEmail = HttpUtility.HtmlEncode(resetPasswordVM.UserEmail);
+            resetPasswordVM.NewPassword = HttpUtility.HtmlEncode(resetPasswordVM.NewPassword).MD5Hash();
+
+            //以Email及Password查詢比對Member資料表記錄，且註冊時間不得為預設1753年
+            var members = _repository.GetAll<Member>().ToList();
+            var user = members.FirstOrDefault(x => x.Email.ToUpper() == resetPasswordVM.UserEmail.ToUpper() && x.SignUpDateTime.Year != 1753);
+
+            //修改上次登入時間
+            if (user != null)
+            {
+                try
+                {
+                    //改成新密碼
+                    user.Password = resetPasswordVM.NewPassword;
+                    user.LastLogin = DateTime.Now;
+                    _repository.Update(user);
+                    _repository.SaveChanges();
+                    memberResult.User = user;
+                    memberResult.IsSuccessful = true;
+                    memberResult.ShowMessage = $"{user.Name}您好，密碼修改成功，歡迎您登入ZONERadar！";
+                    return memberResult;
+                }
+                catch (Exception ex)
+                {
+                    //資料庫儲存失敗
+                    memberResult.ShowMessage = "讀取會員資料過程中遇到錯誤，請檢查您的網路或重新嘗試！";
+                    memberResult.Exception = ex;
+                    return memberResult;
+                }
+            }
+            else
+            {
+                //沒這個會員
+                memberResult.ShowMessage = "找不到此會員！";
+                return memberResult;
+            }
         }
 
         /// <summary>
