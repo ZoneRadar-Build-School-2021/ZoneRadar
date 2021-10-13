@@ -947,7 +947,7 @@ namespace ZoneRadar.Services
                 result.amenityAraeTwoList.Add(temp);
             }
             /// <summary>
-            /// 其他場地空間選項 ( Amber )
+            /// 其他場地空間選項 (Amber)
             /// </summary>
             var AmenityOptionThree = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 3).ToList();
             foreach (var item in AmenityOptionThree)
