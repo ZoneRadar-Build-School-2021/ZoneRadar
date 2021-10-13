@@ -323,13 +323,22 @@ namespace ZoneRadar.Services
                 PaymentDate = model.PaidTime,
                 ContactName = model.ContactName,
                 ContactPhone = model.ContactPhone,
-                OrderStatusID =  5
+                OrderStatusID = 5
             };
 
             _repository.Update<Order>(order);
             _repository.SaveChanges();
 
             return order;
+        }
+
+        /// <summary>
+        /// 刪除已付款的訂單(Jack)
+        /// </summary>
+        /// <returns></returns>
+        public List<ProcessingViewModel> GetHostCenter() 
+        {
+            return null;
         }
     }
 }
