@@ -28,7 +28,8 @@ a {
         color: inherit;
     }
 
-.btn:focus {
+.btn:focus,
+.form-select:focus {
     box-shadow: none;
 }
 
@@ -164,7 +165,13 @@ a {
     border: 1px solid #cccccc;
 }
 
-.about .collapse:not(.show),
+.about .collapse:not(.show) {
+    display: block;
+    height: 3.5rem;
+    overflow: hidden;
+    position: relative;
+}
+
 .facility .collapse:not(.show) {
     display: block;
     height: 8rem;
@@ -173,8 +180,7 @@ a {
 }
 
     .about .collapse:not(.show)::after,
-    .facility .collapse:not(.show)::after,
-    .add-on .collapse:not(.show)::after {
+    .facility .collapse:not(.show)::after {
         content: "";
         position: absolute;
         width: 100%;
@@ -184,32 +190,14 @@ a {
         background: linear-gradient(rgba(255,255,255,0),#fff);
     }
 
-.add-on .collapse:not(.show) {
-    display: block;
-    height: 10rem;
-    overflow: hidden;
-    position: relative;
+.about .collapsing {
+    height: 3.5rem;
 }
 
-    .add-on .collapse:not(.show)::after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 2rem;
-        bottom: 0;
-        left: 0;
-        background: linear-gradient(rgba(255,255,255,0),#fff);
-    }
-
-.about .collapsing,
-.facility .collapsing,
-.add-on .collapsing {
+.facility .collapsing {
     height: 8rem;
 }
 
-.add-on .collapsing {
-    height: 10rem;
-}
 
 .read-more {
     color: #049DD9;
@@ -304,18 +292,46 @@ a {
     color: #9b9b9b;
 }
 
-.attendees:focus {
-    border-color: #cccccc;
-    box-shadow: none;
-}
-
 .form-control:disabled, .form-control[readonly] {
     background-color: #fff;
 }
 
-.form-control:focus {
-    box-shadow: none;
+.extend {
+    color: #049DD9;
+    cursor: pointer;
+    position: relative;
 }
+
+    .extend::after {
+        content: '';
+        position: absolute;
+        height: 1px;
+        width: 0;
+        background-color: #0077a7;
+        bottom: -3px;
+        left: 50%;
+        transition: .3s;
+    }
+
+    .extend:hover {
+        color: #0077a7;
+    }
+
+        .extend:hover::after {
+            width: 100%;
+            transform: translateX(-50%);
+            transition: .3s;
+        }
+
+
+.remove {
+    color: #D9831A;
+    cursor: pointer;
+}
+
+    .remove:hover {
+        color: #be7418;
+    }
 
 .btn-submit {
     background-color: #049DD9;
