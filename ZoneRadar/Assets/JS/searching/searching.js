@@ -259,7 +259,7 @@
   
         amenityList.forEach((amenity, index) => {
           let amenityClone = document.querySelector('#amenity-template').content.cloneNode(true);
-          amenityClone.querySelector('img').setAttribute('src', `${amenityIconList[index]}`);
+          amenityClone.querySelector('img').setAttribute('src', `/Assets/IMG/${amenityIconList[index]}`);
           amenityClone.querySelector('span').innerText = amenity;
           amenityOptionNode.appendChild(amenityClone);
         })
