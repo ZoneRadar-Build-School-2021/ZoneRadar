@@ -464,5 +464,47 @@ namespace ZoneRadar.Services
                 return resulthostinfoReview;
             }
         }
+
+        /// <summary>
+        /// 讀取個人資料(昶安)
+        /// </summary>
+        /// <param name="memberID"></param>
+        /// <returns></returns>
+        public ProfileViewModel GetProfileData(int memberID)
+        {
+            var p = _repository.GetAll<Member>().ToList().FirstOrDefault(x => x.MemberID == memberID);
+            var result = new ProfileViewModel()
+            {
+                MemberID = p.MemberID,
+                //Photo = p.Photo,
+                Name = p.Name,
+                Phone = p.Phone,
+                Email = p.Email,
+                Description = p.Description
+            };
+
+            return result;
+        }
+
+        /// <summary>
+        /// 編輯個人資料(昶安)
+        /// </summary>
+        /// <param name="edit"></param>
+        /// <returns></returns>
+        public ProfileViewModel EditProfileData(ProfileViewModel edit)
+        {
+            //抓取 --> 編輯資料
+            var p = _repository.GetAll<Member>().ToList().FirstOrDefault(x => x.MemberID == edit.MemberID);
+            //p.Photo = edit.Photo;
+            p.Name = edit.Name;
+            p.Phone = edit.Phone;
+            p.Description = edit.Description;
+
+            //更新
+            _repository.Update(p);
+            _repository.SaveChanges();
+
+            return edit;
+        }
     }
 }

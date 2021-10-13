@@ -213,6 +213,7 @@
     <Compile Include="Models\District.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\BookingPageViewModel.cs" />
+    <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\ShopCarViewModel.cs" />
     <Compile Include="Models\ViewModels\SomeOnesSpaceViewModelcs.cs" />
     <Compile Include="Models\ViewModels\SpaceDetailViewModel.cs" />
@@ -273,6 +274,7 @@
     <Content Include="Assets\CSS\leaflet.css" />
     <Content Include="Assets\CSS\material_blue.css" />
     <Content Include="Assets\CSS\membercenter\membercenter.css" />
+    <Content Include="Assets\CSS\membercenter\profile.css" />
     <Content Include="Assets\CSS\membercenter\Seller_completedstyle.css" />
     <Content Include="Assets\CSS\member_card\memberstyle_buyer_collect.css" />
     <Content Include="Assets\CSS\member_card\memberstyle_buyer_evaluation.css" />
@@ -440,6 +442,7 @@
     <Content Include="Assets\JS\layout\navbar-footer.js" />
     <Content Include="Assets\JS\leaflet.js" />
     <Content Include="Assets\JS\leaflet.markercluster.js" />
+    <Content Include="Assets\JS\membercenter\profile.js" />
     <Content Include="Assets\JS\order_state\membercenter_completed.js" />
     <Content Include="Assets\JS\order_state\membercenter_pending.js" />
     <Content Include="Assets\JS\order_state\membercenter_processing.js" />
@@ -664,6 +667,7 @@
     <Content Include="Views\HostCenter\AddSpace.cshtml" />
     <Content Include="Views\HostCenter\SpaceManage.cshtml" />
     <Content Include="Views\HostCenter\Processing.cshtml" />
+    <Content Include="Views\MemberCenter\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

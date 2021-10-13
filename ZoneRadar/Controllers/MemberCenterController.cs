@@ -333,5 +333,34 @@ namespace ZoneRadar.Controllers
                 return View("MyCollection", MemCollectionSpaces);
             }
         }
+
+        /// <summary>
+        /// 編輯個人資料頁面(昶安)
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult EditProfile()
+        {
+            var userID = int.Parse(User.Identity.Name); //登入後的帳號(綁定一人)
+            var model = _service.GetProfileData(userID);
+            return View(model);
+        }
+
+        /// <summary>
+        /// 編輯個人資料頁面(昶安)
+        /// </summary>
+        /// <param name="edit"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile([Bind(Include = "MemberID,Name,Email,Phone,Description")] ProfileViewModel edit)
+        {
+            if (ModelState.IsValid)
+            {
+                var model = _service.EditProfileData(edit);
+                return View(model);
+            }
+            return View("EditProfile");
+        }
     }
 }
