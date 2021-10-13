@@ -16,12 +16,14 @@ namespace ZoneRadar.Controllers
     {
         private readonly OrderService _OrderService;
         private readonly PreOrderService _PreOrderService;
+        private readonly ReviewService _ReviewService;
 
         private readonly ZONERadarContext _db;
         public UserCenterController()
         {
             _OrderService = new OrderService();
             _PreOrderService = new PreOrderService();
+            _ReviewService = new ReviewService();
 
             _db = new ZONERadarContext();
         }
@@ -172,6 +174,42 @@ namespace ZoneRadar.Controllers
             }
             var resultmodel = _OrderService.GetUsercenterPendingVM(userid);
             return View("ShopCar", resultmodel);
+        }
+        /// <summary>
+        /// (Get)新增已完成訂單評價頁(Nick)
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CreatCompletedReview()
+        {
+            var userid = int.Parse(User.Identity.Name);
+
+            if (userid == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var model = _OrderService.GetUsercenterCompletedVM(userid);
+
+            return View("Completed", model);
+        }
+        /// <summary>
+        /// (Post)新增已完成訂單評價頁(Nick)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CreatCompletedReview(UsercenterCompletedViewModel model)
+        {
+            var userid = int.Parse(User.Identity.Name);
+
+            var result = _ReviewService.CreatCompletedReview(model);
+            return RedirectToAction("Completed", result);
+            //if (ModelState.IsValid)
+            //{
+
+            //}
+            //var resultmodel = _OrderService.GetUsercenterCompletedVM(userid);
+            //return View("Completed", resultmodel);
         }
     }
 }

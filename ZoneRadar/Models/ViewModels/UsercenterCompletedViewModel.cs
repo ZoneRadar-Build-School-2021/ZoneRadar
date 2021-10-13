@@ -19,5 +19,9 @@ namespace ZoneRadar.Models.ViewModels
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public decimal Money { get; set; }
         public bool HasReview { get; set; }
+        public int OrderId { get; set; }
+        public int Score { get; set; }
+        public string ReviewContent { get; set; }
+        public bool Recommend { get; set; }
     }
 }
