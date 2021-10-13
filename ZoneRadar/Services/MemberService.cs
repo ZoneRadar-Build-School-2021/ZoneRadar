@@ -337,21 +337,6 @@ namespace ZoneRadar.Services
                 Description = p.Description
             };
 
-            /*
-            var profiledata = _repo.GetAll().Where(x => x.MemberID == 1).ToList();
-            foreach (var m in profiledata)
-            {
-                var profileVM = new ProfileViewModel 
-                { 
-                    Photo= m.Photo, 
-                    Name = m.Name, 
-                    Phone = m.Phone, 
-                    Email = m.Email, 
-                    Description = m.Description 
-                };
-                result = profileVM;
-            }
-            */
             return result;
         }
 
