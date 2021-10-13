@@ -430,6 +430,7 @@
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\skins\moono-lisa\images\spinner.gif" />
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\styles.js" />
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\vendor\promise.js" />
+    <Content Include="Assets\JS\addspace\JavaScript.js" />
     <Content Include="Assets\JS\addspace\text.js" />
     <Content Include="Assets\JS\axios.min.js" />
     <Content Include="Assets\JS\booking\booking.js" />
