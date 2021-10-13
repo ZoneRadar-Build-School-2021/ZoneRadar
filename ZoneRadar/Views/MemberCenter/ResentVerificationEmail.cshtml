@@ -1,15 +1,18 @@
 ﻿
 @{
-    ViewBag.Title = "ResentEmail";
+    ViewBag.Title = "ResentVerificationEmail";
 }
 
 <div class="text-center px-5 my-5">
     <h4 class="mb-3">重發驗證信</h4>
     <h5 class="mb-3">尚未收到驗證信嗎? 請輸入您註冊時使用的Email帳號重新寄發。</h5>
-    <div class="input-area m-auto">
+    <form class="input-area m-auto was-validated">
         <input type="email" id="input-user-email" class="form-control form-control-lg d-block" placeholder="Email" required>
-        <button class="mt-3 px-4 py-2 text-white">確認送出</button>
-    </div>
+        <div class="invalid-feedback">
+            請輸入有效的Email帳號
+        </div>
+        <button class="mt-3 px-4 py-2 text-white resent-verification-email">確認送出</button>
+    </form>
 </div>
 
 @section topCSS
@@ -24,23 +27,23 @@
             color: #343840;
         }
 
-            input#input-user-email::placeholder {
-                font-size: 18px;
-                color: #ccc;
-            }
+        input#input-user-email::placeholder {
+            font-size: 18px;
+            color: #ccc;
+        }
 
-            input#input-user-email:focus {
-                box-shadow: 0 0 5px #049DD9;
-                border-color: #049DD9;
-            }
+        input#input-user-email:focus {
+            box-shadow: 0 0 5px #049DD9;
+            border-color: #049DD9;
+        }
 
-        button {
+        button.resent-verification-email {
             border-radius: .3rem;
             background-color: #049DD9;
             border: none;
         }
 
-            button:hover {
+            button.resent-verification-email:hover {
                 background-color: #0077a7;
             }
     </style>
@@ -55,20 +58,28 @@
             console.log(email);
             $.ajax({
                 type: "POST",
-                url: "/MemberCenter/ResentEmail",
+                url: "/MemberCenter/ResentVerificationEmail",
                 data: { email: email },
                 dataType: "text",
                 success: function (response) {
-                    alert(response);
+                    let result = JSON.parse(response);
+                    Swal.fire({
+                        title: result.Message,
+                        icon: result.Icon,
+                        showConfirmButton: true,
+                        confirmButtonColor: "#be7418",
+                        confirmButtonText: "OK",
+                        position: "top"
+                    })
                 }
             });
         }
 
         window.onload = function () {
-            let btn = $("button");
+            let btn = $("button.resent-verification-email");
             btn.click(function () {
                 postValue();
             });
         }
-    </script>
+    </script>      
 }

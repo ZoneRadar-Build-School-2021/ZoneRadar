@@ -1,0 +1,65 @@
+.profile .container{
+    width: 100%;
+    max-width: 810px;
+}
+.profile-title{
+    margin-top: 20px;
+}
+.profile-photo,
+.basic-info-title ,
+.email-preferences{
+    margin-top: 30px;
+    padding-top: 30px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+.photo-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    border: 3px solid #049DD9;
+}
+.photo-upload{
+    margin-top: 30px;
+}
+.photo-upload .btn{
+    color:#0077a7;
+    background-color: white;
+    border-color: #0077a7;
+}
+.photo-upload .btn:hover{
+    color:black;
+    background-color: #0077a7;
+    border-color: #0077a7;
+}
+.photo-upload .btn:focus{
+    outline: 0;
+    box-shadow: none;
+} 
+.saved-button .btn{
+    background-color: #d9831a;
+    color: white;
+}
+.saved-button .btn:focus{
+    border-color: #d9831a !important;
+    outline: 0;
+    box-shadow: none;
+}
+@media (min-width: 768px) {
+    .col-form-label{
+        display: flex;
+        justify-content: flex-end;
+    }
+    .form-control{
+        width: 50%;
+    }
+}
+.saved-button{
+    margin-top: 5px;
+}
+.email-information{
+    margin-bottom: 30px;
+}

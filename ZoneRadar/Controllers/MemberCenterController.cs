@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ZoneRadar.Services;
 using System.Web.Security;
 using ZoneRadar.Models.ViewModels;
+using Newtonsoft.Json;
 
 namespace ZoneRadar.Controllers
 {
@@ -21,9 +22,119 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 忘記密碼(Get)(Jenny)
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult ForgetPassword()
         {
             return View();
+        }
+
+        /// <summary>
+        /// 忘記密碼(Post)(Jenny)
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ForgetPassword(string email)
+        {
+            //確認是否有此會員
+            var hasUserInfo = _service.SearchUser(email, true);
+            if (hasUserInfo)
+            {
+                //寄送重設密碼信
+                _service.SentResetPasswordEmail(Server, Request, Url, email);
+            }
+            //未刻頁面
+            return Content("請至信箱查看信件");
+        }
+
+        /// <summary>
+        /// 重設密碼(Get)(Jenny)
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="resetCode"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ResetPassword(string email, string resetCode, string expired)
+        {
+            var expiredTime = new DateTime();
+            DateTime.TryParse(expired, out expiredTime);
+            //超過10分鐘無效
+            if (DateTime.Now > expiredTime)
+            {
+                TempData["Alert"] = true;
+                TempData["Message"] = "超過10分鐘有效時間，請重新嘗試！";
+                TempData["Icon"] = false;
+                return RedirectToAction("Index", "Home");
+            }
+            var user = _service.VerifyResetPasswordLink(email, resetCode);
+            if (user != null)
+            {
+                ViewBag.Email = user.Email;
+                return View();
+            }
+            else
+            {
+                TempData["Alert"] = true;
+                TempData["Message"] = "找不到此會員，請重新嘗試！";
+                TempData["Icon"] = false;
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        /// <summary>
+        /// 重設密碼(Post)(Jenny)
+        /// </summary>
+        /// <param name="resetPasswordVM"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ResetPassword(ResetZONERadarPasswordViewModel resetPasswordVM)
+        {
+            if (!ModelState.IsValid || resetPasswordVM.NewPassword != resetPasswordVM.NewConfirmPassword)
+            {
+                //輸入格式不正確或密碼不一致
+                TempData["Alert"] = true;
+                TempData["Message"] = "輸入格式不正確或密碼不一致，請重新輸入！";
+                TempData["Icon"] = false;
+                return View();
+            }
+            //如果已重設密碼、登入了，又按上一頁
+            if (User.Identity.IsAuthenticated)
+            {
+                TempData["Alert"] = true;
+                TempData["Message"] = "現為登入狀態，無法以此方式重設密碼！";
+                TempData["Icon"] = false;
+                return RedirectToAction("Index", "Home");
+            }
+
+            //修改會員密碼
+            var memberResult = _service.EditPassword(resetPasswordVM);
+            if (memberResult.IsSuccessful)
+            {
+                //讓使用者登入，呈現登入後的畫面
+                //建造加密表單驗證票證
+                var encryptedTicket = _service.CreateEncryptedTicket(memberResult.User);
+
+                //建造cookie
+                _service.CreateCookie(encryptedTicket, Response);
+
+                TempData["Alert"] = true;
+                TempData["Message"] = memberResult.ShowMessage;
+                TempData["Icon"] = memberResult.IsSuccessful;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                //密碼修改失敗，回去首頁，跳出錯誤訊息
+                TempData["Alert"] = true;
+                TempData["Message"] = memberResult.ShowMessage;
+                TempData["Icon"] = memberResult.IsSuccessful;
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         /// <summary>
@@ -87,7 +198,7 @@ namespace ZoneRadar.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult ResentEmail()
+        public ActionResult ResentVerificationEmail()
         {
             return View();
         }
@@ -98,10 +209,25 @@ namespace ZoneRadar.Controllers
         /// <param name="email"></param>
         /// <returns></returns>
         [HttpPost]
-        public string ResentEmail(string email)
+        public string ResentVerificationEmail(string email)
         {
-            //_service.SentEmail(Server, Request, Url, email);
-            return "已重發驗證信，請至信箱確認！";
+            //Ajax
+            //確認是否有此帳號的註冊紀錄但還未驗證
+            var hasRegisterInfo = _service.SearchUser(email, false);
+            if (hasRegisterInfo)
+            {
+                //寄送驗證信
+                _service.SentEmail(Server, Request, Url, email);
+                var result = new { Icon = "success", Message = "已重發驗證信，請至信箱確認！" };
+                var jsonResult = JsonConvert.SerializeObject(result);
+                return jsonResult;
+            }
+            else
+            {
+                var result = new { Icon = "error", Message = "該帳號不符合未驗證條件，請重新註冊！" };
+                var jsonResult = JsonConvert.SerializeObject(result);
+                return jsonResult;
+            }
         }
 
         /// <summary>
@@ -332,6 +458,35 @@ namespace ZoneRadar.Controllers
                 var MemCollectionSpaces = _service.GetMemberCollection(id.Value);
                 return View("MyCollection", MemCollectionSpaces);
             }
+        }
+
+        /// <summary>
+        /// 編輯個人資料頁面(昶安)
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult EditProfile()
+        {
+            var userID = int.Parse(User.Identity.Name); //登入後的帳號(綁定一人)
+            var model = _service.GetProfileData(userID);
+            return View(model);
+        }
+
+        /// <summary>
+        /// 編輯個人資料頁面(昶安)
+        /// </summary>
+        /// <param name="edit"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile([Bind(Include = "MemberID,Name,Email,Phone,Description")] ProfileViewModel edit)
+        {
+            if (ModelState.IsValid)
+            {
+                var model = _service.EditProfileData(edit);
+                return View(model);
+            }
+            return View("EditProfile");
         }
     }
 }

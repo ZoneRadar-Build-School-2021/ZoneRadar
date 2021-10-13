@@ -16,7 +16,7 @@ namespace ZoneRadar.Models.ViewModels
         public List<ToSpaceReviewViewModel> ToSpaceReviews { get; set; }
         public List<SelectListItem> TyoeOptions { get; set; }
         public List<SelectListItem> CityOptions { get; set; }
-        public HomepageSearchViewModel HomepageSearchVM { get; set; }
+        public QueryViewModel QueryVM { get; set; }
     }
     /// <summary>
     /// 精選場地(Jenny)
@@ -41,14 +41,5 @@ namespace ZoneRadar.Models.ViewModels
         public string MemberName { get; set; }
         public string ReviewContent { get; set; }
         public int Score { get; set; }
-    }
-    /// <summary>
-    /// 首頁搜尋列的ViewModel(Jenny)
-    /// </summary>
-    public class HomepageSearchViewModel
-    {
-        public int TypeDetailId { get; set; }
-        public int CityId { get; set; }
-        public DateTime Date { get; set; }
     }
 }

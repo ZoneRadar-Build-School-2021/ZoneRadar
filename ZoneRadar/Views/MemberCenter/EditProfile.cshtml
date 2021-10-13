@@ -1,0 +1,106 @@
+﻿@model ProfileViewModel
+
+@{
+    ViewBag.Title = "PersonalInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form action="/MemberCenter/EditProfile" method="post">
+    @Html.AntiForgeryToken()
+    <input name="MemberID" type="hidden" value="@Model.MemberID"/>
+
+    <div class="profile container">
+        <div class="row">
+            <div class="col-12">
+                <div class="profile-photo d-flex justify-content-center">
+                    <h3>大頭照片</h3>
+                </div>
+                <hr>
+                <div class="photo-button mb-3">
+                    <div class="photo-card mb-2 d-flex justify-content-center">
+                        <div class="photo">
+                            <img class="mt-4" src="@Model.Photo">
+                        </div>
+                    </div>
+                    <div class="photo-upload mb-2 d-flex justify-content-center">
+                        @*<button type="button" class="btn btn-outline-info">上傳大頭照</button>*@
+                        <input id="uploadid" type="button" class="btn" value="上傳大頭照" />
+                        <input id="fileid" type="file" hidden />
+                    </div>
+                    <!--<div class="col-12 col-md-4 fileUpload mb-2 btn btn-outline-info">
+                        <input type="file" class="upload">
+                    </div>-->
+                </div>
+                <div class="basic-info-title d-flex justify-content-center">
+                    <h3>個人資訊</h3>
+                </div>
+                <hr>
+                <div class="name row align-items-center mb-3 d-flex justify-content-center">
+                    <div class="col-12 col-md-4">
+                        <label for="InputName" class="col-form-label">姓名</label>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <input id="InputName" type="text" value="@Model.Name" name="Name" class="form-control" aria-describedby="">
+                    </div>
+                </div>
+                <div class="tel row align-items-center mb-3 d-flex justify-content-center">
+                    <div class="col-12 col-md-4">
+                        <label for="InputTel" class="col-form-label">電話</label>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <input id="InputTel" type="text" value="@Model.Phone" name="Phone" class="form-control" aria-describedby="telverify">
+                    </div>
+                    <div class="d-none verify">
+                        <span id="telverify" class="text-danger ">
+                            <i class="fas fa-exclamation-circle"></i>
+                            驗證電話
+                        </span>
+                    </div>
+                </div>
+                <div class="mail row align-items-center mb-3 d-flex justify-content-center">
+                    <div class="col-12 col-md-4">
+                        <label for="InputEmail" class="col-form-label">電子郵件</label>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <input id="InputEmail" type="text" readonly value="@Model.Email" name="Email" class="form-control" aria-describedby="emailverify">
+                    </div>
+                    <div class="d-none verify">
+                        <span id="emailverify" class="text-danger">
+                            <i class="fas fa-exclamation-circle"></i>
+                            驗證電子郵件
+                        </span>
+                    </div>
+                </div>
+                <div class="description row align-items-center mb-3 d-flex justify-content-center">
+                    <div class="col-12 col-md-4">
+                        <label for="descript" class="col-form-label">描述</label>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <textarea class="form-control" id="exampleFormControlTextarea" name="Description" rows="3">@Model.Description</textarea>
+                    </div>
+                </div>
+                <div class="saved-button align-items-center mb-5 mt-5 d-flex justify-content-center">
+                    <input type="submit" value="儲存" class="btn btn-default" onclick="myFunction()" />
+                    @*<button type="button" class="btn btn-outline-danger">儲存</button>*@
+                    @*<button id="save" type="button" class="btn" onclick="myFunction();">儲存</button>*@
+                </div>
+                <div class="email-preferences d-flex justify-content-center">
+                    <h3>電子郵件選項</h3>
+                </div>
+                <hr>
+                <div class="email-information mb-3 form-check text-center">
+                    <input type="checkbox" class="form-check-input float-none" id="Check">
+                    <label class="form-check-label" for="Check">透過電子郵件像我發送獨家優惠、靈感、新聞和社群消息</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section topCSS{
+    <link href="~/Assets/CSS/membercenter/profile.css" rel="stylesheet" />
+}
+
+@section endJS{
+    <script src="~/Assets/JS/membercenter/profile.js"></script>
+}

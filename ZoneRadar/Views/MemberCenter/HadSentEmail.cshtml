@@ -5,26 +5,28 @@
 
 
 <div class="text-center px-5 my-5">
-    <img src="~/Assets/IMG/static/sent-email.png" alt="寄驗證信" />
+    <img src="~/Assets/IMG/static/sent-email.png" alt="寄驗證信" class="img-resent-email" />
     <h3 id="count-down-timer" class="mt-5 mb-3"></h3>
     <h4 class="mb-3">驗證信已寄出，請至信箱確認信件，並在10分鐘內完成身分驗證。</h4>
-    <h5>( 若未收到驗證信，請點擊 <button class="">重發驗證信</button> )</h5>
+    <h5>( 若未收到驗證信，請點擊 <button class="resent-verification-email">重發驗證信</button> )</h5>
 </div>
 
 @section topCSS
 {
     <style>
-        img {
+        .img-resent-email {
             width: 300px;
         }
-        button {
+
+        button.resent-verification-email {
             background-color: transparent;
             border: none;
             color: #049DD9;
         }
-        button:hover {
-            color: #0077a7;
-        }
+
+            button.resent-verification-email:hover {
+                color: #0077a7;
+            }
     </style>
 }
 @section endJS
@@ -56,11 +58,19 @@
         function postValue() {
             $.ajax({
                 type: "POST",
-                url: "/MemberCenter/ResentEmail",
+                url: "/MemberCenter/ResentVerificationEmail",
                 data: { email: "@ViewBag.UserEmail" },
                 dataType: "text",
                 success: function (response) {
-                    alert(response);
+                    let result = JSON.parse(response);
+                    Swal.fire({
+                        title: result.Message,
+                        icon: result.Icon,
+                        showConfirmButton: true,
+                        confirmButtonColor: "#be7418",
+                        confirmButtonText: "OK",
+                        position: "top"
+                    })
                 }
             });
         }
@@ -78,7 +88,7 @@
             startCountDown(--duration, element);
             //#endregion
 
-            let btn = $("button");
+            let btn = $("button.resent-verification-email");
             btn.click(function () {
                 postValue();
                 seconds_remaining = 600;
