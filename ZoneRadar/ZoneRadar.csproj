@@ -273,8 +273,10 @@
     <Content Include="Assets\CSS\layout\navbar-footer.css" />
     <Content Include="Assets\CSS\leaflet.css" />
     <Content Include="Assets\CSS\material_blue.css" />
+    <Content Include="Assets\CSS\membercenter\ForgetPassword.css" />
     <Content Include="Assets\CSS\membercenter\membercenter.css" />
     <Content Include="Assets\CSS\membercenter\profile.css" />
+    <Content Include="Assets\CSS\membercenter\ResetPassword.css" />
     <Content Include="Assets\CSS\membercenter\Seller_completedstyle.css" />
     <Content Include="Assets\CSS\member_card\memberstyle_buyer_collect.css" />
     <Content Include="Assets\CSS\member_card\memberstyle_buyer_evaluation.css" />

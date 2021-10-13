@@ -72,20 +72,5 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
-
-        /// <summary>
-        /// 測試用的Action(Jenny)
-        /// </summary>
-        /// <param name="homepageSearchVM"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public void SearchSpace(HomepageSearchViewModel homepageSearchVM)
-        {
-            FormsIdentity id = (FormsIdentity)User.Identity;
-            string memberId = User.Identity.Name;
-
-            _spaceService.SearchSpacesByTypeCityDate(homepageSearchVM);
-            throw new NotImplementedException();
-        }
     }
 }
