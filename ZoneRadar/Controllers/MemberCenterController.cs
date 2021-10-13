@@ -45,14 +45,9 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "Name, Email, Password, ConfirmPassword")] RegisterZONERadarViewModel registerVM)
+        public ActionResult Register([Bind(Include = "Name, RegisterEmail, RegisterPassword, ConfirmPassword")] RegisterZONERadarViewModel registerVM)
         {
-            ViewBag.UserEmail = registerVM.Email;
-            return View("HadSentEmail");
-
-
-
-            if (!ModelState.IsValid || registerVM.Password != registerVM.ConfirmPassword)
+            if (!ModelState.IsValid || registerVM.RegisterPassword != registerVM.ConfirmPassword)
             {
                 //輸入格式不正確或密碼不一致
                 TempData["Alert"] = true;
@@ -69,6 +64,7 @@ namespace ZoneRadar.Controllers
                 {
                     //測試：用Session記錄註冊資訊
                     //Session["ConfirmRegister"] = new List<string>() { registerResult.User.Email, DateTime.Now.AddMinutes(10).ToString() };
+
                     //接著寄送驗證信
                     _service.SentEmail(Server, Request, Url, memberResult.User.Email);
 
@@ -184,7 +180,7 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login([Bind(Include = "Email, Password")] LoginZONERadarViewModel loginVM)
+        public ActionResult Login([Bind(Include = "LoginEmail, LoginPassword")] LoginZONERadarViewModel loginVM)
         {
             //若未通過Model驗證(前端已先驗證過)
             if (!ModelState.IsValid)
