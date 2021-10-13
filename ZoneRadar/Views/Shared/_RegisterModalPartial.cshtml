@@ -9,10 +9,10 @@
         <input type="password" id="input-password-register" name="RegisterZONERadarVM.Password" class="form-control form-control-lg d-block mb-3" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" required>*@
     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control form-control-lg d-block", type = "text", placeholder = "Name", required = "true" } })
     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger d-block text-start mt-1" })
-    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mt-3", type = "email", placeholder = "Email", required = "true" } })
-    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger d-block text-start mt-1" })
-    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mt-3", type = "password", placeholder = "Password", required = "true" } })
-    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger d-block text-start mt-1" })
+    @Html.EditorFor(model => model.RegisterEmail, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mt-3", type = "email", placeholder = "Email", required = "true" } })
+    @Html.ValidationMessageFor(model => model.RegisterEmail, "", new { @class = "text-danger d-block text-start mt-1" })
+    @Html.EditorFor(model => model.RegisterPassword, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mt-3", type = "password", placeholder = "Password", required = "true" } })
+    @Html.ValidationMessageFor(model => model.RegisterPassword, "", new { @class = "text-danger d-block text-start mt-1" })
     @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mt-3", type = "password", placeholder = "Confirm Password", required = "true" } })
     @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger d-block text-start mt-1" })
     <button type="submit" id="register-submit" class="w-100 text-decoration-none text-white mt-3">以Email註冊</button>

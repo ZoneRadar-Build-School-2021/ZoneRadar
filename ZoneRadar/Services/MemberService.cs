@@ -40,10 +40,10 @@ namespace ZoneRadar.Services
             };
 
             registerVM.Name = HttpUtility.HtmlEncode(registerVM.Name);
-            registerVM.Email = HttpUtility.HtmlEncode(registerVM.Email);
-            registerVM.Password = HttpUtility.HtmlEncode(registerVM.Password).MD5Hash();
+            registerVM.RegisterEmail = HttpUtility.HtmlEncode(registerVM.RegisterEmail);
+            registerVM.RegisterPassword = HttpUtility.HtmlEncode(registerVM.RegisterPassword).MD5Hash();
 
-            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.Email.ToUpper() && x.SignUpDateTime.Year != 1753);
+            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.RegisterEmail.ToUpper() && x.SignUpDateTime.Year != 1753);
 
             if (isSameEmail)
             {
@@ -57,12 +57,12 @@ namespace ZoneRadar.Services
                 {
                     var member = new Member
                     {
-                        Email = registerVM.Email,
-                        Password = registerVM.Password,
+                        Email = registerVM.RegisterEmail,
+                        Password = registerVM.RegisterPassword,
                         Name = registerVM.Name,
                         ReceiveEDM = false,
                         SignUpDateTime = new DateTime(1753, 1, 1), //未驗證時時間為西元1753年
-                        LastLogin = DateTime.Now
+                        LastLogin = new DateTime(1753, 1, 1) //未驗證時時間為西元1753年
                     };
                     _repository.Create<Member>(member);
                     _repository.SaveChanges();
@@ -93,25 +93,36 @@ namespace ZoneRadar.Services
             var afterTenMinutes = DateTime.Now.AddMinutes(10).ToString();
             var route = new RouteValueDictionary { { "email", userEmail }, { "expired", afterTenMinutes } };
             //製作驗證信的連結
-            var confirmLink = urlHelper.Action("ConfirmEmail", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
+            var verificationLink = urlHelper.Action("ConfirmEmail", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
 
             //寄件人資訊
             string ZONERadarAccount = "swkzta3@gmail.com";
             string ZONERadarPassword = "Minato,Naruto";
 
             //產生能寄信的SmtpClient執行個體
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
-            client.Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword);
-            client.EnableSsl = true;
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword),
+                EnableSsl = true
+            };
+            //client.Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword);
+            //client.EnableSsl = true;
 
             //產生信件，編輯信件的相關內容
-            MailMessage mail = new MailMessage(ZONERadarAccount, ZONERadarAccount);
-            mail.Subject = "ZONERadar會員確認信";
-            mail.SubjectEncoding = Encoding.UTF8;
-            mail.IsBodyHtml = true;
-            string confirmEmailContent = File.ReadAllText(Path.Combine(server.MapPath("~/Views/MemberCenter/ConfirmEmailContent.html")));
-            mail.Body = confirmEmailContent.Replace("confirmLink", confirmLink);
-            mail.BodyEncoding = Encoding.UTF8;
+            string verificationEmailContent = File.ReadAllText(Path.Combine(server.MapPath("~/Views/MemberCenter/VerificationEmailContent.html")));
+            MailMessage mail = new MailMessage(ZONERadarAccount, ZONERadarAccount)
+            {
+                Subject = "ZONERadar會員確認信",
+                SubjectEncoding = Encoding.UTF8,
+                IsBodyHtml = true,
+                Body = verificationEmailContent.Replace("verificationLink", verificationLink),
+                BodyEncoding = Encoding.UTF8
+            };
+            //mail.Subject = "ZONERadar會員確認信";
+            //mail.SubjectEncoding = Encoding.UTF8;
+            //mail.IsBodyHtml = true;
+            //mail.Body = confirmEmailContent.Replace("confirmLink", confirmLink);
+            //mail.BodyEncoding = Encoding.UTF8;
 
             try
             {
@@ -129,6 +140,25 @@ namespace ZoneRadar.Services
             }
         }
 
+        /// <summary>
+        /// 確認是否有此帳號的紀錄(包含未驗證的和已是會員的)(Jenny)
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public bool SearchUser(string email, bool verified)
+        {
+            email = HttpUtility.HtmlEncode(email);
+            bool hasInfo;
+            if (verified)
+            {
+                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.SignUpDateTime.Year != 1753);
+            }
+            else
+            {
+                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.SignUpDateTime.Year == 1753);
+            }
+            return hasInfo;
+        }
 
         /// <summary>
         /// 點擊驗證連結後做確認，是否有此會員的註冊紀錄(Jenny)
@@ -147,8 +177,9 @@ namespace ZoneRadar.Services
                 try
                 {
                     var user = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == email.ToUpper());
-                    //將會員的註冊時間改成現在時間，代表驗證成功
+                    //將會員的註冊時間和登入時間改成現在時間，代表驗證成功
                     user.SignUpDateTime = DateTime.Now;
+                    user.LastLogin = DateTime.Now;
                     _repository.Update<Member>(user);
                     _repository.SaveChanges();
                     memberResult.User = user;
@@ -184,13 +215,13 @@ namespace ZoneRadar.Services
             };
 
             //使用HtmlEncode將帳密做HTML編碼, 去除有害的字元
-            loginVM.Email = HttpUtility.HtmlEncode(loginVM.Email);
-            loginVM.Password = HttpUtility.HtmlEncode(loginVM.Password).MD5Hash();
+            loginVM.LoginEmail = HttpUtility.HtmlEncode(loginVM.LoginEmail);
+            loginVM.LoginPassword = HttpUtility.HtmlEncode(loginVM.LoginPassword).MD5Hash();
 
             //EF比對資料庫帳密
             //以Email及Password查詢比對Member資料表記錄，且註冊時間不得為預設1753年
             var members = _repository.GetAll<Member>().ToList();
-            var user = members.SingleOrDefault(x => x.Email.ToUpper() == loginVM.Email.ToUpper() && x.Password == loginVM.Password && x.SignUpDateTime.Year != 1753);
+            var user = members.FirstOrDefault(x => x.Email.ToUpper() == loginVM.LoginEmail.ToUpper() && x.Password == loginVM.LoginPassword && x.SignUpDateTime.Year != 1753);
 
             //修改上次登入時間
             if (user != null)
@@ -202,13 +233,13 @@ namespace ZoneRadar.Services
                     _repository.SaveChanges();
                     memberResult.User = user;
                     memberResult.IsSuccessful = true;
-                    memberResult.ShowMessage = $"{user.Name}您好，歡迎您加入ZONERadar！";
+                    memberResult.ShowMessage = $"{user.Name}您好，歡迎您登入ZONERadar！";
                     return memberResult;
                 }
                 catch (Exception ex)
                 {
                     //資料庫儲存失敗
-                    memberResult.ShowMessage = "註冊資料儲存過程中遇到錯誤，請檢查您的網路或嘗試重新註冊！";
+                    memberResult.ShowMessage = "讀取會員資料過程中遇到錯誤，請檢查您的網路或嘗試重新登入！";
                     memberResult.Exception = ex;
                     return memberResult;
                 }
