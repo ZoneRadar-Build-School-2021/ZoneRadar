@@ -23,17 +23,17 @@ namespace ZoneRadar.Models.ViewModels
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.EmailAddress)]
         [EmailAddress(ErrorMessage = "Email輸入格式錯誤")]
-        public string Email { get; set; }
+        public string RegisterEmail { get; set; }
 
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
-        public string Password { get; set; }
+        public string RegisterPassword { get; set; }
 
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
-        [Compare("Password", ErrorMessage = "密碼不一致！")]
+        [Compare("RegisterPassword", ErrorMessage = "密碼不一致！")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -45,12 +45,12 @@ namespace ZoneRadar.Models.ViewModels
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.EmailAddress)]
         [EmailAddress(ErrorMessage = "Email輸入格式錯誤")]
-        public string Email { get; set; }
+        public string LoginEmail { get; set; }
 
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
-        public string Password { get; set; }
+        public string LoginPassword { get; set; }
     }
 
     /// <summary>

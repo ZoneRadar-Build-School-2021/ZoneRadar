@@ -244,8 +244,6 @@
     <Compile Include="Models\ViewModels\UsercenterPendingViewModel.cs" />
     <Compile Include="Models\ViewModels\UsercenterProcessingViewModel.cs" />
     <Compile Include="Models\ViewModels\UserInfoViewModel.cs" />
-    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
-    <Compile Include="obj\Release\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ZONERadarRepository.cs" />
     <Compile Include="Services\MemberService.cs" />
@@ -264,6 +262,7 @@
     <Content Include="Assets\CSS\fontawesome\all.min.css" />
     <Content Include="Assets\CSS\fontawsome.min.css" />
     <Content Include="Assets\CSS\hostCenter\editplace.css" />
+    <Content Include="Assets\CSS\hostCenter\processing.css" />
     <Content Include="Assets\CSS\images\layers-2x.png" />
     <Content Include="Assets\CSS\images\layers.png" />
     <Content Include="Assets\CSS\images\marker-icon-2x.png" />
@@ -664,6 +663,7 @@
     <Content Include="Views\HostCenter\History.cshtml" />
     <Content Include="Views\HostCenter\AddSpace.cshtml" />
     <Content Include="Views\HostCenter\SpaceManage.cshtml" />
+    <Content Include="Views\HostCenter\Processing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

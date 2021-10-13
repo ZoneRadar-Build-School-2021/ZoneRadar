@@ -71,5 +71,28 @@ namespace ZoneRadar.Services
 
             return spaceReviewList;
         }
+        /// <summary>
+        /// 新增完成訂單的評價(Nick)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public Review CreatCompletedReview(UsercenterCompletedViewModel model)
+        {
+            var review = new Review
+            {
+                OrderID = model.OrderId,
+                ToHost = true,
+                Score = model.Score,
+                ReviewContent = model.ReviewContent,
+                ReviewDate = DateTime.Now,
+                Recommend = model.Recommend
+            };
+
+            _repository.Create<Review>(review);
+            _repository.SaveChanges();
+
+
+            return review;
+        }
     }
 }

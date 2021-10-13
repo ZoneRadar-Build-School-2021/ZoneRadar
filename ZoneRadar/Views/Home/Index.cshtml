@@ -24,10 +24,10 @@
     <h2 class="main-title position-absolute text-white fw-bolder">starts here</h2>
     <!-- 首頁搜尋列 -->
     <div class="homepage-search w-100">
-        <form action="~/Home/SearchSpace" method="post" class="row justify-content-center justify-content-md-start mx-0 py-3 py-md-0">
+        <form action="~/Searching/SearchingPage" method="post" class="row justify-content-center justify-content-md-start mx-0 py-3 py-md-0">
             <!--活動性質-->
             <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0 ms-md-5">
-                <select class="select-activity form-select form-select-lg" name="HomepageSearchVM.TypeDetailId" aria-label="choose-activity">
+                <select class="select-activity form-select form-select-lg" name="QueryVM.Type" aria-label="choose-activity">
                     <option selected class="d-none">活動性質</option>
                     @foreach (var item in typeOptions)
                     {
@@ -38,7 +38,7 @@
             </div>
             <!--地點-->
             <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0">
-                <select class="select-county form-select form-select-lg" name="HomepageSearchVM.CityId" aria-label="choose-county">
+                <select class="select-county form-select form-select-lg" name="QueryVM.City" aria-label="choose-county">
                     <option value="0" selected class="d-none">地點</option>
                     @foreach (var item in cityOptions)
                     {
@@ -49,7 +49,7 @@
             </div>
             <!--日期-->
             <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0">
-                <input class="select-date flatpickr flatpickr-input px-3 py-2 w-100" name="HomepageSearchVM.Date" type="text" placeholder="選擇時間" readonly="readonly">
+                <input class="select-date flatpickr flatpickr-input px-3 py-2 w-100" name="QueryVM.Date" type="text" placeholder="選擇時間" readonly="readonly">
                 @*@Html.EditorFor(model => model.HomepageSearchVM.Date, new { htmlAttributes = new { @class = "select-date flatpickr flatpickr-input px-3 py-2 w-100", type = "text", placeholder = "選擇時間", @readonly = "readonly" } })*@
             </div>
             <div class="col-11 col-md-2"><button class="btn text-white w-100 h-100" id="homepage-search-submit" type="submit">找場地</button></div>
