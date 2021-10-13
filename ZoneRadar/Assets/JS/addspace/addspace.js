@@ -332,7 +332,7 @@ NOprojection.addEventListener('click', function () {
 //       });
 
 ///營業時間 radio///
-var flag = 0;
+var flag = 1;
 //monday
 //營業
 let flexSwitchCheckDefault = document.querySelectorAll("#flexSwitchCheckDefault")[0];
@@ -345,7 +345,6 @@ let flexRadioDefault2 = document.querySelectorAll('#flexRadioDefault1')[1];
 let StateMon = document.querySelectorAll("#State")[0];
 //結束時間
 let StateMon2 = document.querySelectorAll("#State")[1];
-
 flexSwitchCheckDefault.addEventListener("click", function () {
     if (flag == 1) {
         flexRadioDefault1.disabled = false;
@@ -376,15 +375,15 @@ flexRadioDefault2.addEventListener('click', function () {
 
 
 //tuesday
-var flagtue;
+var flagtue=1;
 let flexSwitchCheckDefaultTue = document.querySelectorAll("#flexSwitchCheckDefault")[1];
 let TueAllDay = document.querySelectorAll('#flexRadioDefault1')[2];
 let Tuehour = document.querySelectorAll('#flexRadioDefault1')[3];
 flexSwitchCheckDefaultTue.addEventListener("click", function () {
-    if (flagtue == 0) {
+    if (flagtue == 1) {
         TueAllDay.disabled = false;
         Tuehour.disabled = false;
-        flagtue = 1;
+        flagtue = 0;
     } else {
         TueAllDay.disabled = true;
         Tuehour.disabled = true;
@@ -394,7 +393,7 @@ flexSwitchCheckDefaultTue.addEventListener("click", function () {
         let StateTue2 = document.querySelectorAll("#State")[3];
         StateTue.disabled = true;
         StateTue2.disabled = true;
-        flagtue = 0;
+        flagtue = 1;
     }
 });
 TueAllDay.addEventListener('click', function () {
