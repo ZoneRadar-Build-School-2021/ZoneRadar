@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using ZoneRadar.Services;
 using System.Web.Security;
 using ZoneRadar.Models.ViewModels;
-using ZoneRadar.Services;
 using Newtonsoft.Json;
 
 namespace ZoneRadar.Controllers

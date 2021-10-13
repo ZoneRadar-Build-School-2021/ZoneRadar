@@ -23,6 +23,7 @@ namespace ZoneRadar.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult SearchingPage()
         {
             //var model = new FilterViewModel
@@ -36,6 +37,12 @@ namespace ZoneRadar.Controllers
 
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult SearchingPage(QueryViewModel queryVM)
+        {
+            return View(queryVM);
         }
 
         public ActionResult NoResult()
