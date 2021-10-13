@@ -81,6 +81,7 @@
             // 設定關鍵字事件監聽
             setSearchBar(searchingBar);
             searchingBarBtn.addEventListener('click', keywordSearch);
+            window.addEventListener('keyup', keywordSearchEnter);
         }
 
         function setModalFilter() {
@@ -162,30 +163,34 @@
             });
 
             cityNode.addEventListener('change', function () {
+                // 解鎖鄉鎮區選單
+                districtNode.innerHTML = '';
+                districtNode.removeAttribute('disabled');
+
                 // 渲染畫面
                 selectedCity = this.querySelector(`option[value='${this.value}']`).innerText;
                 if (selectedCity === '選擇縣市') {
                     selectedCity = '';
+                    districtNode.setAttribute('disabled', '');
                 }
                 selectedDistrict = '';
                 requestForSpaces();
 
                 // 設定鄉鎮區選單
-                districtNode.innerHTML = '';
-                districtNode.removeAttribute('disabled');
-
                 let defaultOption = document.createElement('option');
                 defaultOption.innerText = '選擇鄉鎮區';
                 defaultOption.value = 'default';
                 defaultOption.setAttribute('selected', '');
                 districtNode.appendChild(defaultOption);
 
-                cityDistrictList[selectedCity].forEach((district, index) => {
-                    let option = document.createElement('option');
-                    option.value = index + 1;
-                    option.innerText = district;
-                    districtNode.appendChild(option);
-                })
+                if (cityDistrictList[selectedCity] !== undefined) {
+                    cityDistrictList[selectedCity].forEach((district, index) => {
+                        let option = document.createElement('option');
+                        option.value = index + 1;
+                        option.innerText = district;
+                        districtNode.appendChild(option);
+                    })
+                }
             })
 
             districtNode.addEventListener('change', function () {
@@ -348,6 +353,11 @@
             requestForSpaces();
         }
 
+        function keywordSearchEnter(e) {
+            if (e.key !== 'Enter') return;
+            requestForSpaces();
+        }
+
         function requestForSpaces() {
             setPlaceholder();
 
@@ -362,6 +372,21 @@
                 Amenities: amenities,
                 Area: area,
                 Keywords: keywords
+            }
+
+            if (filter.Keywords) {
+                filter = {
+                    City: '',
+                    District: '',
+                    Type: '',
+                    Date: '',
+                    HighPrice: '',
+                    LowPrice: '',
+                    Attendees: '',
+                    Amenities: '',
+                    Area: '',
+                    Keywords: keywords
+                }
             }
 
             console.log(filter)

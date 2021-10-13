@@ -422,7 +422,7 @@ namespace ZoneRadar.Services
             var unbookedSpaces = orders.Select(x => x.Order.Space).Distinct();
             var filterByDate = filteredBytDate.Union(unbookedSpaces);
 
-            var insersectSpaces = filteredBySpace.Intersect(filteredByType).Intersect(filteredByAmenity).Intersect(filterByDate);
+            var insersectSpaces = filteredBySpace.Intersect(filteredByType).Intersect(filteredByAmenity).Intersect(filterByDate).ToList();
 
             var result = insersectSpaces.Select(x => new SearchingPageViewModel
             {
