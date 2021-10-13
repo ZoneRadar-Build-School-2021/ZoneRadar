@@ -323,7 +323,7 @@
             </div>
         </div>
         <div class="booking col-sm-12 col-xl-4 ps-xl-5">
-            <form class="booking-card text-center sticky-xl-top py-4 px-3" action="">
+            <form class="booking-card text-center sticky-xl-top py-4 px-3" action="" method="post">
                 <h3 class="booking-card-title">NT$ <span class="venue-price">@Decimal.Round(@briefs.PricePerHour)</span></h3>
                 <p class="border-bottom pb-2">最少起訂時數<span class="min-time fs-5 px-1">@briefs.MinHour</span>小時</p>
                 <p class="border-bottom py-3 fs-5"><span class="discount-hour py-1">8</span>小時滿時優惠:<span class="ps-4 pe-1 discount">@discount</span>折</p>
@@ -351,7 +351,7 @@
     <form class="order-item mb-3 needs-validation" action="" novalidate>
         <h4 class="text-start mb-3 fs-5 fw-bolder">日期與時間:</h4>
         <div class="input-group mb-2">
-            <input type="text" placeholder="開始日期" class="start-date form-control rounded me-1" required>
+            <input type="text" placeholder="開始日期" class="start-date form-control rounded me-1" required name="">
             <input type="text" placeholder="參加人數" class="attendees form-control rounded ms-1" aria-label=".form-control attendees" required>
         </div>
         <div class="input-group mb-2">
