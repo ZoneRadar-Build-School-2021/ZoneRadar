@@ -78,7 +78,7 @@ namespace ZoneRadar.Services
             var types = _repository.GetAll<TypeDetail>().ToList();
             var typeOptions = types.Select(x => new SelectListItem
             {
-                Value = x.TypeDetailID.ToString(),
+                Value = x.Type,
                 Text = x.Type
             }).ToList();
 
@@ -94,7 +94,7 @@ namespace ZoneRadar.Services
             var cities = _repository.GetAll<City>().ToList();
             var cityOptions = cities.Select(x => new SelectListItem
             {
-                Value = x.CityID.ToString(),
+                Value = x.CityName,
                 Text = x.CityName
             }).ToList();
 
@@ -135,76 +135,76 @@ namespace ZoneRadar.Services
         /// 搜尋符合類型、縣市、時間條件的場地(首頁搜尋列)，並轉成搜尋場地頁面的ViewModel(Jenny)
         /// </summary>
         /// <param name="homepageSearchVM"></param>
-        public void SearchSpacesByTypeCityDate(HomepageSearchViewModel homepageSearchVM)
-        {
-            var orders = _repository.GetAll<Order>().ToList();
-            var targetSpaces = _repository.GetAll<Space>().ToList();
-            var operatings = _repository.GetAll<Operating>().ToList();
-            var orderDetails = _repository.GetAll<OrderDetail>().ToList();
-            var spaceTypes = _repository.GetAll<SpaceType>().ToList();
+        //public void SearchSpacesByTypeCityDate(HomepageSearchViewModel homepageSearchVM)
+        //{
+        //    var orders = _repository.GetAll<Order>().ToList();
+        //    var targetSpaces = _repository.GetAll<Space>().ToList();
+        //    var operatings = _repository.GetAll<Operating>().ToList();
+        //    var orderDetails = _repository.GetAll<OrderDetail>().ToList();
+        //    var spaceTypes = _repository.GetAll<SpaceType>().ToList();
 
-            //1. 找到符合「城市」條件的場地
-            if (homepageSearchVM.CityId != 0)
-            {
-                targetSpaces = targetSpaces.Where(x => x.City.CityID == homepageSearchVM.CityId).ToList();
-            }
+        //    //1. 找到符合「城市」條件的場地
+        //    if (homepageSearchVM.CityId != 0)
+        //    {
+        //        targetSpaces = targetSpaces.Where(x => x.City.CityID == homepageSearchVM.CityId).ToList();
+        //    }
 
-            //2. 找到符合「類型」條件的場地
-            if (homepageSearchVM.TypeDetailId != 0 && targetSpaces.Count() != 0)
-            {
-                //(此方法搜尋的順序不太對)
-                //targetSpaces = spaceTypes.Where(x => x.TypeID == homepageSearchVM.TypeDetailId).Select(x => targetSpaces.FirstOrDefault(y => y.SpaceID == x.SpaceID)).ToList();
+        //    //2. 找到符合「類型」條件的場地
+        //    if (homepageSearchVM.TypeDetailId != 0 && targetSpaces.Count() != 0)
+        //    {
+        //        //(此方法搜尋的順序不太對)
+        //        //targetSpaces = spaceTypes.Where(x => x.TypeID == homepageSearchVM.TypeDetailId).Select(x => targetSpaces.FirstOrDefault(y => y.SpaceID == x.SpaceID)).ToList();
 
-                foreach (var space in targetSpaces)
-                {
-                    var hasType = spaceTypes.Where(x => x.SpaceID == space.SpaceID).Select(x => x.TypeDetailID).Any(x => x == homepageSearchVM.TypeDetailId);
-                    if (!hasType)
-                    {
-                        targetSpaces.Remove(space);
-                    }
-                }
-            }
+        //        foreach (var space in targetSpaces)
+        //        {
+        //            var hasType = spaceTypes.Where(x => x.SpaceID == space.SpaceID).Select(x => x.TypeDetailID).Any(x => x == homepageSearchVM.TypeDetailId);
+        //            if (!hasType)
+        //            {
+        //                targetSpaces.Remove(space);
+        //            }
+        //        }
+        //    }
 
-            //3. 找到符合「時間」條件的場地
-            if (homepageSearchVM.Date != new DateTime() && targetSpaces.Count() != 0)
-            {
-                foreach (var space in targetSpaces)
-                {
-                    //找到該場地的未完成訂單
-                    var unfinishedOrders = orders.Where(x => x.SpaceID == space.SpaceID && x.OrderStatus.OrderStatusID == 2);
-                    //找到該場地的未完成訂單被訂走的日期
-                    var bookedDate = new List<DateTime>();
-                    foreach (var order in unfinishedOrders)
-                    {
-                        bookedDate.AddRange(orderDetails.Where(x => x.OrderID == order.OrderID).Select(x => x.StartDateTime.Date).ToList());
-                    }
-                    //找到該場地的營業星期
-                    var operatingWeekDay = operatings.Where(x => x.SpaceID == space.SpaceID).Select(x => x.OperatingDay).ToList();
-                    //將營業星期陣列中的7改成0(為了符合DayOfWeek列舉)
-                    if (operatingWeekDay.Remove(7))
-                    {
-                        operatingWeekDay.Add(0);
-                    }
-                    //判斷該天是否被訂走或未營業
-                    var isBooked = bookedDate.Contains(homepageSearchVM.Date.Date); //該天被訂走
-                    var isOperating = operatingWeekDay.Contains((int)homepageSearchVM.Date.DayOfWeek); //該天有營業
-                                                                                                                     //若被訂走或未營業，則將其從targetSpaces中移除
-                    if (isBooked && !isOperating)
-                    {
-                        targetSpaces.Remove(space);
-                    }
-                }
-            }
+        //    //3. 找到符合「時間」條件的場地
+        //    if (homepageSearchVM.Date != new DateTime() && targetSpaces.Count() != 0)
+        //    {
+        //        foreach (var space in targetSpaces)
+        //        {
+        //            //找到該場地的未完成訂單
+        //            var unfinishedOrders = orders.Where(x => x.SpaceID == space.SpaceID && x.OrderStatus.OrderStatusID == 2);
+        //            //找到該場地的未完成訂單被訂走的日期
+        //            var bookedDate = new List<DateTime>();
+        //            foreach (var order in unfinishedOrders)
+        //            {
+        //                bookedDate.AddRange(orderDetails.Where(x => x.OrderID == order.OrderID).Select(x => x.StartDateTime.Date).ToList());
+        //            }
+        //            //找到該場地的營業星期
+        //            var operatingWeekDay = operatings.Where(x => x.SpaceID == space.SpaceID).Select(x => x.OperatingDay).ToList();
+        //            //將營業星期陣列中的7改成0(為了符合DayOfWeek列舉)
+        //            if (operatingWeekDay.Remove(7))
+        //            {
+        //                operatingWeekDay.Add(0);
+        //            }
+        //            //判斷該天是否被訂走或未營業
+        //            var isBooked = bookedDate.Contains(homepageSearchVM.Date.Date); //該天被訂走
+        //            var isOperating = operatingWeekDay.Contains((int)homepageSearchVM.Date.DayOfWeek); //該天有營業
+        //                                                                                                             //若被訂走或未營業，則將其從targetSpaces中移除
+        //            if (isBooked && !isOperating)
+        //            {
+        //                targetSpaces.Remove(space);
+        //            }
+        //        }
+        //    }
 
-            //如果targetSpaces.Count()到這裡等於0，代表沒找到符合條件的場地，要顯示找不到頁面
+        //    //如果targetSpaces.Count()到這裡等於0，代表沒找到符合條件的場地，要顯示找不到頁面
 
-            //4. 將符合所有條件的場地轉成ViewModel
-            foreach (var space in targetSpaces)
-            {
+        //    //4. 將符合所有條件的場地轉成ViewModel
+        //    foreach (var space in targetSpaces)
+        //    {
 
-            }
-            throw new NotImplementedException();
-        }
+        //    }
+        //    throw new NotImplementedException();
+        //}
 
         /// <summary>
         /// 依照CityId搜尋場地，並轉成搜尋場地頁面的ViewModel(Jenny)

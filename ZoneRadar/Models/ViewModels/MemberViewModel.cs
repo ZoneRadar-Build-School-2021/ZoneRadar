@@ -73,7 +73,9 @@ namespace ZoneRadar.Models.ViewModels
         public string MemberPhoto { get; set; }
     }
 
-
+    /// <summary>
+    /// 重設密碼的ViewModel(Jenny)
+    /// </summary>
     public class ResetZONERadarPasswordViewModel
     {
         public string UserEmail { get; set; }

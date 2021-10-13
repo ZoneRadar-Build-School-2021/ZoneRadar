@@ -49,7 +49,8 @@ namespace ZoneRadar.Controllers
                 //寄送重設密碼信
                 _service.SentResetPasswordEmail(Server, Request, Url, email);
             }
-            return View();
+            //未刻頁面
+            return Content("請至信箱查看信件");
         }
 
         /// <summary>
@@ -61,15 +62,14 @@ namespace ZoneRadar.Controllers
         [HttpGet]
         public ActionResult ResetPassword(string email, string resetCode, string expired)
         {
-            //測試
-            return View();
-
-
             var expiredTime = new DateTime();
             DateTime.TryParse(expired, out expiredTime);
             //超過10分鐘無效
             if (DateTime.Now > expiredTime)
             {
+                TempData["Alert"] = true;
+                TempData["Message"] = "超過10分鐘有效時間，請重新嘗試！";
+                TempData["Icon"] = false;
                 return RedirectToAction("Index", "Home");
             }
             var user = _service.VerifyResetPasswordLink(email, resetCode);
@@ -80,7 +80,10 @@ namespace ZoneRadar.Controllers
             }
             else
             {
-                throw new NotImplementedException();
+                TempData["Alert"] = true;
+                TempData["Message"] = "找不到此會員，請重新嘗試！";
+                TempData["Icon"] = false;
+                return RedirectToAction("Index", "Home");
             }
         }
 
@@ -99,6 +102,14 @@ namespace ZoneRadar.Controllers
                 TempData["Message"] = "輸入格式不正確或密碼不一致，請重新輸入！";
                 TempData["Icon"] = false;
                 return View();
+            }
+            //如果已重設密碼、登入了，又按上一頁
+            if (User.Identity.IsAuthenticated)
+            {
+                TempData["Alert"] = true;
+                TempData["Message"] = "現為登入狀態，無法以此方式重設密碼！";
+                TempData["Icon"] = false;
+                return RedirectToAction("Index", "Home");
             }
 
             //修改會員密碼
@@ -119,14 +130,12 @@ namespace ZoneRadar.Controllers
             }
             else
             {
-                //密碼修改失敗，回去首頁，跳出錯誤訊息(沒寫好)
+                //密碼修改失敗，回去首頁，跳出錯誤訊息
                 TempData["Alert"] = true;
                 TempData["Message"] = memberResult.ShowMessage;
                 TempData["Icon"] = memberResult.IsSuccessful;
                 return RedirectToAction("Index", "Home");
-            }
-            
-            
+            }          
         }
         public ActionResult EditProfile()
         {

@@ -177,7 +177,7 @@
                     </a>
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email</div>
                     @Html.Partial("_LoginModalPartial", new LoginZONERadarViewModel())
-                    <a href="#" id="forget-password" class="text-decoration-none d-inline-block mb-4">忘記密碼</a>
+                    <a href="~/MemberCenter/ForgetPassword" id="forget-password" class="text-decoration-none d-inline-block mb-4">忘記密碼</a>
                     <p class="mb-5">還沒有ZONERadar帳號？<a href="#" id="a-register-modal" data-bs-toggle="modal" data-bs-target="#register-modal" class="text-decoration-none">立即註冊</a></p>
                 </div>
             </div>
@@ -205,7 +205,7 @@
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email註冊</div>
                     @Html.Partial("_RegisterModalPartial", new RegisterZONERadarViewModel())
                     <p class="mb-2">當您註冊時，代表您已同意ZONERadar的服務條款及隱私權政策</p>
-                    <a href="~/MemberCenter/ResentEmail" id="forget-password" class="text-decoration-none d-inline-block mb-4">重發驗證信</a>
+                    <a href="~/MemberCenter/ResentVerificationEmail" id="forget-password" class="text-decoration-none d-inline-block mb-4">重發驗證信</a>
                     <p class="mb-5">已有ZONERadar帳號？<a href="#" id="a-login-modal" data-bs-toggle="modal" data-bs-target="#login-modal" class="text-decoration-none">登入</a></p>
                 </div>
             </div>

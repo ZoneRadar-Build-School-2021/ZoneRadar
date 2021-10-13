@@ -462,8 +462,9 @@ namespace ZoneRadar.Services
         public void SentResetPasswordEmail(HttpServerUtilityBase server, HttpRequestBase request, UrlHelper urlHelper, string userEmail)
         {
             userEmail = HttpUtility.HtmlEncode(userEmail);
+            var afterTenMinutes = DateTime.Now.AddMinutes(10).ToString();
             var resetCode = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == userEmail.ToUpper()).Password;
-            var route = new RouteValueDictionary { { "email", userEmail }, { "resetCode", resetCode } };
+            var route = new RouteValueDictionary { { "email", userEmail }, { "resetCode", resetCode }, { "expired", afterTenMinutes } };
             //製作驗證信的連結
             var resetLink = urlHelper.Action("ResetPassword", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
 
@@ -562,8 +563,8 @@ namespace ZoneRadar.Services
             }
             else
             {
-                //沒這個會員，或是密碼輸入錯誤
-                memberResult.ShowMessage = "查無此會員！";
+                //沒這個會員
+                memberResult.ShowMessage = "找不到此會員！";
                 return memberResult;
             }
             _repository.Update<Member>(user);

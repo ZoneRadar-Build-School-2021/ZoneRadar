@@ -21,6 +21,8 @@ window.addEventListener("load", () => {
     let date_picker = flatpickr(flatpickr_date,
         {
             minDate: "today",
+            altInput: true,
+            altFormat: 'Y/m/d',
             dateFormat: "Y-m-d",
             disableMobile: "true",
             locale: "zh_tw",

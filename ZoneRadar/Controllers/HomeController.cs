@@ -62,8 +62,6 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
-
-        [Authorize]
         public ActionResult FAQ()
         {
             return View();
@@ -79,12 +77,11 @@ namespace ZoneRadar.Controllers
         /// <param name="homepageSearchVM"></param>
         /// <returns></returns>
         [HttpPost]
-        public void SearchSpace(HomepageSearchViewModel homepageSearchVM)
+        public void SearchSpace(QueryViewModel queryVM)
         {
             FormsIdentity id = (FormsIdentity)User.Identity;
             string memberId = User.Identity.Name;
 
-            _spaceService.SearchSpacesByTypeCityDate(homepageSearchVM);
             throw new NotImplementedException();
         }
     }
