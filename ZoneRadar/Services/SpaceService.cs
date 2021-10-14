@@ -188,8 +188,8 @@ namespace ZoneRadar.Services
                 Latitude = targetSpace.Latitude,
                 TrafficInfo = targetSpace.Traffic,
                 OperatingDayList = convertedOperatingDayList,
-                StartTimeList = originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
-                EndTimeList = originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
+                StartTimeList = originOperatingList.Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
+                EndTimeList = originOperatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
                 CancellationTitle = targetSpace.Cancellation.CancellationTitle,
                 CancellationInfo = targetSpace.Cancellation.CancellationDetail,
                 HoursForDiscount = hoursForDiscount,
@@ -1143,5 +1143,48 @@ namespace ZoneRadar.Services
         //{
         //    var result
         //};
+
+        /// <summary>
+        /// 找出特定場地的Booking Card資料(Steve)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public BookingCardViewModel GetTargetBookingCard(int? id)
+        {
+            var weekDayConverter = new Dictionary<string, int>
+            {
+                { "星期一", 1 },
+                { "星期二", 2 },
+                { "星期三", 3 },
+                { "星期四", 4 },
+                { "星期五", 5 },
+                { "星期六", 6 },
+                { "星期日", 7 }
+            };
+            var originOperatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).ToList();
+            var convertedOperatingDayList = new List<string>();
+            foreach (var day in originOperatingList.Where(x => x.SpaceID == id).Select(x => x.OperatingDay).ToList())
+            {
+                convertedOperatingDayList.Add(weekDayConverter.FirstOrDefault(x => x.Value == day).Key);
+            }
+
+            //var startTimeList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).Select(x => x.StartTime.ToString(@"hh\:mm")).ToList();
+            //var endTimeList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).Select(x => x.EndTime.ToString(@"hh\:mm")).ToList();
+            var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Hour;
+            var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Discount;
+            var minHour = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id).MinHours;
+
+            var result = new BookingCardViewModel
+            {
+                OperatingDayList = convertedOperatingDayList,
+                StartTimeList = originOperatingList.Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
+                EndTimeList = originOperatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
+                HoursForDiscount = hoursForDiscount,
+                Discount = Decimal.Round((1 - discount), 2),
+                MinHour = minHour,
+            };
+
+            return result;
+        }
     }
 }

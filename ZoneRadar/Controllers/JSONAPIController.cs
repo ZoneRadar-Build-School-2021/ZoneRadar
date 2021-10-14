@@ -69,8 +69,12 @@ namespace ZoneRadar.Controllers
         [AcceptVerbs("GET")]
         public IHttpActionResult GetBookingCardData(int? id)
         {
-            var space = _repository.GetAll<Space>().Where(x => x.SpaceID == id).Select(x => x.SpaceName).ToList();
-           return Ok(space);
+            if (!id.HasValue)
+            {
+                return BadRequest();
+            }
+            var result = _spaceService.GetTargetBookingCard(id);
+            return Ok(result);
         }
     }
 }
