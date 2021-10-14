@@ -272,11 +272,13 @@ namespace ZoneRadar.Services
                     dayOfWeek = 7;
                 }
                 operatings = operatings.Where(x => x.OperatingDay == dayOfWeek);
-                orders = orders.Where(x => DateTime.Compare(x.StartDateTime, startDate) < 0 || DateTime.Compare(x.EndDateTime, startDate) > 0);
+                var a = operatings.ToList();
+                orders = orders.Where(x => DateTime.Compare(x.StartDateTime, startDate) < 0 && DateTime.Compare(x.EndDateTime, startDate) > 0 && (x.Order.OrderStatusID == 2 || x.Order.OrderStatusID == 3));
+                var b = orders.ToList();
 
                 var filteredBytDate = operatings.Select(x => x.Space).Distinct();
                 var unBookedSpaces = orders.Select(x => x.Order.Space).Distinct();
-                var filterByDate = filteredBytDate.Union(unBookedSpaces);
+                var filterByDate = filteredBytDate.Except(unBookedSpaces);
 
                 spaces = spaces.Intersect(filterByDate);
             }

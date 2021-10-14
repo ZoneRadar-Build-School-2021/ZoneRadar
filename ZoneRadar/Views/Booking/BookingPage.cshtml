@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "BookingPage";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var reviews = Model.Reviews;
+    var reviews = Model.Reviews.OrderBy(x => x.ReviewDate);
     var briefs = Model.SpaceBreifInfo;
     var details = Model.SpaceDetailInfo;
     float total = 0;
