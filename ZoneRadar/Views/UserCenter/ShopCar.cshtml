@@ -54,7 +54,7 @@
                                                 </div>
 
                                                 <form action="~/UserCenter/EditShopCarDetail" method="post">
-                                                    <!-- Modal -->
+                                                    <!-- ModalA -->
                                                     <input type="hidden" value="@Html.DisplayFor(m => rentDetail.OrderDetailId)" name="OrderDetailId" />
                                                     <input type="hidden" value="@Html.DisplayFor(m => rentDetail.OrderId)" name="OrderId" />
                                                     <div class="modal fade" id="A-@Html.DisplayFor(m => rentDetail.OrderDetailId)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
@@ -85,9 +85,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                 </form>
-
-
                                             }
                                         </div>
                                     </div>
@@ -109,9 +108,24 @@
                             </span>
                         </p>
                         <div class="col-12 text-end mt-2">
-                            @Html.ActionLink("取消預購單", "DeleteShopCarOrder", new { id = item.OrderID }, new { @class = "btn btn_close" })
-                            @*<button type="button" class="btn btn_close" data-bs-dismiss="modal">取消預購單</button>*@
+                            <button type="button" class="btn btn_close" data-bs-toggle="modal" data-bs-target="#B-@Html.DisplayFor( m=> item.OrderID)">取消預購單</button>
                             <button type="button" class="btn btn_sendout">前往付款</button>
+                        </div>
+                    </div>
+                    <!-- ModalB -->
+                    <div class="modal fade" id="B-@Html.DisplayFor(m =>item.OrderID)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered ">
+                            <div class="modal-content">
+                                <div class="model-header text-center">
+                                    <div class="myshockicon"><i class="fas fa-exclamation-circle mt-2"></i></div>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <p class="fs-2">是否確定取消？</p>
+                                </div>
+                                <div class="modal-footer justify-content-center">
+                                    @Html.ActionLink("取消預購單", "DeleteShopCarOrder", new { id = item.OrderID }, new { @class = "btn btn_close" })
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
