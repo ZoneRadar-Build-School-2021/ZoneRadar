@@ -336,6 +336,7 @@
     <Content Include="Assets\IMG\Usercenter\star.png" />
     <Content Include="Assets\IMG\ZONERadar.png" />
     <Content Include="Assets\JS\addspace\addspace.js" />
+    <Content Include="Assets\JS\addspace\addSpaceOperating.js" />
     <Content Include="Assets\JS\addspace\checkPhoneNumber.js" />
     <Content Include="Assets\JS\addspace\ckeditor.js" />
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\adapters\jquery.js" />
