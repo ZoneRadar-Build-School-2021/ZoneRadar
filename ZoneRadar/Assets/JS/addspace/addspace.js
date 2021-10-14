@@ -1,27 +1,27 @@
         //停車場的radio 是
-        let Yes=document.querySelector("#Yes");
-        var parkingPart=document.querySelector("#parkingPart");
-        Yes.addEventListener("click",function(){
+        //let Yes=document.querySelector("#Yes");
+        //var parkingPart=document.querySelector("#parkingPart");
+        //Yes.addEventListener("click",function(){
            
-           parkingPart.classList.remove('d-none');
-        });
+        //   parkingPart.classList.remove('d-none');
+        //});
         //停車場的radio 否
-        let No=document.querySelector('#No');
-        No.addEventListener('click',function(){
-           parkingPart.classList.add('d-none');
-        })
+        //let No=document.querySelector('#No');
+        //No.addEventListener('click',function(){
+        //   parkingPart.classList.add('d-none');
+        //})
         //攝影機 是
-        let Yesprojection=document.querySelector("#Yesprojection");
-        var projectionPart=document.querySelector('#projectionPart');
-        Yesprojection.addEventListener('click',function(){
-            projectionPart.classList.remove('d-none');
-        });
+        //let Yesprojection=document.querySelector("#Yesprojection");
+        //var projectionPart=document.querySelector('#projectionPart');
+        //Yesprojection.addEventListener('click',function(){
+        //    projectionPart.classList.remove('d-none');
+        //});
 
         //攝影機 否
-        let NOprojection=document.querySelector("#Noprojection");
-        NOprojection.addEventListener('click',function(){
-            projectionPart.classList.add('d-none');
-        });
+        //let NOprojection=document.querySelector("#Noprojection");
+        //NOprojection.addEventListener('click',function(){
+        //    projectionPart.classList.add('d-none');
+        //});
        
         var flag=1;
         //monday
