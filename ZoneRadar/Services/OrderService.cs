@@ -75,11 +75,11 @@ namespace ZoneRadar.Services
                 string renttimedayorhour;
                 if (renttimetonow / 24 <= 24)
                 {
-                    renttimedayorhour = $"{(int)renttimetonow} 小時";
+                    renttimedayorhour = $"{(int)renttimetonow / 24} 天";
                 }
                 else
                 {
-                    renttimedayorhour = $"{(int)renttimetonow / 24} 天";
+                    renttimedayorhour = $"{(int)renttimetonow} 小時";
                 }
                 //退錢判斷
                 if (cancelid == 1)
