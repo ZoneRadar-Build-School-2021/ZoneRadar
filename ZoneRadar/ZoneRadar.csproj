@@ -332,6 +332,7 @@
     <Content Include="Assets\IMG\member_card\Nicky K..jpg" />
     <Content Include="Assets\IMG\member_card\Sandro K..jpg" />
     <Content Include="Assets\IMG\static\fistbump-over-desk.jpg" />
+    <Content Include="Assets\IMG\static\sent-email.png" />
     <Content Include="Assets\IMG\Usercenter\chngstar.png" />
     <Content Include="Assets\IMG\Usercenter\star.png" />
     <Content Include="Assets\IMG\ZONERadar.png" />
@@ -554,6 +555,7 @@
     <Content Include="Views\MemberCenter\ForgetPassword.cshtml" />
     <Content Include="Views\MemberCenter\ResentVerificationEmail.cshtml" />
     <Content Include="Views\MemberCenter\ResetPassword.cshtml" />
+    <Content Include="Views\MemberCenter\HadSentResetPasswordEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

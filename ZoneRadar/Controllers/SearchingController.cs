@@ -37,5 +37,27 @@ namespace ZoneRadar.Controllers
             return View(queryVM);
         }
 
+        /// <summary>
+        /// GET: Type/聚餐(Jenny)
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public ActionResult SearchByType(string type)
+        {
+            var queryVM = new QueryViewModel { Type = type };
+            return View("SearchingPage", queryVM);
+        }
+
+        /// <summary>
+        /// GET: City/台北市(Jenny)
+        /// </summary>
+        /// <param name="city"></param>
+        /// <returns></returns>
+        public ActionResult SearchByCity(string city)
+        {
+            var queryVM = new QueryViewModel { City = city };
+            return View("SearchingPage", queryVM);
+        }
+
     }
 }
