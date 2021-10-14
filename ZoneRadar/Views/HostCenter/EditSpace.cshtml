@@ -323,14 +323,13 @@
                         </div>
                         @foreach (var item in compareOpenDay)
                         {
-                            //if (spacetype.Select(x => x.Type).Contains(type.Type))
                             if (spaceOpenDay.Select(x => x.OperatingDay).Contains(item.OperatingDay))
                             {
                                 <div class="row mt-4 border-bottom">
                                     <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                        <p class="mt-xl-3 ">@item.weekDay</p>
+                                        <p class="mt-xl-3 fs18 ">@item.weekDay</p>
                                     </div>
-                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="col-6 col-xl-1  mt-auto mb-auto">
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" checked type="checkbox" name="open" value="1"
                                                    id="flexSwitchCheckDefault">
@@ -346,7 +345,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" disabled name="open"
                                                    id="flexRadioDefault1">
@@ -357,7 +356,7 @@
                                     </div>
 
                                     <div class="col-6 col-xl-2 mb-4">
-                                        <label for="State" class="form-label  "></label>
+                                        <label for="State" class="form-label fs16 mt-xl-1 "></label>
                                         <select id="State" class="form-select MonselectL "
                                                 aria-label="Default select example" disabled>
                                             <option selected>@spaceOpenDay.Where(x => x.weekDay == item.weekDay).Select(x => x.StartTime).FirstOrDefault()</option>
@@ -372,7 +371,7 @@
                                         to
                                     </P>
                                     <div class="col-6  col-xl-2 mb-4">
-                                        <label for="State" class="form-label  "></label>
+                                        <label for="State" class="form-label fs16 mt-xl-1 "></label>
                                         <select id="State" class="form-select MonselectR "
                                                 aria-label="Default select example" disabled>
                                             <option selected>@spaceOpenDay.Where(x => x.weekDay == item.weekDay).Select(x => x.EndTime).FirstOrDefault()</option>
@@ -479,7 +478,7 @@
                                     </div>
                                 </div>
                                 <div class="col-10 col-lg-6 mt-3">
-                                    <p>折扣數(%off)</p>
+                                    <p>折扣數</p>
                                     <div class="form-floating">
                                         <input class="form-control" placeholder="多少折扣" value="@item.Discount" id="Discount">
                                         <label for="Discount">享多少折扣</label>

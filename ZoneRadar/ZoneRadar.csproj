@@ -212,6 +212,7 @@
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\District.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ViewModels\AddSpaceViewModel.cs" />
     <Compile Include="Models\ViewModels\BookingPageViewModel.cs" />
     <Compile Include="Models\ViewModels\ShopCarViewModel.cs" />
     <Compile Include="Models\ViewModels\SomeOnesSpaceViewModelcs.cs" />
@@ -244,8 +245,6 @@
     <Compile Include="Models\ViewModels\UsercenterPendingViewModel.cs" />
     <Compile Include="Models\ViewModels\UsercenterProcessingViewModel.cs" />
     <Compile Include="Models\ViewModels\UserInfoViewModel.cs" />
-    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
-    <Compile Include="obj\Release\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ZONERadarRepository.cs" />
     <Compile Include="Services\MemberService.cs" />
@@ -333,7 +332,7 @@
     <Content Include="Assets\IMG\Usercenter\star.png" />
     <Content Include="Assets\IMG\ZONERadar.png" />
     <Content Include="Assets\JS\addspace\addspace.js" />
-    <Content Include="Assets\JS\addspace\addSpaceOpen.js" />
+    <Content Include="Assets\JS\addspace\addSpaceOperating.js" />
     <Content Include="Assets\JS\addspace\checkPhoneNumber.js" />
     <Content Include="Assets\JS\addspace\ckeditor.js" />
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\adapters\jquery.js" />

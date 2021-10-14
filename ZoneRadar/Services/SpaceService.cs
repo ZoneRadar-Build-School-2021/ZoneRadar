@@ -1200,8 +1200,19 @@ namespace ZoneRadar.Services
             result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 6, weekDay = "星期六" });
             result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 7, weekDay = "星期日" });
 
+            /// <summary>
+            /// 增加場地 增加地址的datamodel轉viewmodel (Amber) 
+            /// </summary>
+            
+        
+
+
             return result;
 
         }
+        //public AddSpaceViewModel CreateSpace()
+        //{
+        //    var result
+        //};
     }
 }

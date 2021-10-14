@@ -45,15 +45,16 @@ namespace ZoneRadar.Controllers
                 CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
 
                 Operating = _spaceService.Operating(),
-
             };
 
             return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddSpace(SpaceViewModel spaceVM)
+        public ActionResult AddSpace(AddSpaceViewModel addspaceVM)
         {
+
+
             var model = new SpaceViewModel
             {
 
