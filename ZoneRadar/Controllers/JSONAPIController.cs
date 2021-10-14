@@ -64,5 +64,12 @@ namespace ZoneRadar.Controllers
 
             return Ok(queriedSpaces);
         }
+
+        [Route("GetBookingCardData")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult GetBookingCardData()
+        {
+            
+        }
     }
 }
