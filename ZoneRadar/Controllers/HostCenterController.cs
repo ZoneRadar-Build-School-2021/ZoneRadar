@@ -11,11 +11,13 @@ namespace ZoneRadar.Controllers
     public class HostCenterController : Controller
     {
         private readonly SpaceService _spaceService;
+        private readonly OrderService _orderService;
 
         // GET: HostCenter
         public HostCenterController()
         {
             _spaceService = new SpaceService();
+            _orderService = new OrderService();
         }
 
         // GET: HostCenter
@@ -127,7 +129,9 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         public ActionResult Processing()
         {
-            return View();
+            var userid = int.Parse(User.Identity.Name);
+            var result = _orderService.GetHostCenter(userid);
+            return View(result);
         }
 
         /// <summary>

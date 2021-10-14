@@ -34,6 +34,20 @@ namespace ZoneRadar
                 defaults: new { controller = "MemberCenter", action = "Collection", id = UrlParameter.Optional }
             );
 
+            //以Type搜尋場地
+            routes.MapRoute(
+                name: "SearchByType",
+                url: "Type/{type}",
+                defaults: new { controller = "Searching", action = "SearchByType", type = UrlParameter.Optional }
+            );
+
+            //以City搜尋場地
+            routes.MapRoute(
+                name: "SearchByCity",
+                url: "City/{city}",
+                defaults: new { controller = "Searching", action = "SearchByCity", city = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Home",
                 url: "",
