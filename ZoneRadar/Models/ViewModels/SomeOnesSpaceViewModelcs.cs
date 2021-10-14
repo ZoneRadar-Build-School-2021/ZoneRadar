@@ -184,6 +184,7 @@ namespace ZoneRadar.Models.ViewModels
     public class SomeOnesShooting
     {
         public string Shooting { get; set; }
+        public string Displaynone{ get; set; }
     }
     public class SomeOnesCleanRule
     {

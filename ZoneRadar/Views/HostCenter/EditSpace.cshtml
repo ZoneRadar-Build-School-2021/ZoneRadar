@@ -323,12 +323,11 @@
                         </div>
                         @foreach (var item in compareOpenDay)
                         {
-                            //if (spacetype.Select(x => x.Type).Contains(type.Type))
                             if (spaceOpenDay.Select(x => x.OperatingDay).Contains(item.OperatingDay))
                             {
                                 <div class="row mt-4 border-bottom">
-                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                        <p class="mt-xl-3 ">@item.weekDay</p>
+                                    <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                        <p class="mt-xl-3 fs16 ">@item.weekDay</p>
                                     </div>
                                     <div class="col-6 col-xl-2  mt-auto mb-auto">
                                         <div class="form-check form-switch">
@@ -346,7 +345,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" disabled name="open"
                                                    id="flexRadioDefault1">
@@ -357,8 +356,8 @@
                                     </div>
 
                                     <div class="col-6 col-xl-2 mb-4">
-                                        <label for="State" class="form-label  "></label>
-                                        <select id="State" class="form-select MonselectL "
+                                        <label for="State" class="form-label fs16 mt-xl-1 "></label>
+                                        <select id="State" class="form-select fs16 MonselectL "
                                                 aria-label="Default select example" disabled>
                                             <option selected>@spaceOpenDay.Where(x => x.weekDay == item.weekDay).Select(x => x.StartTime).FirstOrDefault()</option>
 
@@ -368,12 +367,12 @@
                                             }
                                         </select>
                                     </div>
-                                    <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">
+                                    <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
                                         to
                                     </P>
                                     <div class="col-6  col-xl-2 mb-4">
-                                        <label for="State" class="form-label  "></label>
-                                        <select id="State" class="form-select MonselectR "
+                                        <label for="State" class="form-label  mt-xl-1 "></label>
+                                        <select id="State" class="form-select fs16 MonselectR "
                                                 aria-label="Default select example" disabled>
                                             <option selected>@spaceOpenDay.Where(x => x.weekDay == item.weekDay).Select(x => x.EndTime).FirstOrDefault()</option>
 
@@ -389,7 +388,7 @@
                             {
                                 <div class="row mt-4 border-bottom">
                                     <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                        <p class="mt-xl-3 ">@item.weekDay</p>
+                                        <p class="mt-xl-3 fs16 ">@item.weekDay</p>
                                     </div>
                                     <div class="col-6 col-xl-2  mt-auto mb-auto">
                                         <div class="form-check form-switch">
@@ -407,7 +406,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="open"
                                                    id="flexRadioDefault1" disabled>
@@ -418,7 +417,7 @@
                                     </div>
                                     <div class="col-6 col-xl-2 mb-4">
                                         <label for="State" class="form-label  "></label>
-                                        <select id="State" class="form-select MonselectL "
+                                        <select id="State" class="form-select fs16 MonselectL "
                                                 aria-label="Default select example" disabled>
                                             <option selected>@item.StartTime</option>
 
@@ -428,12 +427,12 @@
                                             }
                                         </select>
                                     </div>
-                                    <P class="col-2 mt-auto d-none col-xl-1 d-xl-block  mb-auto text-center text-start">
+                                    <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
                                         to
                                     </P>
                                     <div class="col-6 d-xl-block col-xl-2 mb-4">
                                         <label for="State" class="form-label  "></label>
-                                        <select id="State" class="form-select MonselectR "
+                                        <select id="State" class="form-select fs16 MonselectR "
                                                 aria-label="Default select example" disabled>
                                             <option selected>@item.EndTime</option>
 
@@ -479,7 +478,7 @@
                                     </div>
                                 </div>
                                 <div class="col-10 col-lg-6 mt-3">
-                                    <p>折扣數(%off)</p>
+                                    <p>折扣數</p>
                                     <div class="form-floating">
                                         <input class="form-control" placeholder="多少折扣" value="@item.Discount" id="Discount">
                                         <label for="Discount">享多少折扣</label>
@@ -684,33 +683,23 @@
 
                             <div class="row mb-3">
                                 <div class="col col-12">
-                                    <h2 class="fs-4 mt-3">描述停車選項</h2>
+                                    <h2 class="fs-4">關於停車資訊</h2>
                                 </div>
                                 <div class="col-7 col-lg-7 mb-auto mt-auto">
                                     <p>您的場地內或附近是否有停車場？</p>
                                 </div>
-                                <div class="col-5 col-lg-5 d-flex mt-auto mb-auto justify-content-end">
-                                    <div class=" mt-auto mb-auto  ">
-                                        <div class="radioGroup Yes">
-                                            <input id="Yes" type="radio" value="Yes" name="switch">
-                                            <label for="Yes">是</label>
-                                        </div>
-                                    </div>
-                                    <div class="radioGroup No">
-                                        <input id="No" type="radio" value="Yes" name="switch">
-                                        <label for="No" class="Nolable">否</label>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" checked type="checkbox" name="open" value="1"
+                                               id="flexSwitchCheckDefaultYes">
+                                        <label class="form-check-label" for="flexSwitchCheckDefaultYes">是</label>
                                     </div>
                                 </div>
-                                <div class="col col-12 mt-3">
-                                    <p>
-                                        選擇所有符合的選項
-                                    </p>
-                                </div>
+
                                 <!-- 勾有停車場才會顯示 -->
-                                <div id="parkingPart" class="row d-none">
-                                    <div class="col col-12 parking">
-                                        <p>寫敘述停車相關資訊</p>
-                                        <p class="fs16">無需敘述私人訊息，這將會公開顯示</p>
+                                <div id="parkingPart" class="row ">
+                                    <div class="col-12">
+                                        <p>描述關於您的場地的停車資訊，如何使用細節跟注意事項</p>
                                     </div>
                                     <div class="col col-12 parkingpart pb-5">
                                         <label for="exampleFormControlTextarea1" class="form-label"></label>
@@ -727,19 +716,15 @@
                                 <div class="col col-7">
                                     <p>是否有投影設備</p>
                                 </div>
-                                <div class="col col-5 d-flex mt-auto mb-auto justify-content-end">
-                                    <div class=" mt-auto mb-auto  ">
-                                        <div class="radioGroup Yes">
-                                            <input id="Yesprojection" type="radio" value="Yes" name="switch">
-                                            <label for="Yesprojection">是</label>
-                                        </div>
-                                    </div>
-                                    <div class="radioGroup No">
-                                        <input id="Noprojection" type="radio" value="No" name="switch">
-                                        <label for="Noprojection" class="Nolable">否</label>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" checked type="checkbox" name="open" value="1"
+                                               id="Yesprojection">
+                                        <label class="form-check-label" for="Yesprojection">是</label>
                                     </div>
                                 </div>
-                                <div id="projectionPart" class="row  d-none">
+
+                                <div id="projectionPart" class="row @shooting[0].Displaynone">
                                     <div class="col-12">
                                         <p>描述您的場地所提供的任何錄影設備，如何使用細節跟注意事項</p>
                                     </div>
@@ -1090,8 +1075,8 @@
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script src="~/Assets/JS/addspace/ckeditor.js"></script>
     @*<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>*@
-    <script src="~/Assets/JS/addspace/addspace.js"></script>
-    @*<script src="~/Assets/JS/addspace/CityandDistrictandZipcodeJavaScript.js"></script>*@
+    <script src="~/Assets/JS/addspace/editSpace.js"></script>
+    <script src="~/Assets/JS/addspace/CityandDistrictandZipcodeJavaScript.js"></script>
 }
 
 

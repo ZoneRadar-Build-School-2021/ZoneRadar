@@ -45,17 +45,19 @@ namespace ZoneRadar.Controllers
                 CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
                 CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
                 CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
+                //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
 
                 Operating = _spaceService.Operating(),
-
             };
 
             return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddSpace(SpaceViewModel spaceVM)
+        public ActionResult AddSpace(AddSpaceViewModel addspaceVM)
         {
+
+
             var model = new SpaceViewModel
             {
 
@@ -122,7 +124,7 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
-        /// 場地主訂單 - 處理中(Steve)
+        /// 場地主訂單 - 處理中(Jack)
         /// </summary>
         /// <returns></returns>
         public ActionResult Processing()
@@ -133,7 +135,7 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
-        /// 場地主訂單 - 歷史訂單(Steve) --- 還沒做 @Nick
+        /// 場地主訂單 - 歷史訂單(Steve) 
         /// </summary>
         /// <returns></returns>
         public ActionResult History()
