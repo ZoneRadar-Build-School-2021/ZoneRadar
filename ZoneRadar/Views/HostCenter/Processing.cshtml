@@ -19,7 +19,7 @@
                     <p class="order-id">訂單編號:<span class="order-number ms-4">@m.OrderId</span></p>
                 </div>
                 <div class="col-sm-12 col-lg-6 text-lg-end mb-2 mb-lg-4 fs-5">
-                    <p class="order-status">距離全額退款期限還有:<span class="full-refund mx-2 fs-4 fw-bolder">10</span>天</p>
+                    
                 </div>
                 <div class="col-sm-12 col-lg-4">
                     <div class="venue-pic mt-2 mt-lg-0" style="background-image: url(@Html.DisplayFor(x=>m.SpacePhoto));"></div>
@@ -60,7 +60,7 @@
                     </ul>
                 </div>
                 <div class="col-12">
-                    <p class="cost text-end">訂單總額:<span class="nt ms-4 fs-2 fw-bolder">NT$<span class="total-cost fs-2 fw-bolder">2,000</span></span></p>
+                    <p class="cost text-end">訂單總額:<span class="nt ms-4 fs-2 fw-bolder"><span class="total-cost fs-2 fw-bolder">@m.Total.ToString("C0")</span></span></p>
                 </div>
                 }
             </div>

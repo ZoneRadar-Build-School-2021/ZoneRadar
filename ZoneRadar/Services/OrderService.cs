@@ -333,7 +333,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 刪除已付款的訂單(Jack)
+        /// 取得訂單使用中資訊 (Jack)
         /// </summary>
         /// <returns></returns>
         public List<ProcessingViewModel> GetHostCenter(int id) 
@@ -347,26 +347,42 @@ namespace ZoneRadar.Services
             
             foreach (var order in Orders) 
             { 
-                result.Add(new ProcessingViewModel 
+                foreach(var o in order.OrderDetail) 
+                { 
+                    resultdetail.orderdetailesforprcess.Add(new OrderDetailesforPrcess {
+                        StratTime = o.StartDateTime,
+                        EndTime =  o.EndDateTime,
+                        People = o.Participants,
+                        SinglePrice = (int)SingleOrderDetailPrice(o.EndDateTime,o.StartDateTime,o.Order.Space.PricePerHour,o.Order.Space.SpaceDiscount.FirstOrDefault().Hour, o.Order.Space.SpaceDiscount.FirstOrDefault().Discount)
+                    });
+                }
+                result.Add(new ProcessingViewModel
                 {
-                    OrderId = order.OrderID,
+                    OrderId = (int)order.OrderNumber,
                     OrderName = order.Member.Name,
                     ContactName = order.ContactName,
                     ContactPhone = order.ContactPhone,
                     SpaceName = order.Space.SpaceName,
                     SpacePhoto = order.Space.SpacePhoto.First().SpacePhotoUrl,
-                    orderdetailesforprcess = resultdetail.orderdetailesforprcess
+                    orderdetailesforprcess = resultdetail.orderdetailesforprcess,
+                    Total = resultdetail.orderdetailesforprcess.Select(x => x.SinglePrice).Sum()
                 });
-                foreach(var o in order.OrderDetail) 
-                { 
-                resultdetail.orderdetailesforprcess.Add(new OrderDetailesforPrcess {
-                    StratTime = o.StartDateTime,
-                    EndTime =  o.EndDateTime,
-                    People = o.Participants
-                });
-                }
             }
             return result;
+        }
+        public decimal SingleOrderDetailPrice(DateTime eDate,DateTime sDate,decimal hourPirce,int hour,decimal discount) 
+        {
+            decimal dis = 0;
+            if ( (int)eDate.Subtract(sDate).TotalHours >= hour )
+            {
+                dis = discount;
+            }
+            else 
+            {
+                dis = 0;
+            }
+            var price = (decimal)eDate.Subtract(sDate).TotalHours * hourPirce*(1-dis);
+            return price;
         }
     }
 }
