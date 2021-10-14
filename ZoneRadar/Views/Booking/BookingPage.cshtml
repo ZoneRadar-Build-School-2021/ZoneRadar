@@ -7,7 +7,7 @@
     var details = Model.SpaceDetailInfo;
     float total = 0;
     float averageScore = 0;
-    string discount = details.Discount.ToString().Split('.')[1];
+    string discount = details.Discount == 0 ? "0" : details.Discount.ToString().Split('.')[1];
     if (discount.Contains('0'))
     {
         discount = discount.TrimEnd('0');
@@ -109,7 +109,7 @@
                         @foreach (var review in reviews.Take(briefReviewBreak))
                         {
                             <div class="review-brief d-flex mb-4">
-                                <a href="#" class="user-pic"><img class="rounded-circle border-blue" src="@review.ReviewedMemberPhoto"></a>
+                                <a href="~/MemberCenter/Member/@review.UserID" class="user-pic"><img class="rounded-circle border-blue" src="@review.ReviewedMemberPhoto"></a>
                                 <div class="content-wrapper w-100 ps-4">
                                     <span class="review-brief-content">@review.ReviewContent</span>
                                     <span class="user-name ms-1"> -@review.ReviewedMemberName</span>
@@ -120,7 +120,7 @@
                     </div>
                 </section>
                 <div class="host col-sm-12 col-md-3 text-center pt-0 pb-4 pt-md-5">
-                    <a href="#">
+                    <a href="~/MemberCenter/Host/@details.HostID">
                         <img class="user-pic rounded-circle border-blue" src="@details.HostPhoto">
                         <p class="user-name my-2">@details.HostName</p>
                     </a>
@@ -272,7 +272,7 @@
                     @foreach (var review in reviews)
                     {
                         <div class="review-item row mb-3 mt-3">
-                            <a href="#" class="user-pic col-2 col-xl-1 pe-0"><img class="rounded-circle border-blue" src="@review.ReviewedMemberPhoto"></a>
+                            <a href="~/MemberCenter/Member/@review.UserID" class="user-pic col-2 col-xl-1 pe-0"><img class="rounded-circle border-blue" src="@review.ReviewedMemberPhoto"></a>
                             <div class="review-txt col-10 col-xl-11 ps-3 ps-xl-4">
                                 <h5 class="user-name">@review.ReviewedMemberName</h5>
                                 <div class="review-rating">
@@ -326,7 +326,10 @@
             <form class="booking-card text-center sticky-xl-top py-4 px-3" action="" method="post">
                 <h3 class="booking-card-title">NT$ <span class="venue-price">@Decimal.Round(@briefs.PricePerHour)</span></h3>
                 <p class="border-bottom pb-2">最少起訂時數<span class="min-time fs-5 px-1">@briefs.MinHour</span>小時</p>
-                <p class="border-bottom py-3 fs-5"><span class="discount-hour py-1">8</span>小時滿時優惠:<span class="ps-4 pe-1 discount">@discount</span>折</p>
+                @if (@details.HoursForDiscount != 0 && @discount != "")
+                {
+                    <p class="border-bottom py-3 fs-5"><span class="discount-hour py-1 pe-1">@details.HoursForDiscount</span>小時滿時優惠:<span class="ps-4 pe-1 discount">@discount</span>折</p>
+                }
                 <div class="order-detail-select mt-4"></div>
                 <div class="other-operation d-flex justify-content-end mt-3">
                     <button type="button" class="btn px-0 py-0 remove me-3 d-none">刪除</button>
@@ -347,7 +350,7 @@
     </div>
 </div>
 
-<div id="order-item-template">
+<template id="order-item-template">
     <div class="order-item mb-3 needs-validation">
         <h4 class="text-start mb-3 fs-5 fw-bolder">日期與時間:</h4>
         <div class="input-group mb-2">
@@ -359,7 +362,7 @@
             <input type="number" placeholder="結束時間" class="end-time form-control rounded ms-1" required>
         </div>
     </div>
-</div>
+</template>
 
 
 @section topCSS

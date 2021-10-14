@@ -168,14 +168,16 @@ namespace ZoneRadar.Services
                                      .GroupBy(x => x.CleaningCategory.Category);
 
             // 找出滿時優惠的時數
-            var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Hour;
+            var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID) == null ? 0 : _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Hour;
 
             // 找出滿時優惠的折數
-            var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Discount;
+            var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID) == null ? 0 : Decimal.Round(1 - (_repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Discount), 2);
+
 
             var result = new SpaceDetailViewModel
             {
                 HostName = targetSpace.Member.Name,
+                HostID = targetSpace.Member.MemberID,
                 HostPhoto = targetSpace.Member.Photo,
                 CleaningOptionDict = cleaningOptionList.ToDictionary(x => x.Key, x => x.Select(y => y.OptionDetail).ToList()),
                 Introduction = targetSpace.Introduction,
@@ -193,7 +195,7 @@ namespace ZoneRadar.Services
                 CancellationTitle = targetSpace.Cancellation.CancellationTitle,
                 CancellationInfo = targetSpace.Cancellation.CancellationDetail,
                 HoursForDiscount = hoursForDiscount,
-                Discount = Decimal.Round((1 - discount), 2),
+                Discount = discount,
             };
 
             return result;
@@ -258,6 +260,7 @@ namespace ZoneRadar.Services
             if (!String.IsNullOrEmpty(type))
             {
                 spaceTypes = spaceTypes.Where(x => x.TypeDetail.Type == type);
+                spaces = spaces.Intersect(spaceTypes.Select(x => x.Space));
             }
 
             if (!String.IsNullOrEmpty(Date))
@@ -270,6 +273,12 @@ namespace ZoneRadar.Services
                 }
                 operatings = operatings.Where(x => x.OperatingDay == dayOfWeek);
                 orders = orders.Where(x => DateTime.Compare(x.StartDateTime, startDate) < 0 || DateTime.Compare(x.EndDateTime, startDate) > 0);
+
+                var filteredBytDate = operatings.Select(x => x.Space).Distinct();
+                var unBookedSpaces = orders.Select(x => x.Order.Space).Distinct();
+                var filterByDate = filteredBytDate.Union(unBookedSpaces);
+
+                spaces = spaces.Intersect(filterByDate);
             }
 
             if (!String.IsNullOrEmpty(lowPrice))
@@ -299,6 +308,8 @@ namespace ZoneRadar.Services
             if (amenities != null && amenities.Count != 0)
             {
                 spaceAmenities = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity));
+                var filteredByAmenity = spaceAmenities.Select(x => x.Space).Distinct();
+                spaces = spaces.Intersect(filteredByAmenity);
             }
 
             if (!String.IsNullOrEmpty(keywords))
@@ -309,17 +320,32 @@ namespace ZoneRadar.Services
                     spaces = spaces.Where(x => x.SpaceName.ToUpper().Contains(keyword.ToUpper()));
                 }
             }
+            //var filteredBySpace = spaces.Select(x => x);
+            //var filteredByType = spaceTypes.Select(x => x.Space).Distinct();
+            //var filteredByAmenity = spaceAmenities.Select(x => x.Space).Distinct();
+            //var filteredBytDate = operatings.Select(x => x.Space).Distinct();
+            //var unBookedSpaces = orders.Select(x => x.Order.Space).Distinct();
+            //var filterByDate = filteredBytDate.Union(unBookedSpaces);
 
-            var filteredBySpace = spaces.Select(x => x);
-            var filteredByType = spaceTypes.Select(x => x.Space).Distinct();
-            var filteredByAmenity = spaceAmenities.Select(x => x.Space).Distinct();
-            var filteredBytDate = operatings.Select(x => x.Space).Distinct();
-            var unbookedSpaces = orders.Select(x => x.Order.Space).Distinct();
-            var filterByDate = filteredBytDate.Union(unbookedSpaces);
+            //var insersectSpaces = filteredBySpace.Intersect(filteredByType).Intersect(filteredByAmenity).Intersect(filterByDate).ToList();
 
-            var insersectSpaces = filteredBySpace.Intersect(filteredByType).Intersect(filteredByAmenity).Intersect(filterByDate).ToList();
-
-            var result = insersectSpaces.Select(x => new SearchingPageViewModel
+            //var result = insersectSpaces.Select(x => new SearchingPageViewModel
+            //{
+            //    SpaceID = x.SpaceID,
+            //    SpaceName = x.SpaceName,
+            //    SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).Select(y => y.SpacePhotoUrl).ToList(),
+            //    Address = x.Address,
+            //    Capacity = x.Capacity,
+            //    PricePerHour = x.PricePerHour,
+            //    Country = x.City.CityName,
+            //    City = x.City.CityName,
+            //    District = x.District.DistrictName,
+            //    MinHour = x.MinHours,
+            //    MeasurementOfArea = x.MeasureOfArea,
+            //    Scores = scores.Where(y => y.Order.SpaceID == x.SpaceID).Select(y => y.Score).ToList(),
+            //}).ToList();
+            //return result;
+            var result = spaces.Select(x => new SearchingPageViewModel
             {
                 SpaceID = x.SpaceID,
                 SpaceName = x.SpaceName,

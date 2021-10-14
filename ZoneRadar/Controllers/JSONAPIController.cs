@@ -65,6 +65,11 @@ namespace ZoneRadar.Controllers
             return Ok(queriedSpaces);
         }
 
+        /// <summary>
+        /// 取得預購卡所需資料(Steve)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("GetBookingCardData")]
         [AcceptVerbs("GET")]
         public IHttpActionResult GetBookingCardData(int? id)

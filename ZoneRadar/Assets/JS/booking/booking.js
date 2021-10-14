@@ -65,7 +65,7 @@
     }
 
     function setSelect() {
-        const cloneNode = document.querySelector('#order-item-template').cloneNode(true);
+        const cloneNode = document.querySelector('#order-item-template').content.cloneNode(true);
         const dateNode = cloneNode.querySelector('.start-date');
         const attendeeNode = cloneNode.querySelector('.attendees');
         const startTimeNode = cloneNode.querySelector('.start-time');
