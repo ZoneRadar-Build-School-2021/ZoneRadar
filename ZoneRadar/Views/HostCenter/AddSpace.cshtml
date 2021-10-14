@@ -1,4 +1,5 @@
 ﻿@model SpaceViewModel
+
 @{
     ViewBag.Title = "AddSpace";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,6 +13,7 @@
     var cleaningThree = Model.CleanThirdPartList;
     var cleaningFour = Model.CleanFourdPartList;
     var Operating = Model.Operating;
+
 }
 
 
@@ -23,7 +25,7 @@
             <!-- 開頭問候文區 -->
             <div class="row">
                 <div class="col mb-3 mt-3">
-                    <h5 class="fs-3"> <span>庭瑜</span> ,你好！說說你的場地吧！</h5>
+                    <h5 class="fs-3"> @*<span>@owner.Select(x=>x.MamberName)</span> ,*@你好！說說你的場地吧！</h5>
                     <p>場地內容分享越詳細，能幫你拿到更多訂單</p>
                 </div>
             </div>

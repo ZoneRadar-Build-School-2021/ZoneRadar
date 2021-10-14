@@ -43,6 +43,7 @@ namespace ZoneRadar.Controllers
                 CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
                 CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
                 CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
+                //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
 
                 Operating = _spaceService.Operating(),
             };
