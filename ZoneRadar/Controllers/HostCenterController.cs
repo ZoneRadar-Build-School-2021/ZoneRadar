@@ -124,7 +124,7 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
-        /// 場地主訂單 - 處理中(Steve)
+        /// 場地主訂單 - 處理中(Jack)
         /// </summary>
         /// <returns></returns>
         public ActionResult Processing()
@@ -135,7 +135,7 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
-        /// 場地主訂單 - 歷史訂單(Steve) --- 還沒做 @Nick
+        /// 場地主訂單 - 歷史訂單(Steve) 
         /// </summary>
         /// <returns></returns>
         public ActionResult History()
