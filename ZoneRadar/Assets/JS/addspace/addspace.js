@@ -1,27 +1,39 @@
-//停車場的radio 是
-let Yes = document.querySelector("#Yes");
+//停車場的 是否
+var yesflag = 0;
 var parkingPart = document.querySelector("#parkingPart");
-Yes.addEventListener("click", function () {
+let flexSwitchCheckDefaultYes = document.querySelector("#flexSwitchCheckDefaultYes");
+flexSwitchCheckDefaultYes.addEventListener("click", function () {
 
-    parkingPart.classList.remove('d-none');
+    if (yesflag == 0) {
+        parkingPart.classList.remove('d-none');
+        yesflag = 1;
+    }
+    else {
+        parkingPart.classList.add('d-none');
+        yesflag = 0;
+    }
 });
-//停車場的radio 否
-let No = document.querySelector('#No');
-No.addEventListener('click', function () {
-    parkingPart.classList.add('d-none');
-})
 //攝影機 是
+let projectionflag =0;
 let Yesprojection = document.querySelector("#Yesprojection");
 var projectionPart = document.querySelector('#projectionPart');
 Yesprojection.addEventListener('click', function () {
-    projectionPart.classList.remove('d-none');
+    if (projectionflag == 0) {
+
+        projectionPart.classList.remove('d-none');
+        projectionflag = 1;
+    } else {
+        projectionPart.classList.add('d-none');
+        projectionflag = 0;
+    }
+    
 });
 
 //攝影機 否
-let NOprojection = document.querySelector("#Noprojection");
-NOprojection.addEventListener('click', function () {
-    projectionPart.classList.add('d-none');
-});
+//let NOprojection = document.querySelector("#Noprojection");
+//NOprojection.addEventListener('click', function () {
+//    projectionPart.classList.add('d-none');
+//});
 
 //        ///營業時間 radio///
 //        var flag=1;

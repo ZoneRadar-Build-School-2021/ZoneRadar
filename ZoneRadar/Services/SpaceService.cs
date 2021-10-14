@@ -894,11 +894,24 @@ namespace ZoneRadar.Services
             var shooting = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var item in shooting)
             {
-                var shootingTemp = new SomeOnesShooting()
+                if (item.ShootingEquipment == null)
                 {
-                    Shooting = item.ShootingEquipment
-                };
-                result.SomeOnesShootingList.Add(shootingTemp);
+                    var shootingTemp = new SomeOnesShooting()
+                    {
+                        Shooting = item.ShootingEquipment,
+                        Displaynone="d-none"
+                    };
+                    result.SomeOnesShootingList.Add(shootingTemp);
+                }
+                else
+                {
+                    var shootingTemp = new SomeOnesShooting()
+                    {
+                        Shooting = item.ShootingEquipment,
+                        Displaynone = " "
+                    };
+                    result.SomeOnesShootingList.Add(shootingTemp);
+                }
             }
             /// <summary>
             ///  取消政策 全部(Amber )
