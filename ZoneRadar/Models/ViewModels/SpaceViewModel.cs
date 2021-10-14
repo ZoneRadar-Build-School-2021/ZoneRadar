@@ -40,7 +40,7 @@ namespace ZoneRadar.Models.ViewModels
         /// 資料庫沒有的表
         /// </summary>
         public List<SelectListItem> Operating { get; set; }
-
+        public List<SomeOnesSpaceName> SomeOnesSpaceNameList { get; internal set; }
     }
     /// <summary>
     /// 場地地址區要的資料
