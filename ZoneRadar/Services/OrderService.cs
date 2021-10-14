@@ -336,9 +336,37 @@ namespace ZoneRadar.Services
         /// 刪除已付款的訂單(Jack)
         /// </summary>
         /// <returns></returns>
-        public List<ProcessingViewModel> GetHostCenter() 
+        public List<ProcessingViewModel> GetHostCenter(int id) 
         {
-            return null;
+            var result = new List<ProcessingViewModel>();
+            var resultdetail = new ProcessingViewModel 
+            {
+                orderdetailesforprcess = new List<OrderDetailesforPrcess>()
+            };
+            var Orders = _repository.GetAll<Order>().Where(x=> x.OrderStatusID == 3 && x.Space.MemberID == id);
+            
+            foreach (var order in Orders) 
+            { 
+                result.Add(new ProcessingViewModel 
+                {
+                    OrderId = order.OrderID,
+                    OrderName = order.Member.Name,
+                    ContactName = order.ContactName,
+                    ContactPhone = order.ContactPhone,
+                    SpaceName = order.Space.SpaceName,
+                    SpacePhoto = order.Space.SpacePhoto.First().SpacePhotoUrl,
+                    orderdetailesforprcess = resultdetail.orderdetailesforprcess
+                });
+                foreach(var o in order.OrderDetail) 
+                { 
+                resultdetail.orderdetailesforprcess.Add(new OrderDetailesforPrcess {
+                    StratTime = o.StartDateTime,
+                    EndTime =  o.EndDateTime,
+                    People = o.Participants
+                });
+                }
+            }
+            return result;
         }
     }
 }

@@ -9,6 +9,7 @@ namespace ZoneRadar.Models.ViewModels
     {
         public int OrderId { get; set; }
         public string SpaceName { get; set; }
+        public string SpacePhoto { get; set; }
         public string OrderName { get; set; }
         public string ContactName { get; set; }
         public string ContactPhone { get; set; }
