@@ -96,8 +96,8 @@ namespace ZoneRadar.Services
             var verificationLink = urlHelper.Action("ConfirmEmail", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
 
             //寄件人資訊
-            string ZONERadarAccount = "swkzta3@gmail.com";
-            string ZONERadarPassword = "Minato,Naruto";
+            string ZONERadarAccount = "zoneradar2021@gmail.com";
+            string ZONERadarPassword = "@Bs202106";
 
             //產生能寄信的SmtpClient執行個體
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
@@ -105,12 +105,10 @@ namespace ZoneRadar.Services
                 Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword),
                 EnableSsl = true
             };
-            //client.Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword);
-            //client.EnableSsl = true;
 
             //產生信件，編輯信件的相關內容
             string verificationEmailContent = File.ReadAllText(Path.Combine(server.MapPath("~/Views/MemberCenter/VerificationEmailContent.html")));
-            MailMessage mail = new MailMessage(ZONERadarAccount, ZONERadarAccount)
+            MailMessage mail = new MailMessage(ZONERadarAccount, userEmail)
             {
                 Subject = "ZONERadar會員確認信",
                 SubjectEncoding = Encoding.UTF8,
@@ -118,11 +116,6 @@ namespace ZoneRadar.Services
                 Body = verificationEmailContent.Replace("verificationLink", verificationLink),
                 BodyEncoding = Encoding.UTF8
             };
-            //mail.Subject = "ZONERadar會員確認信";
-            //mail.SubjectEncoding = Encoding.UTF8;
-            //mail.IsBodyHtml = true;
-            //mail.Body = confirmEmailContent.Replace("confirmLink", confirmLink);
-            //mail.BodyEncoding = Encoding.UTF8;
 
             try
             {
@@ -131,7 +124,7 @@ namespace ZoneRadar.Services
             catch (Exception ex)
             {
                 //未處理
-                throw ex;
+                throw new NotImplementedException();
             }
             finally
             {
@@ -321,8 +314,8 @@ namespace ZoneRadar.Services
             var resetLink = urlHelper.Action("ResetPassword", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
 
             //寄件人資訊
-            string ZONERadarAccount = "swkzta3@gmail.com";
-            string ZONERadarPassword = "Minato,Naruto";
+            string ZONERadarAccount = "zoneradar2021@gmail.com";
+            string ZONERadarPassword = "@Bs202106";
 
             //產生能寄信的SmtpClient執行個體
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
@@ -333,7 +326,7 @@ namespace ZoneRadar.Services
 
             //產生信件，編輯信件的相關內容
             string resetPasswordEmailContent = File.ReadAllText(Path.Combine(server.MapPath("~/Views/MemberCenter/ResetPasswordEmailContent.html")));
-            MailMessage mail = new MailMessage(ZONERadarAccount, ZONERadarAccount)
+            MailMessage mail = new MailMessage(ZONERadarAccount, userEmail)
             {
                 Subject = "重設您的ZONERadar密碼",
                 SubjectEncoding = Encoding.UTF8,
