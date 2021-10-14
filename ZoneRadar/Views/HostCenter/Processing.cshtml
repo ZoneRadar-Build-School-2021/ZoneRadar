@@ -1,4 +1,4 @@
-﻿
+﻿@model  List<ProcessingViewModel>
 @{
     ViewBag.Title = "Processing";
 }
@@ -13,51 +13,45 @@
     <div class="row align-items-end">
         <div class="order-card py-4 py-lg-5">
             <div class="row">
+                @foreach (var m in Model)
+                {
                 <div class="col-sm-12 col-lg-6 mb-2 mb-lg-4 fs-5">
-                    <p class="order-id">訂單編號:<span class="order-number ms-4">2109020001</span></p>
+                    <p class="order-id">訂單編號:<span class="order-number ms-4">@m.OrderId</span></p>
                 </div>
                 <div class="col-sm-12 col-lg-6 text-lg-end mb-2 mb-lg-4 fs-5">
-                    <p class="order-status">距離全額退款期限還有:<span class="full-refund mx-2 fs-4 fw-bolder">10</span>天</p>
+                    
                 </div>
                 <div class="col-sm-12 col-lg-4">
-                    <div class="venue-pic mt-2 mt-lg-0" style="background-image: url(https://picsum.photos/1920/1080/?random=1);"></div>
+                    <div class="venue-pic mt-2 mt-lg-0" style="background-image: url(@Html.DisplayFor(x=>m.SpacePhoto));"></div>
                 </div>
                 <div class="col-sm-12 col-lg-8 px-3">
                     <a href="#" class="d-inline-block mb-3 mt-3 mt-lg-0"><h3 class="venue-name">Good Space Taipei 台大分館</h3></a>
                     <ul class="order-detial">
-                        <li class="mb-2 fs-5">訂購人:<a href="#" class="customer-name mx-2">孫小胖</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="連絡他"></i></li>
-                        <li class="mb-2 fs-5">聯絡人姓名:<span class="contact-name mx-2">王小胖</span></li>
-                        <li class="mb-2 fs-5">聯絡人電話:<span class="contact-phone mx-2">0919111222</span></li>
+                        <li class="mb-2 fs-5">訂購人:<a href="#" class="customer-name mx-2">@m.OrderName</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="連絡他"></i></li>
+                        <li class="mb-2 fs-5">聯絡人姓名:<span class="contact-name mx-2">@m.ContactName</span></li>
+                        <li class="mb-2 fs-5">聯絡人電話:<span class="contact-phone mx-2">@m.ContactPhone</span></li>
                         <li class="mt-3">
                             <div class="collapse" id="order-2109020001">
                                 <div class="datetime-card py-2">
                                     <div class="row">
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/date.svg" alt="date" class="me-1">租借日期:<span class="date ms-2">2021/10/31</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/time.svg" alt="time" class="me-1">租借時間:<span class="start-time ms-2 me-1">09:00</span>~<span class="end-time ms-1">16:00</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/person.svg" alt="participant" class="me-1">參加人數:<span class="participant ms-2 me-1">100</span>人</div>
+                                        @foreach (var orderdateil in m.orderdetailesforprcess)
+                                        {
+                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
+                                            <i class="far fa-calendar-check me-1"></i>租借日期:
+                                            <span class="date ms-2">@orderdateil.StratTime.ToString("yyyy/MM/dd hh:mm")</span>
+                                        </div>
+                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
+                                            <i class="far fa-calendar-check me-1"></i>租還日期:
+                                            <span class="date ms-2">@orderdateil.EndTime.ToString("yyyy/MM/dd hh:mm")</span>
+                                        </div>
+                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
+                                            <i class="far fa-calendar-check me-1"></i>人數:
+                                            <span class="participant ms-2 me-1">@orderdateil.People</span>人
+                                        </div>
+                                        }
                                     </div>
                                 </div>
-                                <div class="datetime-card py-2">
-                                    <div class="row">
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/date.svg" alt="date" class="me-1">租借日期:<span class="date ms-2">2021/10/31</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/time.svg" alt="time" class="me-1">租借時間:<span class="start-time ms-2 me-1">09:00</span>~<span class="end-time ms-1">16:00</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/person.svg" alt="participant" class="me-1">參加人數:<span class="participant ms-2 me-1">100</span>人</div>
-                                    </div>
-                                </div>
-                                <div class="datetime-card py-2">
-                                    <div class="row">
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/date.svg" alt="date" class="me-1">租借日期:<span class="date ms-2">2021/10/31</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/time.svg" alt="time" class="me-1">租借時間:<span class="start-time ms-2 me-1">09:00</span>~<span class="end-time ms-1">16:00</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/person.svg" alt="participant" class="me-1">參加人數:<span class="participant ms-2 me-1">100</span>人</div>
-                                    </div>
-                                </div>
-                                <div class="datetime-card py-2">
-                                    <div class="row">
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/date.svg" alt="date" class="me-1">租借日期:<span class="date ms-2">2021/10/31</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/time.svg" alt="time" class="me-1">租借時間:<span class="start-time ms-2 me-1">09:00</span>~<span class="end-time ms-1">16:00</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/person.svg" alt="participant" class="me-1">參加人數:<span class="participant ms-2 me-1">100</span>人</div>
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="toggle-btn">
                                 <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-2109020001" role="button" aria-expanded="false" aria-controls="order-2109020001"></a>
@@ -66,138 +60,141 @@
                     </ul>
                 </div>
                 <div class="col-12">
-                    <p class="cost text-end">訂單總額:<span class="nt ms-4 fs-2 fw-bolder">NT$<span class="total-cost fs-2 fw-bolder">2,000</span></span></p>
+                    <p class="cost text-end">訂單總額:<span class="nt ms-4 fs-2 fw-bolder"><span class="total-cost fs-2 fw-bolder">@m.Total.ToString("C0")</span></span></p>
                 </div>
+                }
             </div>
         </div>
-        <div class="order-card py-4 py-lg-5">
-            <div class="row">
-                <div class="col-sm-12 col-lg-6 mb-2 mb-lg-4 fs-5">
-                    <p class="order-id">訂單編號:<span class="order-number ms-4">2109020001</span></p>
-                </div>
-                <div class="col-sm-12 col-lg-6 text-lg-end mb-2 mb-lg-4 fs-5">
-                    <p class="order-status">距離全額退款期限還有:<span class="full-refund mx-2 fs-4 fw-bolder">5</span>天</p>
-                </div>
-                <div class="col-sm-12 col-lg-4">
-                    <div class="venue-pic mt-2 mt-lg-0" style="background-image: url(https://picsum.photos/1920/1080/?random=2);"></div>
-                </div>
-                <div class="col-sm-12 col-lg-8 px-3">
-                    <a href="#" class="d-inline-block mb-3 mt-3 mt-lg-0"><h3 class="venue-name">Good Space Taipei 台大分館</h3></a>
-                    <ul class="order-detial">
-                        <li class="mb-2 fs-5">訂購人:<a href="#" class="customer-name mx-2">孫小胖</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="連絡他"></i></li>
-                        <li class="mb-2 fs-5">聯絡人姓名:<span class="contact-name mx-2">王小胖</span></li>
-                        <li class="mb-2 fs-5">聯絡人電話:<span class="contact-phone mx-2">0919111222</span></li>
-                        <li class="mt-3">
-                            <div class="collapse" id="order-2109020002">
-                                <div class="datetime-card py-2">
-                                    <div class="row">
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/date.svg" alt="date" class="me-1">租借日期:<span class="date ms-2">2021/10/31</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/time.svg" alt="time" class="me-1">租借時間:<span class="start-time ms-2 me-1">09:00</span>~<span class="end-time ms-1">16:00</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/person.svg" alt="participant" class="me-1">參加人數:<span class="participant ms-2 me-1">100</span>人</div>
+
+        @*<div class="order-card py-4 py-lg-5">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6 mb-2 mb-lg-4 fs-5">
+                        <p class="order-id">訂單編號:<span class="order-number ms-4">2109020001</span></p>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 text-lg-end mb-2 mb-lg-4 fs-5">
+                        <p class="order-status">距離全額退款期限還有:<span class="full-refund mx-2 fs-4 fw-bolder">5</span>天</p>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="venue-pic mt-2 mt-lg-0" style="background-image: url(https://picsum.photos/1920/1080/?random=2);"></div>
+                    </div>
+                    <div class="col-sm-12 col-lg-8 px-3">
+                        <a href="#" class="d-inline-block mb-3 mt-3 mt-lg-0"><h3 class="venue-name">Good Space Taipei 台大分館</h3></a>
+                        <ul class="order-detial">
+                            <li class="mb-2 fs-5">訂購人:<a href="#" class="customer-name mx-2">孫小胖</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="連絡他"></i></li>
+                            <li class="mb-2 fs-5">聯絡人姓名:<span class="contact-name mx-2">王小胖</span></li>
+                            <li class="mb-2 fs-5">聯絡人電話:<span class="contact-phone mx-2">0919111222</span></li>
+                            <li class="mt-3">
+                                <div class="collapse" id="order-2109020002">
+                                    <div class="datetime-card py-2">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/date.svg" alt="date" class="me-1">租借日期:<span class="date ms-2">2021/10/31</span></div>
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/time.svg" alt="time" class="me-1">租借時間:<span class="start-time ms-2 me-1">09:00</span>~<span class="end-time ms-1">16:00</span></div>
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/person.svg" alt="participant" class="me-1">參加人數:<span class="participant ms-2 me-1">100</span>人</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="toggle-btn">
-                                <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-2109020002" role="button" aria-expanded="false" aria-controls="order-2109020002"></a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-12">
-                    <p class="cost text-end">訂單總額:<span class="nt ms-4 fs-2 fw-bolder">NT$<span class="total-cost fs-2 fw-bolder">2,000</span></span></p>
+                                <div class="toggle-btn">
+                                    <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-2109020002" role="button" aria-expanded="false" aria-controls="order-2109020002"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12">
+                        <p class="cost text-end">訂單總額:<span class="nt ms-4 fs-2 fw-bolder">NT$<span class="total-cost fs-2 fw-bolder">2,000</span></span></p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="order-card py-4 py-lg-5">
-            <div class="row">
-                <div class="col-sm-12 col-lg-6 mb-2 mb-lg-4 fs-5">
-                    <p class="order-id">訂單編號:<span class="order-number ms-4">2109020001</span></p>
-                </div>
-                <div class="col-sm-12 col-lg-6 text-lg-end mb-2 mb-lg-4 fs-5">
-                    <p class="order-status">距離全額退款期限還有:<span class="full-refund mx-2 fs-4 fw-bolder">30</span>天</p>
-                </div>
-                <div class="col-sm-12 col-lg-4">
-                    <div class="venue-pic mt-2 mt-lg-0" style="background-image: url(https://picsum.photos/1920/1080/?random=3);"></div>
-                </div>
-                <div class="col-sm-12 col-lg-8 px-3">
-                    <a href="#" class="d-inline-block mb-3 mt-3 mt-lg-0"><h3 class="venue-name">Good Space Taipei 北科分館</h3></a>
-                    <ul class="order-detial">
-                        <li class="mb-2 fs-5">訂購人:<a href="#" class="customer-name mx-2">孫小胖</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="連絡他"></i></li>
-                        <li class="mb-2 fs-5">聯絡人姓名:<span class="contact-name mx-2">王小胖</span></li>
-                        <li class="mb-2 fs-5">聯絡人電話:<span class="contact-phone mx-2">0919111222</span></li>
-                        <li class="mt-3">
-                            <div class="collapse" id="order-2109020003">
-                                <div class="datetime-card py-2">
-                                    <div class="row">
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/date.svg" alt="date" class="me-1">租借日期:<span class="date ms-2">2021/10/31</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/time.svg" alt="time" class="me-1">租借時間:<span class="start-time ms-2 me-1">09:00</span>~<span class="end-time ms-1">16:00</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/person.svg" alt="participant" class="me-1">參加人數:<span class="participant ms-2 me-1">100</span>人</div>
+            <div class="order-card py-4 py-lg-5">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6 mb-2 mb-lg-4 fs-5">
+                        <p class="order-id">訂單編號:<span class="order-number ms-4">2109020001</span></p>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 text-lg-end mb-2 mb-lg-4 fs-5">
+                        <p class="order-status">距離全額退款期限還有:<span class="full-refund mx-2 fs-4 fw-bolder">30</span>天</p>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="venue-pic mt-2 mt-lg-0" style="background-image: url(https://picsum.photos/1920/1080/?random=3);"></div>
+                    </div>
+                    <div class="col-sm-12 col-lg-8 px-3">
+                        <a href="#" class="d-inline-block mb-3 mt-3 mt-lg-0"><h3 class="venue-name">Good Space Taipei 北科分館</h3></a>
+                        <ul class="order-detial">
+                            <li class="mb-2 fs-5">訂購人:<a href="#" class="customer-name mx-2">孫小胖</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="連絡他"></i></li>
+                            <li class="mb-2 fs-5">聯絡人姓名:<span class="contact-name mx-2">王小胖</span></li>
+                            <li class="mb-2 fs-5">聯絡人電話:<span class="contact-phone mx-2">0919111222</span></li>
+                            <li class="mt-3">
+                                <div class="collapse" id="order-2109020003">
+                                    <div class="datetime-card py-2">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/date.svg" alt="date" class="me-1">租借日期:<span class="date ms-2">2021/10/31</span></div>
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/time.svg" alt="time" class="me-1">租借時間:<span class="start-time ms-2 me-1">09:00</span>~<span class="end-time ms-1">16:00</span></div>
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/person.svg" alt="participant" class="me-1">參加人數:<span class="participant ms-2 me-1">100</span>人</div>
+                                        </div>
+                                    </div>
+                                    <div class="datetime-card py-2">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/date.svg" alt="date" class="me-1">租借日期:<span class="date ms-2">2021/10/31</span></div>
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/time.svg" alt="time" class="me-1">租借時間:<span class="start-time ms-2 me-1">09:00</span>~<span class="end-time ms-1">16:00</span></div>
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/person.svg" alt="participant" class="me-1">參加人數:<span class="participant ms-2 me-1">20</span>人</div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="datetime-card py-2">
-                                    <div class="row">
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/date.svg" alt="date" class="me-1">租借日期:<span class="date ms-2">2021/10/31</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/time.svg" alt="time" class="me-1">租借時間:<span class="start-time ms-2 me-1">09:00</span>~<span class="end-time ms-1">16:00</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/person.svg" alt="participant" class="me-1">參加人數:<span class="participant ms-2 me-1">20</span>人</div>
-                                    </div>
+                                <div class="toggle-btn">
+                                    <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-2109020003" role="button" aria-expanded="false" aria-controls="order-2109020003"></a>
                                 </div>
-                            </div>
-                            <div class="toggle-btn">
-                                <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-2109020003" role="button" aria-expanded="false" aria-controls="order-2109020003"></a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-12">
-                    <p class="cost text-end">訂單總額:<span class="nt ms-4 fs-2 fw-bolder">NT$<span class="total-cost fs-2 fw-bolder">2,000</span></span></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12">
+                        <p class="cost text-end">訂單總額:<span class="nt ms-4 fs-2 fw-bolder">NT$<span class="total-cost fs-2 fw-bolder">2,000</span></span></p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="order-card py-4 py-lg-5">
-            <div class="row">
-                <div class="col-sm-12 col-lg-6 mb-2 mb-lg-4 fs-5">
-                    <p class="order-id">訂單編號:<span class="order-number ms-4">2109020001</span></p>
-                </div>
-                <div class="col-sm-12 col-lg-6 text-lg-end mb-2 mb-lg-4 fs-5">
-                    <p class="order-status">距離全額退款期限還有:<span class="full-refund mx-2 fs-4 fw-bolder">2</span>天</p>
-                </div>
-                <div class="col-sm-12 col-lg-4">
-                    <div class="venue-pic mt-2 mt-lg-0" style="background-image: url(https://picsum.photos/1920/1080/?random=4);"></div>
-                </div>
-                <div class="col-sm-12 col-lg-8 px-3">
-                    <a href="#" class="d-inline-block mb-3 mt-3 mt-lg-0"><h3 class="venue-name">發貼笑道一段聰明名稱外面財富，關於這一也許場所顯卡領域上次，有一些手裡幾乎，模。</h3></a>
-                    <ul class="order-detial">
-                        <li class="mb-2 fs-5">訂購人:<a href="#" class="customer-name mx-2">孫小胖</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="連絡他"></i></li>
-                        <li class="mb-2 fs-5">聯絡人姓名:<span class="contact-name mx-2">王小胖</span></li>
-                        <li class="mb-2 fs-5">聯絡人電話:<span class="contact-phone mx-2">0919111222</span></li>
-                        <li class="mt-3">
-                            <div class="collapse" id="order-2109020004">
-                                <div class="datetime-card py-2">
-                                    <div class="row">
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/date.svg" alt="date" class="me-1">租借日期:<span class="date ms-2">2021/10/31</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/time.svg" alt="time" class="me-1">租借時間:<span class="start-time ms-2 me-1">09:00</span>~<span class="end-time ms-1">16:00</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/person.svg" alt="participant" class="me-1">參加人數:<span class="participant ms-2 me-1">100</span>人</div>
+            <div class="order-card py-4 py-lg-5">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6 mb-2 mb-lg-4 fs-5">
+                        <p class="order-id">訂單編號:<span class="order-number ms-4">2109020001</span></p>
+                    </div>
+                    <div class="col-sm-12 col-lg-6 text-lg-end mb-2 mb-lg-4 fs-5">
+                        <p class="order-status">距離全額退款期限還有:<span class="full-refund mx-2 fs-4 fw-bolder">2</span>天</p>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="venue-pic mt-2 mt-lg-0" style="background-image: url(https://picsum.photos/1920/1080/?random=4);"></div>
+                    </div>
+                    <div class="col-sm-12 col-lg-8 px-3">
+                        <a href="#" class="d-inline-block mb-3 mt-3 mt-lg-0"><h3 class="venue-name">發貼笑道一段聰明名稱外面財富，關於這一也許場所顯卡領域上次，有一些手裡幾乎，模。</h3></a>
+                        <ul class="order-detial">
+                            <li class="mb-2 fs-5">訂購人:<a href="#" class="customer-name mx-2">孫小胖</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="連絡他"></i></li>
+                            <li class="mb-2 fs-5">聯絡人姓名:<span class="contact-name mx-2">王小胖</span></li>
+                            <li class="mb-2 fs-5">聯絡人電話:<span class="contact-phone mx-2">0919111222</span></li>
+                            <li class="mt-3">
+                                <div class="collapse" id="order-2109020004">
+                                    <div class="datetime-card py-2">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/date.svg" alt="date" class="me-1">租借日期:<span class="date ms-2">2021/10/31</span></div>
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/time.svg" alt="time" class="me-1">租借時間:<span class="start-time ms-2 me-1">09:00</span>~<span class="end-time ms-1">16:00</span></div>
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/person.svg" alt="participant" class="me-1">參加人數:<span class="participant ms-2 me-1">100</span>人</div>
+                                        </div>
+                                    </div>
+                                    <div class="datetime-card py-2">
+                                        <div class="row">
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/date.svg" alt="date" class="me-1">租借日期:<span class="date ms-2">2021/10/31</span></div>
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/time.svg" alt="time" class="me-1">租借時間:<span class="start-time ms-2 me-1">09:00</span>~<span class="end-time ms-1">16:00</span></div>
+                                            <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/person.svg" alt="participant" class="me-1">參加人數:<span class="participant ms-2 me-1">10</span>人</div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="datetime-card py-2">
-                                    <div class="row">
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/date.svg" alt="date" class="me-1">租借日期:<span class="date ms-2">2021/10/31</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/time.svg" alt="time" class="me-1">租借時間:<span class="start-time ms-2 me-1">09:00</span>~<span class="end-time ms-1">16:00</span></div>
-                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1"><img src="icons/person.svg" alt="participant" class="me-1">參加人數:<span class="participant ms-2 me-1">10</span>人</div>
-                                    </div>
+                                <div class="toggle-btn">
+                                    <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-2109020004" role="button" aria-expanded="false" aria-controls="order-2109020004"></a>
                                 </div>
-                            </div>
-                            <div class="toggle-btn">
-                                <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-2109020004" role="button" aria-expanded="false" aria-controls="order-2109020004"></a>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12">
+                        <p class="cost text-end">訂單總額:<span class="nt ms-4 fs-2 fw-bolder">NT$<span class="total-cost fs-2 fw-bolder">2,000</span></span></p>
+                    </div>
                 </div>
-                <div class="col-12">
-                    <p class="cost text-end">訂單總額:<span class="nt ms-4 fs-2 fw-bolder">NT$<span class="total-cost fs-2 fw-bolder">2,000</span></span></p>
-                </div>
-            </div>
-        </div>
+            </div>*@
+
     </div>
 </div>
 

@@ -323,13 +323,66 @@ namespace ZoneRadar.Services
                 PaymentDate = model.PaidTime,
                 ContactName = model.ContactName,
                 ContactPhone = model.ContactPhone,
-                OrderStatusID =  5
+                OrderStatusID = 5
             };
 
             _repository.Update<Order>(order);
             _repository.SaveChanges();
 
             return order;
+        }
+
+        /// <summary>
+        /// 取得訂單使用中資訊 (Jack)
+        /// </summary>
+        /// <returns></returns>
+        public List<ProcessingViewModel> GetHostCenter(int id) 
+        {
+            var result = new List<ProcessingViewModel>();
+            var resultdetail = new ProcessingViewModel 
+            {
+                orderdetailesforprcess = new List<OrderDetailesforPrcess>()
+            };
+            var Orders = _repository.GetAll<Order>().Where(x=> x.OrderStatusID == 3 && x.Space.MemberID == id);
+            
+            foreach (var order in Orders) 
+            { 
+                foreach(var o in order.OrderDetail) 
+                { 
+                    resultdetail.orderdetailesforprcess.Add(new OrderDetailesforPrcess {
+                        StratTime = o.StartDateTime,
+                        EndTime =  o.EndDateTime,
+                        People = o.Participants,
+                        SinglePrice = (int)SingleOrderDetailPrice(o.EndDateTime,o.StartDateTime,o.Order.Space.PricePerHour,o.Order.Space.SpaceDiscount.FirstOrDefault().Hour, o.Order.Space.SpaceDiscount.FirstOrDefault().Discount)
+                    });
+                }
+                result.Add(new ProcessingViewModel
+                {
+                    OrderId = (int)order.OrderNumber,
+                    OrderName = order.Member.Name,
+                    ContactName = order.ContactName,
+                    ContactPhone = order.ContactPhone,
+                    SpaceName = order.Space.SpaceName,
+                    SpacePhoto = order.Space.SpacePhoto.First().SpacePhotoUrl,
+                    orderdetailesforprcess = resultdetail.orderdetailesforprcess,
+                    Total = resultdetail.orderdetailesforprcess.Select(x => x.SinglePrice).Sum()
+                });
+            }
+            return result;
+        }
+        public decimal SingleOrderDetailPrice(DateTime eDate,DateTime sDate,decimal hourPirce,int hour,decimal discount) 
+        {
+            decimal dis = 0;
+            if ( (int)eDate.Subtract(sDate).TotalHours >= hour )
+            {
+                dis = discount;
+            }
+            else 
+            {
+                dis = 0;
+            }
+            var price = (decimal)eDate.Subtract(sDate).TotalHours * hourPirce*(1-dis);
+            return price;
         }
     }
 }
