@@ -192,6 +192,16 @@ ul {
 .date{
     font-size:14px;
 }
+.myshockicon {
+    font-size: 80px;
+}
+
+.fa-exclamation-circle {
+    background-color: #D9831A;
+    border-radius: 50%;
+    border: 3px solid #D9831A;
+    color: #fff;
+}
 
 
 @media (max-width:320px) {
