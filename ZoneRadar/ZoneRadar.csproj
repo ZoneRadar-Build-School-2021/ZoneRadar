@@ -260,7 +260,6 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\HashService.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
-    <Compile Include="ViewModels\SpaceVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\CSS\booking\booking.css" />
