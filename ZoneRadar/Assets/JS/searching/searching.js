@@ -48,6 +48,8 @@
         // 初始化
         axios.get('https://localhost:44322/webapi/spaces/GetFilterData')
             .then(response => {
+                document.querySelector('#web-date-filter').value = '';
+                document.querySelector('#phone-date-filter').value = '';
                 filterOptions = response.data;
                 // 抓出後端傳來篩選資料
                 selectedCity = filterOptions.SelectedCity;
@@ -108,7 +110,7 @@
                     disableMobile: 'true',
                     defaultDate: selectedDate,
                     minDate: "today",
-                    maxDate: new Date().fp_incr(60),
+                    maxDate: new Date().fp_incr(90),
                     // change事件監聽
                     onChange: function (selectedDates, dateStr, instance) {
                         selectedDate = dateStr;
@@ -121,7 +123,7 @@
                     altFormat: 'Y/m/d',
                     disableMobile: 'true',
                     minDate: "today",
-                    maxDate: new Date().fp_incr(60),
+                    maxDate: new Date().fp_incr(90),
                     // change事件監聽
                     onChange: function (selectedDates, dateStr, instance) {
                         selectedDate = dateStr;

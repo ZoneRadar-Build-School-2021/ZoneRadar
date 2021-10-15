@@ -8,6 +8,7 @@ namespace ZoneRadar.Models.ViewModels
     public class SpaceDetailViewModel
     {
         public string HostName { get; set; }
+        public int HostID { get; set; }
         public string HostPhoto { get; set; }
         public Dictionary<string, List<string>> CleaningOptionDict { get; set; }
         public string Introduction { get; set; }
