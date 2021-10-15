@@ -272,9 +272,7 @@ namespace ZoneRadar.Services
                     dayOfWeek = 7;
                 }
                 operatings = operatings.Where(x => x.OperatingDay == dayOfWeek);
-                var a = operatings.ToList();
                 orders = orders.Where(x => DateTime.Compare(x.StartDateTime, startDate) < 0 && DateTime.Compare(x.EndDateTime, startDate) > 0 && (x.Order.OrderStatusID == 2 || x.Order.OrderStatusID == 3));
-                var b = orders.ToList();
 
                 var filteredBytDate = operatings.Select(x => x.Space).Distinct();
                 var unBookedSpaces = orders.Select(x => x.Order.Space).Distinct();
@@ -309,7 +307,12 @@ namespace ZoneRadar.Services
 
             if (amenities != null && amenities.Count != 0)
             {
-                spaceAmenities = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity));
+                foreach (var item in amenities)
+                {
+                    spaceAmenities = spaceAmenities.Where(x => x.AmenityDetail.Amenity == item);
+
+                }
+
                 var filteredByAmenity = spaceAmenities.Select(x => x.Space).Distinct();
                 spaces = spaces.Intersect(filteredByAmenity);
             }
