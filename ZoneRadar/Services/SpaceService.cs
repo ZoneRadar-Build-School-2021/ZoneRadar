@@ -307,14 +307,9 @@ namespace ZoneRadar.Services
 
             if (amenities != null && amenities.Count != 0)
             {
-                foreach (var item in amenities)
-                {
-                    spaceAmenities = spaceAmenities.Where(x => x.AmenityDetail.Amenity == item);
+                var filteredByAmenity = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity));
 
-                }
-
-                var filteredByAmenity = spaceAmenities.Select(x => x.Space).Distinct();
-                spaces = spaces.Intersect(filteredByAmenity);
+                spaces = spaces.Where(x => filteredByAmenity.Select(y => y.SpaceID).Contains(x.SpaceID));
             }
 
             if (!String.IsNullOrEmpty(keywords))
