@@ -7,8 +7,8 @@ namespace ZoneRadar.Models.ViewModels
 {
     public class AddSpaceViewModel
     {
-        public Guid[] SelectOptionCountryID { get; set; }
-        public Guid[] SelectOptionCityID { get; set; }
+        public int SelectOptionCountryID { get; set; }
+        public int SelectOptionCityID { get; set; }
         public int DistrictID { get; set; }
         public string Address { get; set; }
     }

@@ -1128,20 +1128,24 @@ namespace ZoneRadar.Services
             result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 5, weekDay = "星期五" });
             result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 6, weekDay = "星期六" });
             result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 7, weekDay = "星期日" });
-
-            /// <summary>
-            /// 增加場地 增加地址的datamodel轉viewmodel (Amber) 
-            /// </summary>
-            
-        
-
-
             return result;
-
         }
-        //public AddSpaceViewModel CreateSpace()
-        //{
-        //    var result
-        //};
+
+        /// <summary>
+        /// 增加場地 增加地址(Amber) 
+        /// </summary>
+        public Space CreateSpace (AddSpaceViewModel model)
+        {
+            var createspace = new Space
+            {
+                CountryID=model.SelectOptionCountryID,
+                CityID=model.SelectOptionCountryID,
+                DistrictID=model.DistrictID,
+                Address=model.Address
+            };
+            _repository.Create<Space>(createspace);
+            _repository.SaveChanges();
+            return createspace;
+        }
     }
 }
