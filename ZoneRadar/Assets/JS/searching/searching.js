@@ -197,7 +197,6 @@
 
             districtNode.addEventListener('change', function () {
                 selectedDistrict = this.querySelector(`option[value='${this.value}']`).innerText;
-                console.log(this.value);
                 if (selectedDistrict === '選擇鄉鎮區') {
                     selectedDistrict = '';
                 }
@@ -209,6 +208,7 @@
             if (selectedType.length === 0) {
                 let defaultOption = document.createElement('option');
                 defaultOption.innerText = '場地類型';
+                defaultOption.value = 'default';
                 defaultOption.setAttribute('selected', '');
                 typeNode.appendChild(defaultOption);
             }
@@ -227,6 +227,9 @@
             typeNode.addEventListener('change', function () {
                 // 渲染畫面
                 selectedType = this.querySelector(`option[value='${this.value}']`).innerText;
+                if (selectedType === '場地類型') {
+                    selectedType = '';
+                }
                 requestForSpaces();
             })
         }
