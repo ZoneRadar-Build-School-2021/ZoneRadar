@@ -66,6 +66,7 @@ namespace ZoneRadar.Services
                     IsRecommend = review.Recommend,
                     ReviewedMemberName = review.Order.Member.Name,
                     ReviewedMemberPhoto = review.Order.Member.Photo,
+                    UserID = review.Order.MemberID,
                 });
             }
 

@@ -168,14 +168,16 @@ namespace ZoneRadar.Services
                                      .GroupBy(x => x.CleaningCategory.Category);
 
             // 找出滿時優惠的時數
-            var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Hour;
+            var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID) == null ? 0 : _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Hour;
 
             // 找出滿時優惠的折數
-            var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Discount;
+            var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID) == null ? 0 : Decimal.Round(1 - (_repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Discount), 2);
+
 
             var result = new SpaceDetailViewModel
             {
                 HostName = targetSpace.Member.Name,
+                HostID = targetSpace.Member.MemberID,
                 HostPhoto = targetSpace.Member.Photo,
                 CleaningOptionDict = cleaningOptionList.ToDictionary(x => x.Key, x => x.Select(y => y.OptionDetail).ToList()),
                 Introduction = targetSpace.Introduction,
@@ -188,12 +190,12 @@ namespace ZoneRadar.Services
                 Latitude = targetSpace.Latitude,
                 TrafficInfo = targetSpace.Traffic,
                 OperatingDayList = convertedOperatingDayList,
-                StartTimeList = originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
-                EndTimeList = originOperatingList.Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
+                StartTimeList = originOperatingList.Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
+                EndTimeList = originOperatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
                 CancellationTitle = targetSpace.Cancellation.CancellationTitle,
                 CancellationInfo = targetSpace.Cancellation.CancellationDetail,
                 HoursForDiscount = hoursForDiscount,
-                Discount = Decimal.Round((1 - discount), 2),
+                Discount = discount,
             };
 
             return result;
@@ -258,6 +260,7 @@ namespace ZoneRadar.Services
             if (!String.IsNullOrEmpty(type))
             {
                 spaceTypes = spaceTypes.Where(x => x.TypeDetail.Type == type);
+                spaces = spaces.Intersect(spaceTypes.Select(x => x.Space));
             }
 
             if (!String.IsNullOrEmpty(Date))
@@ -269,7 +272,15 @@ namespace ZoneRadar.Services
                     dayOfWeek = 7;
                 }
                 operatings = operatings.Where(x => x.OperatingDay == dayOfWeek);
-                orders = orders.Where(x => DateTime.Compare(x.StartDateTime, startDate) < 0 || DateTime.Compare(x.EndDateTime, startDate) > 0);
+                var a = operatings.ToList();
+                orders = orders.Where(x => DateTime.Compare(x.StartDateTime, startDate) < 0 && DateTime.Compare(x.EndDateTime, startDate) > 0 && (x.Order.OrderStatusID == 2 || x.Order.OrderStatusID == 3));
+                var b = orders.ToList();
+
+                var filteredBytDate = operatings.Select(x => x.Space).Distinct();
+                var unBookedSpaces = orders.Select(x => x.Order.Space).Distinct();
+                var filterByDate = filteredBytDate.Except(unBookedSpaces);
+
+                spaces = spaces.Intersect(filterByDate);
             }
 
             if (!String.IsNullOrEmpty(lowPrice))
@@ -299,6 +310,8 @@ namespace ZoneRadar.Services
             if (amenities != null && amenities.Count != 0)
             {
                 spaceAmenities = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity));
+                var filteredByAmenity = spaceAmenities.Select(x => x.Space).Distinct();
+                spaces = spaces.Intersect(filteredByAmenity);
             }
 
             if (!String.IsNullOrEmpty(keywords))
@@ -309,17 +322,32 @@ namespace ZoneRadar.Services
                     spaces = spaces.Where(x => x.SpaceName.ToUpper().Contains(keyword.ToUpper()));
                 }
             }
+            //var filteredBySpace = spaces.Select(x => x);
+            //var filteredByType = spaceTypes.Select(x => x.Space).Distinct();
+            //var filteredByAmenity = spaceAmenities.Select(x => x.Space).Distinct();
+            //var filteredBytDate = operatings.Select(x => x.Space).Distinct();
+            //var unBookedSpaces = orders.Select(x => x.Order.Space).Distinct();
+            //var filterByDate = filteredBytDate.Union(unBookedSpaces);
 
-            var filteredBySpace = spaces.Select(x => x);
-            var filteredByType = spaceTypes.Select(x => x.Space).Distinct();
-            var filteredByAmenity = spaceAmenities.Select(x => x.Space).Distinct();
-            var filteredBytDate = operatings.Select(x => x.Space).Distinct();
-            var unbookedSpaces = orders.Select(x => x.Order.Space).Distinct();
-            var filterByDate = filteredBytDate.Union(unbookedSpaces);
+            //var insersectSpaces = filteredBySpace.Intersect(filteredByType).Intersect(filteredByAmenity).Intersect(filterByDate).ToList();
 
-            var insersectSpaces = filteredBySpace.Intersect(filteredByType).Intersect(filteredByAmenity).Intersect(filterByDate).ToList();
-
-            var result = insersectSpaces.Select(x => new SearchingPageViewModel
+            //var result = insersectSpaces.Select(x => new SearchingPageViewModel
+            //{
+            //    SpaceID = x.SpaceID,
+            //    SpaceName = x.SpaceName,
+            //    SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).Select(y => y.SpacePhotoUrl).ToList(),
+            //    Address = x.Address,
+            //    Capacity = x.Capacity,
+            //    PricePerHour = x.PricePerHour,
+            //    Country = x.City.CityName,
+            //    City = x.City.CityName,
+            //    District = x.District.DistrictName,
+            //    MinHour = x.MinHours,
+            //    MeasurementOfArea = x.MeasureOfArea,
+            //    Scores = scores.Where(y => y.Order.SpaceID == x.SpaceID).Select(y => y.Score).ToList(),
+            //}).ToList();
+            //return result;
+            var result = spaces.Select(x => new SearchingPageViewModel
             {
                 SpaceID = x.SpaceID,
                 SpaceName = x.SpaceName,
@@ -1128,24 +1156,63 @@ namespace ZoneRadar.Services
             result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 5, weekDay = "星期五" });
             result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 6, weekDay = "星期六" });
             result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 7, weekDay = "星期日" });
+
+            /// <summary>
+            /// 增加場地 增加地址的datamodel轉viewmodel (Amber) 
+            /// </summary>
+            
+        
+
+
             return result;
+
         }
+        //public AddSpaceViewModel CreateSpace()
+        //{
+        //    var result
+        //};
 
         /// <summary>
-        /// 增加場地 增加地址(Amber) 
+        /// 找出特定場地的Booking Card資料(Steve)
         /// </summary>
-        public Space CreateSpace (AddSpaceViewModel model)
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public BookingCardViewModel GetTargetBookingCard(int? id)
         {
-            var createspace = new Space
+            var weekDayConverter = new Dictionary<string, int>
             {
-                CountryID=model.SelectOptionCountryID,
-                CityID=model.SelectOptionCountryID,
-                DistrictID=model.DistrictID,
-                Address=model.Address
+                { "星期一", 1 },
+                { "星期二", 2 },
+                { "星期三", 3 },
+                { "星期四", 4 },
+                { "星期五", 5 },
+                { "星期六", 6 },
+                { "星期日", 7 }
             };
-            _repository.Create<Space>(createspace);
-            _repository.SaveChanges();
-            return createspace;
+            var originOperatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).ToList();
+            var convertedOperatingDayList = new List<string>();
+            foreach (var day in originOperatingList.Where(x => x.SpaceID == id).Select(x => x.OperatingDay).ToList())
+            {
+                convertedOperatingDayList.Add(weekDayConverter.FirstOrDefault(x => x.Value == day).Key);
+            }
+
+            //var startTimeList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).Select(x => x.StartTime.ToString(@"hh\:mm")).ToList();
+            //var endTimeList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).Select(x => x.EndTime.ToString(@"hh\:mm")).ToList();
+            var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Hour;
+            var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Discount;
+            var minHour = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id).MinHours;
+
+            var result = new BookingCardViewModel
+            {
+                OperatingDayList = convertedOperatingDayList,
+                StartTimeList = originOperatingList.Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
+                EndTimeList = originOperatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
+                HoursForDiscount = hoursForDiscount,
+                Discount = Decimal.Round((1 - discount), 2),
+                MinHour = minHour,
+            };
+
+            return result;
         }
     }
 }
