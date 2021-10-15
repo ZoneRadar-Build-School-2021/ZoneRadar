@@ -33,6 +33,7 @@ namespace ZoneRadar.Data
         public virtual DbSet<SpaceAmenity> SpaceAmenity { get; set; }
         public virtual DbSet<SpaceDiscount> SpaceDiscount { get; set; }
         public virtual DbSet<SpacePhoto> SpacePhoto { get; set; }
+        public virtual DbSet<SpaceStatus> SpaceStatus { get; set; }
         public virtual DbSet<SpaceType> SpaceType { get; set; }
         public virtual DbSet<TypeDetail> TypeDetail { get; set; }
 
@@ -155,6 +156,11 @@ namespace ZoneRadar.Data
             modelBuilder.Entity<Space>()
                 .HasMany(e => e.SpaceType)
                 .WithRequired(e => e.Space)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<SpaceStatus>()
+                .HasMany(e => e.Space)
+                .WithRequired(e => e.SpaceStatus)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TypeDetail>()
