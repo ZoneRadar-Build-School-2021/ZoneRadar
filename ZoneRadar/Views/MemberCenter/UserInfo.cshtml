@@ -32,7 +32,16 @@
                     <div class="member_verifcation">
                         <p class="member_verifcation_item text-center">認證</p>
                         <p class="member_verifcation_item"><i class="me-3 fas fa-check"></i>Email</p>
-                        <p class="member_verifcation_item"><i class="me-3 fas fa-check"></i>Phone</p>
+                        <p class="member_verifcation_item">
+                            @if (user.Phone != null)
+                            {
+                                <i class="me-3 fas fa-check"></i>
+                            }
+                            else
+                            {
+                                <i class="me-3 fas fa-times"></i>
+                            }Phone
+                        </p>
                         <p class="member_verifcation_item">
                             <i class="me-3 fas fa-check"></i>評價 <span class="member_verifcation_reviews">@review.Select(x=>x.ReviewCount).Count()</span>
                         </p>
