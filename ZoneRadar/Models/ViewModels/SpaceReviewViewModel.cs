@@ -13,5 +13,6 @@ namespace ZoneRadar.Models.ViewModels
         public bool IsRecommend { get; set; }
         public string ReviewedMemberName { get; set; }
         public string ReviewedMemberPhoto { get; set; }
+        public int UserID { get; set; }
     }
 }

@@ -114,6 +114,9 @@ img {
 .fa-star {
     color: #D9831A;
 }
+.fa-times {
+    color: #DE6868;
+}
 
 @media only screen and (min-width: 600px) {
     .space_card_pic img {

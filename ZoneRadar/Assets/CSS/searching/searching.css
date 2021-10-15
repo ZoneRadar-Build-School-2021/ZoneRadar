@@ -48,6 +48,15 @@ input[type="text"]:focus {
             color: #fff;
         }
 
+.filter-row select,
+.filter-row .date-filter {
+    cursor: pointer;
+}
+
+.filter-row .date-filter {
+    max-width: 140px;
+}
+
 .filter-row .search-bar {
     min-width: 400px;
 }
