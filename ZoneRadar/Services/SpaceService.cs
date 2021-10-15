@@ -24,7 +24,7 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public Space GetSpaceByID(int? id)
         {
-            var result = _repository.GetAll<Space>().SingleOrDefault(x => x.SpaceID == id);
+            var result = _repository.GetAll<Space>().SingleOrDefault(x => x.SpaceID == id && x.SpaceStatusID == 2);
             return result;
         }
 

@@ -64,13 +64,15 @@ namespace ZoneRadar.Models
 
         public DateTime PublishTime { get; set; }
 
-        public bool Discontinued { get; set; }
-
         [StringLength(50)]
         public string Latitude { get; set; }
 
         [StringLength(50)]
         public string Longitude { get; set; }
+
+        public int SpaceStatusID { get; set; }
+
+        public DateTime? DiscontinuedDate { get; set; }
 
         public virtual Cancellation Cancellation { get; set; }
 
@@ -90,6 +92,8 @@ namespace ZoneRadar.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
+
+        public virtual SpaceStatus SpaceStatus { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SpaceAmenity> SpaceAmenity { get; set; }
