@@ -56,7 +56,7 @@ namespace ZoneRadar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddSpace(AddSpaceViewModel addspaceVM)
         {
-            var result = _spaceService.CreateSpace(addspaceVM);
+            //var result = _spaceService.CreateSpace(addspaceVM);
 
 
 
