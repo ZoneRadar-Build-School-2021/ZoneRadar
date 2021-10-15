@@ -77,7 +77,7 @@ namespace ZoneRadar.Services
             var types = _repository.GetAll<TypeDetail>().ToList();
             var typeOptions = types.Select(x => new SelectListItem
             {
-                Value = x.TypeDetailID.ToString(),
+                Value = x.Type,
                 Text = x.Type
             }).ToList();
 
@@ -93,7 +93,7 @@ namespace ZoneRadar.Services
             var cities = _repository.GetAll<City>().ToList();
             var cityOptions = cities.Select(x => new SelectListItem
             {
-                Value = x.CityID.ToString(),
+                Value = x.CityName,
                 Text = x.CityName
             }).ToList();
 
