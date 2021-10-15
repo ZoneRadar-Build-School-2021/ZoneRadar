@@ -32,7 +32,16 @@
                     <div class="member_verifcation">
                         <p class="member_verifcation_item text-center">認證</p>
                         <p class="member_verifcation_item"><i class="me-3 fas fa-check"></i>Email</p>
-                        <p class="member_verifcation_item"><i class="me-3 fas fa-check"></i>Phone</p>
+                        <p class="member_verifcation_item">
+                            @if (user.Phone != null)
+                            {
+                                <i class="me-3 fas fa-check"></i>
+                            }
+                            else
+                            {
+                                <i class="me-3 fas fa-times"></i>
+                            }Phone
+                        </p>
                         <p class="member_verifcation_item">
                             <i class="me-3 fas fa-check"></i>評價 <span class="member_verifcation_reviews">@review.Select(x=>x.ReviewCount).Count()</span>
                         </p>
@@ -75,7 +84,7 @@
                 平均評價：
                 @if (review.Select(x => x.Score).Sum() > 0)
                 {
-                    for (var i = 0; i <= (int)(review.Select(x => x.Score).Average()); i++)
+                    for (var i = 1; i <= (int)(review.Select(x => x.Score).Average()); i++)
                     {
                         <i class="fas fa-star"></i>
                     }
@@ -109,7 +118,7 @@
                         <a href="~/MemberCenter/Host/@r.Id">@r.Name</a>
                     </div>
                     <div class="reviewsfromhost_review_card_txt_star mt-2">
-                        @for (var i = 0; i <= r.Score; i++)
+                        @for (var i = 1; i <= r.Score; i++)
                         {
                             <i class="fas fa-star"></i>
                         }
