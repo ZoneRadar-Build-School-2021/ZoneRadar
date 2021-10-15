@@ -15,10 +15,9 @@
     var Operating = Model.Operating;
 }
 
-(Html.BeginForm("AddSpace", "HostCenterController", FormMethod.Post))
+@(Html.BeginRouteForm(new { Action= "AddSpace" })){
 @*@using (Html.BeginRouteForm)*@
     @*//{.BeginRouteForm(new { action =”action”});*@
-
     @Html.AntiForgeryToken()
     <div class="main">
         <div class="container containerForAdd ">

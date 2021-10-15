@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ZoneRadar.Services;
 using ZoneRadar.Models.ViewModels;
+using ZoneRadar.Repositories;
 
 namespace ZoneRadar.Controllers
 {
@@ -57,7 +58,13 @@ namespace ZoneRadar.Controllers
         public ActionResult AddSpace(AddSpaceViewModel addspaceVM)
         {
             //var result = _spaceService.CreateSpace(addspaceVM);
-
+            //html 標籤的name屬性 可以讓Controller抓到input輸入框的資料
+            string SelectOptionCountryID = Request["SelectOptionCountryID"];
+            string SelectOptionCityID = Request["SelectOptionCityID"];
+            string DistrictID = Request["DistrictID"];
+            string Address = Request["Address"];
+            
+            //_ctx.Space.Add();
             return RedirectToAction("index");
         }
 
