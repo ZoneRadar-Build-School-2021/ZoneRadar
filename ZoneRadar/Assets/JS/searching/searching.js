@@ -25,20 +25,17 @@
         const searchingModalBtn = document.querySelector('#phone-search-btn');
 
         // Global Variables
-        let filterOptions, selectedCity, selectedDistrict, selectedType, selectedDate;
-        let highBudget, lowBudget, attendees, area, keywords;
-        let amenities = [];
         let filter = {
-            City: selectedCity,
-            District: selectedDistrict,
-            Type: selectedType,
-            Date: selectedDate,
-            HighPrice: highBudget,
-            LowPrice: lowBudget,
-            Attendees: attendees,
-            Amenities: amenities,
-            Area: area,
-            Keywords: keywords
+            City: '',
+            District: '',
+            Type: '',
+            Date: '',
+            HighPrice: '',
+            LowPrice: '',
+            Attendees: '',
+            Amenities: [],
+            Area: '',
+            Keywords: '',
         };
         let cityDistrictList, typeList, amenityList, amenityIconList;
 
@@ -67,11 +64,10 @@
                 document.querySelector('#phone-date-filter').value = '';
                 filterOptions = response.data;
                 // 抓出後端傳來篩選資料
-                selectedCity = filterOptions.SelectedCity;
-                selectedType = filterOptions.SelectedType;
-                selectedDate = filterOptions.SelectedDate;
-                // 渲染場地列表
-                requestForSpaces();
+                filter.City = filterOptions.SelectedCity;
+                filter.Type = filterOptions.SelectedType;
+                filter.Date = filterOptions.SelectedDate;
+
                 // 篩選分組
                 cityDistrictList = filterOptions.CityDistrictDictionary;
                 typeList = filterOptions.SpaceTypeList;
@@ -81,6 +77,9 @@
                 // 設定Filter
                 setBarFilter();
                 setModalFilter();
+
+                // 渲染場地列表
+                requestForSpaces(filter);
             })
             .catch(error => console.log(error));
 
@@ -89,7 +88,21 @@
             // 設定日曆與事件監聽
             setFlatpickr('#web-date-filter');
             // 鎖定鄉鎮區選單
-            disableDistrictOption(districtOptionBarNode);
+            if (!filter.City) {
+                disableDistrictOption(districtOptionBarNode);
+            } else {
+                let defaultOption = document.createElement('option');
+                defaultOption.innerText = '選擇鄉鎮區';
+                defaultOption.value = 'default';
+                defaultOption.setAttribute('selected', '');
+                districtOptionBarNode.appendChild(defaultOption);
+                cityDistrictList[filter.City].forEach((district, index) => {
+                    let option = document.createElement('option');
+                    option.value = index + 1;
+                    option.innerText = district;
+                    districtOptionBarNode.appendChild(option);
+                })
+            }
             // 設定縣市選單與事件監聽
             setCityAndDistrictOption(cityOptionBarNode, districtOptionBarNode);
             // 設定類型選單與事件監聽
@@ -104,7 +117,21 @@
             // 設定日曆與事件監聽
             setFlatpickr('#phone-date-filter');
             // 鎖定鄉鎮區選單
-            disableDistrictOption(districtOptionModalNode);
+            if (!filter.City) {
+                disableDistrictOption(districtOptionModalNode);
+            } else {
+                let defaultOption = document.createElement('option');
+                defaultOption.innerText = '選擇鄉鎮區';
+                defaultOption.value = 'default';
+                defaultOption.setAttribute('selected', '');
+                districtOptionModalNode.appendChild(defaultOption);
+                cityDistrictList[filter.City].forEach((district, index) => {
+                    let option = document.createElement('option');
+                    option.value = index + 1;
+                    option.innerText = district;
+                    districtOptionModalNode.appendChild(option);
+                })
+            }
             // 設定縣市選單與事件監聽
             setCityAndDistrictOption(cityOptionModalNode, districtOptionModalNode);
             // 設定類型選單與事件監聽
@@ -117,7 +144,7 @@
         }
 
         function setFlatpickr(dateNode) {
-            if (selectedDate) {
+            if (filter.Date) {
                 flatpickr(dateNode, {
                     altInput: true,
                     altFormat: 'Y/m/d',
@@ -127,8 +154,8 @@
                     maxDate: new Date().fp_incr(90),
                     // change事件監聽
                     onChange: function (selectedDates, dateStr, instance) {
-                        selectedDate = dateStr;
-                        requestForSpaces();
+                        filter.Date = dateStr;
+                        requestForSpaces(filter);
                     },
                 });
             } else {
@@ -140,8 +167,8 @@
                     maxDate: new Date().fp_incr(90),
                     // change事件監聽
                     onChange: function (selectedDates, dateStr, instance) {
-                        selectedDate = dateStr;
-                        requestForSpaces();
+                        filter.Date = dateStr;
+                        requestForSpaces(filter);
                     },
                 });
             }
@@ -159,7 +186,7 @@
         function setCityAndDistrictOption(cityNode, districtNode) {
             let cities = Object.keys(cityDistrictList);
 
-            if (selectedCity.length === 0) {
+            if (!filter.City) {
                 let defaultOption = document.createElement('option');
                 defaultOption.innerText = '選擇縣市';
                 defaultOption.value = 'default';
@@ -170,7 +197,7 @@
             cities.forEach((city, index) => {
                 let option = document.createElement('option');
                 option.value = index + 1;
-                if (city === selectedCity) {
+                if (city === filter.City) {
                     option.innerText = city;
                     option.setAttribute('selected', '');
                 }
@@ -184,13 +211,13 @@
                 districtNode.removeAttribute('disabled');
 
                 // 渲染畫面
-                selectedCity = this.querySelector(`option[value='${this.value}']`).innerText;
-                if (selectedCity === '選擇縣市') {
-                    selectedCity = '';
+                filter.City = this.querySelector(`option[value='${this.value}']`).innerText;
+                if (filter.City === '選擇縣市') {
+                    filter.City = '';
                     districtNode.setAttribute('disabled', '');
                 }
-                selectedDistrict = '';
-                requestForSpaces();
+                filter.district = '';
+                requestForSpaces(filter);
 
                 // 設定鄉鎮區選單
                 let defaultOption = document.createElement('option');
@@ -199,8 +226,8 @@
                 defaultOption.setAttribute('selected', '');
                 districtNode.appendChild(defaultOption);
 
-                if (cityDistrictList[selectedCity] !== undefined) {
-                    cityDistrictList[selectedCity].forEach((district, index) => {
+                if (cityDistrictList[filter.City]) {
+                    cityDistrictList[filter.City].forEach((district, index) => {
                         let option = document.createElement('option');
                         option.value = index + 1;
                         option.innerText = district;
@@ -210,16 +237,16 @@
             })
 
             districtNode.addEventListener('change', function () {
-                selectedDistrict = this.querySelector(`option[value='${this.value}']`).innerText;
-                if (selectedDistrict === '選擇鄉鎮區') {
+                filter.District = this.querySelector(`option[value='${this.value}']`).innerText;
+                if (filter.District === '選擇鄉鎮區') {
                     selectedDistrict = '';
                 }
-                requestForSpaces();
+                requestForSpaces(filter);
             });
         }
 
         function setTypeOption(typeNode) {
-            if (selectedType.length === 0) {
+            if (!filter.Type) {
                 let defaultOption = document.createElement('option');
                 defaultOption.innerText = '場地類型';
                 defaultOption.value = 'default';
@@ -231,7 +258,7 @@
                 let option = document.createElement('option');
                 option.value = index + 1;
                 option.innerText = type;
-                if (type === selectedType) {
+                if (type === filter.Type) {
                     option.innerText = type;
                     option.setAttribute('selected', '');
                 }
@@ -240,11 +267,11 @@
 
             typeNode.addEventListener('change', function () {
                 // 渲染畫面
-                selectedType = this.querySelector(`option[value='${this.value}']`).innerText;
-                if (selectedType === '場地類型') {
-                    selectedType = '';
+                filter.Type = this.querySelector(`option[value='${this.value}']`).innerText;
+                if (filter.Type === '場地類型') {
+                    filter.Type = '';
                 }
-                requestForSpaces();
+                requestForSpaces(filter);
             })
         }
 
@@ -260,20 +287,20 @@
 
             function setInputs() {
                 let nodeArr = [lowPriceInputNode, highPriceInputNode, attendeeInputNode, areaInputNode];
-                let valueArr = [lowBudget, highBudget, attendees, area];
+                let valueArr = ['LowPrice', 'HighPrice', 'Attendees', 'Area'];
 
                 // 設定預設值
                 nodeArr.forEach((node, index) => {
                     node.value = '';
                     if (valueArr[index]) {
-                        node.value = valueArr[index];
+                        node.value = filter[valueArr[index]];
                     }
                 })
 
                 // 設定事件監聽
                 valueArr.forEach((value, index) => {
                     nodeArr[index].addEventListener('change', function () {
-                        value = this.value;
+                        filter[value] = this.value;
                     })
                 })
             }
@@ -289,9 +316,9 @@
                 })
 
                 // 設定預設值
-                if (amenities.length !== 0) {
+                if (filter.Amenities) {
                     amenityOptionNode.querySelectorAll('.btn').forEach(node => {
-                        amenities.forEach(item => {
+                        filter.Amenities.forEach(item => {
                             if (node.innerText === item) {
                                 node.setAttribute('style', 'border: 2px solid #049DD9');
                             }
@@ -327,73 +354,29 @@
             function setBtnClickEvent() {
                 // 清除
                 document.querySelector('#filter-modal .clear-btn').addEventListener('click', function () {
-                    highBudget = '';
-                    lowBudget = '';
-                    attendees = '';
-                    area = '';
-                    amenities = [];
+                    filter.HighPrice = '';
+                    filter.LowPrice = '';
+                    filter.Attendees = '';
+                    filter.Area = '';
+                    filter.Amenities.length = 0;
 
-                    requestForSpaces();
+                    requestForSpaces(filter);
                 })
+
                 // 確認
                 document.querySelector('#filter-modal .save-btn').addEventListener('click', function () {
-                    amenities = [];
-                    lowBudget = lowPriceInputNode.value;
-                    highBudget = highPriceInputNode.value;
-                    attendees = attendeeInputNode.value;
-                    area = areaInputNode.value;
+                    filter.Amenities.length = 0;
                     amenityOptionNode.querySelectorAll('.btn[style="border: 2px solid #049DD9"]').forEach(amenity => {
-                        amenities.push(amenity.innerText);
+                        filter.Amenities.push(amenity.innerText);
                     });
                     bootstrap.Modal.getOrCreateInstance('#filter-modal').hide();
-                    requestForSpaces();
+                    requestForSpaces(filter);
                 })
             }
         }
 
         function setSearchBar(node) {
             node.addEventListener('change', function () {
-                keywords = this.value;
-            })
-
-            selectedCity = '';
-            selectedDistrict = '';
-            selectedType = '';
-            selectedDate = '';
-            highBudget = '';
-            lowBudget = '';
-            attendees = '';
-            amenities = '';
-            area = '';
-        }
-
-        function keywordSearch(e) {
-            e.preventDefault();
-            requestForSpaces();
-        }
-
-        function keywordSearchEnter(e) {
-            if (e.key !== 'Enter') return;
-            requestForSpaces();
-        }
-
-        function requestForSpaces() {
-            setPlaceholder();
-
-            filter = {
-                City: selectedCity,
-                District: selectedDistrict,
-                Type: selectedType,
-                Date: selectedDate,
-                HighPrice: highBudget,
-                LowPrice: lowBudget,
-                Attendees: attendees,
-                Amenities: amenities,
-                Area: area,
-                Keywords: keywords
-            }
-
-            if (filter.Keywords) {
                 filter = {
                     City: '',
                     District: '',
@@ -402,11 +385,25 @@
                     HighPrice: '',
                     LowPrice: '',
                     Attendees: '',
-                    Amenities: '',
+                    Amenities: [],
                     Area: '',
-                    Keywords: keywords
-                }
-            }
+                    Keywords: this.value,
+                };
+            })
+        }
+
+        function keywordSearch(e) {
+            e.preventDefault();
+            requestForSpaces(filter);
+        }
+
+        function keywordSearchEnter(e) {
+            if (e.key !== 'Enter') return;
+            requestForSpaces(filter);
+        }
+
+        function requestForSpaces(filter) {
+            setPlaceholder();
 
             console.log(filter)
 
