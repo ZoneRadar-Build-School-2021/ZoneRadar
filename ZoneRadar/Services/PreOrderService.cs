@@ -93,7 +93,8 @@ namespace ZoneRadar.Services
                     OwnerPhone = ownerphone,
                     Money = money,
                     RentDetailVM = temp,
-                    OrderID = item.OrderID
+                    OrderID = item.OrderID,
+                    SpaceID = item.SpaceID
                 });
 
 
