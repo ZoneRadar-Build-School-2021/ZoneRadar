@@ -140,7 +140,9 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         public ActionResult History()
         {
-            return View();
+            var userid = int.Parse(User.Identity.Name);
+            var model = _orderService.GetHostCenterHistoryVM(userid);
+            return View(model);
         }
     }
 }

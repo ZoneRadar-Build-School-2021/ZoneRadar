@@ -17,6 +17,7 @@ namespace ZoneRadar.Models.ViewModels
         public decimal Money { get; set; }
         public int OrderID { get; set; }
         public int SpaceID { get; set; }
+        public int OrderNumber { get; set; }
         public List<RentDetailViewModel> RentDetailVM { get; set; }
 
     }

@@ -466,6 +466,7 @@ namespace ZoneRadar.Services
                     Money = money,
                     OrderID = item.OrderID,
                     SpaceID = item.SpaceID,
+                    OrderNumber = (int)item.OrderNumber,
                     RentDetailVM = temp
                 });
             }
