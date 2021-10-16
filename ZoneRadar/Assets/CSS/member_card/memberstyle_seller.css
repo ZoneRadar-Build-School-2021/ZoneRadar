@@ -87,6 +87,10 @@ img {
     color: #DE6868;
 }
 
+.fa-star {
+    color: #D9831A;
+}
+
 @media only screen and (min-width: 600px) {
     .space_card_pic img {
         height: 300px;

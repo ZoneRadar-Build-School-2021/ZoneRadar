@@ -8,7 +8,7 @@ namespace ZoneRadar.Models.ViewModels
     public class MyCollectionViewModel
     {
         public User User { set; get; }   
-        public List<Spaces> MyCollection { get; set; }
+        public List<Spaces> MyCollection { get; set;}
     }
     
 }

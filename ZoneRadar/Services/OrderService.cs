@@ -373,6 +373,11 @@ namespace ZoneRadar.Services
             }
             return result;
         }
+
+        /// <summary>
+        /// 計算價錢場地 (Jack)
+        /// </summary>
+        /// <returns></returns>
         public decimal SingleOrderDetailPrice(DateTime eDate,DateTime sDate,decimal hourPirce,int hour,decimal discount) 
         {
             decimal dis = 0;
