@@ -240,7 +240,7 @@ namespace ZoneRadar.Services
             var keywords = query.Keywords;
 
             var scores = _repository.GetAll<Review>();
-            var spaces = _repository.GetAll<Space>();
+            var spaces = _repository.GetAll<Space>().Where(x => x.SpaceStatusID == 2);
             var orders = _repository.GetAll<OrderDetail>();
             var spaceTypes = _repository.GetAll<SpaceType>();
             var operatings = _repository.GetAll<Operating>();
@@ -307,9 +307,16 @@ namespace ZoneRadar.Services
 
             if (amenities != null && amenities.Count != 0)
             {
-                var filteredByAmenity = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity));
+                //var filteredByAmenity = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity)).ToList();
+                //spaces = spaces.Where(x => filteredByAmenity.Select(y => y.SpaceID).Contains(x.SpaceID));
 
-                spaces = spaces.Where(x => filteredByAmenity.Select(y => y.SpaceID).Contains(x.SpaceID));
+                var spaceIDs = new List<int>();
+                foreach (var amenity in amenities)
+                {
+                    spaceIDs = spaceAmenities.Where(x => x.AmenityDetail.Amenity == amenity).Select(x => x.SpaceID).Distinct().ToList();
+                }
+
+                spaces = spaces.Where(x => spaceIDs.Contains(x.SpaceID));
             }
 
             if (!String.IsNullOrEmpty(keywords))
