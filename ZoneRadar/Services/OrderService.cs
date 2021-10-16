@@ -304,7 +304,8 @@ namespace ZoneRadar.Services
                     People = people,
                     Money = money,
                     HasReview = hasReview,
-                    OrderId = item.OrderID
+                    OrderId = item.OrderID,
+                    SpaceID = item.SpaceID
                 });
             }
 
