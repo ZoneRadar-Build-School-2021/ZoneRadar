@@ -122,7 +122,7 @@
                     altInput: true,
                     altFormat: 'Y/m/d',
                     disableMobile: 'true',
-                    defaultDate: selectedDate,
+                    defaultDate: filter.Date,
                     minDate: "today",
                     maxDate: new Date().fp_incr(90),
                     // change事件監聽
