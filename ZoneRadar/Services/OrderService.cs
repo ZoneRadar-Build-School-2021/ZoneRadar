@@ -392,5 +392,85 @@ namespace ZoneRadar.Services
             var price = (decimal)eDate.Subtract(sDate).TotalHours * hourPirce*(1-dis);
             return price;
         }
+        /// <summary>
+        /// 找出場地主(ID)的歷史訂單使用中資料(Nick)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<HostCenterHistoryViewModel> GetHostCenterHistoryVM(int id)
+        {
+            var result = new List<HostCenterHistoryViewModel>();
+
+            var spaces = _repository.GetAll<Space>().ToList();
+            var orders = _repository.GetAll<Order>().ToList();
+            var members = _repository.GetAll<Member>().ToList();
+            var orderdetails = _repository.GetAll<OrderDetail>().ToList();
+            var spacepics = _repository.GetAll<SpacePhoto>().ToList();
+            var spacediscounts = _repository.GetAll<SpaceDiscount>().ToList();
+
+            //帶入會員ID
+            var orderformember = orders.Where(x => x.Space.MemberID == id && x.OrderStatusID == 4);
+
+            foreach(var item in orderformember)
+            {
+                //場地名稱
+                var spacename = spaces.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpaceName;
+                //場地圖片
+                var spacepic = spacepics.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpacePhotoUrl;
+                //活動主名稱
+                var username = members.FirstOrDefault(x => x.MemberID == item.MemberID).Name;
+                decimal money = 0;
+                var temp = new List<RentDetailViewModel>();
+                //訂單時間 + 人數
+                foreach(var rentdetail in item.OrderDetail)
+                {
+                    var renttime = rentdetail.StartDateTime;
+                    var rentbacktime = rentdetail.EndDateTime;
+                    var people = rentdetail.Participants;
+                    var detailid = rentdetail.OrderDetailID;
+
+                    //算金額
+                    var totalhour = rentbacktime.Subtract(renttime).TotalHours;
+                    var discounthour = spacediscounts.FirstOrDefault(x => x.SpaceID == item.SpaceID).Hour;
+                    var discount = spacediscounts.FirstOrDefault(x => x.SpaceID == item.SpaceID).Discount;
+                    var spacehourofmoney = spaces.FirstOrDefault(x => x.SpaceID == item.SpaceID).PricePerHour;
+                    decimal moneytemp;
+                    if (totalhour > discounthour)
+                    {
+                        moneytemp = (spacehourofmoney * (int)totalhour) * (1 - discount);
+                    }
+                    else
+                    {
+                        moneytemp = spacehourofmoney * (int)totalhour;
+                    }
+
+                    money += moneytemp;
+                    moneytemp = 0;
+                    temp.Add(new RentDetailViewModel
+                    {
+                        RentTime = renttime.ToString("yyyy-MM-dd HH:mm"),
+                        RentBackTime = rentbacktime.ToString("yyyy-MM-dd HH:mm"),
+                        People = people,
+                        OrderDetailId = detailid,
+                        OrderId = rentdetail.OrderID
+                    });
+                }
+
+                result.Add(new HostCenterHistoryViewModel
+                {
+                    SpaceName = spacename,
+                    SpaceUrl = spacepic,
+                    UserName = username,
+                    ContactName = item.ContactName,
+                    ContactPhone = item.ContactPhone,
+                    Money = money,
+                    OrderID = item.OrderID,
+                    SpaceID = item.SpaceID,
+                    RentDetailVM = temp
+                });
+            }
+
+            return result;
+        }
     }
 }
