@@ -252,13 +252,18 @@
         }
 
         function setTypeOption(typeNode) {
-            if (!filter.Type) {
-                let defaultOption = document.createElement('option');
-                defaultOption.innerText = '場地類型';
-                defaultOption.value = 'default';
-                defaultOption.setAttribute('selected', '');
-                typeNode.appendChild(defaultOption);
-            }
+            //if (!filter.Type) {
+            //    let defaultOption = document.createElement('option');
+            //    defaultOption.innerText = '場地類型';
+            //    defaultOption.value = 'default';
+            //    defaultOption.setAttribute('selected', '');
+            //    typeNode.appendChild(defaultOption);
+            //}
+            let defaultOption = document.createElement('option');
+            defaultOption.innerText = '場地類型';
+            defaultOption.value = 'default';
+            defaultOption.setAttribute('selected', '');
+            typeNode.appendChild(defaultOption);
 
             typeList.forEach((type, index) => {
                 let option = document.createElement('option');
@@ -397,7 +402,7 @@
                     amenityOptionNode.querySelectorAll('.btn[style="border: 2px solid #049DD9"]').forEach(amenity => {
                         filter.Amenities.push(amenity.innerText);
                     });
-                    
+
                     requestForSpaces(filter);
                     bootstrap.Modal.getOrCreateInstance('#filter-modal').hide();
                     document.querySelector('#filter-modal .clear-btn').removeEventListener('click', clearModalFilter)
