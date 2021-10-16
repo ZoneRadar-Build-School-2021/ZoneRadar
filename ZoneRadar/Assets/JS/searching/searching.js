@@ -21,8 +21,6 @@
         const attendeeInputNode = document.querySelector('#attendee-filter');
         const areaInputNode = document.querySelector('#area-filter');
         const amenityOptionNode = document.querySelector('#amenity-filter')
-        const searchingModal = document.querySelector('#phone-search');
-        const searchingModalBtn = document.querySelector('#phone-search-btn');
 
         // Global Variables
         let filter = {
@@ -139,8 +137,8 @@
             // 設定Modal內其他選項與事件監聽
             filterBtn.addEventListener('click', setModalOptionAndEvent);
             // 設定關鍵字事件監聽
-            setSearchBar(searchingModal);
-            searchingModalBtn.addEventListener('click', keywordSearch);
+            //setSearchBar(searchingModal);
+            //searchingModalBtn.addEventListener('click', keywordSearch);
         }
 
         function setFlatpickr(dateNode) {
@@ -155,7 +153,9 @@
                     // change事件監聽
                     onChange: function (selectedDates, dateStr, instance) {
                         filter.Date = dateStr;
-                        requestForSpaces(filter);
+                        if (this.id === 'web-date-filter') {
+                            requestForSpaces(filter);
+                        }
                     },
                 });
             } else {
@@ -168,7 +168,9 @@
                     // change事件監聽
                     onChange: function (selectedDates, dateStr, instance) {
                         filter.Date = dateStr;
-                        requestForSpaces(filter);
+                        if (this.id === 'web-date-filter') {
+                            requestForSpaces(filter);
+                        }
                     },
                 });
             }
@@ -216,8 +218,10 @@
                     filter.City = '';
                     districtNode.setAttribute('disabled', '');
                 }
-                filter.district = '';
-                requestForSpaces(filter);
+                filter.District = '';
+                if (this.id === 'web-city-filter') {
+                    requestForSpaces(filter);
+                }
 
                 // 設定鄉鎮區選單
                 let defaultOption = document.createElement('option');
@@ -237,11 +241,13 @@
             })
 
             districtNode.addEventListener('change', function () {
-                filter.district = this.querySelector(`option[value='${this.value}']`).innerText;
+                filter.District = this.querySelector(`option[value='${this.value}']`).innerText;
                 if (filter.District === '選擇鄉鎮區') {
                     filter.District = '';
                 }
-                requestForSpaces(filter);
+                if (this.id === 'web-district-filter') {
+                    requestForSpaces(filter);
+                }
             });
         }
 
@@ -271,7 +277,9 @@
                 if (filter.Type === '場地類型') {
                     filter.Type = '';
                 }
-                requestForSpaces(filter);
+                if (this.id === 'web-type-filter') {
+                    requestForSpaces(filter);
+                }
             })
         }
 
@@ -353,42 +361,54 @@
 
             function setBtnClickEvent() {
                 // 清除
-                document.querySelector('#filter-modal .clear-btn').addEventListener('click', function () {
+                document.querySelector('#filter-modal .clear-btn').addEventListener('click', clearModalFilter)
+
+                // 確認
+                document.querySelector('#filter-modal .save-btn').addEventListener('click', saveModalFilter)
+
+                function clearModalFilter() {
                     filter.HighPrice = '';
                     filter.LowPrice = '';
                     filter.Attendees = '';
                     filter.Area = '';
                     filter.Amenities.length = 0;
 
-                    requestForSpaces(filter);
-                })
+                    if (document.querySelector('#phone-city-filter').value !== 'default') {
+                        document.querySelector('#phone-city-filter').value = 'default';
+                        filter.City = '';
+                    }
+                    if (document.querySelector('#phone-district-filter').value !== 'default') {
+                        document.querySelector('#phone-district-filter').value = 'default';
+                        filter.District = '';
+                    }
+                    if (document.querySelector('#phone-date-filter').value) {
+                        document.querySelector('#phone-date-filter').value = '';
+                        filter.Date = '';
+                    }
 
-                // 確認
-                document.querySelector('#filter-modal .save-btn').addEventListener('click', function () {
+                    requestForSpaces(filter);
+                    bootstrap.Modal.getOrCreateInstance('#filter-modal').hide();
+                    document.querySelector('#filter-modal .save-btn').removeEventListener('click', saveModalFilter)
+                    this.removeEventListener('click', clearModalFilter)
+                }
+
+                function saveModalFilter() {
                     filter.Amenities.length = 0;
                     amenityOptionNode.querySelectorAll('.btn[style="border: 2px solid #049DD9"]').forEach(amenity => {
                         filter.Amenities.push(amenity.innerText);
                     });
-                    bootstrap.Modal.getOrCreateInstance('#filter-modal').hide();
+                    
                     requestForSpaces(filter);
-                })
+                    bootstrap.Modal.getOrCreateInstance('#filter-modal').hide();
+                    document.querySelector('#filter-modal .clear-btn').removeEventListener('click', clearModalFilter)
+                    this.removeEventListener('click', saveModalFilter);
+                }
             }
         }
 
         function setSearchBar(node) {
             node.addEventListener('change', function () {
-                filter = {
-                    City: '',
-                    District: '',
-                    Type: '',
-                    Date: '',
-                    HighPrice: '',
-                    LowPrice: '',
-                    Attendees: '',
-                    Amenities: [],
-                    Area: '',
-                    Keywords: this.value,
-                };
+                filter.Keywords = this.value;
             })
         }
 
@@ -404,6 +424,18 @@
 
         function requestForSpaces(filter) {
             setPlaceholder();
+
+            if (filter.Keywords) {
+                filter.City = '';
+                filter.District = '';
+                filter.Type = '';
+                filter.Date = '';
+                filter.HighPrice = '';
+                filter.LowPrice = '';
+                filter.Attendees = '';
+                filter.Amenities = [];
+                filter.Area = '';
+            }
 
             console.log(filter)
 

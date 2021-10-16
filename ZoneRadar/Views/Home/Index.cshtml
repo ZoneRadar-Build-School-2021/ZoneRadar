@@ -194,7 +194,7 @@
                     </div>
                     <div class="swiper-slide Tainan">
                         <a href="~/City/台南市" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="" data-city="台南市">臺南</span>
+                            <span class="" data-city="臺南市">臺南</span>
                         </a>
                     </div>
                     <div class="swiper-slide Kaohsiung">
@@ -381,7 +381,7 @@
 
         // 場地類型
         document.querySelectorAll('.swiper.swiper-activity .swiper-slide').forEach(node => {
-            node.addEventListener('click', function () {
+            node.addEventListener('click', function (e) {
                 this.querySelector('a').setAttribute('href', '#');
                 filterVM.SelectedType = this.querySelector('a span').innerText;
 
