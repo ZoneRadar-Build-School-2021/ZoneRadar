@@ -160,7 +160,8 @@ namespace ZoneRadar.Services
                     SpaceId = item.SpaceID,
                     MemberId = item.MemberID,
                     ContactName = item.ContactName,
-                    ContactPhone = item.ContactPhone
+                    ContactPhone = item.ContactPhone,
+                    SpaceID = item.SpaceID
                 });
 
             }
