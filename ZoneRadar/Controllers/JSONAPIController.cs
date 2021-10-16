@@ -54,9 +54,11 @@ namespace ZoneRadar.Controllers
             var amenityList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.Amenity);
             var amenityIconList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.AmenityICON);
 
+            var result = new FilterViewModel();
+
             if (_isComeFromIndex)
             {
-                var result = new FilterViewModel
+                result = new FilterViewModel
                 {
                     CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList()),
                     SpaceTypeList = spaceTypeList.ToList(),
@@ -69,7 +71,7 @@ namespace ZoneRadar.Controllers
             }
             else
             {
-                var result = new FilterViewModel
+                result = new FilterViewModel
                 {
                     CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList()),
                     SpaceTypeList = spaceTypeList.ToList(),
