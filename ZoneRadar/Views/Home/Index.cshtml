@@ -375,11 +375,14 @@
                 SelectedDate: date,
             }
 
-            console.log(filterVM)
             axios.post('https://localhost:44322/webapi/spaces/GetFilterDataFromIndex', filterVM).then(res => {
-                if (res.status === 200) window.location = 'https://localhost:44322/Searching/SearchingPage';
+                if (res.status === 200) {
+                    console.log(res.data);
+                    sessionStorage.setItem('filterVm', JSON.stringify(res.data));
+                    window.location = 'https://localhost:44322/Searching/SearchingPage'
+                };
             });
-        })
+        });
     </script>
     <script src="~/Assets/JS/index/index.js"></script>
 }

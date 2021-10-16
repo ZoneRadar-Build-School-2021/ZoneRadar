@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -43,7 +44,7 @@ namespace ZoneRadar.Controllers
             _filterDataFromIndex.SelectedType = filterVm.SelectedType;
             _filterDataFromIndex.SelectedDate = filterVm.SelectedDate;
 
-            return Ok();
+            return Ok(_filterDataFromIndex);
         }
 
         /// <summary>
@@ -52,36 +53,45 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [Route("GetFilterData")]
         [AcceptVerbs("GET")]
-        public IHttpActionResult GetFilterData()
+        public IHttpActionResult GetFilterData(string type, string city, string date)
         {
             var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City).OrderBy(x => x.Key.CityID);
             var spaceTypeList = _repository.GetAll<TypeDetail>().OrderBy(x => x.TypeDetailID).Select(x => x.Type);
             var amenityList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.Amenity);
             var amenityIconList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.AmenityICON);
 
-            var result = new FilterViewModel();
+            //var result = new FilterViewModel();
 
-            if (_isFomIndex == true)
+            //if (_isFomIndex == true)
+            //{
+            //    result.CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList());
+            //    result.SpaceTypeList = spaceTypeList.ToList();
+            //    result.AmenityList = amenityList.ToList();
+            //    result.AmenityIconList = amenityIconList.ToList();
+            //    result.SelectedCity = _filterDataFromIndex.SelectedCity;
+            //    result.SelectedType = _filterDataFromIndex.SelectedType;
+            //    result.SelectedDate = _filterDataFromIndex.SelectedDate;
+            //}
+            //else
+            //{
+            //    result.CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList());
+            //    result.SpaceTypeList = spaceTypeList.ToList();
+            //    result.AmenityList = amenityList.ToList();
+            //    result.AmenityIconList = amenityIconList.ToList();
+            //    result.SelectedCity = "";
+            //    result.SelectedType = "";
+            //    result.SelectedDate = "";
+            //}
+            var result = new FilterViewModel
             {
-                result.CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList());
-                result.SpaceTypeList = spaceTypeList.ToList();
-                result.AmenityList = amenityList.ToList();
-                result.AmenityIconList = amenityIconList.ToList();
-                result.SelectedCity = _filterDataFromIndex.SelectedCity;
-                result.SelectedType = _filterDataFromIndex.SelectedType;
-                result.SelectedDate = _filterDataFromIndex.SelectedDate;
-            }
-            else
-            {
-                result.CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList());
-                result.SpaceTypeList = spaceTypeList.ToList();
-                result.AmenityList = amenityList.ToList();
-                result.AmenityIconList = amenityIconList.ToList();
-                result.SelectedCity = "";
-                result.SelectedType = "";
-                result.SelectedDate = "";
-            }
-            
+                CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList()),
+                SpaceTypeList = spaceTypeList.ToList(),
+                AmenityList = amenityList.ToList(),
+                AmenityIconList = amenityIconList.ToList(),
+                SelectedCity = city == null ? "" : city,
+                SelectedType = type == null ? "" : type,
+                SelectedDate = date == null ? "" : date,
+            };
 
             return Ok(result);
         }

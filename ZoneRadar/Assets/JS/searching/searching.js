@@ -46,7 +46,22 @@
         flatpickr.localize(flatpickr.l10ns.zh_tw);
 
         // 初始化
-        axios.get('https://localhost:44322/webapi/spaces/GetFilterData')
+        let type, city, date;
+        if (sessionStorage.getItem('filterVm')) {
+            let keywords = JSON.parse(sessionStorage.getItem('filterVm'));
+            type = keywords.SelectedType;
+            city = keywords.SelectedCity;
+            date = keywords.SelectedDate;
+        } else {
+            type = '';
+            city = '';
+            date = '';
+        }
+
+        const getUrl = `https://localhost:44322/webapi/spaces/GetFilterData?type=${type}&city=${city}&date=${date}`;
+        sessionStorage.clear();
+
+        axios.get(getUrl)
             .then(response => {
                 document.querySelector('#web-date-filter').value = '';
                 document.querySelector('#phone-date-filter').value = '';
@@ -55,6 +70,8 @@
                 selectedCity = filterOptions.SelectedCity;
                 selectedType = filterOptions.SelectedType;
                 selectedDate = filterOptions.SelectedDate;
+                // 渲染場地列表
+                requestForSpaces();
                 // 篩選分組
                 cityDistrictList = filterOptions.CityDistrictDictionary;
                 typeList = filterOptions.SpaceTypeList;
@@ -64,9 +81,6 @@
                 // 設定Filter
                 setBarFilter();
                 setModalFilter();
-
-                // 渲染場地列表
-                requestForSpaces();
             })
             .catch(error => console.log(error));
 
