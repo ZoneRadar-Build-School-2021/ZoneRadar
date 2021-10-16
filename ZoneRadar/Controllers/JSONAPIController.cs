@@ -20,13 +20,11 @@ namespace ZoneRadar.Controllers
         private readonly SpaceService _spaceService;
         private readonly ZONERadarRepository _repository;
         private FilterViewModel _filterDataFromIndex;
-        private bool _isFomIndex;
         public JSONAPIController()
         {
             _spaceService = new SpaceService();
             _repository = new ZONERadarRepository();
             _filterDataFromIndex = new FilterViewModel();
-            _isFomIndex = false;
         }
 
         /// <summary>
@@ -38,8 +36,6 @@ namespace ZoneRadar.Controllers
         [AcceptVerbs("POST")]
         public IHttpActionResult GetFilterDataFromIndex(FilterViewModel filterVm)
         {
-            _isFomIndex = true;
-
             _filterDataFromIndex.SelectedCity = filterVm.SelectedCity;
             _filterDataFromIndex.SelectedType = filterVm.SelectedType;
             _filterDataFromIndex.SelectedDate = filterVm.SelectedDate;
@@ -60,28 +56,6 @@ namespace ZoneRadar.Controllers
             var amenityList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.Amenity);
             var amenityIconList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.AmenityICON);
 
-            //var result = new FilterViewModel();
-
-            //if (_isFomIndex == true)
-            //{
-            //    result.CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList());
-            //    result.SpaceTypeList = spaceTypeList.ToList();
-            //    result.AmenityList = amenityList.ToList();
-            //    result.AmenityIconList = amenityIconList.ToList();
-            //    result.SelectedCity = _filterDataFromIndex.SelectedCity;
-            //    result.SelectedType = _filterDataFromIndex.SelectedType;
-            //    result.SelectedDate = _filterDataFromIndex.SelectedDate;
-            //}
-            //else
-            //{
-            //    result.CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList());
-            //    result.SpaceTypeList = spaceTypeList.ToList();
-            //    result.AmenityList = amenityList.ToList();
-            //    result.AmenityIconList = amenityIconList.ToList();
-            //    result.SelectedCity = "";
-            //    result.SelectedType = "";
-            //    result.SelectedDate = "";
-            //}
             var result = new FilterViewModel
             {
                 CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList()),
