@@ -1156,21 +1156,44 @@ namespace ZoneRadar.Services
             result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 5, weekDay = "星期五" });
             result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 6, weekDay = "星期六" });
             result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 7, weekDay = "星期日" });
-
-            /// <summary>
-            /// 增加場地 增加地址的datamodel轉viewmodel (Amber) 
-            /// </summary>
-            
-        
-
-
             return result;
 
         }
-        //public AddSpaceViewModel CreateSpace()
-        //{
-        //    var result
-        //};
+        /// <summary>
+        /// 增加場地 增加地址的datamodel (Amber) 
+        /// </summary>
+        public Space CreateSpace(AddSpaceViewModel addSpaceViewModel)
+        {
+            var city = _repository.GetAll<City>().Where(x => x.CityName == addSpaceViewModel.City).Select(x => x.CityID).FirstOrDefault();
+            var space = new Space
+            {
+                MemberID=addSpaceViewModel.MemberID,
+                SpaceName=addSpaceViewModel.SpaceName,
+                Introduction=addSpaceViewModel.Introduction,
+                MeasureOfArea=addSpaceViewModel.MeasureOfArea,
+                Capacity=addSpaceViewModel.Capacity,
+                PricePerHour=addSpaceViewModel.PricePerHour,
+                MinHours=addSpaceViewModel.MinHours,
+                HostRules=addSpaceViewModel.HostRules,
+                Traffic=addSpaceViewModel.Traffic,
+                Parking=addSpaceViewModel.Parking,
+                ShootingEquipment=addSpaceViewModel.ShootingEquipment,
+                CancellationID=addSpaceViewModel.CancellationID,
+                CountryID=addSpaceViewModel.CountryID,
+                CityID=city,
+                DistrictID=addSpaceViewModel.DistrictID,
+                Address=addSpaceViewModel.Address,
+                PublishTime=addSpaceViewModel.PublishTime,
+                Latitude=addSpaceViewModel.Latitude,
+                Longitude=addSpaceViewModel.Longitude,
+                SpaceStatusID=addSpaceViewModel.SpaceStatusID,
+                DiscontinuedDate=addSpaceViewModel.DiscontinuedDate,
+            };
+            _repository.Create<Space>(space);
+            _repository.SaveChanges();
+            return space;
+        }
+
 
         /// <summary>
         /// 找出特定場地的Booking Card資料(Steve)
@@ -1211,6 +1234,7 @@ namespace ZoneRadar.Services
                 Discount = Decimal.Round((1 - discount), 2),
                 MinHour = minHour,
             };
+
 
             return result;
         }

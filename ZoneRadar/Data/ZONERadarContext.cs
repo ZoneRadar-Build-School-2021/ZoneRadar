@@ -11,7 +11,6 @@ namespace ZoneRadar.Models
             : base("name=ZONERadarContext")
         {
         }
-
         public virtual DbSet<AmenityCategoryDetail> AmenityCategoryDetail { get; set; }
         public virtual DbSet<AmenityDetail> AmenityDetail { get; set; }
         public virtual DbSet<Cancellation> Cancellation { get; set; }

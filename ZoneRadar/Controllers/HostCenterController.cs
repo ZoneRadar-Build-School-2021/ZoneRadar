@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ZoneRadar.Services;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Repositories;
+using ZoneRadar.Models;
 
 namespace ZoneRadar.Controllers
 {
@@ -13,12 +14,15 @@ namespace ZoneRadar.Controllers
     {
         private readonly SpaceService _spaceService;
         private readonly OrderService _orderService;
+        private readonly ZONERadarContext _context;
+       
 
         // GET: HostCenter
         public HostCenterController()
         {
             _spaceService = new SpaceService();
             _orderService = new OrderService();
+            _context = new ZONERadarContext();
         }
 
         // GET: HostCenter
@@ -55,17 +59,37 @@ namespace ZoneRadar.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddSpace(AddSpaceViewModel addspaceVM)
+        public ActionResult AddSpace(AddSpaceViewModel model)
         {
             //var result = _spaceService.CreateSpace(addspaceVM);
             //html 標籤的name屬性 可以讓Controller抓到input輸入框的資料
-            string SelectOptionCountryID = Request["SelectOptionCountryID"];
-            string SelectOptionCityID = Request["SelectOptionCityID"];
-            string DistrictID = Request["DistrictID"];
-            string Address = Request["Address"];
-            
-            //_ctx.Space.Add();
-            return RedirectToAction("index");
+            //string CountryID = Request["CountryID"];
+            //string CityID= Request["CityID"];
+            //string DistrictID = Request["DistrictID"];
+            //string Address = Request["Address"];
+
+            //把input輸入的City轉成CityID
+            //var city = _spaceService.GetCityOptions().Where(x => x.Text == CityID).Select(x => x.Value).FirstOrDefault();
+            //addspaceVM.CityID = Int32.Parse(city);
+            //addspaceVM.MemberID = 4;
+            //addspaceVM.SpaceName = "測試";
+            //addspaceVM.Introduction = "測試";
+            //addspaceVM.MeasureOfArea = 20;
+            //addspaceVM.Capacity = 10;
+            //addspaceVM.PricePerHour = 100;
+            //addspaceVM.MinHours = 2;
+            //addspaceVM.HostRules = "測試";
+            //addspaceVM.Traffic = "測試";
+            //addspaceVM.Parking = "測試";
+            //addspaceVM.ShootingEquipment = "測試";
+            //addspaceVM.CancellationID = 1;
+            //addspaceVM.PublishTime = DateTime.Today;
+            //addspaceVM.SpaceStatusID = 1;
+
+            //_context.Space.Add(addspaceVM);
+            //_context.SaveChanges();
+            var result = _spaceService.CreateSpace(model);
+            return View();
         }
 
         /// <summary>
