@@ -224,7 +224,8 @@ namespace ZoneRadar.Services
                     RentTime = renttime,
                     RentBackTime = rentbacktime,
                     People = people,
-                    Money = money
+                    Money = money,
+                    SpaceID = item.SpaceID
                 });
             }
             return UCProcessingList;
