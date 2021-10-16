@@ -382,7 +382,7 @@
         // 場地類型
         document.querySelectorAll('.swiper.swiper-activity .swiper-slide').forEach(node => {
             node.addEventListener('click', function (e) {
-                this.querySelector('a').setAttribute('href', '#');
+                this.querySelector('a').setAttribute('href', '');
                 filterVM.SelectedType = this.querySelector('a span').innerText;
 
                 goSearching(filterVM);
@@ -391,7 +391,7 @@
 
         // 場地區域 - 臺北
         document.querySelector('.max-slide.Taipei').addEventListener('click', function () {
-            this.querySelector('a').setAttribute('href', '#');
+            this.querySelector('a').setAttribute('href', '');
             filterVM.SelectedCity = "臺北市";
 
             goSearching(filterVM);
@@ -400,7 +400,7 @@
         // 場地區域 - 其他
         document.querySelectorAll('.swiper.swiper-location .swiper-slide').forEach(node => {
             node.addEventListener('click', function () {
-                this.querySelector('a').setAttribute('href', '#');
+                this.querySelector('a').setAttribute('href', '');
                 filterVM.SelectedCity = this.querySelector('a span').dataset.city;
 
                 goSearching(filterVM);
