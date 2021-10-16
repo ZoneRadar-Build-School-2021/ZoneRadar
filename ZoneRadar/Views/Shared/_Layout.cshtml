@@ -1,4 +1,5 @@
 ﻿@{
+    //透過cookie取得表單驗證的資料
     HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
 
     string userPhoto = "";
@@ -9,9 +10,7 @@
         UserInfo userInfo = Json.Decode<UserInfo>(ticket.UserData);
         userPhoto = userInfo.MemberPhoto;
         userId = userInfo.MemberId;
-    }
-
-    string icon = ViewBag.Icon == true ? "success" : "error";
+    }  
 }
 <!DOCTYPE html>
 <html>
@@ -55,10 +54,10 @@
                     <li class="nav-item">
                         <a class="become-host-link nav-link" href="~/HostCenter/AddSpace">成為場地主</a>
                     </li>
-                    <li class="customer-only nav-item">
+                    <li class="customer-only d-none nav-item">
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#register-modal">註冊</a>
                     </li>
-                    <li class="customer-only nav-item">
+                    <li class="customer-only d-none nav-item">
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login-modal">登入</a>
                     </li>
                     <!-- 登入後出現 -->
@@ -299,66 +298,47 @@
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
 
-    <!--判斷登入與否，決定導覽列顯示的介面-->
-    @if (User.Identity.IsAuthenticated)
-    {
-        <script>
-            window.addEventListener("load", () => {
-                let customer_only = document.querySelectorAll(".customer-only");
-                let member_only = document.querySelectorAll(".member-only");
-                customer_only.forEach(item => {
-                    item.classList.add("d-none");
-                })
-                member_only.forEach(item => {
-                    item.classList.remove("d-none");
-                })
-            })
-        </script>
-    }
-    else
-    {
-        <script>
-            window.addEventListener("load", () => {
-                let customer_only = document.querySelectorAll(".customer-only");
-                let member_only = document.querySelectorAll(".member-only");
-                customer_only.forEach(item => {
-                    item.classList.remove("d-none");
-                })
-                member_only.forEach(item => {
-                    item.classList.add("d-none");
-                })
-            })
-        </script>
+    @{ 
+        bool isAuthenticated = User.Identity.IsAuthenticated;
+        bool registerModalPopup = ViewBag.RegisterModalPopup == true;
+        bool loginModalPopup = ViewBag.LoginModalPopup == true;
+        bool alert = ViewBag.Alert == true;
+        //設定sweet alert的icon應為哪種樣式
+        string icon = ViewBag.Icon == true ? "success" : "error";
     }
 
-    <!--輸入註冊路由時，跳出註冊Modal-->
-    @if (ViewBag.RegisterModalPopup == true)
-    {
-        <script>
-            window.addEventListener("load", () => {
+
+    <script>
+        window.addEventListener("load", () => {
+            //判斷登入與否，決定導覽列顯示的介面
+            let customer_only = document.querySelectorAll(".customer-only");
+            let member_only = document.querySelectorAll(".member-only");
+            if (@Json.Encode(isAuthenticated)) {
+                member_only.forEach(item => {
+                    item.classList.remove("d-none");
+                })
+            } else {
+                customer_only.forEach(item => {
+                    item.classList.remove("d-none");
+                })
+            }
+
+            //輸入註冊路由時，跳出註冊Modal
+            if (@Json.Encode(registerModalPopup)) {
                 let register_modal = document.querySelector("#register-modal");
                 let modal = bootstrap.Modal.getOrCreateInstance(register_modal);
                 modal.show();
-            })
-        </script>
-    }
+            }
 
-    <!--判斷是否欲進入未授權畫面或輸入登入路由時，跳出登入Modal-->
-    @if (ViewBag.LoginModalPopup == true)
-    {
-        <script>
-            window.addEventListener("load", () => {
+            //判斷是否欲進入未授權畫面或輸入登入路由時，跳出登入Modal
+            if (@Json.Encode(loginModalPopup)) {
                 let login_modal = document.querySelector("#login-modal");
                 let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
                 modal.show();
-            })
-        </script>
-    }
+            }
 
-    @if (ViewBag.Alert == true)
-    {
-        <script>
-            window.addEventListener("load", () => {
+            //跳出sweet alert提示訊息
+            if (@Json.Encode(alert)) {
                 Swal.fire({
                     title: "@ViewBag.Message",
                     icon: "@icon",
@@ -367,9 +347,10 @@
                     confirmButtonText: "OK",
                     position: "top"
                 })
-            })
-        </script>
-    }
+            }
+        })
+    </script>
+    
 
     @RenderSection("endCSS", required: false)
     @RenderSection("endJS", required: false)
