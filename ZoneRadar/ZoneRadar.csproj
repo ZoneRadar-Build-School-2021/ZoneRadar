@@ -243,6 +243,7 @@
     <Compile Include="Models\ViewModels\MyCollectionViewModel.cs" />
     <Compile Include="Models\ViewModels\QueryViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchingPageViewModel.cs" />
+    <Compile Include="Models\ViewModels\SpaceManageViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceReviewViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceViewModel.cs" />
     <Compile Include="Models\ViewModels\UsercenterCompletedViewModel.cs" />
