@@ -372,7 +372,7 @@ namespace ZoneRadar.Services
         /// <summary>
         ///  找出memberName (Amber)
         /// </summary>
-        
+
         //public SomeOnesSpaceViewModel ShowOwnerName()
         //{
         //    var result = new SomeOnesSpaceViewModel()
@@ -954,7 +954,7 @@ namespace ZoneRadar.Services
                     var shootingTemp = new SomeOnesShooting()
                     {
                         Shooting = item.ShootingEquipment,
-                        Displaynone="d-none"
+                        Displaynone = "d-none"
                     };
                     result.SomeOnesShootingList.Add(shootingTemp);
                 }
@@ -1165,8 +1165,8 @@ namespace ZoneRadar.Services
             /// <summary>
             /// 增加場地 增加地址的datamodel轉viewmodel (Amber) 
             /// </summary>
-            
-        
+
+
 
 
             return result;

@@ -237,9 +237,9 @@
             })
 
             districtNode.addEventListener('change', function () {
-                filter.District = this.querySelector(`option[value='${this.value}']`).innerText;
+                filter.district = this.querySelector(`option[value='${this.value}']`).innerText;
                 if (filter.District === '選擇鄉鎮區') {
-                    selectedDistrict = '';
+                    filter.District = '';
                 }
                 requestForSpaces(filter);
             });
