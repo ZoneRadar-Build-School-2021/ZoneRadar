@@ -135,12 +135,14 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
-        /// 場地主訂單 - 歷史訂單(Steve) 
+        /// 場地主訂單 - 歷史訂單(Nick) 
         /// </summary>
         /// <returns></returns>
         public ActionResult History()
         {
-            return View();
+            var userid = int.Parse(User.Identity.Name);
+            var model = _orderService.GetHostCenterHistoryVM(userid);
+            return View(model);
         }
     }
 }
