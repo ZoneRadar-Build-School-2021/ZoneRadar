@@ -18,10 +18,25 @@ namespace ZoneRadar.Controllers
     {
         private readonly SpaceService _spaceService;
         private readonly ZONERadarRepository _repository;
+        private FilterViewModel _filterDataFromIndex;
+        private bool _isFomIndex = false;
         public JSONAPIController()
         {
             _spaceService = new SpaceService();
             _repository = new ZONERadarRepository();
+            _filterDataFromIndex = new FilterViewModel();
+        }
+
+
+        public IHttpActionResult GetFilterDataFromIndex(FilterViewModel filterVm)
+        {
+            _isFomIndex = true;
+
+            _filterDataFromIndex.SelectedCity = filterVm.SelectedCity;
+            _filterDataFromIndex.SelectedType = filterVm.SelectedType;
+            _filterDataFromIndex.SelectedDate = filterVm.SelectedDate;
+
+            return Ok();
         }
 
         /// <summary>
