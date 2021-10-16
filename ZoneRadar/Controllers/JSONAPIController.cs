@@ -46,8 +46,8 @@ namespace ZoneRadar.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("GetFilterData")]
-        [AcceptVerbs("GET", "Post")]
-        public IHttpActionResult GetFilterData(FilterViewModel filterVM)
+        [AcceptVerbs("GET")]
+        public IHttpActionResult GetFilterData()
         {
             var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City).OrderBy(x => x.Key.CityID);
             var spaceTypeList = _repository.GetAll<TypeDetail>().OrderBy(x => x.TypeDetailID).Select(x => x.Type);
