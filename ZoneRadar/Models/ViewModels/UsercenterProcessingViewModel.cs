@@ -18,5 +18,6 @@ namespace ZoneRadar.Models.ViewModels
         public int People { get; set; }
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public decimal Money { get; set; }
+        public int SpaceID { get; set; }
     }
 }

@@ -160,7 +160,8 @@ namespace ZoneRadar.Services
                     SpaceId = item.SpaceID,
                     MemberId = item.MemberID,
                     ContactName = item.ContactName,
-                    ContactPhone = item.ContactPhone
+                    ContactPhone = item.ContactPhone,
+                    SpaceID = item.SpaceID
                 });
 
             }
@@ -223,7 +224,8 @@ namespace ZoneRadar.Services
                     RentTime = renttime,
                     RentBackTime = rentbacktime,
                     People = people,
-                    Money = money
+                    Money = money,
+                    SpaceID = item.SpaceID
                 });
             }
             return UCProcessingList;
@@ -302,7 +304,8 @@ namespace ZoneRadar.Services
                     People = people,
                     Money = money,
                     HasReview = hasReview,
-                    OrderId = item.OrderID
+                    OrderId = item.OrderID,
+                    SpaceID = item.SpaceID
                 });
             }
 
