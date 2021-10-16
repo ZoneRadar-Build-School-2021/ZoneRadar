@@ -33,6 +33,8 @@ namespace ZoneRadar.Controllers
         /// </summary>
         /// <param name="filterVm"></param>
         /// <returns></returns>
+        [Route("GetFilterDataFromIndex")]
+        [AcceptVerbs("POST")]
         public IHttpActionResult GetFilterDataFromIndex(FilterViewModel filterVm)
         {
             _isFomIndex = true;
