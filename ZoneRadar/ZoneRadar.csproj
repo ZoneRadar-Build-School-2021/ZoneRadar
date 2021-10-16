@@ -564,6 +564,8 @@
     <Content Include="Views\MemberCenter\ResentVerificationEmail.cshtml" />
     <Content Include="Views\MemberCenter\ResetPassword.cshtml" />
     <Content Include="Views\MemberCenter\HadSentResetPasswordEmail.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Home\Policy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

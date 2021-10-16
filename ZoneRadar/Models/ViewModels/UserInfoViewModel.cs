@@ -15,7 +15,6 @@ namespace ZoneRadar.Models.ViewModels
     {
         public string Name { get; set; }
         public int Id { get; set; }
-        public int Score { get; set; }
         public string ReviewContent { get; set; }
         public bool Recommend { get; set; }
         public DateTime ReviewDate { get; set; }
