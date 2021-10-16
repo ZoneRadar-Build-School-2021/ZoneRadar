@@ -14,14 +14,10 @@ namespace ZoneRadar.Models.ViewModels
     {
         public int Id { get; set; }
         public string Email { get; set; }
-
         public string Password { get; set; }
         public string Photo { get; set; }
-       
         public string Name { get; set; }
-
         public string Phone { get; set; }
-
         public string Description { get; set; }
         public DateTime SignUpDateTime { get; set; }
     }
@@ -34,5 +30,7 @@ namespace ZoneRadar.Models.ViewModels
         public decimal PricePerHour { get; set; }
         public string SpacePhoto { get; set; }
         public int ReviewCount { get; set; }
+        public int Score { get; set; }
+        public string SpaceMemberPhoto { set; get; }
     }
 }

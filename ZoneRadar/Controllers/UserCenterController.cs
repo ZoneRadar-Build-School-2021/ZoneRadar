@@ -85,7 +85,7 @@ namespace ZoneRadar.Controllers
         {
             var userid = int.Parse(User.Identity.Name);
 
-            if (userid == null)
+            if (userid == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -117,13 +117,13 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         public ActionResult DeleteShopCarDetail(int id)
         {
-            var userid = int.Parse(User.Identity.Name);
+            //var userid = int.Parse(User.Identity.Name);
 
             var result = _PreOrderService.DeleteShopCarDetail(id);
             return RedirectToAction("ShopCar", result);
 
-            var model = _PreOrderService.GetShopCarVM(userid);
-            return View("ShopCar", model);
+            //var model = _PreOrderService.GetShopCarVM(userid);
+            //return View("ShopCar", model);
         }
         /// <summary>
         /// 刪除預購單頁(Nick)
@@ -133,13 +133,13 @@ namespace ZoneRadar.Controllers
         public ActionResult DeleteShopCarOrder(int id)
         {
 
-            var userid = int.Parse(User.Identity.Name);
-            var model = _PreOrderService.GetShopCarVM(userid);
+            //var userid = int.Parse(User.Identity.Name);
+            //var model = _PreOrderService.GetShopCarVM(userid);
 
             var result = _PreOrderService.DeleteShopCarOrder(id);
             return RedirectToAction("ShopCar", result);
 
-            return View("ShopCar", model);
+            //return View("ShopCar", model);
         }
         /// <summary>
         /// (Get)刪除已付款訂單頁(Nick)
@@ -150,7 +150,7 @@ namespace ZoneRadar.Controllers
         {
             var userid = int.Parse(User.Identity.Name);
 
-            if (userid == null)
+            if (userid == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -184,7 +184,7 @@ namespace ZoneRadar.Controllers
         {
             var userid = int.Parse(User.Identity.Name);
 
-            if (userid == null)
+            if (userid == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }

@@ -47,9 +47,15 @@ namespace ZoneRadar.Controllers
             {
                 //寄送重設密碼信
                 _service.SentResetPasswordEmail(Server, Request, Url, email);
+                return View("HadSentResetPasswordEmail");
             }
-            //未刻頁面
-            return Content("請至信箱查看信件");
+            else
+            {
+                ViewBag.Alert = true;
+                ViewBag.Message = "找不到此會員，請重新輸入！";
+                ViewBag.Icon = false;
+                return View();
+            }
         }
 
         /// <summary>
@@ -97,9 +103,9 @@ namespace ZoneRadar.Controllers
             if (!ModelState.IsValid || resetPasswordVM.NewPassword != resetPasswordVM.NewConfirmPassword)
             {
                 //輸入格式不正確或密碼不一致
-                TempData["Alert"] = true;
-                TempData["Message"] = "輸入格式不正確或密碼不一致，請重新輸入！";
-                TempData["Icon"] = false;
+                ViewBag.Alert = true;
+                ViewBag.Message = "輸入格式不正確或密碼不一致，請重新輸入！";
+                ViewBag.Icon = false;
                 return View();
             }
             //如果已重設密碼、登入了，又按上一頁
