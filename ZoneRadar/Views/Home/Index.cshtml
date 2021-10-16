@@ -364,89 +364,57 @@
 @section endJS
 {
     <script>
+        let filterVM = {
+            SelectedCity: "",
+            SelectedType: "",
+            SelectedDate: "",
+        }
+
         // 條件
         document.querySelector('#homepage-search-submit').addEventListener('click', function () {
-            let type = document.querySelector('.select-activity').value || '';
-            let city = document.querySelector('.select-county').value || '';
-            let date = document.querySelector('.select-date.flatpickr.flatpickr-input').value || '';
+            filterVM.SelectedType = document.querySelector('.select-activity').value || '';
+            filterVM.SelectedCity = document.querySelector('.select-county').value || '';
+            filterVM.SelectedDate = document.querySelector('.select-date.flatpickr.flatpickr-input').value || '';
 
-            const filterVM = {
-                SelectedCity: city,
-                SelectedType: type,
-                SelectedDate: date,
-            }
-
-            axios.post('https://localhost:44322/webapi/spaces/GetFilterDataFromIndex', filterVM).then(res => {
-                if (res.status === 200) {
-                    console.log(res.data);
-                    sessionStorage.setItem('filterVm', JSON.stringify(res.data));
-                    window.location = 'https://localhost:44322/Searching/SearchingPage'
-                };
-            });
+            goSearching(filterVM);
         });
 
         // 場地類型
         document.querySelectorAll('.swiper.swiper-activity .swiper-slide').forEach(node => {
             node.addEventListener('click', function () {
                 this.querySelector('a').setAttribute('href', '#');
-                let type = this.querySelector('a span').innerText;
+                filterVM.SelectedType = this.querySelector('a span').innerText;
 
-                const filterVM = {
-                    SelectedCity: "",
-                    SelectedType: type,
-                    SelectedDate: "",
-                }
-
-                axios.post('https://localhost:44322/webapi/spaces/GetFilterDataFromIndex', filterVM).then(res => {
-                    if (res.status === 200) {
-                        sessionStorage.setItem('filterVm', JSON.stringify(res.data));
-                        window.location = 'https://localhost:44322/Searching/SearchingPage'
-                    };
-                });
+                goSearching(filterVM);
             });
         });
 
         // 場地區域 - 臺北
         document.querySelector('.max-slide.Taipei').addEventListener('click', function () {
             this.querySelector('a').setAttribute('href', '#');
+            filterVM.SelectedCity = "臺北市";
 
-            const filterVM = {
-                SelectedCity: "臺北市",
-                SelectedType: "",
-                SelectedDate: "",
-            }
-
-            axios.post('https://localhost:44322/webapi/spaces/GetFilterDataFromIndex', filterVM).then(res => {
-                if (res.status === 200) {
-                    console.log(res.data);
-                    sessionStorage.setItem('filterVm', JSON.stringify(res.data));
-                    window.location = 'https://localhost:44322/Searching/SearchingPage'
-                };
-            });
+            goSearching(filterVM);
         });
 
         // 場地區域 - 其他
         document.querySelectorAll('.swiper.swiper-location .swiper-slide').forEach(node => {
             node.addEventListener('click', function () {
                 this.querySelector('a').setAttribute('href', '#');
-                let city = this.querySelector('a span').dataset.city;
+                filterVM.SelectedCity = this.querySelector('a span').dataset.city;
 
-                const filterVM = {
-                    SelectedCity: city,
-                    SelectedType: "",
-                    SelectedDate: "",
-                }
-
-                axios.post('https://localhost:44322/webapi/spaces/GetFilterDataFromIndex', filterVM).then(res => {
-                    if (res.status === 200) {
-                        sessionStorage.setItem('filterVm', JSON.stringify(res.data));
-                        window.location = 'https://localhost:44322/Searching/SearchingPage'
-                    };
-                });
+                goSearching(filterVM);
             });
         });
 
-
+        function goSearching(filterVM) {
+            axios.post('https://localhost:44322/webapi/spaces/GetFilterDataFromIndex', filterVM).then(res => {
+                if (res.status === 200) {
+                    sessionStorage.setItem('filterVm', JSON.stringify(res.data));
+                    window.location = 'https://localhost:44322/Searching/SearchingPage'
+                };
+            });
+        };
     </script>
     <script src="~/Assets/JS/index/index.js"></script>
 }
