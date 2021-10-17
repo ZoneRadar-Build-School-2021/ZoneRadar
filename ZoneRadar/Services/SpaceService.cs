@@ -1164,33 +1164,40 @@ namespace ZoneRadar.Services
         /// </summary>
         public Space CreateSpace(AddSpaceViewModel addSpaceViewModel)
         {
-            var city = _repository.GetAll<City>().Where(x => x.CityName == addSpaceViewModel.City).Select(x => x.CityID).FirstOrDefault();
+            var city = _repository.GetAll<City>().Where(x => x.CityName == addSpaceViewModel.CityID).Select(x => x.CityID).FirstOrDefault();
             var space = new Space
             {
                 MemberID=addSpaceViewModel.MemberID,
                 SpaceName=addSpaceViewModel.SpaceName,
-                Introduction=addSpaceViewModel.Introduction,
-                MeasureOfArea=addSpaceViewModel.MeasureOfArea,
+                Introduction = addSpaceViewModel.Introduction,
+                //Introduction = "<p>test</p>",
+                MeasureOfArea =addSpaceViewModel.MeasureOfArea,
                 Capacity=addSpaceViewModel.Capacity,
                 PricePerHour=addSpaceViewModel.PricePerHour,
                 MinHours=addSpaceViewModel.MinHours,
-                HostRules=addSpaceViewModel.HostRules,
-                Traffic=addSpaceViewModel.Traffic,
-                Parking=addSpaceViewModel.Parking,
+                //HostRules=addSpaceViewModel.HostRules,
+                HostRules ="<p>test</p>",
+                //Traffic = addSpaceViewModel.Traffic,
+                Traffic = "<p>test</p>",
+
+                Parking = addSpaceViewModel.Parking,
                 ShootingEquipment=addSpaceViewModel.ShootingEquipment,
                 CancellationID=addSpaceViewModel.CancellationID,
                 CountryID=addSpaceViewModel.CountryID,
                 CityID=city,
                 DistrictID=addSpaceViewModel.DistrictID,
                 Address=addSpaceViewModel.Address,
-                PublishTime=addSpaceViewModel.PublishTime,
-                Latitude=addSpaceViewModel.Latitude,
+                PublishTime = DateTime.Today,
+                Latitude =addSpaceViewModel.Latitude,
                 Longitude=addSpaceViewModel.Longitude,
-                SpaceStatusID=addSpaceViewModel.SpaceStatusID,
-                DiscontinuedDate=addSpaceViewModel.DiscontinuedDate,
+                SpaceStatusID=1,
+                //SpaceStatusID = addSpaceViewModel.SpaceStatusID,
+                DiscontinuedDate = DateTime.UtcNow,
+                //DiscontinuedDate = addSpaceViewModel.DiscontinuedDate,
             };
             _repository.Create<Space>(space);
             _repository.SaveChanges();
+           
             return space;
         }
 
