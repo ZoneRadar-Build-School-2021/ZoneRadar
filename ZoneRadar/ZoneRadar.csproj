@@ -293,6 +293,7 @@
     <Content Include="Assets\CSS\order_state\membercenter_pending.css" />
     <Content Include="Assets\CSS\order_state\membercenter_processing.css" />
     <Content Include="Assets\CSS\order_state\usercenter_shopcar.css" />
+    <Content Include="Assets\CSS\Pay\Paypage.css" />
     <Content Include="Assets\CSS\profile\profile.css" />
     <Content Include="Assets\CSS\searching\searching.css" />
     <Content Include="Assets\CSS\static\QA.css" />
@@ -461,6 +462,7 @@
     <Content Include="Assets\JS\order_state\membercenter_pending.js" />
     <Content Include="Assets\JS\order_state\membercenter_processing.js" />
     <Content Include="Assets\JS\order_state\usercenter_shopcar.js" />
+    <Content Include="Assets\JS\Payment\Paypage.js" />
     <Content Include="Assets\JS\searching\searching.js" />
     <Content Include="Assets\JS\static\Q&amp;A.js" />
     <Content Include="Assets\JS\sweetalert2.js" />
@@ -569,10 +571,10 @@
     <Content Include="Views\MemberCenter\HadSentResetPasswordEmail.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Home\Policy.cshtml" />
+    <Content Include="Views\Payment\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Payment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
