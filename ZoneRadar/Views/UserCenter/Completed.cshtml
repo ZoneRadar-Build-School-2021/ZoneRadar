@@ -93,7 +93,8 @@
                     </div>
                 </div>
                 <div class="memberbuyer_completed_btn col-12 mt-3 mb-5 d-flex justify-content-end">
-                    <button class="btn me-2">再買一次</button>
+                    @Html.ActionLink("再買一次","BookingPage","Booking",new { id = item.SpaceID} , new { @class = "btn me-2" })
+                    @*<button class="btn me-2">再買一次</button>*@
                     @if (item.HasReview)
                     {
                         <button class="btn me-2" data-bs-toggle="modal" data-bs-target="#@Html.DisplayFor(m => item.SpaceName)" disabled>評價 / 評分</button>
