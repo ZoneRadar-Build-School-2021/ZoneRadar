@@ -116,22 +116,28 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
-        /// 下架場地(Jenny)
+        /// 儲存場地預定下架日期(Jenny)
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult SpaceDiscontinue(int spaceId, DateTime discontinuedDate)
+        public ActionResult SpaceDiscontinue(int spaceId, DateTime? discontinuedDate)
         {
             int userId;
             var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
-            if (isAuthenticated)
+            if (!isAuthenticated)
             {
-                var spaceManageList = _spaceService.GetHostSpace(userId);
-                return View(spaceManageList);
+                return RedirectToAction("Index", "Home");
+            }
+            if (discontinuedDate.HasValue)
+            {
+                var se = new ReviewService();
+                se.SetDiscontinuedDate(spaceId, discontinuedDate.Value);
+                return RedirectToAction("SpaceManage");
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                //防呆未完成
+                return RedirectToAction("SpaceManage");
             }
         }
     }

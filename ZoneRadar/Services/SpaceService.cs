@@ -1244,8 +1244,8 @@ namespace ZoneRadar.Services
                     var details = order.OrderDetail.Where(x => x.StartDateTime.Date.AddDays(30) >= DateTime.Now.Date);
                     orderDetails.AddRange(details);
 
-                    //計算最後被預定日期
-                    var dates = order.OrderDetail.Select(x => x.EndDateTime);
+                    //找出最後被預定日期並加一天
+                    var dates = order.OrderDetail.Select(x => x.EndDateTime.AddDays(1));
                     allorderEndDates.AddRange(dates);
                 }
                 var lastOrderdDate = allorderEndDates.Count == 0 ? "today" : allorderEndDates.Max().ToString("yyyy-MM-dd");
@@ -1260,7 +1260,7 @@ namespace ZoneRadar.Services
                     NumberOfReviews = spaceReview.Count,
                     NumberOfOrders = orderDetails.Count,
                     SpaceStatusId = space.SpaceStatusID,
-                    LastOrderdDate = lastOrderdDate,
+                    CanDiscontinueDate = lastOrderdDate,
                     DiscontinuedDate = space.DiscontinuedDate.HasValue ? space.DiscontinuedDate.Value.ToString("yyyy-MM-dd") : "無"
                 });
             }

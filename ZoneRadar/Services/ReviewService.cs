@@ -95,5 +95,23 @@ namespace ZoneRadar.Services
 
             return review;
         }
+
+        /// <summary>
+        /// 將場地預定下架日期存進資料庫(Jenny)
+        /// </summary>
+        public void SetDiscontinuedDate(int spaceId, DateTime discontinuedDate)
+        {
+            var space = _repository.GetAll<Space>().First(x=>x.SpaceID == spaceId);
+            space.DiscontinuedDate = discontinuedDate;
+            try
+            {
+                _repository.Update(space);
+                _repository.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }
