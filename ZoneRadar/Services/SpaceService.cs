@@ -471,7 +471,8 @@ namespace ZoneRadar.Services
                 var canceltemp = new CancellationArae()
                 {
                     CancellationTitle = cancel.CancellationTitle,
-                    CancellationDetail = cancel.CancellationDetail
+                    CancellationDetail = cancel.CancellationDetail,
+                    CancellationId=cancel.CancellationID
                 };
                 result.cancellationAraesList.Add(canceltemp);
             }
@@ -1164,40 +1165,38 @@ namespace ZoneRadar.Services
         /// </summary>
         public Space CreateSpace(AddSpaceViewModel addSpaceViewModel)
         {
-            var city = _repository.GetAll<City>().Where(x => x.CityName == addSpaceViewModel.CityID).Select(x => x.CityID).FirstOrDefault();
+            var spacecity=addSpaceViewModel.CityID;
+            var city = _repository.GetAll<City>().Where(x => x.CityName == spacecity).Select(x => x.CityID).FirstOrDefault();
             var space = new Space
             {
-                MemberID=addSpaceViewModel.MemberID,
-                SpaceName=addSpaceViewModel.SpaceName,
+                //MemberID = addSpaceViewModel.MemberID,
+                MemberID = 4,
+                SpaceName = addSpaceViewModel.SpaceName,
                 Introduction = addSpaceViewModel.Introduction,
-                //Introduction = "<p>test</p>",
-                MeasureOfArea =addSpaceViewModel.MeasureOfArea,
-                Capacity=addSpaceViewModel.Capacity,
-                PricePerHour=addSpaceViewModel.PricePerHour,
-                MinHours=addSpaceViewModel.MinHours,
-                //HostRules=addSpaceViewModel.HostRules,
-                HostRules ="<p>test</p>",
-                //Traffic = addSpaceViewModel.Traffic,
-                Traffic = "<p>test</p>",
-
+                MeasureOfArea = addSpaceViewModel.MeasureOfArea,
+                Capacity = addSpaceViewModel.Capacity,
+                PricePerHour = addSpaceViewModel.PricePerHour,
+                MinHours = addSpaceViewModel.MinHours,
+                HostRules = addSpaceViewModel.HostRules,
+                Traffic = addSpaceViewModel.Traffic,
                 Parking = addSpaceViewModel.Parking,
-                ShootingEquipment=addSpaceViewModel.ShootingEquipment,
-                CancellationID=addSpaceViewModel.CancellationID,
-                CountryID=addSpaceViewModel.CountryID,
-                CityID=city,
-                DistrictID=addSpaceViewModel.DistrictID,
-                Address=addSpaceViewModel.Address,
+                ShootingEquipment = addSpaceViewModel.ShootingEquipment,
+                CancellationID = addSpaceViewModel.CancellationID,
+                CountryID = addSpaceViewModel.CountryID,
+                CityID = city,
+                DistrictID = addSpaceViewModel.DistrictID,
+                Address = addSpaceViewModel.Address,
                 PublishTime = DateTime.Today,
-                Latitude =addSpaceViewModel.Latitude,
-                Longitude=addSpaceViewModel.Longitude,
-                SpaceStatusID=1,
+                //Latitude = addSpaceViewModel.Latitude,
+                //Longitude = addSpaceViewModel.Longitude,
+                SpaceStatusID = 1,
                 //SpaceStatusID = addSpaceViewModel.SpaceStatusID,
                 DiscontinuedDate = DateTime.UtcNow,
                 //DiscontinuedDate = addSpaceViewModel.DiscontinuedDate,
             };
             _repository.Create<Space>(space);
             _repository.SaveChanges();
-           
+
             return space;
         }
 

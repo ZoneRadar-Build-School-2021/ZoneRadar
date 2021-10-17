@@ -9,7 +9,7 @@ namespace ZoneRadar.Models.ViewModels
     {
         
         public int CountryID { get; set; }
-        public int CityID { get; set; }
+        public string CityID { get; set; }
         public int DistrictID { get; set; }
         public string Address { get; set; }
         public int MemberID { get; set; }
