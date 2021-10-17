@@ -46,6 +46,9 @@ namespace ZoneRadar.Services
                 //該場地主電話
                 var ownerphone = members.FirstOrDefault(x => x.MemberID == item.Space.MemberID).Phone;
 
+                var ownerid = item.Space.MemberID;
+                var email = members.FirstOrDefault(x => x.MemberID == ownerid).Email;
+
                 decimal money = 0;
                 var temp = new List<RentDetailViewModel>();
                 //訂單時間及人數
@@ -94,7 +97,8 @@ namespace ZoneRadar.Services
                     Money = money,
                     RentDetailVM = temp,
                     OrderID = item.OrderID,
-                    SpaceID = item.SpaceID
+                    SpaceID = item.SpaceID,
+                    Email = email
                 });
 
 
