@@ -83,24 +83,24 @@
             </h4>
         </div>
     </div>
-    <div class="reviewsfromhost row justify-content-center p-3 mt-2">
+    <div class="reviewsfromhost row p-3 mt-2">
         @foreach (var My in Myspaces)
         {
             <div class="mt-4 myplace_space_card col-sm-12 col-md-6 col-lg-6">
-                <a class="space_card_pic" href="~/Booking/BookingPage"><img class="pe-2" src="@My.SpacePhoto"></a>
+                <a class="space_card_pic" href="~/Booking/BookingPage/@My.SpaceId"><img class="pe-2" src="@My.SpacePhoto"></a>
                 <span class="myplace_space_card_distinct">@My.PricePerHour.ToString("C0") / hr</span>
                 <div class="space_card mt-4">
-                    <a href="~/Booking/BookingPage" class="space_card_title fs-5">
+                    <a href="~/Booking/BookingPage/@My" class="space_card_title fs-5">
                         @My.SpaceName
                     </a>
                     <div class="space_card_location mt-1">
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                        <a href="~/Searching/SearchingPage/@My.City" class="space_card_location_a">
                             <span>@My.City</span>
                         </a>
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                        <a href="~/Searching/SearchingPage/@My.District" class="space_card_location_a">
                             <span>@My.District</span>
                         </a>
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                        <a href="~/Searching/SearchingPage/@My.Address" class="space_card_location_a">
                             <span>@My.Address</span>
                         </a>
                     </div>

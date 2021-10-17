@@ -455,6 +455,7 @@ namespace ZoneRadar.Services
                     {
                         resultMember.Spaces.Add(new Spaces
                         {
+                            SpaceId = s.SpaceID,
                             SpaceName = s.SpaceName,
                             Address = s.Address,
                             SpacePhoto = s.SpacePhoto.First().SpacePhotoUrl,
@@ -515,6 +516,7 @@ namespace ZoneRadar.Services
                     var sps = spaces.FirstOrDefault(x => x.SpaceID == c.SpaceID && x.SpaceStatusID == 2);
                     resultMemberCollection.MyCollection.Add(new Spaces
                     {
+                        SpaceId = sps.SpaceID,
                         SpaceName = sps.SpaceName,
                         Address = sps.Address,
                         SpacePhoto = sps.SpacePhoto.First().SpacePhotoUrl,
@@ -586,6 +588,7 @@ namespace ZoneRadar.Services
                     var or = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID && x.ToHost == false);
                     resulthostinfoReview.ToUserReview.Add(new UserReview
                     {
+                        SpaceId = o.Space.SpaceID,
                         SpaceName = o.Space.SpaceName,
                         /*sps.FirstOrDefault(x => x.SpaceID == o.SpaceID).SpaceName,*/
                         SpaceMemberPhoto = o.Space.Member.Photo,

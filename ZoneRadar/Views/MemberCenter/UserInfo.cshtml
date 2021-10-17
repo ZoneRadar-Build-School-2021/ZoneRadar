@@ -145,18 +145,18 @@
                         <p class="reviewsfromhost_review_card_txt_date">
                             <span>@r.ReviewDate.ToString("yyyy-MM-dd")</span>
                         </p>
-                        <a href="~/Booking/BookingPage">
+                        <a href="~/Booking/BookingPage/@r.SpaceId">
                             <span class="reviewsfromhost_review_card_txt_place">Build School</span>
                         </a>
                         <div class="reviewsfromhost_review_card_txt_location">
                             <div class="reviewsfromhost_review_card_txt_location_a">
-                                <a href="~/Searching/SearchingPage">
+                                <a href="~/Searching/SearchingPage/@r.City">
                                     <span>@r.City</span>
                                 </a>
-                                <a href="~/Searching/SearchingPage">
+                                <a href="~/Searching/SearchingPage/@r.District">
                                     <span>@r.District</span>
                                 </a>
-                                <a href="~/Searching/SearchingPage">
+                                <a href="~/Searching/SearchingPage/@r.Address">
                                     <span>@r.Address</span>
                                 </a>
                             </div>

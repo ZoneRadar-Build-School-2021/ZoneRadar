@@ -361,6 +361,7 @@ namespace ZoneRadar.Services
                 }
                 result.Add(new ProcessingViewModel
                 {
+                    SpaceId = order.SpaceID,
                     OrderId = (int)order.OrderNumber,
                     OrderName = order.Member.Name,
                     ContactName = order.ContactName,

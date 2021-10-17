@@ -23,6 +23,7 @@ namespace ZoneRadar.Models.ViewModels
     }
     public class Spaces 
     {
+        public int SpaceId { get; set; }
         public string SpaceName { get; set; }
         public string City { get; set; }
         public string District { get; set; }
