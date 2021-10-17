@@ -40,6 +40,8 @@ namespace ZoneRadar.Services
             {
 
                 var ordernum = item.OrderNumber;
+                var ownerid = item.Space.MemberID;
+                var email = members.FirstOrDefault(x => x.MemberID == ownerid).Email;
                 var paidtime = item.PaymentDate;
                 var score = reviews.Where(x => x.Order.SpaceID == item.SpaceID && x.ToHost == true).Select(x => x.Score).Average();
                 var spacename = spaces.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpaceName;
@@ -161,7 +163,8 @@ namespace ZoneRadar.Services
                     MemberId = item.MemberID,
                     ContactName = item.ContactName,
                     ContactPhone = item.ContactPhone,
-                    SpaceID = item.SpaceID
+                    SpaceID = item.SpaceID,
+                    Email = email
                 });
 
             }

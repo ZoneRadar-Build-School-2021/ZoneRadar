@@ -31,5 +31,6 @@ namespace ZoneRadar.Models.ViewModels
         public string ContactName { get; set; }
         public string ContactPhone { get; set; }
         public int SpaceID { get; set; }
+        public string Email { get; set; }
     }
 }
