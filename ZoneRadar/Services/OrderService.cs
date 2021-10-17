@@ -40,6 +40,8 @@ namespace ZoneRadar.Services
             {
 
                 var ordernum = item.OrderNumber;
+                var ownerid = item.Space.MemberID;
+                var email = members.FirstOrDefault(x => x.MemberID == ownerid).Email;
                 var paidtime = item.PaymentDate;
                 var score = reviews.Where(x => x.Order.SpaceID == item.SpaceID && x.ToHost == true).Select(x => x.Score).Average();
                 var spacename = spaces.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpaceName;
@@ -161,7 +163,8 @@ namespace ZoneRadar.Services
                     MemberId = item.MemberID,
                     ContactName = item.ContactName,
                     ContactPhone = item.ContactPhone,
-                    SpaceID = item.SpaceID
+                    SpaceID = item.SpaceID,
+                    Email = email
                 });
 
             }
@@ -191,6 +194,8 @@ namespace ZoneRadar.Services
                 var score = reviews.Where(x => x.Order.SpaceID == item.SpaceID && x.ToHost == true).Select(x => x.Score).Average();
 
 
+                var ownerid = item.Space.MemberID;
+                var email = members.FirstOrDefault(x => x.MemberID == ownerid).Email;
                 var ordernum = item.OrderNumber;
                 var paidtime = item.PaymentDate;
                 var spacename = spaces.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpaceName;
@@ -225,7 +230,8 @@ namespace ZoneRadar.Services
                     RentBackTime = rentbacktime,
                     People = people,
                     Money = money,
-                    SpaceID = item.SpaceID
+                    SpaceID = item.SpaceID,
+                    Email = email
                 });
             }
             return UCProcessingList;
@@ -254,6 +260,9 @@ namespace ZoneRadar.Services
                 string orderstaus;
                 bool hasReview = false;
                 var spaceid = orders.FirstOrDefault(x => x.OrderID == item.OrderID).SpaceID;
+
+                var ownerid = item.Space.MemberID;
+                var email = members.FirstOrDefault(x => x.MemberID == ownerid).Email;
 
                 var ordernum = orders.FirstOrDefault(x => x.OrderID == item.OrderID).OrderNumber;
                 var orderstatusid = item.OrderStatusID;
@@ -305,7 +314,8 @@ namespace ZoneRadar.Services
                     Money = money,
                     HasReview = hasReview,
                     OrderId = item.OrderID,
-                    SpaceID = item.SpaceID
+                    SpaceID = item.SpaceID,
+                    Email = email
                 });
             }
 
@@ -361,8 +371,10 @@ namespace ZoneRadar.Services
                 }
                 result.Add(new ProcessingViewModel
                 {
+                    SpaceId = order.SpaceID,
                     OrderId = (int)order.OrderNumber,
                     OrderName = order.Member.Name,
+                    OrderEmail = order.Member.Email,
                     ContactName = order.ContactName,
                     ContactPhone = order.ContactPhone,
                     SpaceName = order.Space.SpaceName,
@@ -419,6 +431,8 @@ namespace ZoneRadar.Services
                 var spacepic = spacepics.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpacePhotoUrl;
                 //活動主名稱
                 var username = members.FirstOrDefault(x => x.MemberID == item.MemberID).Name;
+                //活動主Email
+                var email = members.FirstOrDefault(x => x.MemberID == item.MemberID).Email;
                 decimal money = 0;
                 var temp = new List<RentDetailViewModel>();
                 //訂單時間 + 人數
@@ -467,7 +481,8 @@ namespace ZoneRadar.Services
                     OrderID = item.OrderID,
                     SpaceID = item.SpaceID,
                     OrderNumber = (int)item.OrderNumber,
-                    RentDetailVM = temp
+                    RentDetailVM = temp,
+                    Email = email
                 });
             }
 
