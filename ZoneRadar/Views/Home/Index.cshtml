@@ -13,7 +13,7 @@
         <div class="slide-img position-absolute top-0 start-0 w-100 h-100">
             <h2 class="main-title-location position-absolute text-white fw-bolder">lecture</h2>
         </div>
-        <div class="slide-img position-absolute top-0 start-0 w-100 h-100">
+        <div class="slide-img position-absolute top-0 start-0 w-100 h-100 slide-img-show">
             <h2 class="main-title-location position-absolute text-white fw-bolder">party</h2>
         </div>
         <div class="slide-img position-absolute top-0 start-0 w-100 h-100">
@@ -28,7 +28,7 @@
             <!--活動性質-->
             <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0 ms-md-5">
                 <select class="select-activity form-select form-select-lg" name="QueryVM.Type" aria-label="choose-activity">
-                    <option selected class="d-none">活動性質</option>
+                    <option value="" selected class="d-none">活動性質</option>
                     @foreach (var item in typeOptions)
                     {
                         <option value="@item.Value">@item.Text</option>
@@ -39,7 +39,7 @@
             <!--地點-->
             <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0">
                 <select class="select-county form-select form-select-lg" name="QueryVM.City" aria-label="choose-county">
-                    <option value="0" selected class="d-none">地點</option>
+                    <option value="" selected class="d-none">地點</option>
                     @foreach (var item in cityOptions)
                     {
                         <option value="@item.Value">@item.Text</option>
@@ -49,10 +49,10 @@
             </div>
             <!--日期-->
             <div class="col-11 col-md-3 col-lg-3 col-xl-2 mb-2 mb-md-0">
-                <input class="select-date flatpickr flatpickr-input px-3 py-2 w-100" name="QueryVM.Date" type="text" placeholder="選擇時間" readonly="readonly">
+                <input class="select-date flatpickr flatpickr-input px-3 py-2 w-100" name="QueryVM.Date" type="text" placeholder="選擇時間" readonly="readonly" value="">
                 @*@Html.EditorFor(model => model.HomepageSearchVM.Date, new { htmlAttributes = new { @class = "select-date flatpickr flatpickr-input px-3 py-2 w-100", type = "text", placeholder = "選擇時間", @readonly = "readonly" } })*@
             </div>
-            <div class="col-11 col-md-2"><button class="btn text-white w-100 h-100" id="homepage-search-submit" type="submit">找場地</button></div>
+            <div class="col-11 col-md-2"><button class="btn text-white w-100 h-100" id="homepage-search-submit" type="button">找場地</button></div>
         </form>
     </div>
 </div>
@@ -140,7 +140,7 @@
         <div class="col-12 col-md-5 position-relative mb-2 mb-md-0 pe-md-0">
             <div class="max-slide Taipei h-100">
                 <a href="~/City/台北市" class="d-block w-100 h-100 text-decoration-none text-white">
-                    <span class="">台北</span>
+                    <span class="" data-city="臺北市">臺北</span>
                 </a>
             </div>
         </div>
@@ -149,97 +149,97 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide NewTaipeiCity">
                         <a href="~/City/新北市" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">新北</span>
+                            <span class="" data-city="新北市">新北</span>
                         </a>
                     </div>
                     <div class="swiper-slide Tauyuan">
                         <a href="~/City/桃園市" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">桃園</span>
+                            <span class="" data-city="桃園市">桃園</span>
                         </a>
                     </div>
                     <div class="swiper-slide Hsinchu">
                         <a href="~/City/新竹市" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">新竹</span>
+                            <span class="" data-city="新竹市">新竹</span>
                         </a>
                     </div>
                     <div class="swiper-slide Miaoli">
                         <a href="~/City/苗栗縣" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">苗栗</span>
+                            <span class="" data-city="苗栗縣">苗栗</span>
                         </a>
                     </div>
                     <div class="swiper-slide Taichung">
                         <a href="~/City/台中市" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">台中</span>
+                            <span class="" data-city="台中市">臺中</span>
                         </a>
                     </div>
                     <div class="swiper-slide Nantou">
                         <a href="~/City/南投縣" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">南投</span>
+                            <span class="" data-city="南投縣">南投</span>
                         </a>
                     </div>
                     <div class="swiper-slide Changhua">
                         <a href="~/City/彰化縣" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">彰化</span>
+                            <span class="" data-city="彰化縣">彰化</span>
                         </a>
                     </div>
                     <div class="swiper-slide Yunlin">
                         <a href="~/City/雲林縣" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">雲林</span>
+                            <span class="" data-city="雲林縣">雲林</span>
                         </a>
                     </div>
                     <div class="swiper-slide Chiayi">
                         <a href="~/City/嘉義市" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">嘉義</span>
+                            <span class="" data-city="嘉義市">嘉義</span>
                         </a>
                     </div>
                     <div class="swiper-slide Tainan">
                         <a href="~/City/台南市" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">台南</span>
+                            <span class="" data-city="臺南市">臺南</span>
                         </a>
                     </div>
                     <div class="swiper-slide Kaohsiung">
                         <a href="~/City/高雄市" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">高雄</span>
+                            <span class="" data-city="高雄市">高雄</span>
                         </a>
                     </div>
                     <div class="swiper-slide Pingtung">
                         <a href="~/City/屏東縣" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">屏東</span>
+                            <span class="" data-city="屏東縣">屏東</span>
                         </a>
                     </div>
                     <div class="swiper-slide Keelung">
                         <a href="~/City/基隆市" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">基隆</span>
+                            <span class="" data-city="基隆市">基隆</span>
                         </a>
                     </div>
                     <div class="swiper-slide Yilan">
                         <a href="~/City/宜蘭縣" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">宜蘭</span>
+                            <span class="" data-city="宜蘭縣">宜蘭</span>
                         </a>
                     </div>
                     <div class="swiper-slide Hualien">
                         <a href="~/City/花蓮縣" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">花蓮</span>
+                            <span class="" data-city="花蓮縣">花蓮</span>
                         </a>
                     </div>
                     <div class="swiper-slide Taitung">
                         <a href="~/City/台東縣" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">台東</span>
+                            <span class="" data-city="台東縣">臺東</span>
                         </a>
                     </div>
                     <div class="swiper-slide Matsu">
                         <a href="~/City/連江縣" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">連江</span>
+                            <span class="" data-city="連江縣">連江</span>
                         </a>
                     </div>
                     <div class="swiper-slide Kinmen">
                         <a href="~/City/金門縣" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">金門</span>
+                            <span class="" data-city="金門縣">金門</span>
                         </a>
                     </div>
                     <div class="swiper-slide Penghu">
                         <a href="~/City/澎湖縣" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="">澎湖</span>
+                            <span class="" data-city="澎湖縣">澎湖</span>
                         </a>
                     </div>
                 </div>
@@ -363,5 +363,58 @@
 
 @section endJS
 {
+    <script>
+        let filterVM = {
+            SelectedCity: "",
+            SelectedType: "",
+            SelectedDate: "",
+        }
+
+        // 條件
+        document.querySelector('#homepage-search-submit').addEventListener('click', function () {
+            filterVM.SelectedType = document.querySelector('.select-activity').value || '';
+            filterVM.SelectedCity = document.querySelector('.select-county').value || '';
+            filterVM.SelectedDate = document.querySelector('.select-date.flatpickr.flatpickr-input').value || '';
+
+            goSearching(filterVM);
+        });
+
+        // 場地類型
+        document.querySelectorAll('.swiper.swiper-activity .swiper-slide').forEach(node => {
+            node.addEventListener('click', function (e) {
+                this.querySelector('a').setAttribute('href', '');
+                filterVM.SelectedType = this.querySelector('a span').innerText;
+
+                goSearching(filterVM);
+            });
+        });
+
+        // 場地區域 - 臺北
+        document.querySelector('.max-slide.Taipei').addEventListener('click', function () {
+            this.querySelector('a').setAttribute('href', '');
+            filterVM.SelectedCity = "臺北市";
+
+            goSearching(filterVM);
+        });
+
+        // 場地區域 - 其他
+        document.querySelectorAll('.swiper.swiper-location .swiper-slide').forEach(node => {
+            node.addEventListener('click', function () {
+                this.querySelector('a').setAttribute('href', '');
+                filterVM.SelectedCity = this.querySelector('a span').dataset.city;
+
+                goSearching(filterVM);
+            });
+        });
+
+        function goSearching(filterVM) {
+            axios.post('https://localhost:44322/webapi/spaces/GetFilterDataFromIndex', filterVM).then(res => {
+                if (res.status === 200) {
+                    sessionStorage.setItem('filterVm', JSON.stringify(res.data));
+                    window.location = 'https://localhost:44322/Searching/SearchingPage'
+                };
+            });
+        };
+    </script>
     <script src="~/Assets/JS/index/index.js"></script>
 }

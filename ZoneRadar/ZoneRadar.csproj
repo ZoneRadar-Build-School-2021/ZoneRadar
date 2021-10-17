@@ -229,6 +229,7 @@
     <Compile Include="Models\ViewModels\AddSpaceViewModel.cs" />
     <Compile Include="Models\ViewModels\BookingCardViewModel.cs" />
     <Compile Include="Models\ViewModels\BookingPageViewModel.cs" />
+    <Compile Include="Models\ViewModels\HostCenterHistoryViewModel.cs" />
     <Compile Include="Models\ViewModels\ProcessingViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\ShopCarViewModel.cs" />
@@ -243,6 +244,7 @@
     <Compile Include="Models\ViewModels\MyCollectionViewModel.cs" />
     <Compile Include="Models\ViewModels\QueryViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchingPageViewModel.cs" />
+    <Compile Include="Models\ViewModels\SpaceManageViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceReviewViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceViewModel.cs" />
     <Compile Include="Models\ViewModels\UsercenterCompletedViewModel.cs" />

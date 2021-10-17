@@ -150,8 +150,12 @@ namespace ZoneRadar.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            TempData["RegisterModalPopup"] = true;
-            //若直接輸入路由：導回原本頁面並跳出註冊Modal
+            //若直接輸入路由：導回原本頁面並跳出註冊Modal(非登入狀態時)
+            //防止登入狀態下輸入路由
+            if (!User.Identity.IsAuthenticated)
+            {
+                TempData["RegisterModalPopup"] = true;
+            }
             return RedirectToAction("Index", "Home");
         }
 
@@ -292,8 +296,11 @@ namespace ZoneRadar.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            //(每個非授權畫面都要加這行，例：預約頁面)
-            TempData["LoginModalPopup"] = true;
+            //防止登入狀態下輸入路由
+            if (!User.Identity.IsAuthenticated)
+            {
+                TempData["LoginModalPopup"] = true;
+            }         
             //如果想進入未授權畫面
             if (Request.QueryString["ReturnUrl"] != null)
             {
@@ -301,7 +308,7 @@ namespace ZoneRadar.Controllers
                 return Redirect($"{Request.UrlReferrer.AbsolutePath}?ReturnUrl={Request.QueryString["ReturnUrl"]}");
             }
 
-            //若直接輸入路由：導回原本頁面並跳出登入Modal
+            //若直接輸入路由：導回原本頁面並跳出登入Modal(非登入狀態下)
             return RedirectToAction("Index", "Home");
         }
 

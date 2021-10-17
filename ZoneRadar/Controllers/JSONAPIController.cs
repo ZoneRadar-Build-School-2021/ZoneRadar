@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -18,10 +19,28 @@ namespace ZoneRadar.Controllers
     {
         private readonly SpaceService _spaceService;
         private readonly ZONERadarRepository _repository;
+        private FilterViewModel _filterDataFromIndex;
         public JSONAPIController()
         {
             _spaceService = new SpaceService();
             _repository = new ZONERadarRepository();
+            _filterDataFromIndex = new FilterViewModel();
+        }
+
+        /// <summary>
+        /// 從首頁取得filterData(Steve)
+        /// </summary>
+        /// <param name="filterVm"></param>
+        /// <returns></returns>
+        [Route("GetFilterDataFromIndex")]
+        [AcceptVerbs("POST")]
+        public IHttpActionResult GetFilterDataFromIndex(FilterViewModel filterVm)
+        {
+            _filterDataFromIndex.SelectedCity = filterVm.SelectedCity;
+            _filterDataFromIndex.SelectedType = filterVm.SelectedType;
+            _filterDataFromIndex.SelectedDate = filterVm.SelectedDate;
+
+            return Ok(_filterDataFromIndex);
         }
 
         /// <summary>
@@ -30,7 +49,7 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [Route("GetFilterData")]
         [AcceptVerbs("GET")]
-        public IHttpActionResult GetFilterData()
+        public IHttpActionResult GetFilterData(string type, string city, string date)
         {
             var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City).OrderBy(x => x.Key.CityID);
             var spaceTypeList = _repository.GetAll<TypeDetail>().OrderBy(x => x.TypeDetailID).Select(x => x.Type);
@@ -43,9 +62,9 @@ namespace ZoneRadar.Controllers
                 SpaceTypeList = spaceTypeList.ToList(),
                 AmenityList = amenityList.ToList(),
                 AmenityIconList = amenityIconList.ToList(),
-                SelectedCity = "",
-                SelectedType = "",
-                SelectedDate = ""
+                SelectedCity = city == null ? "" : city,
+                SelectedType = type == null ? "" : type,
+                SelectedDate = date == null ? "" : date,
             };
 
             return Ok(result);
