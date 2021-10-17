@@ -429,6 +429,8 @@ namespace ZoneRadar.Services
                 var spacepic = spacepics.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpacePhotoUrl;
                 //活動主名稱
                 var username = members.FirstOrDefault(x => x.MemberID == item.MemberID).Name;
+                //活動主Email
+                var email = members.FirstOrDefault(x => x.MemberID == item.MemberID).Email;
                 decimal money = 0;
                 var temp = new List<RentDetailViewModel>();
                 //訂單時間 + 人數
@@ -477,7 +479,8 @@ namespace ZoneRadar.Services
                     OrderID = item.OrderID,
                     SpaceID = item.SpaceID,
                     OrderNumber = (int)item.OrderNumber,
-                    RentDetailVM = temp
+                    RentDetailVM = temp,
+                    Email = email
                 });
             }
 
