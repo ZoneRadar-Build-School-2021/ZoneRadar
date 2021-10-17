@@ -8,11 +8,13 @@ namespace ZoneRadar.Models.ViewModels
     public class ProcessingViewModel
     {
         public int OrderId { get; set; }
+        public int SpaceId { get; set; }
         public string SpaceName { get; set; }
         public string SpacePhoto { get; set; }
         public string OrderName { get; set; }
         public string ContactName { get; set; }
         public string ContactPhone { get; set; }
+        public string OrderEmail { get; set; }
         public int Total { get; set; }
         public List<OrderDetailesforPrcess> orderdetailesforprcess { get; set; }
 
