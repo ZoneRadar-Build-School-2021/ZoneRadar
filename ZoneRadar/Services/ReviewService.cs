@@ -94,24 +94,6 @@ namespace ZoneRadar.Services
 
 
             return review;
-        }
-
-        /// <summary>
-        /// 將取消下架存進資料庫(Jenny)
-        /// </summary>
-        public void CancelDiscontinueDate(int spaceId)
-        {
-            var space = _repository.GetAll<Space>().First(x => x.SpaceID == spaceId);
-            space.DiscontinuedDate = null;
-            try
-            {
-                _repository.Update(space);
-                _repository.SaveChanges();
-            }
-            catch(Exception ex)
-            {
-                throw new NotImplementedException();
-            }
-        }
+        }        
     }
 }

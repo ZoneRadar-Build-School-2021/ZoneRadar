@@ -130,7 +130,7 @@ namespace ZoneRadar.Controllers
             }
             if (discontinuedDate.HasValue)
             {
-                _spaceService.SetDiscontinuedDate(spaceId, discontinuedDate.Value);
+                _spaceService.SetDiscontinuedDate(userId, spaceId, discontinuedDate.Value);
                 return RedirectToAction("SpaceManage");
             }
             else
@@ -145,7 +145,7 @@ namespace ZoneRadar.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult CancelDiscontinue(int? id)
+        public ActionResult CancelDiscontinue(int? spaceId)
         {
             int userId;
             var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
@@ -153,9 +153,33 @@ namespace ZoneRadar.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            if (id.HasValue)
+            if (spaceId.HasValue)
             {
-                _spaceService.SetDiscontinuedDate(id.Value, null);
+                _spaceService.SetDiscontinuedDate(userId, spaceId.Value, null);
+                return RedirectToAction("SpaceManage");
+            }
+            else
+            {
+                //防呆未完成
+                return RedirectToAction("SpaceManage");
+            }
+        }
+
+        /// <summary>
+        /// 刪除場地(Jenny)
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DeleteSpace(int? spaceId)
+        {
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (spaceId.HasValue)
+            {
+                _spaceService.DeleteSpace(userId, spaceId.Value);
                 return RedirectToAction("SpaceManage");
             }
             else

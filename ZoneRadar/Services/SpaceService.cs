@@ -1271,16 +1271,48 @@ namespace ZoneRadar.Services
         /// <summary>
         /// 將場地預定下架日期資訊存進資料庫(Jenny)
         /// </summary>
-        public void SetDiscontinuedDate(int spaceId, DateTime? discontinuedDate)
+        public void SetDiscontinuedDate(int userId, int spaceId, DateTime? discontinuedDate)
         {
-            var space = _repository.GetAll<Space>().First(x => x.SpaceID == spaceId);
-            space.DiscontinuedDate = discontinuedDate;
-            try
+            var space = _repository.GetAll<Space>().First(x => x.SpaceID == spaceId && x.MemberID == userId);
+            if (space != null)
             {
-                _repository.Update(space);
-                _repository.SaveChanges();
+                space.DiscontinuedDate = discontinuedDate;
+                try
+                {
+                    _repository.Update(space);
+                    _repository.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new NotImplementedException();
+                }
             }
-            catch (Exception ex)
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        /// <summary>
+        /// 刪除場地(Jenny)
+        /// </summary>
+        public void DeleteSpace(int userId, int spaceId)
+        {
+            var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceId && x.MemberID == userId && x.SpaceStatusID == 1);
+            if (space != null)
+            {
+                space.SpaceStatusID = 3;
+                try
+                {
+                    _repository.Update(space);
+                    _repository.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            else
             {
                 throw new NotImplementedException();
             }

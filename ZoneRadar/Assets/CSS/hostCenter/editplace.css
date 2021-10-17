@@ -206,10 +206,6 @@ a.venue-link:hover {
   text-decoration: line-through;
 }
 
-.discontinued a {
-  pointer-events:none;
-}
-
 .delete-btn {
   color: white;
   background-color: #de6868;
