@@ -36,7 +36,7 @@
                                     <p>
                                         <span class="memberbuyer_completed_num_ordernumber">訂單編號：</span>
                                         <span class="ms-1">@Html.DisplayFor(m => item.OrderNumber) </span>
-                                        <a class="p-2 ms-3" href="#">
+                                        <a class="p-2 ms-3" href="mailto:@Html.DisplayFor(m => item.Email)">
                                             <i class="far fa-comment-dots me-1"></i>聯繫我
                                         </a>
                                     </p>
@@ -175,7 +175,7 @@
                                     <p>
                                         <span class="memberbuyer_completed_num_ordernumber cancel">訂單編號：</span>
                                         <span class="ms-1 cancel">@Html.DisplayFor(m => item.OrderNumber) </span>
-                                        <a class="p-2 ms-3" href="#">
+                                        <a class="p-2 ms-3" href="mailto:@Html.DisplayFor(m => item.Email)">
                                             <i class="far fa-comment-dots me-1"></i>聯繫我
                                         </a>
                                     </p>

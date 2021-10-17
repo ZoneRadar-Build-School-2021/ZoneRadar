@@ -261,6 +261,9 @@ namespace ZoneRadar.Services
                 bool hasReview = false;
                 var spaceid = orders.FirstOrDefault(x => x.OrderID == item.OrderID).SpaceID;
 
+                var ownerid = item.Space.MemberID;
+                var email = members.FirstOrDefault(x => x.MemberID == ownerid).Email;
+
                 var ordernum = orders.FirstOrDefault(x => x.OrderID == item.OrderID).OrderNumber;
                 var orderstatusid = item.OrderStatusID;
                 if (orderstatusid == 4)
@@ -311,7 +314,8 @@ namespace ZoneRadar.Services
                     Money = money,
                     HasReview = hasReview,
                     OrderId = item.OrderID,
-                    SpaceID = item.SpaceID
+                    SpaceID = item.SpaceID,
+                    Email = email
                 });
             }
 
