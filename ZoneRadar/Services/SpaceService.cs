@@ -1237,11 +1237,18 @@ namespace ZoneRadar.Services
 
                 //計算場地近30天的被預訂次數
                 var orderDetails = new List<OrderDetail>();
+                var allorderEndDates = new List<DateTime>();
                 foreach (var order in space.Order)
                 {
+                    //計算場地近30天的被預訂次數
                     var details = order.OrderDetail.Where(x => x.StartDateTime.Date.AddDays(30) >= DateTime.Now.Date);
                     orderDetails.AddRange(details);
+
+                    //計算最後被預定日期
+                    var dates = order.OrderDetail.Select(x => x.EndDateTime);
+                    allorderEndDates.AddRange(dates);
                 }
+                var lastOrderdDate = allorderEndDates.Count == 0 ? "today" : allorderEndDates.Max().ToString("yyyy-MM-dd");
 
                 spaceManageList.Add(new SpaceManageViewModel
                 {
@@ -1252,7 +1259,9 @@ namespace ZoneRadar.Services
                     Score = scoreAvg,
                     NumberOfReviews = spaceReview.Count,
                     NumberOfOrders = orderDetails.Count,
-                    SpaceStatusId = space.SpaceStatusID
+                    SpaceStatusId = space.SpaceStatusID,
+                    LastOrderdDate = lastOrderdDate,
+                    DiscontinuedDate = space.DiscontinuedDate.HasValue ? space.DiscontinuedDate.Value.ToString("yyyy-MM-dd") : "無"
                 });
             }
 

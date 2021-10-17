@@ -114,5 +114,25 @@ namespace ZoneRadar.Controllers
             var model = _orderService.GetHostCenterHistoryVM(userid);
             return View(model);
         }
+
+        /// <summary>
+        /// 下架場地(Jenny)
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SpaceDiscontinue(int spaceId, DateTime discontinuedDate)
+        {
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (isAuthenticated)
+            {
+                var spaceManageList = _spaceService.GetHostSpace(userId);
+                return View(spaceManageList);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
     }
 }

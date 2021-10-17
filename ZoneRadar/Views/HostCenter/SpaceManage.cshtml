@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<SpaceManageViewModel>
 @{
     ViewBag.Title = "SpaceManage";
-    var discontinued = Model.Where(x => x.SpaceStatusId == 1);
     var onTheMarket = Model.Where(x => x.SpaceStatusId == 2);
+    var discontinued = Model.Where(x => x.SpaceStatusId == 1);
+    var spaceListJson = Json.Encode(Model);
 }
 <div class="place-manage container my-5">
     <div class="header d-flex justify-content-between align-items-center my-3 my-md-5">
@@ -40,9 +41,34 @@
                     <span class="review-count ms-2">@item.NumberOfReviews</span>篇評價
                 </p>
                 <p>近30天的被預定次數:<a href="~/HostCenter/History" class="booking-count mx-2 fs-5">@item.NumberOfOrders</a>次</p>
-                <p class="text-end pt-3 pb-4 border-bottom border-3"><a class="edit-btn btn me-3" href="~/HostCenter/EditSpace?spaceId=@item.SpaceID">編輯場地</a><button class="discontinue-btn btn">下架</button></p>
+                <p>預定下架日期: 無</p>
+                <p class="text-end pt-3 pb-4 border-bottom border-3"><a class="edit-btn btn me-3" href="~/HostCenter/EditSpace?spaceId=@item.SpaceID">編輯場地</a><button class="discontinue-btn btn" data-bs-toggle="modal" data-bs-target="#discontinue-modal-@item.SpaceID">下架</button></p>
             </div>
-        }      
+
+            <!-- discontinue-Modal -->
+            <div class="modal fade discontinue-modal" id="discontinue-modal-@item.SpaceID" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">場地名稱：</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="" method="post">
+                            <div class="modal-body">
+                                <input type="hidden" name="spaceId" value="@item.SpaceID" />
+                                <span class="d-block mb-2">請選擇場地預定下架日：</span>
+                                <input class="select-date flatpickr flatpickr-input px-3 py-2 w-100 mb-2" type="text" placeholder="選擇時間" readonly="readonly" name="discontinuedDate" id="select-date-@item.SpaceID">
+                                <span>( 場地下架日期的可選擇範圍為自最後一筆訂單結束日開始 )</span>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary cancel-btn" data-bs-dismiss="modal">取消</button>
+                                <button type="submit" class="btn btn-primary submit-btn">確定</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 
     <h3 class="discontinue-title my-3 mb-md-0">已下架的場地</h3>
@@ -82,8 +108,26 @@
     </div>
 </div>
 
+
+
 @section topCss{
     <link href="~/Assets/CSS/hostCenter/editplace.css" rel="stylesheet" />
 }
 
-
+@section endJs{
+    <script>
+        let spaceListJson = @Html.Raw(spaceListJson);
+        let select_dates = document.querySelectorAll(".select-date");
+        select_dates.forEach((item, index) => {
+            flatpickr(item,
+            {
+                minDate: spaceListJson[index].LastOrderdDate,
+                altInput: true,
+                altFormat: 'Y/m/d',
+                dateFormat: "Y-m-d",
+                disableMobile: "true",
+                locale: "zh_tw"
+            });          
+        })
+    </script>   
+}
