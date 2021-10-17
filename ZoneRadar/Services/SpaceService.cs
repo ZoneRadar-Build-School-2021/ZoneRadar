@@ -1194,27 +1194,23 @@ namespace ZoneRadar.Services
                 { "星期六", 6 },
                 { "星期日", 7 }
             };
-            var originOperatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).ToList();
-            var convertedOperatingDayList = new List<string>();
-            foreach (var day in originOperatingList.Where(x => x.SpaceID == id).Select(x => x.OperatingDay).ToList())
-            {
-                convertedOperatingDayList.Add(weekDayConverter.FirstOrDefault(x => x.Value == day).Key);
-            }
-
-            //var startTimeList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).Select(x => x.StartTime.ToString(@"hh\:mm")).ToList();
-            //var endTimeList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).Select(x => x.EndTime.ToString(@"hh\:mm")).ToList();
+            var operatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).ToList();
             var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Hour;
             var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Discount;
             var minHour = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id).MinHours;
+            var pricePerHour = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id).PricePerHour;
+            var orderTimeList = _repository.GetAll<OrderDetail>().Where(x => x.Order.SpaceID == id).ToList().Select(x => x.StartDateTime.ToString("yyyy-MM-dd"));
 
             var result = new BookingCardViewModel
             {
-                OperatingDayList = convertedOperatingDayList,
-                StartTimeList = originOperatingList.Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
-                EndTimeList = originOperatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
+                OperatingDayList = operatingList.Select(x => x.OperatingDay).ToList(),
+                StartTimeList = operatingList.Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
+                EndTimeList = operatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
                 HoursForDiscount = hoursForDiscount,
                 Discount = Decimal.Round((1 - discount), 2),
                 MinHour = minHour,
+                PricePerHour = (int)pricePerHour,
+                OrderTimeList = orderTimeList.ToList(),
             };
 
             return result;

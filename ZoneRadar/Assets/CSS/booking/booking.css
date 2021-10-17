@@ -292,8 +292,12 @@ a {
     color: #9b9b9b;
 }
 
-.form-control:disabled, .form-control[readonly] {
+.form-control[readonly] {
     background-color: #fff;
+}
+
+.form-control:disabled {
+    background-color: #dddddd;
 }
 
 .extend {
