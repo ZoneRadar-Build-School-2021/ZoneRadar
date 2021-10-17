@@ -84,13 +84,13 @@ p {
 }
 
 .discontinue-btn {
-  background-color: #D9831A;
-  color: white;
+    background-color: #D9831A;
+    color: white;
 }
 
 .discontinue-btn:hover {
-  background-color: #b16911;
-  color: white;
+    background-color: #b16911;
+    color: white;
 }
 
 .discontinue-modal input {
@@ -110,6 +110,37 @@ p {
 
 .discontinue-modal .submit-btn, .discontinue-modal .cancel-btn {
     border: none;
+}
+
+.cancel-discontinue-btn {
+    background-color: #de6868;
+    color: white;
+}
+
+.cancel-discontinue-btn:hover {
+    background-color: #d64c15;
+    color: white;
+}
+
+.btn_close {
+    background-color: #de6868;
+    color: #fff;
+}
+
+.btn_close:hover {
+    background-color: #982626;
+    color: #fff;
+}
+
+.myshockicon {
+    font-size: 80px;
+}
+
+.fa-exclamation-circle {
+    background-color: #D9831A;
+    border-radius: 50%;
+    border: 3px solid #D9831A;
+    color: #fff;
 }
 
 .venue-pic {

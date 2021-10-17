@@ -130,8 +130,32 @@ namespace ZoneRadar.Controllers
             }
             if (discontinuedDate.HasValue)
             {
-                var se = new ReviewService();
-                se.SetDiscontinuedDate(spaceId, discontinuedDate.Value);
+                _spaceService.SetDiscontinuedDate(spaceId, discontinuedDate.Value);
+                return RedirectToAction("SpaceManage");
+            }
+            else
+            {
+                //防呆未完成
+                return RedirectToAction("SpaceManage");
+            }
+        }
+
+        /// <summary>
+        /// 取消下架(Jenny)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult CancelDiscontinue(int? id)
+        {
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (id.HasValue)
+            {
+                _spaceService.SetDiscontinuedDate(id.Value, null);
                 return RedirectToAction("SpaceManage");
             }
             else

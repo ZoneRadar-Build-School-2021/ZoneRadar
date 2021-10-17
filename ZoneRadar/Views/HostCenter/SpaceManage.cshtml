@@ -42,7 +42,14 @@
                 </p>
                 <p>近30天的被預定次數:<a href="~/HostCenter/History" class="booking-count mx-2 fs-5">@item.NumberOfOrders</a>次</p>
                 <p>預定下架日期: @item.DiscontinuedDate</p>
-                <p class="text-end pt-3 pb-4 border-bottom border-3"><a class="edit-btn btn me-3" href="~/HostCenter/EditSpace?spaceId=@item.SpaceID">編輯場地</a><button class="discontinue-btn btn" data-bs-toggle="modal" data-bs-target="#discontinue-modal-@item.SpaceID">選擇下架日期</button></p>
+                <p class="text-end pt-3 pb-4 border-bottom border-3">
+                    <a class="edit-btn btn me-3" href="~/HostCenter/EditSpace?spaceId=@item.SpaceID">編輯場地</a>
+                    <button class="discontinue-btn btn" data-bs-toggle="modal" data-bs-target="#discontinue-modal-@item.SpaceID">選擇下架日期</button>
+                    @if (item.DiscontinuedDate != "無")
+                    {
+                        <button type="button" class="btn cancel-discontinue-btn ms-3" data-bs-toggle="modal" data-bs-target="#cancel-discontinue-modal-@item.SpaceID">取消下架</button>
+                    }
+                </p>
             </div>
 
             <!-- discontinue-Modal -->
@@ -60,14 +67,29 @@
                                 <input class="select-date flatpickr flatpickr-input px-3 py-2 w-100 mb-2" type="text" placeholder="選擇時間" readonly="readonly" name="discontinuedDate">
                                 <span>( 場地下架日期的可選擇範圍為自最後一筆訂單結束日開始 )</span>
                             </div>
-                            <div class="modal-footer">
-                                @if (item.DiscontinuedDate != "無")
-                                {
-                                    <button type="button" class="btn btn-secondary cancel-btn" data-bs-dismiss="modal">取消下架</button>
-                                }
+                            <div class="modal-footer">                                
                                 <button type="submit" class="btn btn-primary submit-btn" disabled>確定</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- cancel-discontinue-Modal -->
+            <div class="modal fade" id="cancel-discontinue-modal-@item.SpaceID" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content">
+                        <div class="model-header text-center">
+                            <div class="myshockicon">
+                                <i class="fas fa-exclamation-circle mt-2"></i>
+                            </div>
+                        </div>
+                        <div class="modal-body text-center">
+                            <p class="fs-2">是否確定取消？</p>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <a href="~/HostCenter/CancelDiscontinue/@item.SpaceID" class="btn btn_close">確定</a>
+                        </div>
                     </div>
                 </div>
             </div>
