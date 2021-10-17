@@ -14,6 +14,7 @@ namespace ZoneRadar.Models.ViewModels
         public string OrderName { get; set; }
         public string ContactName { get; set; }
         public string ContactPhone { get; set; }
+        public string OrderEmail { get; set; }
         public int Total { get; set; }
         public List<OrderDetailesforPrcess> orderdetailesforprcess { get; set; }
 

@@ -19,7 +19,7 @@
                 <div class="member_card_introduce_name col-12">
                     <h3>
                         @user.Name
-                        <a href="#">
+                        <a href="mailto:@user.Email">
                             <i class="ms-3 fas fa-comment-dots" data-bs-toggle="tooltip" data-bs-placement="right" title="聯絡我">
                             </i>
                         </a>
@@ -49,7 +49,7 @@
                         </p>
                         <p class="member_verifcation_item">
                             <i class="me-3 fas fa-check"></i>評價
-                            <span class="member_verifcation_reviews">@Myspaces.Select(x => x.ReviewCount).Count()</span>
+                            <span class="member_verifcation_reviews"> (@Myspaces.Select(x => x.ReviewCount).Count())</span>
                         </p>
                     </div>
                 </div>
