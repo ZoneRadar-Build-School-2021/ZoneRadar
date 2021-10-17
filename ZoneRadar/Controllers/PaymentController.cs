@@ -17,7 +17,6 @@ namespace ZoneRadar.Controllers
         }
         protected void Page_Load()
         {
-
             List<string> enErrors = new List<string>();
             try
             {
@@ -39,7 +38,6 @@ namespace ZoneRadar.Controllers
                     oPayment.Send.TotalAmount = Decimal.Parse("3280");//交易總金額
                     oPayment.Send.TradeDesc = "交易描述";//交易描述
                     oPayment.Send.ChoosePayment = PaymentMethod.Credit;//使用的付款方式
-                    oPayment.Send.Remark = "";//備註欄位
                     oPayment.Send.ChooseSubPayment = PaymentMethodItem.Credit;//使用的付款子項目
                     oPayment.Send.NeedExtraPaidInfo = ExtraPaymentInfo.Yes;//是否需要額外的付款資訊
                     oPayment.Send.DeviceSource = DeviceType.PC;//來源裝置
