@@ -24,7 +24,7 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public Space GetSpaceByID(int? id)
         {
-            var result = _repository.GetAll<Space>().SingleOrDefault(x => x.SpaceID == id);
+            var result = _repository.GetAll<Space>().SingleOrDefault(x => x.SpaceID == id && x.SpaceStatusID == 2);
             return result;
         }
 
@@ -240,7 +240,7 @@ namespace ZoneRadar.Services
             var keywords = query.Keywords;
 
             var scores = _repository.GetAll<Review>();
-            var spaces = _repository.GetAll<Space>();
+            var spaces = _repository.GetAll<Space>().Where(x => x.SpaceStatusID == 2);
             var orders = _repository.GetAll<OrderDetail>();
             var spaceTypes = _repository.GetAll<SpaceType>();
             var operatings = _repository.GetAll<Operating>();
@@ -272,9 +272,7 @@ namespace ZoneRadar.Services
                     dayOfWeek = 7;
                 }
                 operatings = operatings.Where(x => x.OperatingDay == dayOfWeek);
-                var a = operatings.ToList();
                 orders = orders.Where(x => DateTime.Compare(x.StartDateTime, startDate) < 0 && DateTime.Compare(x.EndDateTime, startDate) > 0 && (x.Order.OrderStatusID == 2 || x.Order.OrderStatusID == 3));
-                var b = orders.ToList();
 
                 var filteredBytDate = operatings.Select(x => x.Space).Distinct();
                 var unBookedSpaces = orders.Select(x => x.Order.Space).Distinct();
@@ -309,9 +307,16 @@ namespace ZoneRadar.Services
 
             if (amenities != null && amenities.Count != 0)
             {
-                spaceAmenities = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity));
-                var filteredByAmenity = spaceAmenities.Select(x => x.Space).Distinct();
-                spaces = spaces.Intersect(filteredByAmenity);
+                //var filteredByAmenity = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity)).ToList();
+                //spaces = spaces.Where(x => filteredByAmenity.Select(y => y.SpaceID).Contains(x.SpaceID));
+
+                var spaceIDs = new List<int>();
+                foreach (var amenity in amenities)
+                {
+                    spaceIDs = spaceAmenities.Where(x => x.AmenityDetail.Amenity == amenity).Select(x => x.SpaceID).Distinct().ToList();
+                }
+
+                spaces = spaces.Where(x => spaceIDs.Contains(x.SpaceID));
             }
 
             if (!String.IsNullOrEmpty(keywords))
@@ -367,7 +372,7 @@ namespace ZoneRadar.Services
         /// <summary>
         ///  找出memberName (Amber)
         /// </summary>
-        
+
         //public SomeOnesSpaceViewModel ShowOwnerName()
         //{
         //    var result = new SomeOnesSpaceViewModel()
@@ -949,7 +954,7 @@ namespace ZoneRadar.Services
                     var shootingTemp = new SomeOnesShooting()
                     {
                         Shooting = item.ShootingEquipment,
-                        Displaynone="d-none"
+                        Displaynone = "d-none"
                     };
                     result.SomeOnesShootingList.Add(shootingTemp);
                 }
@@ -1160,8 +1165,8 @@ namespace ZoneRadar.Services
             /// <summary>
             /// 增加場地 增加地址的datamodel轉viewmodel (Amber) 
             /// </summary>
-            
-        
+
+
 
 
             return result;
