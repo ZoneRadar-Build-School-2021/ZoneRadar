@@ -101,8 +101,12 @@ p {
   background-repeat: no-repeat;
 }
 
-.fa-map-marker-alt {
+a.venue-link:hover {
   color: #049DD9;
+}
+
+.fa-map-marker-alt {
+    color: #049DD9;
 }
 
 .fa-star,

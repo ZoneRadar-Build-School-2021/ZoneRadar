@@ -14,7 +14,7 @@
         @foreach (var item in onTheMarket)
         {
             <div class="venue-card col-12 col-md-6 mt-3 mt-md-5 mb-4">
-                <div class="venue-pic mb-3" style="background-image: url(@item.SpacePhotoUrl);"></div>
+                <div class="venue-pic mb-3 position-relative" style="background-image: url(@item.SpacePhotoUrl);"><a href="~/Booking/BookingPage/@item.SpaceID" class="d-block position-absolute w-100 h-100 top-0 start-0"></a></div>
                 <a href="~/Booking/BookingPage/@item.SpaceID" class="venue-link"><h3 class="venue-name mb-3">@item.SpaceName</h3></a>
                 <p class="mb-2"><i class="fas fa-map-marker-alt me-1"></i><span class="address">@item.SpaceAddress</span></p>
                 <p class="rating mb-4">
@@ -50,7 +50,7 @@
         @foreach (var item in discontinued)
         {
             <div class="venue-card col-12 col-md-6 mt-3 mt-md-5 mb-4">
-                <div class="venue-pic mb-3" style="background-image: url(@item.SpacePhotoUrl);"></div>
+                <div class="venue-pic mb-3 position-relative" style="background-image: url(@item.SpacePhotoUrl);"><a href="~/Booking/BookingPage/@item.SpaceID" class="d-block position-absolute w-100 h-100 top-0 start-0"></a></div>
                 <a href="#" class="venue-link"><h3 class="venue-name mb-3">@item.SpaceName</h3></a>
                 <p class="mb-2"><i class="fas fa-map-marker-alt me-1"></i><span class="address">@item.SpaceAddress</span></p>
                 <p class="rating mb-4">
