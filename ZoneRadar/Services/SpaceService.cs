@@ -1219,5 +1219,44 @@ namespace ZoneRadar.Services
 
             return result;
         }
+
+
+        /// <summary>
+        /// 取得場地主擁有的場地(Jenny)
+        /// </summary>
+        public List<SpaceManageViewModel> GetHostSpace(int userId)
+        {
+            var spaces = _repository.GetAll<Space>().Where(x => x.MemberID == userId).ToList();
+            var spaceManageList = new List<SpaceManageViewModel>();
+
+            foreach (var space in spaces)
+            {
+                //計算場地平均分數
+                var spaceReview = space.Order.Select(x => x.Review.FirstOrDefault(y => y.ToHost)).OfType<Review>().ToList();
+                double scoreAvg = spaceReview.Count == 0 ? 0 : spaceReview.Average(x => x.Score);
+
+                //計算場地近30天的被預訂次數
+                var orderDetails = new List<OrderDetail>();
+                foreach (var order in space.Order)
+                {
+                    var details = order.OrderDetail.Where(x => x.StartDateTime.Date.AddDays(30) >= DateTime.Now.Date);
+                    orderDetails.AddRange(details);
+                }
+
+                spaceManageList.Add(new SpaceManageViewModel
+                {
+                    SpaceID = space.SpaceID,
+                    SpacePhotoUrl = space.SpacePhoto.First(x => x.Sort == 1).SpacePhotoUrl,
+                    SpaceName = space.SpaceName,
+                    SpaceAddress = string.Concat(space.District.DistrictID.ToString(), space.City.CityName, space.District.DistrictName, space.Address),
+                    Score = scoreAvg,
+                    NumberOfReviews = spaceReview.Count,
+                    NumberOfOrders = orderDetails.Count,
+                    SpaceStatusId = space.SpaceStatusID
+                });
+            }
+
+            return spaceManageList;
+        }
     }
 }
