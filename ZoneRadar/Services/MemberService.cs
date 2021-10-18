@@ -16,6 +16,7 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.IO;
+using System.Diagnostics;
 
 namespace ZoneRadar.Services
 {
@@ -446,30 +447,21 @@ namespace ZoneRadar.Services
                 };
                 //會員所擁有的廠所有場地
                 var sps = _repository.GetAll<Space>().Where(x => x.MemberID == memberId && x.SpaceStatus.SpaceStatusID == 2);
-                var re = _repository.GetAll<Review>();
-                var spt = _repository.GetAll<SpacePhoto>();
 
                 foreach (var s in sps)
                 {
-                    if (s.SpaceID > 0)
+                    resultMember.Spaces.Add(new Spaces
                     {
-                        resultMember.Spaces.Add(new Spaces
-                        {
-                            SpaceName = s.SpaceName,
-                            Address = s.Address,
-                            SpacePhoto = s.SpacePhoto.First().SpacePhotoUrl,
-                            District = s.District.DistrictName,
-                            //sps.FirstOrDefault(x => x.SpaceID == s.SpaceID).District.DistrictName,
-                            City = s.City.CityName,
-                            PricePerHour = s.PricePerHour,
-                            Score = Average(s.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Count()).Sum(), s.Order.Select(x=>x.Review.Where(z=>z.ToHost == true).Select(y=>y.Score).Sum()).Sum()),
-                            ReviewCount = s.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.ReviewContent).Count()).Sum()
-                        });
-                    }
-                    else 
-                    {
-                        return resultMember;
-                    }
+                        SpaceName = s.SpaceName,
+                        Address = s.Address,
+                        SpacePhoto = s.SpacePhoto.First().SpacePhotoUrl,
+                        District = s.District.DistrictName,
+                        //sps.FirstOrDefault(x => x.SpaceID == s.SpaceID).District.DistrictName,
+                        City = s.City.CityName,
+                        PricePerHour = s.PricePerHour,
+                        Score = Average(s.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Count()).Sum(), s.Order.Select(x=>x.Review.Where(z=>z.ToHost == true).Select(y=>y.Score).Sum()).Sum()),
+                        ReviewCount = s.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.ReviewContent).Count()).Sum()
+                    });
                 }
                 return resultMember;
             }
@@ -481,51 +473,97 @@ namespace ZoneRadar.Services
         /// <returns> 取得會員資訊 & 該會員所有收藏的場地 </returns>
         public MyCollectionViewModel GetMemberCollection(int? memberId)
         {
+            var time = new Stopwatch();
+            time.Start();
             var resultMemberCollection = new MyCollectionViewModel
             {
                 User = new User(),
                 MyCollection = new List<Spaces>()
             };
 
-            var u = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == memberId);
-            if (u == null)
+            var user = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == memberId);
+            if (user == null)
             {
                 return resultMemberCollection;
             }
             else
             {
-                resultMemberCollection.User = new User
-                {
-                    Id = u.MemberID,
-                    Name = u.Name,
-                    Email = u.Email,
-                    Phone = u.Phone,
-                    Description = u.Description,
-                    SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
-                };
+                //resultMemberCollection.User = new User
+                //{
+                //    Id = u.MemberID,
+                //    Name = u.Name,
+                //    Email = u.Email,
+                //    Phone = u.Phone,
+                //    Description = u.Description,
+                //    SignUpDateTime = u.SignUpDateTime,
+                //    Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
+                //};
+                resultMemberCollection.User = (from u in _repository.GetAll<Member>()
+                                               where u.MemberID == memberId
+                                               select new User
+                                               {
+                                                   Id = u.MemberID,
+                                                   Name = u.Name,
+                                                   Email = u.Email,
+                                                   Phone = u.Phone,
+                                                   Description = u.Description,
+                                                   SignUpDateTime = u.SignUpDateTime,
+                                                   Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
+                                               }).FirstOrDefault();
+                                              
                 //會員所收藏的場地
+                //var collection = _repository.GetAll<Collection>().Where(x => x.MemberID == memberId);
+                //var spaces = _repository.GetAll<Space>();
+                //var r = _repository.GetAll<Review>();
+
+                ////c.Member.Space.Where(x => x.SpaceID == c.SpaceID && x.SpaceStatusID == 2).FirstOrDefault().SpaceName
+                //foreach (var c in collection)
+                //{
+                //    var sps = spaces.FirstOrDefault(x => x.SpaceID == c.SpaceID && x.SpaceStatusID == 2);
+                //    resultMemberCollection.MyCollection.Add(new Spaces
+                //    {
+                //        SpaceName = sps.SpaceName,
+                //        Address = sps.Address,
+                //        SpacePhoto = sps.SpacePhoto.First().SpacePhotoUrl,
+                //        District = sps.District.DistrictName,
+                //        City = sps.City.CityName,
+                //        PricePerHour = sps.PricePerHour,
+                //        ReviewCount = sps.Order.Where(x=>sps.SpaceID == x.SpaceID).Select(x=>x.Review.Where(y=>y.ToHost == true).Select(z=>z.ReviewContent).Count()).Sum(),
+                //        Score = Average(sps.Order.Where(x => sps.SpaceID == x.SpaceID).Select(x => x.Review.Where(y => y.ToHost == true).Select(z => z.ReviewContent).Count()).Sum(), sps.Order.Select(x => x.Review.Where(y => y.ToHost == true).Select(z => z.Score).Sum()).Sum())
+                //        /*re.Where(x => x.Order.MemberID == s.MemberID && x.ToHost == true).Select(x => x.Score).Count()*/
+                //    });
+                //}
                 var collection = _repository.GetAll<Collection>().Where(x => x.MemberID == memberId);
-                var spaces = _repository.GetAll<Space>();
-                var r = _repository.GetAll<Review>();
-                
-                //c.Member.Space.Where(x => x.SpaceID == c.SpaceID && x.SpaceStatusID == 2).FirstOrDefault().SpaceName
-                foreach (var c in collection)
-                {
-                    var sps = spaces.FirstOrDefault(x => x.SpaceID == c.SpaceID && x.SpaceStatusID == 2);
-                    resultMemberCollection.MyCollection.Add(new Spaces
-                    {
-                        SpaceName = sps.SpaceName,
-                        Address = sps.Address,
-                        SpacePhoto = sps.SpacePhoto.First().SpacePhotoUrl,
-                        District = sps.District.DistrictName,
-                        City = sps.City.CityName,
-                        PricePerHour = sps.PricePerHour,
-                        ReviewCount = sps.Order.Where(x=>sps.SpaceID == x.SpaceID).Select(x=>x.Review.Where(y=>y.ToHost == true).Select(z=>z.ReviewContent).Count()).Sum(),
-                        Score = Average(sps.Order.Where(x => sps.SpaceID == x.SpaceID).Select(x => x.Review.Where(y => y.ToHost == true).Select(z => z.ReviewContent).Count()).Sum(), sps.Order.Select(x => x.Review.Where(y => y.ToHost == true).Select(z => z.Score).Sum()).Sum())
-                        /*re.Where(x => x.Order.MemberID == s.MemberID && x.ToHost == true).Select(x => x.Score).Count()*/
-                    });
-                }
+                var spaces = _repository.GetAll<Space>().Where(x => x.SpaceStatusID == 2 && collection.Select(y => y.SpaceID).Contains(x.SpaceID)).ToList();
+
+                resultMemberCollection.MyCollection = (from s in spaces
+                                                      select new Spaces
+                                                      {
+                                                        SpaceName = s.SpaceName,
+                                                        Address = s.Address,
+                                                        City  = s.City.CityName,
+                                                        District = s.District.DistrictName,
+                                                        PricePerHour = s.PricePerHour,
+                                                        ReviewCount = s.Order.Select(x => x.Review.Where(y => y.ToHost == true && y.Order.SpaceID == s.SpaceID).Select(z => z.ReviewContent).Count()).Sum(),
+                                                        Score = Average(s.Order.Select(x => x.Review.Where(y => y.ToHost == true && y.Order.SpaceID == s.SpaceID).Select(z => z.ReviewContent).Count()).Sum(), s.Order.Select(x => x.Review.Where(y => y.ToHost == true).Select(z => z.Score).Sum()).Sum())
+                                                      }).ToList();
+
+                //foreach (var s in spaces)
+                //{
+                //    resultMemberCollection.MyCollection.Add(new Spaces
+                //    {
+                //        SpaceName = s.SpaceName,
+                //        Address = s.Address,
+                //        City = s.City.CityName,
+                //        District = s.District.DistrictName,
+                //        SpacePhoto = s.SpacePhoto.First().SpacePhotoUrl,
+                //        PricePerHour = s.PricePerHour,
+                //        ReviewCount = s.Order.Select(x => x.Review.Where(y => y.ToHost == true && y.Order.SpaceID == s.SpaceID).Select(z=>z.ReviewContent).Count()).Sum(),
+                //        Score = Average(s.Order.Select(x => x.Review.Where(y => y.ToHost == true && y.Order.SpaceID == s.SpaceID).Select(z => z.ReviewContent).Count()).Sum() , s.Order.Select(x => x.Review.Where(y => y.ToHost == true).Select(z => z.Score).Sum()).Sum())
+                //    });
+                //}
+
+                time.Stop();
                 return resultMemberCollection;
             }
 
