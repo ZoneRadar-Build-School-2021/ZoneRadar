@@ -114,5 +114,71 @@ namespace ZoneRadar.Controllers
             var model = _orderService.GetHostCenterHistoryVM(userid);
             return View(model);
         }
+
+        /// <summary>
+        /// 儲存場地預定下架日期(Jenny)
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SpaceDiscontinue(int spaceId, DateTime? discontinuedDate)
+        {
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (discontinuedDate.HasValue)
+            {
+                _spaceService.SetDiscontinuedDate(userId, spaceId, discontinuedDate.Value);
+                return RedirectToAction("SpaceManage");
+            }
+            else
+            {
+                //防呆未完成
+                return RedirectToAction("SpaceManage");
+            }
+        }
+
+        /// <summary>
+        /// 取消下架(Jenny)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CancelDiscontinue(int spaceId)
+        {
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                _spaceService.SetDiscontinuedDate(userId, spaceId, null);
+                return RedirectToAction("SpaceManage");
+            }
+        }
+
+        /// <summary>
+        /// 刪除場地(Jenny)
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult DeleteSpace(int spaceId)
+        {
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                _spaceService.DeleteSpace(userId, spaceId);
+                return RedirectToAction("SpaceManage");
+            }
+        }
     }
 }
