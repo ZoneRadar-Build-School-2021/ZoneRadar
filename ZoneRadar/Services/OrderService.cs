@@ -187,7 +187,7 @@ namespace ZoneRadar.Services
             var reviews = _repository.GetAll<Review>().ToList();
             var spacediscounts = _repository.GetAll<SpaceDiscount>().ToList();
 
-            var orderformember = orders.Where(x => x.MemberID == id && x.OrderStatusID == 3);
+            var orderformember = orders.Where(x => x.MemberID == id && x.OrderStatusID == 3 && x.Space.SpaceStatusID == 2);
 
             foreach (var item in orderformember)
             {
