@@ -216,4 +216,6 @@ a.venue-link:hover {
   background-color: #d64c15;;
 }
 
-
+.delete-modal i {
+    color: #fff;
+}
