@@ -338,7 +338,7 @@
                 </div>
                 <div class="calculation d-none">
                     <div class="price-cal mt-5 border-bottom mb-2">
-                        <p class="d-flex mb-2">交易金額:<span class="ms-auto"><span class="venue-price"></span><span class="mx-1">x</span><span class="total-hour"></span></span></p>
+                        <p class="d-flex mb-2">交易金額:<span class="ms-auto"><span class="venue-price"></span><span class="mx-1">x</span><span class="total-hour"></span>小時</span></p>
                         <p class="discount-row d-none mb-2">滿時優惠:<span class="ms-auto"><span class="discount"></span></span></p>
                     </div>
                     <div class="total fs-5 fw-bolder">
@@ -374,11 +374,7 @@
 @section endJS
 {
     <script>
-        @*const operationDay = @Html.Raw(Json.Encode(@operationDayList));
-        const operationStartTime = @Html.Raw(Json.Encode(@startTimeList));
-        const operationEndTime = @Html.Raw(Json.Encode(@endTimeList));*@
-        @*const spaceID = @Html.Raw(Json.Encode(@spaceID));*@
         sessionStorage.setItem('theKey', @Html.Raw(Json.Encode(@spaceID)));
     </script>
-    <script src="~/Assets/JS/booking/booking1.js"></script>
+    <script src="~/Assets/JS/booking/booking.js"></script>
 }

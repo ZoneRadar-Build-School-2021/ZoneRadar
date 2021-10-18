@@ -2,26 +2,6 @@
 (function () {
   // flatpickr中文化
   flatpickr.localize(flatpickr.l10ns.zh_tw);
-  // 全域變數
-  let index = 1;
-  let operationStartArr = [];
-  let operationEndArr = [];
-  let operationDayArr = [];
-  let minHour, discount, hoursForDiscount, pricePerHour, orderDateArr;
-  let preOrderObj = {
-    DatesArr: [],
-    AttendeesArr: [],
-    StartTimeArr: [],
-    EndTimeArr: []
-  }
-  let spaceID = '';
-  let whichCardIndex = 1;
-  // 抓取session的場地ID
-  if (sessionStorage.getItem('theKey')) {
-    spaceID = sessionStorage.getItem('theKey');
-    sessionStorage.clear();
-  }
-  const getURL = `https://localhost:44322/webapi/spaces/GetBookingCardData?id=${spaceID}`;
   // 節點
   const orderDetailNode = document.querySelector('.order-detail-select');
   const extendDayBtn = document.querySelector('.extend');
@@ -31,8 +11,6 @@
     center: [25.041824011585646, 121.53629849747963],
     zoom: 17
   });
-
-  // 執行區
   const swiper = new Swiper('.swiper', {
     loop: true,
     pagination: {
@@ -48,12 +26,36 @@
       disableOnInteraction: false
     },
   });
+  // 全域變數
+  let index = 1;
+  let whichCardIndex = 1;
+  let operationStartArr = [];
+  let operationEndArr = [];
+  let operationDayArr = [];
+  let minHour, discount, hoursForDiscount, pricePerHour, orderDateArr, capacity;
+  let preOrderObj = {
+    DatesArr: [],
+    AttendeesArr: [],
+    StartTimeArr: [],
+    EndTimeArr: []
+  }
+  let spaceID = '';
+  if (sessionStorage.getItem('theKey')) {
+    spaceID = sessionStorage.getItem('theKey');
+    sessionStorage.clear();
+  }
+  const getURL = `https://localhost:44322/webapi/spaces/GetBookingCardData?id=${spaceID}`;
+
+
+  // 執行區-----------
   setMap();
   setMarker();
   setCard();
   extendDayBtn.addEventListener('click', extendADay);
   removeDayBtn.addEventListener('click', removeADay);
   submitBtn.addEventListener('click', submitOrder);
+  // 執行區-----------
+
 
   // functions定義
   function setMap() {
@@ -80,50 +82,50 @@
   function setCard() {
     axios.get(getURL).then(res => {
       const source = res.data;
+      console.log(source)
       const cloneNode = document.querySelector('#order-item-template').content.cloneNode(true);
       const dateNode = cloneNode.querySelector('.start-date');
       const attendeeNode = cloneNode.querySelector('.attendees');
       const startTimeNode = cloneNode.querySelector('.start-time');
       const endTimeNode = cloneNode.querySelector('.end-time');
-      minHour = source.MinHour;
-      discount = source.Discount;
-      hoursForDiscount = source.HoursForDiscount;
-      pricePerHour = source.PricePerHour;
-      let validation = [];
       let todayDay = 0;
       let attendee = '';
       let startTime = '';
       let endTimeStartFrom = '';
       let endTime = '';
       let selectedDate = '';
+      operationStartArr = source.StartTimeList;
+      operationEndArr = source.EndTimeList;
+      operationDayArr = source.OperatingDayList;
+      operationDayArr.forEach(day => {
+        if (day === 7) day = 0;
+      });
+      minHour = source.MinHour;
+      discount = source.Discount;
+      hoursForDiscount = source.HoursForDiscount;
+      pricePerHour = source.PricePerHour;
+      capacity = source.Capacity;
 
-      // 執行區
-      getOperation();
-      setCalendarAndTime();
+
+      // 執行區-----------
+      setCalendar();
       setAttendee();
       cloneNode.querySelector('.order-item').classList.add(`day-${index}`);
       orderDetailNode.appendChild(cloneNode);
+      // 執行區-----------
 
       // functions定義
-      function getOperation() {
-        operationStartArr = source.StartTimeList;
-        operationEndArr = source.EndTimeList;
-        operationDayArr = source.OperatingDayList;
-        operationDayArr.forEach(day => {
-          if (day === 7) day = 0;
-        });
-      }
-
-      function setCalendarAndTime() {
-        orderDateArr = source.OrderTimeList.map(date => new Date(`${date} 00:00:00`).getTime());
+      function setCalendar() {
+        // 如果preOrderObj裡沒有值，日曆第一天為今天
         let firstDay = 'today';
+        // 如果preOrderObj裡有值，日曆第一天為前一次預訂 + 1天
+        orderDateArr = source.OrderTimeList.map(date => new Date(`${date} 00:00:00`).getTime());
         if (preOrderObj.DatesArr[index - 2]) {
           let temp = preOrderObj.DatesArr[index - 2];
           let tempDate = new Date(temp);
           let tempDatePlus = tempDate.setDate(tempDate.getDate() + 1);
           firstDay = new Date(tempDatePlus);
         }
-
         // 設定日曆
         flatpickr(dateNode, {
           altInput: true,
@@ -143,17 +145,40 @@
             // 暫存今天所選的日期
             selectedDate = dateStr;
             // 設定時間
-            setTime();
-            // 值來自第幾幾張卡片
+            // setTime();
+            // input來自第幾幾張卡片
             let whichCard = instance.input.parentNode.parentNode.classList[2];
             whichCardIndex = whichCard.split('-')[1];
+            // 開啟人數選項
+            attendeeNode.removeAttribute('disabled');
             // 確認是否合規
             validation = [selectedDate, attendee, startTime, endTime];
             checkValidation(validation);
-            // 開啟人數選項
-            attendeeNode.removeAttribute('disabled');
           },
         });
+      }
+
+      function setAttendee() {
+        attendeeNode.addEventListener('change', function (e) {
+          // 只能輸入數字
+          const reg = /^[0-9]+(\.[0-9]{1,3})?$/;
+          // this.value = this.value.replace(, '');
+
+          console.log(reg.test(this.value))
+          // 如果人數 > 50，數字顯示50
+          if (this.value > capacity) this.value = capacity;
+
+          // 暫存參加人數
+          attendee = this.value;
+          let whichCard = e.target.parentNode.parentNode.classList[2];
+          whichCardIndex = whichCard.split('-')[1];
+          // 開啟開始時間選項
+          startTimeNode.removeAttribute('disabled');
+          setTime();
+
+          validation = [selectedDate, attendee, startTime, endTime];
+          checkValidation(validation, whichCardIndex);
+        })
       }
 
       function setTime() {
@@ -168,6 +193,8 @@
         setStartTime();
 
         function setStartTime() {
+          let startBeginHour = operationStartArr[dayIndex].split(':')[0];
+          let startBeginMin = operationStartArr[dayIndex].split(':')[1];
           // 開始時間
           flatpickr(startTimeNode, {
             enableTime: true,
@@ -177,9 +204,17 @@
             minuteIncrement: 30,
             minTime: operationStartArr[dayIndex],
             maxTime: maxStartTime,
+            // defaultHour: startBeginHour,
+            // defaultMinute: startBeginMin,
             defaultDate: operationStartArr[dayIndex],
             disableMobile: "true",
-            onValueUpdate: function (selectedDates, dateStr, instance) {
+            onReady: function (selectedDates, dateStr, instance) {
+              // 暫存所選開始時間
+              startTime = dateStr;
+              setEndTime();
+              endTimeNode.removeAttribute('disabled');
+            },
+            onClose: function (selectedDates, dateStr, instance) {
               // 選擇的開始時間string to DateTime
               let todayDateTime = new Date(`${selectedDate} ${dateStr}`)
               // 結束時間點起始點為選擇的開始時間 + 最少預定時數
@@ -194,15 +229,16 @@
               let whichCard = instance.input.parentNode.parentNode.classList[2];
               whichCardIndex = whichCard.split('-')[1];
               // 設定結束時間
-              endTimeNode.removeAttribute('disabled');
               setEndTime();
-              // validation = [selectedDate, attendee, startTime, endTime];
-              // checkValidation(validation);
+              validation = [selectedDate, attendee, startTime, endTime];
+              checkValidation(validation);
             },
           });
         }
 
         function setEndTime() {
+          let endBeginHour = (parseInt(startTime.split(':')[0]) + minHour).toString();
+          let endBeginMin = startTime.split(':')[1];
           // 結束時間
           flatpickr(endTimeNode, {
             enableTime: true,
@@ -212,9 +248,20 @@
             minuteIncrement: 30,
             minTime: endTimeStartFrom,
             maxTime: operationEndArr[dayIndex],
+            // defaultHour: endBeginHour,
+            // defaultMinute: endBeginMin,
             defaultDate: endTimeStartFrom,
             disableMobile: "true",
-            onValueUpdate: function (selectedDates, dateStr, instance) {
+            onReady: function (selectedDates, dateStr, instance) {
+              // 暫存結束時間
+              endTime = dateStr;
+              // 值來自第幾幾張卡片
+              let whichCard = instance.input.parentNode.parentNode.classList[2];
+              whichCardIndex = whichCard.split('-')[1];
+              validation = [selectedDate, attendee, startTime, endTime];
+              checkValidation(validation);
+            },
+            onClose: function (selectedDates, dateStr, instance) {
               // 暫存結束時間
               endTime = dateStr;
               // 值來自第幾幾張卡片
@@ -225,33 +272,16 @@
             },
           });
         }
-
-      }
-
-      function setAttendee() {
-        attendeeNode.addEventListener('keyup', function () {
-          this.value = this.value.replace(/[^\d]/g, '');
-        })
-
-        attendeeNode.addEventListener('change', function (e) {
-          // 暫存參加人數
-          attendee = this.value;
-          validation = [selectedDate, attendee, startTime, endTime];
-          let whichCard = e.target.parentNode.parentNode.classList[2];
-          let whichCardIndex = whichCard.split('-')[1];
-          checkValidation(validation, whichCardIndex);
-          startTimeNode.removeAttribute('disabled');
-        })
       }
 
       function checkValidation(validation) {
-        // let trueArr = [];
-        // // 判斷傳入的判斷陣列是否都有值
-        // validation.forEach(item => {
-        //   if (item) {
-        //     trueArr.push(true);
-        //   }
-        // })
+        let trueArr = [];
+        // 判斷傳入的判斷陣列是否都有值
+        validation.forEach(item => {
+          if (item) {
+            trueArr.push(true);
+          }
+        })
 
         // 如果trueArr的長度為四
         if (validation.length === 4) {
@@ -268,7 +298,53 @@
         }
       }
     })
-  };
+  }
+
+  function extendADay() {
+    index++;
+
+    this.setAttribute('disabled', '');
+    removeDayBtn.classList.remove('d-none');
+    setCard();
+  }
+
+  function removeADay() {
+    let latest = document.querySelector(`.day-${index}`);
+    orderDetailNode.removeChild(latest);
+
+    preOrderObj.DatesArr.length = index - 1;
+    preOrderObj.AttendeesArr.length = index - 1;
+    preOrderObj.StartTimeArr.length = index - 1;
+    preOrderObj.EndTimeArr.length = index - 1;
+
+    index--;
+    if (index === 1) {
+      this.classList.add('d-none');
+      extendDayBtn.removeAttribute('disabled');
+    }
+
+    calculate(preOrderObj);
+  }
+
+  function submitOrder() {
+    axios.get('https://localhost:44322/webapi/spaces/CheckLogin').then(res => {
+      let isLogin = res.data;
+      if (!isLogin) {
+        const login_modal = document.querySelector("#login-modal");
+        const modal = bootstrap.Modal.getOrCreateInstance(login_modal);
+        modal.show();
+      } else {
+
+        Swal.fire(
+          '預約成功!',
+          '請於24小時內前往會員中心 > 我的訂單內申請付款',
+          'success'
+        )
+      }
+
+      const ok = document.querySelector('.swal2-confirm.swal2-styled')
+    })
+  }
 
   function calculate(preOrderObj) {
     console.log(preOrderObj);
@@ -300,46 +376,16 @@
       discountRowNode.classList = 'discount-row d-flex mb-2'
     }
 
+    // 渲染畫面
     priceNode.innerText = `NT$${pricePerHour.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
-    totalHourNode.innerText = totalHour;
+    if (totalHour > 0) {
+      totalHourNode.innerText = totalHour;
+    }
     discountNode.innerText = discount;
-    totalCostNode.innerText = `NT$${totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
-  }
-
-  function extendADay() {
-    index++;
-
-    this.setAttribute('disabled', '');
-    removeDayBtn.classList.remove('d-none');
-    setCard();
-  }
-
-  function removeADay() {
-    let latest = document.querySelector(`.day-${index}`);
-    orderDetailNode.removeChild(latest);
-
-    preOrderObj.DatesArr.length = index - 1;
-    preOrderObj.AttendeesArr.length = index - 1;
-    preOrderObj.StartTimeArr.length = index - 1;
-    preOrderObj.EndTimeArr.length = index - 1;
-
-    index--;
-    if (index === 1) {
-      this.classList.add('d-none');
-      extendDayBtn.removeAttribute('disabled');
+    if (totalCost > 0) {
+      totalCostNode.innerText = `NT$${totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
     }
 
-    calculate(preOrderObj);
   }
 
-  function submitOrder() {
-    axios.get('https://localhost:44322/webapi/spaces/CheckLogin').then(res => console.log(res.data))
-
-    // Swal.fire(
-    //   '預約成功!',
-    //   '請於24小時內前往會員中心 > 我的訂單內申請付款',
-    //   'success'
-    // )
-  }
-
-})()
+})();

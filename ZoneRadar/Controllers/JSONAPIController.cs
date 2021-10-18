@@ -105,12 +105,7 @@ namespace ZoneRadar.Controllers
         [AcceptVerbs("GET")]
         public IHttpActionResult CheckLogin()
         {
-            bool isLogin = false;
-
-            if (User.Identity.Name != "")
-            {
-                isLogin = true;
-            }
+            bool isLogin = User.Identity.IsAuthenticated;
 
             return Ok(isLogin);
         }
