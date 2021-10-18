@@ -374,10 +374,11 @@
 @section endJS
 {
     <script>
-        const operationDay = @Html.Raw(Json.Encode(@operationDayList));
+        @*const operationDay = @Html.Raw(Json.Encode(@operationDayList));
         const operationStartTime = @Html.Raw(Json.Encode(@startTimeList));
-        const operationEndTime = @Html.Raw(Json.Encode(@endTimeList));
-        const spaceID = @Html.Raw(Json.Encode(@spaceID));
+        const operationEndTime = @Html.Raw(Json.Encode(@endTimeList));*@
+        @*const spaceID = @Html.Raw(Json.Encode(@spaceID));*@
+        sessionStorage.setItem('theKey', @Html.Raw(Json.Encode(@spaceID)));
     </script>
     <script src="~/Assets/JS/booking/booking.js"></script>
 }

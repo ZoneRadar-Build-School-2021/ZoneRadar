@@ -1197,9 +1197,9 @@ namespace ZoneRadar.Services
             var operatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).ToList();
             var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Hour;
             var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Discount;
-            var minHour = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id).MinHours;
-            var pricePerHour = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id).PricePerHour;
-            var orderTimeList = _repository.GetAll<OrderDetail>().Where(x => x.Order.SpaceID == id).ToList().Select(x => x.StartDateTime.ToString("yyyy-MM-dd"));
+            var targetSpace = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id);
+            var orderTimeList = _repository.GetAll<OrderDetail>().Where(x => x.Order.SpaceID == id && x.Order.OrderStatusID != 5).ToList().Select(x => x.StartDateTime.ToString("yyyy-MM-dd"));
+
 
             var result = new BookingCardViewModel
             {
@@ -1208,8 +1208,9 @@ namespace ZoneRadar.Services
                 EndTimeList = operatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
                 HoursForDiscount = hoursForDiscount,
                 Discount = Decimal.Round((1 - discount), 2),
-                MinHour = minHour,
-                PricePerHour = (int)pricePerHour,
+                MinHour = targetSpace.MinHours,
+                PricePerHour = (int)targetSpace.PricePerHour,
+                Capacity = targetSpace.Capacity,
                 OrderTimeList = orderTimeList.ToList(),
             };
 

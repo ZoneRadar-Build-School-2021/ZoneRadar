@@ -14,6 +14,7 @@ namespace ZoneRadar.Models.ViewModels
         public Decimal Discount { get; set; }
         public int MinHour { get; set; }
         public int PricePerHour { get; set; }
+        public int Capacity { get; set; }
         public List<string> OrderTimeList { get; set; }
     }
 }

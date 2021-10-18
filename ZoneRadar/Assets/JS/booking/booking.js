@@ -14,7 +14,11 @@
     AttendeesArr: [],
     StartTimeArr: [],
     EndTimeArr: []
-  }
+    }
+    let spaceID;
+    if (sessionStorage.getItem('theKey')) {
+        spaceID = sessionStorage.getItem('theKey');
+    }
   const getURL = `https://localhost:44322/webapi/spaces/GetBookingCardData?id=${spaceID}`;
   // 節點
   const orderDetailNode = document.querySelector('.order-detail-select');
@@ -72,7 +76,8 @@
   }
 
   function setCard() {
-    axios.get(getURL).then(res => {
+      axios.get(getURL).then(res => {
+          sessionStorage.clear();
       const source = res.data;
       console.log(source)
       const cloneNode = document.querySelector('#order-item-template').content.cloneNode(true);
