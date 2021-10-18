@@ -100,5 +100,14 @@ namespace ZoneRadar.Controllers
             var result = _spaceService.GetTargetBookingCard(id);
             return Ok(result);
         }
+
+        [Route("CheckLogin")]
+        [AcceptVerbs("GET", "POST")]
+        public IHttpActionResult CheckLogin()
+        {
+            string userID = User.Identity.Name;
+
+            return Ok(userID);
+        }
     }
 }

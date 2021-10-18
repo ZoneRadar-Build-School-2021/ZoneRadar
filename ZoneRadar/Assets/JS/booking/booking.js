@@ -51,7 +51,7 @@
   setCard();
   extendDayBtn.addEventListener('click', extendADay);
   removeDayBtn.addEventListener('click', removeADay);
-
+  submitBtn.addEventListener('click', submitOrder);
 
   // functions定義
   function setMap() {
@@ -337,13 +337,13 @@
   }
 
   function submitOrder() {
+    axios.get('https://localhost:44322/webapi/spaces/CheckLogin').then(res => console.log(res.data))
 
-
-    Swal.fire(
-      '預約成功!',
-      '請於24小時內前往會員中心 > 我的訂單內申請付款',
-      'success'
-    )
+    // Swal.fire(
+    //   '預約成功!',
+    //   '請於24小時內前往會員中心 > 我的訂單內申請付款',
+    //   'success'
+    // )
   }
 
 })()
