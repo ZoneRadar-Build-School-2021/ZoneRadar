@@ -1163,7 +1163,8 @@ namespace ZoneRadar.Services
         /// <summary>
         /// 增加場地 增加地址的datamodel (Amber) 
         /// </summary>
-        public Space CreateSpace(AddSpaceViewModel addSpaceViewModel)
+        public AddSpaceViewModel CreateSpace(AddSpaceViewModel addSpaceViewModel)
+
         {
             var spacecity=addSpaceViewModel.CityID;
             var city = _repository.GetAll<City>().Where(x => x.CityName == spacecity).Select(x => x.CityID).FirstOrDefault();
@@ -1171,6 +1172,7 @@ namespace ZoneRadar.Services
             {
                 //MemberID = addSpaceViewModel.MemberID,
                 MemberID = 4,
+                SpaceID=addSpaceViewModel.SpaceID,
                 SpaceName = addSpaceViewModel.SpaceName,
                 Introduction = addSpaceViewModel.Introduction,
                 MeasureOfArea = addSpaceViewModel.MeasureOfArea,
@@ -1191,14 +1193,38 @@ namespace ZoneRadar.Services
                 //Longitude = addSpaceViewModel.Longitude,
                 SpaceStatusID = 1,
                 //SpaceStatusID = addSpaceViewModel.SpaceStatusID,
-                DiscontinuedDate = DateTime.UtcNow,
+                //DiscontinuedDate = DateTime.UtcNow,
                 //DiscontinuedDate = addSpaceViewModel.DiscontinuedDate,
             };
             _repository.Create<Space>(space);
             _repository.SaveChanges();
 
-            return space;
+            var spaceid = _repository.GetAll<Space>().Max(x => x.SpaceID).ToString();
+            
+            var operating = new Operating
+            {
+                SpaceID = Int32.Parse(spaceid),
+                OperatingDay = addSpaceViewModel.OperatingDay,
+                StartTime = addSpaceViewModel.StartTime,
+                EndTime = addSpaceViewModel.EndTime
+            };
+            var type = new SpaceType
+            {
+                SpaceID = Int32.Parse(spaceid),
+                TypeDetailID=addSpaceViewModel.TypeDetailID
+            };
+            
+            _repository.Create<Operating>(operating);
+            _repository.Create<SpaceType>(type);
+            _repository.SaveChanges();
+            return addSpaceViewModel;
+
         }
+        /// <summary>
+        ///  //上傳到雲 (Amber) 
+        /// </summary>
+
+       
 
 
         /// <summary>

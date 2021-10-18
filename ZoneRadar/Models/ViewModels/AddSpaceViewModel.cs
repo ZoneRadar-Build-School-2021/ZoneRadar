@@ -7,7 +7,7 @@ namespace ZoneRadar.Models.ViewModels
 {
     public class AddSpaceViewModel
     {
-        
+        public int SpaceID { get;set; }
         public int CountryID { get; set; }
         public string CityID { get; set; }
         public int DistrictID { get; set; }
@@ -29,5 +29,14 @@ namespace ZoneRadar.Models.ViewModels
         public string Longitude { get; set; }
         public int SpaceStatusID { get; set; }
         public DateTime DiscontinuedDate { get; set; }
+
+        public int OperatingDay { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
+
+
+        public int TypeDetailID { get; set; }
+
+
     }
 }

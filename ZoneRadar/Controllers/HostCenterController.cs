@@ -14,7 +14,6 @@ namespace ZoneRadar.Controllers
     {
         private readonly SpaceService _spaceService;
         private readonly OrderService _orderService;
-        private readonly ZONERadarContext _context;
        
 
         // GET: HostCenter
@@ -22,7 +21,6 @@ namespace ZoneRadar.Controllers
         {
             _spaceService = new SpaceService();
             _orderService = new OrderService();
-            _context = new ZONERadarContext();
         }
 
         // GET: HostCenter
@@ -60,102 +58,21 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]
+        //public ActionResult AddSpace(AddSpaceViewModel space, AddOperatingViewModel addOperating)
+
         public ActionResult AddSpace(AddSpaceViewModel space)
         {
-            //var result = _spaceService.CreateSpace(addspaceVM);
-            ////html 標籤的name屬性 可以讓Controller抓到input輸入框的資料
-            //string CountryID = Request["CountryID"];
-            //string CityID = Request["CityID"];
-            //string DistrictID = Request["DistrictID"];
-            //string Address = Request["Address"];
-            //string SpaceName = Request["SpaceName"];
-            ////string Introduction = Request["Introduction"];
-            //string MeasureOfArea = Request["MeasureOfArea"];
-            //string Capacity = Request["Capacity"];
-            //string PricePerHour = Request["PricePerHour"];
-            //string MinHours = Request["MinHours"];
-            //string HostRules = Request["HostRules"];
-            //string Traffic = Request["Traffic"];
-            //string Parking = Request["Parking"];
-            //string ShootingEquipment = Request["ShootingEquipment"];
-            //string CancellationID = Request["CancellationID"];
-            //string OperatingDay = Request["OperatingDay"];
-            //string StartTime=Request[""]
-            //把input輸入的City轉成CityID
-            //var city = _spaceService.GetCityOptions().Where(x => x.Text == CityID).Select(x => x.Value).FirstOrDefault();
-            //model.CityID = Int32.Parse(city);
-            //model.MemberID = 4;
-            ////model.SpaceName = "測試";
-            //model.Introduction = "<p>test</p>";
-            ////model.MeasureOfArea = 20;
-            ////model.Capacity = 10;
-            ////model.PricePerHour = 100;
-            ////model.MinHours = 2;
-            //model.HostRules = "<p>test</p>";
-            //model.Traffic = "<p>test</p>";
-            ////model.Parking = "測試";
-            ////model.ShootingEquipment = "測試";
-            //model.CancellationID = 1;
-            //model.PublishTime = DateTime.Today;
-            //model.SpaceStatusID = 1;
-
-
-
-            //_context.Space.Add(model);
-            //_context.Operating.Add(operating);
-            //_context.SaveChanges();
-
             var result = _spaceService.CreateSpace(space);
-            return View();
+            ViewData["Message"] = "成功新增場地";
+            return View(result);
         }
-
         /// <summary>
         /// 場地主編輯場地 (Amber)
         /// </summary>
         public ActionResult EditSpace(int spaceId)
         {
-            var model = new SomeOnesSpaceViewModel()
-            {
-                SomeOnesSpaceList = _spaceService.ReadAnySpace(spaceId).SomeOnesSpaceList,
-                SomeOnesCountryList = _spaceService.ReadAnySpace(spaceId).SomeOnesCountryList,
-                SomeOnesDistrictList = _spaceService.ReadAnySpace(spaceId).SomeOnesDistrictList,
-                SomeOnesCitytList = _spaceService.ReadAnySpace(spaceId).SomeOnesCitytList,
-                SomeOnesTypeDetailList = _spaceService.ReadAnySpace(spaceId).SomeOnesTypeDetailList,
-                ShowAllTypeDetailList = _spaceService.ReadAnySpace(spaceId).ShowAllTypeDetailList,
-                SomeOnesSpaceNameList = _spaceService.ReadAnySpace(spaceId).SomeOnesSpaceNameList,
-                SomeOnesSpaceIntroductionList = _spaceService.ReadAnySpace(spaceId).SomeOnesSpaceIntroductionList,
-                SomeOnesMeasureOfAreaandCapacityList = _spaceService.ReadAnySpace(spaceId).SomeOnesMeasureOfAreaandCapacityList,
-                SomeOnesPriceList = _spaceService.ReadAnySpace(spaceId).SomeOnesPriceList,
-                SomeOnesDiscountsList = _spaceService.ReadAnySpace(spaceId).SomeOnesDiscountsList,
-                SomeOnesRulesList = _spaceService.ReadAnySpace(spaceId).SomeOnesRulesList,
-                SomeOnesTrafficList = _spaceService.ReadAnySpace(spaceId).SomeOnesTrafficList,
-                SomeOnesParkingList = _spaceService.ReadAnySpace(spaceId).SomeOnesParkingList,
-                SomeOnesShootingList = _spaceService.ReadAnySpace(spaceId).SomeOnesShootingList,
-                SomeOnesCancelAllList = _spaceService.ReadAnySpace(spaceId).SomeOnesCancelAllList,
-                SomeOnesCancelList = _spaceService.ReadAnySpace(spaceId).SomeOnesCancelList,
-
-                SomeOnesAmenityList = _spaceService.ReadAnySpace(spaceId).SomeOnesAmenityList,
-                amenityAraeOneList = _spaceService.ReadAnySpace(spaceId).amenityAraeOneList,
-
-                SomeTwoAmenityList = _spaceService.ReadAnySpace(spaceId).SomeTwoAmenityList,
-                amenityAraeTwoList = _spaceService.ReadAnySpace(spaceId).amenityAraeTwoList,
-
-                SomeThreeAmenityList = _spaceService.ReadAnySpace(spaceId).SomeThreeAmenityList,
-                amenityAraeThreeList = _spaceService.ReadAnySpace(spaceId).amenityAraeThreeList,
-
-                CleanRuleOptionsOneList = _spaceService.ReadAnySpace(spaceId).CleanRuleOptionsOneList,
-                SomeOnesCleanRuleOneList = _spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleOneList,
-                CleanRuleOptionsTwoList = _spaceService.ReadAnySpace(spaceId).CleanRuleOptionsTwoList,
-                SomeOnesCleanRuleTwoList = _spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleTwoList,
-                CleanRuleOptionsThreeList = _spaceService.ReadAnySpace(spaceId).CleanRuleOptionsThreeList,
-                SomeOnesCleanRuleThreeList = _spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleThreeList,
-                CleanRuleOptionsFourList = _spaceService.ReadAnySpace(spaceId).CleanRuleOptionsFourList,
-                SomeOnesCleanRuleFourList = _spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleFourList,
-                SpaceoperatingDaysList = _spaceService.ReadAnySpace(spaceId).SpaceoperatingDaysList,
-                _compareOperatingDay = _spaceService.ReadAnySpace(spaceId)._compareOperatingDay,
-                Operating = _spaceService.Operating(),
-                SpaceOwnerNameList = _spaceService.ReadAnySpace(spaceId).SpaceOwnerNameList,
-            };
+            var model = _spaceService.ReadAnySpace(spaceId);
+            
             return View(model);
         }
         /// <summary>
