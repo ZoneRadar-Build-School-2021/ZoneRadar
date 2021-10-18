@@ -14,11 +14,11 @@
     AttendeesArr: [],
     StartTimeArr: [],
     EndTimeArr: []
-    }
-    let spaceID;
-    if (sessionStorage.getItem('theKey')) {
-        spaceID = sessionStorage.getItem('theKey');
-    }
+  }
+  let spaceID;
+  if (sessionStorage.getItem('theKey')) {
+    spaceID = sessionStorage.getItem('theKey');
+  }
   const getURL = `https://localhost:44322/webapi/spaces/GetBookingCardData?id=${spaceID}`;
   // 節點
   const orderDetailNode = document.querySelector('.order-detail-select');
@@ -76,8 +76,8 @@
   }
 
   function setCard() {
-      axios.get(getURL).then(res => {
-          sessionStorage.clear();
+    axios.get(getURL).then(res => {
+      sessionStorage.clear();
       const source = res.data;
       console.log(source)
       const cloneNode = document.querySelector('#order-item-template').content.cloneNode(true);
@@ -119,7 +119,7 @@
         endTimeNode.setAttribute('disabled', '');
 
         orderDateArr = source.OrderTimeList.map(date => new Date(`${date} 00:00:00`).getTime());
-        let firstDay = 'today'; 
+        let firstDay = 'today';
         if (preOrderObj.DatesArr[index - 2]) {
           let temp = preOrderObj.DatesArr[index - 2];
           let tempDate = new Date(temp);
@@ -301,7 +301,7 @@
     // 如果超過指定時數則享有優惠
     if (totalHour >= hoursForDiscount) {
       totalCost = Math.floor(totalCost * discount);
-      discountRowNode. classList = 'discount-row d-flex mb-2'
+      discountRowNode.classList = 'discount-row d-flex mb-2'
     }
 
     priceNode.innerText = `NT$${pricePerHour.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
