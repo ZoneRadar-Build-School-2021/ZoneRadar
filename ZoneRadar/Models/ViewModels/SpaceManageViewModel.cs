@@ -18,5 +18,10 @@ namespace ZoneRadar.Models.ViewModels
         public int NumberOfReviews { get; set; }
         public int NumberOfOrders { get; set; }
         public int SpaceStatusId { get; set; }
+        /// <summary>
+        /// 可下架日期
+        /// </summary>
+        public string CanDiscontinueDate { get; set; }
+        public string DiscontinuedDate { get; set; }
     }
 }

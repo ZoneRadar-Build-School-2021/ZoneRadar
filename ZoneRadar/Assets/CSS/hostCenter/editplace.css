@@ -42,19 +42,19 @@ p {
   box-sizing: border-box;
 }
 
-.btn:focus {
-  box-shadow: none;
+    .btn:focus, .btn-close:focus, input:focus, .submit-btn:focus, .cancel-btn:focus {
+        box-shadow: none;
+    }
+
+.add-btn, .discontinue-modal .submit-btn {
+    background-color: #049DD9;
+    color: white;
 }
 
-.add-btn {
-  background-color: #049DD9;
-  color: white;
-}
-
-.add-btn:hover {
-  background-color: #0485b8;
-  color: white;
-}
+    .add-btn:hover, .discontinue-modal .submit-btn:hover {
+        background-color: #0485b8;
+        color: white;
+    }
 
 .edit-btn {
   color: #049DD9;
@@ -84,21 +84,71 @@ p {
 }
 
 .discontinue-btn {
-  background-color: #D9831A;
-  color: white;
+    background-color: #D9831A;
+    color: white;
 }
 
 .discontinue-btn:hover {
-  background-color: #b16911;
-  color: white;
+    background-color: #b16911;
+    color: white;
+}
+
+.discontinue-modal input {
+    font-size: 16px;
+    line-height: 1.5;
+    border-radius: .25rem;
+    border: 1px solid #ced4da;
+}
+
+.discontinue-modal input:focus {
+    outline: none;
+}
+
+.discontinue-modal input::placeholder {
+    color: #000000;
+}
+
+.discontinue-modal .submit-btn, .discontinue-modal .cancel-btn {
+    border: none;
+}
+
+.cancel-discontinue-btn {
+    background-color: #de6868;
+    color: white;
+}
+
+.cancel-discontinue-btn:hover {
+    background-color: #d64c15;
+    color: white;
+}
+
+.btn_close {
+    background-color: #de6868;
+    color: #fff;
+}
+
+.btn_close:hover {
+    background-color: #982626;
+    color: #fff;
+}
+
+.myshockicon {
+    font-size: 80px;
+}
+
+.fa-exclamation-circle {
+    background-color: #D9831A;
+    border-radius: 50%;
+    border: 3px solid #D9831A;
+    color: #fff;
 }
 
 .venue-pic {
-  width: 100%;
-  padding-top: 60%;
-  border-radius: 5px;
-  background-position: center;
-  background-repeat: no-repeat;
+    width: 100%;
+    padding-top: 60%;
+    border-radius: 5px;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 a.venue-link:hover {
@@ -156,10 +206,6 @@ a.venue-link:hover {
   text-decoration: line-through;
 }
 
-.discontinued a {
-  pointer-events:none;
-}
-
 .delete-btn {
   color: white;
   background-color: #de6868;
@@ -170,4 +216,6 @@ a.venue-link:hover {
   background-color: #d64c15;;
 }
 
-
+.delete-modal i {
+    color: #fff;
+}

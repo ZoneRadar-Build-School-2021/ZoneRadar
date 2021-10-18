@@ -1237,11 +1237,18 @@ namespace ZoneRadar.Services
 
                 //計算場地近30天的被預訂次數
                 var orderDetails = new List<OrderDetail>();
+                var allorderEndDates = new List<DateTime>();
                 foreach (var order in space.Order)
                 {
+                    //計算場地近30天的被預訂次數
                     var details = order.OrderDetail.Where(x => x.StartDateTime.Date.AddDays(30) >= DateTime.Now.Date);
                     orderDetails.AddRange(details);
+
+                    //找出最後被預定日期並加一天
+                    var dates = order.OrderDetail.Select(x => x.EndDateTime.AddDays(1));
+                    allorderEndDates.AddRange(dates);
                 }
+                var lastOrderdDate = allorderEndDates.Count == 0 ? "today" : allorderEndDates.Max().ToString("yyyy-MM-dd");
 
                 spaceManageList.Add(new SpaceManageViewModel
                 {
@@ -1252,11 +1259,63 @@ namespace ZoneRadar.Services
                     Score = scoreAvg,
                     NumberOfReviews = spaceReview.Count,
                     NumberOfOrders = orderDetails.Count,
-                    SpaceStatusId = space.SpaceStatusID
+                    SpaceStatusId = space.SpaceStatusID,
+                    CanDiscontinueDate = lastOrderdDate,
+                    DiscontinuedDate = space.DiscontinuedDate.HasValue ? space.DiscontinuedDate.Value.ToString("yyyy-MM-dd") : "無"
                 });
             }
 
             return spaceManageList;
+        }
+
+        /// <summary>
+        /// 將場地預定下架日期資訊存進資料庫(Jenny)
+        /// </summary>
+        public void SetDiscontinuedDate(int userId, int spaceId, DateTime? discontinuedDate)
+        {
+            var space = _repository.GetAll<Space>().First(x => x.SpaceID == spaceId && x.MemberID == userId);
+            if (space != null)
+            {
+                space.DiscontinuedDate = discontinuedDate;
+                try
+                {
+                    _repository.Update(space);
+                    _repository.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        /// <summary>
+        /// 刪除場地(Jenny)
+        /// </summary>
+        public void DeleteSpace(int userId, int spaceId)
+        {
+            var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceId && x.MemberID == userId && x.SpaceStatusID == 1);
+            if (space != null)
+            {
+                space.SpaceStatusID = 3;
+                try
+                {
+                    _repository.Update(space);
+                    _repository.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }
