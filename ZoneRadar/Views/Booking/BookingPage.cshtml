@@ -356,11 +356,11 @@
         <h4 class="text-start mb-3 fs-5 fw-bolder">日期與時間:</h4>
         <div class="input-group mb-2">
             <input type="text" placeholder="開始日期" class="start-date form-control rounded me-1">
-            <input type="text" placeholder="參加人數" class="attendees form-control rounded ms-1" aria-label=".form-control attendees">
+            <input type="text" placeholder="參加人數" class="attendees form-control rounded ms-1" aria-label=".form-control attendees" disabled>
         </div>
         <div class="input-group mb-2">
-            <input type="text" placeholder="開始時間" class="start-time form-control rounded me-1">
-            <input type="text" placeholder="結束時間" class="end-time form-control rounded ms-1">
+            <input type="text" placeholder="開始時間" class="start-time form-control rounded me-1" disabled>
+            <input type="text" placeholder="結束時間" class="end-time form-control rounded ms-1" disabled>
         </div>
     </div>
 </template>
@@ -380,5 +380,5 @@
         @*const spaceID = @Html.Raw(Json.Encode(@spaceID));*@
         sessionStorage.setItem('theKey', @Html.Raw(Json.Encode(@spaceID)));
     </script>
-    <script src="~/Assets/JS/booking/booking.js"></script>
+    <script src="~/Assets/JS/booking/booking1.js"></script>
 }

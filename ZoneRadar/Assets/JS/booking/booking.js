@@ -2,22 +2,24 @@
 (function () {
   // flatpickr中文化
   flatpickr.localize(flatpickr.l10ns.zh_tw);
-  // 變數
+  // 全域變數
   let index = 1;
   let operationStartArr = [];
   let operationEndArr = [];
   let operationDayArr = [];
   let minHour, discount, hoursForDiscount, pricePerHour, orderDateArr;
-
   let preOrderObj = {
     DatesArr: [],
     AttendeesArr: [],
     StartTimeArr: [],
     EndTimeArr: []
   }
-  let spaceID;
+  let spaceID = '';
+  let whichCardIndex = 1;
+  // 抓取session的場地ID
   if (sessionStorage.getItem('theKey')) {
     spaceID = sessionStorage.getItem('theKey');
+    sessionStorage.clear();
   }
   const getURL = `https://localhost:44322/webapi/spaces/GetBookingCardData?id=${spaceID}`;
   // 節點
@@ -77,9 +79,7 @@
 
   function setCard() {
     axios.get(getURL).then(res => {
-      sessionStorage.clear();
       const source = res.data;
-      console.log(source)
       const cloneNode = document.querySelector('#order-item-template').content.cloneNode(true);
       const dateNode = cloneNode.querySelector('.start-date');
       const attendeeNode = cloneNode.querySelector('.attendees');
@@ -97,13 +97,14 @@
       let endTime = '';
       let selectedDate = '';
 
+      // 執行區
       getOperation();
       setCalendarAndTime();
       setAttendee();
       cloneNode.querySelector('.order-item').classList.add(`day-${index}`);
       orderDetailNode.appendChild(cloneNode);
 
-      // functions
+      // functions定義
       function getOperation() {
         operationStartArr = source.StartTimeList;
         operationEndArr = source.EndTimeList;
@@ -114,10 +115,6 @@
       }
 
       function setCalendarAndTime() {
-        // 選擇前鎖定時間選項
-        startTimeNode.setAttribute('disabled', '');
-        endTimeNode.setAttribute('disabled', '');
-
         orderDateArr = source.OrderTimeList.map(date => new Date(`${date} 00:00:00`).getTime());
         let firstDay = 'today';
         if (preOrderObj.DatesArr[index - 2]) {
@@ -134,11 +131,6 @@
           disableMobile: 'true',
           minDate: firstDay,
           maxDate: new Date().fp_incr(90),
-          // "enable": [
-          //   function (date) {
-          //     return (operationDayArr.indexOf(date.getDay()) !== -1);
-          //   }
-          // ],
           "disable": [
             function (date) {
               return (operationDayArr.indexOf(date.getDay()) === -1 || orderDateArr.indexOf(date.getTime()) !== -1);
@@ -154,10 +146,12 @@
             setTime();
             // 值來自第幾幾張卡片
             let whichCard = instance.input.parentNode.parentNode.classList[2];
-            let whichCardIndex = whichCard.split('-')[1];
+            whichCardIndex = whichCard.split('-')[1];
             // 確認是否合規
             validation = [selectedDate, attendee, startTime, endTime];
-            checkValidation(validation, whichCardIndex);
+            checkValidation(validation);
+            // 開啟人數選項
+            attendeeNode.removeAttribute('disabled');
           },
         });
       }
@@ -175,7 +169,6 @@
 
         function setStartTime() {
           // 開始時間
-          startTimeNode.removeAttribute('disabled');
           flatpickr(startTimeNode, {
             enableTime: true,
             noCalendar: true,
@@ -199,17 +192,17 @@
               startTime = dateStr;
               // 值來自第幾幾張卡片
               let whichCard = instance.input.parentNode.parentNode.classList[2];
-              let whichCardIndex = whichCard.split('-')[1];
+              whichCardIndex = whichCard.split('-')[1];
               // 設定結束時間
+              endTimeNode.removeAttribute('disabled');
               setEndTime();
               // validation = [selectedDate, attendee, startTime, endTime];
-              // checkValidation(validation, whichCardIndex);
+              // checkValidation(validation);
             },
           });
         }
 
         function setEndTime() {
-          endTimeNode.removeAttribute('disabled');
           // 結束時間
           flatpickr(endTimeNode, {
             enableTime: true,
@@ -226,9 +219,9 @@
               endTime = dateStr;
               // 值來自第幾幾張卡片
               let whichCard = instance.input.parentNode.parentNode.classList[2];
-              let whichCardIndex = whichCard.split('-')[1];
+              whichCardIndex = whichCard.split('-')[1];
               validation = [selectedDate, attendee, startTime, endTime];
-              checkValidation(validation, whichCardIndex);
+              checkValidation(validation);
             },
           });
         }
@@ -236,29 +229,32 @@
       }
 
       function setAttendee() {
+        attendeeNode.addEventListener('keyup', function () {
+          this.value = this.value.replace(/[^\d]/g, '');
+        })
+
         attendeeNode.addEventListener('change', function (e) {
           // 暫存參加人數
           attendee = this.value;
           validation = [selectedDate, attendee, startTime, endTime];
-          checkValidation(validation);
-        })
-
-        attendeeNode.addEventListener('keyup', function () {
-          this.value = this.value.replace(/[^\d]/g, '');
+          let whichCard = e.target.parentNode.parentNode.classList[2];
+          let whichCardIndex = whichCard.split('-')[1];
+          checkValidation(validation, whichCardIndex);
+          startTimeNode.removeAttribute('disabled');
         })
       }
 
-      function checkValidation(validation, whichCardIndex) {
-        let trueArr = [];
-        // 判斷傳入的判斷陣列是否都有值
-        validation.forEach(item => {
-          if (item) {
-            trueArr.push(true);
-          }
-        })
+      function checkValidation(validation) {
+        // let trueArr = [];
+        // // 判斷傳入的判斷陣列是否都有值
+        // validation.forEach(item => {
+        //   if (item) {
+        //     trueArr.push(true);
+        //   }
+        // })
 
         // 如果trueArr的長度為四
-        if (trueArr.length === 4) {
+        if (validation.length === 4) {
           // 打開加一天和送出鈕
           extendDayBtn.removeAttribute('disabled');
           submitBtn.removeAttribute('disabled');

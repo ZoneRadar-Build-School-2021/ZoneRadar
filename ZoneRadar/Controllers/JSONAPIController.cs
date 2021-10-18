@@ -102,12 +102,31 @@ namespace ZoneRadar.Controllers
         }
 
         [Route("CheckLogin")]
-        [AcceptVerbs("GET", "POST")]
+        [AcceptVerbs("GET")]
         public IHttpActionResult CheckLogin()
         {
-            string userID = User.Identity.Name;
+            bool isLogin = false;
 
-            return Ok(userID);
+            if (User.Identity.Name != "")
+            {
+                isLogin = true;
+            }
+
+            return Ok(isLogin);
+        }
+
+        [Route("AddPreOrder")]
+        [AcceptVerbs("POST")]
+        public IHttpActionResult AddPreOrder()
+        {
+            bool isLogin = false;
+
+            if (User.Identity.Name != "")
+            {
+                isLogin = true;
+            }
+
+            return Ok(isLogin);
         }
     }
 }
