@@ -33,7 +33,7 @@ namespace ZoneRadar.Services
             var cancels = _repository.GetAll<Cancellation>().ToList();
             var spacediscounts = _repository.GetAll<SpaceDiscount>().ToList();
 
-            var orderformember = orders.Where(x => x.MemberID == id && x.OrderStatusID == 2);
+            var orderformember = orders.Where(x => x.MemberID == id && x.OrderStatusID == 2 && x.Space.SpaceStatusID == 2);
 
 
             foreach (var item in orderformember)
