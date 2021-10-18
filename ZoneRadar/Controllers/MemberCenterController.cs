@@ -51,9 +51,9 @@ namespace ZoneRadar.Controllers
             }
             else
             {
-                ViewBag.Alert = true;
-                ViewBag.Message = "找不到此會員，請重新輸入！";
-                ViewBag.Icon = false;
+                ViewData["Alert"] = true;
+                ViewData["Message"] = "找不到此會員，請重新輸入！";
+                ViewData["Icon"] = false;
                 return View();
             }
         }
@@ -80,7 +80,7 @@ namespace ZoneRadar.Controllers
             var user = _service.VerifyResetPasswordLink(email, resetCode);
             if (user != null)
             {
-                ViewBag.Email = user.Email;
+                ViewData["Email"] = user.Email;
                 return View();
             }
             else
@@ -103,9 +103,9 @@ namespace ZoneRadar.Controllers
             if (!ModelState.IsValid || resetPasswordVM.NewPassword != resetPasswordVM.NewConfirmPassword)
             {
                 //輸入格式不正確或密碼不一致
-                ViewBag.Alert = true;
-                ViewBag.Message = "輸入格式不正確或密碼不一致，請重新輸入！";
-                ViewBag.Icon = false;
+                ViewData["Alert"] = true;
+                ViewData["Message"] = "輸入格式不正確或密碼不一致，請重新輸入！";
+                ViewData["Icon"] = false;
                 return View();
             }
             //如果已重設密碼、登入了，又按上一頁
@@ -189,7 +189,7 @@ namespace ZoneRadar.Controllers
                     //接著寄送驗證信
                     _service.SentEmail(Server, Request, Url, memberResult.User.Email);
 
-                    ViewBag.UserEmail = memberResult.User.Email;
+                    ViewData["UserEmail"] = memberResult.User.Email;
                     return View("HadSentEmail");
                 }
                 else

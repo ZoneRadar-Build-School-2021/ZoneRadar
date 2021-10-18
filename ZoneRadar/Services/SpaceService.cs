@@ -44,7 +44,7 @@ namespace ZoneRadar.Services
             foreach (var item in spaces)
             {
                 //計算場地平均分數
-                var spaceReview = orders.Where(x => x.SpaceID == item.SpaceID).Select(x => reviews.FirstOrDefault(y => y.OrderID == x.OrderID)).OfType<Review>().ToList();
+                var spaceReview = item.Order.Select(x => x.Review.FirstOrDefault(y => y.ToHost)).OfType<Review>().ToList();
                 double scoreAvg = spaceReview.Count() == 0 ? 0 : spaceReview.Average(x => x.Score);
 
                 //場地圖片資料表還沒建好，先寫防呆程式

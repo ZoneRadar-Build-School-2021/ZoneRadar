@@ -292,7 +292,6 @@
     <Content Include="Assets\CSS\order_state\membercenter_pending.css" />
     <Content Include="Assets\CSS\order_state\membercenter_processing.css" />
     <Content Include="Assets\CSS\order_state\usercenter_shopcar.css" />
-    <Content Include="Assets\CSS\profile\profile.css" />
     <Content Include="Assets\CSS\searching\searching.css" />
     <Content Include="Assets\CSS\static\QA.css" />
     <Content Include="Assets\CSS\static\StaticPage.css" />
