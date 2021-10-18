@@ -90,7 +90,9 @@
                                 <p class="fs-2">是否確定取消？</p>
                             </div>
                             <div class="modal-footer justify-content-center">
-                                <a href="~/HostCenter/CancelDiscontinue?spaceId=@item.SpaceID" class="btn btn_close">確定</a>
+                                <form action="/HostCenter/CancelDiscontinue?spaceId=@item.SpaceID" method="post">
+                                    <button type="submit" class="btn btn_close">確定</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -130,7 +132,7 @@
                 <span class="review-count ms-2">@item.NumberOfReviews</span>篇評價
             </p>
             <p>近30天的被預定次數:<a href="~/HostCenter/History" class="booking-count mx-2 fs-5">@item.NumberOfOrders</a>次</p>
-            <p class="text-end pt-3 pb-4 border-bottom border-3"><a class="edit-btn btn me-3" href="~/HostCenter/EditSpace?spaceId=@item.SpaceID">編輯場地</a><button class="delete-btn btn" href="~/HostCenter/DeleteSpace?spaceId=@item.SpaceID" data-bs-toggle="modal" data-bs-target="#delete-modal-@item.SpaceID">永久刪除</button></p>
+            <p class="text-end pt-3 pb-4 border-bottom border-3"><a class="edit-btn btn me-3" href="~/HostCenter/EditSpace?spaceId=@item.SpaceID">編輯場地</a><button class="delete-btn btn" data-bs-toggle="modal" data-bs-target="#delete-modal-@item.SpaceID">永久刪除</button></p>
 
             <!-- delete-Modal -->
             <div class="modal fade delete-modal" id="delete-modal-@item.SpaceID" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
@@ -145,7 +147,9 @@
                             <p class="fs-2 text-decoration-none text-black">是否確定刪除？</p>
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <a href="~/HostCenter/DeleteSpace?spaceId=@item.SpaceID" class="btn btn_close">確定</a>
+                            <form action="/HostCenter/DeleteSpace?spaceId=@item.SpaceID" method="post">
+                                <button type="submit" class="btn btn_close">確定</button>
+                            </form>
                         </div>
                     </div>
                 </div>

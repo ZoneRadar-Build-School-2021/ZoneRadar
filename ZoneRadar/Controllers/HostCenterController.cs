@@ -145,7 +145,8 @@ namespace ZoneRadar.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult CancelDiscontinue(int? spaceId)
+        [HttpPost]
+        public ActionResult CancelDiscontinue(int spaceId)
         {
             int userId;
             var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
@@ -153,14 +154,9 @@ namespace ZoneRadar.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            if (spaceId.HasValue)
-            {
-                _spaceService.SetDiscontinuedDate(userId, spaceId.Value, null);
-                return RedirectToAction("SpaceManage");
-            }
             else
             {
-                //防呆未完成
+                _spaceService.SetDiscontinuedDate(userId, spaceId, null);
                 return RedirectToAction("SpaceManage");
             }
         }
@@ -169,7 +165,8 @@ namespace ZoneRadar.Controllers
         /// 刪除場地(Jenny)
         /// </summary>
         /// <returns></returns>
-        public ActionResult DeleteSpace(int? spaceId)
+        [HttpPost]
+        public ActionResult DeleteSpace(int spaceId)
         {
             int userId;
             var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
@@ -177,14 +174,9 @@ namespace ZoneRadar.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            if (spaceId.HasValue)
-            {
-                _spaceService.DeleteSpace(userId, spaceId.Value);
-                return RedirectToAction("SpaceManage");
-            }
             else
             {
-                //防呆未完成
+                _spaceService.DeleteSpace(userId, spaceId);
                 return RedirectToAction("SpaceManage");
             }
         }
