@@ -63,3 +63,13 @@ img {
 .email-information{
     margin-bottom: 30px;
 }
+.email-information
+.form-check-input:checked {
+    background-color: #049DD9;
+    border-color: #049DD9;
+}
+.email-information
+.form-check-input:focus {
+    outline: 0;
+    box-shadow: none !important;
+}
