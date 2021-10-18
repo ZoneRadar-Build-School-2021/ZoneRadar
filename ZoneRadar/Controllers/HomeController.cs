@@ -36,11 +36,11 @@ namespace ZoneRadar.Controllers
 
 
 
-            ViewBag.RegisterModalPopup = TempData["RegisterModalPopup"];
-            ViewBag.LoginModalPopup = TempData["LoginModalPopup"];
-            ViewBag.Alert = TempData["Alert"];
-            ViewBag.Message = TempData["Message"];
-            ViewBag.Icon = TempData["Icon"];
+            ViewData["RegisterModalPopup"] = TempData["RegisterModalPopup"];
+            ViewData["LoginModalPopup"] = TempData["LoginModalPopup"];
+            ViewData["Alert"] = TempData["Alert"];
+            ViewData["Message"] = TempData["Message"];
+            ViewData["Icon"] = TempData["Icon"];
 
             return View(model);
         }
