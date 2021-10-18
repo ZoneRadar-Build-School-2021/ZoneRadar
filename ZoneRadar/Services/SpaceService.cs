@@ -307,13 +307,13 @@ namespace ZoneRadar.Services
 
             if (amenities != null && amenities.Count != 0)
             {
-                //var filteredByAmenity = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity)).ToList();
-                //spaces = spaces.Where(x => filteredByAmenity.Select(y => y.SpaceID).Contains(x.SpaceID));
+                var filteredByAmenity = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity));
 
-                var spaceIDs = new List<int>();
+                var spaceIDs = filteredByAmenity.Select(x => x.SpaceID).Distinct();
                 foreach (var amenity in amenities)
                 {
-                    spaceIDs = spaceAmenities.Where(x => x.AmenityDetail.Amenity == amenity).Select(x => x.SpaceID).Distinct().ToList();
+                    var layer = filteredByAmenity.Where(x => x.AmenityDetail.Amenity == amenity).Select(x => x.SpaceID);
+                    spaceIDs = spaceIDs.Intersect(layer);
                 }
 
                 spaces = spaces.Where(x => spaceIDs.Contains(x.SpaceID));
