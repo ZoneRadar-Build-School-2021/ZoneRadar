@@ -10,7 +10,7 @@
 
 <div class="host-order container my-5">
     <div class="row">
-        <h2>預定單</h2>
+        <h2>訂購單</h2>
     </div>
     @foreach (var item in Model)
     {
@@ -23,13 +23,13 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-lg-8 px-3">
-                        <a href="#" class="d-inline-block mb-3 mt-3 mt-lg-0">
+                        <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceID)" class="d-inline-block mb-3 mt-3 mt-lg-0">
                             <h3 class="venue-name">@Html.DisplayFor(m => item.SpaceName)</h3>
                         </a>
                         <ul class="order-detial">
                             <li class="mb-2 fs-5">
                                 場地主姓名:
-                                <a href="#" class="customer-name mx-2">@Html.DisplayFor(m => item.OwnerName)</a>
+                                <a href="mailto:@Html.DisplayFor(m => item.Email)" class="customer-name mx-2">@Html.DisplayFor(m => item.OwnerName)</a>
                                 <i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top"
                                    title="連絡他"></i>
                             </li>

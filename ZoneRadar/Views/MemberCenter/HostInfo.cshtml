@@ -1,6 +1,6 @@
 ﻿@model HostInfoViewModel
 @{
-    ViewBag.Title = Model.User.Name +" - SellerCard";
+    ViewBag.Title = Model.User.Name + " - SellerCard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var user = Model.User;
@@ -20,13 +20,14 @@
                 <div class="member_card_introduce_name col-12">
                     <h3>
                         @user.Name
-                        <a href="#">
+                        <a href="mailto:@user.Email">
                             <i class="ms-3 fas fa-comment-dots" data-bs-toggle="tooltip" data-bs-placement="right" title="聯絡我">
                             </i>
                         </a>
                     </h3>
                     <p class="mt-4">
-                        加入時間：<span class="ms-3">
+                        加入時間：
+                        <span class="ms-3">
                             @user.SignUpDateTime.ToString("yyyy.MM.dd")
                         </span>
                     </p>
@@ -73,30 +74,29 @@
         @foreach (var sp in spaces)
         {
             <div class="mt-4 myplace_space_card col-sm-12 col-md-6 col-lg-6">
-                <a class="space_card_pic" href="~/Booking/BookingPage"><img class="pe-2" src="@sp.SpacePhoto"></a>
+                <a class="space_card_pic" href="~/Booking/BookingPage/@sp.SpaceId"><img class="pe-2" src="@sp.SpacePhoto"></a>
                 <span class="myplace_space_card_distinct">@sp.PricePerHour.ToString("C0") / hr</span>
                 <div class="space_card mt-4">
-                    <a href="~/Booking/BookingPage" class="space_card_title fs-5">
+                    <a href="~/Booking/BookingPage/@sp.SpaceId" class="space_card_title fs-5">
                         @sp.SpaceName
                     </a>
                     <div class="space_card_location mt-1">
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                        <a href="~/Searching/SearchingPage/@sp.City" class="space_card_location_a">
                             <span>@sp.City</span>
                         </a>
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                        <a href="~/Searching/SearchingPage/@sp.District" class="space_card_location_a">
                             <span>@sp.District</span>
                         </a>
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                        <a href="~/Searching/SearchingPage/@sp.Address" class="space_card_location_a">
                             <span>@sp.Address</span>
                         </a>
                     </div>
                     <div class="space_card_star mt-1">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="me-2">@sp.ReviewCount</span>
+                        @for (int i = 1; i <= sp.Score; i++)
+                        {
+                            <i class="fas fa-star"></i>
+                        }
+                        <span class="me-2">(@sp.ReviewCount)</span>
                     </div>
                 </div>
             </div>

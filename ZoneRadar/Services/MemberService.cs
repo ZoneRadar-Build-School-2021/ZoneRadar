@@ -43,7 +43,7 @@ namespace ZoneRadar.Services
             registerVM.RegisterEmail = HttpUtility.HtmlEncode(registerVM.RegisterEmail);
             registerVM.RegisterPassword = HttpUtility.HtmlEncode(registerVM.RegisterPassword).MD5Hash();
 
-            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.RegisterEmail.ToUpper() && x.SignUpDateTime.Year != 1753);
+            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.RegisterEmail.ToUpper() && x.IsVerify == true);
 
             if (isSameEmail)
             {
@@ -61,8 +61,8 @@ namespace ZoneRadar.Services
                         Password = registerVM.RegisterPassword,
                         Name = registerVM.Name,
                         ReceiveEDM = false,
-                        SignUpDateTime = new DateTime(1753, 1, 1), //未驗證時時間為西元1753年
-                        LastLogin = new DateTime(1753, 1, 1) //未驗證時時間為西元1753年
+                        SignUpDateTime = DateTime.Now,
+                        LastLogin = DateTime.Now
                     };
                     _repository.Create<Member>(member);
                     _repository.SaveChanges();
@@ -144,11 +144,11 @@ namespace ZoneRadar.Services
             bool hasInfo;
             if (verified)
             {
-                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.SignUpDateTime.Year != 1753);
+                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == true);
             }
             else
             {
-                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.SignUpDateTime.Year == 1753);
+                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == false);
             }
             return hasInfo;
         }
@@ -214,7 +214,7 @@ namespace ZoneRadar.Services
             //EF比對資料庫帳密
             //以Email及Password查詢比對Member資料表記錄，且註冊時間不得為預設1753年
             var members = _repository.GetAll<Member>().ToList();
-            var user = members.FirstOrDefault(x => x.Email.ToUpper() == loginVM.LoginEmail.ToUpper() && x.Password == loginVM.LoginPassword && x.SignUpDateTime.Year != 1753);
+            var user = members.FirstOrDefault(x => x.Email.ToUpper() == loginVM.LoginEmail.ToUpper() && x.Password == loginVM.LoginPassword && x.IsVerify == true);
 
             //修改上次登入時間
             if (user != null)
@@ -381,7 +381,7 @@ namespace ZoneRadar.Services
 
             //以Email及Password查詢比對Member資料表記錄，且註冊時間不得為預設1753年
             var members = _repository.GetAll<Member>().ToList();
-            var user = members.FirstOrDefault(x => x.Email.ToUpper() == resetPasswordVM.UserEmail.ToUpper() && x.SignUpDateTime.Year != 1753);
+            var user = members.FirstOrDefault(x => x.Email.ToUpper() == resetPasswordVM.UserEmail.ToUpper() && x.IsVerify == true);
 
             //修改上次登入時間
             if (user != null)
@@ -442,25 +442,35 @@ namespace ZoneRadar.Services
                     Phone = u.Phone,
                     Description = u.Description,
                     SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo
+                    Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
                 };
                 //會員所擁有的廠所有場地
-                var sps = _repository.GetAll<Space>().Where(x => x.MemberID == memberId);
+                var sps = _repository.GetAll<Space>().Where(x => x.MemberID == memberId && x.SpaceStatus.SpaceStatusID == 2);
                 var re = _repository.GetAll<Review>();
                 var spt = _repository.GetAll<SpacePhoto>();
 
                 foreach (var s in sps)
                 {
-                    resultMember.Spaces.Add(new Spaces
+                    if (s.SpaceID > 0)
                     {
-                        SpaceName = s.SpaceName,
-                        Address = s.Address,
-                        SpacePhoto = sps.FirstOrDefault(x => x.SpaceID == s.SpaceID).SpacePhoto.First().SpacePhotoUrl,
-                        District = sps.FirstOrDefault(x => x.SpaceID == s.SpaceID).District.DistrictName,
-                        City = sps.FirstOrDefault(x => x.SpaceID == s.SpaceID).City.CityName,
-                        PricePerHour = s.PricePerHour,
-                        ReviewCount = re.Where(x => x.Order.MemberID == s.MemberID && x.ToHost == true).Select(x => x.Score).Count()
-                    });
+                        resultMember.Spaces.Add(new Spaces
+                        {
+                            SpaceId = s.SpaceID,
+                            SpaceName = s.SpaceName,
+                            Address = s.Address,
+                            SpacePhoto = s.SpacePhoto.First().SpacePhotoUrl,
+                            District = s.District.DistrictName,
+                            //sps.FirstOrDefault(x => x.SpaceID == s.SpaceID).District.DistrictName,
+                            City = s.City.CityName,
+                            PricePerHour = s.PricePerHour,
+                            Score = Average(s.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Count()).Sum(), s.Order.Select(x=>x.Review.Where(z=>z.ToHost == true).Select(y=>y.Score).Sum()).Sum()),
+                            ReviewCount = s.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.ReviewContent).Count()).Sum()
+                        });
+                    }
+                    else 
+                    {
+                        return resultMember;
+                    }
                 }
                 return resultMember;
             }
@@ -493,29 +503,51 @@ namespace ZoneRadar.Services
                     Phone = u.Phone,
                     Description = u.Description,
                     SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo
+                    Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
                 };
                 //會員所收藏的場地
                 var collection = _repository.GetAll<Collection>().Where(x => x.MemberID == memberId);
-                var sps = _repository.GetAll<Space>();
-
+                var spaces = _repository.GetAll<Space>();
+                var r = _repository.GetAll<Review>();
+                
+                //c.Member.Space.Where(x => x.SpaceID == c.SpaceID && x.SpaceStatusID == 2).FirstOrDefault().SpaceName
                 foreach (var c in collection)
                 {
+                    var sps = spaces.FirstOrDefault(x => x.SpaceID == c.SpaceID && x.SpaceStatusID == 2);
                     resultMemberCollection.MyCollection.Add(new Spaces
                     {
-                        SpaceName = sps.FirstOrDefault(x => x.SpaceID == c.SpaceID).SpaceName,
-                        Address = sps.FirstOrDefault(x => x.SpaceID == c.SpaceID).Address,
-                        SpacePhoto = sps.FirstOrDefault(x => x.SpaceID == c.SpaceID).SpacePhoto.First().SpacePhotoUrl,
-                        District = sps.FirstOrDefault(x => x.SpaceID == c.SpaceID).District.DistrictName,
-                        City = sps.FirstOrDefault(x => x.SpaceID == c.SpaceID).City.CityName,
-                        PricePerHour = sps.FirstOrDefault(x => x.SpaceID == c.SpaceID).PricePerHour,
-                        ReviewCount = sps.FirstOrDefault(x => x.SpaceID == c.SpaceID).Order.Select(x => x.Review).Count()
+                        SpaceId = sps.SpaceID,
+                        SpaceName = sps.SpaceName,
+                        Address = sps.Address,
+                        SpacePhoto = sps.SpacePhoto.First().SpacePhotoUrl,
+                        District = sps.District.DistrictName,
+                        City = sps.City.CityName,
+                        PricePerHour = sps.PricePerHour,
+                        ReviewCount = sps.Order.Where(x=>sps.SpaceID == x.SpaceID).Select(x=>x.Review.Where(y=>y.ToHost == true).Select(z=>z.ReviewContent).Count()).Sum(),
+                        Score = Average(sps.Order.Where(x => sps.SpaceID == x.SpaceID).Select(x => x.Review.Where(y => y.ToHost == true).Select(z => z.ReviewContent).Count()).Sum(), sps.Order.Select(x => x.Review.Where(y => y.ToHost == true).Select(z => z.Score).Sum()).Sum())
                         /*re.Where(x => x.Order.MemberID == s.MemberID && x.ToHost == true).Select(x => x.Score).Count()*/
                     });
                 }
                 return resultMemberCollection;
             }
 
+        }
+        /// <summary>
+        /// Space平均評分 (Jack)
+        /// </summar>
+        /// <returns> 取得會員資訊 & 該會員所有被場地主的評價 </returns>
+        private static int Average(int count,int score)
+        {
+            var result = 0;
+            if ( count == 0 ||  score == 0) 
+            {
+                result = 0;
+            }
+            else
+            {
+                result = (int)score / count;
+            }
+            return result;
         }
 
         /// <summary>
@@ -546,27 +578,30 @@ namespace ZoneRadar.Services
                     Phone = u.Phone,
                     Description = u.Description,
                     SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo
+                    Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
                 };
                 //找出會員是否有租借場地並且顯示 出被場地主的評價
                 var order = _repository.GetAll<Order>().Where(x => x.MemberID == u.MemberID && x.OrderStatusID == 4);
-                var sps = _repository.GetAll<Space>();
+                
                 foreach (var o in order)
                 {
+                    var or = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID && x.ToHost == false);
                     resulthostinfoReview.ToUserReview.Add(new UserReview
                     {
-                        SpaceName = sps.FirstOrDefault(x => x.SpaceID == o.SpaceID).SpaceName,
-                        SpacePhoto = sps.FirstOrDefault(x => x.SpaceID == o.SpaceID).Member.Photo,
-                        District = sps.FirstOrDefault(x => x.SpaceID == o.SpaceID).District.DistrictName,
-                        Address = sps.FirstOrDefault(x => x.SpaceID == o.SpaceID).Address,
-                        PricePerHour = sps.FirstOrDefault(x => x.SpaceID == o.SpaceID).PricePerHour,
-                        ReviewContent = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID && x.ToHost == false).ReviewContent,
-                        Recommend = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID && x.ToHost == false).Recommend,
-                        Score = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID && x.ToHost == false).Score,
-                        ReviewDate = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID && x.ToHost == false).ReviewDate,
+                        SpaceId = o.Space.SpaceID,
+                        SpaceName = o.Space.SpaceName,
+                        /*sps.FirstOrDefault(x => x.SpaceID == o.SpaceID).SpaceName,*/
+                        SpaceMemberPhoto = o.Space.Member.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : o.Space.Member.Photo,
+                        District = o.Space.District.DistrictName,
+                        Address = o.Space.Address,
+                        PricePerHour = o.Space.PricePerHour,
+                        ReviewContent = or.ReviewContent,
+                        Recommend = or.Recommend,
+                        Score = or.Score,
+                        ReviewDate = or.ReviewDate,
                         ReviewCount = o.Review.Where(x => x.OrderID == o.OrderID && x.ToHost == false).Count(),
-                        Name = sps.Where(x=>x.SpaceID == o.SpaceID).FirstOrDefault().Member.Name,
-                        Id = sps.Where(x=>x.SpaceID == o.SpaceID).FirstOrDefault().MemberID
+                        Name = o.Space.Member.Name,
+                        Id = o.Space.MemberID
                     });
 
                     return resulthostinfoReview;
@@ -615,6 +650,6 @@ namespace ZoneRadar.Services
             _repository.SaveChanges();
 
             return edit;
-        }
+        }        
     }
 }

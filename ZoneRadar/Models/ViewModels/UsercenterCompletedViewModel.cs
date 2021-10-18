@@ -23,5 +23,7 @@ namespace ZoneRadar.Models.ViewModels
         public int Score { get; set; }
         public string ReviewContent { get; set; }
         public bool Recommend { get; set; }
+        public int SpaceID { get; set; }
+        public string Email { get; set; }
     }
 }

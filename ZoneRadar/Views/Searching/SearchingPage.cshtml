@@ -19,14 +19,14 @@
         <div class="my-2 d-none d-xl-inline-block me-2">
             <input class="date-filter" id="web-date-filter" placeholder="活動日期">
         </div>
-        <div class="more-filter d-xl-inline-block me-2">
-            <a type="button" class="filter-btn btn d-flex align-items-center justify-content-center" id="filter-btn" data-bs-toggle="modal" data-bs-target="#filter-modal">
+        <div class="more-filter d-inline-block me-2">
+            <button type="button" class="filter-btn btn d-flex align-items-center justify-content-center" id="filter-btn" data-bs-toggle="modal" data-bs-target="#filter-modal">
                 <i class="fas fa-filter me-2"></i><span>更多條件</span>
-            </a>
+            </button>
         </div>
-        <div class="d-none d-xl-inline-block me-2">
+        <div class="d-inline-block me-2 search-row">
             <div class="serching d-flex align-items-center">
-                <input class="search-bar form-control form-control" type="text" placeholder="想找什麼場地呢?" id="web-search">
+                <input class="search-bar form-control" type="text" placeholder="想找什麼場地呢?" id="web-search">
                 <a class="ms-1" href="#"><i class="fas fa-search-location fs-4 ms-2" id="web-search-btn"></i></a>
             </div>
         </div>
@@ -62,12 +62,12 @@
                         <input class="date-filter" id="phone-date-filter" placeholder="活動日期">
                     </div>
                 </div>
-                <div class="row d-xl-none">
+                @*<div class="row d-xl-none">
                     <div class="col-12 d-flex align-items-center mb-5">
                         <input class="search-bar form-control form-control" type="text" placeholder="想找什麼場地呢?" id="phone-search">
                         <a class="ms-2" href="#"><i class="fas fa-search-location fs-4" id="phone-search-btn"></i></a>
                     </div>
-                </div>
+                </div>*@
                 <div class="row mb-5">
                     <section class="price col-12 co-md-8">
                         <h5>價格區間</h5>
@@ -121,7 +121,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="clear-btn btn" data-bs-dismiss="modal">清除條件</button>
+                <button type="button" class="clear-btn btn">清除條件</button>
                 <button type="button" class="save-btn btn">確認</button>
             </div>
         </div>
@@ -152,8 +152,6 @@
                     <span class="venue-price fs-5"></span><span class="ms-1">起</span>
                 </div>
                 <div class="swiper-wrapper"></div>
-                <!-- <div class="swiper-button-prev d-none d-xl-block"></div>
-                <div class="swiper-button-next d-none d-xl-block"></div> -->
             </div>
             <h4 class="venue-name fw-bolder mt-3"></h4>
             <p class="venue-address mb-2"><i class="fas fa-map-marker-alt me-1"></i></p>
@@ -189,7 +187,7 @@
 
 @section endJS
 {
-    <script src="~/Assets/JS/axios.min.js"></script>
+    @*<script src="~/Assets/JS/axios.min.js"></script>*@
     <script src="~/Assets/JS/searching/searching.js"></script>
 }
 

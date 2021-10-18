@@ -70,57 +70,27 @@ namespace ZoneRadar.Controllers
         /// </summary>
         public ActionResult EditSpace(int spaceId)
         {
-            var model = new SomeOnesSpaceViewModel()
-            {
-                SomeOnesSpaceList = _spaceService.ReadAnySpace(spaceId).SomeOnesSpaceList,
-                SomeOnesCountryList = _spaceService.ReadAnySpace(spaceId).SomeOnesCountryList,
-                SomeOnesDistrictList = _spaceService.ReadAnySpace(spaceId).SomeOnesDistrictList,
-                SomeOnesCitytList = _spaceService.ReadAnySpace(spaceId).SomeOnesCitytList,
-                SomeOnesTypeDetailList = _spaceService.ReadAnySpace(spaceId).SomeOnesTypeDetailList,
-                ShowAllTypeDetailList = _spaceService.ReadAnySpace(spaceId).ShowAllTypeDetailList,
-                SomeOnesSpaceNameList = _spaceService.ReadAnySpace(spaceId).SomeOnesSpaceNameList,
-                SomeOnesSpaceIntroductionList = _spaceService.ReadAnySpace(spaceId).SomeOnesSpaceIntroductionList,
-                SomeOnesMeasureOfAreaandCapacityList = _spaceService.ReadAnySpace(spaceId).SomeOnesMeasureOfAreaandCapacityList,
-                SomeOnesPriceList = _spaceService.ReadAnySpace(spaceId).SomeOnesPriceList,
-                SomeOnesDiscountsList = _spaceService.ReadAnySpace(spaceId).SomeOnesDiscountsList,
-                SomeOnesRulesList = _spaceService.ReadAnySpace(spaceId).SomeOnesRulesList,
-                SomeOnesTrafficList = _spaceService.ReadAnySpace(spaceId).SomeOnesTrafficList,
-                SomeOnesParkingList = _spaceService.ReadAnySpace(spaceId).SomeOnesParkingList,
-                SomeOnesShootingList = _spaceService.ReadAnySpace(spaceId).SomeOnesShootingList,
-                SomeOnesCancelAllList = _spaceService.ReadAnySpace(spaceId).SomeOnesCancelAllList,
-                SomeOnesCancelList = _spaceService.ReadAnySpace(spaceId).SomeOnesCancelList,
-
-                SomeOnesAmenityList = _spaceService.ReadAnySpace(spaceId).SomeOnesAmenityList,
-                amenityAraeOneList = _spaceService.ReadAnySpace(spaceId).amenityAraeOneList,
-
-                SomeTwoAmenityList = _spaceService.ReadAnySpace(spaceId).SomeTwoAmenityList,
-                amenityAraeTwoList = _spaceService.ReadAnySpace(spaceId).amenityAraeTwoList,
-
-                SomeThreeAmenityList = _spaceService.ReadAnySpace(spaceId).SomeThreeAmenityList,
-                amenityAraeThreeList = _spaceService.ReadAnySpace(spaceId).amenityAraeThreeList,
-
-                CleanRuleOptionsOneList = _spaceService.ReadAnySpace(spaceId).CleanRuleOptionsOneList,
-                SomeOnesCleanRuleOneList = _spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleOneList,
-                CleanRuleOptionsTwoList = _spaceService.ReadAnySpace(spaceId).CleanRuleOptionsTwoList,
-                SomeOnesCleanRuleTwoList = _spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleTwoList,
-                CleanRuleOptionsThreeList = _spaceService.ReadAnySpace(spaceId).CleanRuleOptionsThreeList,
-                SomeOnesCleanRuleThreeList = _spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleThreeList,
-                CleanRuleOptionsFourList = _spaceService.ReadAnySpace(spaceId).CleanRuleOptionsFourList,
-                SomeOnesCleanRuleFourList = _spaceService.ReadAnySpace(spaceId).SomeOnesCleanRuleFourList,
-                SpaceoperatingDaysList = _spaceService.ReadAnySpace(spaceId).SpaceoperatingDaysList,
-                _compareOperatingDay = _spaceService.ReadAnySpace(spaceId)._compareOperatingDay,
-                Operating = _spaceService.Operating(),
-                SpaceOwnerNameList = _spaceService.ReadAnySpace(spaceId).SpaceOwnerNameList,
-            };
+            var model = _spaceService.ReadAnySpace(spaceId);
             return View(model);
         }
+
         /// <summary>
-        /// 編輯場地(Steve) 
+        /// 管理我的場地(Jenny)
         /// </summary>
         /// <returns></returns>
         public ActionResult SpaceManage()
         {
-            return View();
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (isAuthenticated)
+            {
+                var spaceManageList = _spaceService.GetHostSpace(userId);
+                return View(spaceManageList);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         /// <summary>
@@ -135,12 +105,80 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
-        /// 場地主訂單 - 歷史訂單(Steve) 
+        /// 場地主訂單 - 歷史訂單(Nick) 
         /// </summary>
         /// <returns></returns>
         public ActionResult History()
         {
-            return View();
+            var userid = int.Parse(User.Identity.Name);
+            var model = _orderService.GetHostCenterHistoryVM(userid);
+            return View(model);
+        }
+
+        /// <summary>
+        /// 儲存場地預定下架日期(Jenny)
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SpaceDiscontinue(int spaceId, DateTime? discontinuedDate)
+        {
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (discontinuedDate.HasValue)
+            {
+                _spaceService.SetDiscontinuedDate(userId, spaceId, discontinuedDate.Value);
+                return RedirectToAction("SpaceManage");
+            }
+            else
+            {
+                //防呆未完成
+                return RedirectToAction("SpaceManage");
+            }
+        }
+
+        /// <summary>
+        /// 取消下架(Jenny)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CancelDiscontinue(int spaceId)
+        {
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                _spaceService.SetDiscontinuedDate(userId, spaceId, null);
+                return RedirectToAction("SpaceManage");
+            }
+        }
+
+        /// <summary>
+        /// 刪除場地(Jenny)
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult DeleteSpace(int spaceId)
+        {
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                _spaceService.DeleteSpace(userId, spaceId);
+                return RedirectToAction("SpaceManage");
+            }
         }
     }
 }

@@ -32,10 +32,10 @@ namespace ZoneRadar.Services
             var spacediscounts = _repository.GetAll<SpaceDiscount>().ToList();
 
             //帶入會員ID
-            var orderformember25 = orders.Where(x => x.MemberID == id && x.OrderStatusID == 1);
+            var orderformember = orders.Where(x => x.MemberID == id && x.OrderStatusID == 1 && x.Space.SpaceStatusID == 2);
 
             //在所有訂單中符合此會員ID
-            foreach (var item in orderformember25)
+            foreach (var item in orderformember)
             {
                 //該場地名稱
                 var spacename = spaces.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpaceName;
@@ -45,6 +45,9 @@ namespace ZoneRadar.Services
                 var ownername = members.FirstOrDefault(x => x.MemberID == item.Space.MemberID).Name;
                 //該場地主電話
                 var ownerphone = members.FirstOrDefault(x => x.MemberID == item.Space.MemberID).Phone;
+
+                var ownerid = item.Space.MemberID;
+                var email = members.FirstOrDefault(x => x.MemberID == ownerid).Email;
 
                 decimal money = 0;
                 var temp = new List<RentDetailViewModel>();
@@ -93,7 +96,9 @@ namespace ZoneRadar.Services
                     OwnerPhone = ownerphone,
                     Money = money,
                     RentDetailVM = temp,
-                    OrderID = item.OrderID
+                    OrderID = item.OrderID,
+                    SpaceID = item.SpaceID,
+                    Email = email
                 });
 
 

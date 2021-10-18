@@ -36,7 +36,7 @@
                                     <p>
                                         <span class="memberbuyer_completed_num_ordernumber">訂單編號：</span>
                                         <span class="ms-1">@Html.DisplayFor(m => item.OrderNumber) </span>
-                                        <a class="p-2 ms-3" href="#">
+                                        <a class="p-2 ms-3" href="mailto:@Html.DisplayFor(m => item.Email)">
                                             <i class="far fa-comment-dots me-1"></i>聯繫我
                                         </a>
                                     </p>
@@ -49,13 +49,13 @@
                             </div>
                         </div>
                         <div class="memberbuyer_completed_pic col-sm-12 col-md-12 col-lg-3">
-                            <a href="#">
+                            <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceID)">
                                 <img class="p-2 mt-2" src="@Html.DisplayFor(m => item.SpaceUrl)">
                             </a>
                         </div>
                         <div class="memberbuyer_completed_txt col-sm-12 col-md-12 col-lg-9 p-3">
                             <div class="memberbuyer_completed_txt_title">
-                                <a href="#">
+                                <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceID)">
                                     @Html.DisplayFor(m => item.SpaceName)
                                 </a>
                             </div>
@@ -93,7 +93,8 @@
                     </div>
                 </div>
                 <div class="memberbuyer_completed_btn col-12 mt-3 mb-5 d-flex justify-content-end">
-                    <button class="btn me-2">再買一次</button>
+                    @Html.ActionLink("再買一次","BookingPage","Booking",new { id = item.SpaceID} , new { @class = "btn me-2" })
+                    @*<button class="btn me-2">再買一次</button>*@
                     @if (item.HasReview)
                     {
                         <button class="btn me-2" data-bs-toggle="modal" data-bs-target="#@Html.DisplayFor(m => item.SpaceName)" disabled>評價 / 評分</button>
@@ -174,7 +175,7 @@
                                     <p>
                                         <span class="memberbuyer_completed_num_ordernumber cancel">訂單編號：</span>
                                         <span class="ms-1 cancel">@Html.DisplayFor(m => item.OrderNumber) </span>
-                                        <a class="p-2 ms-3" href="#">
+                                        <a class="p-2 ms-3" href="mailto:@Html.DisplayFor(m => item.Email)">
                                             <i class="far fa-comment-dots me-1"></i>聯繫我
                                         </a>
                                     </p>
@@ -187,13 +188,13 @@
                             </div>
                         </div>
                         <div class="memberbuyer_completed_pic col-sm-12 col-md-12 col-lg-3">
-                            <a href="#">
+                            <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceID)">
                                 <img class="p-2 mt-2" src="@Html.DisplayFor(m =>item.SpaceUrl)">
                             </a>
                         </div>
                         <div class="memberbuyer_completed_txt col-sm-12 col-md-12 col-lg-9 p-3 cancel">
                             <div class="memberbuyer_completed_txt_title">
-                                <a href="#">
+                                <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceID)">
                                     @Html.DisplayFor(m => item.SpaceName)
                                 </a>
                             </div>
@@ -233,56 +234,6 @@
                 <div class="memberbuyer_completed_btn col-12 mt-3 mb-5 d-flex justify-content-end">
                     <button class="btn me-2" disabled>再買一次</button>
                     <button class="btn me-2" data-bs-toggle="modal" data-bs-target="#@Html.DisplayFor(m =>item.SpaceName)" disabled>評價 / 評分</button>
-                </div>
-            </div>
-
-            <!-- Modal -->
-            <div class="modal fade" id="@Html.DisplayFor(m =>item.SpaceName)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered ">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>@Html.DisplayFor(m => item.OrderNumber)</span></h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div>
-                                <div class="col-6">
-                                    <select class="form-select form-select-sm text-center" aria-label=".form-select-sm example">
-                                        <option selected class="d-none">請選擇星數</option>
-                                        <option value="1">1星</option>
-                                        <option value="2">2星</option>
-                                        <option value="3">3星</option>
-                                        <option value="4">4星</option>
-                                        <option value="5">5星</option>
-                                    </select>
-                                </div>
-                                <div class="col-6"></div>
-                            </div>
-                            <div class="customer_evaluation mt-3">
-                                <p>您對於這次的場地有什麼需要改進或是想對我們說的話？</p>
-                                <textarea class="form-control" aria-label="With textarea"></textarea>
-                            </div>
-                            <div class="customer_eveluation_recommend mt-3">
-                                <p>您是否會推薦其他人</p>
-                                <div class="customer_evelution_radio form-check">
-                                    <input class="form-check-input" type="radio" name="customer_evelution_recommend_radio_option" id="flexRadioDefault1">
-                                    <label class="form-check-label ms-1" for="flexRadioDefault1">
-                                        <i class="fas fa-check me-1"></i>我會推薦給其他人
-                                    </label>
-                                </div>
-                                <div class="customer_evelution_radio form-check">
-                                    <input class="form-check-input" type="radio" name="customer_evelution_recommend_radio_option" id="flexRadioDefault2">
-                                    <label class="form-check-label ms-1" for="flexRadioDefault2">
-                                        <i class="fas fa-times me-2"></i>我不會推薦給其他人
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn_close" data-bs-dismiss="modal">關閉</button>
-                            <button type="button" class="btn btn_sendout">送出</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

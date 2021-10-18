@@ -32,7 +32,7 @@
                                 <p>
                                     訂單編號：
                                     <span class="ms-1">@Html.DisplayFor(m => item.OrderNumber)</span>
-                                    <a class="p-2 ms-3" href="#">
+                                    <a class="p-2 ms-3" href="mailto:@Html.DisplayFor(m => item.Email)">
                                         <i class="far fa-comment-dots me-1"></i>聯繫我
                                     </a>
                                 </p>
@@ -46,13 +46,13 @@
                         </div>
                     </div>
                     <div class="memberbuyer_processing_pic col-sm-12 col-md-12 col-lg-3">
-                        <a href="#">
+                        <a href="~/Booking/BookingPage/@Html.DisplayFor(m=>item.SpaceID)">
                             <img class="p-2 mt-2" src="@Html.DisplayFor(m => item.SpaceUrl)">
                         </a>
                     </div>
                     <div class="memberbuyer_processing_txt col-sm-12 col-md-12 col-lg-9 p-3">
                         <div class="memberbuyer_processing_txt_title">
-                            <a href="#">
+                            <a href="~/Booking/BookingPage/@Html.DisplayFor(m=>item.SpaceID)">
                                 @Html.DisplayFor(m => item.SpaceName)
                             </a>
                         </div>
