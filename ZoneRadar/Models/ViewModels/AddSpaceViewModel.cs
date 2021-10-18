@@ -30,13 +30,20 @@ namespace ZoneRadar.Models.ViewModels
         public int SpaceStatusID { get; set; }
         public DateTime DiscontinuedDate { get; set; }
 
-        public int OperatingDay { get; set; }
-        public TimeSpan StartTime { get; set; }
-        public TimeSpan EndTime { get; set; }
+
+        public List<int> OperatingDay { get; set; }
+        public List<TimeSpan> StartTime { get; set; }
+        public List<TimeSpan> EndTime { get; set; }
 
 
-        public int TypeDetailID { get; set; }
 
+        public List<int> TypeDetailID { get; set; }
 
+        public List<int> AmenityDetailID { get; set; }
+
+        public List<int> CleaningOptionID { get; set; }
+
+        public int Hour { get; set; }
+        public decimal Discount { get; set; }
     }
 }

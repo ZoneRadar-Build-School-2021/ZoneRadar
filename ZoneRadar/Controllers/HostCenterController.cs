@@ -32,28 +32,35 @@ namespace ZoneRadar.Controllers
         /// <summary>
         ///  場地主上架場地(Amber) 
         /// </summary>
+        [Authorize]
         public ActionResult AddSpace()
         {
-            var model = new SpaceViewModel
+            var userId = 0;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (isAuthenticated)
             {
-                SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
-                cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
-                addressAraeList = _spaceService.ShowAmenityByIdOne().addressAraeList,
+                var model = new SpaceViewModel
+                {
+                    SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
+                    cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
+                    addressAraeList = _spaceService.ShowAmenityByIdOne().addressAraeList,
 
-                amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
-                amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
-                amenityAraeThreeList = _spaceService.ShowAmenityByIdThree().amenityAraeThreeList,
+                    amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
+                    amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
+                    amenityAraeThreeList = _spaceService.ShowAmenityByIdThree().amenityAraeThreeList,
 
-                CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
-                CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
-                CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
-                CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
-                //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
+                    CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
+                    CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
+                    CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
+                    CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
+                    //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
 
-                Operating = _spaceService.Operating(),
-            };
-
-            return View(model);
+                    Operating = _spaceService.Operating(),
+                };
+                return View(model);
+            }
+            return View();
+            
         }
         [HttpPost]
         [ValidateInput(false)]
@@ -62,6 +69,8 @@ namespace ZoneRadar.Controllers
 
         public ActionResult AddSpace(AddSpaceViewModel space)
         {
+            var userid = int.Parse(User.Identity.Name);
+            space.MemberID = userid;
             var result = _spaceService.CreateSpace(space);
             ViewData["Message"] = "成功新增場地";
             return View(result);

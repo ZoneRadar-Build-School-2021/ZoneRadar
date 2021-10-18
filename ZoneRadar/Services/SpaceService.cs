@@ -1170,9 +1170,8 @@ namespace ZoneRadar.Services
             var city = _repository.GetAll<City>().Where(x => x.CityName == spacecity).Select(x => x.CityID).FirstOrDefault();
             var space = new Space
             {
-                //MemberID = addSpaceViewModel.MemberID,
-                MemberID = 4,
-                SpaceID=addSpaceViewModel.SpaceID,
+                MemberID = addSpaceViewModel.MemberID,
+                SpaceID =addSpaceViewModel.SpaceID,
                 SpaceName = addSpaceViewModel.SpaceName,
                 Introduction = addSpaceViewModel.Introduction,
                 MeasureOfArea = addSpaceViewModel.MeasureOfArea,
@@ -1199,27 +1198,46 @@ namespace ZoneRadar.Services
             _repository.Create<Space>(space);
             _repository.SaveChanges();
 
-            var spaceid = _repository.GetAll<Space>().Max(x => x.SpaceID).ToString();
-            
-            var operating = new Operating
+            var spaceid = _repository.GetAll<Space>().Max(x => x.SpaceID);
+            var spaceDiscount=new SpaceDiscount
             {
-                SpaceID = Int32.Parse(spaceid),
-                OperatingDay = addSpaceViewModel.OperatingDay,
-                StartTime = addSpaceViewModel.StartTime,
-                EndTime = addSpaceViewModel.EndTime
+                SpaceID = spaceid,
+                Hour= addSpaceViewModel.Hour,
+                Discount=1-((addSpaceViewModel.Discount)/10.00m),
             };
-            var type = new SpaceType
+            List<Operating> operating = new List<Operating>();
+            foreach (var item in addSpaceViewModel.OperatingDay)
             {
-                SpaceID = Int32.Parse(spaceid),
-                TypeDetailID=addSpaceViewModel.TypeDetailID
-            };
-            
-            _repository.Create<Operating>(operating);
-            _repository.Create<SpaceType>(type);
+                operating.Add(new Operating { SpaceID = spaceid, OperatingDay = item});
+            }
+         
+            List<SpaceType> type = new List<SpaceType>();
+            foreach (var item in addSpaceViewModel.TypeDetailID)
+            {
+                type.Add(new SpaceType { SpaceID = spaceid, TypeDetailID = item });
+            }
+            List<CleaningProtocol> cleaningProtocol=new List<CleaningProtocol>();
+            foreach (var item in addSpaceViewModel.CleaningOptionID) 
+            {
+                cleaningProtocol.Add(new CleaningProtocol { SpaceID = spaceid, CleaningOptionID = item });
+            }
+            List<SpaceAmenity> spaceAmenity = new List<SpaceAmenity>();
+            foreach (var item in addSpaceViewModel.AmenityDetailID)
+            {
+                spaceAmenity.Add(new SpaceAmenity { SpaceID = spaceid, AmenityDetailID = item });
+            }
+
+            _repository.CreateRange<Operating>(operating);
+            _repository.CreateRange<SpaceType>(type);
+            _repository.CreateRange<CleaningProtocol>(cleaningProtocol);
+            _repository.CreateRange<SpaceAmenity>(spaceAmenity);
+            _repository.Create<SpaceDiscount>(spaceDiscount);
             _repository.SaveChanges();
             return addSpaceViewModel;
 
         }
+
+        //todo
         /// <summary>
         ///  //上傳到雲 (Amber) 
         /// </summary>
