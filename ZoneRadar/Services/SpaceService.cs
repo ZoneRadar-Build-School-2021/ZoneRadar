@@ -327,31 +327,7 @@ namespace ZoneRadar.Services
                     spaces = spaces.Where(x => x.SpaceName.ToUpper().Contains(keyword.ToUpper()));
                 }
             }
-            //var filteredBySpace = spaces.Select(x => x);
-            //var filteredByType = spaceTypes.Select(x => x.Space).Distinct();
-            //var filteredByAmenity = spaceAmenities.Select(x => x.Space).Distinct();
-            //var filteredBytDate = operatings.Select(x => x.Space).Distinct();
-            //var unBookedSpaces = orders.Select(x => x.Order.Space).Distinct();
-            //var filterByDate = filteredBytDate.Union(unBookedSpaces);
 
-            //var insersectSpaces = filteredBySpace.Intersect(filteredByType).Intersect(filteredByAmenity).Intersect(filterByDate).ToList();
-
-            //var result = insersectSpaces.Select(x => new SearchingPageViewModel
-            //{
-            //    SpaceID = x.SpaceID,
-            //    SpaceName = x.SpaceName,
-            //    SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).Select(y => y.SpacePhotoUrl).ToList(),
-            //    Address = x.Address,
-            //    Capacity = x.Capacity,
-            //    PricePerHour = x.PricePerHour,
-            //    Country = x.City.CityName,
-            //    City = x.City.CityName,
-            //    District = x.District.DistrictName,
-            //    MinHour = x.MinHours,
-            //    MeasurementOfArea = x.MeasureOfArea,
-            //    Scores = scores.Where(y => y.Order.SpaceID == x.SpaceID).Select(y => y.Score).ToList(),
-            //}).ToList();
-            //return result;
             var result = spaces.Select(x => new SearchingPageViewModel
             {
                 SpaceID = x.SpaceID,

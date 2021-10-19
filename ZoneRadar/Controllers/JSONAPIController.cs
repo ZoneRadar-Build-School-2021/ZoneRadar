@@ -18,14 +18,14 @@ namespace ZoneRadar.Controllers
     public class JSONAPIController : ApiController
     {
         private readonly SpaceService _spaceService;
-        private readonly OrderService _orderService;
+        private readonly PreOrderService _preOrderService;
         private readonly ZONERadarRepository _repository;
         private FilterViewModel _filterDataFromIndex;
 
         public JSONAPIController()
         {
             _spaceService = new SpaceService();
-            _orderService = new OrderService();
+            _preOrderService = new PreOrderService();
             _repository = new ZONERadarRepository();
             _filterDataFromIndex = new FilterViewModel();
         }
@@ -119,7 +119,7 @@ namespace ZoneRadar.Controllers
         {
             int memberID = int.Parse(User.Identity.Name);
 
-            _orderService.PlaceAPreOrder(preOrderVM, memberID);
+            _preOrderService.PlaceAPreOrder(preOrderVM, memberID);
             return Ok();
         }
     }
