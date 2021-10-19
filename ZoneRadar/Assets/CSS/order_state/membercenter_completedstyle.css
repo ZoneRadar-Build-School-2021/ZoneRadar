@@ -1,11 +1,11 @@
-img {
+﻿img {
     max-width: 100%;
     height: auto;
     vertical-align: middle;
 }
 
-.memberbuyer_container.container {
-    max-width: 1100px;
+.member_container {
+    max-width: 1140px;
 }
 
 .memberbuyer_container {
@@ -18,6 +18,10 @@ img {
     margin-bottom: -20px;
 }
 
+.btn:focus {
+    box-shadow: none;
+}
+
 .memberbuyer_state {
     list-style: none;
 }
@@ -28,132 +32,244 @@ img {
         border-bottom: 2px solid transparent;
     }
 
-        .memberbuyer_state a:hover {
-            color: #cccccc;
-            border-bottom: 2px solid #D9831A;
-        }
-
 .active {
     color: #000;
     border-bottom: 2px solid #D9831A;
 }
 
-.fa-star {
-    color: #D9831A;
-    cursor: pointer;
+.memberbuyer_state a:hover {
+    color: #cccccc;
+    border-bottom: 2px solid #D9831A;
 }
 
-.memberbuyer_completed {
-    border-bottom: 1px solid #DEE2E6;
-}
-
-.memberbuyer_completed_num {
-    color: #D9831A;
-}
-
-    .memberbuyer_completed_num a {
-        text-decoration: none;
-        color: #fff;
-        background-color: #D9831A;
-        border-radius: 10px;
-    }
-
-        .memberbuyer_completed_num a:hover {
-            background-color: #be7418;
-        }
-
-.memberbuyer_completed_num_completed {
-    display: inline-block;
-    text-align: right;
-}
-
-.memberbuyer_completed_pic img {
-    width: 100%;
-}
-
-.memberbuyer_completed_txt_title a {
+a {
     text-decoration: none;
-    color: #000;
+    color: inherit;
 }
 
-    .memberbuyer_completed_txt_title a:hover {
-        color: #cccccc
+    a:hover {
+        color: inherit;
     }
 
-
-.memberbuyer_completed_txt_price {
-    display: inline-block;
-    margin-top: auto;
-    margin-bottom: auto;
+p {
+    margin-bottom: 0;
 }
 
-.memberbuyer_completed_txt_price_title {
-    color: #D9831A;
-    font-weight: bolder;
-    text-align: right;
-    margin: 0px;
+ul {
+    padding-left: 0;
+    list-style: none;
 }
 
-.memberbuyer_completed_txt_price {
-    color: #D9831A;
-    font-weight: bolder;
-    font-size: 35px;
+.order-link.now {
+    border-bottom: 2px solid #D9831A;
+    pointer-events: none;
 }
-
-.memberbuyer_completed_btn .btn {
-    background-color: #fff;
-    border: 1px solid #cccccc;
-    color: #000;
-}
-
-    .memberbuyer_completed_btn .btn:hover {
-        background-color: #CCCCCC;
-        border: 1px solid #cccccc;
-        color: #fff;
-    }
-
-    .memberbuyer_completed_btn .btn:nth-child(2) {
-        background-color: #D9831A;
-        color: #fff;
-    }
-
-        .memberbuyer_completed_btn .btn:nth-child(2):hover {
-            background-color: #be7418;
-        }
 
 .btn:focus {
     box-shadow: none;
 }
 
-.btn_close {
+.host-order.container {
+    max-width: 1100px;
+}
+
+.order-card {
+    position: relative;
+}
+
+    .order-card::after {
+        content: '';
+        position: absolute;
+        width: calc(100% - 24px);
+        height: 1px;
+        background-color: #cccccc;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+.order-id {
+    color: #D9831A;
+}
+
+.full-refund {
+    color: #D9831A;
+}
+
+.venue-pic {
+    width: 100%;
+    padding-top: 60%;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.fa-comment-dots {
+    cursor: pointer;
+    color: #D9831A;
+}
+
+.read-more {
+    padding-top: 1rem;
+    position: relative;
+    color: #D9831A;
+}
+
+    .read-more::before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -3px;
+        left: 50%;
+        background-color: #D9831A;
+        transform: translate(-50%, -50%);
+        transition: .3s;
+    }
+
+    .read-more:hover::before {
+        width: 100%;
+        transform: translateX(-50%);
+        transition: .3s;
+    }
+
+    .read-more::after {
+        content: '查看日期';
+    }
+
+    .read-more:not(.collapsed)::after {
+        content: '隱藏日期';
+    }
+
+.datetime-card {
+    position: relative;
+}
+
+    .datetime-card::after {
+        content: '';
+        position: absolute;
+        width: 92%;
+        height: 1px;
+        background-color: #cccccc;
+        bottom: 0;
+        left: 0;
+    }
+
+    .datetime-card img {
+        max-width: 1em;
+    }
+
+.nt,
+.total-cost {
+    color: #D9831A;
+}
+
+.edit_order {
+    font-size: smaller;
+    border: 1px solid #D9831A;
+    padding: 5px;
+}
+
+    .edit_order:hover {
+        background-color: #D9831A;
+        color: #fff;
+    }
+
+
+.modify_rent_date input,
+.modify_rentback_date input,
+.modify_people input {
+    text-align: center;
+    width: 100%;
+    border: 1px solid #D9831A;
+    color: #cccccc;
+    border-radius: 10px;
+}
+
+.form-control {
+    background-color: #fff !important;
+}
+
+    .form-control:focus {
+        box-shadow: none;
+        border: 1px solid #D9831A;
+    }
+
+.fa-edit:hover {
+    color: #D9831A;
+    cursor: pointer;
+}
+
+.edit_icon {
+    justify-content: center;
+}
+
+.btn_cancel {
     background-color: #fff;
     border: 1px solid #cccccc;
     color: #000;
 }
 
-    .btn_close:hover {
+    .btn_cancel:hover {
         background-color: #CCCCCC;
         border: 1px solid #cccccc;
         color: #fff;
     }
 
-.btn_sendout {
-    background-color: #d9831a;
+.btn_sendscore {
+    background-color: #D9831A;
     color: #fff;
 }
 
-    .btn_sendout:hover {
+    .btn_sendscore:hover {
         background-color: #be7418;
         color: #fff;
     }
 
-.text-decoration-line-through {
-    color: #CCCCCC;
+.btn_sendout {
+    border: 1px solid #982626;
+}
+
+    .btn_sendout:hover {
+        background-color: #D9831A;
+        color: #fff;
+    }
+
+.date {
+    font-size: 16px
+}
+
+.myshockicon {
+    font-size: 80px;
+}
+
+.fa-exclamation-circle {
+    background-color: #D9831A;
+    border-radius: 50%;
+    border: 3px solid #D9831A;
+    color: #fff;
+}
+
+.memberbuyer_pending_num_ordernum,
+.memberbuyer_pending_num_date,
+.fa-star,
+.fa-star-half-alt {
+    color: #D9831A;
+}
+
+.fa-star {
+    font-size: 18px;
+}
+
+.memberbuyer_pending_num_date {
+    text-align: right;
 }
 
 .cancel,
 .cancel p,
-.cancel a {
+.cancel a,
+.cancel .fa-star {
     text-decoration: line-through;
     color: #CCCCCC;
 }
@@ -186,54 +302,27 @@ img {
     border-color: #D9831A;
 }
 
-.star_pic {
-    cursor: pointer;
+.form-select {
+    border-color: #D9831A;
 }
 
-.reset_score {
-    border-radius: 4px;
-    background-color: #fff;
-    border: 1px solid #cccccc;
+    .form-select:focus {
+        box-shadow: none;
+        border-color: #D9831A;
+    }
+
+.btn_close {
+    border: 1px solid #de6868;
     color: #000;
 }
 
-    .reset_score:hover {
-        background-color: #E72A54;
-        border: 1px solid #cccccc;
+    .btn_close:hover {
+        background-color: #de6868;
         color: #fff;
     }
 
-@media (max-width:480px) {
-}
-
-
 @media (max-width:767px) {
-    .memberbuyer_completed_num_ordernum {
+    .memberbuyer_pending_num_date {
         text-align: left;
-    }
-
-    .memberbuyer_completed_num_completed {
-        text-align: left;
-    }
-
-    .fa-wifi,
-    .fa-video,
-    .fa-briefcase-medical {
-        padding: 10px !important;
-    }
-
-    .memberbuyer_completed_txt_price_title {
-        font-size: 10px;
-    }
-
-    .memberbuyer_completed_txt_price {
-        font-size: 25px;
-    }
-
-
-    .memberbuyer_completed_num,
-    .memberbuyer_completed_pic,
-    .memberbuyer_completed_txt {
-        border-bottom: none;
     }
 }
