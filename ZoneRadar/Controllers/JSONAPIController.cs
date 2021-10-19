@@ -18,11 +18,14 @@ namespace ZoneRadar.Controllers
     public class JSONAPIController : ApiController
     {
         private readonly SpaceService _spaceService;
+        private readonly OrderService _orderService;
         private readonly ZONERadarRepository _repository;
         private FilterViewModel _filterDataFromIndex;
+
         public JSONAPIController()
         {
             _spaceService = new SpaceService();
+            _orderService = new OrderService();
             _repository = new ZONERadarRepository();
             _filterDataFromIndex = new FilterViewModel();
         }
@@ -112,16 +115,12 @@ namespace ZoneRadar.Controllers
 
         [Route("AddPreOrder")]
         [AcceptVerbs("POST")]
-        public IHttpActionResult AddPreOrder()
+        public IHttpActionResult AddPreOrder(PreOrderViewModel preOrderVM)
         {
-            bool isLogin = false;
+            int memberID = int.Parse(User.Identity.Name);
 
-            if (User.Identity.Name != "")
-            {
-                isLogin = true;
-            }
-
-            return Ok(isLogin);
+            _orderService.PlaceAPreOrder(preOrderVM, memberID);
+            return Ok();
         }
     }
 }
