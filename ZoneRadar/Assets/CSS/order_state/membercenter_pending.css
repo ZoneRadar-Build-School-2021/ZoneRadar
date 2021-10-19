@@ -1,4 +1,4 @@
-img {
+﻿img {
     max-width: 100%;
     height: auto;
     vertical-align: middle;
@@ -135,11 +135,11 @@ ul {
     }
 
     .read-more::after {
-        content: 'Show Date';
+        content: '顯示日期';
     }
 
     .read-more:not(.collapsed)::after {
-        content:'Hidden Date';
+        content:'隱藏日期';
     }
 
 .datetime-card {
