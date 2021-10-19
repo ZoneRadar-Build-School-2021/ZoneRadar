@@ -1203,7 +1203,7 @@ namespace ZoneRadar.Services
             {
                 SpaceID = spaceid,
                 Hour= addSpaceViewModel.Hour,
-                Discount=1-((addSpaceViewModel.Discount)/10.00m),
+                Discount=1m-((addSpaceViewModel.Discount)/10.00m),
             };
             List<Operating> operating = new List<Operating>();
             foreach (var item in addSpaceViewModel.OperatingDay)
