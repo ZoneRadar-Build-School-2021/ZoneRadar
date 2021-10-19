@@ -447,7 +447,6 @@ namespace ZoneRadar.Services
                 //會員所擁有的廠所有場地
                 var sps = _repository.GetAll<Space>().Where(x => x.MemberID == memberId && x.SpaceStatus.SpaceStatusID == 2);
                 var re = _repository.GetAll<Review>();
-                var spt = _repository.GetAll<SpacePhoto>();
 
                 foreach (var s in sps)
                 {
@@ -508,7 +507,6 @@ namespace ZoneRadar.Services
                 //會員所收藏的場地
                 var collection = _repository.GetAll<Collection>().Where(x => x.MemberID == memberId);
                 var spaces = _repository.GetAll<Space>();
-                var r = _repository.GetAll<Review>();
                 
                 //c.Member.Space.Where(x => x.SpaceID == c.SpaceID && x.SpaceStatusID == 2).FirstOrDefault().SpaceName
                 foreach (var c in collection)
@@ -581,11 +579,11 @@ namespace ZoneRadar.Services
                     Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
                 };
                 //找出會員是否有租借場地並且顯示 出被場地主的評價
-                var order = _repository.GetAll<Order>().Where(x => x.MemberID == u.MemberID && x.OrderStatusID == 4);
+                var order = _repository.GetAll<Order>().Where(x => x.MemberID == u.MemberID && x.OrderStatusID == 4).Where(x=>x.Review.Select(y=>y.ToHost).Equals(false));
                 
                 foreach (var o in order)
                 {
-                    var or = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID && x.ToHost == false);
+                    var or = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID);
                     resulthostinfoReview.ToUserReview.Add(new UserReview
                     {
                         SpaceId = o.Space.SpaceID,
