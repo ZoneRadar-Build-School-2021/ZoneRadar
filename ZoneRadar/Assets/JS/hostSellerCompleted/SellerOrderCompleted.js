@@ -1,10 +1,8 @@
-flatpickr( ".choose-date",
-{
-    dateFormat: "Y-m-d",
-    disableMobile: "true",
-    mode: "range",
-    locale: "zh_tw",
-    onClose: function(selectedDates, dateStr, instance) {
-        console.log(dateStr);
-    }
-});
+flatpickr.localize(flatpickr.l10ns.zh_tw);
+flatpickr(".choose-date",
+    {
+        enableTime: true,
+        minDate: "today",
+        dateFormat: "Y-F-d H:i",
+        minuteIncrement: 30,
+    });

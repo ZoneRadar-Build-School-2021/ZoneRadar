@@ -15,6 +15,8 @@ namespace ZoneRadar.Models.ViewModels
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public decimal Money { get; set; }
         public int OrderID { get; set; }
+        public int SpaceID { get; set; }
+        public string Email { get; set; }
         public List<RentDetailViewModel> RentDetailVM { get; set; }
     }
 

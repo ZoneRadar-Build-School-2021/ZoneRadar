@@ -58,7 +58,7 @@ input[type="text"]:focus {
 }
 
 .filter-row .search-bar {
-    min-width: 400px;
+    min-width: 20rem;
 }
 
 .fa-search-location:hover {

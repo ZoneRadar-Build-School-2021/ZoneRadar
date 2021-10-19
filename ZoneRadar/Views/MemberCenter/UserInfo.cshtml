@@ -19,7 +19,7 @@
                 <div class="member_card_introduce_name col-12">
                     <h3>
                        @user.Name
-                        <a href="#">
+                        <a href="mailto:@user.Email">
                             <i class="ms-3 fas fa-comment-dots" data-bs-toggle="tooltip" data-bs-placement="right" title="聯絡我">
                             </i>
                         </a>
@@ -32,9 +32,18 @@
                     <div class="member_verifcation">
                         <p class="member_verifcation_item text-center">認證</p>
                         <p class="member_verifcation_item"><i class="me-3 fas fa-check"></i>Email</p>
-                        <p class="member_verifcation_item"><i class="me-3 fas fa-check"></i>Phone</p>
                         <p class="member_verifcation_item">
-                            <i class="me-3 fas fa-check"></i>評價 <span class="member_verifcation_reviews">@review.Select(x=>x.ReviewCount).Count()</span>
+                            @if (user.Phone != null)
+                            {
+                                <i class="me-3 fas fa-check"></i>
+                            }
+                            else
+                            {
+                                <i class="me-3 fas fa-times"></i>
+                            }Phone
+                        </p>
+                        <p class="member_verifcation_item">
+                            <i class="me-3 fas fa-check"></i>評價 <span class="member_verifcation_reviews"> (@review.Select(x=>x.ReviewCount).Count())</span>
                         </p>
                     </div>
                 </div>
@@ -75,7 +84,7 @@
                 平均評價：
                 @if (review.Select(x => x.Score).Sum() > 0)
                 {
-                    for (var i = 0; i <= (int)(review.Select(x => x.Score).Average()); i++)
+                    for (var i = 1; i <= (int)(review.Select(x => x.Score).Average()); i++)
                     {
                         <i class="fas fa-star"></i>
                     }
@@ -101,7 +110,7 @@
             <div class="reviewsfromhost_review_card row mt-4">
                 <div class="reviewsfromhost_review_card_pic mb-3 col-sm-2 col-md-2 col-lg-2">
                     <a href="~/MemberCenter/Host/@r.Id">
-                        <img src="@r.SpacePhoto" />
+                        <img src="@r.SpaceMemberPhoto" />
                     </a>
                 </div>
                 <div class="reviewsfromhost_review_card_txt mb-4 col-sm-10 col-md-10 col-lg-10">
@@ -109,7 +118,7 @@
                         <a href="~/MemberCenter/Host/@r.Id">@r.Name</a>
                     </div>
                     <div class="reviewsfromhost_review_card_txt_star mt-2">
-                        @for (var i = 0; i <= r.Score; i++)
+                        @for (var i = 1; i <= r.Score; i++)
                         {
                             <i class="fas fa-star"></i>
                         }
@@ -136,18 +145,18 @@
                         <p class="reviewsfromhost_review_card_txt_date">
                             <span>@r.ReviewDate.ToString("yyyy-MM-dd")</span>
                         </p>
-                        <a href="~/Booking/BookingPage">
-                            <span class="reviewsfromhost_review_card_txt_place">Build School</span>
+                        <a href="~/Booking/BookingPage/@r.SpaceId">
+                            <span class="reviewsfromhost_review_card_txt_place">@r.SpaceName</span>
                         </a>
                         <div class="reviewsfromhost_review_card_txt_location">
                             <div class="reviewsfromhost_review_card_txt_location_a">
-                                <a href="~/Searching/SearchingPage">
+                                <a href="~/Searching/SearchingPage/@r.City">
                                     <span>@r.City</span>
                                 </a>
-                                <a href="~/Searching/SearchingPage">
+                                <a href="~/Searching/SearchingPage/@r.District">
                                     <span>@r.District</span>
                                 </a>
-                                <a href="~/Searching/SearchingPage">
+                                <a href="~/Searching/SearchingPage/@r.Address">
                                     <span>@r.Address</span>
                                 </a>
                             </div>

@@ -1,6 +1,6 @@
 ﻿@model MyCollectionViewModel
 @{
-    ViewBag.Title = Model.User.Name +"- MyCollection ";
+    ViewBag.Title = Model.User.Name + "- MyCollection ";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var user = Model.User;
     var Myspaces = Model.MyCollection;
@@ -18,23 +18,38 @@
             <div class="member_card mt-4 row">
                 <div class="member_card_introduce_name col-12">
                     <h3>
-                       @user.Name
-                        <a href="#">
+                        @user.Name
+                        <a href="mailto:@user.Email">
                             <i class="ms-3 fas fa-comment-dots" data-bs-toggle="tooltip" data-bs-placement="right" title="聯絡我">
                             </i>
                         </a>
                     </h3>
-                    <p class="mt-4">加入時間：<span class="ms-3">@user.SignUpDateTime.ToString("yyyy.MM.dd")</span></p>
+                    <p class="mt-4">
+                        加入時間：
+                        <span class="ms-3">@user.SignUpDateTime.ToString("yyyy.MM.dd")</span>
+                    </p>
                 </div>
             </div>
             <div class="member_card row mt-auto">
                 <div class="col-sm-4 col-md-4">
                     <div class="member_verifcation">
                         <p class="member_verifcation_item text-center">認證</p>
-                        <p class="member_verifcation_item"><i class="me-3 fas fa-check"></i>Email</p>
-                        <p class="member_verifcation_item"><i class="me-3 fas fa-check"></i>Phone</p>
                         <p class="member_verifcation_item">
-                            <i class="me-3 fas fa-check"></i>評價 <span class="member_verifcation_reviews">@Myspaces.Select(x=>x.ReviewCount).Count()</span>
+                            <i class="me-3 fas fa-check"></i>Email
+                        </p>
+                        <p class="member_verifcation_item">
+                            @if (user.Phone != null)
+                            {
+                                <i class="me-3 fas fa-check"></i>
+                            }
+                            else
+                            {
+                                <i class="me-3 fas fa-times"></i>
+                            }Phone
+                        </p>
+                        <p class="member_verifcation_item">
+                            <i class="me-3 fas fa-check"></i>評價
+                            <span class="member_verifcation_reviews"> (@Myspaces.Select(x => x.ReviewCount).Count())</span>
                         </p>
                     </div>
                 </div>
@@ -68,125 +83,124 @@
             </h4>
         </div>
     </div>
-    <div class="reviewsfromhost row justify-content-center p-3 mt-2">
+    <div class="reviewsfromhost row p-3 mt-2">
         @foreach (var My in Myspaces)
         {
             <div class="mt-4 myplace_space_card col-sm-12 col-md-6 col-lg-6">
-                <a class="space_card_pic" href="~/Booking/BookingPage"><img class="pe-2" src="@My.SpacePhoto"></a>
+                <a class="space_card_pic" href="~/Booking/BookingPage/@My.SpaceId"><img class="pe-2" src="@My.SpacePhoto"></a>
                 <span class="myplace_space_card_distinct">@My.PricePerHour.ToString("C0") / hr</span>
                 <div class="space_card mt-4">
-                    <a href="~/Booking/BookingPage" class="space_card_title fs-5">
+                    <a href="~/Booking/BookingPage/@My" class="space_card_title fs-5">
                         @My.SpaceName
                     </a>
                     <div class="space_card_location mt-1">
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                        <a href="~/Searching/SearchingPage/@My.City" class="space_card_location_a">
                             <span>@My.City</span>
                         </a>
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                        <a href="~/Searching/SearchingPage/@My.District" class="space_card_location_a">
                             <span>@My.District</span>
                         </a>
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                        <a href="~/Searching/SearchingPage/@My.Address" class="space_card_location_a">
                             <span>@My.Address</span>
                         </a>
                     </div>
                     <div class="space_card_star mt-1">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="me-2">@My.ReviewCount</span>
+                        @for (int i = 1; i <= My.Score; i++)
+                        {
+                            <i class="fas fa-star"></i>
+                        }
+                        <span class="me-2"> (@My.ReviewCount)</span>
                     </div>
                 </div>
             </div>
         }
         @*
-            <div class="mt-4 myplace_space_card col-sm-12 col-md-6 col-lg-6">
-                <a class="space_card_pic" href="~/Booking/BookingPage"><img class="pe-2" src="https://picsum.photos/500/300/?random=2"></a>
-                <span class="myplace_space_card_distinct">100 / hr</span>
-                <div class="space_card mt-4">
-                    <a href="~/Booking/BookingPage" class="space_card_title fs-5">
-                        得到完美您可以進一步，主人網際快車解放反對升級大型太陽，我們在我權益模型提到他也為你瀏覽器告訴烏日，機構看來雜誌壓縮歡迎您臺中，力量影響提供發揮，交換漢化，正確人才做什麼，國內廣告你們的幫你格式，手上他也小學聽到權限特別是無限北方從來沒您是類型富岡製造輕。
-                    </a>
-                    <div class="space_card_location mt-1">
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
-                            <span>台北</span>
+                <div class="mt-4 myplace_space_card col-sm-12 col-md-6 col-lg-6">
+                    <a class="space_card_pic" href="~/Booking/BookingPage"><img class="pe-2" src="https://picsum.photos/500/300/?random=2"></a>
+                    <span class="myplace_space_card_distinct">100 / hr</span>
+                    <div class="space_card mt-4">
+                        <a href="~/Booking/BookingPage" class="space_card_title fs-5">
+                            得到完美您可以進一步，主人網際快車解放反對升級大型太陽，我們在我權益模型提到他也為你瀏覽器告訴烏日，機構看來雜誌壓縮歡迎您臺中，力量影響提供發揮，交換漢化，正確人才做什麼，國內廣告你們的幫你格式，手上他也小學聽到權限特別是無限北方從來沒您是類型富岡製造輕。
                         </a>
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
-                            <span>大安區</span>
-                        </a>
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
-                            <span>忠孝東路三段96號11號樓之1</span>
-                        </a>
-                    </div>
-                    <div class="space_card_star mt-1">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="me-2">14</span>
+                        <div class="space_card_location mt-1">
+                            <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                                <span>台北</span>
+                            </a>
+                            <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                                <span>大安區</span>
+                            </a>
+                            <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                                <span>忠孝東路三段96號11號樓之1</span>
+                            </a>
+                        </div>
+                        <div class="space_card_star mt-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="me-2">14</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mt-4 myplace_space_card col-sm-12 col-md-6 col-lg-6">
-                <a class="space_card_pic" href="~/Booking/BookingPage"><img class="pe-2" src="https://picsum.photos/500/300/?random=3"></a>
-                <span class="myplace_space_card_distinct">100 / hr</span>
-                <div class="space_card mt-4">
-                    <a href="~/Booking/BookingPage" class="space_card_title fs-5">
-                        得到完美您可以進一步，主人網際快車解放反對升級大型太陽，我們在我權益模型提到他也為你瀏覽器告訴烏日，機構看來雜誌壓縮歡迎您臺中，力量影響提供發揮，交換漢化，正確人才做什麼，國內廣告你們的幫你格式，手上他也小學聽到權限特別是無限北方從來沒您是類型富岡製造輕。
-                    </a>
-                    <div class="space_card_location mt-1">
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
-                            <span>台北</span>
+                <div class="mt-4 myplace_space_card col-sm-12 col-md-6 col-lg-6">
+                    <a class="space_card_pic" href="~/Booking/BookingPage"><img class="pe-2" src="https://picsum.photos/500/300/?random=3"></a>
+                    <span class="myplace_space_card_distinct">100 / hr</span>
+                    <div class="space_card mt-4">
+                        <a href="~/Booking/BookingPage" class="space_card_title fs-5">
+                            得到完美您可以進一步，主人網際快車解放反對升級大型太陽，我們在我權益模型提到他也為你瀏覽器告訴烏日，機構看來雜誌壓縮歡迎您臺中，力量影響提供發揮，交換漢化，正確人才做什麼，國內廣告你們的幫你格式，手上他也小學聽到權限特別是無限北方從來沒您是類型富岡製造輕。
                         </a>
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
-                            <span>大安區</span>
-                        </a>
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
-                            <span>忠孝東路三段96號11號樓之1</span>
-                        </a>
-                    </div>
-                    <div class="space_card_star mt-1">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="me-2">14</span>
+                        <div class="space_card_location mt-1">
+                            <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                                <span>台北</span>
+                            </a>
+                            <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                                <span>大安區</span>
+                            </a>
+                            <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                                <span>忠孝東路三段96號11號樓之1</span>
+                            </a>
+                        </div>
+                        <div class="space_card_star mt-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="me-2">14</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mt-4 myplace_space_card col-sm-12 col-md-6 col-lg-6">
-                <a class="space_card_pic" href="~/Booking/BookingPage"><img class="pe-2" src="https://picsum.photos/500/300/?random=4"></a>
-                <span class="myplace_space_card_distinct">100 / hr</span>
-                <div class="space_card mt-4">
-                    <a href="~/Booking/BookingPage" class="space_card_title fs-5">
-                        得到完美您可以進一步，主人網際快車解放反對升級大型太陽，我們在我權益模型提到他也為你瀏覽器告訴烏日，機構看來雜誌壓縮歡迎您臺中，力量影響提供發揮，交換漢化，正確人才做什麼，國內廣告你們的幫你格式，手上他也小學聽到權限特別是無限北方從來沒您是類型富岡製造輕。
-                    </a>
-                    <div class="space_card_location mt-1">
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
-                            <span>台北</span>
+                <div class="mt-4 myplace_space_card col-sm-12 col-md-6 col-lg-6">
+                    <a class="space_card_pic" href="~/Booking/BookingPage"><img class="pe-2" src="https://picsum.photos/500/300/?random=4"></a>
+                    <span class="myplace_space_card_distinct">100 / hr</span>
+                    <div class="space_card mt-4">
+                        <a href="~/Booking/BookingPage" class="space_card_title fs-5">
+                            得到完美您可以進一步，主人網際快車解放反對升級大型太陽，我們在我權益模型提到他也為你瀏覽器告訴烏日，機構看來雜誌壓縮歡迎您臺中，力量影響提供發揮，交換漢化，正確人才做什麼，國內廣告你們的幫你格式，手上他也小學聽到權限特別是無限北方從來沒您是類型富岡製造輕。
                         </a>
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
-                            <span>大安區</span>
-                        </a>
-                        <a href="~/Searching/SearchingPage" class="space_card_location_a">
-                            <span>忠孝東路三段96號11號樓之1</span>
-                        </a>
+                        <div class="space_card_location mt-1">
+                            <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                                <span>台北</span>
+                            </a>
+                            <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                                <span>大安區</span>
+                            </a>
+                            <a href="~/Searching/SearchingPage" class="space_card_location_a">
+                                <span>忠孝東路三段96號11號樓之1</span>
+                            </a>
+                        </div>
+                        <div class="space_card_star mt-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="me-2">14</span>
                     </div>
-                    <div class="space_card_star mt-1">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span class="me-2">14</span>
                 </div>
             </div>
-        </div>
         *@
     </div>
 </div>

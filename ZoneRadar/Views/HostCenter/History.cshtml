@@ -1,7 +1,197 @@
-﻿
+﻿@model IEnumerable<HostCenterHistoryViewModel>
 @{
-    ViewBag.Title = "History";
+    ViewBag.Title = "SellerOrderCompleted";
 }
 
-<h2>History</h2>
 
+<div class="host-order container my-5">
+    <div class="row">
+        <h2>訂單管理</h2>
+        <ul class="links d-flex mt-3 mt-lg-5">
+            <li class="order-link pb-1"><a href="~/HostCenter/Processing">使用中</a></li>
+            <li class="order-link now pb-1 ms-4"><a href="~/HostCenter/History">歷史訂單</a></li>
+        </ul>
+    </div>
+    <div class="main mt-2">
+        <div class="search-orders container border-top">
+            <div class="row mt-3">
+                <div class="col-12 d-lg-none">
+                    <button class="btn w-100" data-bs-toggle="modal" data-bs-target="#search-modal">
+                        <i class="fas fa-search me-2"></i>搜尋訂單
+                    </button>
+                </div>
+                <div class="col-lg-2 d-none d-lg-block">
+                    <input type="text" class="form-control text-center" placeholder="輸入訂單編號" id="order-id">
+                </div>
+                <div class="col-lg-2 d-none d-lg-block">
+                    <input type="text" class="form-control text-center" placeholder="輸入場地編號" id="space-id">
+                </div>
+                <div class="col-lg-2 d-none d-lg-block">
+                    <input type="text" class="form-control text-center" placeholder="輸入場地名稱" id="space-name">
+                </div>
+                <div class="col-lg-2 d-none d-lg-block">
+                    <input type="text" class="form-control text-center" placeholder="輸入訂購人" id="member-name">
+                </div>
+                <div class="col col-date d-none d-lg-block ">
+                    <input type="text" class="choose-date form-control text-center" id="basicDate_rent" placeholder="選擇時段"
+                           data-input>
+                </div>
+                <div class="col col-btn d-none d-lg-block">
+                    <button class="search-orders-btn btn w-100"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="search-modal" tabindex="-1" aria-labelledby="search-modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">搜尋訂單</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control w-100 mb-2" placeholder="輸入訂單編號" id="order-id">
+                        <input type="text" class="form-control w-100 mb-2" placeholder="輸入場地編號" id="space-id">
+                        <input type="text" class="form-control w-100 mb-2" placeholder="輸入場地名稱" id="space-name">
+                        <input type="text" class="form-control w-100 mb-2" placeholder="輸入訂購人" id="member-name">
+                        <input type="text" class="choose-date form-control text-center mb-2" id="basicDate_rent"
+                               placeholder="選擇時段" data-input>
+                        <button class="search-orders-btn btn w-100"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="row align-items-end">
+            <div class="order-card py-4 py-lg-5">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="venue-pic mt-2 mt-lg-0"
+                             style="background-image: url(@Html.DisplayFor(m => item.SpaceUrl));"></div>
+                    </div>
+                    <div class="col-sm-12 col-lg-8 px-3">
+                        <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceID)" class="d-inline-block mb-3 mt-3 mt-lg-0">
+                            <h3 class="venue-name">@Html.DisplayFor(m => item.SpaceName)</h3>
+                        </a>
+                        <ul class="order-detial">
+                            <li class="mb-2 fs-5">
+                                活動主姓名：<a href="mailto:@Html.DisplayFor(m => item.Email)" class="customer-name mx-2">@Html.DisplayFor(m => item.UserName)</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                                                                        title="連絡他"></i>
+                            </li>
+                            <li class="mb-2 fs-5">聯絡人姓名：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.ContactName)</span></li>
+                            <li class="mb-2 fs-5">聯絡人電話：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.ContactPhone)</span></li>
+                            <li class="mt-3">
+                                <div class="collapse" id="order-2109020001">
+                                    <div class="datetime-card py-2">
+                                        <div class="row">
+                                            @foreach (var rentDetail in item.RentDetailVM)
+                                            {
+                                                <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
+                                                    <i class="far fa-calendar-check me-1"></i>租借日期:
+                                                    <span class="date ms-2">@Html.DisplayFor(m => rentDetail.RentTime)</span>
+                                                </div>
+                                                <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
+                                                    <i class="far fa-calendar-check me-1"></i>租還日期:
+                                                    <span class="date ms-2">@Html.DisplayFor(m => rentDetail.RentBackTime)</span>
+                                                </div>
+                                                <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
+                                                    <i class="far fa-calendar-check me-1"></i>人數:
+                                                    <span class="participant ms-2 me-1">@Html.DisplayFor(m => rentDetail.People)</span>人
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="toggle-btn">
+                                    <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-2109020001"
+                                       role="button" aria-expanded="false" aria-controls="order-2109020001"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12">
+                        <p class="cost text-end">
+                            訂單總額:
+                            <span class="nt ms-4 fs-2 fw-bolder">
+                                NT$
+                                <span class="total-cost fs-2 fw-bolder">
+                                    @Html.DisplayFor(m => item.Money)
+                                </span>
+                            </span>
+                        </p>
+                        <div class="col-12 text-end mt-2">
+                            <button type="button" class="btn btn_sendout" data-bs-toggle="modal" data-bs-target="#A-@Html.DisplayFor(m => item.OrderID)">前往評價</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="A-@Html.DisplayFor(m => item.OrderID)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>@Html.DisplayFor(m => item.OrderNumber)</span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="score_star mt-2">
+                            <p>您對於這次活動主的滿意度為幾顆星：</p>
+                            <div>
+                                <div class="col-6">
+                                    <select class="form-select form-select-sm text-center mt-3" aria-label=".form-select-sm example">
+                                        <option selected class="d-none">請選擇星數</option>
+                                        <option value="1">1星</option>
+                                        <option value="2">2星</option>
+                                        <option value="3">3星</option>
+                                        <option value="4">4星</option>
+                                        <option value="5">5星</option>
+                                    </select>
+                                </div>
+                                <div class="col-6"></div>
+                            </div>
+                        </div>
+                        <div class="customer_evaluation mt-3">
+                            <p>您對於這次的活動主有什麼需要改進或是想對活動主說的話？</p>
+                            <textarea class="form-control mt-3" aria-label="With textarea"></textarea>
+                        </div>
+                        <div class="customer_eveluation_recommend mt-3">
+                            <p>您是否會再次接待他</p>
+                            <div class="customer_evelution_radio form-check mt-2">
+                                <input class="form-check-input" type="radio" name="customer_evelution_recommend_radio_option"
+                                       id="flexRadioDefault1">
+                                <label class="form-check-label ms-1" for="flexRadioDefault1">
+                                    <i class="fas fa-check me-1"></i>我還會想再次接待他
+                                </label>
+                            </div>
+                            <div class="customer_evelution_radio form-check">
+                                <input class="form-check-input" type="radio" name="customer_evelution_recommend_radio_option"
+                                       id="flexRadioDefault2">
+                                <label class="form-check-label ms-1" for="flexRadioDefault2">
+                                    <i class="fas fa-times me-2"></i>我不會想再次接待他
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn_sendout">送出</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+@section topCSS
+{
+    <link href="~/Assets/CSS/membercenter/Seller_completedstyle.css" rel="stylesheet" />
+
+}
+@section endJS{
+    <script src="~/Assets/JS/hostSellerCompleted/SellerOrderCompleted.js"></script>
+}

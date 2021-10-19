@@ -6,8 +6,8 @@
     <div class="row">
         <h2>訂單管理</h2>
         <ul class="links d-flex mt-3 mt-lg-5">
-            <li class="order-link now pb-1"><a href="#">使用中</a></li>
-            <li class="order-link pb-1 ms-4"><a href="#">歷史訂單</a></li>
+            <li class="order-link now pb-1"><a href="~/HostCenter/Processing">使用中</a></li>
+            <li class="order-link pb-1 ms-4"><a href="~/HostCenter/History">歷史訂單</a></li>
         </ul>
     </div>
     <div class="row align-items-end">
@@ -25,9 +25,11 @@
                     <div class="venue-pic mt-2 mt-lg-0" style="background-image: url(@Html.DisplayFor(x=>m.SpacePhoto));"></div>
                 </div>
                 <div class="col-sm-12 col-lg-8 px-3">
-                    <a href="#" class="d-inline-block mb-3 mt-3 mt-lg-0"><h3 class="venue-name">@m.SpaceName</h3></a>
+                    <a href="~/Booking/BookingPage/@m.SpaceId" class="d-inline-block mb-3 mt-3 mt-lg-0"><h3 class="venue-name">@m.SpaceName</h3></a>
                     <ul class="order-detial">
-                        <li class="mb-2 fs-5">訂購人:<a href="#" class="customer-name mx-2">@m.OrderName</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="連絡他"></i></li>
+                        <li class="mb-2 fs-5">訂購人:<a href="mailto:@m.OrderEmail" class="customer-name mx-2">
+                             @m.OrderName<i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="連絡他"></i></a>
+                        </li>
                         <li class="mb-2 fs-5">聯絡人姓名:<span class="contact-name mx-2">@m.ContactName</span></li>
                         <li class="mb-2 fs-5">聯絡人電話:<span class="contact-phone mx-2">@m.ContactPhone</span></li>
                         <li class="mt-3">

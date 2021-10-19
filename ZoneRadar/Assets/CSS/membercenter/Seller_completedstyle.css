@@ -1,251 +1,177 @@
-.ZoneRadarB {
-    color: #049DD9;
-}
-
 img {
     max-width: 100%;
     height: auto;
     vertical-align: middle;
 }
 
-.member_container {
-    max-width: 1140px;
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-.memberSeller_container {
-    margin-top: -50px;
+    a:hover {
+        color: inherit;
+    }
+
+p {
+    margin-bottom: 0;
 }
 
-.memberSeller_state {
+ul {
+    padding-left: 0;
     list-style: none;
 }
 
-    .memberSeller_state a {
-        text-decoration: none;
-        color: #000;
-        border-bottom: 2px solid transparent;
-    }
-
-        .memberSeller_state a:hover {
-            color: #cccccc;
-            border-bottom: 2px solid #049DD9;
-        }
-
-.fa-star {
-    color: #049DD9;
-}
-
-.memberSeller_completed {
-    border: 1px solid #049DD9;
-    border-radius: 5px;
-}
-
-.CurrentState {
-    color: #049DD9;
-}
-
-.notCurrentState {
-    color: #cccccc;
-}
-
-.underline {
-    border-bottom: #049DD9 1px solid;
-}
-
-.memberSeller_completed_num,
-.membeSeller_completed_txt {
-    border-bottom: 0.5px solid #049DD9;
-}
-
-.textms {
-    margin-left: 105px;
-}
-
-.memberSellertext,
-.memberSeller_completed_num {
-    color: #049DD9;
-}
-
-    .memberSeller_completed_num a {
-        text-decoration: none;
-        color: #fff;
-        background-color: #049DD9;
-        border-radius: 10px;
-    }
-
-        .memberSeller_completed_num a:hover {
-            background-color: #049DD9;
-        }
-
-.memberSeller_completed_num_completed {
-    display: inline-block;
-    text-align: right;
-}
-
-.memberSeller_completed_pic img {
-    width: 100%;
-}
-
-.memberSeller_completed_txt_title a {
-    text-decoration: none;
-    color: #000;
-}
-
-    .memberSeller_completed_txt_title a:hover {
-        color: #cccccc
-    }
-
-.fa-wifi,
-.fa-video,
-.fa-briefcase-medical {
-    background-color: #049DD9;
-    color: #fff;
-    border-radius: 10px;
-}
-
-.memberSeller_completed_txt_price {
-    display: inline-block;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.memberSeller_completed_txt_price_title {
-    color: #049DD9;
-    font-weight: bolder;
-    text-align: right;
-    margin: 0px;
-}
-
-.memberSeller_completed_txt_price {
-    color: #049DD9;
-    font-weight: bolder;
-    font-size: 35px;
-}
-
-.memberSeller_completed_txt_iconprice {
-    display: flex;
-    justify-content: space-between;
-}
-
-
-.memberSeller_completed_btn .btn {
-    background-color: #fff;
-    border: 1px solid #cccccc;
-    color: #000;
-}
-
-    .memberSeller_completed_btn .btn:hover {
-        background-color: #CCCCCC;
-        border: 1px solid #cccccc;
-        color: #fff;
-    }
-
-    .B, .memberSeller_completed_btn .btn:nth-child(2) {
-        background-color: #049DD9;
-        color: #fff;
-    }
-
-        .memberSeller_completed_btn .btn:nth-child(2):hover {
-            background-color: #049DD9;
-        }
-
-.G {
-    background-color: #049DD9;
-    color: #fff;
+.order-link.now {
+    border-bottom: 2px solid #049DD9;
+    pointer-events: none;
 }
 
 .btn:focus {
     box-shadow: none;
 }
 
-.btn_close {
-    background-color: #fff;
-    border: 1px solid #cccccc;
-    color: #000;
+.host-order.container {
+    max-width: 1100px;
 }
 
-    .btn_close:hover {
-        background-color: #CCCCCC;
-        border: 1px solid #cccccc;
+.order-card {
+    position: relative;
+}
+
+    .order-card::after {
+        content: '';
+        position: absolute;
+        width: calc(100% - 24px);
+        height: 1px;
+        background-color: #cccccc;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+.order-id {
+    color: #049DD9;
+}
+
+.full-refund {
+    color: #049DD9;
+}
+
+.venue-pic {
+    width: 100%;
+    padding-top: 60%;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.fa-comment-dots {
+    cursor: pointer;
+    color: #049DD9;
+}
+
+.read-more {
+    padding-top: 1rem;
+    position: relative;
+    color: #049DD9;
+}
+
+    .read-more::before {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -3px;
+        left: 50%;
+        background-color: #049DD9;
+        transform: translate(-50%, -50%);
+        transition: .3s;
+    }
+
+
+    .read-more::after {
+        content: '查看日期';
+    }
+
+    .read-more:not(.collapsed)::after {
+        content: '隱藏日期';
+    }
+
+.datetime-card {
+    position: relative;
+}
+
+    .datetime-card::after {
+        content: '';
+        position: absolute;
+        width: 92%;
+        height: 1px;
+        background-color: #cccccc;
+        bottom: 0;
+        left: 0;
+    }
+
+    .datetime-card img {
+        max-width: 1em;
+    }
+
+.nt,
+.total-cost {
+    color: #049DD9;
+}
+
+.date {
+    font-size: 14px
+}
+
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.form-control[readonly] {
+    background-color: #fff;
+}
+
+.search-orders-btn {
+    border: 1px solid #ced4da;
+}
+
+    .search-orders-btn:hover {
+        background-color: #049DD9;
         color: #fff;
     }
 
 .btn_sendout {
-    background-color: #d9831a;
+    background-color: #049DD9;
     color: #fff;
 }
 
-    .btn_sendout:hover {
-        background-color: #be7418;
-        color: #fff;
-    }
-
-@media (max-width:767px) {
-    .memberSeller_completed_num_ordernum {
-        text-align: left;
-    }
-
-    .memberSeller_completed_num_completed {
-        text-align: left;
-    }
-
-    .fa-wifi,
-    .fa-video,
-    .fa-briefcase-medical {
-        padding: 10px !important;
-    }
-
-    .memberSeller_completed_txt_price_title {
-        font-size: 10px;
-    }
-
-    .memberSeller_completed_txt_price {
-        font-size: 25px;
-    }
-
-
-    .memberSeller_completed {
-        border: 1px solid #049DD9;
-        border-radius: 5px;
-    }
-
-    .memberSeller_completed_pic {
-        border: 0px;
-    }
-
-    .memberSeller_completed_num,
-    .memberSeller_completed_pic,
-    .memberSeller_completed_txt {
-        border-bottom: none;
-    }
-}
-
-.rowunderline {
-    border-bottom: #049DD9 0.5px solid;
-}
-/* .EvaluationBtn{
-	background-color: #049DD9;
-	color: rgb(255, 255, 255);
-} */
-.Evaluation .btn {
-    background-color: #049DD9;
-    color: rgb(255, 255, 255);
-}
-
-.EvaluationSendOut .btn:last-child {
-    background-color: #049DD9;
-    color: rgb(255, 255, 255);
-}
-
-.Evaluation .btn:hover {
-    background-color: #027fb1;
-    color: rgb(255, 255, 255);
+.fa-check {
+    color: green;
 }
 
 .fa-times {
     color: #E82953;
 }
 
-.fa-check {
-    color: #049DD9;
+.form-check-input:checked {
+    background-color: #049DD9;
+    border-color: #049DD9;
+}
+
+.form-select {
+    border-color: #049DD9;
+}
+
+    .form-select:focus {
+        box-shadow: none;
+        border-color: #049DD9;
+    }
+
+.customer_evaluation textarea {
+    resize: none;
+    border: 1px solid #049DD9;
 }

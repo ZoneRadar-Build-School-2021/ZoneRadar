@@ -6,19 +6,21 @@ using System.Web;
 
 namespace ZoneRadar.Models.ViewModels
 {
-    public class UsercenterProcessingViewModel
+    public class HostCenterHistoryViewModel
     {
-        public int OrderNumber { get; set; }
-        public DateTime PaidTime { get; set; }
         public string SpaceName { get; set; }
         public string SpaceUrl { get; set; }
-        public int Score { get; set; }
-        public DateTime RentTime { get; set; }
-        public DateTime RentBackTime { get; set; }
-        public int People { get; set; }
+        public string UserName { get; set; }
+        public string ContactName { get; set; }
+        public string ContactPhone { get; set; }
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public decimal Money { get; set; }
+        public int OrderID { get; set; }
         public int SpaceID { get; set; }
+        public int OrderNumber { get; set; }
         public string Email { get; set; }
+        public List<RentDetailViewModel> RentDetailVM { get; set; }
+
     }
+
 }

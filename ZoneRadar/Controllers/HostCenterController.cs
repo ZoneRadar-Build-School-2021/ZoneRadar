@@ -5,8 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using ZoneRadar.Services;
 using ZoneRadar.Models.ViewModels;
-using ZoneRadar.Repositories;
-using ZoneRadar.Models;
 
 namespace ZoneRadar.Controllers
 {
@@ -81,16 +79,26 @@ namespace ZoneRadar.Controllers
         public ActionResult EditSpace(int spaceId)
         {
             var model = _spaceService.ReadAnySpace(spaceId);
-            
             return View(model);
         }
+
         /// <summary>
-        /// 編輯場地(Steve) 
+        /// 管理我的場地(Jenny)
         /// </summary>
         /// <returns></returns>
         public ActionResult SpaceManage()
         {
-            return View();
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (isAuthenticated)
+            {
+                var spaceManageList = _spaceService.GetHostSpace(userId);
+                return View(spaceManageList);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         /// <summary>
@@ -105,12 +113,80 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
-        /// 場地主訂單 - 歷史訂單(Steve) 
+        /// 場地主訂單 - 歷史訂單(Nick) 
         /// </summary>
         /// <returns></returns>
         public ActionResult History()
         {
-            return View();
+            var userid = int.Parse(User.Identity.Name);
+            var model = _orderService.GetHostCenterHistoryVM(userid);
+            return View(model);
+        }
+
+        /// <summary>
+        /// 儲存場地預定下架日期(Jenny)
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SpaceDiscontinue(int spaceId, DateTime? discontinuedDate)
+        {
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (discontinuedDate.HasValue)
+            {
+                _spaceService.SetDiscontinuedDate(userId, spaceId, discontinuedDate.Value);
+                return RedirectToAction("SpaceManage");
+            }
+            else
+            {
+                //防呆未完成
+                return RedirectToAction("SpaceManage");
+            }
+        }
+
+        /// <summary>
+        /// 取消下架(Jenny)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CancelDiscontinue(int spaceId)
+        {
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                _spaceService.SetDiscontinuedDate(userId, spaceId, null);
+                return RedirectToAction("SpaceManage");
+            }
+        }
+
+        /// <summary>
+        /// 刪除場地(Jenny)
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult DeleteSpace(int spaceId)
+        {
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                _spaceService.DeleteSpace(userId, spaceId);
+                return RedirectToAction("SpaceManage");
+            }
         }
     }
 }
