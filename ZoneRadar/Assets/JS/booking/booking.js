@@ -334,7 +334,7 @@
         const modal = bootstrap.Modal.getOrCreateInstance(login_modal);
         modal.show();
       } else {
-
+        axios.post('')
         Swal.fire(
           '預約成功!',
           '請於24小時內前往會員中心 > 我的訂單內申請付款',
@@ -342,9 +342,10 @@
         )
       }
 
-      const ok = document.querySelector('.swal2-confirm.swal2-styled')
+      document.querySelector('.swal2-confirm.swal2-styled').addEventListener('click', redirectToOrderCenter);
     })
   }
+
 
   function calculate(preOrderObj) {
     console.log(preOrderObj);
@@ -386,6 +387,10 @@
       totalCostNode.innerText = `NT$${totalCost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
     }
 
+  }
+
+  function redirectToOrderCenter() {
+    
   }
 
 })();
