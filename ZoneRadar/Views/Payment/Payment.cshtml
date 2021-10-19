@@ -10,36 +10,36 @@
         <div class="col-lg-7 mt-5 col-sm-12">
             <div class="PriceTable mb-5">
                 <!-- Space rental-->
-                <div class="BookingRequestForm form-horizontal mt-3">
-                    <h2 class="py-3">Review & Pay</h2>
-                    <div class="Table table-component">
-                        <div class="table-head">
-                            <div class="header-row d-flex">
-                                <div class="label undefined">Space Rental</div>
-                            </div>
-                        </div>
-                        <div class="table-body">
-                            <div class="add-ons-rows">
-                                <div class="d-flex  table-row">
-                                    <div class="title-field me-auto">Subtotal</div>
-                                    <div data-testing-id="space-rental-subtotal"><span>$200.00</span></div>
+                @*<div class="BookingRequestForm form-horizontal mt-3">
+                        <h2 class="py-3">Review & Pay</h2>
+                        <div class="Table table-component">
+                            <div class="table-head">
+                                <div class="header-row d-flex">
+                                    <div class="label undefined">Space Rental</div>
                                 </div>
-                                <div>
+                            </div>
+                            <div class="table-body">
+                                <div class="add-ons-rows">
+                                    <div class="d-flex  table-row">
+                                        <div class="title-field me-auto">Subtotal</div>
+                                        <div data-testing-id="space-rental-subtotal"><span>$200.00</span></div>
+                                    </div>
+                                    <div>
+                                        <hr class="dotted margin-md-top margin-md-bottom">
+                                        <div class="d-flex table-row">
+                                            <div class="title-field me-auto">Cleaning</div>
+                                            <div data-testing-id="cleaning-fee"><span>$80.00</span></div>
+                                        </div>
+                                    </div>
                                     <hr class="dotted margin-md-top margin-md-bottom">
-                                    <div class="d-flex table-row">
-                                        <div class="title-field me-auto">Cleaning</div>
-                                        <div data-testing-id="cleaning-fee"><span>$80.00</span></div>
+                                    <div class="d-flex heavy table-row">
+                                        <div class="title-field me-auto">Space rental total</div>
+                                        <div data-testing-id="space-rental-total"><span>$280.00</span></div>
                                     </div>
                                 </div>
-                                <hr class="dotted margin-md-top margin-md-bottom">
-                                <div class="d-flex heavy table-row">
-                                    <div class="title-field me-auto">Space rental total</div>
-                                    <div data-testing-id="space-rental-total"><span>$280.00</span></div>
-                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div>*@
                 <!-- Price -->
                 <div class="BookingRequestForm form-horizontal mt-3">
                     <div class="Table table-component">
@@ -52,19 +52,25 @@
                             <div class="add-ons-rows">
                                 <div class="d-flex  table-row">
                                     <div class="title-field me-auto">Space rental total</div>
-                                    <div data-testing-id="space-rental-subtotal"><span>$280.00</span></div>
+                                    <div data-testing-id="space-rental-subtotal">
+                                        <span>$280.00</span>
+                                    </div>
                                 </div>
                                 <div>
                                     <hr class="dotted margin-md-top margin-md-bottom">
                                     <div class="d-flex table-row">
                                         <div class="title-field me-auto">Space rental total</div>
-                                        <div data-testing-id="cleaning-fee"><span>26.60</span></div>
+                                        <div data-testing-id="cleaning-fee">
+                                            <span>26.60</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <hr class="dotted margin-md-top margin-md-bottom">
                                 <div class="d-flex heavy table-row">
                                     <div class="title-field me-auto">Total</div>
-                                    <div data-testing-id="space-rental-total"><span>$306.60</span></div>
+                                    <div data-testing-id="space-rental-total">
+                                        <span>$306.60</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -100,7 +106,9 @@
                     </div>
                 </div>
                 <!-- Host Rules -->
-                <p class="mt-5"> <i class="far fa-file-alt"></i> Host Rules</p>
+                <p class="mt-5">
+                    <i class="far fa-file-alt"></i> Host Rules
+                </p>
                 <!--  -->
                 <!-- <button>Read more</button> -->
                 <div class="mb-2">
@@ -111,9 +119,10 @@
                         cleaning is expected.
                     <p>
                     <p class="text-gray-600" style="word-wrap:break-word; font-size: 14px;"></p>
-                    <p>In the studio there is also a bar with 3m gastronomy refrigerators and a dishwashing
-                    area with
-                    following 6m bar. The use and consumption of beverages can be individually regulated.
+                    <p>
+                        In the studio there is also a bar with 3m gastronomy refrigerators and a dishwashing
+                        area with
+                        following 6m bar. The use and consumption of beverages can be individually regulated.
                     </p>
                 </div>
                 <div>
@@ -133,7 +142,7 @@
                         <div class="heavy mt-4">Nudity is allowed</div>
                     </div>
                 </div>
-                <div class="mt-4 mb-4">
+                <div class="mt-2 mb-2">
                     <div class="heavy">Security cameras and recording devices</div>
                     <p class="text" style="white-space:nowrap; font-size: 14px;">
                         Check with your host if
@@ -145,14 +154,28 @@
 
                     </p>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
+                <div class="form-input">
+                    <div class="row mb-3">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">聯絡人 </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputPassword">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">聯絡電話 </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputPassword">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-check mt-4">
+                    <input class="form-check-input" type="checkbox" onclick="checkboxOnclick(this)" value="false" id="flexCheckAccpet">
+                    <label class="form-check-label" for="flexCheckAccpet">
                         I accept and understand these host rules and disclosures.
                     </label>
                 </div>
                 <button class="Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled" type="submit"
-                        data-testing-id="booking-request-submit-button">
+                        data-testing-id="booking-request-submit-button" id="submit-pay">
                     <div class="submit-bkg-req-btn">送出</div>
                 </button>
 

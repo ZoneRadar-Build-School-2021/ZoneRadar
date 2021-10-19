@@ -157,7 +157,6 @@ namespace ZoneRadar.Services
                     CancelMoney = cancelmoney,
                     OrderStatus = item.OrderStatusID,
                     OrderId = item.OrderID,
-                    SpaceId = item.SpaceID,
                     MemberId = item.MemberID,
                     ContactName = item.ContactName,
                     ContactPhone = item.ContactPhone,
@@ -321,7 +320,6 @@ namespace ZoneRadar.Services
             var order = new Order {
                 OrderID = model.OrderId,
                 OrderNumber = model.OrderNumber,
-                SpaceID = model.SpaceId,
                 MemberID = model.MemberId,
                 PaymentDate = model.PaidTime,
                 ContactName = model.ContactName,
