@@ -75,7 +75,7 @@
                                 </span>
                             </li>
                             <li class="mt-3">
-                                <div class="collapse" id="order-2109020001">
+                                <div class="collapse" id="order-@Html.DisplayFor(m => item.OrderNumber)">
                                     <div class="datetime-card py-2">
                                         <div class="row">
                                             @foreach (var rentdatail in item.RentDetail)
@@ -97,8 +97,8 @@
                                     </div>
                                 </div>
                                 <div class="toggle-btn">
-                                    <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-2109020001"
-                                       role="button" aria-expanded="false" aria-controls="order-2109020001"></a>
+                                    <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-@Html.DisplayFor(m => item.OrderNumber)"
+                                       role="button" aria-expanded="false" aria-controls="order-@Html.DisplayFor(m => item.OrderNumber)"></a>
                                 </div>
                             </li>
                         </ul>
