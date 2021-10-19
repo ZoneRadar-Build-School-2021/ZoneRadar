@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using ZoneRadar.Models;
@@ -487,6 +489,53 @@ namespace ZoneRadar.Services
             }
 
             return result;
+        }
+
+        public void PlaceAPreOrder(PreOrderViewModel preOrderVM, int memberID)
+        {
+            var spaceID = preOrderVM.SpaceID;
+
+            var newOrder = new Order
+            {
+                SpaceID = spaceID,
+                MemberID = memberID,
+                ContactName = "123",
+                ContactPhone = "123",
+                OrderStatusID = 1
+            };
+
+            _repository.Create<Order>(newOrder);
+            _repository.SaveChanges();
+
+            var orderID = newOrder.OrderID;
+            var bookingDateList = preOrderVM.DatesArr;
+            var attendeesList = preOrderVM.AttendeesArr;
+            var startTimeList = preOrderVM.StartTimeArr;
+            var endTimeList = preOrderVM.EndTimeArr;
+
+            var startDateTimeList = new List<DateTime>();
+            var endDateTimeList = new List<DateTime>();
+            for (int i = 0; i < bookingDateList.Count; i++)
+            {
+                startDateTimeList.Add(DateTime.Parse($"{bookingDateList[i]}T{startTimeList[i]:00}"));
+                endDateTimeList.Add(DateTime.Parse($"{bookingDateList[i]}T{endTimeList[i]:00}"));
+            }
+
+            var newOrderDetail = new List<OrderDetail>();
+            for (int i = 0; i < startDateTimeList.Count; i++)
+            {
+                newOrderDetail.Add(new OrderDetail
+                {
+                    OrderID = orderID,
+                    StartDateTime = startDateTimeList[i],
+                    EndDateTime = endDateTimeList[i],
+                    Participants = int.Parse(attendeesList[i]),
+                });
+            }
+
+            _repository.CreateRange<OrderDetail>(newOrderDetail);
+            _repository.SaveChanges();
+            _repository.Dispose();
         }
     }
 }

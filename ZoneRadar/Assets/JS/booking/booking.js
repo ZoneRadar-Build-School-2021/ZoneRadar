@@ -33,19 +33,19 @@
   let operationEndArr = [];
   let operationDayArr = [];
   let minHour, discount, hoursForDiscount, pricePerHour, orderDateArr, capacity;
-  let preOrderObj = {
-    DatesArr: [],
-    AttendeesArr: [],
-    StartTimeArr: [],
-    EndTimeArr: []
-  }
   let spaceID = '';
   if (sessionStorage.getItem('theKey')) {
     spaceID = sessionStorage.getItem('theKey');
     sessionStorage.clear();
   }
   const getURL = `/webapi/spaces/GetBookingCardData?id=${spaceID}`;
-
+  let preOrderObj = {
+    DatesArr: [],
+    AttendeesArr: [],
+    StartTimeArr: [],
+    EndTimeArr: [],
+    spaceID: spaceID,
+  }
 
   // 執行區-----------
   setMap();
@@ -334,12 +334,13 @@
         const modal = bootstrap.Modal.getOrCreateInstance(login_modal);
         modal.show();
       } else {
-        axios.post('')
-        Swal.fire(
-          '預約成功!',
-          '請於24小時內前往會員中心 > 我的訂單內申請付款',
-          'success'
-        )
+          axios.post('/webapi/spaces/AddPreOrder', preOrderObj).then(res => {
+              Swal.fire(
+                  '預約成功!',
+                  '請於24小時內前往會員中心 > 我的訂單內申請付款',
+                  'success'
+              )
+          })
       }
 
       document.querySelector('.swal2-confirm.swal2-styled').addEventListener('click', redirectToOrderCenter);
