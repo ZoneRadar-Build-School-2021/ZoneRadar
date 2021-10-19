@@ -542,6 +542,7 @@ namespace ZoneRadar.Services
                                                         SpaceName = s.SpaceName,
                                                         Address = s.Address,
                                                         City  = s.City.CityName,
+                                                        SpacePhoto = s.SpacePhoto.First().SpacePhotoUrl,
                                                         District = s.District.DistrictName,
                                                         PricePerHour = s.PricePerHour,
                                                         ReviewCount = s.Order.Select(x => x.Review.Where(y => y.ToHost == true && y.Order.SpaceID == s.SpaceID).Select(z => z.ReviewContent).Count()).Sum(),
