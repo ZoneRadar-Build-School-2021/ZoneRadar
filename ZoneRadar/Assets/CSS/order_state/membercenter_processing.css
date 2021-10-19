@@ -241,11 +241,13 @@ ul {
 
 .memberbuyer_pending_num_ordernum,
 .memberbuyer_pending_num_date,
-.fa-star {
+.fa-star,
+.fa-star-half-alt {
     color: #D9831A;
 }
 
-.fa-star {
+.fa-star,
+.fa-star-half-alt {
     font-size: 18px;
 }
 

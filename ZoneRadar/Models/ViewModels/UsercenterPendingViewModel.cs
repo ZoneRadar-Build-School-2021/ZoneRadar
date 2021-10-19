@@ -14,7 +14,7 @@ namespace ZoneRadar.Models.ViewModels
         public string SpaceUrl { get; set; }
         public string OwnerName { get; set; }
         public string OwnerPhone { get; set; }
-        public int Score { get; set; }
+        public double Score { get; set; }
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public decimal Money { get; set; }
         public string CancelTitle { get; set; }
