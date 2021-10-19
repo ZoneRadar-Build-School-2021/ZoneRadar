@@ -207,7 +207,7 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public List<UsercenterProcessingViewModel> GetUsercenterProcessingVM(int id)
         {
-            List<UsercenterProcessingViewModel> UCProcessingList = new List<UsercenterProcessingViewModel>();
+            List<UsercenterProcessingViewModel> result = new List<UsercenterProcessingViewModel>();
 
             var spaces = _repository.GetAll<Space>().ToList();
             var orders = _repository.GetAll<Order>().ToList();
@@ -221,50 +221,80 @@ namespace ZoneRadar.Services
 
             foreach (var item in orderformember)
             {
+                //訂單編號
+                var ordernum = item.OrderNumber;
+                //付款時間
+                var paytime = (DateTime)item.PaymentDate;
+                //該場地名稱
+                var spacename = spaces.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpaceName;
+                //該場地照片
+                var spacepic = spacepics.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpacePhotoUrl;
+                //該場地主姓名
+                var ownername = members.FirstOrDefault(x => x.MemberID == item.Space.MemberID).Name;
+                //該場地主電話
+                var ownerphone = members.FirstOrDefault(x => x.MemberID == item.Space.MemberID).Phone;
+                //該場地評價
                 var score = reviews.Where(x => x.Order.SpaceID == item.SpaceID && x.ToHost == true).Select(x => x.Score).Average();
-
-
+                //場地主ID + Email
                 var ownerid = item.Space.MemberID;
                 var email = members.FirstOrDefault(x => x.MemberID == ownerid).Email;
-                var ordernum = item.OrderNumber;
-                var paidtime = item.PaymentDate;
-                var spacename = spaces.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpaceName;
-                var spaceurl = spacepics.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpacePhotoUrl;
-                var renttime = orderdetails.Where(x => x.OrderID == item.OrderID).Select(x => x.StartDateTime).FirstOrDefault();
-                var rentbacktime = orderdetails.Where(x => x.OrderID == item.OrderID).Select(x => x.EndDateTime).FirstOrDefault();
-                var people = orderdetails.Where(x => x.OrderID == item.OrderID).Select(x => x.Participants).FirstOrDefault();
-
-                //算金額
-                var totalhour = rentbacktime.Subtract(renttime).TotalHours;
-                var discounthour = spacediscounts.FirstOrDefault(x => x.SpaceID == item.SpaceID).Hour;
-                var discount = spacediscounts.FirstOrDefault(x => x.SpaceID == item.SpaceID).Discount;
-                var spacehourofmoney = spaces.FirstOrDefault(x => x.SpaceID == item.SpaceID).PricePerHour;
+                //錢
                 decimal money = 0;
-                if (totalhour > discounthour)
-                {
-                    money = (spacehourofmoney * (int)totalhour) * (1 - discount);
-                }
-                else
-                {
-                    money = spacehourofmoney * (int)totalhour;
-                }
 
-                UCProcessingList.Add(new UsercenterProcessingViewModel
+                //Temp存訂單Detail
+                var temp = new List<RentDetailViewModel>();
+                //訂單時間及人數
+                foreach (var rentdetail in item.OrderDetail)
+                {
+                    var renttime = rentdetail.StartDateTime;
+                    var rentbacktime = rentdetail.EndDateTime;
+                    var people = rentdetail.Participants;
+                    var detailid = rentdetail.OrderDetailID;
+
+                    //算金額
+                    var totalhour = rentbacktime.Subtract(renttime).TotalHours;
+                    var discounthour = spacediscounts.FirstOrDefault(x => x.SpaceID == item.SpaceID).Hour;
+                    var discount = spacediscounts.FirstOrDefault(x => x.SpaceID == item.SpaceID).Discount;
+                    var spacehourofmoney = spaces.FirstOrDefault(x => x.SpaceID == item.SpaceID).PricePerHour;
+                    decimal moneytemp;
+                    if (totalhour > discounthour)
+                    {
+                        moneytemp = (spacehourofmoney * (int)totalhour) * (1 - discount);
+                    }
+                    else
+                    {
+                        moneytemp = spacehourofmoney * (int)totalhour;
+                    }
+
+                    money += moneytemp;
+                    moneytemp = 0;
+                    temp.Add(new RentDetailViewModel
+                    {
+                        RentTime = renttime.ToString("yyyy-MM-dd HH:mm"),
+                        RentBackTime = rentbacktime.ToString("yyyy-MM-dd HH:mm"),
+                        People = people,
+                        OrderDetailId = detailid,
+                        OrderId = rentdetail.OrderID
+                    });
+                }
+                result.Add(new UsercenterProcessingViewModel
                 {
                     OrderNumber = (int)ordernum,
-                    PaidTime = (DateTime)paidtime,
+                    PaidTime = paytime.ToString("yyyy-MM-dd HH:mm"),
                     SpaceName = spacename,
-                    Score = (int)score,
-                    SpaceUrl = spaceurl,
-                    RentTime = renttime,
-                    RentBackTime = rentbacktime,
-                    People = people,
+                    SpaceUrl = spacepic,
+                    OwnerName = ownername,
+                    OwnerPhone = ownerphone,
+                    Score =  (int)score,
                     Money = money,
+                    Email = email,
                     SpaceID = item.SpaceID,
-                    Email = email
+                    OrderId = item.OrderID,
+                    RentDetail = temp
                 });
+
             }
-            return UCProcessingList;
+            return result;
         }
         /// <summary>
         /// 找出使用者(ID)的已完成資料(Nick)
