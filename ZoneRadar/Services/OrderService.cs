@@ -41,7 +41,7 @@ namespace ZoneRadar.Services
                 //訂單編號
                 var ordernum = item.OrderNumber;
                 //付款時間
-                var paytime = item.PaymentDate;
+                var paytime = (DateTime)item.PaymentDate;
                 //該場地名稱
                 var spacename = spaces.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpaceName;
                 //該場地照片
@@ -177,7 +177,7 @@ namespace ZoneRadar.Services
                 result.Add(new UsercenterPendingViewModel
                 {
                     OrderNumber = (int)ordernum,
-                    PaidTime = (DateTime)paytime,
+                    PaidTime = paytime.ToString("yyyy-MM-dd HH:mm"),
                     SpaceUrl = spacepic,
                     SpaceName = spacename,
                     OwnerName = ownername,
@@ -363,7 +363,7 @@ namespace ZoneRadar.Services
                 OrderNumber = model.OrderNumber,
                 SpaceID = model.SpaceId,
                 MemberID = model.MemberId,
-                PaymentDate = model.PaidTime,
+                PaymentDate = DateTime.Parse(model.PaidTime),
                 ContactName = model.ContactName,
                 ContactPhone = model.ContactPhone,
                 OrderStatusID = 5

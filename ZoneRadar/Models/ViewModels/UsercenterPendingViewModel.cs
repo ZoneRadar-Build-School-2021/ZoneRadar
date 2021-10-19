@@ -9,7 +9,7 @@ namespace ZoneRadar.Models.ViewModels
     public class UsercenterPendingViewModel
     {
         public int OrderNumber { get; set; }
-        public DateTime PaidTime { get; set; }
+        public string PaidTime { get; set; }
         public string SpaceName { get; set; }
         public string SpaceUrl { get; set; }
         public string OwnerName { get; set; }
