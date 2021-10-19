@@ -33,7 +33,6 @@ namespace ZoneRadar.Models
         public virtual DbSet<SpacePhoto> SpacePhoto { get; set; }
         public virtual DbSet<SpaceStatus> SpaceStatus { get; set; }
         public virtual DbSet<SpaceType> SpaceType { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TypeDetail> TypeDetail { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
