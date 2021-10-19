@@ -44,7 +44,7 @@
     spaceID = sessionStorage.getItem('theKey');
     sessionStorage.clear();
   }
-  const getURL = `https://localhost:44322/webapi/spaces/GetBookingCardData?id=${spaceID}`;
+  const getURL = `/webapi/spaces/GetBookingCardData?id=${spaceID}`;
 
 
   // 執行區-----------
@@ -327,7 +327,7 @@
   }
 
   function submitOrder() {
-    axios.get('https://localhost:44322/webapi/spaces/CheckLogin').then(res => {
+    axios.get('/webapi/spaces/CheckLogin').then(res => {
       let isLogin = res.data;
       if (!isLogin) {
         const login_modal = document.querySelector("#login-modal");
