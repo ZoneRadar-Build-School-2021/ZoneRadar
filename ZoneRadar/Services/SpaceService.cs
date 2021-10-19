@@ -44,7 +44,7 @@ namespace ZoneRadar.Services
             foreach (var item in spaces)
             {
                 //計算場地平均分數
-                var spaceReview = orders.Where(x => x.SpaceID == item.SpaceID).Select(x => reviews.FirstOrDefault(y => y.OrderID == x.OrderID)).OfType<Review>().ToList();
+                var spaceReview = item.Order.Select(x => x.Review.FirstOrDefault(y => y.ToHost)).OfType<Review>().ToList();
                 double scoreAvg = spaceReview.Count() == 0 ? 0 : spaceReview.Average(x => x.Score);
 
                 //場地圖片資料表還沒建好，先寫防呆程式
@@ -307,13 +307,13 @@ namespace ZoneRadar.Services
 
             if (amenities != null && amenities.Count != 0)
             {
-                //var filteredByAmenity = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity)).ToList();
-                //spaces = spaces.Where(x => filteredByAmenity.Select(y => y.SpaceID).Contains(x.SpaceID));
+                var filteredByAmenity = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity));
 
-                var spaceIDs = new List<int>();
+                var spaceIDs = filteredByAmenity.Select(x => x.SpaceID).Distinct();
                 foreach (var amenity in amenities)
                 {
-                    spaceIDs = spaceAmenities.Where(x => x.AmenityDetail.Amenity == amenity).Select(x => x.SpaceID).Distinct().ToList();
+                    var layer = filteredByAmenity.Where(x => x.AmenityDetail.Amenity == amenity).Select(x => x.SpaceID);
+                    spaceIDs = spaceIDs.Intersect(layer);
                 }
 
                 spaces = spaces.Where(x => spaceIDs.Contains(x.SpaceID));
@@ -1194,27 +1194,24 @@ namespace ZoneRadar.Services
                 { "星期六", 6 },
                 { "星期日", 7 }
             };
-            var originOperatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).ToList();
-            var convertedOperatingDayList = new List<string>();
-            foreach (var day in originOperatingList.Where(x => x.SpaceID == id).Select(x => x.OperatingDay).ToList())
-            {
-                convertedOperatingDayList.Add(weekDayConverter.FirstOrDefault(x => x.Value == day).Key);
-            }
-
-            //var startTimeList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).Select(x => x.StartTime.ToString(@"hh\:mm")).ToList();
-            //var endTimeList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).Select(x => x.EndTime.ToString(@"hh\:mm")).ToList();
+            var operatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).ToList();
             var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Hour;
             var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Discount;
-            var minHour = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id).MinHours;
+            var targetSpace = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id);
+            var orderTimeList = _repository.GetAll<OrderDetail>().Where(x => x.Order.SpaceID == id && x.Order.OrderStatusID != 5).ToList().Select(x => x.StartDateTime.ToString("yyyy-MM-dd"));
+
 
             var result = new BookingCardViewModel
             {
-                OperatingDayList = convertedOperatingDayList,
-                StartTimeList = originOperatingList.Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
-                EndTimeList = originOperatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
+                OperatingDayList = operatingList.Select(x => x.OperatingDay).ToList(),
+                StartTimeList = operatingList.Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
+                EndTimeList = operatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
                 HoursForDiscount = hoursForDiscount,
                 Discount = Decimal.Round((1 - discount), 2),
-                MinHour = minHour,
+                MinHour = targetSpace.MinHours,
+                PricePerHour = (int)targetSpace.PricePerHour,
+                Capacity = targetSpace.Capacity,
+                OrderTimeList = orderTimeList.ToList(),
             };
 
             return result;

@@ -300,15 +300,15 @@
 
     @{ 
         bool isAuthenticated = User.Identity.IsAuthenticated;
-        bool registerModalPopup = ViewBag.RegisterModalPopup == true;
-        bool loginModalPopup = ViewBag.LoginModalPopup == true;
-        bool alert = ViewBag.Alert == true;
+        bool registerModalPopup = ViewData["RegisterModalPopup"] == null ? false : (bool)ViewData["RegisterModalPopup"];
+        bool loginModalPopup = ViewData["LoginModalPopup"] == null ? false : (bool)ViewData["LoginModalPopup"];
+        bool alert = ViewData["Alert"] == null ? false : (bool)ViewData["Alert"];
         //設定sweet alert的icon應為哪種樣式
-        string icon = ViewBag.Icon == true ? "success" : "error";
+        string icon = ViewData["Icon"] == null ? string.Empty : (bool)ViewData["Icon"] ? "success" : "error";
     }
 
 
-    <script>
+<script>
         window.addEventListener("load", () => {
             //判斷登入與否，決定導覽列顯示的介面
             let customer_only = document.querySelectorAll(".customer-only");
@@ -340,7 +340,7 @@
             //跳出sweet alert提示訊息
             if (@Json.Encode(alert)) {
                 Swal.fire({
-                    title: "@ViewBag.Message",
+                    title: "@ViewData["Message"]",
                     icon: "@icon",
                     showConfirmButton: true,
                     confirmButtonColor: "#be7418",
@@ -349,7 +349,7 @@
                 })
             }
         })
-    </script>
+</script>
     
 
     @RenderSection("endCSS", required: false)

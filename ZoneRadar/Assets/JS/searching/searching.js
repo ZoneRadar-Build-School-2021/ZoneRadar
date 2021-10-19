@@ -430,17 +430,17 @@
         function requestForSpaces(filter) {
             setPlaceholder();
 
-            if (filter.Keywords) {
-                filter.City = '';
-                filter.District = '';
-                filter.Type = '';
-                filter.Date = '';
-                filter.HighPrice = '';
-                filter.LowPrice = '';
-                filter.Attendees = '';
-                filter.Amenities = [];
-                filter.Area = '';
-            }
+            //if (filter.Keywords) {
+            //    filter.City = '';
+            //    filter.District = '';
+            //    filter.Type = '';
+            //    filter.Date = '';
+            //    filter.HighPrice = '';
+            //    filter.LowPrice = '';
+            //    filter.Attendees = '';
+            //    filter.Amenities = [];
+            //    filter.Area = '';
+            //}
 
             console.log(filter)
 
