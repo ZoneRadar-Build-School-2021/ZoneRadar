@@ -10,7 +10,7 @@
         UserInfo userInfo = Json.Decode<UserInfo>(ticket.UserData);
         userPhoto = userInfo.MemberPhoto;
         userId = userInfo.MemberId;
-    }  
+    }
 }
 <!DOCTYPE html>
 <html>
@@ -298,7 +298,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
 
-    @{ 
+    @{
         bool isAuthenticated = User.Identity.IsAuthenticated;
         bool registerModalPopup = ViewData["RegisterModalPopup"] == null ? false : (bool)ViewData["RegisterModalPopup"];
         bool loginModalPopup = ViewData["LoginModalPopup"] == null ? false : (bool)ViewData["LoginModalPopup"];
@@ -308,8 +308,7 @@
     }
 
 
-<script>
-        window.addEventListener("load", () => {
+    <script>
             //判斷登入與否，決定導覽列顯示的介面
             let customer_only = document.querySelectorAll(".customer-only");
             let member_only = document.querySelectorAll(".member-only");
@@ -347,10 +346,19 @@
                     confirmButtonText: "OK",
                     position: "top"
                 })
+
+                const redirectToPreURL = function() {
+                    if (sessionStorage.getItem('targetURL')) {
+                        window.location = sessionStorage.getItem('targetURL');
+                        sessionStorage.clear();
+                    }
+                    this.removeEventListener('click', redirectToPreURL)
+                }
+
+                document.querySelector('.swal2-confirm.swal2-styled').addEventListener('click', redirectToPreURL); 
             }
-        })
-</script>
-    
+    </script>
+
 
     @RenderSection("endCSS", required: false)
     @RenderSection("endJS", required: false)

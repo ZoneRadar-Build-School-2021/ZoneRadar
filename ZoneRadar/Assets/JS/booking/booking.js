@@ -332,7 +332,9 @@
       if (!isLogin) {
         const login_modal = document.querySelector("#login-modal");
         const modal = bootstrap.Modal.getOrCreateInstance(login_modal);
-        modal.show();
+          modal.show();
+
+          sessionStorage.setItem('targetURL', location.href);
       } else {
           axios.post('/webapi/spaces/AddPreOrder', preOrderObj).then(res => {
               Swal.fire(
