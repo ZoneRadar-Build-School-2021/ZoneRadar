@@ -1,4 +1,4 @@
-img {
+﻿img {
   max-width: 100%;
   height: auto;
   vertical-align: middle;
@@ -83,15 +83,15 @@ p {
   transition: .3s;
 }
 
-.discontinue-btn {
+.discontinue-btn, .republish-btn {
     background-color: #D9831A;
     color: white;
 }
 
-.discontinue-btn:hover {
-    background-color: #b16911;
-    color: white;
-}
+    .discontinue-btn:hover, .republish-btn:hover {
+        background-color: #b16911;
+        color: white;
+    }
 
 .discontinue-modal input {
     font-size: 16px;
@@ -110,6 +110,10 @@ p {
 
 .discontinue-modal .submit-btn, .discontinue-modal .cancel-btn {
     border: none;
+}
+
+.form-control[readonly] {
+    background-color: white;
 }
 
 .cancel-discontinue-btn {
