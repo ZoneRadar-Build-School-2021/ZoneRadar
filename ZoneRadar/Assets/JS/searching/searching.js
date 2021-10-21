@@ -58,6 +58,7 @@
 
         axios.get(getUrl)
             .then(response => {
+                console.log(response)
                 document.querySelector('#web-date-filter').value = '';
                 document.querySelector('#phone-date-filter').value = '';
                 filterOptions = response.data;

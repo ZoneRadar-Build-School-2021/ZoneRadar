@@ -88,7 +88,7 @@ namespace ZoneRadar.Controllers
                     SelectedDate = date == null ? "" : date,
                 };
 
-                return Ok();
+                return Ok(result);
             }
             catch (Exception)
             {
