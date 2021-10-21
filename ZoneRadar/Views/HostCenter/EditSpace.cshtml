@@ -387,7 +387,7 @@
                             else
                             {
                                 <div class="row mt-4 border-bottom">
-                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="col-6 col-xl-1  mt-auto mb-auto">
                                         <p class="mt-xl-3 fs16 ">@item.weekDay</p>
                                     </div>
                                     <div class="col-6 col-xl-2  mt-auto mb-auto">
@@ -716,6 +716,7 @@
                                 <div class="col col-7">
                                     <p>是否有投影設備</p>
                                 </div>
+                                @*把check標籤做成一個判斷的值  @shooting[0].Displaynone *@
                                 <div class="col-6 col-xl-2  mt-auto mb-auto">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" checked type="checkbox" name="open" value="1"
@@ -724,13 +725,13 @@
                                     </div>
                                 </div>
 
-                                <div id="projectionPart" class="row @shooting[0].Displaynone">
+                                <div id="projectionPart" class="row @shooting[0].Displaynone ">
                                     <div class="col-12">
                                         <p>描述您的場地所提供的任何錄影設備，如何使用細節跟注意事項</p>
                                     </div>
                                     <div class="col parking">
                                         <div class="col col-12 parkingpart pb-5">
-                                            <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                            <label for="exampleFormControlTextarea1" class="form-label "></label>
                                             <textarea name="textPartProjection" class="form-control" id="exampleFormControlTextarea1" rows="3">
                                                 @shooting[0].Shooting
                                             </textarea>
