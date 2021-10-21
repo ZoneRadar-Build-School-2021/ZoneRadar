@@ -14,12 +14,11 @@ namespace ZoneRadar.Models.ViewModels
         public int MemberID { get; set; }
         public string Photo { get; set; }
         [Required]
-        [StringLength(20)]
         public string Name { get; set; }
-        [Required]
         [StringLength(50)]
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Description { get; set; }
+        public bool ReceiveEDM { get; set; }
     }
 }

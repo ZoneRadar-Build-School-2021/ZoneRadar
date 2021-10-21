@@ -19,6 +19,11 @@ namespace ZoneRadar.Models.ViewModels
         public int SpaceID { get; set; }
         public int OrderNumber { get; set; }
         public string Email { get; set; }
+        public bool HasReview { get; set; }
+        public double Score { get; set; }
+        public string ReviewContent { get; set; }
+        public bool Recommend { get; set; }
+
         public List<RentDetailViewModel> RentDetailVM { get; set; }
 
     }
