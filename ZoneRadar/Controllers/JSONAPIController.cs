@@ -14,7 +14,7 @@ using ZoneRadar.Services;
 namespace ZoneRadar.Controllers
 {
     [RoutePrefix("webapi/spaces")]
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    //[EnableCors(origins: "*", headers: "*", methods: "*")]
     public class JSONAPIController : ApiController
     {
         private readonly SpaceService _spaceService;
@@ -37,13 +37,29 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [Route("GetFilterDataFromIndex")]
         [AcceptVerbs("POST")]
-        public IHttpActionResult GetFilterDataFromIndex(FilterViewModel filterVm)
+        public APIResponse GetFilterDataFromIndex(FilterViewModel filterVm)
         {
-            _filterDataFromIndex.SelectedCity = filterVm.SelectedCity;
-            _filterDataFromIndex.SelectedType = filterVm.SelectedType;
-            _filterDataFromIndex.SelectedDate = filterVm.SelectedDate;
+            var response = new APIResponse();
+            try
+            {
+                _filterDataFromIndex.SelectedCity = filterVm.SelectedCity;
+                _filterDataFromIndex.SelectedType = filterVm.SelectedType;
+                _filterDataFromIndex.SelectedDate = filterVm.SelectedDate;
 
-            return Ok(_filterDataFromIndex);
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = _filterDataFromIndex;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Response = null;
+
+                return response;
+            }
         }
 
         /// <summary>
@@ -54,23 +70,31 @@ namespace ZoneRadar.Controllers
         [AcceptVerbs("GET")]
         public IHttpActionResult GetFilterData(string type, string city, string date)
         {
-            var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City).OrderBy(x => x.Key.CityID);
-            var spaceTypeList = _repository.GetAll<TypeDetail>().OrderBy(x => x.TypeDetailID).Select(x => x.Type);
-            var amenityList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.Amenity);
-            var amenityIconList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.AmenityICON);
-
-            var result = new FilterViewModel
+            try
             {
-                CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList()),
-                SpaceTypeList = spaceTypeList.ToList(),
-                AmenityList = amenityList.ToList(),
-                AmenityIconList = amenityIconList.ToList(),
-                SelectedCity = city == null ? "" : city,
-                SelectedType = type == null ? "" : type,
-                SelectedDate = date == null ? "" : date,
-            };
+                var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City).OrderBy(x => x.Key.CityID);
+                var spaceTypeList = _repository.GetAll<TypeDetail>().OrderBy(x => x.TypeDetailID).Select(x => x.Type);
+                var amenityList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.Amenity);
+                var amenityIconList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.AmenityICON);
 
-            return Ok(result);
+                var result = new FilterViewModel
+                {
+                    CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList()),
+                    SpaceTypeList = spaceTypeList.ToList(),
+                    AmenityList = amenityList.ToList(),
+                    AmenityIconList = amenityIconList.ToList(),
+                    SelectedCity = city == null ? "" : city,
+                    SelectedType = type == null ? "" : type,
+                    SelectedDate = date == null ? "" : date,
+                };
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>

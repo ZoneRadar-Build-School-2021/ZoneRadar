@@ -230,6 +230,7 @@
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\AddSpaceViewModel.cs" />
+    <Compile Include="Models\ViewModels\APIResponse.cs" />
     <Compile Include="Models\ViewModels\BookingCardViewModel.cs" />
     <Compile Include="Models\ViewModels\BookingPageViewModel.cs" />
     <Compile Include="Models\ViewModels\HostCenterHistoryViewModel.cs" />
