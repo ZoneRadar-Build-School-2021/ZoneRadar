@@ -148,6 +148,16 @@ namespace ZoneRadar.Controllers
             try
             {
                 var result = _spaceService.GetTargetBookingCard(id);
+                if (User.Identity.IsAuthenticated)
+                {
+                    var memberID = int.Parse(User.Identity.Name);
+                    var isCollection = _repository.GetAll<Collection>().FirstOrDefault(x => x.SpaceID == id && x.MemberID == memberID) == null ? false : true;
+                    result.IsCollection = isCollection;
+                }
+                else
+                {
+                    result.IsCollection = false;
+                }
 
                 response.Status = "Success";
                 response.Message = string.Empty;

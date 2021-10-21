@@ -1176,7 +1176,6 @@ namespace ZoneRadar.Services
             var targetSpace = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id);
             var orderTimeList = _repository.GetAll<OrderDetail>().Where(x => x.Order.SpaceID == id && x.Order.OrderStatusID != 5).ToList().Select(x => x.StartDateTime.ToString("yyyy-MM-dd"));
 
-
             var result = new BookingCardViewModel
             {
                 OperatingDayList = operatingList.Select(x => x.OperatingDay).ToList(),

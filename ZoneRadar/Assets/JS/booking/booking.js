@@ -8,6 +8,7 @@
     const removeDayBtn = document.querySelector('.remove');
     const submitBtn = document.querySelector('.btn-submit');
     const saveBtn = document.querySelector('.btn-save.btn');
+    const heart = document.querySelector('.btn-save .fa-heart');
     const map = L.map('map', {
         center: [25.041824011585646, 121.53629849747963],
         zoom: 17
@@ -35,6 +36,7 @@
     let operationDayArr = [];
     let minHour, discount, hoursForDiscount, pricePerHour, orderDateArr, capacity;
     let spaceID = '';
+    let isCollection = false;
     if (sessionStorage.getItem('theKey')) {
         spaceID = sessionStorage.getItem('theKey');
         sessionStorage.clear();
@@ -106,9 +108,14 @@
             hoursForDiscount = source.HoursForDiscount;
             pricePerHour = source.PricePerHour;
             capacity = source.Capacity;
-
+            isCollection = source.IsCollection;
 
             // 執行區-----------
+            if (isCollection) {
+                heart.style.fontWeight = 900;
+            } else {
+                heart.style.fontWeight = 300;
+            }
             setCalendar();
             setAttendee();
             cloneNode.querySelector('.order-item').classList.add(`day-${index}`);
@@ -402,29 +409,37 @@
     function addCollection(e) {
         e.preventDefault();
 
-        axios.get('/webapi/spaces/CheckLogin').then(res => {
-            let isLogin = res.data.Response;
-            if (!isLogin) {
-                const login_modal = document.querySelector("#login-modal");
-                const modal = bootstrap.Modal.getOrCreateInstance(login_modal);
-                modal.show();
+        if (isCollection) {
 
-                sessionStorage.setItem('targetURL', location.href);
-            } else {
-                let SpaceBriefVM = {
-                    SpaceID: spaceID,
-                }
-                axios.post('/webapi/spaces/AddCollection', SpaceBriefVM).then(res => {
-                    if (res.data.Status === 'Success') {
-                        Swal.fire(
-                            '收藏成功!',
-                            '',
-                            'success'
-                        )
+        } else {
+            isCollection = true;
+            axios.get('/webapi/spaces/CheckLogin').then(res => {
+                let isLogin = res.data.Response;
+                if (!isLogin) {
+                    const login_modal = document.querySelector("#login-modal");
+                    const modal = bootstrap.Modal.getOrCreateInstance(login_modal);
+                    modal.show();
+
+                    sessionStorage.setItem('targetURL', location.href);
+                } else {
+                    let SpaceBriefVM = {
+                        SpaceID: spaceID,
                     }
-                })
-            }
-        })
+                    axios.post('/webapi/spaces/AddCollection', SpaceBriefVM).then(res => {
+                        if (res.data.Status === 'Success') {
+                            Swal.fire(
+                                '收藏成功!',
+                                '',
+                                'success'
+                            )
+                            window.getComputedStyle(saveBtn, "::before").fontWeight = 900;
+                        }
+                    })
+                }
+            })
+        }
+
+        
     }
 
 })();
