@@ -12,6 +12,7 @@ namespace ZoneRadar.Controllers
     {
         private readonly SpaceService _spaceService;
         private readonly OrderService _orderService;
+       
 
         // GET: HostCenter
         public HostCenterController()
@@ -29,42 +30,48 @@ namespace ZoneRadar.Controllers
         /// <summary>
         ///  場地主上架場地(Amber) 
         /// </summary>
+        [Authorize]
         public ActionResult AddSpace()
         {
-            var model = new SpaceViewModel
+            var userId = 0;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (isAuthenticated)
             {
-                SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
-                cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
-                addressAraeList = _spaceService.ShowAmenityByIdOne().addressAraeList,
+                var model = new SpaceViewModel
+                {
+                    SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
+                    cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
+                    addressAraeList = _spaceService.ShowAmenityByIdOne().addressAraeList,
 
-                amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
-                amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
-                amenityAraeThreeList = _spaceService.ShowAmenityByIdThree().amenityAraeThreeList,
+                    amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
+                    amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
+                    amenityAraeThreeList = _spaceService.ShowAmenityByIdThree().amenityAraeThreeList,
 
-                CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
-                CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
-                CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
-                CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
-                //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
+                    CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
+                    CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
+                    CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
+                    CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
+                    //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
 
-                Operating = _spaceService.Operating(),
-            };
-
-            return View(model);
+                    Operating = _spaceService.Operating(),
+                };
+                return View(model);
+            }
+            return View();
         }
         [HttpPost]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult AddSpace(AddSpaceViewModel addspaceVM)
+        //public ActionResult AddSpace(AddSpaceViewModel space, AddOperatingViewModel addOperating)
+
+        public ActionResult AddSpace(AddSpaceViewModel space)
         {
-
-
-            var model = new SpaceViewModel
-            {
-
-            };
-            return View(model);
+            var userid = int.Parse(User.Identity.Name);
+            space.MemberID = userid;
+            var result = _spaceService.CreateSpace(space);
+            ViewData["Message"] = "成功新增場地";
+            return RedirectToAction("SpaceManage", "HostCenter");
         }
-
         /// <summary>
         /// 場地主編輯場地 (Amber)
         /// </summary>
