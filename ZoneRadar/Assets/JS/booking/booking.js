@@ -7,7 +7,7 @@
     const extendDayBtn = document.querySelector('.extend');
     const removeDayBtn = document.querySelector('.remove');
     const submitBtn = document.querySelector('.btn-submit');
-    const saveBtn = document.querySelector('.btn-save');
+    const saveBtn = document.querySelector('.btn-save.btn');
     const map = L.map('map', {
         center: [25.041824011585646, 121.53629849747963],
         zoom: 17
@@ -402,7 +402,29 @@
     function addCollection(e) {
         e.preventDefault();
 
-        axios.get('')
+        axios.get('/webapi/spaces/CheckLogin').then(res => {
+            let isLogin = res.data.Response;
+            if (!isLogin) {
+                const login_modal = document.querySelector("#login-modal");
+                const modal = bootstrap.Modal.getOrCreateInstance(login_modal);
+                modal.show();
+
+                sessionStorage.setItem('targetURL', location.href);
+            } else {
+                let SpaceBriefVM = {
+                    SpaceID: spaceID,
+                }
+                axios.post('/webapi/spaces/AddCollection', SpaceBriefVM).then(res => {
+                    if (res.data.Status === 'Success') {
+                        Swal.fire(
+                            '收藏成功!',
+                            '',
+                            'success'
+                        )
+                    }
+                })
+            }
+        })
     }
 
 })();

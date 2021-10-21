@@ -14,7 +14,7 @@ using ZoneRadar.Services;
 namespace ZoneRadar.Controllers
 {
     [RoutePrefix("webapi/spaces")]
-    //[EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class JSONAPIController : ApiController
     {
         private readonly SpaceService _spaceService;
@@ -208,6 +208,37 @@ namespace ZoneRadar.Controllers
             {
                 int memberID = int.Parse(User.Identity.Name);
                 _preOrderService.PlaceAPreOrder(preOrderVM, memberID);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = null;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Response = null;
+
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// 加入收藏
+        /// </summary>
+        /// <param name="spaceID"></param>
+        /// <returns></returns>
+        [Route("AddCollection")]
+        [AcceptVerbs("POST")]
+        public APIResponse AddCollection(SpaceBriefViewModel SpaceBriefVM)
+        {
+            var response = new APIResponse();
+            try
+            {
+                int memberID = int.Parse(User.Identity.Name);
+                _spaceService.AddToCollection(SpaceBriefVM.SpaceID, memberID);
 
                 response.Status = "Success";
                 response.Message = string.Empty;

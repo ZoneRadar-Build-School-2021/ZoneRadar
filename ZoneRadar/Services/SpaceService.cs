@@ -202,23 +202,23 @@ namespace ZoneRadar.Services
         }
 
 
-        ///// <summary>
-        ///// 收藏寫入資料庫(Steve)
-        ///// </summary>
-        ///// <param name="bookingPageVM"></param>
-        ///// <param name="memberID"></param>
-        //public void CreateCollectionInDB(BookingPageViewModel bookingPageVM, string memberID)
-        //{
-        //    var collection = new Collection
-        //    {
-        //        MemberID = int.Parse(memberID),
-        //        SpaceID = bookingPageVM.SpaceBreifInfo.SpaceID,
-        //    };
+        /// <summary>
+        /// 收藏寫入資料庫(Steve)
+        /// </summary>
+        /// <param name="bookingPageVM"></param>
+        /// <param name="memberID"></param>
+        public void AddToCollection(int spaceID, int memberID)
+        {
+            var collection = new Collection
+            {
+                MemberID = memberID,
+                SpaceID = spaceID,
+            };
 
-        //    _repository.Create<Collection>(collection);
-        //    _repository.SaveChanges();
-        //    _repository.Dispose();
-        //}
+            _repository.Create<Collection>(collection);
+            _repository.SaveChanges();
+            _repository.Dispose();
+        }
 
 
         /// <summary>
