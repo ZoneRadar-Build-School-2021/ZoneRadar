@@ -1195,7 +1195,7 @@ namespace ZoneRadar.Services
                 PublishTime = DateTime.Today,
                 //Latitude = addSpaceViewModel.Latitude,
                 //Longitude = addSpaceViewModel.Longitude,
-                SpaceStatusID = 1,
+                SpaceStatusID = 2,
                 //SpaceStatusID = addSpaceViewModel.SpaceStatusID,
                 //DiscontinuedDate = DateTime.UtcNow,
                 //DiscontinuedDate = addSpaceViewModel.DiscontinuedDate,
@@ -1231,6 +1231,31 @@ namespace ZoneRadar.Services
             {
                 spaceAmenity.Add(new SpaceAmenity { SpaceID = spaceid, AmenityDetailID = item });
             }
+
+            //營業時間
+            List<Operating> ope = new List<Operating>(); 
+            foreach (var item in addSpaceViewModel.OperatingDay)
+            { 
+                var xxx = new Operating { OperatingDay = item };
+                ope.Add(xxx);
+            }
+            for (int i = 0; i < ope.Count; i++)
+            { 
+                if (addSpaceViewModel.Hours[i].Contains("Y")) 
+                { ope[i].StartTime = TimeSpan.Parse("06:00"); 
+                  ope[i].EndTime = TimeSpan.Parse("23:00"); 
+                } 
+                else
+                { 
+                    int x = 0; 
+                    ope[i].StartTime = TimeSpan.Parse(addSpaceViewModel.StartTime[x]);
+                    ope[i].EndTime = TimeSpan.Parse(addSpaceViewModel.EndTime[x]); x++; 
+                } 
+            }
+
+
+
+
 
             _repository.CreateRange<Operating>(operating);
             _repository.CreateRange<SpaceType>(type);

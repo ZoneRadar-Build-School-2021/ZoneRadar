@@ -32,8 +32,9 @@ namespace ZoneRadar.Models.ViewModels
 
 
         public List<int> OperatingDay { get; set; }
-        public List<TimeSpan> StartTime { get; set; }
-        public List<TimeSpan> EndTime { get; set; }
+        public List<string> Hours { get; set; }
+        public List<string> StartTime { get; set; }
+        public List<string> EndTime { get; set; }
 
 
 
