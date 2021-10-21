@@ -75,7 +75,7 @@
                             <li class="mb-2 fs-5">聯絡人姓名：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.ContactName)</span></li>
                             <li class="mb-2 fs-5">聯絡人電話：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.ContactPhone)</span></li>
                             <li class="mt-3">
-                                <div class="collapse" id="order-2109020001">
+                                <div class="collapse" id="order-@Html.DisplayFor(m => item.OrderID)">
                                     <div class="datetime-card py-2">
                                         <div class="row">
                                             @foreach (var rentDetail in item.RentDetailVM)
@@ -89,7 +89,7 @@
                                                     <span class="date ms-2">@Html.DisplayFor(m => rentDetail.RentBackTime)</span>
                                                 </div>
                                                 <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
-                                                    <i class="far fa-calendar-check me-1"></i>人數:
+                                                    <i class="far fa-user me-1"></i>人數:
                                                     <span class="participant ms-2 me-1">@Html.DisplayFor(m => rentDetail.People)</span>人
                                                 </div>
                                             }
@@ -97,8 +97,8 @@
                                     </div>
                                 </div>
                                 <div class="toggle-btn">
-                                    <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-2109020001"
-                                       role="button" aria-expanded="false" aria-controls="order-2109020001"></a>
+                                    <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-@Html.DisplayFor(m => item.OrderID)"
+                                       role="button" aria-expanded="false" aria-controls="order-@Html.DisplayFor(m => item.OrderID)"></a>
                                 </div>
                             </li>
                         </ul>
