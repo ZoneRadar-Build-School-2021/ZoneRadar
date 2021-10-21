@@ -24,11 +24,11 @@ namespace ZoneRadar.Models.ViewModels
         public decimal CancelMoney { get; set; }
         public int OrderId { get; set; }
         public int OrderStatus { get; set; }
-        public int SpaceId { get; set; }
         public int MemberId { get; set; }
         public string ContactName { get; set; }
         public string ContactPhone { get; set; }
         public string Email { get; set; }
+        public int SpaceId { get; set; }
         public List<RentDetailViewModel> RentDetail { get; set; }
     }
 }
