@@ -1,9 +1,10 @@
 ﻿@model System.Collections.Generic.Dictionary<string, string>
+@*@model ECPay.Payment.Integration.AllInOne*@
 @{
     ViewBag.Title = "Payment";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var m = Model;
-    int i = 0;
+    //var Pay = ViewBag.Ecpay;
+    //int i = 0;
 }
 
 <div class="container">
@@ -11,38 +12,6 @@
         <!-- col-7 電腦版 col-12手機板 -->
         <div class="col-lg-7 mt-5 col-sm-12">
             <div class="PriceTable mb-5">
-                <!-- Space rental-->
-                @*<div class="BookingRequestForm form-horizontal mt-3">
-                        <h2 class="py-3">Review & Pay</h2>
-                        <div class="Table table-component">
-                            <div class="table-head">
-                                <div class="header-row d-flex">
-                                    <div class="label undefined">Space Rental</div>
-                                </div>
-                            </div>
-                            <div class="table-body">
-                                <div class="add-ons-rows">
-                                    <div class="d-flex  table-row">
-                                        <div class="title-field me-auto">Subtotal</div>
-                                        <div data-testing-id="space-rental-subtotal"><span>$200.00</span></div>
-                                    </div>
-                                    <div>
-                                        <hr class="dotted margin-md-top margin-md-bottom">
-                                        <div class="d-flex table-row">
-                                            <div class="title-field me-auto">Cleaning</div>
-                                            <div data-testing-id="cleaning-fee"><span>$80.00</span></div>
-                                        </div>
-                                    </div>
-                                    <hr class="dotted margin-md-top margin-md-bottom">
-                                    <div class="d-flex heavy table-row">
-                                        <div class="title-field me-auto">Space rental total</div>
-                                        <div data-testing-id="space-rental-total"><span>$280.00</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>*@
-                <!-- Price -->
                 <div class="BookingRequestForm form-horizontal mt-3">
                     <div class="Table table-component">
                         <div class="table-head">
@@ -50,26 +19,27 @@
                                 <div class="label undefined"> 場地租金 </div>
                             </div>
                         </div>
-                        <div class="table-body">
+                       
+                        <div class="table-body mt-2">
                             <div class="add-ons-rows">
-                                <div class="d-flex  table-row">
-                                    <div class="title-field me-auto">Space rental total</div>
+                                <div class="d-flex table-row">
+                                    <div class="title-field me-auto">場地價格</div>
                                     <div data-testing-id="space-rental-subtotal">
                                         <span>$280.00</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <hr class="dotted margin-md-top margin-md-bottom">
+                                    <hr class="dotted mt-1">
                                     <div class="d-flex table-row">
-                                        <div class="title-field me-auto">Space rental total</div>
+                                        <div class="title-field me-auto">場地折扣</div>
                                         <div data-testing-id="cleaning-fee">
-                                            <span>26.60</span>
+                                            <span>$26.60</span>
                                         </div>
                                     </div>
                                 </div>
-                                <hr class="dotted margin-md-top margin-md-bottom">
+                                <hr class="dotted mt-1">
                                 <div class="d-flex heavy table-row">
-                                    <div class="title-field me-auto">Total</div>
+                                    <div class="title-field me-auto">總計</div>
                                     <div data-testing-id="space-rental-total">
                                         <span>$306.60</span>
                                     </div>
@@ -81,39 +51,43 @@
             </div>
             <b-c>
                 <!-- Cancellation Policy-->
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button collapsed p-0" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                aria-controls="flush-collapseOne">
-                            Cancellation Policy: Standard 30 day with Grace Period
-                        </button>
-                    </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse"
-                         aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                            <ul>
-                                <li>
-                                    如預約確認後24小時內取消,將獲全額退款。
-                                    48小時內開始的事件除外。
-                                    如果提前30天取消的話，可以全額退款。
-                                </li>
-                                <li>如果提前30天取消的話，可以全額退款。</li>
-                                <li>
-                                    如於30至7天前取消,可獲50%退款(費用除外)。
-                                </li>
-                                <li>7天內開始的活動取消不能退款。</li>
-                            </ul>
+                <div class="mt-2">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed p-2" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne">
+                                退訂政策 : 如果提前30天取消的話，可以全額退款。
+                                @* 開場地主選擇的退訂方案 *@
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <ul>
+                                    @* 所有退訂政策的方案說明 *@
+                                    <li>
+                                        如預約確認後24小時內取消,將獲全額退款。
+                                        48小時內開始的事件除外。
+                                        如果提前30天取消的話，可以全額退款。
+                                    </li>
+                                    <li>如果提前30天取消的話，可以全額退款。</li>
+                                    <li>
+                                        如於30至7天前取消,可獲50%退款(費用除外)。
+                                    </li>
+                                    <li>7天內開始的活動取消不能退款。</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- Host Rules -->
-                <p class="mt-5">
+                <!--<p class="mt-5">
                     <i class="far fa-file-alt"></i> Host Rules
-                </p>
+                </p>-->
                 <!--  -->
                 <!-- <button>Read more</button> -->
-                <div class="mb-2">
+                <!--<div class="mb-2">
                     <div class="heavy">General Rules</div>
                     <p class="text-gray-600 mt-2" style="word-wrap:break-word; font-size: 14px;">
                         The studio,
@@ -154,19 +128,27 @@
                         <a href="#" target="_blank">ZoneRadar Services Agreement</a>
 
                     </p>
-                </div>
-                <div class="form-input">
+                </div>-->
+                <div class="form-input mt-5 p-2">
                     <div class="row mb-3">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">聯絡人 </label>
-                        <div class="col-sm-6">
+                        <label for="validationServerUsername" class="col-2 col-sm-4 col-form-label">聯絡人 </label>
+                        <div class="col-6 col-sm-6">
                             <input type="text" class="form-control" id="inputPassword">
                         </div>
+                        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            請填寫聯絡人
+                        </div>
+
                     </div>
                     <div class="row mt-3">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">聯絡電話 </label>
-                        <div class="col-sm-6">
+                        <label for="validationServerPhone" class="col-2 col-sm-4 col-form-label">聯絡電話 </label>
+                        <div class="col-6 col-sm-6">
                             <input type="text" class="form-control" id="inputPassword">
                         </div>
+                        <div id="validationServerPhoneFeedback" class="invalid-feedback">
+                            請填連絡電話
+                        </div>
+
                     </div>
                 </div>
                 <div class="form-check mt-4">
@@ -174,11 +156,14 @@
                     <label class="form-check-label" for="flexCheckAccpet">
                         I accept and understand these host rules and disclosures.
                     </label>
+
                 </div>
+                @*@Html.ActionLink("送出", https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5,new , new { @class = "Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled", @id= "submit-pay" })*@
+
                 <form id="form" name="form" action="https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5" method="POST">
                     @foreach (var key in Model.Keys.ToList())
                     {
-                       <input type="hidden" name="@key" value="@Model[key]" />
+                        <input type="hidden" name="@key" value="@Model[key]" />
                     }
                     <button class="Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled" type="submit"
                             data-testing-id="booking-request-submit-button" id="submit-pay">
@@ -190,14 +175,14 @@
         <!-- col-5 電腦版 col-12手機板 -->
         <div class="col-lg-5 mt-5 col-sm-12">
             <div class="Host-card sticky-top">
-                <h2 class="py-3"> Activity Details </h2>
+                <h2 class="py-3"> 訂單明細 </h2>
                 <div class="user-informtion">
-                    <div class="ps-2">
+                    <div class="ps-3">
                         <label class="font-monospace">Host</label>
                     </div>
-                    <div class="ps-2 d-flex host-pic">
+                    <div class="ps-1 d-flex host-pic">
                         <img src="https://picsum.photos/1920/1080/?random=1">
-                        <p class="text-center">整體千萬</p>
+                        <p class="text-center ps-4">整體千萬</p>
                     </div>
                 </div>
                 <div>
