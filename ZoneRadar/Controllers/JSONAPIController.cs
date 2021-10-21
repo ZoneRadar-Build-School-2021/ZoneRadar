@@ -37,7 +37,7 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [Route("GetFilterDataFromIndex")]
         [AcceptVerbs("POST")]
-        public APIResponse GetFilterDataFromIndex(FilterViewModel filterVm)
+        public IHttpActionResult GetFilterDataFromIndex(FilterViewModel filterVm)
         {
             var response = new APIResponse();
             try
@@ -50,7 +50,7 @@ namespace ZoneRadar.Controllers
                 response.Message = string.Empty;
                 response.Response = _filterDataFromIndex;
 
-                return response;
+                return Ok(_filterDataFromIndex);
             }
             catch (Exception ex)
             {
@@ -58,7 +58,7 @@ namespace ZoneRadar.Controllers
                 response.Message = $"發生錯誤，{ex.ToString()}";
                 response.Response = null;
 
-                return response;
+                return Ok();
             }
         }
 
