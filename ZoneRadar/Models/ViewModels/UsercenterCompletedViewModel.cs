@@ -10,20 +10,20 @@ namespace ZoneRadar.Models.ViewModels
     {
         public int OrderNumber { get; set; }
         public string OrederStatus { get; set; }
-        public DateTime PublishTime { get; set; }
+        public string OwnerName { get; set; }
+        public string OwnerPhone { get; set; }
+        public string PublishTime { get; set; }
         public string SpaceName { get; set; }
         public string SpaceUrl { get; set; }
-        public DateTime RentTime { get; set; }
-        public DateTime RentBackTime { get; set; }
-        public int People { get; set; }
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public decimal Money { get; set; }
         public bool HasReview { get; set; }
         public int OrderId { get; set; }
-        public int Score { get; set; }
+        public double Score { get; set; }
         public string ReviewContent { get; set; }
         public bool Recommend { get; set; }
         public int SpaceID { get; set; }
         public string Email { get; set; }
+        public List<RentDetailViewModel> RentDetail { get; set; }
     }
 }

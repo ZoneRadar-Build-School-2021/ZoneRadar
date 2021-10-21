@@ -83,7 +83,7 @@ namespace ZoneRadar.Services
             {
                 OrderID = model.OrderId,
                 ToHost = true,
-                Score = model.Score,
+                Score = (int)model.Score,
                 ReviewContent = model.ReviewContent,
                 ReviewDate = DateTime.Now,
                 Recommend = model.Recommend

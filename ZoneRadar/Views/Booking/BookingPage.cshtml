@@ -36,6 +36,7 @@
     var operationDayList = details.OperatingDayList;
     var startTimeList = details.StartTimeList;
     var endTimeList = details.EndTimeList;
+    var spaceID = briefs.SpaceID;
 }
 
 <!-- Body -->
@@ -68,7 +69,7 @@
                     <a href="#map"><p class="venue-address mb-3 mb-xl-4"><i class="fas fa-map-marker-alt me-1"></i><span class="city ms-1">@briefs.City</span><span class="district ms-1">@briefs.District</span><span class="address ms-1">@briefs.Address</span></p></a>
                     <div class="venue-highlight d-block d-xl-flex mb-4">
                         <div class="venue-rating mb-3 mb-md-0">
-                            <a class="review-link ms-1" href="#review">
+                            <a class="review-link" href="#review">
                                 @if (averageScore != 0)
                                 {
                                     if (averageScore % 1 == 0)
@@ -323,8 +324,8 @@
             </div>
         </div>
         <div class="booking col-sm-12 col-xl-4 ps-xl-5">
-            <form class="booking-card text-center sticky-xl-top py-4 px-3" action="" method="post">
-                <h3 class="booking-card-title">NT$ <span class="venue-price">@Decimal.Round(@briefs.PricePerHour)</span></h3>
+            <div class="booking-card text-center sticky-xl-top py-4 px-3">
+                <h3 class="booking-card-title">NT$ <span class="venue-price">@Decimal.Round(@briefs.PricePerHour).ToString("#,0")</span></h3>
                 <p class="border-bottom pb-2">最少起訂時數<span class="min-time fs-5 px-1">@briefs.MinHour</span>小時</p>
                 @if (@details.HoursForDiscount != 0 && @discount != "")
                 {
@@ -335,31 +336,31 @@
                     <button type="button" class="btn px-0 py-0 remove me-3 d-none">刪除</button>
                     <button type="button" class="btn px-0 py-0 extend" disabled>加一天</button>
                 </div>
-                <div class="calculation">
-                    <div class="price-calculus mt-5 border-bottom mb-2">
-                        <p class="d-flex mb-2">交易金額:<span class="ms-auto"><span class="venue-price">N$1200</span><span class="mx-1">x</span><span class="total-hour">6小時</span></span></p>
-                        <p class="d-flex mb-2">滿時優惠:<span class="ms-auto"><span class="discount">85折</span></span></p>
+                <div class="calculation d-none">
+                    <div class="price-cal mt-5 border-bottom mb-2">
+                        <p class="d-flex mb-2">交易金額:<span class="ms-auto"><span class="venue-price"></span><span class="mx-1">x</span><span class="total-hour"></span>小時</span></p>
+                        <p class="discount-row d-none mb-2">滿時優惠:<span class="ms-auto"><span class="discount"></span></span></p>
                     </div>
                     <div class="total fs-5 fw-bolder">
-                        <p class="d-flex mb-2">總共:<span class="ms-auto"><span class="total-price">NT$6120</span></span></p>
+                        <p class="d-flex mb-2">總共:<span class="ms-auto"><span class="total-price"></span></span></p>
                     </div>
                 </div>
                 <button class="btn-submit btn mt-4" type="button" disabled>馬上預約</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
 
 <template id="order-item-template">
-    <div class="order-item mb-3 needs-validation">
+    <div class="order-item mb-3">
         <h4 class="text-start mb-3 fs-5 fw-bolder">日期與時間:</h4>
         <div class="input-group mb-2">
-            <input type="text" placeholder="開始日期" class="start-date form-control rounded me-1" required name="">
-            <input type="text" placeholder="參加人數" class="attendees form-control rounded ms-1" aria-label=".form-control attendees" required>
+            <input type="text" placeholder="開始日期" class="start-date form-control rounded me-1">
+            <input type="text" placeholder="參加人數" class="attendees form-control rounded ms-1" aria-label=".form-control attendees" disabled>
         </div>
         <div class="input-group mb-2">
-            <input type="number" placeholder="開始時間" class="start-time form-control rounded me-1" required>
-            <input type="number" placeholder="結束時間" class="end-time form-control rounded ms-1" required>
+            <input type="text" placeholder="開始時間" class="start-time form-control rounded me-1" disabled>
+            <input type="text" placeholder="結束時間" class="end-time form-control rounded ms-1" disabled>
         </div>
     </div>
 </template>
@@ -373,9 +374,7 @@
 @section endJS
 {
     <script>
-        const operationDay = @Html.Raw(Json.Encode(@operationDayList));
-        const operationStartTime = @Html.Raw(Json.Encode(@startTimeList));
-        const operationEndTime = @Html.Raw(Json.Encode(@endTimeList));
+        sessionStorage.setItem('theKey', @Html.Raw(Json.Encode(@spaceID)));
     </script>
     <script src="~/Assets/JS/booking/booking.js"></script>
 }

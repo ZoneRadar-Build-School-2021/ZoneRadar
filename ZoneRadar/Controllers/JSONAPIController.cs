@@ -18,11 +18,14 @@ namespace ZoneRadar.Controllers
     public class JSONAPIController : ApiController
     {
         private readonly SpaceService _spaceService;
+        private readonly PreOrderService _preOrderService;
         private readonly ZONERadarRepository _repository;
         private FilterViewModel _filterDataFromIndex;
+
         public JSONAPIController()
         {
             _spaceService = new SpaceService();
+            _preOrderService = new PreOrderService();
             _repository = new ZONERadarRepository();
             _filterDataFromIndex = new FilterViewModel();
         }
@@ -99,6 +102,25 @@ namespace ZoneRadar.Controllers
             }
             var result = _spaceService.GetTargetBookingCard(id);
             return Ok(result);
+        }
+
+        [Route("CheckLogin")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult CheckLogin()
+        {
+            bool isLogin = User.Identity.IsAuthenticated;
+
+            return Ok(isLogin);
+        }
+
+        [Route("AddPreOrder")]
+        [AcceptVerbs("POST")]
+        public IHttpActionResult AddPreOrder(PreOrderViewModel preOrderVM)
+        {
+            int memberID = int.Parse(User.Identity.Name);
+
+            _preOrderService.PlaceAPreOrder(preOrderVM, memberID);
+            return Ok();
         }
     }
 }
