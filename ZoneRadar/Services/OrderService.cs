@@ -196,6 +196,7 @@ namespace ZoneRadar.Services
                     ContactName = item.ContactName,
                     ContactPhone = item.ContactPhone,
                     CancelTime = renttimedayorhour,
+                    SpaceId = item.SpaceID,
                     CancelMoney = cancelmoney
                 });
             }

@@ -28,6 +28,7 @@ namespace ZoneRadar.Models.ViewModels
         public string ContactName { get; set; }
         public string ContactPhone { get; set; }
         public string Email { get; set; }
+        public int SpaceId { get; set; }
         public List<RentDetailViewModel> RentDetail { get; set; }
     }
 }
