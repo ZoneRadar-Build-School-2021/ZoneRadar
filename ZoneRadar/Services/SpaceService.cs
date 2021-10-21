@@ -34,7 +34,7 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public List<SelectedSpaceViewModel> GetSelectedSpace()
         {
-            var spaces = _repository.GetAll<Space>().ToList();
+            var spaces = _repository.GetAll<Space>().Where(x=>x.SpaceStatusID == 2).ToList();
             var orders = _repository.GetAll<Order>().Where(x => x.OrderStatus.OrderStatusID == 2).ToList();
             var reviews = _repository.GetAll<Review>().Where(x => x.ToHost).ToList();
             var spacePhotos = _repository.GetAll<SpacePhoto>().ToList();
@@ -307,13 +307,13 @@ namespace ZoneRadar.Services
 
             if (amenities != null && amenities.Count != 0)
             {
-                //var filteredByAmenity = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity)).ToList();
-                //spaces = spaces.Where(x => filteredByAmenity.Select(y => y.SpaceID).Contains(x.SpaceID));
+                var filteredByAmenity = spaceAmenities.Where(x => amenities.Contains(x.AmenityDetail.Amenity));
 
-                var spaceIDs = new List<int>();
+                var spaceIDs = filteredByAmenity.Select(x => x.SpaceID).Distinct();
                 foreach (var amenity in amenities)
                 {
-                    spaceIDs = spaceAmenities.Where(x => x.AmenityDetail.Amenity == amenity).Select(x => x.SpaceID).Distinct().ToList();
+                    var layer = filteredByAmenity.Where(x => x.AmenityDetail.Amenity == amenity).Select(x => x.SpaceID);
+                    spaceIDs = spaceIDs.Intersect(layer);
                 }
 
                 spaces = spaces.Where(x => spaceIDs.Contains(x.SpaceID));
@@ -327,31 +327,7 @@ namespace ZoneRadar.Services
                     spaces = spaces.Where(x => x.SpaceName.ToUpper().Contains(keyword.ToUpper()));
                 }
             }
-            //var filteredBySpace = spaces.Select(x => x);
-            //var filteredByType = spaceTypes.Select(x => x.Space).Distinct();
-            //var filteredByAmenity = spaceAmenities.Select(x => x.Space).Distinct();
-            //var filteredBytDate = operatings.Select(x => x.Space).Distinct();
-            //var unBookedSpaces = orders.Select(x => x.Order.Space).Distinct();
-            //var filterByDate = filteredBytDate.Union(unBookedSpaces);
 
-            //var insersectSpaces = filteredBySpace.Intersect(filteredByType).Intersect(filteredByAmenity).Intersect(filterByDate).ToList();
-
-            //var result = insersectSpaces.Select(x => new SearchingPageViewModel
-            //{
-            //    SpaceID = x.SpaceID,
-            //    SpaceName = x.SpaceName,
-            //    SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).Select(y => y.SpacePhotoUrl).ToList(),
-            //    Address = x.Address,
-            //    Capacity = x.Capacity,
-            //    PricePerHour = x.PricePerHour,
-            //    Country = x.City.CityName,
-            //    City = x.City.CityName,
-            //    District = x.District.DistrictName,
-            //    MinHour = x.MinHours,
-            //    MeasurementOfArea = x.MeasureOfArea,
-            //    Scores = scores.Where(y => y.Order.SpaceID == x.SpaceID).Select(y => y.Score).ToList(),
-            //}).ToList();
-            //return result;
             var result = spaces.Select(x => new SearchingPageViewModel
             {
                 SpaceID = x.SpaceID,
@@ -1194,27 +1170,24 @@ namespace ZoneRadar.Services
                 { "星期六", 6 },
                 { "星期日", 7 }
             };
-            var originOperatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).ToList();
-            var convertedOperatingDayList = new List<string>();
-            foreach (var day in originOperatingList.Where(x => x.SpaceID == id).Select(x => x.OperatingDay).ToList())
-            {
-                convertedOperatingDayList.Add(weekDayConverter.FirstOrDefault(x => x.Value == day).Key);
-            }
-
-            //var startTimeList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).Select(x => x.StartTime.ToString(@"hh\:mm")).ToList();
-            //var endTimeList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).Select(x => x.EndTime.ToString(@"hh\:mm")).ToList();
+            var operatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).ToList();
             var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Hour;
             var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Discount;
-            var minHour = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id).MinHours;
+            var targetSpace = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id);
+            var orderTimeList = _repository.GetAll<OrderDetail>().Where(x => x.Order.SpaceID == id && x.Order.OrderStatusID != 5).ToList().Select(x => x.StartDateTime.ToString("yyyy-MM-dd"));
+
 
             var result = new BookingCardViewModel
             {
-                OperatingDayList = convertedOperatingDayList,
-                StartTimeList = originOperatingList.Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
-                EndTimeList = originOperatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
+                OperatingDayList = operatingList.Select(x => x.OperatingDay).ToList(),
+                StartTimeList = operatingList.Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
+                EndTimeList = operatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
                 HoursForDiscount = hoursForDiscount,
                 Discount = Decimal.Round((1 - discount), 2),
-                MinHour = minHour,
+                MinHour = targetSpace.MinHours,
+                PricePerHour = (int)targetSpace.PricePerHour,
+                Capacity = targetSpace.Capacity,
+                OrderTimeList = orderTimeList.ToList(),
             };
 
             return result;
@@ -1248,7 +1221,7 @@ namespace ZoneRadar.Services
                     var dates = order.OrderDetail.Select(x => x.EndDateTime.AddDays(1));
                     allorderEndDates.AddRange(dates);
                 }
-                var lastOrderdDate = allorderEndDates.Count == 0 ? "today" : allorderEndDates.Max().ToString("yyyy-MM-dd");
+                var lastOrderdDate = allorderEndDates.Count == 0 ? "today" : allorderEndDates.Max().ToString("yyyy/MM/dd");
 
                 spaceManageList.Add(new SpaceManageViewModel
                 {
@@ -1261,7 +1234,7 @@ namespace ZoneRadar.Services
                     NumberOfOrders = orderDetails.Count,
                     SpaceStatusId = space.SpaceStatusID,
                     CanDiscontinueDate = lastOrderdDate,
-                    DiscontinuedDate = space.DiscontinuedDate.HasValue ? space.DiscontinuedDate.Value.ToString("yyyy-MM-dd") : "無"
+                    DiscontinuedDate = space.DiscontinuedDate.HasValue ? space.DiscontinuedDate.Value.ToString("yyyy/MM/dd") : "無"
                 });
             }
 
@@ -1273,7 +1246,7 @@ namespace ZoneRadar.Services
         /// </summary>
         public void SetDiscontinuedDate(int userId, int spaceId, DateTime? discontinuedDate)
         {
-            var space = _repository.GetAll<Space>().First(x => x.SpaceID == spaceId && x.MemberID == userId);
+            var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceId && x.MemberID == userId);
             if (space != null)
             {
                 space.DiscontinuedDate = discontinuedDate;
@@ -1302,6 +1275,34 @@ namespace ZoneRadar.Services
             if (space != null)
             {
                 space.SpaceStatusID = 3;
+                try
+                {
+                    _repository.Update(space);
+                    _repository.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        /// <summary>
+        /// 重新上架場地(Jenny)
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="spaceId"></param>
+        public void Republish(int userId, int spaceId)
+        {
+            var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceId && x.MemberID == userId);
+            if (space != null)
+            {
+                space.SpaceStatusID = 2;
+                space.DiscontinuedDate = null;
                 try
                 {
                     _repository.Update(space);

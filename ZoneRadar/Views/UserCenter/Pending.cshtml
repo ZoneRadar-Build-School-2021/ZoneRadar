@@ -2,160 +2,176 @@
 @{
     ViewBag.Title = "Pending";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
-
-<div class="memberbuyer_container container mt-5 border-bottom">
-
-    <div class="memberbuyer row mt-5">
-        <h3 class="memberbuyer_title me-4">訂單管理</h3>
-        <ul class="memberbuyer_state d-flex justify-content-start mt-5">
-            <a class="me-4" href="Pending">
-            <li class="p-2 order_state active">已付款</li>
-            </a>
-            <a class="me-4" href="Processing">
-            <li class="p-2 order_state">使用中</li>
-            </a>
-            <a class="me-4" href="Completed">
-            <li class="p-2 order_state">歷史訂單</li>
-            </a>
-        </ul>
-    </div>
-</div>
 @foreach (var item in Model)
 {
-    <div class="memberbuyer_container container mt-1">
-        <div class="memberbuyer_pending row mt-5 mb-3">
-            <div class="col-12">
+    <div class="memberbuyer_container container mt-5 border-bottom">
+        <div class="memberbuyer row mt-5">
+            <h3 class="memberbuyer_title me-4">訂單管理</h3>
+            <ul class="memberbuyer_state d-flex justify-content-start mt-5">
+                <a class="me-4" href="Pending">
+                <li class="p-2 order_state active">已付款</li>
+                </a>
+                <a class="me-4" href="Processing">
+                <li class="p-2 order_state">使用中</li>
+                </a>
+                <a class="me-4" href="Completed">
+                <li class="p-2 order_state">歷史訂單</li>
+                </a>
+            </ul>
+        </div>
+        <div class="row align-items-end">
+            <div class="order-card py-4 py-lg-5">
                 <div class="row">
-                    <div class="memberbuyer_pending_num col-12 mt-3">
-                        <div class="memberbuyer_pending_num_row row">
-                            <div class="memberbuyer_pending_num_ordernum col-sm-12 col-md-6 col-lg-6">
-                                <p>
-                                    訂單編號：
-                                    <span class="ms-1">@Html.DisplayFor(m => item.OrderNumber)</span>
-                                    <a class="p-2 ms-3" href="mailto:@Html.DisplayFor(m => item.Email)">
-                                        <i class="far fa-comment-dots me-1"></i>聯繫我
-                                    </a>
-                                </p>
-                            </div>
-                            <div class="memberbuyer_pending_num_date col-sm-12 col-md-6 col-lg-6">
-                                <p>
-                                    付款日期：
-                                    <span>@Html.DisplayFor(m => item.PaidTime)</span>
-                                </p>
-                            </div>
-                        </div>
+                    <div class="memberbuyer_pending_num_ordernum col-sm-12 col-md-6 col-lg-6 mb-3">
+                        <p>
+                            訂單編號：
+                            <span class="ms-1">@Html.DisplayFor(m => item.OrderNumber)</span>
+                        </p>
                     </div>
-                    <div class="memberbuyer_pending_pic col-sm-12 col-md-12 col-lg-3">
-                        <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceID)">
-                            <img class="p-2 mt-2" src="@Html.DisplayFor(m => item.SpaceUrl)">
+                    <div class="memberbuyer_pending_num_date col-sm-12 col-md-6 col-lg-6 mb-3">
+                        <p>
+                            付款日期：
+                            <span>@Html.DisplayFor(m => item.PaidTime)</span>
+                        </p>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <div class="venue-pic mt-2 mt-lg-0"
+                             style="background-image: url(@Html.DisplayFor(m => item.SpaceUrl));"></div>
+                    </div>
+                    <div class="col-sm-12 col-lg-8 px-3">
+                        <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceId)" class="d-inline-block mb-3 mt-3 mt-lg-0">
+                            <h3 class="venue-name">@Html.DisplayFor(m => item.SpaceName)</h3>
                         </a>
-                    </div>
-                    <div class="memberbuyer_pending_txt col-sm-12 col-md-12 col-lg-9 p-3">
-                        <div class="memberbuyer_pending_txt_title ">
-                            <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceID)">
-                                @Html.DisplayFor(m => item.SpaceName)
-                            </a>
-                        </div>
-                        <div class="memberbuyer_pending_num_star mt-3">
-                            <p>
+                        <ul class="order-detial">
+                            <li class="mb-2 fs-5">
+                                場地主姓名:<a href="mailto:@Html.DisplayFor(m => item.Email)" class="customer-name mx-2">@Html.DisplayFor(m => item.OwnerName)</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                                                                                                                title="連絡他"></i>
+                            </li>
+                            <li class="mb-2 fs-5">場地主電話：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.OwnerPhone)</span></li>
+                            <li class="mb-2 fs-5">
                                 場地評價：
-                                @for (int i = 0; i < item.Score; i++)
-                                {
-                                    <i class="fas fa-star"></i>
-                                }
-                            </p>
-                        </div>
-                        <div class="memberbuyer_pending_txt_rent mt-3">
-                            <p>
-                                租借時間：
-                                <span class="memberbuyer_pending_txt_rent_date ms-1 fw-bold">@Html.DisplayFor(m => item.RentTime)</span>
-                            </p>
-                        </div>
-                        <div class="memberbuyer_pending_txt_rentback mt-3">
-                            <p>
-                                租還時間：
-                                <span class="memberbuyer_pending_txt_rentback_date ms-1 fw-bold">@Html.DisplayFor(m => item.RentBackTime)</span>
-                            </p>
-                        </div>
-                        <div class="memberbuyer_pending_txt_people mt-3">
-                            <p>
-                                預約人數：
-                                <span class="memberbuyer_pending_txt_people_howmuch ms-1 me-1 fw-bold">@Html.DisplayFor(m => item.People)</span>人
-                            </p>
-                        </div>
-                        <div class="memberbuyer_pending_txt_iconprice text-end">
-                            <p class="memberbuyer_pending_txt_price_title">
-                                訂單價格：
-                                <span class="memberbuyer_pending_txt_price">NT$ @Html.DisplayFor(m =>item.Money)</span>
-                            </p>
+                                <span class="contact-phone">
+                                    @if (item.Score == 0)
+                                    {
+                                        <span>目前沒有任何評價</span>
+                                    }
+                                    else if (item.Score % 1 == 0)
+                                    {
+                                        for (int i = 0; i < item.Score; i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int i = 0; i < (item.Score - 1); i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
+                                        <i class="fas fa-star-half-alt"></i>
+                                    }
+                                </span>
+                            </li>
+                            <li class="mt-3">
+                                <div class="collapse" id="order-@Html.DisplayFor(m => item.OrderNumber)">
+                                    <div class="datetime-card py-2">
+                                        <div class="row">
+                                            @foreach (var rentdatail in item.RentDetail)
+                                            {
+                                                <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
+                                                    <i class="far fa-calendar-check me-1"></i>租借日期:
+                                                    <span class="date ms-2">@Html.DisplayFor(m => rentdatail.RentTime)</span>
+                                                </div>
+                                                <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
+                                                    <i class="far fa-calendar-check me-1"></i>租還日期:
+                                                    <span class="date ms-2">@Html.DisplayFor(m => rentdatail.RentBackTime)</span>
+                                                </div>
+                                                <div class="col-sm-12 d-flex col-lg-3 align-items-center mb-1">
+                                                    <i class="far fa-user me-1"></i>人數:
+                                                    <span class="participant ms-2 me-1">@Html.DisplayFor(m => rentdatail.People)</span>人
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="toggle-btn">
+                                    <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-@Html.DisplayFor(m => item.OrderNumber)"
+                                       role="button" aria-expanded="false" aria-controls="order-@Html.DisplayFor(m => item.OrderNumber)"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12">
+                        <p class="cost text-end">
+                            訂單總額:
+                            <span class="nt ms-4 fs-2 fw-bolder">
+                                NT$
+                                <span class="total-cost fs-2 fw-bolder">
+                                    @Html.DisplayFor(m => item.Money)
+                                </span>
+                            </span>
+                        </p>
+                        <div class="col-12 text-end mt-2">
+                            <button type="button" class="btn btn_close" data-bs-toggle="modal" data-bs-target="#B-@Html.DisplayFor(m => item.OrderId)">取消預購單</button>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="memberbuyer_pending_btn col-12 mt-3 mb-5 d-flex justify-content-end">
-                <button class="btn me-2" data-bs-toggle="modal" data-bs-target="#@Html.DisplayFor(m => item.SpaceName)">取消訂單</button>
             </div>
         </div>
-
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="@Html.DisplayFor(m => item.SpaceName)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>@Html.DisplayFor(m => item.OrderNumber)</span></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p class="cancel_policy">
-                        依據您所租借場地之退款政策為：
-                        <span class="fw-bolder">
-                            @Html.DisplayFor(m => item.CancelTitle)
-                        </span>
-                    </p>
-                    <p class="cancel_policy">
-                        距離您租借場地的時間還剩：
-                        <span class="fw-bolder">
-                            @Html.DisplayFor(m => item.CancelTime)
-                        </span>
-                    </p>
-                    <p class="cancel_policy_text">
-                        政策說明：
-                        <span>
-                            @Html.DisplayFor(m => item.CancelDetail)
-                        </span>
-                    </p>
-                    <p class="cancel_police_money">
-                        退款金額：NT$
-                        <span class="fw-bolder">
-                            @Html.DisplayFor(m => item.CancelMoney)
-                        </span>
-                    </p>
-                </div>
-                <input type="hidden" value="@Html.DisplayFor(m=>item.OrderStatus)" name="OrderStatus" />
-                <form action="~/UserCenter/DeletePendingOrder" method="post">
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.OrderId)" name="OrderId" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.OrderNumber)" name="OrderNumber" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.SpaceId)" name="SpaceId" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.MemberId)" name="MemberId" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.PaidTime)" name="PaidTime" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.CancelTime)" name="CancelTime" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.ContactName)" name="ContactName" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.ContactPhone)" name="ContactPhone" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.OrderStatus)" name="OrderStatus" />
-
-                    <div class="modal-footer">
-                        @*@Html.ActionLink("確定取消訂單", "DeletePendingOrder", new { id = item }, new { @class = "btn btn_close" })*@
-                        <button class="btn btn_close" type="submit">確定取消訂單</button>
+        <!-- Modal -->
+        <div class="modal fade" id="B-@Html.DisplayFor(m => item.OrderId)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>@Html.DisplayFor(m => item.OrderNumber)</span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </form>
+                    <div class="modal-body">
+                        <p class="cancel_policy">
+                            依據您所租借場地之退款政策為：
+                            <span class="fw-bolder">
+                                @Html.DisplayFor(m => item.CancelTitle)
+                            </span>
+                        </p>
+                        <p class="cancel_policy">
+                            距離您租借場地的時間還剩：
+                            <span class="fw-bolder">
+                                @Html.DisplayFor(m => item.CancelTime)
+                            </span>
+                        </p>
+                        <p class="cancel_policy_text">
+                            政策說明：
+                            <span>
+                                @Html.DisplayFor(m => item.CancelDetail)
+                            </span>
+                        </p>
+                        <p class="cancel_police_money">
+                            退款金額：NT$
+                            <span class="fw-bolder">
+                                @Html.DisplayFor(m => item.CancelMoney)
+                            </span>
+                        </p>
+                    </div>
+                    <form action="~/UserCenter/DeletePendingOrder" method="post">
+                        <input type="hidden" value="@Html.DisplayFor(m=>item.OrderId)" name="OrderId" />
+                        <input type="hidden" value="@Html.DisplayFor(m=>item.OrderStatus)" name="OrderStatus" />
+                        <input type="hidden" value="@Html.DisplayFor(m=>item.OrderNumber)" name="OrderNumber" />
+                        <input type="hidden" value="@Html.DisplayFor(m=>item.SpaceId)" name="SpaceId" />
+                        <input type="hidden" value="@Html.DisplayFor(m=>item.MemberId)" name="MemberId" />
+                        <input type="hidden" value="@Html.DisplayFor(m=>item.PaidTime)" name="PaidTime" />
+                        <input type="hidden" value="@Html.DisplayFor(m=>item.CancelTime)" name="CancelTime" />
+                        <input type="hidden" value="@Html.DisplayFor(m=>item.ContactName)" name="ContactName" />
+                        <input type="hidden" value="@Html.DisplayFor(m=>item.ContactPhone)" name="ContactPhone" />
+                        <div class="modal-footer">
+                            <button class="btn btn_close" type="submit">確定取消訂單</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 }
-
 @section topCSS{
     <link href="~/Assets/CSS/order_state/membercenter_pending.css" rel="stylesheet" />
     <link href="~/Assets/CSS/flatpickr.min.css" rel="stylesheet" />
@@ -164,4 +180,3 @@
     <script src="~/Assets/JS/order_state/membercenter_pending.js"></script>
     <script src="~/Assets/JS/flatpickr.js"></script>
 }
-

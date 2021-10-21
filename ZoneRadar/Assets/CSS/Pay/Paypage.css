@@ -1,0 +1,83 @@
+/* .pic
+        {
+            background-color: darkolivegreen;
+            width: 100%;
+            height: 25%;
+        } */
+.host-pic img {
+    max-width: 60px;
+    height: 60px;
+    border: 2px solid #049DD9;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-informtion p {
+    padding: 1rem 1rem;
+    font-size: 18px;
+}
+
+.Host-card {
+    background-color: #F8F9fa;
+    padding: 16px;
+    border-bottom: 1px solid #dde0e6;
+}
+
+.table-component {
+    border: 1px solid #dde0e6;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+    .table-component .table-body {
+        padding: 8px 16px;
+    }
+
+    .table-component .table-head {
+        background-color: #F8F9fa;
+        padding: 16px;
+        border-bottom: 1px solid #dde0e6;
+    }
+
+b-c {
+    border-color: #e9ebef;
+}
+
+/*關閉特效*/
+.accordion-button:focus,
+.accordion-button:not(.collapsed) {
+    color: black !important;
+    background-color: white !important;
+    box-shadow: none !important;
+}
+
+.text-base {
+    font-size: 16px;
+    color: #6a707a;
+}
+
+.p {
+    margin: 0 0 12px;
+}
+
+.text {
+    padding: 1rem 1rem;
+}
+
+.heavy {
+    font-weight: bolder;
+}
+
+.font-monospace {
+    font-size: 15px;
+}
+
+.Host-card {
+    top: 60px;
+}
+
+.btn-check:focus + .btn-primary,
+.btn-primary:focus,
+.form-check-input:focus {
+    box-shadow: none !important;
+}
