@@ -1350,7 +1350,8 @@ namespace ZoneRadar.Services
                 spaceManageList.Add(new SpaceManageViewModel
                 {
                     SpaceID = space.SpaceID,
-                    SpacePhotoUrl = space.SpacePhoto.FirstOrDefault(x => x.Sort == 1) == null ? "" : space.SpacePhoto.First(x => x.Sort == 1).SpacePhotoUrl
+                    SpacePhotoUrl = space.SpacePhoto.FirstOrDefault(x => x.Sort == 1) == null ? "" : space.SpacePhoto.First(x => x.Sort == 1)
+                    .SpacePhotoUrl,
                     SpaceName = space.SpaceName,
                     SpaceAddress = string.Concat(space.District.DistrictID.ToString(), space.City.CityName, space.District.DistrictName, space.Address),
                     Score = scoreAvg,
@@ -1359,7 +1360,7 @@ namespace ZoneRadar.Services
                     SpaceStatusId = space.SpaceStatusID,
                     CanDiscontinueDate = lastOrderdDate,
                     DiscontinuedDate = space.DiscontinuedDate.HasValue ? space.DiscontinuedDate.Value.ToString("yyyy-MM-dd") : "無"
-                });
+                }) ;
             }
 
             return spaceManageList;
