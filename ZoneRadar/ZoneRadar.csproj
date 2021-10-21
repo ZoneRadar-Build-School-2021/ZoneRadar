@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ECPay.Payment.Integration">
+      <HintPath>..\..\..\..\Downloads\ECPayAIO_Net-master\ECPay.Payment.Integration.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -293,6 +296,8 @@
     <Content Include="Assets\CSS\order_state\membercenter_pending.css" />
     <Content Include="Assets\CSS\order_state\membercenter_processing.css" />
     <Content Include="Assets\CSS\order_state\usercenter_shopcar.css" />
+    <Content Include="Assets\CSS\Pay\Paypage.css" />
+    <Content Include="Assets\CSS\profile\profile.css" />
     <Content Include="Assets\CSS\searching\searching.css" />
     <Content Include="Assets\CSS\static\QA.css" />
     <Content Include="Assets\CSS\static\StaticPage.css" />
@@ -460,6 +465,7 @@
     <Content Include="Assets\JS\order_state\membercenter_pending.js" />
     <Content Include="Assets\JS\order_state\membercenter_processing.js" />
     <Content Include="Assets\JS\order_state\usercenter_shopcar.js" />
+    <Content Include="Assets\JS\Payment\Paypage.js" />
     <Content Include="Assets\JS\searching\searching.js" />
     <Content Include="Assets\JS\static\Q&amp;A.js" />
     <Content Include="Assets\JS\sweetalert2.js" />
@@ -568,10 +574,10 @@
     <Content Include="Views\MemberCenter\HadSentResetPasswordEmail.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Home\Policy.cshtml" />
+    <Content Include="Views\Payment\Payment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Payment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -585,6 +591,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\..\..\Downloads\ECPayAIO_Net-master\ECPay.Payment.Integration.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

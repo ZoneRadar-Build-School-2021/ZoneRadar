@@ -14,6 +14,10 @@ body {
     padding-top: 3.9rem;
 }
 
+button.swal2-styled.swal2-default-outline:focus, button.swal2-styled.swal2-confirm:focus {
+    box-shadow: none;
+}
+
 nav.shared-navbar img.logo {
     width: 175px;
 }

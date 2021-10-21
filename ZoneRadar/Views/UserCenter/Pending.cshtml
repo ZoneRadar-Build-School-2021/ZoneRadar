@@ -103,6 +103,68 @@
                             </li>
                         </ul>
                     </div>
+                </div>
+            </div>
+            <div class="memberbuyer_pending_btn col-12 mt-3 mb-5 d-flex justify-content-end">
+                <button class="btn me-2" data-bs-toggle="modal" data-bs-target="#@Html.DisplayFor(m => item.SpaceName)">取消訂單</button>
+            </div>
+        </div>
+
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="@Html.DisplayFor(m => item.SpaceName)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>@Html.DisplayFor(m => item.OrderNumber)</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="cancel_policy">
+                        依據您所租借場地之退款政策為：
+                        <span class="fw-bolder">
+                            @Html.DisplayFor(m => item.CancelTitle)
+                        </span>
+                    </p>
+                    <p class="cancel_policy">
+                        距離您租借場地的時間還剩：
+                        <span class="fw-bolder">
+                            @Html.DisplayFor(m => item.CancelTime)
+                        </span>
+                    </p>
+                    <p class="cancel_policy_text">
+                        政策說明：
+                        <span>
+                            @Html.DisplayFor(m => item.CancelDetail)
+                        </span>
+                    </p>
+                    <p class="cancel_police_money">
+                        退款金額：NT$
+                        <span class="fw-bolder">
+                            @Html.DisplayFor(m => item.CancelMoney)
+                        </span>
+                    </p>
+                </div>
+                <input type="hidden" value="@Html.DisplayFor(m=>item.OrderStatus)" name="OrderStatus" />
+                <form action="~/UserCenter/DeletePendingOrder" method="post">
+                    <input type="hidden" value="@Html.DisplayFor(m=>item.OrderId)" name="OrderId" />
+                    <input type="hidden" value="@Html.DisplayFor(m=>item.OrderNumber)" name="OrderNumber" />
+                    <input type="hidden" value="@Html.DisplayFor(m=>item.SpaceID)" name="SpaceId" />
+                    <input type="hidden" value="@Html.DisplayFor(m=>item.MemberId)" name="MemberId" />
+                    <input type="hidden" value="@Html.DisplayFor(m=>item.PaidTime)" name="PaidTime" />
+                    <input type="hidden" value="@Html.DisplayFor(m=>item.CancelTime)" name="CancelTime" />
+                    <input type="hidden" value="@Html.DisplayFor(m=>item.ContactName)" name="ContactName" />
+                    <input type="hidden" value="@Html.DisplayFor(m=>item.ContactPhone)" name="ContactPhone" />
+                    <input type="hidden" value="@Html.DisplayFor(m=>item.OrderStatus)" name="OrderStatus" />
+
+                    <div class="modal-footer">
+                        @*@Html.ActionLink("確定取消訂單", "DeletePendingOrder", new { id = item }, new { @class = "btn btn_close" })*@
+                        <button class="btn btn_close" type="submit">確定取消訂單</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
                     <div class="col-12">
                         <p class="cost text-end">
                             訂單總額:
