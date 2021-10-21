@@ -149,6 +149,11 @@ ul {
     color: #fff;
 }
 
+    .btn_sendout:hover {
+        background-color: #0077a7;
+        color: #fff;
+    }
+
 .fa-check {
     color: green;
 }

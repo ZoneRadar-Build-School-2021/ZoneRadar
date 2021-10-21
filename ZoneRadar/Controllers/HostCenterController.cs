@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ZoneRadar.Services;
 using ZoneRadar.Models.ViewModels;
+using System.Net;
 
 namespace ZoneRadar.Controllers
 {
@@ -12,12 +13,14 @@ namespace ZoneRadar.Controllers
     {
         private readonly SpaceService _spaceService;
         private readonly OrderService _orderService;
+        private readonly ReviewService _reviewService;
 
         // GET: HostCenter
         public HostCenterController()
         {
             _spaceService = new SpaceService();
             _orderService = new OrderService();
+            _reviewService = new ReviewService();
         }
 
         // GET: HostCenter
@@ -200,6 +203,36 @@ namespace ZoneRadar.Controllers
                 _spaceService.Republish(userId, spaceId);
                 return RedirectToAction("SpaceManage");
             }
+        }
+        /// <summary>
+        /// (Get)場地主新增歷史訂單評價頁(Nick)
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CreatCompletedReview()
+        {
+            var userid = int.Parse(User.Identity.Name);
+
+            if (userid == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var model = _orderService.GetHostCenterHistoryVM(userid);
+
+            return View("History", model);
+        }
+        /// <summary>
+        /// (Post)場地主新增歷史訂單評價頁(Nick)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CreatCompletedReview(HostCenterHistoryViewModel model)
+        {
+            var userid = int.Parse(User.Identity.Name);
+
+            var result = _reviewService.CreateHistoryReview(model);
+            return RedirectToAction("History", result);
         }
     }
 }
