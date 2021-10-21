@@ -83,8 +83,7 @@
 
     function setCard() {
         axios.get(getURL).then(res => {
-            const source = res.data;
-            console.log(source)
+            const source = res.data.Response;
             const cloneNode = document.querySelector('#order-item-template').content.cloneNode(true);
             const dateNode = cloneNode.querySelector('.start-date');
             const attendeeNode = cloneNode.querySelector('.attendees');
@@ -330,7 +329,7 @@
 
     function submitOrder() {
         axios.get('/webapi/spaces/CheckLogin').then(res => {
-            let isLogin = res.data;
+            let isLogin = res.data.Response;
             if (!isLogin) {
                 const login_modal = document.querySelector("#login-modal");
                 const modal = bootstrap.Modal.getOrCreateInstance(login_modal);
@@ -339,11 +338,13 @@
                 sessionStorage.setItem('targetURL', location.href);
             } else {
                 axios.post('/webapi/spaces/AddPreOrder', preOrderObj).then(res => {
-                    Swal.fire(
-                        '預約成功!',
-                        '請於24小時內前往會員中心 > 我的訂單內申請付款',
-                        'success'
-                    )
+                    if (res.data.Status === 'Success') {
+                        Swal.fire(
+                            '預約成功!',
+                            '請於24小時內前往會員中心 > 我的訂單內申請付款',
+                            'success'
+                        )
+                    }
                 })
             }
 

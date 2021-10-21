@@ -409,8 +409,8 @@
 
         function goSearching(filterVM) {
             axios.post('https://localhost:44322/webapi/spaces/GetFilterDataFromIndex', filterVM).then(res => {
-                if (res.status === 200) {
-                    sessionStorage.setItem('filterVm', JSON.stringify(res.data));
+                if (res.status === 200 && res.data.Status === 'Success') {
+                    sessionStorage.setItem('filterVm', JSON.stringify(res.data.Response));
                     window.location = 'https://localhost:44322/Searching/SearchingPage'
                 };
             });
