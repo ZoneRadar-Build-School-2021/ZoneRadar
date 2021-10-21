@@ -1,4 +1,4 @@
-@model  BookingPageViewModel
+ï»¿@model  BookingPageViewModel
 @{
     ViewBag.Title = "BookingPage";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -36,17 +36,18 @@
     var operationDayList = details.OperatingDayList;
     var startTimeList = details.StartTimeList;
     var endTimeList = details.EndTimeList;
+    var spaceID = briefs.SpaceID;
 }
 
 <!-- Body -->
 <div class="booking-container container pb-5" id="top">
-    <!-- ·Ó¤ù½ü¼½ -->
+    <!-- ç…§ç‰‡è¼ªæ’­ -->
     <div class="row mb-5">
         <div class="col-12">
             <div class="venue-img-group swiper">
-                @*<button type="button" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">¦¬ÂÃ</span></button>*@
-                @*<a href="#" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">¦¬ÂÃ</span></a>*@
-                <a href="@Url.Action("BookingPage", "Booking")" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">¦¬ÂÃ</span></a>
+                @*<button type="button" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">æ”¶è—</span></button>*@
+                @*<a href="#" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">æ”¶è—</span></a>*@
+                <a href="@Url.Action("BookingPage", "Booking")" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">æ”¶è—</span></a>
                 <div class="venue-img-wrapper swiper-wrapper">
                     @foreach (var url in briefs.SpaceImageURLList)
                     {
@@ -61,14 +62,14 @@
     </div>
     <div class="row">
         <div class="main-content col-sm-12 col-xl-8">
-            <!-- ³õ¦aÂ²µu¤¶²Ğ -->
+            <!-- å ´åœ°ç°¡çŸ­ä»‹ç´¹ -->
             <div class="row">
                 <section class="venue-brief col-sm-12 col-md-9">
                     <h2 class="venue-title mb-2">@briefs.SpaceName</h2>
                     <a href="#map"><p class="venue-address mb-3 mb-xl-4"><i class="fas fa-map-marker-alt me-1"></i><span class="city ms-1">@briefs.City</span><span class="district ms-1">@briefs.District</span><span class="address ms-1">@briefs.Address</span></p></a>
                     <div class="venue-highlight d-block d-xl-flex mb-4">
                         <div class="venue-rating mb-3 mb-md-0">
-                            <a class="review-link ms-1" href="#review">
+                            <a class="review-link" href="#review">
                                 @if (averageScore != 0)
                                 {
                                     if (averageScore % 1 == 0)
@@ -89,22 +90,22 @@
                                 }
                                 @if (averageScore == 0)
                                 {
-                                    <span>¥Ø«e¨S¦³¥ô¦óµû»ù</span>
+                                    <span>ç›®å‰æ²’æœ‰ä»»ä½•è©•åƒ¹</span>
                                 }
-                                <span class="review-count ms-2">@reviews.Count()</span>½gµû»ù
+                                <span class="review-count ms-2">@reviews.Count()</span>ç¯‡è©•åƒ¹
                             </a>
                         </div>
                         <ul class="venue-info d-md-flex ms-0 ms-md-4">
-                            <li class="d-flex align-items-center ms-0 mb-2 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/person.svg" alt="capacity" style="height: 1rem"><span class="capacity">@briefs.Capacity</span>¤H</li>
-                            <li class="d-flex align-items-center ms-0 mb-2 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/time.svg" alt="min-hour" style="height: 1rem"><span class="min-hour">@briefs.MinHour</span>¤p®É</li>
-                            <li class="d-flex align-items-center ms-0 mb-2 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/speed-square.svg" alt="area" style="height: 1rem"><span class="area">@briefs.MeasurementOfArea</span>©W</li>
+                            <li class="d-flex align-items-center ms-0 mb-2 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/person.svg" alt="capacity" style="height: 1rem"><span class="capacity">@briefs.Capacity</span>äºº</li>
+                            <li class="d-flex align-items-center ms-0 mb-2 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/time.svg" alt="min-hour" style="height: 1rem"><span class="min-hour">@briefs.MinHour</span>å°æ™‚</li>
+                            <li class="d-flex align-items-center ms-0 mb-2 ms-md-3"><img class="mx-1" src="~/Assets/IMG/icons/speed-square.svg" alt="area" style="height: 1rem"><span class="area">@briefs.MeasurementOfArea</span>åª</li>
                         </ul>
                     </div>
-                    <!-- Â²µuµû»ù -->
+                    <!-- ç°¡çŸ­è©•åƒ¹ -->
                     <div class="review-brief-group d-none d-md-block pe-3">
                         @if (reviews.Count() == 0)
                         {
-                            <div class="review-brief d-flex mb-4">Åwªï¹w¬ù¡A¨Ã¯d¤U±zªºµû»ù</div>
+                            <div class="review-brief d-flex mb-4">æ­¡è¿é ç´„ï¼Œä¸¦ç•™ä¸‹æ‚¨çš„è©•åƒ¹</div>
                         }
                         @foreach (var review in reviews.Take(briefReviewBreak))
                         {
@@ -124,7 +125,7 @@
                         <img class="user-pic rounded-circle border-blue" src="@details.HostPhoto">
                         <p class="user-name my-2">@details.HostName</p>
                     </a>
-                    <button type="button" class="btn-message btn">Ápµ¸¥L</button>
+                    <button type="button" class="btn-message btn">è¯çµ¡ä»–</button>
                 </div>
             </div>
             <div class="row">
@@ -132,7 +133,7 @@
                     <section class="detailed-info">
                         <div class="clean border-top border-bottom">
                             <a class="d-flex justify-content-between align-items-center w-100 btn-toggle py-3" data-bs-toggle="collapse" href="#clean-protocol" role="button" aria-expanded="false" aria-controls="clean-protocol">
-                                <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/cleaning-solution.svg" alt="cleaning">²M¼ä¤½¬ù</h4>
+                                <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/cleaning-solution.svg" alt="cleaning">æ¸…æ½”å…¬ç´„</h4>
                                 <i class="fas fa-chevron-down"></i>
                             </a>
                             <div class="collapse" id="clean-protocol">
@@ -151,7 +152,7 @@
                             </div>
                         </div>
                         <div class="about border-bottom">
-                            <h4 class="mb-0 d-flex align-items-center py-3">Ãö©ó¦¹³õ¦a</h4>
+                            <h4 class="mb-0 d-flex align-items-center py-3">é—œæ–¼æ­¤å ´åœ°</h4>
                             <div class="collapse" id="about-venue">
                                 <div class="card card-body border-0 ps-0">@Html.Raw(@details.Introduction)</div>
                             </div>
@@ -159,14 +160,14 @@
                         </div>
                         <div class="shooting border-bottom">
                             <a class="d-flex justify-content-between align-items-center w-100 btn-toggle py-3" data-bs-toggle="collapse" href="#shooting" role="button" aria-expanded="false" aria-controls="shooting">
-                                <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/lighting.svg" alt="shooting">Äá¼v¤Î¿ı¼v³]³Æ</h4>
+                                <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/lighting.svg" alt="shooting">æ”å½±åŠéŒ„å½±è¨­å‚™</h4>
                                 <i class="fas fa-chevron-down"></i>
                             </a>
                             <div class="collapse" id="shooting">
                                 @if (@details.ShootingEquipment == null)
                                 {
                                     <div class="card card-body border-0">
-                                        ³õ¦a¥D¨S¦³¯d¤U¥ô¦óÄá¼v¤Î¿ı¼v³]³Æªº¸ê°T
+                                        å ´åœ°ä¸»æ²’æœ‰ç•™ä¸‹ä»»ä½•æ”å½±åŠéŒ„å½±è¨­å‚™çš„è³‡è¨Š
                                     </div>
                                 }
                                 @if (@details.ShootingEquipment != null)
@@ -177,14 +178,14 @@
                         </div>
                         <div class="parking border-bottom">
                             <a class="d-flex justify-content-between align-items-center w-100 btn-toggle py-3" data-bs-toggle="collapse" href="#parking" role="button" aria-expanded="false" aria-controls="parking">
-                                <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/parking.svg" alt="parking">°±¨®¸ê°T</h4>
+                                <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/parking.svg" alt="parking">åœè»Šè³‡è¨Š</h4>
                                 <i class="fas fa-chevron-down"></i>
                             </a>
                             <div class="collapse" id="parking">
                                 @if (@details.ShootingEquipment == null)
                                 {
                                     <div class="card card-body border-0">
-                                        ³õ¦a¥D¨S¦³¯d¤U¥ô¦ó°±¨®¸ê°T
+                                        å ´åœ°ä¸»æ²’æœ‰ç•™ä¸‹ä»»ä½•åœè»Šè³‡è¨Š
                                     </div>
                                 }
                                 @if (@details.ShootingEquipment != null)
@@ -195,7 +196,7 @@
                         </div>
                         <div class="rule border-bottom">
                             <a class="d-flex justify-content-between align-items-center w-100 btn-toggle py-3" data-bs-toggle="collapse" href="#rule" role="button" aria-expanded="false" aria-controls="rule">
-                                <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/rules.svg" alt="rules">³õ¦a³W½d</h4>
+                                <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/rules.svg" alt="rules">å ´åœ°è¦ç¯„</h4>
                                 <i class="fas fa-chevron-down"></i>
                             </a>
                             <div class="collapse" id="rule">
@@ -203,7 +204,7 @@
                             </div>
                         </div>
                         <div class="facility border-bottom">
-                            <h4 class="mb-0 py-3">³õ¦a³]¬I»PªÅ¶¡</h4>
+                            <h4 class="mb-0 py-3">å ´åœ°è¨­æ–½èˆ‡ç©ºé–“</h4>
                             <div class="collapse" id="facility">
                                 <div class="card card-body border-0 ps-0">
                                     @foreach (var category in details.AmenityDict)
@@ -237,7 +238,7 @@
                 <div class="col-12">
                     <div class="traffic border-top border-bottom">
                         <a class="d-flex justify-content-between align-items-center w-100 btn-toggle py-3" data-bs-toggle="collapse" href="#traffic" role="button" aria-expanded="false" aria-controls="traffic">
-                            <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/road.svg" alt="traffic" style="width: 24px; height: 24px">¥æ³q¸ê°T</h4>
+                            <h4 class="mb-0 d-flex align-items-center"><img class="me-2" src="~/Assets/IMG/icons/road.svg" alt="traffic" style="width: 24px; height: 24px">äº¤é€šè³‡è¨Š</h4>
                             <i class="fas fa-chevron-down"></i>
                         </a>
                         <div class="collapse" id="traffic">
@@ -247,7 +248,7 @@
                         </div>
                     </div>
                     <section class="service-time border-bottom">
-                        <h4 class="mb-0 py-3">ªA°È®É¶¡</h4>
+                        <h4 class="mb-0 py-3">æœå‹™æ™‚é–“</h4>
                         <ul class="py-3">
                             @for (int i = 0; i < details.OperatingDayList.Count(); i++)
                             {
@@ -258,7 +259,7 @@
                 </div>
                 <div class="col-12">
                     <section class="cancellation border-bottom">
-                        <h4 class="mb-0 py-3">¨ú®ø¬Fµ¦</h4>
+                        <h4 class="mb-0 py-3">å–æ¶ˆæ”¿ç­–</h4>
                         <div class="cancellation-content py-3">
                             <h5>@details.CancellationTitle</h5>
                             <p>@details.CancellationInfo</p>
@@ -268,7 +269,7 @@
             </div>
             <div class="row">
                 <div class="col-12" id="review">
-                    <h4 class="mb-0 py-3">³õ¦aµû»ù<span class="review-count ms-2">(@reviews.Count())</span></h4>
+                    <h4 class="mb-0 py-3">å ´åœ°è©•åƒ¹<span class="review-count ms-2">(@reviews.Count())</span></h4>
                     @foreach (var review in reviews)
                     {
                         <div class="review-item row mb-3 mt-3">
@@ -300,11 +301,11 @@
                                         <div class="recommend col-12 col-xl-9 ps-3 ps-lx-0">
                                             @if (review.IsRecommend == true)
                                             {
-                                                <i class="fas fa-check me-1"></i><span class="recommend-content">§Ú·|±ÀÂËµ¹¨ä¥L¤H</span>
+                                                <i class="fas fa-check me-1"></i><span class="recommend-content">æˆ‘æœƒæ¨è–¦çµ¦å…¶ä»–äºº</span>
                                             }
                                             @if (review.IsRecommend != true)
                                             {
-                                                <i class="fas fa-times me-1"></i><span class="recommend-content">§Ú¤£·|±ÀÂËµ¹¨ä¥L¤H</span>
+                                                <i class="fas fa-times me-1"></i><span class="recommend-content">æˆ‘ä¸æœƒæ¨è–¦çµ¦å…¶ä»–äºº</span>
                                             }
                                         </div>
                                     </div>
@@ -318,48 +319,48 @@
                     }
                 </div>
                 <div class="text-center mt-3">
-                    <div class="read-more-review btn mb-4">¬d¬İ§ó¦hµû»ù</div>
+                    <div class="read-more-review btn mb-4">æŸ¥çœ‹æ›´å¤šè©•åƒ¹</div>
                 </div>
             </div>
         </div>
         <div class="booking col-sm-12 col-xl-4 ps-xl-5">
-            <form class="booking-card text-center sticky-xl-top py-4 px-3" action="" method="post">
-                <h3 class="booking-card-title">NT$ <span class="venue-price">@Decimal.Round(@briefs.PricePerHour)</span></h3>
-                <p class="border-bottom pb-2">³Ì¤Ö°_­q®É¼Æ<span class="min-time fs-5 px-1">@briefs.MinHour</span>¤p®É</p>
+            <div class="booking-card text-center sticky-xl-top py-4 px-3">
+                <h3 class="booking-card-title">NT$ <span class="venue-price">@Decimal.Round(@briefs.PricePerHour).ToString("#,0")</span></h3>
+                <p class="border-bottom pb-2">æœ€å°‘èµ·è¨‚æ™‚æ•¸<span class="min-time fs-5 px-1">@briefs.MinHour</span>å°æ™‚</p>
                 @if (@details.HoursForDiscount != 0 && @discount != "")
                 {
-                    <p class="border-bottom py-3 fs-5"><span class="discount-hour py-1 pe-1">@details.HoursForDiscount</span>¤p®Éº¡®ÉÀu´f:<span class="ps-4 pe-1 discount">@discount</span>§é</p>
+                    <p class="border-bottom py-3 fs-5"><span class="discount-hour py-1 pe-1">@details.HoursForDiscount</span>å°æ™‚æ»¿æ™‚å„ªæƒ :<span class="ps-4 pe-1 discount">@discount</span>æŠ˜</p>
                 }
                 <div class="order-detail-select mt-4"></div>
                 <div class="other-operation d-flex justify-content-end mt-3">
-                    <button type="button" class="btn px-0 py-0 remove me-3 d-none">§R°£</button>
-                    <button type="button" class="btn px-0 py-0 extend" disabled>¥[¤@¤Ñ</button>
+                    <button type="button" class="btn px-0 py-0 remove me-3 d-none">åˆªé™¤</button>
+                    <button type="button" class="btn px-0 py-0 extend" disabled>åŠ ä¸€å¤©</button>
                 </div>
-                <div class="calculation">
-                    <div class="price-calculus mt-5 border-bottom mb-2">
-                        <p class="d-flex mb-2">¥æ©öª÷ÃB:<span class="ms-auto"><span class="venue-price">N$1200</span><span class="mx-1">x</span><span class="total-hour">6¤p®É</span></span></p>
-                        <p class="d-flex mb-2">º¡®ÉÀu´f:<span class="ms-auto"><span class="discount">85§é</span></span></p>
+                <div class="calculation d-none">
+                    <div class="price-cal mt-5 border-bottom mb-2">
+                        <p class="d-flex mb-2">äº¤æ˜“é‡‘é¡:<span class="ms-auto"><span class="venue-price"></span><span class="mx-1">x</span><span class="total-hour"></span>å°æ™‚</span></p>
+                        <p class="discount-row d-none mb-2">æ»¿æ™‚å„ªæƒ :<span class="ms-auto"><span class="discount"></span></span></p>
                     </div>
                     <div class="total fs-5 fw-bolder">
-                        <p class="d-flex mb-2">Á`¦@:<span class="ms-auto"><span class="total-price">NT$6120</span></span></p>
+                        <p class="d-flex mb-2">ç¸½å…±:<span class="ms-auto"><span class="total-price"></span></span></p>
                     </div>
                 </div>
-                <button class="btn-submit btn mt-4" type="button" disabled>°¨¤W¹w¬ù</button>
-            </form>
+                <button class="btn-submit btn mt-4" type="button" disabled>é¦¬ä¸Šé ç´„</button>
+            </div>
         </div>
     </div>
 </div>
 
 <template id="order-item-template">
-    <div class="order-item mb-3 needs-validation">
-        <h4 class="text-start mb-3 fs-5 fw-bolder">¤é´Á»P®É¶¡:</h4>
+    <div class="order-item mb-3">
+        <h4 class="text-start mb-3 fs-5 fw-bolder">æ—¥æœŸèˆ‡æ™‚é–“:</h4>
         <div class="input-group mb-2">
-            <input type="text" placeholder="¶}©l¤é´Á" class="start-date form-control rounded me-1" required name="">
-            <input type="text" placeholder="°Ñ¥[¤H¼Æ" class="attendees form-control rounded ms-1" aria-label=".form-control attendees" required>
+            <input type="text" placeholder="é–‹å§‹æ—¥æœŸ" class="start-date form-control rounded me-1">
+            <input type="text" placeholder="åƒåŠ äººæ•¸" class="attendees form-control rounded ms-1" aria-label=".form-control attendees" disabled>
         </div>
         <div class="input-group mb-2">
-            <input type="number" placeholder="¶}©l®É¶¡" class="start-time form-control rounded me-1" required>
-            <input type="number" placeholder="µ²§ô®É¶¡" class="end-time form-control rounded ms-1" required>
+            <input type="text" placeholder="é–‹å§‹æ™‚é–“" class="start-time form-control rounded me-1" disabled>
+            <input type="text" placeholder="çµæŸæ™‚é–“" class="end-time form-control rounded ms-1" disabled>
         </div>
     </div>
 </template>
@@ -373,9 +374,7 @@
 @section endJS
 {
     <script>
-        const operationDay = @Html.Raw(Json.Encode(@operationDayList));
-        const operationStartTime = @Html.Raw(Json.Encode(@startTimeList));
-        const operationEndTime = @Html.Raw(Json.Encode(@endTimeList));
+        sessionStorage.setItem('theKey', @Html.Raw(Json.Encode(@spaceID)));
     </script>
     <script src="~/Assets/JS/booking/booking.js"></script>
 }

@@ -32,10 +32,10 @@ namespace ZoneRadar.Services
             var spacediscounts = _repository.GetAll<SpaceDiscount>().ToList();
 
             //帶入會員ID
-            var orderformember25 = orders.Where(x => x.MemberID == id && x.OrderStatusID == 1);
+            var orderformember = orders.Where(x => x.MemberID == id && x.OrderStatusID == 1 && x.Space.SpaceStatusID == 2);
 
             //在所有訂單中符合此會員ID
-            foreach (var item in orderformember25)
+            foreach (var item in orderformember)
             {
                 //該場地名稱
                 var spacename = spaces.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpaceName;
@@ -170,6 +170,58 @@ namespace ZoneRadar.Services
             _repository.SaveChanges();
 
             return order;
+        }
+
+        /// <summary>
+        /// 預約頁面預購轉成預購單到DB(Steve)
+        /// </summary>
+        /// <param name="preOrderVM"></param>
+        /// <param name="memberID"></param>
+        public void PlaceAPreOrder(PreOrderViewModel preOrderVM, int memberID)
+        {
+            var spaceID = preOrderVM.SpaceID;
+
+            var newOrder = new Order
+            {
+                SpaceID = spaceID,
+                MemberID = memberID,
+                ContactName = "123",
+                ContactPhone = "123",
+                OrderStatusID = 1
+            };
+
+            _repository.Create<Order>(newOrder);
+            _repository.SaveChanges();
+
+            var orderID = newOrder.OrderID;
+            var bookingDateList = preOrderVM.DatesArr;
+            var attendeesList = preOrderVM.AttendeesArr;
+            var startTimeList = preOrderVM.StartTimeArr;
+            var endTimeList = preOrderVM.EndTimeArr;
+
+            var startDateTimeList = new List<DateTime>();
+            var endDateTimeList = new List<DateTime>();
+            for (int i = 0; i < bookingDateList.Count; i++)
+            {
+                startDateTimeList.Add(DateTime.Parse($"{bookingDateList[i]}T{startTimeList[i]:00}"));
+                endDateTimeList.Add(DateTime.Parse($"{bookingDateList[i]}T{endTimeList[i]:00}"));
+            }
+
+            var newOrderDetail = new List<OrderDetail>();
+            for (int i = 0; i < startDateTimeList.Count; i++)
+            {
+                newOrderDetail.Add(new OrderDetail
+                {
+                    OrderID = orderID,
+                    StartDateTime = startDateTimeList[i],
+                    EndDateTime = endDateTimeList[i],
+                    Participants = int.Parse(attendeesList[i]),
+                });
+            }
+
+            _repository.CreateRange<OrderDetail>(newOrderDetail);
+            _repository.SaveChanges();
+            _repository.Dispose();
         }
     }
 }

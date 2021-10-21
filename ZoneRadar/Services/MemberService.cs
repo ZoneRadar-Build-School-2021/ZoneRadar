@@ -43,7 +43,7 @@ namespace ZoneRadar.Services
             registerVM.RegisterEmail = HttpUtility.HtmlEncode(registerVM.RegisterEmail);
             registerVM.RegisterPassword = HttpUtility.HtmlEncode(registerVM.RegisterPassword).MD5Hash();
 
-            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.RegisterEmail.ToUpper() && x.SignUpDateTime.Year != 1753);
+            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.RegisterEmail.ToUpper() && x.IsVerify == true);
 
             if (isSameEmail)
             {
@@ -61,8 +61,8 @@ namespace ZoneRadar.Services
                         Password = registerVM.RegisterPassword,
                         Name = registerVM.Name,
                         ReceiveEDM = false,
-                        SignUpDateTime = new DateTime(1753, 1, 1), //未驗證時時間為西元1753年
-                        LastLogin = new DateTime(1753, 1, 1) //未驗證時時間為西元1753年
+                        SignUpDateTime = DateTime.Now,
+                        LastLogin = DateTime.Now
                     };
                     _repository.Create<Member>(member);
                     _repository.SaveChanges();
@@ -144,11 +144,11 @@ namespace ZoneRadar.Services
             bool hasInfo;
             if (verified)
             {
-                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.SignUpDateTime.Year != 1753);
+                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == true);
             }
             else
             {
-                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.SignUpDateTime.Year == 1753);
+                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == false);
             }
             return hasInfo;
         }
@@ -214,7 +214,7 @@ namespace ZoneRadar.Services
             //EF比對資料庫帳密
             //以Email及Password查詢比對Member資料表記錄，且註冊時間不得為預設1753年
             var members = _repository.GetAll<Member>().ToList();
-            var user = members.FirstOrDefault(x => x.Email.ToUpper() == loginVM.LoginEmail.ToUpper() && x.Password == loginVM.LoginPassword && x.SignUpDateTime.Year != 1753);
+            var user = members.FirstOrDefault(x => x.Email.ToUpper() == loginVM.LoginEmail.ToUpper() && x.Password == loginVM.LoginPassword && x.IsVerify == true);
 
             //修改上次登入時間
             if (user != null)
@@ -381,7 +381,7 @@ namespace ZoneRadar.Services
 
             //以Email及Password查詢比對Member資料表記錄，且註冊時間不得為預設1753年
             var members = _repository.GetAll<Member>().ToList();
-            var user = members.FirstOrDefault(x => x.Email.ToUpper() == resetPasswordVM.UserEmail.ToUpper() && x.SignUpDateTime.Year != 1753);
+            var user = members.FirstOrDefault(x => x.Email.ToUpper() == resetPasswordVM.UserEmail.ToUpper() && x.IsVerify == true);
 
             //修改上次登入時間
             if (user != null)

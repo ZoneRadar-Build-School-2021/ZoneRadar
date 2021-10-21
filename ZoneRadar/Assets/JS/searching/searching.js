@@ -53,7 +53,7 @@
             date = '';
         }
 
-        const getUrl = `https://localhost:44322/webapi/spaces/GetFilterData?type=${type}&city=${city}&date=${date}`;
+        const getUrl = `/webapi/spaces/GetFilterData?type=${type}&city=${city}&date=${date}`;
         sessionStorage.clear();
 
         axios.get(getUrl)
@@ -430,21 +430,21 @@
         function requestForSpaces(filter) {
             setPlaceholder();
 
-            if (filter.Keywords) {
-                filter.City = '';
-                filter.District = '';
-                filter.Type = '';
-                filter.Date = '';
-                filter.HighPrice = '';
-                filter.LowPrice = '';
-                filter.Attendees = '';
-                filter.Amenities = [];
-                filter.Area = '';
-            }
+            //if (filter.Keywords) {
+            //    filter.City = '';
+            //    filter.District = '';
+            //    filter.Type = '';
+            //    filter.Date = '';
+            //    filter.HighPrice = '';
+            //    filter.LowPrice = '';
+            //    filter.Attendees = '';
+            //    filter.Amenities = [];
+            //    filter.Area = '';
+            //}
 
             console.log(filter)
 
-            axios.post('https://localhost:44322/webapi/spaces/GetFilteredSpaces', filter)
+            axios.post('/webapi/spaces/GetFilteredSpaces', filter)
                 .then(response => {
                     let spaceList = response.data;
                     renderSpaceCards(spaceList);
