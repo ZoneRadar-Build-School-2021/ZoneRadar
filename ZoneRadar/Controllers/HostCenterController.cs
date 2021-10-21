@@ -58,7 +58,6 @@ namespace ZoneRadar.Controllers
                 return View(model);
             }
             return View();
-            
         }
         [HttpPost]
         [ValidateInput(false)]
@@ -71,7 +70,7 @@ namespace ZoneRadar.Controllers
             space.MemberID = userid;
             var result = _spaceService.CreateSpace(space);
             ViewData["Message"] = "成功新增場地";
-            return View(result);
+            return RedirectToAction("SpaceManage", "HostCenter");
         }
         /// <summary>
         /// 場地主編輯場地 (Amber)

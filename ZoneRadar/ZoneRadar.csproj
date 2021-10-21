@@ -569,6 +569,7 @@
     <Content Include="Views\MemberCenter\HadSentResetPasswordEmail.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Home\Policy.cshtml" />
+    <Content Include="Views\HostCenter\addSpaceSuccessView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

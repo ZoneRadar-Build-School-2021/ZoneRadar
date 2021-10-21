@@ -32,11 +32,17 @@ namespace ZoneRadar.Models.ViewModels
 
 
         public List<int> OperatingDay { get; set; }
-        public List<string> Hours { get; set; }
+        public string Hours1 { get; set; }
+        public string Hours2 { get; set; }
+        public string Hours3 { get; set; }
+        public string Hours4 { get; set; }
+        public string Hours5 { get; set; }
+        public string Hours6 { get; set; }
+        public string Hours7 { get; set; }
         public List<string> StartTime { get; set; }
         public List<string> EndTime { get; set; }
 
-
+        public List<string> SpacePhotoUrl { get; set; }
 
         public List<int> TypeDetailID { get; set; }
 
