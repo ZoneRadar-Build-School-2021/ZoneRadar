@@ -409,10 +409,7 @@
     function addCollection(e) {
         e.preventDefault();
 
-        if (isCollection) {
-
-        } else {
-            isCollection = true;
+        if (isCollection === false) {
             axios.get('/webapi/spaces/CheckLogin').then(res => {
                 let isLogin = res.data.Response;
                 if (!isLogin) {
@@ -432,7 +429,42 @@
                                 '',
                                 'success'
                             )
-                            window.getComputedStyle(saveBtn, "::before").fontWeight = 900;
+                            isCollection = true;
+                            if (isCollection) {
+                                heart.style.fontWeight = 900;
+                            } else {
+                                heart.style.fontWeight = 300;
+                            }
+                        }
+                    })
+                }
+            })
+        } else {
+            axios.get('/webapi/spaces/CheckLogin').then(res => {
+                let isLogin = res.data.Response;
+                if (!isLogin) {
+                    const login_modal = document.querySelector("#login-modal");
+                    const modal = bootstrap.Modal.getOrCreateInstance(login_modal);
+                    modal.show();
+
+                    sessionStorage.setItem('targetURL', location.href);
+                } else {
+                    let SpaceBriefVM = {
+                        SpaceID: spaceID,
+                    }
+                    axios.post('/webapi/spaces/RemoveCollection', SpaceBriefVM).then(res => {
+                        if (res.data.Status === 'Success') {
+                            Swal.fire(
+                                '移除收藏成功!',
+                                '',
+                                'success'
+                            )
+                            isCollection = false;
+                            if (isCollection) {
+                                heart.style.fontWeight = 900;
+                            } else {
+                                heart.style.fontWeight = 300;
+                            }
                         }
                     })
                 }

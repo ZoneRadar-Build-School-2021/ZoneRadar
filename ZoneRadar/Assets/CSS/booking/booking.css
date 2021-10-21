@@ -56,29 +56,19 @@ a {
         font-size: 16px;
         color: #FF0000;
     }
-    /*    .btn-save::before {
-        content: "\f004";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 300;
-        font-size: 16px;
-        margin-right: 0.3rem;
-        
-    }*/
+
 
     .btn-save:hover {
         background-color: var(--gray-btn-hover);
     }
 
-        /*.btn-save:hover::before {
-            font-weight: 900;
-        }*/
-    .venue-img {
-        width: 100%;
-        padding-bottom: 85%;
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-    }
+.venue-img {
+    width: 100%;
+    padding-bottom: 85%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
 
 .swiper-button-prev,
 .swiper-button-next {

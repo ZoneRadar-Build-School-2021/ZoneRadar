@@ -265,5 +265,36 @@ namespace ZoneRadar.Controllers
                 return response;
             }
         }
+
+        /// <summary>
+        /// 移除收藏
+        /// </summary>
+        /// <param name="spaceID"></param>
+        /// <returns></returns>
+        [Route("RemoveCollection")]
+        [AcceptVerbs("POST")]
+        public APIResponse RemoveCollection(SpaceBriefViewModel SpaceBriefVM)
+        {
+            var response = new APIResponse();
+            try
+            {
+                int memberID = int.Parse(User.Identity.Name);
+                _spaceService.RemoveFromCollection(SpaceBriefVM.SpaceID, memberID);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = null;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Response = null;
+
+                return response;
+            }
+        }
     }
 }

@@ -153,7 +153,7 @@
                     // change事件監聽
                     onChange: function (selectedDates, dateStr, instance) {
                         filter.Date = dateStr;
-                        if (this.id === 'web-date-filter') {
+                        if (this.input.id === 'web-date-filter') {
                             requestForSpaces(filter);
                         }
                     },
@@ -168,7 +168,7 @@
                     // change事件監聽
                     onChange: function (selectedDates, dateStr, instance) {
                         filter.Date = dateStr;
-                        if (this.id === 'web-date-filter') {
+                        if (this.input.id === 'web-date-filter') {
                             requestForSpaces(filter);
                         }
                     },

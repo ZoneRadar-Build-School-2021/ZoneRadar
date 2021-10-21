@@ -220,6 +220,19 @@ namespace ZoneRadar.Services
             _repository.Dispose();
         }
 
+        /// <summary>
+        /// 移除寫入資料庫(Steve)
+        /// </summary>
+        /// <param name="bookingPageVM"></param>
+        /// <param name="memberID"></param>
+        public void RemoveFromCollection(int spaceID, int memberID)
+        {
+            var target = _repository.GetAll<Collection>().FirstOrDefault(x => x.SpaceID == spaceID && x.MemberID == memberID);
+
+            _repository.Delete<Collection>(target);
+            _repository.SaveChanges();
+            _repository.Dispose();
+        }
 
         /// <summary>
         /// 搜尋頁即時篩選(Steve)
