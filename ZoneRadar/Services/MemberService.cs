@@ -653,7 +653,8 @@ namespace ZoneRadar.Services
                 Name = p.Name,
                 Phone = p.Phone,
                 Email = p.Email,
-                Description = p.Description
+                Description = p.Description,
+                ReceiveEDM = p.ReceiveEDM
             };
 
             return result;
@@ -672,10 +673,12 @@ namespace ZoneRadar.Services
             p.Name = edit.Name;
             p.Phone = edit.Phone;
             p.Description = edit.Description;
+            p.ReceiveEDM = edit.ReceiveEDM;
 
             //更新
             _repository.Update(p);
             _repository.SaveChanges();
+            _repository.Dispose();
 
             return edit;
         }        
