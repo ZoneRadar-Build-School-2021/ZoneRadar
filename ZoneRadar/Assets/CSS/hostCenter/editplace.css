@@ -84,12 +84,12 @@ p {
 }
 
 .discontinue-btn, .republish-btn {
-    background-color: #D9831A;
+    background-color: #049DD9;
     color: white;
 }
 
     .discontinue-btn:hover, .republish-btn:hover {
-        background-color: #b16911;
+        background-color: #0077a7;
         color: white;
     }
 
@@ -217,7 +217,7 @@ a.venue-link:hover {
 
 .delete-btn:hover {
   color: white;
-  background-color: #d64c15;;
+  background-color: #d64c15;
 }
 
 .delete-modal i {
