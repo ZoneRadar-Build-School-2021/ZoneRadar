@@ -196,6 +196,7 @@ namespace ZoneRadar.Services
                 CancellationInfo = targetSpace.Cancellation.CancellationDetail,
                 HoursForDiscount = hoursForDiscount,
                 Discount = discount,
+                HostEmail = targetSpace.Member.Email
             };
 
             return result;
@@ -252,7 +253,7 @@ namespace ZoneRadar.Services
             var amenities = query.Amenities;
             var keywords = query.Keywords;
 
-            var scores = _repository.GetAll<Review>();
+            var scores = _repository.GetAll<Review>().Where(x => x.ToHost == true);
             var spaces = _repository.GetAll<Space>().Where(x => x.SpaceStatusID == 2);
             var orders = _repository.GetAll<OrderDetail>();
             var spaceTypes = _repository.GetAll<SpaceType>();
