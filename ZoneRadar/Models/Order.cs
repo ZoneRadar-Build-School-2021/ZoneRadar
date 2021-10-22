@@ -28,11 +28,9 @@ namespace ZoneRadar.Models
 
         public DateTime? CancelDateTime { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string ContactName { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string ContactPhone { get; set; }
 

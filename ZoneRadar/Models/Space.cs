@@ -74,6 +74,8 @@ namespace ZoneRadar.Models
 
         public DateTime? DiscontinuedDate { get; set; }
 
+        public string OtherAmenity { get; set; }
+
         public virtual Cancellation Cancellation { get; set; }
 
         public virtual City City { get; set; }
