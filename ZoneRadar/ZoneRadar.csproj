@@ -233,11 +233,9 @@
     <Compile Include="Models\ViewModels\APIResponse.cs" />
     <Compile Include="Models\ViewModels\BookingCardViewModel.cs" />
     <Compile Include="Models\ViewModels\BookingPageViewModel.cs" />
-    <Compile Include="Models\ViewModels\HostCenterHistoryViewModel.cs" />
     <Compile Include="Models\ViewModels\ProcessingViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\PreOrderViewModel.cs" />
-    <Compile Include="Models\ViewModels\ShopCarViewModel.cs" />
     <Compile Include="Models\ViewModels\SomeOnesSpaceViewModelcs.cs" />
     <Compile Include="Models\ViewModels\SpaceDetailViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceBriefViewModel.cs" />
@@ -253,9 +251,7 @@
     <Compile Include="Models\ViewModels\SpaceImg.cs" />
     <Compile Include="Models\ViewModels\SpaceReviewViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceViewModel.cs" />
-    <Compile Include="Models\ViewModels\UsercenterCompletedViewModel.cs" />
-    <Compile Include="Models\ViewModels\UsercenterPendingViewModel.cs" />
-    <Compile Include="Models\ViewModels\UsercenterProcessingViewModel.cs" />
+    <Compile Include="Models\ViewModels\OrderViewModel.cs" />
     <Compile Include="Models\ViewModels\UserInfoViewModel.cs" />
     <Compile Include="Models\ZONERadarContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

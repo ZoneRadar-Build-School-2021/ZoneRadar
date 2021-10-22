@@ -100,7 +100,7 @@ namespace ZoneRadar.Services
         {
             var review = new Review
             {
-                OrderID = model.OrderID,
+                OrderID = model.OrderId,
                 ToHost = false,
                 Score = (int)model.Score,
                 ReviewContent = model.ReviewContent,

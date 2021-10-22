@@ -44,7 +44,7 @@
                                  style="background-image: url(@Html.DisplayFor(m => item.SpaceUrl));"></div>
                         </div>
                         <div class="col-sm-12 col-lg-8 px-3">
-                            <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceID)" class="d-inline-block mb-3 mt-3 mt-lg-0">
+                            <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceId)" class="d-inline-block mb-3 mt-3 mt-lg-0">
                                 <h3 class="venue-name">@Html.DisplayFor(m => item.SpaceName)</h3>
                             </a>
                             <ul class="order-detial">
@@ -118,7 +118,7 @@
                                 </span>
                             </p>
                             <div class="col-12 text-end mt-2">
-                                @Html.ActionLink("再買一次", "BookingPage", "Booking", new { id = item.SpaceID }, new { @class = "btn btn_cancel" })
+                                @Html.ActionLink("再買一次", "BookingPage", "Booking", new { id = item.SpaceId }, new { @class = "btn btn_cancel" })
                                 @if (item.HasReview)
                                 {
                                     <button class="btn btn_sendscore me-2" data-bs-toggle="modal" data-bs-target="#B-@Html.DisplayFor(m => item.OrderNumber)" disabled>評價 / 評分</button>
@@ -213,7 +213,7 @@
                                  style="background-image: url(@Html.DisplayFor(m => item.SpaceUrl));"></div>
                         </div>
                         <div class="col-sm-12 col-lg-8 px-3">
-                            <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceID)" class="d-inline-block mb-3 mt-3 mt-lg-0">
+                            <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceId)" class="d-inline-block mb-3 mt-3 mt-lg-0">
                                 <h3 class="venue-name cancel">@Html.DisplayFor(m => item.SpaceName)</h3>
                             </a>
                             <ul class="order-detial">

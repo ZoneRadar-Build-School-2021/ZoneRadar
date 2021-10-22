@@ -116,13 +116,8 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         public ActionResult DeleteShopCarDetail(int id)
         {
-            //var userid = int.Parse(User.Identity.Name);
-
             var result = _PreOrderService.DeleteShopCarDetail(id);
             return RedirectToAction("ShopCar", result);
-
-            //var model = _PreOrderService.GetShopCarVM(userid);
-            //return View("ShopCar", model);
         }
         /// <summary>
         /// 刪除預購單頁(Nick)
@@ -131,14 +126,8 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         public ActionResult DeleteShopCarOrder(int id)
         {
-
-            //var userid = int.Parse(User.Identity.Name);
-            //var model = _PreOrderService.GetShopCarVM(userid);
-
             var result = _PreOrderService.DeleteShopCarOrder(id);
             return RedirectToAction("ShopCar", result);
-
-            //return View("ShopCar", model);
         }
         /// <summary>
         /// (Get)刪除已付款訂單頁(Nick)
@@ -199,16 +188,8 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public ActionResult CreatCompletedReview(UsercenterCompletedViewModel model)
         {
-            var userid = int.Parse(User.Identity.Name);
-
             var result = _ReviewService.CreatCompletedReview(model);
             return RedirectToAction("Completed", result);
-            //if (ModelState.IsValid)
-            //{
-
-            //}
-            //var resultmodel = _OrderService.GetUsercenterCompletedVM(userid);
-            //return View("Completed", resultmodel);
         }
     }
 }

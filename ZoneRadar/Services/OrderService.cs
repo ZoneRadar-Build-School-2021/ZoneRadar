@@ -17,6 +17,13 @@ namespace ZoneRadar.Services
         {
             _repository = new ZONERadarRepository();
         }
+        public enum CancellationOptions
+        {
+            VeryFlexible = 1,
+            Flexible = 2,
+            StandardThirtyDays = 3,
+            StandardNintyDays = 4
+        }
         /// <summary>
         /// 找出使用者(ID)的已付款資料(Nick)
         /// </summary>
@@ -120,7 +127,7 @@ namespace ZoneRadar.Services
                     });
                 }
                 //退錢判斷
-                if (cancelid == 1)
+                if (cancelid == (int)CancellationOptions.VeryFlexible)
                 {
                     if (renttimetonow <= 24)
                     {
@@ -131,7 +138,7 @@ namespace ZoneRadar.Services
                         cancelmoney = money;
                     }
                 }
-                else if (cancelid == 2)
+                else if (cancelid == (int)CancellationOptions.Flexible)
                 {
                     if (renttimetonow <= 24)
                     {
@@ -146,7 +153,7 @@ namespace ZoneRadar.Services
                         cancelmoney = money;
                     }
                 }
-                else if (cancelid == 3)
+                else if (cancelid == (int)CancellationOptions.StandardThirtyDays)
                 {
                     if (renttimetonow <= (24 * 7))
                     {
@@ -161,7 +168,7 @@ namespace ZoneRadar.Services
                         cancelmoney = money;
                     }
                 }
-                else if (cancelid == 4)
+                else if (cancelid == (int)CancellationOptions.StandardNintyDays)
                 {
                     if (renttimetonow <= (24 * 14))
                     {
@@ -207,9 +214,9 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<UsercenterProcessingViewModel> GetUsercenterProcessingVM(int id)
+        public List<OrderViewModel> GetUsercenterProcessingVM(int id)
         {
-            List<UsercenterProcessingViewModel> result = new List<UsercenterProcessingViewModel>();
+            List<OrderViewModel> result = new List<OrderViewModel>();
 
             var spaces = _repository.GetAll<Space>().ToList();
             var orders = _repository.GetAll<Order>().ToList();
@@ -279,7 +286,7 @@ namespace ZoneRadar.Services
                         OrderId = rentdetail.OrderID
                     });
                 }
-                result.Add(new UsercenterProcessingViewModel
+                result.Add(new OrderViewModel
                 {
                     OrderNumber = (int)ordernum,
                     PaidTime = paytime.ToString("yyyy-MM-dd HH:mm"),
@@ -290,7 +297,7 @@ namespace ZoneRadar.Services
                     Score = score,
                     Money = money,
                     Email = email,
-                    SpaceID = item.SpaceID,
+                    SpaceId = item.SpaceID,
                     OrderId = item.OrderID,
                     RentDetail = temp
                 });
@@ -402,7 +409,7 @@ namespace ZoneRadar.Services
                     OwnerPhone = ownerphone,
                     PublishTime = publishtime.ToString("yyyy-MM-dd HH:mm"),
                     Score = score,
-                    SpaceID = spaceid,
+                    SpaceId = spaceid,
                     SpaceUrl = spaceurl,
                     Email = email,
                     Money = money,
@@ -574,10 +581,10 @@ namespace ZoneRadar.Services
                     ContactName = item.ContactName,
                     ContactPhone = item.ContactPhone,
                     Money = money,
-                    OrderID = item.OrderID,
-                    SpaceID = item.SpaceID,
+                    OrderId = item.OrderID,
+                    SpaceId = item.SpaceID,
                     OrderNumber = (int)item.OrderNumber,
-                    RentDetailVM = temp,
+                    RentDetail = temp,
                     Email = email,
                     HasReview = hasReview
                 });

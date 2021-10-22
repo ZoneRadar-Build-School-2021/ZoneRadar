@@ -1,11 +1,8 @@
-﻿@model IEnumerable<ShopCarViewModel>
+﻿@model IEnumerable<OrderViewModel>
 @{
     ViewBag.Title = "ShopCar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-
 
 
 <div class="host-order container my-5">
@@ -23,7 +20,7 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-lg-8 px-3">
-                        <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceID)" class="d-inline-block mb-3 mt-3 mt-lg-0">
+                        <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceId)" class="d-inline-block mb-3 mt-3 mt-lg-0">
                             <h3 class="venue-name">@Html.DisplayFor(m => item.SpaceName)</h3>
                         </a>
                         <ul class="order-detial">
@@ -38,10 +35,10 @@
                                 <span class="contact-phone mx-2">@Html.DisplayFor(m => item.OwnerPhone)</span>
                             </li>
                             <li class="mt-3">
-                                <div class="collapse" id="order-@Html.DisplayFor(m => item.OrderID)">
+                                <div class="collapse" id="order-@Html.DisplayFor(m => item.OrderId)">
                                     <div class="datetime-card py-2">
                                         <div class="row">
-                                            @foreach (var rentDetail in item.RentDetailVM)
+                                            @foreach (var rentDetail in item.RentDetail)
                                             {
                                                 <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
                                                     <i class="far fa-calendar-check me-1"></i>租借日期:
@@ -98,8 +95,8 @@
                                     </div>
                                 </div>
                                 <div class="toggle-btn">
-                                    <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-@Html.DisplayFor(m => item.OrderID)"
-                                       role="button" aria-expanded="false" aria-controls="order-@Html.DisplayFor(m => item.OrderID)"></a>
+                                    <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-@Html.DisplayFor(m => item.OrderId)"
+                                       role="button" aria-expanded="false" aria-controls="order-@Html.DisplayFor(m => item.OrderId)"></a>
                                 </div>
                             </li>
                         </ul>
@@ -115,13 +112,13 @@
                             </span>
                         </p>
                         <div class="col-12 text-end mt-2">
-                            <button type="button" class="btn btn_close" data-bs-toggle="modal" data-bs-target="#B-@Html.DisplayFor(m => item.OrderID)">取消預購單</button>
-                            @Html.ActionLink("前往付款", "Payment", "Payment", new { id = item.OrderID }, new {@class = "btn btn_sendout"})
+                            <button type="button" class="btn btn_close" data-bs-toggle="modal" data-bs-target="#B-@Html.DisplayFor(m => item.OrderId)">取消預購單</button>
+                            @Html.ActionLink("前往付款", "Payment", "Payment", new { id = item.OrderId }, new {@class = "btn btn_sendout"})
                             @*<button type="button" class="btn btn_sendout">前往付款</button>*@
                         </div>
                     </div>
                     <!-- ModalB -->
-                    <div class="modal fade" id="B-@Html.DisplayFor(m =>item.OrderID)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="B-@Html.DisplayFor(m =>item.OrderId)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered ">
                             <div class="modal-content">
                                 <div class="model-header text-center">
@@ -133,7 +130,7 @@
                                     <p class="fs-2">是否確定取消？</p>
                                 </div>
                                 <div class="modal-footer justify-content-center">
-                                    @Html.ActionLink("取消預購單", "DeleteShopCarOrder", new { id = item.OrderID }, new { @class = "btn btn_close" })
+                                    @Html.ActionLink("取消預購單", "DeleteShopCarOrder", new { id = item.OrderId }, new { @class = "btn btn_close" })
                                 </div>
                             </div>
                         </div>
