@@ -34,7 +34,7 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public List<SelectedSpaceViewModel> GetSelectedSpace()
         {
-            var spaces = _repository.GetAll<Space>().ToList();
+            var spaces = _repository.GetAll<Space>().Where(x=>x.SpaceStatusID == 2).ToList();
             var orders = _repository.GetAll<Order>().Where(x => x.OrderStatus.OrderStatusID == 2).ToList();
             var reviews = _repository.GetAll<Review>().Where(x => x.ToHost).ToList();
             var spacePhotos = _repository.GetAll<SpacePhoto>().ToList();
@@ -1341,7 +1341,7 @@ namespace ZoneRadar.Services
                     var dates = order.OrderDetail.Select(x => x.EndDateTime.AddDays(1));
                     allorderEndDates.AddRange(dates);
                 }
-                var lastOrderdDate = allorderEndDates.Count == 0 ? "today" : allorderEndDates.Max().ToString("yyyy-MM-dd");
+                var lastOrderdDate = allorderEndDates.Count == 0 ? "today" : allorderEndDates.Max().ToString("yyyy/MM/dd");
 
                 spaceManageList.Add(new SpaceManageViewModel
                 {
@@ -1355,8 +1355,8 @@ namespace ZoneRadar.Services
                     NumberOfOrders = orderDetails.Count,
                     SpaceStatusId = space.SpaceStatusID,
                     CanDiscontinueDate = lastOrderdDate,
-                    DiscontinuedDate = space.DiscontinuedDate.HasValue ? space.DiscontinuedDate.Value.ToString("yyyy-MM-dd") : "無"
-                }) ;
+                    DiscontinuedDate = space.DiscontinuedDate.HasValue ? space.DiscontinuedDate.Value.ToString("yyyy/MM/dd") : "無"
+                });
             }
 
             return spaceManageList;
@@ -1367,7 +1367,7 @@ namespace ZoneRadar.Services
         /// </summary>
         public void SetDiscontinuedDate(int userId, int spaceId, DateTime? discontinuedDate)
         {
-            var space = _repository.GetAll<Space>().First(x => x.SpaceID == spaceId && x.MemberID == userId);
+            var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceId && x.MemberID == userId);
             if (space != null)
             {
                 space.DiscontinuedDate = discontinuedDate;
@@ -1396,6 +1396,34 @@ namespace ZoneRadar.Services
             if (space != null)
             {
                 space.SpaceStatusID = 3;
+                try
+                {
+                    _repository.Update(space);
+                    _repository.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        /// <summary>
+        /// 重新上架場地(Jenny)
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="spaceId"></param>
+        public void Republish(int userId, int spaceId)
+        {
+            var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceId && x.MemberID == userId);
+            if (space != null)
+            {
+                space.SpaceStatusID = 2;
+                space.DiscontinuedDate = null;
                 try
                 {
                     _repository.Update(space);

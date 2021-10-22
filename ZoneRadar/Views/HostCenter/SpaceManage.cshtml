@@ -106,8 +106,8 @@
         @foreach (var item in discontinued)
         {
         <div class="venue-card col-12 col-md-6 mt-3 mt-md-5 mb-4">
-            <div class="venue-pic mb-3 position-relative" style="background-image: url(@item.SpacePhotoUrl);"><a href="~/Booking/BookingPage/@item.SpaceID" class="d-block position-absolute w-100 h-100 top-0 start-0"></a></div>
-            <a href="~/Booking/BookingPage/@item.SpaceID" class="venue-link"><h3 class="venue-name mb-3">@item.SpaceName</h3></a>
+            <div class="venue-pic mb-3 position-relative" style="background-image: url(@item.SpacePhotoUrl);"></div>
+            <h3 class="venue-name mb-3">@item.SpaceName</h3>
             <p class="mb-2"><i class="fas fa-map-marker-alt me-1"></i><span class="address">@item.SpaceAddress</span></p>
             <p class="rating mb-4">
                 @if (item.Score == 0)
@@ -133,7 +133,32 @@
             </p>
             <p>近30天的被預定次數:<a href="~/HostCenter/History" class="booking-count mx-2 fs-5">@item.NumberOfOrders</a>次</p>
             <p>下架日期: @item.DiscontinuedDate</p>
-            <p class="text-end pt-3 pb-4 border-bottom border-3"><a class="edit-btn btn me-3" href="~/HostCenter/EditSpace?spaceId=@item.SpaceID">編輯場地</a><button class="delete-btn btn" data-bs-toggle="modal" data-bs-target="#delete-modal-@item.SpaceID">永久刪除</button></p>
+            <p class="text-end pt-3 pb-4 border-bottom border-3">
+                <a class="edit-btn btn me-3" href="~/HostCenter/EditSpace?spaceId=@item.SpaceID">編輯場地</a>
+                <button class="republish-btn btn me-3" data-bs-toggle="modal" data-bs-target="#republish-modal-@item.SpaceID">重新上架</button>
+                <button class="delete-btn btn" data-bs-toggle="modal" data-bs-target="#delete-modal-@item.SpaceID">永久刪除</button>
+            </p>
+
+            <!-- republish-Modal -->
+            <div class="modal fade delete-modal" id="republish-modal-@item.SpaceID" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content">
+                        <div class="model-header text-center">
+                            <div class="myshockicon">
+                                <i class="fas fa-exclamation-circle mt-2 text-decoration-none"></i>
+                            </div>
+                        </div>
+                        <div class="modal-body text-center">
+                            <p class="fs-2 text-decoration-none text-black">是否確定重新上架？</p>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <form action="/HostCenter/RepublishSpace?spaceId=@item.SpaceID" method="post">
+                                <button type="submit" class="btn btn_close">確定</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- delete-Modal -->
             <div class="modal fade delete-modal" id="delete-modal-@item.SpaceID" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">

@@ -187,5 +187,26 @@ namespace ZoneRadar.Controllers
                 return RedirectToAction("SpaceManage");
             }
         }
+
+        /// <summary>
+        /// 重新上架(Jenny)
+        /// </summary>
+        /// <param name="spaceId"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult RepublishSpace(int spaceId)
+        {
+            int userId;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                _spaceService.Republish(userId, spaceId);
+                return RedirectToAction("SpaceManage");
+            }
+        }
     }
 }
