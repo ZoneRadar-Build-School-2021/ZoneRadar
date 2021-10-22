@@ -71,7 +71,6 @@ namespace ZoneRadar.Controllers
             var userid = int.Parse(User.Identity.Name);
             space.MemberID = userid;
             var result = _spaceService.CreateSpace(space);
-            ViewData["Message"] = "成功新增場地";
             return RedirectToAction("SpaceManage", "HostCenter");
         }
         /// <summary>

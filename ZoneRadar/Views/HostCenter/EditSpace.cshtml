@@ -547,47 +547,19 @@
                             }
                         </div>
                         <div class="row mt-3">
-                            <h5>其他設施</h5>
-                            @foreach (var ametityThree in amenityAraeThree)
-                            {
-                                if (someThreeAmenity.Select(x => x.Amenity).Contains(ametityThree.AmenityName))
-                                {
-                                    <div class="col-12 col-lg-3 ">
-                                        <div class="form-check">
-                                            <input class="form-check-input" checked value="" type="checkbox"
-                                                   name="flexRadioDefault" id="@ametityThree.AmenityId">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                @ametityThree.AmenityName
-                                            </label>
-                                        </div>
+                            <div class="row mt-3">
+                                <h5>其他設施</h5>
+                                <div class="col ">
+                                    <div class="col col-12  pb-5">
+                                        <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                        <textarea name="OtherAmenity" class="form-control"
+                                                  id="exampleFormControlTextarea1" rows="3">
+
+                                         </textarea>
                                     </div>
-                                }
-                                else
-                                {
-                                    <div class="col-12 col-lg-3 ">
-                                        <div class="form-check">
-                                            <input class="form-check-input" value="" type="checkbox"
-                                                   name="flexRadioDefault" id="@ametityThree.AmenityId">
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                @ametityThree.AmenityName
-                                            </label>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-6 col-lg-4">
-                                <label for="Add" class="visually-hidden"></label>
-                                <input type="text" class="form-control" id="Add" placeholder="其他設施">
+                                </div>
                             </div>
-                            <div class="col-4 col-lg-2">
-                                <button type="submit" class="btn btn-primary mb-3">增加</button>
-                            </div>
-
                         </div>
-
                     </div>
                 </div>
                 <div class="accordion-item">
