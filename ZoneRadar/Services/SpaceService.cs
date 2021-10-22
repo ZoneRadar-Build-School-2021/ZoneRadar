@@ -196,6 +196,7 @@ namespace ZoneRadar.Services
                 CancellationInfo = targetSpace.Cancellation.CancellationDetail,
                 HoursForDiscount = hoursForDiscount,
                 Discount = discount,
+                HostEmail = targetSpace.Member.Email
             };
 
             return result;
