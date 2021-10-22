@@ -76,6 +76,7 @@ img {
 .exampleFormControlTextarea {
     resize: none;
 }
-textarea {
+.description
+ textarea {
     resize: none;
 }
