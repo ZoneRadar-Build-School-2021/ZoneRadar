@@ -609,7 +609,7 @@ namespace ZoneRadar.Services
                     Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
                 };
                 //找出會員是否有租借場地並且顯示 出被場地主的評價
-                var order = _repository.GetAll<Order>().Where(x => x.MemberID == u.MemberID && x.OrderStatusID == 4).Where(x=>x.Review.Select(y=>y.ToHost).Equals(false));
+                var order = _repository.GetAll<Order>().Where(x => x.MemberID == u.MemberID && x.OrderStatusID == 4).Where(x=>x.Review.Select(y=>y.ToHost).Contains(false));
                 
                 foreach (var o in order)
                 {
