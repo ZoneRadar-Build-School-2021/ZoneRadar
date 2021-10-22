@@ -705,7 +705,7 @@ namespace ZoneRadar.Services
             };
             ///<summary>
             //活動類型 把活動類別用戶有選的撈出來(Amber)
-            /// </summary>
+            
 
             List<SpaceType> spacetypes = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == spaceId).ToList();
             foreach (var item in spacetypes)
@@ -801,7 +801,7 @@ namespace ZoneRadar.Services
                 var someonsdiscountsTemp = new SomeOnesDiscount()
                 {
                     SpaceId = item.SpaceID,
-                    Discount = 100 * (item.Discount),
+                    Discount =Math.Floor(10m*(1m-(item.Discount))),
                     Hours = item.Hour
                 };
                 result.SomeOnesDiscountsList.Add(someonsdiscountsTemp);
@@ -1200,7 +1200,7 @@ namespace ZoneRadar.Services
             }
             
             //List<Operating> operating = new List<Operating>();
-            //foreach (var item in addSpaceViewModel.OperatingDay)
+            //foreach (var item in addS6paceViewModel.OperatingDay)
             //{
             //    operating.Add(new Operating { SpaceID = spaceid, OperatingDay = item});
             //}
@@ -1233,7 +1233,6 @@ namespace ZoneRadar.Services
             hours = hours.OfType<string>().ToList();
 
 
-
             List<Operating> ope = new List<Operating>();
             foreach (var item in addSpaceViewModel.OperatingDay)
             {
@@ -1255,8 +1254,6 @@ namespace ZoneRadar.Services
                     x++;
                 }
             }
-
-
             _repository.CreateRange<SpacePhoto>(imgs);
             _repository.CreateRange<Operating>(ope);
             _repository.CreateRange<SpaceType>(type);
@@ -1265,7 +1262,6 @@ namespace ZoneRadar.Services
             _repository.Create<SpaceDiscount>(spaceDiscount);
             _repository.SaveChanges();
             return addSpaceViewModel;
-
         }
 
         //todo
