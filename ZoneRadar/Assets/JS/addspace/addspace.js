@@ -609,12 +609,12 @@ Yesprojection.addEventListener('click', function () {
 })()
 ///文字編輯器 
 
-CKEDITOR.replace('textPartType');
-CKEDITOR.replace('textPartRule');
-CKEDITOR.replace('textPartPark');
-CKEDITOR.replace('textPartProjection');
+CKEDITOR.replace('Introduction');
+CKEDITOR.replace('HostRules');
+CKEDITOR.replace('Parking');
+CKEDITOR.replace('ShootingEquipment');
 CKEDITOR.replace('textPartClean');
-CKEDITOR.replace('textPartTransportation');
+CKEDITOR.replace('Traffic');
 
 
 ///上傳照片

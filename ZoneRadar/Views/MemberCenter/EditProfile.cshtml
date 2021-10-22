@@ -93,8 +93,9 @@
                 </div>
                 <hr>
                 <div class="email-information mb-3 form-check text-center">
-                    <input type="checkbox" class="form-check-input float-none" id="Check">
-                    <label class="form-check-label" for="Check">透過電子郵件像我發送獨家優惠、靈感、新聞和社群消息</label>
+                    @*<input type="checkbox" class="form-check-input float-none" id="ReceiveEDM" name="ReceiveEDM" value="@Model.ReceiveEDM" />*@
+                    @Html.CheckBoxFor(model => model.ReceiveEDM, new { @class = "form-check-input float-none" })
+                    <label class="form-check-label" for="ReceiveEDM">透過電子郵件像我發送獨家優惠、靈感、新聞和社群消息</label>
                 </div>
             </div>
         </div>

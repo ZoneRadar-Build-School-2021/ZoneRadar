@@ -52,7 +52,7 @@
                                                     <span class="date ms-2">@Html.DisplayFor(m => rentDetail.RentBackTime)</span>
                                                 </div>
                                                 <div class="col-sm-12 d-flex col-lg-3 align-items-center mb-1">
-                                                    <i class="far fa-calendar-check me-1"></i>人數:
+                                                    <i class="far fa-user me-1"></i>人數:
                                                     <span class="participant ms-2 me-1">@Html.DisplayFor(m => rentDetail.People)</span>人
                                                 </div>
                                                 <div class="edit_icon col-sm-12 d-flex col-lg-1 align-items-center mb-1">
@@ -72,7 +72,7 @@
                                                                 <div class="modal-body">
                                                                     <div class="modify_rent_date mt-2">
                                                                         <p>更改租借日期：</p>
-                                                                        <input type="text" class="form-control" id="basicDate_rent" placeholder="更改租借日期" data-input value="@Html.DisplayFor(m=>rentDetail.RentTime)" name="RentTime">
+                                                                        <input type="text" class="form-control" id="basicDate_rent" placeholder="更改租借日期" data-input value="@Html.DisplayFor(m => rentDetail.RentTime)" name="RentTime">
                                                                     </div>
                                                                     <div class="modify_rentback_date mt-2">
                                                                         <p>更改租還日期：</p>
@@ -80,7 +80,7 @@
                                                                     </div>
                                                                     <div class="modify_people mt-2">
                                                                         <p>更改預約人數：</p>
-                                                                        <input type="text" class="input_people form-control" oninput="value=value.replace(/[^\d]/g,'')" value="@Html.DisplayFor(m=> rentDetail.People)" name="People">
+                                                                        <input type="text" class="input_people form-control" oninput="value=value.replace(/[^\d]/g,'')" value="@Html.DisplayFor(m => rentDetail.People)" name="People">
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
@@ -115,8 +115,9 @@
                             </span>
                         </p>
                         <div class="col-12 text-end mt-2">
-                            <button type="button" class="btn btn_close" data-bs-toggle="modal" data-bs-target="#B-@Html.DisplayFor( m=> item.OrderID)">取消預購單</button>
-                            <button type="button" class="btn btn_sendout">前往付款</button>
+                            <button type="button" class="btn btn_close" data-bs-toggle="modal" data-bs-target="#B-@Html.DisplayFor(m => item.OrderID)">取消預購單</button>
+                            @Html.ActionLink("前往付款", "Payment", "Payment", new { id = item.OrderID }, new {@class = "btn btn_sendout"})
+                            @*<button type="button" class="btn btn_sendout">前往付款</button>*@
                         </div>
                     </div>
                     <!-- ModalB -->

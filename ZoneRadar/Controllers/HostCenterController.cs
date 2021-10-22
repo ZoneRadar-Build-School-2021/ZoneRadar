@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ZoneRadar.Services;
 using ZoneRadar.Models.ViewModels;
+using System.Net;
 
 namespace ZoneRadar.Controllers
 {
@@ -12,12 +13,14 @@ namespace ZoneRadar.Controllers
     {
         private readonly SpaceService _spaceService;
         private readonly OrderService _orderService;
+        private readonly ReviewService _reviewService;
 
         // GET: HostCenter
         public HostCenterController()
         {
             _spaceService = new SpaceService();
             _orderService = new OrderService();
+            _reviewService = new ReviewService();
         }
 
         // GET: HostCenter
@@ -29,42 +32,48 @@ namespace ZoneRadar.Controllers
         /// <summary>
         ///  場地主上架場地(Amber) 
         /// </summary>
+        [Authorize]
         public ActionResult AddSpace()
         {
-            var model = new SpaceViewModel
+            var userId = 0;
+            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
+            if (isAuthenticated)
             {
-                SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
-                cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
-                addressAraeList = _spaceService.ShowAmenityByIdOne().addressAraeList,
+                var model = new SpaceViewModel
+                {
+                    SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
+                    cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
+                    addressAraeList = _spaceService.ShowAmenityByIdOne().addressAraeList,
 
-                amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
-                amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
-                amenityAraeThreeList = _spaceService.ShowAmenityByIdThree().amenityAraeThreeList,
+                    amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
+                    amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
+                    amenityAraeThreeList = _spaceService.ShowAmenityByIdThree().amenityAraeThreeList,
 
-                CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
-                CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
-                CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
-                CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
-                //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
+                    CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
+                    CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
+                    CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
+                    CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
+                    //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
 
-                Operating = _spaceService.Operating(),
-            };
-
-            return View(model);
+                    Operating = _spaceService.Operating(),
+                };
+                return View(model);
+            }
+            return View();
         }
         [HttpPost]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult AddSpace(AddSpaceViewModel addspaceVM)
+        //public ActionResult AddSpace(AddSpaceViewModel space, AddOperatingViewModel addOperating)
+
+        public ActionResult AddSpace(AddSpaceViewModel space)
         {
-
-
-            var model = new SpaceViewModel
-            {
-
-            };
-            return View(model);
+            var userid = int.Parse(User.Identity.Name);
+            space.MemberID = userid;
+            var result = _spaceService.CreateSpace(space);
+            ViewData["Message"] = "成功新增場地";
+            return RedirectToAction("SpaceManage", "HostCenter");
         }
-
         /// <summary>
         /// 場地主編輯場地 (Amber)
         /// </summary>
@@ -200,6 +209,36 @@ namespace ZoneRadar.Controllers
                 _spaceService.Republish(userId, spaceId);
                 return RedirectToAction("SpaceManage");
             }
+        }
+        /// <summary>
+        /// (Get)場地主新增歷史訂單評價頁(Nick)
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CreatCompletedReview()
+        {
+            var userid = int.Parse(User.Identity.Name);
+
+            if (userid == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var model = _orderService.GetHostCenterHistoryVM(userid);
+
+            return View("History", model);
+        }
+        /// <summary>
+        /// (Post)場地主新增歷史訂單評價頁(Nick)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CreatCompletedReview(HostCenterHistoryViewModel model)
+        {
+            var userid = int.Parse(User.Identity.Name);
+
+            var result = _reviewService.CreateHistoryReview(model);
+            return RedirectToAction("History", result);
         }
     }
 }

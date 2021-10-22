@@ -94,6 +94,24 @@ namespace ZoneRadar.Services
 
 
             return review;
-        }        
+        }   
+        
+        public Review CreateHistoryReview(HostCenterHistoryViewModel model)
+        {
+            var review = new Review
+            {
+                OrderID = model.OrderID,
+                ToHost = false,
+                Score = (int)model.Score,
+                ReviewContent = model.ReviewContent,
+                ReviewDate = DateTime.Now,
+                Recommend = model.Recommend
+            };
+
+            _repository.Create<Review>(review);
+            _repository.SaveChanges();
+
+            return review;
+        }
     }
 }

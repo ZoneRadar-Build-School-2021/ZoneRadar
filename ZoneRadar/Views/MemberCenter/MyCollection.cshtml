@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var user = Model.User;
     var Myspaces = Model.MyCollection;
+    int b = 0;
     /*https://localhost:44322/MemberCenter/MyCollection?memberId=1*/
 }
 
@@ -26,7 +27,7 @@
                     </h3>
                     <p class="mt-4">
                         加入時間：
-                        <span class="ms-3">@user.SignUpDateTime.ToString("yyyy.MM.dd")</span>
+                        <span class="ms-3">@user.SignUpDateTime.ToString("yyyy-MM-dd")</span>
                     </p>
                 </div>
             </div>
@@ -67,17 +68,17 @@
 </div>
 
 <div class="member_container container mt-5">
-    <div class="member_choose row">
+    <div class="member_choose row p-2">
         <div class="col-6 text-center">
             <h4 class="pb-2">
-                <a href="~/MemberCenter/Member/@user.Id" class="myplace_title">
+                <a href="~/MemberCenter/Member/@user.Id" class="myplace_title p-1">
                     <i class="me-2 fas fa-pencil-alt"></i>來自賣家的評價
                 </a>
             </h4>
         </div>
         <div class="col-6 text-center">
             <h4 class="pb-2">
-                <a href="~/MemberCenter/Collection/@user.Id" class="myplace_title active">
+                <a href="~/MemberCenter/Collection/@user.Id" class="myplace_title active p-1">
                     <i class="me-2 fas fa-heart"></i>我的收藏
                 </a>
             </h4>
@@ -105,9 +106,15 @@
                         </a>
                     </div>
                     <div class="space_card_star mt-1">
-                        @for (int i = 1; i <= My.Score; i++)
+                        @if (My.Score == 0)
                         {
-                            <i class="fas fa-star"></i>
+                            <span>目前沒有任何評價</span>
+                        }
+                        else { 
+                            for (int i = 1; i <= My.Score; i++)
+                                {
+                                    <i class="fas fa-star"></i>
+                                }
                         }
                         <span class="me-2"> (@My.ReviewCount)</span>
                     </div>

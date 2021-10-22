@@ -24,10 +24,10 @@
                     <input type="text" class="form-control text-center" placeholder="輸入場地名稱" id="space-name">
                 </div>
                 <div class="col-lg-3 d-none d-lg-block">
-                    <input type="text" class="form-control text-center" placeholder="輸入訂購人" id="member-name">
+                    <input type="text" class="form-control text-center" placeholder="輸入活動主" id="member-name">
                 </div>
                 <div class="col-lg-3 col-date d-none d-lg-block ">
-                    <input type="text" class="choose-date form-control text-center" id="basicDate_rent" placeholder="選擇時段"
+                    <input type="text" class="choose-date form-control text-center" id="basicDate_rent" placeholder="選擇時間"
                            data-input>
                 </div>
                 <div class="col-lg-3 col-btn d-none d-lg-block">
@@ -45,9 +45,9 @@
                     </div>
                     <div class="modal-body">
                         <input type="text" class="form-control w-100 mb-2" placeholder="輸入場地名稱" id="space-name">
-                        <input type="text" class="form-control w-100 mb-2" placeholder="輸入訂購人" id="member-name">
+                        <input type="text" class="form-control w-100 mb-2" placeholder="輸入活動主" id="member-name">
                         <input type="text" class="choose-date form-control mb-2" id="basicDate_rent"
-                               placeholder="選擇時段" data-input>
+                               placeholder="選擇時間" data-input>
                         <button class="search-orders-btn btn w-100"><i class="fas fa-search"></i></button>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                             <li class="mb-2 fs-5">聯絡人姓名：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.ContactName)</span></li>
                             <li class="mb-2 fs-5">聯絡人電話：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.ContactPhone)</span></li>
                             <li class="mt-3">
-                                <div class="collapse" id="order-2109020001">
+                                <div class="collapse" id="order-@Html.DisplayFor(m => item.OrderID)">
                                     <div class="datetime-card py-2">
                                         <div class="row">
                                             @foreach (var rentDetail in item.RentDetailVM)
@@ -89,7 +89,7 @@
                                                     <span class="date ms-2">@Html.DisplayFor(m => rentDetail.RentBackTime)</span>
                                                 </div>
                                                 <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
-                                                    <i class="far fa-calendar-check me-1"></i>人數:
+                                                    <i class="far fa-user me-1"></i>人數:
                                                     <span class="participant ms-2 me-1">@Html.DisplayFor(m => rentDetail.People)</span>人
                                                 </div>
                                             }
@@ -97,8 +97,8 @@
                                     </div>
                                 </div>
                                 <div class="toggle-btn">
-                                    <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-2109020001"
-                                       role="button" aria-expanded="false" aria-controls="order-2109020001"></a>
+                                    <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-@Html.DisplayFor(m => item.OrderID)"
+                                       role="button" aria-expanded="false" aria-controls="order-@Html.DisplayFor(m => item.OrderID)"></a>
                                 </div>
                             </li>
                         </ul>
@@ -114,65 +114,75 @@
                             </span>
                         </p>
                         <div class="col-12 text-end mt-2">
-                            <button type="button" class="btn btn_sendout" data-bs-toggle="modal" data-bs-target="#A-@Html.DisplayFor(m => item.OrderID)">前往評價</button>
+                            @if (item.HasReview)
+                            {
+                                <button type="button" class="btn btn_sendout" data-bs-toggle="modal" data-bs-target="#A-@Html.DisplayFor(m => item.OrderID)" disabled>前往評價</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn_sendout" data-bs-toggle="modal" data-bs-target="#A-@Html.DisplayFor(m => item.OrderID)">前往評價</button>
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="A-@Html.DisplayFor(m => item.OrderID)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered ">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>@Html.DisplayFor(m => item.OrderNumber)</span></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="score_star mt-2">
-                            <p>您對於這次活動主的滿意度為幾顆星：</p>
-                            <div>
-                                <div class="col-6">
-                                    <select class="form-select form-select-sm text-center mt-3" aria-label=".form-select-sm example">
-                                        <option selected class="d-none">請選擇星數</option>
-                                        <option value="1">1星</option>
-                                        <option value="2">2星</option>
-                                        <option value="3">3星</option>
-                                        <option value="4">4星</option>
-                                        <option value="5">5星</option>
-                                    </select>
-                                </div>
-                                <div class="col-6"></div>
+<form method="post" action="~/HostCenter/CreatCompletedReview">
+    <div class="modal fade" id="A-@Html.DisplayFor(m => item.OrderID)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>@Html.DisplayFor(m => item.OrderNumber)</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="score_star mt-2">
+                        <p>您對於這次活動主的滿意度為幾顆星：</p>
+                        <div>
+                            <div class="col-6">
+                                <select class="form-select form-select-sm text-center mt-3" aria-label=".form-select-sm example" name="Score">
+                                    <option selected class="d-none">請選擇星數</option>
+                                    <option value="1">1星</option>
+                                    <option value="2">2星</option>
+                                    <option value="3">3星</option>
+                                    <option value="4">4星</option>
+                                    <option value="5">5星</option>
+                                </select>
                             </div>
-                        </div>
-                        <div class="customer_evaluation mt-3">
-                            <p>您對於這次的活動主有什麼需要改進或是想對活動主說的話？</p>
-                            <textarea class="form-control mt-3" aria-label="With textarea"></textarea>
-                        </div>
-                        <div class="customer_eveluation_recommend mt-3">
-                            <p>您是否會再次接待他</p>
-                            <div class="customer_evelution_radio form-check mt-2">
-                                <input class="form-check-input" type="radio" name="customer_evelution_recommend_radio_option"
-                                       id="flexRadioDefault1">
-                                <label class="form-check-label ms-1" for="flexRadioDefault1">
-                                    <i class="fas fa-check me-1"></i>我還會想再次接待他
-                                </label>
-                            </div>
-                            <div class="customer_evelution_radio form-check">
-                                <input class="form-check-input" type="radio" name="customer_evelution_recommend_radio_option"
-                                       id="flexRadioDefault2">
-                                <label class="form-check-label ms-1" for="flexRadioDefault2">
-                                    <i class="fas fa-times me-2"></i>我不會想再次接待他
-                                </label>
-                            </div>
+                            <div class="col-6"></div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn_sendout">送出</button>
+                    <div class="customer_evaluation mt-3">
+                        <p>您對於這次的活動主有什麼需要改進或是想對活動主說的話？</p>
+                        <textarea class="form-control mt-3" aria-label="With textarea" name="ReviewContent"></textarea>
                     </div>
+                    <div class="customer_eveluation_recommend mt-3">
+                        <p>您是否會再次接待他</p>
+                        <div class="customer_evelution_radio form-check mt-2">
+                            <input class="form-check-input" type="radio" value="true" name="Recommend"
+                                   id="flexRadioDefault1">
+                            <label class="form-check-label ms-1" for="flexRadioDefault1">
+                                <i class="fas fa-check me-1"></i>我還會想再次接待他
+                            </label>
+                        </div>
+                        <div class="customer_evelution_radio form-check">
+                            <input class="form-check-input" type="radio" value="false" name="Recommend"
+                                   id="flexRadioDefault2">
+                            <label class="form-check-label ms-1" for="flexRadioDefault2">
+                                <i class="fas fa-times me-2"></i>我不會想再次接待他
+                            </label>
+                        </div>
+                        <input type="hidden" value="@Html.DisplayFor(m => item.OrderID)" name="OrderID" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn_sendout">送出</button>
                 </div>
             </div>
         </div>
+    </div>
+</form>
     }
 </div>
 

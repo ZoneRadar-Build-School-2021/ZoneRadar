@@ -192,11 +192,11 @@ namespace ZoneRadar.Services
                     RentDetail = temp,
                     OrderStatus = item.OrderStatusID,
                     OrderId = item.OrderID,
-                    SpaceId = item.SpaceID,
                     MemberId = item.MemberID,
                     ContactName = item.ContactName,
                     ContactPhone = item.ContactPhone,
                     CancelTime = renttimedayorhour,
+                    SpaceId = item.SpaceID,
                     CancelMoney = cancelmoney
                 });
             }
@@ -424,7 +424,6 @@ namespace ZoneRadar.Services
             var order = new Order {
                 OrderID = model.OrderId,
                 OrderNumber = model.OrderNumber,
-                SpaceID = model.SpaceId,
                 MemberID = model.MemberId,
                 PaymentDate = DateTime.Parse(model.PaidTime),
                 ContactName = model.ContactName,
@@ -512,6 +511,7 @@ namespace ZoneRadar.Services
             var orderdetails = _repository.GetAll<OrderDetail>().ToList();
             var spacepics = _repository.GetAll<SpacePhoto>().ToList();
             var spacediscounts = _repository.GetAll<SpaceDiscount>().ToList();
+            var reviews = _repository.GetAll<Review>().ToList();
 
             //帶入會員ID
             var orderformember = orders.Where(x => x.Space.MemberID == id && x.OrderStatusID == 4);
@@ -526,6 +526,9 @@ namespace ZoneRadar.Services
                 var username = members.FirstOrDefault(x => x.MemberID == item.MemberID).Name;
                 //活動主Email
                 var email = members.FirstOrDefault(x => x.MemberID == item.MemberID).Email;
+                //是否評價過
+                var hasReview = reviews.Where(x => x.ToHost == false).Any(x => x.OrderID == item.OrderID);
+
                 decimal money = 0;
                 var temp = new List<RentDetailViewModel>();
                 //訂單時間 + 人數
@@ -575,7 +578,8 @@ namespace ZoneRadar.Services
                     SpaceID = item.SpaceID,
                     OrderNumber = (int)item.OrderNumber,
                     RentDetailVM = temp,
-                    Email = email
+                    Email = email,
+                    HasReview = hasReview
                 });
             }
 

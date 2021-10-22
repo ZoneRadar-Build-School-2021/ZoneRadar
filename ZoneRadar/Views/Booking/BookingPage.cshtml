@@ -47,7 +47,7 @@
             <div class="venue-img-group swiper">
                 @*<button type="button" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">收藏</span></button>*@
                 @*<a href="#" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">收藏</span></a>*@
-                <a href="@Url.Action("BookingPage", "Booking")" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block">收藏</span></a>
+                <a href="#" class="btn-save btn mx-3 px-3"><span class="d-none d-xl-inline-block"><i class="fas fa-heart me-2"></i>收藏</span></a>
                 <div class="venue-img-wrapper swiper-wrapper">
                     @foreach (var url in briefs.SpaceImageURLList)
                     {
@@ -125,7 +125,8 @@
                         <img class="user-pic rounded-circle border-blue" src="@details.HostPhoto">
                         <p class="user-name my-2">@details.HostName</p>
                     </a>
-                    <button type="button" class="btn-message btn">聯絡他</button>
+                    @*<button type="button" class="btn-message btn">聯絡他</button>*@
+                    <a href="mailto:@details.HostEmail" class="btn-message btn">聯絡他</a>
                 </div>
             </div>
             <div class="row">

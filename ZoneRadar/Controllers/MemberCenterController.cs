@@ -492,7 +492,7 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditProfile([Bind(Include = "MemberID,Name,Email,Phone,Description")] ProfileViewModel edit)
+        public ActionResult EditProfile([Bind(Include = "MemberID,Name,Email,Phone,Description,ReceiveEDM")] ProfileViewModel edit)
         {
             if (ModelState.IsValid)
             {
