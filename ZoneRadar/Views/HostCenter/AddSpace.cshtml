@@ -252,7 +252,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="row mt-4">
+                            <div class="row mt-4 border-bottom">
                                 <div class="col-6 col-xl-1  mt-auto mb-auto">
                                     <p class="mt-xl-3 fs16">星期一</p>
                                 </div>
@@ -286,6 +286,7 @@
                                     <label for="StateMon" class="form-label  "></label>
                                     <select id="StateMon" class="form-select fs16 MonselectL "
                                             aria-label="Default select example" name="StartTime" disabled>
+                                        <option id="MonS" value="">請選擇時間</option>
                                         @foreach (var open in Operating)
                                         {
                                             <option value="@open.Value">@open.Text</option>
@@ -302,6 +303,7 @@
                                     <label for="StateMon" class="form-label  "></label>
                                     <select id="StateMon" class="form-select fs16 MonselectR "
                                             aria-label="Default select example" name="EndTime" disabled>
+                                        <option id="MonEnd"  value="">請選擇時間</option>
                                         @foreach (var open in Operating)
                                         {
                                             <option value="@open.Value">@open.Text</option>
@@ -336,7 +338,7 @@
                                 </div>
                             </div>-->
 
-                            <div class="row mt-4">
+                            <div class="row mt-4 border-bottom">
                                 <div class="col-6 col-xl-1  mt-auto mb-auto">
                                     <p class="mt-xl-3 fs16">星期二</p>
                                 </div>
@@ -420,7 +422,7 @@
                                 </div>
                             </div>-->
 
-                            <div class="row mt-4">
+                            <div class="row mt-4 border-bottom">
                                 <div class="col-6 col-xl-1  mt-auto mb-auto">
                                     <p class="mt-xl-3 fs16">星期三</p>
                                 </div>
@@ -504,7 +506,7 @@
                                     </select>
                                 </div>
                             </div>-->
-                            <div class="row mt-4">
+                            <div class="row mt-4 border-bottom">
                                 <div class="col-6 col-xl-1  mt-auto mb-auto">
                                     <p class="mt-xl-3 fs16">星期四</p>
                                 </div>
@@ -588,7 +590,7 @@
                                     </select>
                                 </div>
                             </div>*@
-                            <div class="row mt-4">
+                            <div class="row mt-4 border-bottom">
                                 <div class="col-6 col-xl-1  mt-auto mb-auto">
                                     <p class="mt-xl-3 fs16">星期五</p>
                                 </div>
@@ -672,7 +674,7 @@
                                     </select>
                                 </div>
                             </div>-->
-                            <div class="row mt-4">
+                            <div class="row mt-4 border-bottom">
                                 <div class="col-6 col-xl-1  mt-auto mb-auto">
                                     <p class="mt-xl-3 fs16 ">星期六</p>
                                 </div>
@@ -756,7 +758,7 @@
                                     </select>
                                 </div>
                             </div>-->
-                            <div class="row mt-4">
+                            <div class="row mt-4 border-bottom">
                                 <div class="col-6 col-xl-1  mt-auto mb-auto">
                                     <p class="mt-xl-3 fs16">星期日</p>
                                 </div>

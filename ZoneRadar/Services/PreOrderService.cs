@@ -20,9 +20,9 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<ShopCarViewModel> GetShopCarVM(int id)
+        public List<OrderViewModel> GetShopCarVM(int id)
         {
-            var result = new List<ShopCarViewModel>();
+            var result = new List<OrderViewModel>();
 
             var spaces = _repository.GetAll<Space>().ToList();
             var orders = _repository.GetAll<Order>().ToList();
@@ -88,23 +88,19 @@ namespace ZoneRadar.Services
 
 
 
-                result.Add(new ShopCarViewModel
+                result.Add(new OrderViewModel
                 {
                     SpaceName = spacename,
                     SpaceUrl = spacepic,
                     OwnerName = ownername,
                     OwnerPhone = ownerphone,
                     Money = money,
-                    RentDetailVM = temp,
-                    OrderID = item.OrderID,
-                    SpaceID = item.SpaceID,
+                    RentDetail = temp,
+                    OrderId = item.OrderID,
+                    SpaceId = item.SpaceID,
                     Email = email
                 });
-
-
             }
-
-
             return result;
         }
         /// <summary>
