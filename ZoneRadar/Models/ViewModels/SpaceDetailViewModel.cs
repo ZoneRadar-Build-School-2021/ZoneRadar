@@ -10,6 +10,7 @@ namespace ZoneRadar.Models.ViewModels
         public string HostName { get; set; }
         public int HostID { get; set; }
         public string HostPhoto { get; set; }
+        public string HostEmail { get; set; }
         public Dictionary<string, List<string>> CleaningOptionDict { get; set; }
         public string Introduction { get; set; }
         public string ShootingEquipment { get; set; }

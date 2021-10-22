@@ -501,5 +501,10 @@ namespace ZoneRadar.Controllers
             }
             return View("EditProfile");
         }
+
+        public void GoogleLoginCallback()
+        {
+
+        }
     }
 }

@@ -44,7 +44,7 @@ namespace ZoneRadar.Services
             registerVM.RegisterEmail = HttpUtility.HtmlEncode(registerVM.RegisterEmail);
             registerVM.RegisterPassword = HttpUtility.HtmlEncode(registerVM.RegisterPassword).MD5Hash();
 
-            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.RegisterEmail.ToUpper() && x.IsVerify == true);
+            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.RegisterEmail.ToUpper() && x.IsVerify);
 
             if (isSameEmail)
             {
@@ -142,15 +142,7 @@ namespace ZoneRadar.Services
         public bool SearchUser(string email, bool verified)
         {
             email = HttpUtility.HtmlEncode(email);
-            bool hasInfo;
-            if (verified)
-            {
-                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == true);
-            }
-            else
-            {
-                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == false);
-            }
+            bool hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == verified);
             return hasInfo;
         }
 
@@ -174,6 +166,7 @@ namespace ZoneRadar.Services
                     //將會員的註冊時間和登入時間改成現在時間，代表驗證成功
                     user.SignUpDateTime = DateTime.Now;
                     user.LastLogin = DateTime.Now;
+                    user.IsVerify = true;
                     _repository.Update(user);
                     _repository.SaveChanges();
                     memberResult.User = user;
@@ -545,6 +538,7 @@ namespace ZoneRadar.Services
                     var sps = spaces.FirstOrDefault(x => x.SpaceID == c.SpaceID && x.SpaceStatusID == 2);
                     resultMemberCollection.MyCollection.Add(new Spaces
                     {
+                        SpaceId = sps.SpaceID,
                         SpaceName = sps.SpaceName,
                         Address = sps.Address,
                         SpacePhoto = sps.SpacePhoto.First().SpacePhotoUrl,
@@ -609,7 +603,7 @@ namespace ZoneRadar.Services
                     Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
                 };
                 //找出會員是否有租借場地並且顯示 出被場地主的評價
-                var order = _repository.GetAll<Order>().Where(x => x.MemberID == u.MemberID && x.OrderStatusID == 4).Where(x=>x.Review.Select(y=>y.ToHost).Equals(false));
+                var order = _repository.GetAll<Order>().Where(x => x.MemberID == u.MemberID && x.OrderStatusID == 4).Where(x=>x.Review.Select(y=>y.ToHost).Contains(false));
                 
                 foreach (var o in order)
                 {
