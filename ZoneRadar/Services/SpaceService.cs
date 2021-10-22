@@ -1226,7 +1226,7 @@ namespace ZoneRadar.Services
                 spaceManageList.Add(new SpaceManageViewModel
                 {
                     SpaceID = space.SpaceID,
-                    SpacePhotoUrl = space.SpacePhoto.First(x => x.Sort == 1).SpacePhotoUrl,
+                    SpacePhotoUrl = space.SpacePhoto.FirstOrDefault(x => x.Sort == 1) == null ? "" : space.SpacePhoto.First(x => x.Sort == 1).SpacePhotoUrl,
                     SpaceName = space.SpaceName,
                     SpaceAddress = string.Concat(space.District.DistrictID.ToString(), space.City.CityName, space.District.DistrictName, space.Address),
                     Score = scoreAvg,
@@ -1250,6 +1250,10 @@ namespace ZoneRadar.Services
             if (space != null)
             {
                 space.DiscontinuedDate = discontinuedDate;
+                if(discontinuedDate.Value.Date == DateTime.Today)
+                {
+                    space.SpaceStatusID = 1;
+                }
                 try
                 {
                     _repository.Update(space);
