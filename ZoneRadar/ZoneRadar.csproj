@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ECPay.Payment.Integration">
-      <HintPath>..\..\..\..\Downloads\ECPayAIO_Net-master\ECPay.Payment.Integration.dll</HintPath>
+      <HintPath>.\ECPay.Payment.Integration.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -230,6 +230,7 @@
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\AddSpaceViewModel.cs" />
+    <Compile Include="Models\ViewModels\APIResponse.cs" />
     <Compile Include="Models\ViewModels\BookingCardViewModel.cs" />
     <Compile Include="Models\ViewModels\BookingPageViewModel.cs" />
     <Compile Include="Models\ViewModels\HostCenterHistoryViewModel.cs" />
@@ -249,6 +250,7 @@
     <Compile Include="Models\ViewModels\QueryViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchingPageViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceManageViewModel.cs" />
+    <Compile Include="Models\ViewModels\SpaceImg.cs" />
     <Compile Include="Models\ViewModels\SpaceReviewViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceViewModel.cs" />
     <Compile Include="Models\ViewModels\UsercenterCompletedViewModel.cs" />
@@ -503,6 +505,7 @@
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\skins\moono-lisa\readme.md" />
+    <None Include="Properties\PublishProfiles\ZoneRadar - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -591,9 +594,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\..\..\Downloads\ECPayAIO_Net-master\ECPay.Payment.Integration.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

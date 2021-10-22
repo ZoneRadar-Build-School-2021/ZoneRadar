@@ -37,13 +37,29 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [Route("GetFilterDataFromIndex")]
         [AcceptVerbs("POST")]
-        public IHttpActionResult GetFilterDataFromIndex(FilterViewModel filterVm)
+        public APIResponse GetFilterDataFromIndex(FilterViewModel filterVm)
         {
-            _filterDataFromIndex.SelectedCity = filterVm.SelectedCity;
-            _filterDataFromIndex.SelectedType = filterVm.SelectedType;
-            _filterDataFromIndex.SelectedDate = filterVm.SelectedDate;
+            var response = new APIResponse();
+            try
+            {
+                _filterDataFromIndex.SelectedCity = filterVm.SelectedCity;
+                _filterDataFromIndex.SelectedType = filterVm.SelectedType;
+                _filterDataFromIndex.SelectedDate = filterVm.SelectedDate;
 
-            return Ok(_filterDataFromIndex);
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = _filterDataFromIndex;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Response = null;
+
+                return response;
+            }
         }
 
         /// <summary>
@@ -52,25 +68,41 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [Route("GetFilterData")]
         [AcceptVerbs("GET")]
-        public IHttpActionResult GetFilterData(string type, string city, string date)
+        public APIResponse GetFilterData(string type, string city, string date)
         {
-            var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City).OrderBy(x => x.Key.CityID);
-            var spaceTypeList = _repository.GetAll<TypeDetail>().OrderBy(x => x.TypeDetailID).Select(x => x.Type);
-            var amenityList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.Amenity);
-            var amenityIconList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.AmenityICON);
-
-            var result = new FilterViewModel
+            var response = new APIResponse();
+            try
             {
-                CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList()),
-                SpaceTypeList = spaceTypeList.ToList(),
-                AmenityList = amenityList.ToList(),
-                AmenityIconList = amenityIconList.ToList(),
-                SelectedCity = city == null ? "" : city,
-                SelectedType = type == null ? "" : type,
-                SelectedDate = date == null ? "" : date,
-            };
+                var citiesAndDistricts = _repository.GetAll<District>().GroupBy(x => x.City).OrderBy(x => x.Key.CityID);
+                var spaceTypeList = _repository.GetAll<TypeDetail>().OrderBy(x => x.TypeDetailID).Select(x => x.Type);
+                var amenityList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.Amenity);
+                var amenityIconList = _repository.GetAll<AmenityDetail>().OrderBy(x => x.AmenityDetailID).Select(x => x.AmenityICON);
 
-            return Ok(result);
+                var result = new FilterViewModel
+                {
+                    CityDistrictDictionary = citiesAndDistricts.ToDictionary(x => x.Key.CityName, x => x.Select(y => y.DistrictName).ToList()),
+                    SpaceTypeList = spaceTypeList.ToList(),
+                    AmenityList = amenityList.ToList(),
+                    AmenityIconList = amenityIconList.ToList(),
+                    SelectedCity = city == null ? "" : city,
+                    SelectedType = type == null ? "" : type,
+                    SelectedDate = date == null ? "" : date,
+                };
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = result;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Response = null;
+
+                return response;
+            }
         }
 
         /// <summary>
@@ -80,11 +112,27 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [Route("GetFilteredSpaces")]
         [AcceptVerbs("GET", "POST")]
-        public IHttpActionResult GetFilteredSpaces(QueryViewModel query)
+        public APIResponse GetFilteredSpaces(QueryViewModel query)
         {
-            var queriedSpaces = _spaceService.GetFilteredSpaces(query);
+            var response = new APIResponse();
+            try
+            {
+                var queriedSpaces = _spaceService.GetFilteredSpaces(query);
 
-            return Ok(queriedSpaces);
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = queriedSpaces;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Response = null;
+
+                return response;
+            }
         }
 
         /// <summary>
@@ -94,33 +142,159 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [Route("GetBookingCardData")]
         [AcceptVerbs("GET")]
-        public IHttpActionResult GetBookingCardData(int? id)
+        public APIResponse GetBookingCardData(int? id)
         {
-            if (!id.HasValue)
+            var response = new APIResponse();
+            try
             {
-                return BadRequest();
+                var result = _spaceService.GetTargetBookingCard(id);
+                if (User.Identity.IsAuthenticated)
+                {
+                    var memberID = int.Parse(User.Identity.Name);
+                    var isCollection = _repository.GetAll<Collection>().FirstOrDefault(x => x.SpaceID == id && x.MemberID == memberID) == null ? false : true;
+                    result.IsCollection = isCollection;
+                }
+                else
+                {
+                    result.IsCollection = false;
+                }
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = result;
+
+                return response;
             }
-            var result = _spaceService.GetTargetBookingCard(id);
-            return Ok(result);
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Response = null;
+
+                return response;
+            }
         }
 
+        /// <summary>
+        /// 確認會員是否登入
+        /// </summary>
+        /// <returns></returns>
         [Route("CheckLogin")]
         [AcceptVerbs("GET")]
-        public IHttpActionResult CheckLogin()
+        public APIResponse CheckLogin()
         {
-            bool isLogin = User.Identity.IsAuthenticated;
+            var response = new APIResponse();
+            try
+            {
+                bool isLogin = User.Identity.IsAuthenticated;
 
-            return Ok(isLogin);
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = isLogin;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Response = null;
+
+                return response;
+            }
         }
 
+        /// <summary>
+        /// 加入購物車
+        /// </summary>
+        /// <param name="preOrderVM"></param>
+        /// <returns></returns>
         [Route("AddPreOrder")]
         [AcceptVerbs("POST")]
-        public IHttpActionResult AddPreOrder(PreOrderViewModel preOrderVM)
+        public APIResponse AddPreOrder(PreOrderViewModel preOrderVM)
         {
-            int memberID = int.Parse(User.Identity.Name);
+            var response = new APIResponse();
+            try
+            {
+                int memberID = int.Parse(User.Identity.Name);
+                _preOrderService.PlaceAPreOrder(preOrderVM, memberID);
 
-            _preOrderService.PlaceAPreOrder(preOrderVM, memberID);
-            return Ok();
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = null;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Response = null;
+
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// 加入收藏
+        /// </summary>
+        /// <param name="spaceID"></param>
+        /// <returns></returns>
+        [Route("AddCollection")]
+        [AcceptVerbs("POST")]
+        public APIResponse AddCollection(SpaceBriefViewModel SpaceBriefVM)
+        {
+            var response = new APIResponse();
+            try
+            {
+                int memberID = int.Parse(User.Identity.Name);
+                _spaceService.AddToCollection(SpaceBriefVM.SpaceID, memberID);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = null;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Response = null;
+
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// 移除收藏
+        /// </summary>
+        /// <param name="spaceID"></param>
+        /// <returns></returns>
+        [Route("RemoveCollection")]
+        [AcceptVerbs("POST")]
+        public APIResponse RemoveCollection(SpaceBriefViewModel SpaceBriefVM)
+        {
+            var response = new APIResponse();
+            try
+            {
+                int memberID = int.Parse(User.Identity.Name);
+                _spaceService.RemoveFromCollection(SpaceBriefVM.SpaceID, memberID);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = null;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Response = null;
+
+                return response;
+            }
         }
     }
 }

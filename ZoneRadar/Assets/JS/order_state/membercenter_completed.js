@@ -1,52 +1,14 @@
-document.addEventListener("DOMContentLoaded", function () {
-    let pic = document.querySelectorAll('.star_pic');
-    let piclen = pic.length;
-    for (let i = 0; i < piclen; i++) {
-        pic[i].addEventListener("mouseout", mouseout);
-        pic[i].addEventListener("mouseover", mouseover);
-        pic[i].addEventListener("click", Click);
-    }
-    document.getElementById("clean").addEventListener("click", clean);
-});
-
-function mouseover() {
-    let pic = document.querySelectorAll('.star_pic');
-    for (let i = 0; i < this.id.substr(5); i++) {
-        pic[i].src = "/Assets/IMG/Usercenter/chngstar.png";
-    }
-}
+let mytextarea = document.getElementById("textsend");
+let myselect = document.querySelector('.myselect');
+let myradio = document.querySelectorAll('.myradio');
+let mybtn = document.querySelector('.mybtn');
 
 
-function mouseout() {
-    let pic = document.querySelectorAll('.star_pic');
-    for (let i = 0; i < this.id.substr(5); i++) {
-        pic[i].src = "/Assets/IMG/Usercenter/star.png";
-        document.getElementById("score").innerHTML = "";
-    }
-}
 
-function Click() {
-    let pic = document.querySelectorAll('.star_pic');
-    for (let i = 0; i < this.id.substr(5); i++) {
-        pic[i].src = "/Assets/IMG/Usercenter/chngstar.png";
+function success() {
+    if (mytextarea.value != "" && (myselect.value == '1' || myselect.value == '2' || myselect.value == '3' || myselect.value == '4' || myselect.value == '5') && (myradio[0].checked || myradio[1].checked)) {
+        mybtn.disabled = false;
+    } else {
+        mybtn.disabled = true;
     }
-    let piclen = pic.length;
-    for (let i = 0; i < piclen; i++) {
-        pic[i].removeEventListener("mouseout", mouseout);
-        pic[i].removeEventListener("mouseover", mouseover);
-        pic[i].removeEventListener("click", Click);
-    }
-}
-
-function clean() {
-    let pic = document.querySelectorAll('.star_pic');
-    let piclen = pic.length;
-    document.getElementById("score").innerHTML = "";
-    for (let i = 0; i < piclen; i++) {
-        pic[i].src = "/Assets/IMG/Usercenter/star.png";
-        pic[i].addEventListener("mouseout", mouseout);
-        pic[i].addEventListener("mouseover", mouseover);
-        pic[i].addEventListener("click", Click);
-    }
-    document.getElementById("clean").addEventListener("click", clean);
 }

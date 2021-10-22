@@ -57,10 +57,10 @@
         sessionStorage.clear();
 
         axios.get(getUrl)
-            .then(response => {
+            .then(res => {
                 document.querySelector('#web-date-filter').value = '';
                 document.querySelector('#phone-date-filter').value = '';
-                filterOptions = response.data;
+                filterOptions = res.data.Response;
                 // 抓出後端傳來篩選資料
                 filter.City = filterOptions.SelectedCity;
                 filter.Type = filterOptions.SelectedType;
@@ -153,7 +153,7 @@
                     // change事件監聽
                     onChange: function (selectedDates, dateStr, instance) {
                         filter.Date = dateStr;
-                        if (this.id === 'web-date-filter') {
+                        if (this.input.id === 'web-date-filter') {
                             requestForSpaces(filter);
                         }
                     },
@@ -168,7 +168,7 @@
                     // change事件監聽
                     onChange: function (selectedDates, dateStr, instance) {
                         filter.Date = dateStr;
-                        if (this.id === 'web-date-filter') {
+                        if (this.input.id === 'web-date-filter') {
                             requestForSpaces(filter);
                         }
                     },
@@ -445,9 +445,11 @@
             console.log(filter)
 
             axios.post('/webapi/spaces/GetFilteredSpaces', filter)
-                .then(response => {
-                    let spaceList = response.data;
-                    renderSpaceCards(spaceList);
+                .then(res => {
+                    if (res.data.Status === 'Success') {
+                        let spaceList = res.data.Response;
+                        renderSpaceCards(spaceList);
+                    }
                 })
         }
 

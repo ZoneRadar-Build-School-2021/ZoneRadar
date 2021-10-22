@@ -1,4 +1,4 @@
-img {
+ï»¿img {
     max-width: 100%;
     height: auto;
     vertical-align: middle;
@@ -92,11 +92,11 @@ ul {
 
 
     .read-more::after {
-        content: '¬d¬İ¤é´Á';
+        content: 'æŸ¥çœ‹æ—¥æœŸ';
     }
 
     .read-more:not(.collapsed)::after {
-        content: 'ÁôÂÃ¤é´Á';
+        content: 'éš±è—æ—¥æœŸ';
     }
 
 .datetime-card {
@@ -148,6 +148,11 @@ ul {
     background-color: #049DD9;
     color: #fff;
 }
+
+    .btn_sendout:hover {
+        background-color: #0077a7;
+        color: #fff;
+    }
 
 .fa-check {
     color: green;

@@ -2,9 +2,8 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
-using ZoneRadar.Models;
 
-namespace ZoneRadar.Data
+namespace ZoneRadar.Models
 {
     public partial class ZONERadarContext : DbContext
     {
@@ -12,7 +11,6 @@ namespace ZoneRadar.Data
             : base("name=ZONERadarContext")
         {
         }
-
         public virtual DbSet<AmenityCategoryDetail> AmenityCategoryDetail { get; set; }
         public virtual DbSet<AmenityDetail> AmenityDetail { get; set; }
         public virtual DbSet<Cancellation> Cancellation { get; set; }

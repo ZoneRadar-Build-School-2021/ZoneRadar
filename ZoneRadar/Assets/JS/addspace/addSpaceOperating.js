@@ -1,15 +1,18 @@
-﻿        ///營業時間 radio///
+﻿        //營業時間 radio///
         var flag=1;
         //monday
-        let flexSwitchCheckDefault= document.querySelectorAll("#flexSwitchCheckDefault")[0];
-        let flexRadioDefault1=document.querySelectorAll ('#flexRadioDefault1')[0];
-        let flexRadioDefault2=document.querySelectorAll ('#flexRadioDefault1')[1];
+        let flexSwitchCheckDefault = document.querySelector("#flexSwitchCheckDefault");
+        let flexRadioDefault1=document.querySelector('#flexRadioDefault1');
+        let flexRadioDefault2 = document.querySelector('#flexRadioDefault1hr');
 
         let StateMon=document.querySelectorAll("#StateMon")[0];
         let StateMon2=document.querySelectorAll("#StateMon")[1];
         let StateMon3=document.querySelectorAll("#StateMon")[2];
         let StateMon4=document.querySelectorAll("#StateMon")[3];
 
+       
+
+        
         flexSwitchCheckDefault.addEventListener("click",function(){
            if(flag==1){
             flexRadioDefault1.disabled=false;
@@ -28,14 +31,27 @@
            }
         });
         flexRadioDefault1.addEventListener("click",function(){
-            StateMon.disabled=true;
-            StateMon2.disabled=true;
-            StateMon3.disabled=true;
-            StateMon4.disabled=true;
+            StateMon.disabled = false;
+            StateMon2.disabled = false;
+            StateMon3.disabled = false;
+            StateMon4.disabled = false;
+        //    var starttime= document.getElementById("Mon");
+        //    starttime.removeAttribute('class');
+        //    var MonS = document.getElementById("MonS");
+        //    MonS.innerHTML = "06:00";
+        //    MonS.setAttribute("value", "06:00");
+        //    var MonEnd = document.getElementById("MonEnd");
+        //    MonEnd.innerHTML = "23:00";
+        //    MonEnd.setAttribute("value", "23:00");
         });
 
         flexRadioDefault2.addEventListener('click',function () {
-
+            //var MonS = document.getElementById("MonS");
+            //MonS.innerHTML = "請選擇營業時間";
+            
+            //var MonEnd = document.getElementById("MonEnd");
+            //MonEnd.innerHTML = "請選擇營業時間";
+           
             let StateMon=document.querySelectorAll("#StateMon")[0];
             let StateMon2=document.querySelectorAll("#StateMon")[1];
             let StateMon3=document.querySelectorAll("#StateMon")[2];
@@ -49,9 +65,9 @@
 
         //tuesday
         var flagtue=1;
-        let flexSwitchCheckDefaultTue=document.querySelectorAll("#flexSwitchCheckDefault")[1];
-        let TueAllDay=document.querySelectorAll ('#flexRadioDefault2')[0];
-        let Tuehour=document.querySelectorAll ('#flexRadioDefault2')[1];
+        let flexSwitchCheckDefaultTue=document.querySelector("#flexSwitchCheckDefault2");
+        let TueAllDay=document.querySelector('#flexRadioDefault2');
+        let Tuehour = document.querySelector('#flexRadioDefault2hr');
         flexSwitchCheckDefaultTue.addEventListener("click",function(){
             if (flagtue==1) {
                 TueAllDay.disabled=false;
@@ -102,12 +118,12 @@
 
 
        //wednesday
-       let flexSwitchCheckDefaultWed=document.querySelectorAll("#flexSwitchCheckDefault")[2];
-       let WedAllDay=document.querySelectorAll("#flexRadioDefault3")[0];
-       let Wedhour=document.querySelectorAll("#flexRadioDefault3")[1];
+       let flexSwitchCheckDefaultWed = document.querySelector("#flexSwitchCheckDefault3");
+       let WedAllDay=document.querySelector("#flexRadioDefault3");
+       let Wedhour=document.querySelector("#flexRadioDefault3hr");
        var flagWed=1;
        flexSwitchCheckDefaultWed.addEventListener("click",function(){
-           if ((flagWed==1)) {
+           if (flagWed==1) {
             Wedhour.disabled=false;
             WedAllDay.disabled=false;
             flagWed=0;
@@ -151,9 +167,9 @@
             StateWed4.document=false;
        });
        //thursday
-        let flexSwitchCheckDefaultThu=document.querySelectorAll("#flexSwitchCheckDefault")[3];
-        let ThuAllDay=document.querySelectorAll("#flexRadioDefault4")[0];
-        let Thuhour=document.querySelectorAll("#flexRadioDefault4")[1];
+        let flexSwitchCheckDefaultThu=document.querySelector("#flexSwitchCheckDefault4");
+        let ThuAllDay=document.querySelector("#flexRadioDefault4");
+        let Thuhour = document.querySelector("#flexRadioDefault4hr");
         let StateThu=document.querySelectorAll("#StateThu")[0];
         let StateThu2=document.querySelectorAll("#StateThu")[1];
         let StateThu3=document.querySelectorAll("#StateThu")[2];
@@ -190,9 +206,9 @@
      })
 
        //friday
-       let flexSwitchCheckDefaultFri=document.querySelectorAll("#flexSwitchCheckDefault")[4];
-        let FridayAllDay=document.querySelectorAll("#flexRadioDefault5")[0];
-        let Fridayhour=document.querySelectorAll("#flexRadioDefault5")[1];
+       let flexSwitchCheckDefaultFri=document.querySelector("#flexSwitchCheckDefault5");
+        let FridayAllDay=document.querySelector("#flexRadioDefault5");
+        let Fridayhour = document.querySelector("#flexRadioDefault5hr");
         let StateFri=document.querySelectorAll("#StateFri")[0];
         let StateFri2=document.querySelectorAll('#StateFri')[1];
         let StateFri3=document.querySelectorAll("#StateFri")[2];
@@ -227,11 +243,11 @@
                 StateFri3.disabled=false;
                 StateFri4.disabled=false;
        })
-2
+
        //saturday
-       let flexSwitchCheckDefaultSat=document.querySelectorAll("#flexSwitchCheckDefault")[5];
-       let SatAllday=document.querySelectorAll("#flexRadioDefault6")[0];
-       let Sathour=document.querySelectorAll('#flexRadioDefault6')[1];
+       let flexSwitchCheckDefaultSat=document.querySelector("#flexSwitchCheckDefault6");
+       let SatAllday=document.querySelector("#flexRadioDefault6");
+       let Sathour = document.querySelector('#flexRadioDefault6hr');
        let StateSat=document.querySelectorAll("#StateSat")[0];
        let StateSat2=document.querySelectorAll("#StateSat")[1];
        let StateSat3=document.querySelectorAll("#StateSat")[2];
@@ -268,9 +284,9 @@
        });
 
         //sunday 
-        let flexSwitchCheckDefaultSun=document.querySelectorAll("#flexSwitchCheckDefault")[6];
-        let SunAllDay=document.querySelectorAll("#flexRadioDefault7")[0];
-        let Sunhour=document.querySelectorAll('#flexRadioDefault7')[1];
+        let flexSwitchCheckDefaultSun=document.querySelector("#flexSwitchCheckDefault7");
+        let SunAllDay=document.querySelector("#flexRadioDefault7");
+        let Sunhour=document.querySelector('#flexRadioDefault7hr');
         let StateSun=document.querySelectorAll('#StateSun')[0];
         let StateSun2=document.querySelectorAll("#StateSun")[1];
         let StateSun3=document.querySelectorAll("#StateSun")[2];
@@ -306,4 +322,4 @@
                 StateSun4.disabled=false;
        });
 
-/營業時間 radio///
+///營業時間 radio///

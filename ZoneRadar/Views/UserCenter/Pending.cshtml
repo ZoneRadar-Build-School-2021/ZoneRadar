@@ -2,25 +2,25 @@
 @{
     ViewBag.Title = "Pending";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
-@foreach (var item in Model)
-{
-    <div class="memberbuyer_container container mt-5 border-bottom">
-        <div class="memberbuyer row mt-5">
-            <h3 class="memberbuyer_title me-4">訂單管理</h3>
-            <ul class="memberbuyer_state d-flex justify-content-start mt-5">
-                <a class="me-4" href="Pending">
-                <li class="p-2 order_state active">已付款</li>
-                </a>
-                <a class="me-4" href="Processing">
-                <li class="p-2 order_state">使用中</li>
-                </a>
-                <a class="me-4" href="Completed">
-                <li class="p-2 order_state">歷史訂單</li>
-                </a>
-            </ul>
-        </div>
+
+<div class="memberbuyer_container container mt-5 border-bottom">
+    <div class="memberbuyer row mt-5">
+        <h3 class="memberbuyer_title me-4">訂單管理</h3>
+        <ul class="memberbuyer_state d-flex justify-content-start mt-5">
+            <a class="me-4" href="Pending">
+            <li class="p-2 order_state active">已付款</li>
+            </a>
+            <a class="me-4" href="Processing">
+            <li class="p-2 order_state">使用中</li>
+            </a>
+            <a class="me-4" href="Completed">
+            <li class="p-2 order_state">歷史訂單</li>
+            </a>
+        </ul>
+    </div>
+    @foreach (var item in Model)
+    {
         <div class="row align-items-end">
             <div class="order-card py-4 py-lg-5">
                 <div class="row">
@@ -47,7 +47,7 @@
                         <ul class="order-detial">
                             <li class="mb-2 fs-5">
                                 場地主姓名:<a href="mailto:@Html.DisplayFor(m => item.Email)" class="customer-name mx-2">@Html.DisplayFor(m => item.OwnerName)</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                                       title="連絡他"></i>
+                                                                                                                                                                title="連絡他"></i>
                             </li>
                             <li class="mb-2 fs-5">場地主電話：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.OwnerPhone)</span></li>
                             <li class="mb-2 fs-5">
@@ -89,7 +89,7 @@
                                                     <span class="date ms-2">@Html.DisplayFor(m => rentdatail.RentBackTime)</span>
                                                 </div>
                                                 <div class="col-sm-12 d-flex col-lg-3 align-items-center mb-1">
-                                                    <i class="far fa-calendar-check me-1"></i>人數:
+                                                    <i class="far fa-user me-1"></i>人數:
                                                     <span class="participant ms-2 me-1">@Html.DisplayFor(m => rentdatail.People)</span>人
                                                 </div>
                                             }
@@ -103,68 +103,6 @@
                             </li>
                         </ul>
                     </div>
-                </div>
-            </div>
-            <div class="memberbuyer_pending_btn col-12 mt-3 mb-5 d-flex justify-content-end">
-                <button class="btn me-2" data-bs-toggle="modal" data-bs-target="#@Html.DisplayFor(m => item.SpaceName)">取消訂單</button>
-            </div>
-        </div>
-
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="@Html.DisplayFor(m => item.SpaceName)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>@Html.DisplayFor(m => item.OrderNumber)</span></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p class="cancel_policy">
-                        依據您所租借場地之退款政策為：
-                        <span class="fw-bolder">
-                            @Html.DisplayFor(m => item.CancelTitle)
-                        </span>
-                    </p>
-                    <p class="cancel_policy">
-                        距離您租借場地的時間還剩：
-                        <span class="fw-bolder">
-                            @Html.DisplayFor(m => item.CancelTime)
-                        </span>
-                    </p>
-                    <p class="cancel_policy_text">
-                        政策說明：
-                        <span>
-                            @Html.DisplayFor(m => item.CancelDetail)
-                        </span>
-                    </p>
-                    <p class="cancel_police_money">
-                        退款金額：NT$
-                        <span class="fw-bolder">
-                            @Html.DisplayFor(m => item.CancelMoney)
-                        </span>
-                    </p>
-                </div>
-                <input type="hidden" value="@Html.DisplayFor(m=>item.OrderStatus)" name="OrderStatus" />
-                <form action="~/UserCenter/DeletePendingOrder" method="post">
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.OrderId)" name="OrderId" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.OrderNumber)" name="OrderNumber" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.SpaceID)" name="SpaceId" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.MemberId)" name="MemberId" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.PaidTime)" name="PaidTime" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.CancelTime)" name="CancelTime" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.ContactName)" name="ContactName" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.ContactPhone)" name="ContactPhone" />
-                    <input type="hidden" value="@Html.DisplayFor(m=>item.OrderStatus)" name="OrderStatus" />
-
-                    <div class="modal-footer">
-                        @*@Html.ActionLink("確定取消訂單", "DeletePendingOrder", new { id = item }, new { @class = "btn btn_close" })*@
-                        <button class="btn btn_close" type="submit">確定取消訂單</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
                     <div class="col-12">
                         <p class="cost text-end">
                             訂單總額:
@@ -233,10 +171,8 @@
                 </div>
             </div>
         </div>
-    </div>
-}
-
-
+    }
+</div>
 @section topCSS{
     <link href="~/Assets/CSS/order_state/membercenter_pending.css" rel="stylesheet" />
     <link href="~/Assets/CSS/flatpickr.min.css" rel="stylesheet" />
@@ -245,4 +181,3 @@
     <script src="~/Assets/JS/order_state/membercenter_pending.js"></script>
     <script src="~/Assets/JS/flatpickr.js"></script>
 }
-

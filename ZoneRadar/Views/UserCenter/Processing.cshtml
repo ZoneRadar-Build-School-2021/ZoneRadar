@@ -4,23 +4,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@foreach (var item in Model)
-{
-    <div class="memberbuyer_container container mt-5 border-bottom">
-        <div class="memberbuyer row mt-5">
-            <h3 class="memberbuyer_title me-4">訂單管理</h3>
-            <ul class="memberbuyer_state d-flex justify-content-start mt-5 mb-3">
-                <a class="me-4" href="Pending">
-                <li class="p-2 order_state">已付款</li>
-                </a>
-                <a class="me-4" href="Processing">
-                <li class="p-2 order_state active">使用中</li>
-                </a>
-                <a class="me-4" href="Completed">
-                <li class="p-2 order_state">歷史訂單</li>
-                </a>
-            </ul>
-        </div>
+<div class="memberbuyer_container container mt-5 border-bottom">
+    <div class="memberbuyer row mt-5">
+        <h3 class="memberbuyer_title me-4">訂單管理</h3>
+        <ul class="memberbuyer_state d-flex justify-content-start mt-5 mb-3">
+            <a class="me-4" href="Pending">
+            <li class="p-2 order_state">已付款</li>
+            </a>
+            <a class="me-4" href="Processing">
+            <li class="p-2 order_state active">使用中</li>
+            </a>
+            <a class="me-4" href="Completed">
+            <li class="p-2 order_state">歷史訂單</li>
+            </a>
+        </ul>
+    </div>
+
+    @foreach (var item in Model)
+    {
         <div class="row align-items-end">
             <div class="order-card py-4 py-lg-5">
                 <div class="row">
@@ -47,7 +48,7 @@
                         <ul class="order-detial">
                             <li class="mb-2 fs-5">
                                 場地主姓名:<a href="mailto:@Html.DisplayFor(m => item.Email)" class="customer-name mx-2">@Html.DisplayFor(m => item.OwnerName)</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                                       title="連絡他"></i>
+                                                                                                                                                                title="連絡他"></i>
                             </li>
                             <li class="mb-2 fs-5">場地主電話：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.OwnerPhone)</span></li>
                             <li class="mb-2 fs-5">
@@ -89,7 +90,7 @@
                                                     <span class="date ms-2">@Html.DisplayFor(m => rentdetail.RentBackTime)</span>
                                                 </div>
                                                 <div class="col-sm-12 d-flex col-lg-3 align-items-center mb-1">
-                                                    <i class="far fa-calendar-check me-1"></i>人數:
+                                                    <i class="far fa-user me-1"></i>人數:
                                                     <span class="participant ms-2 me-1">@Html.DisplayFor(m => rentdetail.People)</span>人
                                                 </div>
                                             }
@@ -117,9 +118,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    }
+ </div>
 
-}
+
 
 @section topCSS{
     <link href="~/Assets/CSS/order_state/membercenter_processing.css" rel="stylesheet" />

@@ -52,22 +52,15 @@ a {
     border-radius: 10px !important;
 }
 
-    .btn-save::before {
-        content: "\f004";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 300;
+    .btn-save .fa-heart {
         font-size: 16px;
-        margin-right: 0.3rem;
         color: #FF0000;
     }
+
 
     .btn-save:hover {
         background-color: var(--gray-btn-hover);
     }
-
-        .btn-save:hover::before {
-            font-weight: 900;
-        }
 
 .venue-img {
     width: 100%;
