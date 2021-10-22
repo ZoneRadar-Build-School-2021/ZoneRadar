@@ -356,7 +356,13 @@
                 }
 
                 document.querySelector('.swal2-confirm.swal2-styled').addEventListener('click', redirectToPreURL); 
-            }
+        }
+
+        $.validator.addMethod("safe", function (value, element) {
+            let reg = /^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-zA-Z])(?=.*\d).*$/;
+            return this.optional(element) || (reg.test(value));
+        }, "密碼必須包含至少1個數字、小寫英文和大寫英文");
+        $.validator.unobtrusive.adapters.addBool("safe");
     </script>
 
 

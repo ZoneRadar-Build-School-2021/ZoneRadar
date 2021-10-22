@@ -16,5 +16,6 @@ namespace ZoneRadar.Models.ViewModels
         public int PricePerHour { get; set; }
         public int Capacity { get; set; }
         public List<string> OrderTimeList { get; set; }
+        public bool IsCollection { get; set; }
     }
 }

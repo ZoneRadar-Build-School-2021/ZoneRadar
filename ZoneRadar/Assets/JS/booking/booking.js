@@ -7,7 +7,8 @@
     const extendDayBtn = document.querySelector('.extend');
     const removeDayBtn = document.querySelector('.remove');
     const submitBtn = document.querySelector('.btn-submit');
-    const saveBtn = document.querySelector('.btn-save');
+    const saveBtn = document.querySelector('.btn-save.btn');
+    const heart = document.querySelector('.btn-save .fa-heart');
     const map = L.map('map', {
         center: [25.041824011585646, 121.53629849747963],
         zoom: 17
@@ -35,6 +36,7 @@
     let operationDayArr = [];
     let minHour, discount, hoursForDiscount, pricePerHour, orderDateArr, capacity;
     let spaceID = '';
+    let isCollection = false;
     if (sessionStorage.getItem('theKey')) {
         spaceID = sessionStorage.getItem('theKey');
         sessionStorage.clear();
@@ -83,8 +85,7 @@
 
     function setCard() {
         axios.get(getURL).then(res => {
-            const source = res.data;
-            console.log(source)
+            const source = res.data.Response;
             const cloneNode = document.querySelector('#order-item-template').content.cloneNode(true);
             const dateNode = cloneNode.querySelector('.start-date');
             const attendeeNode = cloneNode.querySelector('.attendees');
@@ -107,9 +108,14 @@
             hoursForDiscount = source.HoursForDiscount;
             pricePerHour = source.PricePerHour;
             capacity = source.Capacity;
-
+            isCollection = source.IsCollection;
 
             // 執行區-----------
+            if (isCollection) {
+                heart.style.fontWeight = 900;
+            } else {
+                heart.style.fontWeight = 300;
+            }
             setCalendar();
             setAttendee();
             cloneNode.querySelector('.order-item').classList.add(`day-${index}`);
@@ -330,7 +336,7 @@
 
     function submitOrder() {
         axios.get('/webapi/spaces/CheckLogin').then(res => {
-            let isLogin = res.data;
+            let isLogin = res.data.Response;
             if (!isLogin) {
                 const login_modal = document.querySelector("#login-modal");
                 const modal = bootstrap.Modal.getOrCreateInstance(login_modal);
@@ -339,11 +345,13 @@
                 sessionStorage.setItem('targetURL', location.href);
             } else {
                 axios.post('/webapi/spaces/AddPreOrder', preOrderObj).then(res => {
-                    Swal.fire(
-                        '預約成功!',
-                        '請於24小時內前往會員中心 > 我的訂單內申請付款',
-                        'success'
-                    )
+                    if (res.data.Status === 'Success') {
+                        Swal.fire(
+                            '預約成功!',
+                            '請於24小時內前往會員中心 > 我的訂單內申請付款',
+                            'success'
+                        )
+                    }
                 })
             }
 
@@ -401,7 +409,69 @@
     function addCollection(e) {
         e.preventDefault();
 
-        axios.get('')
+        if (isCollection === false) {
+            axios.get('/webapi/spaces/CheckLogin').then(res => {
+                let isLogin = res.data.Response;
+                if (!isLogin) {
+                    const login_modal = document.querySelector("#login-modal");
+                    const modal = bootstrap.Modal.getOrCreateInstance(login_modal);
+                    modal.show();
+
+                    sessionStorage.setItem('targetURL', location.href);
+                } else {
+                    let SpaceBriefVM = {
+                        SpaceID: spaceID,
+                    }
+                    axios.post('/webapi/spaces/AddCollection', SpaceBriefVM).then(res => {
+                        if (res.data.Status === 'Success') {
+                            Swal.fire(
+                                '收藏成功!',
+                                '',
+                                'success'
+                            )
+                            isCollection = true;
+                            if (isCollection) {
+                                heart.style.fontWeight = 900;
+                            } else {
+                                heart.style.fontWeight = 300;
+                            }
+                        }
+                    })
+                }
+            })
+        } else {
+            axios.get('/webapi/spaces/CheckLogin').then(res => {
+                let isLogin = res.data.Response;
+                if (!isLogin) {
+                    const login_modal = document.querySelector("#login-modal");
+                    const modal = bootstrap.Modal.getOrCreateInstance(login_modal);
+                    modal.show();
+
+                    sessionStorage.setItem('targetURL', location.href);
+                } else {
+                    let SpaceBriefVM = {
+                        SpaceID: spaceID,
+                    }
+                    axios.post('/webapi/spaces/RemoveCollection', SpaceBriefVM).then(res => {
+                        if (res.data.Status === 'Success') {
+                            Swal.fire(
+                                '移除收藏成功!',
+                                '',
+                                'success'
+                            )
+                            isCollection = false;
+                            if (isCollection) {
+                                heart.style.fontWeight = 900;
+                            } else {
+                                heart.style.fontWeight = 300;
+                            }
+                        }
+                    })
+                }
+            })
+        }
+
+        
     }
 
 })();

@@ -267,6 +267,7 @@
     <Compile Include="Services\SpaceService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\HashService.cs" />
+    <Compile Include="Utilities\QualifiedPasswordAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\CSS\booking\booking.css" />
@@ -299,7 +300,6 @@
     <Content Include="Assets\CSS\order_state\membercenter_processing.css" />
     <Content Include="Assets\CSS\order_state\usercenter_shopcar.css" />
     <Content Include="Assets\CSS\Pay\Paypage.css" />
-    <Content Include="Assets\CSS\profile\profile.css" />
     <Content Include="Assets\CSS\searching\searching.css" />
     <Content Include="Assets\CSS\static\QA.css" />
     <Content Include="Assets\CSS\static\StaticPage.css" />
@@ -505,6 +505,7 @@
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\skins\moono-lisa\readme.md" />
+    <None Include="Properties\PublishProfiles\ZoneRadar - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

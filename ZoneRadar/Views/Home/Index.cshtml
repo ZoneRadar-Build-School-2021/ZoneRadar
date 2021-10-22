@@ -84,7 +84,7 @@
             </div>
             <div class="swiper-slide swiper-slide-photograph">
                 <a href="~/Type/拍攝攝影" class="d-block w-100 h-100 text-decoration-none text-white">
-                    <span class="">拍攝攝影</span>
+                    <span class="">拍照/攝影</span>
                 </a>
             </div>
             <div class="swiper-slide swiper-slide-announce">
@@ -94,7 +94,7 @@
             </div>
             <div class="swiper-slide swiper-slide-concert">
                 <a href="~/Type/音樂表演" class="d-block w-100 h-100 text-decoration-none text-white">
-                    <span class="">音樂表演</span>
+                    <span class="">音樂/表演</span>
                 </a>
             </div>
             <div class="swiper-slide swiper-slide-exhibition">
@@ -169,7 +169,7 @@
                     </div>
                     <div class="swiper-slide Taichung">
                         <a href="~/City/台中市" class="d-block w-100 h-100 text-decoration-none text-white">
-                            <span class="" data-city="台中市">臺中</span>
+                            <span class="" data-city="臺中市">臺中</span>
                         </a>
                     </div>
                     <div class="swiper-slide Nantou">
@@ -408,10 +408,10 @@
         });
 
         function goSearching(filterVM) {
-            axios.post('https://localhost:44322/webapi/spaces/GetFilterDataFromIndex', filterVM).then(res => {
-                if (res.status === 200) {
-                    sessionStorage.setItem('filterVm', JSON.stringify(res.data));
-                    window.location = 'https://localhost:44322/Searching/SearchingPage'
+            axios.post('/webapi/spaces/GetFilterDataFromIndex', filterVM).then(res => {
+                if (res.status === 200 && res.data.Status === 'Success') {
+                    sessionStorage.setItem('filterVm', JSON.stringify(res.data.Response));
+                    window.location = '/Searching/SearchingPage'
                 };
             });
         };

@@ -196,30 +196,44 @@ namespace ZoneRadar.Services
                 CancellationInfo = targetSpace.Cancellation.CancellationDetail,
                 HoursForDiscount = hoursForDiscount,
                 Discount = discount,
+                HostEmail = targetSpace.Member.Email
             };
 
             return result;
         }
 
 
-        ///// <summary>
-        ///// 收藏寫入資料庫(Steve)
-        ///// </summary>
-        ///// <param name="bookingPageVM"></param>
-        ///// <param name="memberID"></param>
-        //public void CreateCollectionInDB(BookingPageViewModel bookingPageVM, string memberID)
-        //{
-        //    var collection = new Collection
-        //    {
-        //        MemberID = int.Parse(memberID),
-        //        SpaceID = bookingPageVM.SpaceBreifInfo.SpaceID,
-        //    };
+        /// <summary>
+        /// 收藏寫入資料庫(Steve)
+        /// </summary>
+        /// <param name="bookingPageVM"></param>
+        /// <param name="memberID"></param>
+        public void AddToCollection(int spaceID, int memberID)
+        {
+            var collection = new Collection
+            {
+                MemberID = memberID,
+                SpaceID = spaceID,
+            };
 
-        //    _repository.Create<Collection>(collection);
-        //    _repository.SaveChanges();
-        //    _repository.Dispose();
-        //}
+            _repository.Create<Collection>(collection);
+            _repository.SaveChanges();
+            _repository.Dispose();
+        }
 
+        /// <summary>
+        /// 移除寫入資料庫(Steve)
+        /// </summary>
+        /// <param name="bookingPageVM"></param>
+        /// <param name="memberID"></param>
+        public void RemoveFromCollection(int spaceID, int memberID)
+        {
+            var target = _repository.GetAll<Collection>().FirstOrDefault(x => x.SpaceID == spaceID && x.MemberID == memberID);
+
+            _repository.Delete<Collection>(target);
+            _repository.SaveChanges();
+            _repository.Dispose();
+        }
 
         /// <summary>
         /// 搜尋頁即時篩選(Steve)
@@ -239,7 +253,7 @@ namespace ZoneRadar.Services
             var amenities = query.Amenities;
             var keywords = query.Keywords;
 
-            var scores = _repository.GetAll<Review>();
+            var scores = _repository.GetAll<Review>().Where(x => x.ToHost == true);
             var spaces = _repository.GetAll<Space>().Where(x => x.SpaceStatusID == 2);
             var orders = _repository.GetAll<OrderDetail>();
             var spaceTypes = _repository.GetAll<SpaceType>();
@@ -1295,7 +1309,6 @@ namespace ZoneRadar.Services
             var targetSpace = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id);
             var orderTimeList = _repository.GetAll<OrderDetail>().Where(x => x.Order.SpaceID == id && x.Order.OrderStatusID != 5).ToList().Select(x => x.StartDateTime.ToString("yyyy-MM-dd"));
 
-
             var result = new BookingCardViewModel
             {
                 OperatingDayList = operatingList.Select(x => x.OperatingDay).ToList(),
@@ -1371,6 +1384,10 @@ namespace ZoneRadar.Services
             if (space != null)
             {
                 space.DiscontinuedDate = discontinuedDate;
+                if(discontinuedDate.Value.Date == DateTime.Today)
+                {
+                    space.SpaceStatusID = 1;
+                }
                 try
                 {
                     _repository.Update(space);

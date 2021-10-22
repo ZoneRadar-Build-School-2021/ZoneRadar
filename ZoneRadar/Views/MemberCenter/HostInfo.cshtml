@@ -92,9 +92,15 @@
                         </a>
                     </div>
                     <div class="space_card_star mt-1">
-                        @for (int i = 1; i <= sp.Score; i++)
+                        @if (sp.Score == 0)
                         {
+                            <span>目前沒有任何評價</span>
+                        }
+                        else{
+                            for (int i = 1; i <= sp.Score; i++)
+                            {
                             <i class="fas fa-star"></i>
+                            }
                         }
                         <span class="me-2">(@sp.ReviewCount)</span>
                     </div>

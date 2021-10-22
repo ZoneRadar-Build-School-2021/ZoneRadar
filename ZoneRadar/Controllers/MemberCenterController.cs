@@ -480,7 +480,7 @@ namespace ZoneRadar.Controllers
         [HttpGet]
         public ActionResult EditProfile()
         {
-            var userID = int.Parse(User.Identity.Name); //登入後的帳號(綁定一人)
+            var userID = int.Parse(User.Identity.Name); //特定帳號
             var model = _service.GetProfileData(userID);
             return View(model);
         }
@@ -500,6 +500,11 @@ namespace ZoneRadar.Controllers
                 return View(model);
             }
             return View("EditProfile");
+        }
+
+        public void GoogleLoginCallback()
+        {
+
         }
     }
 }

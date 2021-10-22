@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using ZoneRadar.Utilities;
 
 namespace ZoneRadar.Models.ViewModels
 {
@@ -28,6 +29,7 @@ namespace ZoneRadar.Models.ViewModels
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
+        [QualifiedPassword]
         public string RegisterPassword { get; set; }
 
         [Required(ErrorMessage = "請填寫此欄位")]
