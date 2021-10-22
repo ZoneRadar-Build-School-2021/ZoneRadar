@@ -505,6 +505,7 @@
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\skins\moono-lisa\readme.md" />
+    <None Include="Properties\PublishProfiles\ZoneRadar - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
