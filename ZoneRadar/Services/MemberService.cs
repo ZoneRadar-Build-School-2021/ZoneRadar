@@ -44,7 +44,7 @@ namespace ZoneRadar.Services
             registerVM.RegisterEmail = HttpUtility.HtmlEncode(registerVM.RegisterEmail);
             registerVM.RegisterPassword = HttpUtility.HtmlEncode(registerVM.RegisterPassword).MD5Hash();
 
-            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.RegisterEmail.ToUpper() && x.IsVerify == true);
+            var isSameEmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == registerVM.RegisterEmail.ToUpper() && x.IsVerify);
 
             if (isSameEmail)
             {
@@ -142,15 +142,7 @@ namespace ZoneRadar.Services
         public bool SearchUser(string email, bool verified)
         {
             email = HttpUtility.HtmlEncode(email);
-            bool hasInfo;
-            if (verified)
-            {
-                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == true);
-            }
-            else
-            {
-                hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == false);
-            }
+            bool hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == verified);
             return hasInfo;
         }
 
@@ -174,6 +166,7 @@ namespace ZoneRadar.Services
                     //將會員的註冊時間和登入時間改成現在時間，代表驗證成功
                     user.SignUpDateTime = DateTime.Now;
                     user.LastLogin = DateTime.Now;
+                    user.IsVerify = true;
                     _repository.Update(user);
                     _repository.SaveChanges();
                     memberResult.User = user;

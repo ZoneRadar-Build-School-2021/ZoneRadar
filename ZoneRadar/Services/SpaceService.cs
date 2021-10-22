@@ -1388,6 +1388,10 @@ namespace ZoneRadar.Services
             if (space != null)
             {
                 space.DiscontinuedDate = discontinuedDate;
+                if(discontinuedDate.Value.Date == DateTime.Today)
+                {
+                    space.SpaceStatusID = 1;
+                }
                 try
                 {
                     _repository.Update(space);

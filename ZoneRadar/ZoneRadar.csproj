@@ -267,6 +267,7 @@
     <Compile Include="Services\SpaceService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\HashService.cs" />
+    <Compile Include="Utilities\QualifiedPasswordAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\CSS\booking\booking.css" />
