@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var user = Model.User;
     var Myspaces = Model.MyCollection;
+    int b = 0;
     /*https://localhost:44322/MemberCenter/MyCollection?memberId=1*/
 }
 
@@ -105,9 +106,15 @@
                         </a>
                     </div>
                     <div class="space_card_star mt-1">
-                        @for (int i = 1; i <= My.Score; i++)
+                        @if (My.Score == 0)
                         {
-                            <i class="fas fa-star"></i>
+                            <span>目前沒有任何評價</span>
+                        }
+                        else { 
+                            for (int i = 1; i <= My.Score; i++)
+                                {
+                                    <i class="fas fa-star"></i>
+                                }
                         }
                         <span class="me-2"> (@My.ReviewCount)</span>
                     </div>

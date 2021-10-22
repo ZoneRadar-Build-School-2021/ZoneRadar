@@ -545,6 +545,7 @@ namespace ZoneRadar.Services
                     var sps = spaces.FirstOrDefault(x => x.SpaceID == c.SpaceID && x.SpaceStatusID == 2);
                     resultMemberCollection.MyCollection.Add(new Spaces
                     {
+                        SpaceId = sps.SpaceID,
                         SpaceName = sps.SpaceName,
                         Address = sps.Address,
                         SpacePhoto = sps.SpacePhoto.First().SpacePhotoUrl,
