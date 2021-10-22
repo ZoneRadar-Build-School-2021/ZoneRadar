@@ -73,3 +73,9 @@ img {
     outline: 0;
     box-shadow: none !important;
 }
+.exampleFormControlTextarea {
+    resize: none;
+}
+textarea {
+    resize: none;
+}
