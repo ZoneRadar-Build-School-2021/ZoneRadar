@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var user = Model.User;
     var review = Model.ToUserReview;
-    var a = 0;
     //https://localhost:44322/MemberCenter/UserInfo?memberId=19
 }
 
@@ -44,7 +43,7 @@
                             }Phone
                         </p>
                         <p class="member_verifcation_item">
-                            <i class="me-3 fas fa-check"></i>評價 <span class="member_verifcation_reviews"> 
+                            評價 <span class="member_verifcation_reviews"> 
                             @if (review.Select(x => x.ReviewContent) == null)
                             {
                                 <span>(0)</span>
@@ -94,7 +93,7 @@
                 平均評價：
                 @if (review.Select(x => x.Score).Sum() > 0)
                 {
-                    for (var i = 1; i <= (int)(review.Select(x => x.Score).Average()); i++)
+                    for (var i = 0; i < (review.Select(x => x.Score).Average()); i++)
                     {
                         <i class="fas fa-star"></i>
                     }
@@ -128,9 +127,24 @@
                         <a href="~/MemberCenter/Host/@r.Id">@r.Name</a>
                     </div>
                     <div class="reviewsfromhost_review_card_txt_star mt-2">
-                        @for (var i = 1; i <= r.Score; i++)
+                        @if (r.Score == 0)
                         {
-                            <i class="fas fa-star"></i>
+                            <span>目前沒有任何評價</span>
+                        }
+                        else if (r.Score % 1 == 0)
+                        {
+                            for (int i = 0; i < r.Score; i++)
+                            {
+                                <i class="fas fa-star"></i>
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < (r.Score - 1); i++)
+                            {
+                                <i class="fas fa-star"></i>
+                            }
+                            <i class="fas fa-star-half-alt"></i>
                         }
                     </div>
                         @if (r.Recommend == true)
