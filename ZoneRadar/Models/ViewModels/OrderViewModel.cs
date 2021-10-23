@@ -33,6 +33,11 @@ namespace ZoneRadar.Models.ViewModels
         public int OrderId { get; set; }
         public List<RentDetailViewModel> RentDetail { get; set; }
     }
+    // 預購單 CartVM
+    public class CartsViewModel : OrderViewModel
+    {
+
+    }
     // 訂單 UsercenterPendingVM
     public class UsercenterPendingViewModel : OrderViewModel
     {
@@ -45,6 +50,11 @@ namespace ZoneRadar.Models.ViewModels
         public int MemberId { get; set; }
         public string ContactName { get; set; }
         public string ContactPhone { get; set; }
+    }
+    // 訂單 UsercenterProcessingVM
+    public class UsercenterProcessingViewModel : OrderViewModel
+    {
+        
     }
     // 訂單 UsercenterCompletedVM
     public class UsercenterCompletedViewModel : OrderViewModel
