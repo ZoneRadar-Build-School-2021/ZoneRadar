@@ -386,21 +386,21 @@ namespace ZoneRadar.Services
         /// </summary>
         /// 分三類
         /// 場地空間 第一類
-        public SpaceViewModel ShowAmenityByIdOne()
+        public SpaceViewModel ShowAmenityById()
         {
             var result = new SpaceViewModel()
             {
                 amenityAraeOneList = new List<AmenityAraeOne>(),
             };
-            var amenityOnes = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 1).Select(x => x).ToList();
-            foreach (var amenityOne in amenityOnes)
+            var amenitys = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 1).Select(x => x).ToList();
+            foreach (var amenityOne in amenitys)
             {
-                var amenityOneTemp = new AmenityAraeOne()
+                var amenityTemp = new AmenityAraeOne()
                 {
                     AmenityId = amenityOne.AmenityDetailID,
                     AmenityName = amenityOne.Amenity
                 };
-                result.amenityAraeOneList.Add(amenityOneTemp);
+                result.amenityAraeOneList.Add(amenityTemp);
             };
             return result;
         }

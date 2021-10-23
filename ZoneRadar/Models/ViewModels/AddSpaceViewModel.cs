@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,9 +9,17 @@ namespace ZoneRadar.Models.ViewModels
     public class AddSpaceViewModel
     {
         public int SpaceID { get;set; }
+       
+        [Required]
         public int CountryID { get; set; }
+       
+        [Required(ErrorMessage = "請選擇縣市")]
         public string CityID { get; set; }
+
+        [Required]
         public int DistrictID { get; set; }
+        
+        [Required]
         public string Address { get; set; }
         public int MemberID { get; set; }
         public string SpaceName { get; set; }

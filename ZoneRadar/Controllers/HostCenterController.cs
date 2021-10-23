@@ -39,11 +39,10 @@ namespace ZoneRadar.Controllers
             var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
             if (isAuthenticated)
             {
-                var model = new SpaceViewModel
+                var model = new SpaceViewModel()
                 {
                     SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
                     cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
-                    addressAraeList = _spaceService.ShowAmenityByIdOne().addressAraeList,
 
                     amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
                     amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
