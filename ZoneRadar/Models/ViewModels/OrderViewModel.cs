@@ -12,6 +12,7 @@ namespace ZoneRadar.Models.ViewModels
         public string RentTime { get; set; }
         public string RentBackTime { get; set; }
         public int People { get; set; }
+        public decimal Money { get; set; }
         public int OrderDetailId { get; set; }
         public int OrderId { get; set; }
     }
@@ -27,7 +28,7 @@ namespace ZoneRadar.Models.ViewModels
         public string OwnerPhone { get; set; }
         public double Score { get; set; }
         [DisplayFormat(DataFormatString = "{0:N0}")]
-        public decimal Money { get; set; }
+        public decimal TotalMoney { get; set; }
         public string Email { get; set; }
         public int OrderId { get; set; }
         public List<RentDetailViewModel> RentDetail { get; set; }

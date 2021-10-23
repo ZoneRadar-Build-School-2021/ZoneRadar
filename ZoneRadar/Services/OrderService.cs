@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using ZoneRadar.Models;
@@ -192,7 +193,7 @@ namespace ZoneRadar.Services
                     OwnerName = ownername,
                     OwnerPhone = ownerphone,
                     Score = score,
-                    Money = money,
+                    TotalMoney = money,
                     Email = email,
                     CancelTitle = canceltitle,
                     CancelDetail = canceldetail,
@@ -214,95 +215,50 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<OrderViewModel> GetUsercenterProcessingVM(int id)
+        public List<OrderViewModel> GetUsercenterProcessingVM(int userid)
         {
-            List<OrderViewModel> result = new List<OrderViewModel>();
-
-            var spaces = _repository.GetAll<Space>().ToList();
-            var orders = _repository.GetAll<Order>().ToList();
-            var members = _repository.GetAll<Member>().ToList();
-            var orderdetails = _repository.GetAll<OrderDetail>().ToList();
-            var spacepics = _repository.GetAll<SpacePhoto>().ToList();
-            var reviews = _repository.GetAll<Review>().ToList();
-            var spacediscounts = _repository.GetAll<SpaceDiscount>().ToList();
-
-            var orderformember = orders.Where(x => x.MemberID == id && x.OrderStatusID == 3 && x.Space.SpaceStatusID == 2);
-
-            foreach (var item in orderformember)
+            var watchTime = new Stopwatch();
+            watchTime.Start();
+            var result = new List<OrderViewModel>();
+            var resultDetail = new OrderViewModel
             {
-                //訂單編號
-                var ordernum = item.OrderNumber;
-                //付款時間
-                var paytime = (DateTime)item.PaymentDate;
-                //該場地名稱
-                var spacename = spaces.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpaceName;
-                //該場地照片
-                var spacepic = spacepics.FirstOrDefault(x => x.SpaceID == item.SpaceID).SpacePhotoUrl;
-                //該場地主姓名
-                var ownername = members.FirstOrDefault(x => x.MemberID == item.Space.MemberID).Name;
-                //該場地主電話
-                var ownerphone = members.FirstOrDefault(x => x.MemberID == item.Space.MemberID).Phone;
-                //該場地評價
-                var score = reviews.Where(x => x.Order.SpaceID == item.SpaceID && x.ToHost == true).Select(x => x.Score).Average();
-                //場地主ID + Email
-                var ownerid = item.Space.MemberID;
-                var email = members.FirstOrDefault(x => x.MemberID == ownerid).Email;
-                //錢
-                decimal money = 0;
-
-                //Temp存訂單Detail
-                var temp = new List<RentDetailViewModel>();
-                //訂單時間及人數
-                foreach (var rentdetail in item.OrderDetail)
+                RentDetail = new List<RentDetailViewModel>()
+            };
+            //訂單 ( 該會員ID 且 訂單狀態是使用中 且 場地狀態是上架中 )
+            var orders = _repository.GetAll<Order>().Where(x => x.MemberID == userid && x.OrderStatusID == 3 && x.Space.SpaceStatusID == 2);
+            var reviews = _repository.GetAll<Review>();
+            foreach (var order in orders)
+            {
+                foreach (var orderdetail in order.OrderDetail)
                 {
-                    var renttime = rentdetail.StartDateTime;
-                    var rentbacktime = rentdetail.EndDateTime;
-                    var people = rentdetail.Participants;
-                    var detailid = rentdetail.OrderDetailID;
-
-                    //算金額
-                    var totalhour = rentbacktime.Subtract(renttime).TotalHours;
-                    var discounthour = spacediscounts.FirstOrDefault(x => x.SpaceID == item.SpaceID).Hour;
-                    var discount = spacediscounts.FirstOrDefault(x => x.SpaceID == item.SpaceID).Discount;
-                    var spacehourofmoney = spaces.FirstOrDefault(x => x.SpaceID == item.SpaceID).PricePerHour;
-                    decimal moneytemp;
-                    if (totalhour > discounthour)
+                    resultDetail.RentDetail.Add(new RentDetailViewModel
                     {
-                        moneytemp = (spacehourofmoney * (int)totalhour) * (1 - discount);
-                    }
-                    else
-                    {
-                        moneytemp = spacehourofmoney * (int)totalhour;
-                    }
-
-                    money += moneytemp;
-                    moneytemp = 0;
-                    temp.Add(new RentDetailViewModel
-                    {
-                        RentTime = renttime.ToString("yyyy-MM-dd HH:mm"),
-                        RentBackTime = rentbacktime.ToString("yyyy-MM-dd HH:mm"),
-                        People = people,
-                        OrderDetailId = detailid,
-                        OrderId = rentdetail.OrderID
+                        OrderDetailId = orderdetail.OrderDetailID,
+                        OrderId = orderdetail.OrderID,
+                        RentTime = orderdetail.StartDateTime.ToString("yyyy-MM-dd HH:mm"),
+                        RentBackTime = orderdetail.EndDateTime.ToString("yyyy-MM-dd HH:mm"),
+                        People = orderdetail.Participants,
+                        Money = PayMentService.OrderDetailPrice(orderdetail.EndDateTime, orderdetail.StartDateTime, orderdetail.Order.Space.PricePerHour, orderdetail.Order.Space.SpaceDiscount.First().Hour, orderdetail.Order.Space.SpaceDiscount.First().Discount),
                     });
                 }
                 result.Add(new OrderViewModel
                 {
-                    OrderNumber = (int)ordernum,
-                    PaidTime = paytime.ToString("yyyy-MM-dd HH:mm"),
-                    SpaceName = spacename,
-                    SpaceUrl = spacepic,
-                    OwnerName = ownername,
-                    OwnerPhone = ownerphone,
-                    Score = score,
-                    Money = money,
-                    Email = email,
-                    SpaceId = item.SpaceID,
-                    OrderId = item.OrderID,
-                    RentDetail = temp
+                    SpaceId = order.SpaceID,
+                    OrderNumber = (int)order.OrderNumber,
+                    PaidTime = ((DateTime)order.PaymentDate).ToString("yyyy-MM-dd HH:mm"),
+                    SpaceName = order.Space.SpaceName,
+                    SpaceUrl = order.Space.SpacePhoto.First().SpacePhotoUrl,
+                    OwnerName = order.Space.Member.Name,
+                    OwnerPhone = order.Space.Member.Phone,
+                    //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
+                    Score = reviews.Where(x => x.Order.SpaceID == order.SpaceID && x.ToHost).Select(x => x.Score).Average(),
+                    TotalMoney = resultDetail.RentDetail.Select(x => x.Money).Sum(),
+                    Email = order.Member.Email,
+                    OrderId = order.OrderID,
+                    RentDetail = resultDetail.RentDetail
                 });
-
             }
+            watchTime.Stop();
             return result;
         }
         /// <summary>
@@ -412,7 +368,7 @@ namespace ZoneRadar.Services
                     SpaceId = spaceid,
                     SpaceUrl = spaceurl,
                     Email = email,
-                    Money = money,
+                    TotalMoney = money,
                     OrderId =item.OrderID,
                     HasReview = hasReview,
                     RentDetail = temp
@@ -580,7 +536,7 @@ namespace ZoneRadar.Services
                     UserName = username,
                     ContactName = item.ContactName,
                     ContactPhone = item.ContactPhone,
-                    Money = money,
+                    TotalMoney = money,
                     OrderId = item.OrderID,
                     SpaceId = item.SpaceID,
                     OrderNumber = (int)item.OrderNumber,

@@ -94,7 +94,7 @@ namespace ZoneRadar.Services
                     SpaceUrl = spacepic,
                     OwnerName = ownername,
                     OwnerPhone = ownerphone,
-                    Money = money,
+                    TotalMoney = money,
                     RentDetail = temp,
                     OrderId = item.OrderID,
                     SpaceId = item.SpaceID,
