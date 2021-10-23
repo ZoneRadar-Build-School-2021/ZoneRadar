@@ -50,7 +50,6 @@ namespace ZoneRadar.Models.ViewModels
     public class UsercenterCompletedViewModel : OrderViewModel
     {
         public string OrederStatus { get; set; }
-        public string PublishTime { get; set; }
         public bool HasReview { get; set; }
         public string ReviewContent { get; set; }
         public bool Recommend { get; set; }

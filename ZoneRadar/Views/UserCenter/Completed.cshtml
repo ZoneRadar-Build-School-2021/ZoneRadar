@@ -53,7 +53,7 @@
                                                                                                                                                                     title="連絡他"></i>
                                 </li>
                                 <li class="mb-2 fs-5">場地主電話：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.OwnerPhone)</span></li>
-                                <li class="mb-2 fs-5">下單日期：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.PublishTime)</span></li>
+                                <li class="mb-2 fs-5">下單日期：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.PaidTime)</span></li>
                                 <li class="mb-2 fs-5">
                                     場地評價：
                                     <span class="contact-phone">
@@ -113,7 +113,7 @@
                                 <span class="nt ms-4 fs-2 fw-bolder">
                                     NT$
                                     <span class="total-cost fs-2 fw-bolder">
-                                        @Html.DisplayFor(m => item.Money)
+                                        @Html.DisplayFor(m => item.TotalMoney)
                                     </span>
                                 </span>
                             </p>
@@ -222,7 +222,7 @@
                                                                                            title="連絡他"></i>
                                 </li>
                                 <li class="mb-2 cancel fs-5">場地主電話：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.OwnerPhone)</span></li>
-                                <li class="mb-2 cancel fs-5">下單日期：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.PublishTime)</span></li>
+                                <li class="mb-2 cancel fs-5">下單日期：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.PaidTime)</span></li>
                                 <li class="mb-2 cancel fs-5">
                                     場地評價：
                                     <span class="contact-phone">
