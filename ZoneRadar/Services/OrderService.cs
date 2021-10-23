@@ -18,13 +18,7 @@ namespace ZoneRadar.Services
         {
             _repository = new ZONERadarRepository();
         }
-        public enum CancellationOptions
-        {
-            VeryFlexible = 1,
-            Flexible = 2,
-            StandardThirtyDays = 3,
-            StandardNintyDays = 4
-        }
+
         /// <summary>
         /// 找出使用者(ID)的已付款資料(Nick)
         /// </summary>
@@ -33,18 +27,16 @@ namespace ZoneRadar.Services
         public List<UsercenterPendingViewModel> GetUsercenterPendingVM(int userid)
         {
             List<UsercenterPendingViewModel> result = new List<UsercenterPendingViewModel>();
-            var resultDetail = new UsercenterPendingViewModel
-            {
-                RentDetail = new List<RentDetailViewModel>()
-            };
             //訂單 ( 該會員ID 且 訂單狀態是已付款 且 場地狀態是上架中 )
             var orders = _repository.GetAll<Order>().Where(x => x.MemberID == userid && x.OrderStatusID == 2 && x.Space.SpaceStatusID == 2);
             var reviews = _repository.GetAll<Review>();
             foreach(var order in orders)
             {
-                foreach(var orderdetail in order.OrderDetail)
+                var resultDetail = new List<RentDetailViewModel>();
+
+                foreach (var orderdetail in order.OrderDetail)
                 {
-                    resultDetail.RentDetail.Add(new RentDetailViewModel
+                    resultDetail.Add(new RentDetailViewModel
                     {
                         OrderDetailId = orderdetail.OrderDetailID,
                         OrderId = orderdetail.OrderID,
@@ -56,7 +48,7 @@ namespace ZoneRadar.Services
                 }
 
                 //租借時間的第一天
-                var rentTimeFirst =DateTime.Parse(resultDetail.RentDetail.Select(x => x.RentTime).First());
+                var rentTimeFirst =DateTime.Parse(resultDetail.Select(x => x.RentTime).First());
                 //租借時間與現在時間差( 總小時數 )
                 var rentTimeToNow = rentTimeFirst.Subtract(DateTime.Now).TotalHours;
                 //轉換成天數 或是 只有小時數
@@ -81,18 +73,18 @@ namespace ZoneRadar.Services
                     OwnerPhone = order.Space.Member.Phone,
                     //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
                     Score = reviews.Where(x => x.Order.SpaceID == order.SpaceID && x.ToHost).Select(x => x.Score).Average(),
-                    TotalMoney = resultDetail.RentDetail.Select(x => x.Money).Sum(),
+                    TotalMoney = resultDetail.Select(x => x.Money).Sum(),
                     Email = order.Member.Email,
                     OrderId = order.OrderID,
                     CancelTitle = order.Space.Cancellation.CancellationTitle,
                     CancelDetail = order.Space.Cancellation.CancellationDetail,
                     CancelTime = renttimedayorhour,
-                    CancelMoney = PayMentService.CancelPrice(order.Space.Cancellation.CancellationID , rentTimeToNow , cancelMoney , resultDetail.RentDetail.Select(x => x.Money).Sum()),
+                    CancelMoney = PayMentService.CancelPrice(order.Space.Cancellation.CancellationID , rentTimeToNow , cancelMoney , resultDetail.Select(x => x.Money).Sum()),
                     OrderStatus = order.OrderStatusID,
                     MemberId = order.MemberID,
                     ContactName = order.ContactName,
                     ContactPhone = order.ContactPhone,
-                    RentDetail = resultDetail.RentDetail
+                    RentDetail = resultDetail
                 });
             }
             return result;
@@ -105,10 +97,8 @@ namespace ZoneRadar.Services
         public List<OrderViewModel> GetUsercenterProcessingVM(int userid)
         {
             var result = new List<OrderViewModel>();
-            var resultDetail = new OrderViewModel
-            {
-                RentDetail = new List<RentDetailViewModel>()
-            };
+            var resultDetail = new List<RentDetailViewModel>();
+
             //訂單 ( 該會員ID 且 訂單狀態是使用中 且 場地狀態是上架中 )
             var orders = _repository.GetAll<Order>().Where(x => x.MemberID == userid && x.OrderStatusID == 3 && x.Space.SpaceStatusID == 2);
             var reviews = _repository.GetAll<Review>();
@@ -116,7 +106,7 @@ namespace ZoneRadar.Services
             {
                 foreach (var orderdetail in order.OrderDetail)
                 {
-                    resultDetail.RentDetail.Add(new RentDetailViewModel
+                    resultDetail.Add(new RentDetailViewModel
                     {
                         OrderDetailId = orderdetail.OrderDetailID,
                         OrderId = orderdetail.OrderID,
@@ -137,10 +127,10 @@ namespace ZoneRadar.Services
                     OwnerPhone = order.Space.Member.Phone,
                     //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
                     Score = reviews.Where(x => x.Order.SpaceID == order.SpaceID && x.ToHost).Select(x => x.Score).Average(),
-                    TotalMoney = resultDetail.RentDetail.Select(x => x.Money).Sum(),
+                    TotalMoney = resultDetail.Select(x => x.Money).Sum(),
                     Email = order.Member.Email,
                     OrderId = order.OrderID,
-                    RentDetail = resultDetail.RentDetail
+                    RentDetail = resultDetail
                 });
             }
             return result;
@@ -153,10 +143,8 @@ namespace ZoneRadar.Services
         public List<UsercenterCompletedViewModel> GetUsercenterCompletedVM(int userid)
         {
             List<UsercenterCompletedViewModel> result = new List<UsercenterCompletedViewModel>();
-            var resultDetail = new UsercenterCompletedViewModel
-            {
-                RentDetail = new List<RentDetailViewModel>()
-            };
+            var resultDetail = new List<RentDetailViewModel>();
+
             //訂單 ( 該會員ID 且 訂單狀態是已完成OR已取消 且 場地狀態是上架中 )
             var orders = _repository.GetAll<Order>().Where(x => x.MemberID == userid && x.OrderStatusID == 4 || x.MemberID == userid && x.OrderStatusID == 5 && x.Space.SpaceStatusID == 2);
             var reviews = _repository.GetAll<Review>();
@@ -164,7 +152,7 @@ namespace ZoneRadar.Services
             {
                 foreach (var orderdetail in order.OrderDetail)
                 {
-                    resultDetail.RentDetail.Add(new RentDetailViewModel
+                    resultDetail.Add(new RentDetailViewModel
                     {
                         OrderDetailId = orderdetail.OrderDetailID,
                         OrderId = orderdetail.OrderID,
@@ -198,10 +186,10 @@ namespace ZoneRadar.Services
                     OwnerPhone = order.Space.Member.Phone,
                     //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
                     Score = reviews.Where(x => x.Order.SpaceID == order.SpaceID && x.ToHost).Select(x => x.Score).Average(),
-                    TotalMoney = resultDetail.RentDetail.Select(x => x.Money).Sum(),
+                    TotalMoney = resultDetail.Select(x => x.Money).Sum(),
                     Email = order.Member.Email,
                     OrderId = order.OrderID,
-                    RentDetail = resultDetail.RentDetail,
+                    RentDetail = resultDetail,
                     OrederStatus = orderstaus,
                     HasReview = hasReview,
                 });
@@ -213,22 +201,23 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public Order DeletePendingOrder(UsercenterPendingViewModel model)
+        public void DeletePendingOrder(UsercenterPendingViewModel model)
         {
-            var order = new Order {
-                OrderID = model.OrderId,
-                OrderNumber = model.OrderNumber,
-                MemberID = model.MemberId,
-                PaymentDate = DateTime.Parse(model.PaidTime),
-                ContactName = model.ContactName,
-                ContactPhone = model.ContactPhone,
-                OrderStatusID = 5
-            };
+            var order = _repository.GetAll<Order>().FirstOrDefault(x => x.OrderID == model.OrderId && x.MemberID == model.MemberId);
+            if(order != null)
+            {
+                order.OrderStatusID = 5;
+                try
+                {
+                    _repository.Update(order);
+                    _repository.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw new NotImplementedException();
+                }
+            }
 
-            _repository.Update<Order>(order);
-            _repository.SaveChanges();
-
-            return order;
         }
 
         /// <summary>
