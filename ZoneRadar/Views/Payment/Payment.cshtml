@@ -1,10 +1,10 @@
-﻿@model System.Collections.Generic.Dictionary<string, string>
+﻿@model Dictionary<string, string>
 @*@model ECPay.Payment.Integration.AllInOne*@
 @{
     ViewBag.Title = "Payment";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    //var Pay = ViewBag.Ecpay;
-    //int i = 0;
+    var Pay = ViewBag.Ecpay;
+    int i = 0;
 }
 
 <div class="container">
@@ -160,10 +160,10 @@
                 @*@Html.ActionLink("送出", https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5,new , new { @class = "Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled", @id= "submit-pay" })*@
 
                 <form id="form" name="form" action="https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5" method="POST">
-                    @foreach (var key in Model.Keys.ToList())
+                    @*@foreach (var key in Model.Keys.ToList())
                     {
                         <input type="hidden" name="@key" value="@Model[key]" />
-                    }
+                    }*@
                     <button class="Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled" type="submit"
                             data-testing-id="booking-request-submit-button" id="submit-pay">
                         送出
