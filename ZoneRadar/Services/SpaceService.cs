@@ -1456,5 +1456,63 @@ namespace ZoneRadar.Services
                 throw new NotImplementedException();
             }
         }
+        /// <summary>
+        /// 將場地狀態資訊存進資料庫(下架、刪除、重新上架)(Jenny)
+        /// </summary>
+        public SweetAlert SetSpaceStatus(SpaceStatusInformation spaceStatusInfo)
+        {
+            var sweetAlert = new SweetAlert { Alert = false };
+            try
+            {
+                var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceStatusInfo.SpaceId && x.MemberID == spaceStatusInfo.UserId);
+                if (space != null)
+                {
+                    //儲存預定下架日期
+                    if (spaceStatusInfo.SpaceStatusId == (int)SpaceStatusEnum.Discontinued && spaceStatusInfo.DiscontinuedDate != null)
+                    {
+                        space.DiscontinuedDate = spaceStatusInfo.DiscontinuedDate.Value;
+                        //如果預定下架日期是當天，直接將場地狀態改成下架
+                        if (spaceStatusInfo.DiscontinuedDate.Value.Date == DateTime.Today)
+                        {
+                            space.SpaceStatusID = (int)SpaceStatusEnum.Discontinued;
+                        }
+                    }
+                    //取消下架
+                    if (spaceStatusInfo.SpaceStatusId == (int)SpaceStatusEnum.Discontinued && spaceStatusInfo.DiscontinuedDate == null)
+                    {
+                        space.DiscontinuedDate = null;
+                    }                   
+                    //刪除場地
+                    if (spaceStatusInfo.SpaceStatusId == (int)SpaceStatusEnum.Delete)
+                    {
+                        space.SpaceStatusID = (int)SpaceStatusEnum.Delete;
+                    }
+                    //重新上架
+                    if (spaceStatusInfo.SpaceStatusId == (int)SpaceStatusEnum.OnTheShelf)
+                    {
+                        space.SpaceStatusID = (int)SpaceStatusEnum.OnTheShelf;
+                        space.DiscontinuedDate = null;
+                    }
+
+                    _repository.Update(space);
+                    _repository.SaveChanges();
+                    return sweetAlert;
+                }
+                else
+                {
+                    sweetAlert.Alert = true;
+                    sweetAlert.Message = "您並非該場地主";
+                    sweetAlert.Icon = false;
+                    return sweetAlert;
+                }
+            }
+            catch (Exception ex)
+            {
+                sweetAlert.Alert = true;
+                sweetAlert.Message = "發生錯誤，請稍後再試！";
+                sweetAlert.Icon = false;
+                return sweetAlert;
+            }
+        }
     }
 }
