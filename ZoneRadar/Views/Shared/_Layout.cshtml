@@ -60,10 +60,6 @@
                     <li class="customer-only d-none nav-item">
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login-modal">登入</a>
                     </li>
-                    <!-- 登入後出現 -->
-                    <li class="member-only d-none nav-item mb-1 mb-md-0">
-                        <a class="nav-link" href="#">訊息中心</a>
-                    </li>
                     <!-- 登入後，手機出現 -->
                     <li class="member-only d-none nav-item d-md-none">
                         <div class="accordion-item">
@@ -248,7 +244,7 @@
                     <p class="mb-0 py-1 fw-bolder">探索</p>
                     <ul class="list-unstyled m-0 py-3">
                         <li class="mb-1 mb-lg-2"><a href="~/Searching/SearchingPage">找場地</a></li>
-                        <li class="mb-1 mb-lg-2"><a href="#" data-bs-toggle="modal" data-bs-target="#register-modal">刊場地</a></li>
+                        <li class="mb-1 mb-lg-2"><a href="~/HostCenter/AddSpace" data-bs-toggle="modal" data-bs-target="#register-modal">刊場地</a></li>
                     </ul>
                 </div>
 
@@ -276,7 +272,7 @@
                         <p class="mb-0 py-3 fw-bolder" data-bs-toggle="collapse" data-bs-target="#explore">探索</p>
                         <ul class="collapse list-unstyled m-0 py-3" id="explore">
                             <li class="mb-2 mb-lg-2"><a href="~/Searching/SearchingPage">找場地</a></li>
-                            <li class="mb-2 mb-lg-2"><a href="#" data-bs-toggle="modal" data-bs-target="#register-modal">刊場地</a></li>
+                            <li class="mb-2 mb-lg-2"><a href="~/HostCenter/AddSpace" data-bs-toggle="modal" data-bs-target="#register-modal">刊場地</a></li>
                         </ul>
                     </div>
                 </div>
@@ -309,55 +305,56 @@
 
 
     <script>
-            //判斷登入與否，決定導覽列顯示的介面
-            let customer_only = document.querySelectorAll(".customer-only");
-            let member_only = document.querySelectorAll(".member-only");
-            if (@Json.Encode(isAuthenticated)) {
-                member_only.forEach(item => {
-                    item.classList.remove("d-none");
-                })
-            } else {
-                customer_only.forEach(item => {
-                    item.classList.remove("d-none");
-                })
-            }
-
-            //輸入註冊路由時，跳出註冊Modal
-            if (@Json.Encode(registerModalPopup)) {
-                let register_modal = document.querySelector("#register-modal");
-                let modal = bootstrap.Modal.getOrCreateInstance(register_modal);
-                modal.show();
-            }
-
-            //判斷是否欲進入未授權畫面或輸入登入路由時，跳出登入Modal
-            if (@Json.Encode(loginModalPopup)) {
-                let login_modal = document.querySelector("#login-modal");
-                let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
-                modal.show();
-            }
-
-            //跳出sweet alert提示訊息
-            if (@Json.Encode(alert)) {
-                Swal.fire({
-                    title: "@ViewData["Message"]",
-                    icon: "@icon",
-                    showConfirmButton: true,
-                    confirmButtonColor: "#be7418",
-                    confirmButtonText: "OK",
-                    position: "top"
-                })
-
-                const redirectToPreURL = function() {
-                    if (sessionStorage.getItem('targetURL')) {
-                        window.location = sessionStorage.getItem('targetURL');
-                        sessionStorage.clear();
-                    }
-                    this.removeEventListener('click', redirectToPreURL)
-                }
-
-                document.querySelector('.swal2-confirm.swal2-styled').addEventListener('click', redirectToPreURL); 
+        //判斷登入與否，決定導覽列顯示的介面
+        let customer_only = document.querySelectorAll(".customer-only");
+        let member_only = document.querySelectorAll(".member-only");
+        if (@Json.Encode(isAuthenticated)) {
+            member_only.forEach(item => {
+                item.classList.remove("d-none");
+            })
+        } else {
+            customer_only.forEach(item => {
+                item.classList.remove("d-none");
+            })
         }
 
+        //輸入註冊路由時，跳出註冊Modal
+        if (@Json.Encode(registerModalPopup)) {
+            let register_modal = document.querySelector("#register-modal");
+            let modal = bootstrap.Modal.getOrCreateInstance(register_modal);
+            modal.show();
+        }
+
+        //判斷是否欲進入未授權畫面或輸入登入路由時，跳出登入Modal
+        if (@Json.Encode(loginModalPopup)) {
+            let login_modal = document.querySelector("#login-modal");
+            let modal = bootstrap.Modal.getOrCreateInstance(login_modal);
+            modal.show();
+        }
+
+        //跳出sweet alert提示訊息
+        if (@Json.Encode(alert)) {
+            Swal.fire({
+                title: "@ViewData["Message"]",
+                icon: "@icon",
+                showConfirmButton: true,
+                confirmButtonColor: "#be7418",
+                confirmButtonText: "OK",
+                position: "top"
+            })
+
+            const redirectToPreURL = function() {
+                if (sessionStorage.getItem('targetURL')) {
+                    window.location = sessionStorage.getItem('targetURL');
+                    sessionStorage.clear();
+                }
+                this.removeEventListener('click', redirectToPreURL)
+            }
+
+            document.querySelector('.swal2-confirm.swal2-styled').addEventListener('click', redirectToPreURL); 
+        }
+
+        //註冊密碼驗證
         $.validator.addMethod("safe", function (value, element) {
             let reg = /^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-zA-Z])(?=.*\d).*$/;
             return this.optional(element) || (reg.test(value));

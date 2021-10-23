@@ -29,7 +29,7 @@ namespace ZoneRadar.Models.ViewModels
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
-        [QualifiedPassword]
+        [QualifiedPassword(ErrorMessage = "密碼必須包含至少1個數字、小寫英文和大寫英文")]
         public string RegisterPassword { get; set; }
 
         [Required(ErrorMessage = "請填寫此欄位")]

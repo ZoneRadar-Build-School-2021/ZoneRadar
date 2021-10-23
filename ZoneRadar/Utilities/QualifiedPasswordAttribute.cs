@@ -8,8 +8,12 @@ using System.Web.Mvc;
 
 namespace ZoneRadar.Utilities
 {
+    /// <summary>
+    /// 指定資料欄位中必須包含至少1個數字、小寫英文和大寫英文
+    /// </summary>
     public class QualifiedPasswordAttribute : ValidationAttribute, IClientValidatable
     {
+        //When implemented in a class, returns client validation rules for that class.
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
         {
             var rule = new ModelClientValidationRule()
@@ -20,33 +24,20 @@ namespace ZoneRadar.Utilities
             yield return rule;
         }
 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        //Determines whether the specified value of the object is valid.
+        public override bool IsValid(object value)
         {
             string password = (string)value;
             Regex rgx = new Regex(@"^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-zA-Z])(?=.*\d).*$", RegexOptions.IgnoreCase);
 
             if (rgx.IsMatch(password))
             {
-                return ValidationResult.Success;
+                return true;
             }
             else
             {
-                return new ValidationResult("密碼必須包含至少1個數字、小寫英文和大寫英文");
+                return false;
             }
         }
-        //public override bool IsValid(object value)
-        //{
-        //    string password = (string)value;
-        //    Regex rgx = new Regex(@"^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-zA-Z])(?=.*\d).*$", RegexOptions.IgnoreCase);
-
-        //    if (rgx.IsMatch(password))
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
     }
 }
