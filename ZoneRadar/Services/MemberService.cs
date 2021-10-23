@@ -481,7 +481,7 @@ namespace ZoneRadar.Services
             }
             else
             {
-                
+                //該使用者
                 resultMemberCollection.User = new User
                 {
                     Id = u.MemberID,
@@ -492,50 +492,13 @@ namespace ZoneRadar.Services
                     SignUpDateTime = u.SignUpDateTime,
                     Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
                 };
-                //resultMemberCollection.User = (from u in _repository.GetAll<Member>()
-                //                               where u.MemberID == memberId
-                //                               select new User
-                //                               {
-                //                                   Id = u.MemberID,
-                //                                   Name = u.Name,
-                //                                   Email = u.Email,
-                //                                   Phone = u.Phone,
-                //                                   Description = u.Description,
-                //                                   SignUpDateTime = u.SignUpDateTime,
-                //                                   Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
-                //                               }).FirstOrDefault();
 
                 //會員所收藏的場地
-                //var collection = _repository.GetAll<Collection>().Where(x => x.MemberID == memberId);
-                //var spaces = _repository.GetAll<Space>();
-                //var r = _repository.GetAll<Review>();
-
-                ////c.Member.Space.Where(x => x.SpaceID == c.SpaceID && x.SpaceStatusID == 2).FirstOrDefault().SpaceName
-                //foreach (var c in collection)
-                //{
-                //    var sps = spaces.FirstOrDefault(x => x.SpaceID == c.SpaceID && x.SpaceStatusID == 2);
-                //    resultMemberCollection.MyCollection.Add(new Spaces
-                //    {
-                //        SpaceName = sps.SpaceName,
-                //        Address = sps.Address,
-                //        SpacePhoto = sps.SpacePhoto.First().SpacePhotoUrl,
-                //        District = sps.District.DistrictName,
-                //        City = sps.City.CityName,
-                //        PricePerHour = sps.PricePerHour,
-                //        ReviewCount = sps.Order.Where(x=>sps.SpaceID == x.SpaceID).Select(x=>x.Review.Where(y=>y.ToHost == true).Select(z=>z.ReviewContent).Count()).Sum(),
-                //        Score = Average(sps.Order.Where(x => sps.SpaceID == x.SpaceID).Select(x => x.Review.Where(y => y.ToHost == true).Select(z => z.ReviewContent).Count()).Sum(), sps.Order.Select(x => x.Review.Where(y => y.ToHost == true).Select(z => z.Score).Sum()).Sum())
-                //        /*re.Where(x => x.Order.MemberID == s.MemberID && x.ToHost == true).Select(x => x.Score).Count()*/
-                //    });
-                //}
+                var collection = _repository.GetAll<Collection>().Where(x => x.MemberID == memberId).Select(x=>x.SpaceID);
+                var spaces = _repository.GetAll<Space>().Where(x=> x.SpaceStatusID == 2 &&collection.Contains(x.SpaceID));
                 
-                var collection = _repository.GetAll<Collection>().Where(x => x.MemberID == memberId);
-                var spaces = _repository.GetAll<Space>();
-                var r = _repository.GetAll<Review>();
-                
-                //c.Member.Space.Where(x => x.SpaceID == c.SpaceID && x.SpaceStatusID == 2).FirstOrDefault().SpaceName
-                foreach (var c in collection)
+                foreach (var sps in spaces)
                 {
-                    var sps = spaces.FirstOrDefault(x => x.SpaceID == c.SpaceID && x.SpaceStatusID == 2);
                     resultMemberCollection.MyCollection.Add(new Spaces
                     {
                         SpaceId = sps.SpaceID,
@@ -545,7 +508,7 @@ namespace ZoneRadar.Services
                         District = sps.District.DistrictName,
                         City = sps.City.CityName,
                         PricePerHour = sps.PricePerHour,
-                        ReviewCount = sps.Order.Where(x=>sps.SpaceID == x.SpaceID).Select(x=>x.Review.Where(y=>y.ToHost == true).Select(z=>z.ReviewContent).Count()).Sum(),
+                        ReviewCount = sps.Order.Where(x=>sps.SpaceID == x.SpaceID).Select(x=>x.Review.Where(y=>y.ToHost).Select(z=>z.ReviewContent).Count()).Sum(),
                         Score = Average(sps.Order.Where(x => sps.SpaceID == x.SpaceID).Select(x => x.Review.Where(y => y.ToHost == true).Select(z => z.ReviewContent).Count()).Sum(), sps.Order.Select(x => x.Review.Where(y => y.ToHost == true).Select(z => z.Score).Sum()).Sum())
                         /*re.Where(x => x.Order.MemberID == s.MemberID && x.ToHost == true).Select(x => x.Score).Count()*/
                     });
@@ -573,7 +536,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// HostTpMemberReview (Jack)
+        /// HostToMemberReview (Jack)
         /// </summar>
         /// <returns> 取得會員資訊 & 該會員所有被場地主的評價 </returns>
         public UserInfoViewModel GetHostReview(int? memberId)
@@ -603,30 +566,35 @@ namespace ZoneRadar.Services
                     Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
                 };
                 //找出會員是否有租借場地並且顯示 出被場地主的評價
-                var order = _repository.GetAll<Order>().Where(x => x.MemberID == u.MemberID && x.OrderStatusID == 4).Where(x=>x.Review.Select(y=>y.ToHost).Contains(false));
-                
-                foreach (var o in order)
+                var order = _repository.GetAll<Order>().Where(x => x.MemberID == u.MemberID && x.OrderStatusID == 4).Where(x=>x.Review.Select(y=>y.ToHost).Contains(false)).ToList();
+
+                if (order == null)
                 {
-                    var or = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID);
-                    resulthostinfoReview.ToUserReview.Add(new UserReview
-                    {
-                        SpaceId = o.Space.SpaceID,
-                        SpaceName = o.Space.SpaceName,
-                        /*sps.FirstOrDefault(x => x.SpaceID == o.SpaceID).SpaceName,*/
-                        SpaceMemberPhoto = o.Space.Member.Photo,
-                        District = o.Space.District.DistrictName,
-                        Address = o.Space.Address,
-                        PricePerHour = o.Space.PricePerHour,
-                        ReviewContent = or.ReviewContent,
-                        Recommend = or.Recommend,
-                        Score = or.Score,
-                        ReviewDate = or.ReviewDate,
-                        ReviewCount = o.Review.Where(x => x.OrderID == o.OrderID && x.ToHost == false).Count(),
-                        Name = o.Space.Member.Name,
-                        Id = o.Space.MemberID
-                    });
 
                     return resulthostinfoReview;
+                }
+                else
+                { 
+                    foreach (var o in order)
+                    {
+                        var or = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID);
+                        resulthostinfoReview.ToUserReview.Add(new UserReview
+                        {
+                            SpaceId = o.Space.SpaceID,
+                            SpaceName = o.Space.SpaceName,
+                            SpaceMemberPhoto = o.Space.Member.Photo,
+                            District = o.Space.District.DistrictName,
+                            Address = o.Space.Address,
+                            PricePerHour = o.Space.PricePerHour,
+                            ReviewContent = or.ReviewContent,
+                            Recommend = or.Recommend,
+                            Score = or.Score,
+                            ReviewDate = or.ReviewDate,
+                            ReviewCount = o.Review.Where(x => x.OrderID == o.OrderID && x.ToHost == false).Count(),
+                            Name = o.Space.Member.Name,
+                            Id = o.Space.MemberID
+                        });
+                    }
                 }
                 return resulthostinfoReview;
             }

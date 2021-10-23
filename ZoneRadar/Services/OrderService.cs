@@ -428,7 +428,8 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public Order DeletePendingOrder(UsercenterPendingViewModel model)
         {
-            var order = new Order {
+            var order = new Order 
+            {
                 OrderID = model.OrderId,
                 OrderNumber = model.OrderNumber,
                 MemberID = model.MemberId,

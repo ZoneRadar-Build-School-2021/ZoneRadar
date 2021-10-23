@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var user = Model.User;
     var review = Model.ToUserReview;
+    var a = 0;
     //https://localhost:44322/MemberCenter/UserInfo?memberId=19
 }
 
@@ -43,7 +44,16 @@
                             }Phone
                         </p>
                         <p class="member_verifcation_item">
-                            <i class="me-3 fas fa-check"></i>評價 <span class="member_verifcation_reviews"> (@review.Select(x=>x.ReviewCount).Count())</span>
+                            <i class="me-3 fas fa-check"></i>評價 <span class="member_verifcation_reviews"> 
+                            @if (review.Select(x => x.ReviewContent) == null)
+                            {
+                                <span>(0)</span>
+                            }
+                            else
+                            {
+                                <span>(@review.Select(x => x.ReviewContent).Count())</span>
+                            }
+                            </span>
                         </p>
                     </div>
                 </div>
