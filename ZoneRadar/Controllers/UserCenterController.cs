@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ZoneRadar.Data;
 using ZoneRadar.Models;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Services;
@@ -16,7 +17,6 @@ namespace ZoneRadar.Controllers
         private readonly OrderService _OrderService;
         private readonly PreOrderService _PreOrderService;
         private readonly ReviewService _ReviewService;
-
         private readonly ZONERadarContext _db;
         public UserCenterController()
         {
