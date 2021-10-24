@@ -118,6 +118,15 @@ function showSelectOption() {
     let districtValue = districtSelect.selectedOptions[0].value;
     let zipcode = districtSelect.selectedOptions[0].dataset.zipcode;
     console.log(zipcode)
+    // console.log(zipCodevalue)
+    //如果city或district有任一個未選, 則submit disable*
+    if (cityValue != "" && districtValue != "") {
+        ZipCode.setAttribute('value', zipcode);
+        // submitButton.disabled = false;
+    } else {
+        ZipCode.setAttribute('value',);
+        // submitButton.disabled = true;
+    }
 }
 
 //4.Submit提交資料
@@ -136,4 +145,3 @@ function submitData() {
         alert(`你提交了資料: ${ZipCode.innerText}`)
     }, 300);
 }
-

@@ -34,8 +34,8 @@ namespace ZoneRadar.Models.ViewModels
         public string ShootingEquipment { get; set; }
         public int CancellationID { get; set; }
         public DateTime PublishTime { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
+        public string Lat { get; set; }
+        public string Lng{ get; set; }
         public int SpaceStatusID { get; set; }
         public DateTime DiscontinuedDate { get; set; }
 

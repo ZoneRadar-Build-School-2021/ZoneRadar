@@ -44,5 +44,7 @@ function addressToLatLng(addr) {
             $("#target").val(content + addr + "查無經緯度，或系統發生錯誤！" + "\n");
         }
     });
+
 }
-(adsbygoogle = window.adsbygoogle || []).push({});
+
+

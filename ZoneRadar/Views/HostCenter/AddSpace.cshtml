@@ -99,7 +99,12 @@
                                                 <label for="address" id="addresslabel" class="form-label mt-3">地址</label>
                                                 <input type="text" required class="form-control" name="Address" id="address" value="" placeholder="請輸入地址，從路名開始即可，例:中正路283巷45弄11號4樓" />
                                             </div>
+                                            @*經緯度*@
+                                            <input type="text" class="form-control" name="Lat" id="target" />
+                                             <input type="text" class="form-control" name="Lng" id="target2" />
+
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +114,7 @@
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
+                        <button class="accordion-button accordion-buttonAdd collapsed" onclick="trans()" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             <div class="col-11 col-lg-9 d-flex align-items-start">
                                 <div class=" imgcontainer mt-2 me-2 ">
@@ -382,7 +387,7 @@
                                         to
                                     </P>
 
-                                    <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                    <div class="col-6 d-xl-block col-xl-2 mb-4">
                                         <label for="StateTue" class="form-label  "></label>
                                         <select id="StateTue" class="form-select fs16 TusselectR" name="EndTime"
                                                 aria-label="Default select example" disabled>
@@ -394,32 +399,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                @*手機*@
-                                <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
-                                <div class="col-5">
-                                    <label for="StateTue" class="form-label  "></label>
-                                    <select id="StateTue" class="form-select  TusselectL" name="StartTime"
-                                            aria-label="Default select example" disabled>-->
-                                @*<option value="">請選擇營業時間</option>*@
-                                <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                                <P class="col-2 mt-4 text-center  text-start">to</P>
-                                <div class="col-5">
-                                    <label for="StateTue" class="form-label  "></label>
-                                    <select id="StateTue" class="form-select TusselectR " name="EndTime"
-                                            aria-label="Default select example" disabled>-->
-                                @*<option value="">請選擇營業時間</option>*@
-                                <!--@foreach (var open in Operating)
-                                            {
-                                                <option value="@open.Value">@open.Text</option>
-                                            }
-                                        </select>
-                                    </div>
-                                </div>-->
 
                                 <div class="row mt-4 border-bottom">
                                     <div class="col-6 col-xl-1  mt-auto mb-auto">
@@ -1291,18 +1270,12 @@
             <div class="container containerForAdd">
                 <div class="row mt-5 mb-5">
                     <div class="col-12 text-center">
-                        <button type="submit" class="btn submitAdd deleteBtn" onclick="trans()" id="success">完成</button>
+                        <button type="submit" class="btn submitAdd deleteBtn"  id="success">完成</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <p>
-        <textarea rows="6" class="d-none" name="Latitude" cols="67" id="target"></textarea>
-    </p>
-    <p>
-        <textarea rows="6" class="d-none" name="Longitude" cols="67" id="target2"></textarea>
-    </p>
 
 
 }
