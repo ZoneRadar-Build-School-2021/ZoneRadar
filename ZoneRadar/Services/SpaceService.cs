@@ -1309,13 +1309,12 @@ namespace ZoneRadar.Services
                 StartTimeList = operatingList.Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
                 EndTimeList = operatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
                 HoursForDiscount = spaceDiscounts == null ? 0 : spaceDiscounts.Hour,
-                Discount = spaceDiscounts == null ? 0 : decimal.Round((1 - spaceDiscounts.Discount), 2),
+                Discount = spaceDiscounts == null ? 1 : decimal.Round((1 - spaceDiscounts.Discount), 2),
                 MinHour = targetSpace.MinHours,
                 PricePerHour = (int)targetSpace.PricePerHour,
                 Capacity = targetSpace.Capacity,
                 OrderTimeList = orderTimeList.ToList(),
             };
-
 
             return result;
         }

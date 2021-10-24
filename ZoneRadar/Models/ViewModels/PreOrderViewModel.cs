@@ -14,5 +14,6 @@ namespace ZoneRadar.Models.ViewModels
         public List<string> EndTimeArr { get; set; }
         public int HoursForDiscount { get; set; }
         public decimal Discount { get; set; }
+        public decimal PricePerHour { get; set; }
     }
 }

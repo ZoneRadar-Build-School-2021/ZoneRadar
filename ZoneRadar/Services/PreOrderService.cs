@@ -172,5 +172,44 @@ namespace ZoneRadar.Services
             _repository.SaveChanges();
             _repository.Dispose();
         }
+
+        /// <summary>
+        /// 及時算錢
+        /// </summary>
+        /// <param name="preOrderVM"></param>
+        /// <returns></returns>
+        public CalculateViewModel CalculatePrice(PreOrderViewModel preOrderVM)
+        {
+            var bookingDateList = preOrderVM.DatesArr;
+            var startTimeList = preOrderVM.StartTimeArr;
+            var endTimeList = preOrderVM.EndTimeArr;
+            var hoursForDiscount = preOrderVM.HoursForDiscount;
+            var discount = preOrderVM.Discount;
+            var pricePerHour = preOrderVM.PricePerHour;
+
+            var timeDiffList = new List<double>();
+            for (int i = 0; i < bookingDateList.Count; i++)
+            {
+                var stratDateTime = DateTime.Parse($"{bookingDateList[i]}T{startTimeList[i]:00}");
+                var endDateTime = DateTime.Parse($"{bookingDateList[i]}T{endTimeList[i]:00}");
+                var timeDiff = (endDateTime.Subtract(stratDateTime).TotalMinutes);
+                timeDiffList.Add((timeDiff));
+            }
+
+            var totalHour = (decimal)(timeDiffList.Sum() / 60);
+            var totalPrice = totalHour * pricePerHour;
+            if (totalHour >= hoursForDiscount)
+            {
+                totalPrice = totalPrice * discount;
+            }
+
+            var result = new CalculateViewModel
+            {
+                TotalHour = totalHour,
+                TotalPrice = decimal.Round(totalPrice)
+            };
+
+            return result;
+        }
     }
 }

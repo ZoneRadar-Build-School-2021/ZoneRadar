@@ -332,29 +332,5 @@ namespace ZoneRadar.Services
             }
             return result;
         }
-
-        public decimal CalculatePrice(PreOrderViewModel preOrderVM)
-        {
-            var bookingDate = preOrderVM.DatesArr;
-            var startTime = preOrderVM.StartTimeArr;
-            var endTime = preOrderVM.EndTimeArr;
-            var hoursForDiscount = preOrderVM.HoursForDiscount;
-            var discount = preOrderVM.Discount;
-
-            var totalPrice = 0.0m;
-            var startDateTimeList = new List<DateTime>();
-            var endDateTimeList = new List<DateTime>();
-
-            for (int i = 0; i < bookingDate.Count; i++)
-            {
-                var startDateTime = 
-            }
-
-
-
-
-
-            return totalPrice;
-        }
     }
 }

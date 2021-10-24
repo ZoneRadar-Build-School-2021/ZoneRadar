@@ -19,7 +19,6 @@ namespace ZoneRadar.Controllers
     {
         private readonly SpaceService _spaceService;
         private readonly PreOrderService _preOrderService;
-        private readonly OrderService _orderService;
         private readonly ZONERadarRepository _repository;
         private FilterViewModel _filterDataFromIndex;
 
@@ -27,7 +26,6 @@ namespace ZoneRadar.Controllers
         {
             _spaceService = new SpaceService();
             _preOrderService = new PreOrderService();
-            _orderService = new OrderService();
             _repository = new ZONERadarRepository();
             _filterDataFromIndex = new FilterViewModel();
         }
@@ -311,9 +309,9 @@ namespace ZoneRadar.Controllers
             var response = new APIResponse();
             try
             {
-
-
-                response.Response = _orderService.CalculatePrice(preOrderVM);
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = _preOrderService.CalculatePrice(preOrderVM);
 
                 return response;
             }

@@ -29,6 +29,8 @@
       disableOnInteraction: false
     },
   });
+  const login_modal = document.querySelector("#login-modal");
+  const modal = bootstrap.Modal.getOrCreateInstance(login_modal);
 
   // -----變數
   let cardIndex = 0;
@@ -40,6 +42,7 @@
   let dayOfSelectedDate, attendee, startTime, endTimeStartFrom, endTime, selectedDate;
   let spaceID = '';
   let source = {};
+  let isLogin;
   if (sessionStorage.getItem('theKey')) {
     spaceID = sessionStorage.getItem('theKey');
     sessionStorage.clear();
@@ -52,6 +55,7 @@
     SpaceID: spaceID,
     HoursForDiscount: 0,
     Discount: 0,
+    PricePerHour: 0,
   }
   const getURL = `/webapi/spaces/GetBookingCardData?id=${spaceID}`;
   const dateFormat = 'YYYY-MM-DD';
@@ -79,11 +83,19 @@
       pricePerHour = source.PricePerHour;
       capacity = source.Capacity;
       isCollection = source.IsCollection;
+      // 更新preOrderObj屬性
       preOrderObj.HoursForDiscount = hoursForDiscount;
       preOrderObj.Discount = discount;
+      preOrderObj.PricePerHour = pricePerHour;
 
-      checkCollection();
+      renderCollection();
       setCard();
+      setMap();
+      setMarker();
+      extendDayBtn.addEventListener('click', extendADay);
+      removeDayBtn.addEventListener('click', removeADay);
+      submitBtn.addEventListener('click', submitOrder);
+      saveBtn.addEventListener('click', checkCollection);
     }).catch(err => console.log(err))
   }
 
@@ -111,7 +123,7 @@
   }
 
   // 確認是否有被加為收藏
-  function checkCollection() {
+  function renderCollection() {
     if (isCollection) {
       heart.style.fontWeight = 900;
     } else {
@@ -139,12 +151,11 @@
   // 設定日曆
   function setCalendar(dateNode, attendeeNode) {
     // 如果preOrderObj裡沒有值，日曆第一天為今天，若有值，第一天為前一次預訂 + 1天
-    let calendarMinDate = 'today';
-    if (preOrderObj.DatesArr[cardIndex - 1]) {
-      let datAfter = dayjs(preOrderObj.DatesArr[cardIndex - 1]).add(1, 'day');
-      calendarMinDate = datAfter.formate(dateFormat);
+    let calendarMinDate = dayjs().format(dateFormat);
+    if ((cardIndex - 1) >= 0) {
+      let dayAfter = dayjs(preOrderObj.DatesArr[cardIndex - 1]).add(1, 'day');
+      calendarMinDate = dayAfter.format(dateFormat);
     }
-
     //建立日曆實體
     flatpickr(dateNode, {
       altInput: true,
@@ -217,17 +228,11 @@
       onReady: function (selectedDates, dateStr, instance) {
         // 暫存預設的起始時間
         startTime = dateStr;
-        // 值來自第幾幾張卡片
-        let whichCard = instance.input.parentNode.parentNode.classList[2];
-        whichCardIndex = whichCard.split('-')[1];
         // 設定結束時間
         setEndTime(endTimeNode);
         endTimeNode.removeAttribute('disabled');
-        // 確認是否開放加一天
-        inputGroups = [selectedDate, attendee, startTime, endTime];
-        checkExtendDayBtn(inputGroups);
       },
-      onChange: function (selectedDates, dateStr, instance) {
+      onClose: function (selectedDates, dateStr, instance) {
         // 暫存所選開始時間
         startTime = dateStr;
         // 變動來自第幾幾張卡片
@@ -265,14 +270,8 @@
       onReady: function (selectedDates, dateStr, instance) {
         // 暫存結束時間
         endTime = dateStr;
-        // 值來自第幾幾張卡片
-        let whichCard = instance.input.parentNode.parentNode.classList[2];
-        whichCardIndex = whichCard.split('-')[1];
-        // 確認是否開放加一天
-        inputGroups = [selectedDate, attendee, startTime, endTime];
-        checkExtendDayBtn(inputGroups);
       },
-      onChange: function (selectedDates, dateStr, instance) {
+      onClose: function (selectedDates, dateStr, instance) {
         // 暫存結束時間
         endTime = dateStr;
         // 值來自第幾幾張卡片
@@ -318,12 +317,134 @@
     const discountRowNode = calculationNode.querySelector('.discount-row');
     const totalCostNode = calculationNode.querySelector('.total-price');
 
-    axios.post('')
+    calculationNode.classList = 'calculation';
+
+    axios.post('/webapi/spaces/Calculate', preOrderObj).then(res => {
+      let totalHour = res.data.Response.TotalHour;
+      let totalPrice = res.data.Response.TotalPrice;
+      // 渲染畫面
+      // 如果超過指定時數則享有優惠
+      if (totalHour >= hoursForDiscount) {
+        discountRowNode.classList = 'discount-row d-flex mb-2'
+      } else {
+        discountRowNode.classList = 'discount-row d-none'
+      }
+
+      priceNode.innerText = `NT$${pricePerHour.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+      totalHourNode.innerText = totalHour;
+      discountNode.innerText = discount;
+      totalCostNode.innerText = `NT$${totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+
+
+    }).catch(err => console.log(err))
   }
 
-  
-  initialize();
+  function extendADay() {
+    cardIndex++;
 
+    this.setAttribute('disabled', '');
+    removeDayBtn.classList.remove('d-none');
+    setCard();
+  }
+
+  function removeADay() {
+    let latestCard = document.querySelector(`.index-${cardIndex}`);
+    orderDetailNode.removeChild(latestCard);
+
+    preOrderObj.DatesArr.length = cardIndex;
+    preOrderObj.AttendeesArr.length = cardIndex;
+    preOrderObj.StartTimeArr.length = cardIndex;
+    preOrderObj.EndTimeArr.length = cardIndex;
+
+    cardIndex--;
+    if (cardIndex === 0) {
+      this.classList.add('d-none');
+      extendDayBtn.removeAttribute('disabled');
+    }
+
+    calculate(preOrderObj);
+  }
+
+  function checkLogin() {
+    axios.get('/webapi/spaces/CheckLogin').then(res => {
+      isLogin = res.data.Response;
+
+      if (isLogin === false) {
+        modal.show();
+        sessionStorage.setItem('targetURL', location.href);
+      };
+    }).catch(err => console.log(err))
+  }
+
+  function submitOrder() {
+    checkLogin();
+
+    if (isLogin === true) {
+      axios.post('/webapi/spaces/AddPreOrder', preOrderObj).then(res => {
+        if (res.data.Status === 'Success') {
+          Swal.fire(
+            '預約成功!',
+            '請於24小時內前往會員中心 > 我的訂單內申請付款',
+            'success'
+          );
+
+          document.querySelector('.swal2-confirm.swal2-styled').addEventListener('click', redirectToOrderCenter);
+        }
+      })
+    }
+  }
+
+  function redirectToOrderCenter() {
+    window.location = '/UserCenter/ShopCar';
+    this.removeEventListener('click', redirectToOrderCenter);
+  }
+
+  function checkCollection() {
+    checkLogin();
+
+    let SpaceBriefVM = {
+      SpaceID: spaceID,
+    }
+
+    if (isCollection === false) {
+      addCollection(SpaceBriefVM);
+    } else {
+      removeCollection(SpaceBriefVM);
+    }
+  }
+
+  function addCollection(SpaceBriefVM) {
+    axios.post('/webapi/spaces/AddCollection', SpaceBriefVM)
+      .then(res => {
+        if (res.data.Status === 'Success') {
+          Swal.fire(
+            '收藏成功!',
+            '',
+            'success'
+          )
+          isCollection = true;
+          renderCollection();
+        }
+      }).catch(err => console.log(err))
+  }
+
+  function removeCollection(SpaceBriefVM) {
+    axios.post('/webapi/spaces/RemoveCollection', SpaceBriefVM)
+      .then(res => {
+        if (res.data.Status === 'Success') {
+          Swal.fire(
+            '移除收藏成功!',
+            '',
+            'success'
+          )
+          isCollection = false;
+          renderCollection();
+        }
+      })
+  }
+
+
+  initialize();
 
 
 
