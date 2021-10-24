@@ -1,4 +1,4 @@
-@{
+﻿@{
     //透過cookie取得表單驗證的資料
     HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
 
@@ -286,7 +286,6 @@
     </footer>
 
     <script src="~/Assets/JS/axios.min.js"></script>
-    <script src="~/Assets/JS/dayjs.min.js"></script>
     <script src="~/Assets/JS/leaflet.js"></script>
     <script src="~/Assets/JS/flatpickr.js"></script>
     <script src="~/Assets/JS/leaflet.markercluster.js"></script>
@@ -356,7 +355,7 @@
                     this.removeEventListener('click', redirectToPreURL)
                 }
 
-                document.querySelector('.swal2-confirm.swal2-styled').addEventListener('click', redirectToPreURL); 
+                document.querySelector('.swal2-confirm.swal2-styled').addEventListener('click', redirectToPreURL);
         }
 
         $.validator.addMethod("safe", function (value, element) {

@@ -19,6 +19,7 @@ namespace ZoneRadar.Controllers
     {
         private readonly SpaceService _spaceService;
         private readonly PreOrderService _preOrderService;
+        private readonly OrderService _orderService;
         private readonly ZONERadarRepository _repository;
         private FilterViewModel _filterDataFromIndex;
 
@@ -26,6 +27,7 @@ namespace ZoneRadar.Controllers
         {
             _spaceService = new SpaceService();
             _preOrderService = new PreOrderService();
+            _orderService = new OrderService();
             _repository = new ZONERadarRepository();
             _filterDataFromIndex = new FilterViewModel();
         }
@@ -296,5 +298,34 @@ namespace ZoneRadar.Controllers
                 return response;
             }
         }
+
+        /// <summary>
+        /// 及時計算價錢
+        /// </summary>
+        /// <param name="preOrderVM"></param>
+        /// <returns></returns>
+        [Route("Calculate")]
+        [AcceptVerbs("POST")]
+        public APIResponse Calculate(PreOrderViewModel preOrderVM)
+        {
+            var response = new APIResponse();
+            try
+            {
+
+
+                response.Response = _orderService.CalculatePrice(preOrderVM);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Response = null;
+
+                return response;
+            }
+        }
+
     }
 }

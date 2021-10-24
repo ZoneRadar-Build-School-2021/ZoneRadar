@@ -136,8 +136,6 @@ namespace ZoneRadar.Services
             {
                 SpaceID = spaceID,
                 MemberID = memberID,
-                ContactName = "123",
-                ContactPhone = "123",
                 OrderStatusID = 1
             };
 

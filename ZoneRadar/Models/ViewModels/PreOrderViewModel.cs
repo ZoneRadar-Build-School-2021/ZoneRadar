@@ -12,5 +12,7 @@ namespace ZoneRadar.Models.ViewModels
         public List<string> AttendeesArr { get; set; }
         public List<string> StartTimeArr { get; set; }
         public List<string> EndTimeArr { get; set; }
+        public int HoursForDiscount { get; set; }
+        public decimal Discount { get; set; }
     }
 }
