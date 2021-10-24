@@ -296,5 +296,34 @@ namespace ZoneRadar.Controllers
                 return response;
             }
         }
+
+        /// <summary>
+        /// 及時計算價錢
+        /// </summary>
+        /// <param name="preOrderVM"></param>
+        /// <returns></returns>
+        [Route("Calculate")]
+        [AcceptVerbs("POST")]
+        public APIResponse Calculate(PreOrderViewModel preOrderVM)
+        {
+            var response = new APIResponse();
+            try
+            {
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = _preOrderService.CalculatePrice(preOrderVM);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Response = null;
+
+                return response;
+            }
+        }
+
     }
 }

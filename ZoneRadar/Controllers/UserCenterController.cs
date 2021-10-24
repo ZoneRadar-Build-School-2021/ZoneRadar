@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ZoneRadar.Data;
 using ZoneRadar.Models;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Services;
@@ -16,7 +17,6 @@ namespace ZoneRadar.Controllers
         private readonly OrderService _OrderService;
         private readonly PreOrderService _PreOrderService;
         private readonly ReviewService _ReviewService;
-
         private readonly ZONERadarContext _db;
         public UserCenterController()
         {
@@ -116,13 +116,8 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         public ActionResult DeleteShopCarDetail(int id)
         {
-            //var userid = int.Parse(User.Identity.Name);
-
             var result = _PreOrderService.DeleteShopCarDetail(id);
             return RedirectToAction("ShopCar", result);
-
-            //var model = _PreOrderService.GetShopCarVM(userid);
-            //return View("ShopCar", model);
         }
         /// <summary>
         /// 刪除預購單頁(Nick)
@@ -131,14 +126,8 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         public ActionResult DeleteShopCarOrder(int id)
         {
-
-            //var userid = int.Parse(User.Identity.Name);
-            //var model = _PreOrderService.GetShopCarVM(userid);
-
             var result = _PreOrderService.DeleteShopCarOrder(id);
             return RedirectToAction("ShopCar", result);
-
-            //return View("ShopCar", model);
         }
         /// <summary>
         /// (Get)刪除已付款訂單頁(Nick)
@@ -168,11 +157,11 @@ namespace ZoneRadar.Controllers
             var userid = int.Parse(User.Identity.Name);
             if (ModelState.IsValid)
             {
-                var result = _OrderService.DeletePendingOrder(model);
-                return RedirectToAction("Pending", result);
+                _OrderService.DeletePendingOrder(model);
+                return RedirectToAction("Pending");
             }
             var resultmodel = _OrderService.GetUsercenterPendingVM(userid);
-            return View("ShopCar", resultmodel);
+            return View("Pending", resultmodel);
         }
         /// <summary>
         /// (Get)新增已完成訂單評價頁(Nick)
@@ -199,16 +188,8 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public ActionResult CreatCompletedReview(UsercenterCompletedViewModel model)
         {
-            var userid = int.Parse(User.Identity.Name);
-
             var result = _ReviewService.CreatCompletedReview(model);
             return RedirectToAction("Completed", result);
-            //if (ModelState.IsValid)
-            //{
-
-            //}
-            //var resultmodel = _OrderService.GetUsercenterCompletedVM(userid);
-            //return View("Completed", resultmodel);
         }
     }
 }

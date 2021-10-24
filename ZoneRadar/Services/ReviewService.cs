@@ -72,6 +72,7 @@ namespace ZoneRadar.Services
 
             return spaceReviewList;
         }
+
         /// <summary>
         /// 新增完成訂單的評價(Nick)
         /// </summary>
@@ -100,7 +101,7 @@ namespace ZoneRadar.Services
         {
             var review = new Review
             {
-                OrderID = model.OrderID,
+                OrderID = model.OrderId,
                 ToHost = false,
                 Score = (int)model.Score,
                 ReviewContent = model.ReviewContent,
