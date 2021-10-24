@@ -386,7 +386,7 @@ namespace ZoneRadar.Services
         /// </summary>
         /// 分三類
         /// 場地空間 第一類
-        public SpaceViewModel ShowAmenityById()
+        public SpaceViewModel ShowAmenityByIdOne()
         {
             var result = new SpaceViewModel()
             {
@@ -1182,13 +1182,10 @@ namespace ZoneRadar.Services
                 DistrictID = addSpaceViewModel.DistrictID,
                 Address = addSpaceViewModel.Address,
                 PublishTime = DateTime.Today,
-                //Latitude = addSpaceViewModel.Latitude,
-                //Longitude = addSpaceViewModel.Longitude,
+                Latitude = addSpaceViewModel.Latitude,
+                Longitude = addSpaceViewModel.Longitude,
                 SpaceStatusID = 2,
                
-                //SpaceStatusID = addSpaceViewModel.SpaceStatusID,
-                //DiscontinuedDate = DateTime.UtcNow,
-                //DiscontinuedDate = addSpaceViewModel.DiscontinuedDate,
             };
            
             _repository.Create<Space>(space);

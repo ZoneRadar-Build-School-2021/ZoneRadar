@@ -61,5 +61,7 @@ namespace ZoneRadar.Models.ViewModels
 
         public int Hour { get; set; }
         public decimal Discount { get; set; }
+
+
     }
 }

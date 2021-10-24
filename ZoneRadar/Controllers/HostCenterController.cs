@@ -33,13 +33,13 @@ namespace ZoneRadar.Controllers
         ///  場地主上架場地(Amber) 
         /// </summary>
         [Authorize]
-        public ActionResult AddSpace()
+        public ActionResult AddSpace(SpaceViewModel id)
         {
             var userId = 0;
             var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
             if (isAuthenticated)
             {
-                var model = new SpaceViewModel()
+                var model = new SpaceViewModel( )
                 {
                     SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
                     cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
