@@ -258,6 +258,7 @@
     <Compile Include="Repositories\ZONERadarRepository.cs" />
     <Compile Include="Services\MemberService.cs" />
     <Compile Include="Services\OrderService.cs" />
+    <Compile Include="Services\PayMentService.cs" />
     <Compile Include="Services\PreOrderService.cs" />
     <Compile Include="Services\ReviewService.cs" />
     <Compile Include="Services\SpaceService.cs" />
