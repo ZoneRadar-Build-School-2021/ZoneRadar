@@ -613,7 +613,6 @@ CKEDITOR.replace('Introduction');
 CKEDITOR.replace('HostRules');
 CKEDITOR.replace('Parking');
 CKEDITOR.replace('ShootingEquipment');
-CKEDITOR.replace('textPartClean');
 CKEDITOR.replace('Traffic');
 
 

@@ -452,7 +452,9 @@
     <Content Include="Assets\JS\addspace\CKEditor4\ckeditor\vendor\promise.js" />
     <Content Include="Assets\JS\addspace\CityandDistrictandZipcodeJavaScript.js" />
     <Content Include="Assets\JS\addspace\editSpace.js" />
+    <Content Include="Assets\JS\addspace\Latitude_and_Longitude.js" />
     <Content Include="Assets\JS\addspace\text.js" />
+    <Content Include="Assets\JS\addspace\validation.js" />
     <Content Include="Assets\JS\axios.min.js" />
     <Content Include="Assets\JS\booking\booking.js" />
     <Content Include="Assets\JS\bootstrap.bundle.min.js" />
