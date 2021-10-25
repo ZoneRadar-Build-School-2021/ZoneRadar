@@ -17,645 +17,571 @@
 
 @using (Html.BeginForm("AddSpace", "HostCenter", FormMethod.Post))
 {
-    @*@using (Html.BeginRouteForm)*@
-    @*//{.BeginRouteForm(new { action =”action”});*@
     @Html.AntiForgeryToken()
-<div class="main">
-    <div class="container containerForAdd ">
-        <!-- 開頭問候文區 -->
-        <div class="row">
-            <div class="col mb-3 mt-3">
-                <h5 class="fs-3"> @*<span>@owner.Select(x=>x.MamberName)</span> ,*@你好！說說你的場地吧！</h5>
-                <p>場地內容分享越詳細，能幫你拿到更多訂單</p>
-            </div>
-        </div>
-        <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button accordion-buttonAdd" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <div class="col-12 col-lg-9 d-flex align-items-start">
-                            <div class=" imgcontainer mt-1 me-2 ">
-                                <img class=" location" src="~/Assets/IMG/icons/location-icon.svg" alt="">
-                            </div>
-                            <div class="textgroup">
-                                <h6 class="fs18">1.位置</h6>
-                                <p class="editDetailsp ">地址</p>
-                            </div>
-                        </div>
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class="row mt-5 ">
-                            <div class="col-12 ">
-                                <h2 class="fs-4">地址</h2>
-                                <p class="fs16">您的場地完整的地址，<br>不會公開顯示在<span>ZONERadar</span>的網站列表，只有當客戶完成預定後顯示。</p>
-                            </div>
-                            <div class="col-12">
-                                <div class="row mb-3">
-                                    <div class="col-12 col-md-6 col-xl-6">
-                                        <label for="country" class="form-label">國家</label>
-                                        <select class="form-select" name="CountryID" id="country" required>
-                                            <option selected disabled value="">請選擇國家</option>
-                                            <option value="1">台灣</option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            請選擇國家
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12 col-md-6 col-xl-6">
-                                        <div class="mb-3">
-                                            <label for="city" class="form-label mt-3">城市</label>
-                                            <select class="form-select" name="CityID" id="city" required>
-                                                <option selected disabled value=""></option>
-                                            </select>
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            請填寫縣市
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-xl-6 mt-3">
-                                        <label for="district" class="form-label">行政區</label>
-                                        <select class="form-select" name="" id="district" required>
-                                            <option selected disabled value="">請選擇行政區</option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            請選擇行政區
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12 col-md-6 col-xl-6">
-                                        <div class="mb-3">
-                                            <label for="ZipCode"
-                                                   class="form-label mt-3">郵遞區號</label>
-                                            <input type="text" readonly class="form-control" name="DistrictID" id="ZipCode" placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-xl-6">
-                                        <div class="mb-3">
-                                            <label for="address" id="addresslabel" class="form-label mt-3">地址</label>
-                                            <input type="text" required class="form-control" name="Address" id="address" value="" placeholder="請輸入地址，從路名開始即可，例:中正路283巷45弄11號4樓" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+    <div id="app" class="main form-horizontal">
+        <div class="container containerForAdd ">
+            <!-- 開頭問候文區 -->
+            <div class="row">
+                <div class="col mb-3 mt-3">
+                    <h5 class="fs-3"> @*<span>@owner.Select(x=>x.MamberName)</span> ,*@你好！說說你的場地吧！</h5>
+                    <p>場地內容分享越詳細，能幫你拿到更多訂單</p>
                 </div>
             </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        <div class="col-11 col-lg-9 d-flex align-items-start">
-                            <div class=" imgcontainer mt-2 me-2 ">
-                                <i class="fs-2 bi bi-bricks mt-3"></i>
-                            </div>
-                            <div class="textgroup mt-2 ">
-                                <h6 class="fs18">2.創建您的場地</h6>
-                                <p class="editDetailsp">場地類型</p>
-                            </div>
-                        </div>
-                    </button>
-                </h2>
-
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                     data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class="row mt-5">
-                            <div class="col-12">
-                                <h2 class="fs-4">說說您的場地類型</h2>
-                                <p class="fs16">
-                                    敘述最能代表您場地類型
-                                    <br><i class=" mt-4 me-1 far fa-lightbulb"></i>
-                                    例如：“公寓”、“攝影棚”、“餐廳”.....
-                                </p>
-                            </div>
-                            @foreach (var type in spacetype)
-                            {
-                                <div class="mb-3 col-lg-6">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="TypeDetailId" value="@type.TypeDetailId "
-                                               id=" @type.Type">
-                                        <label class="form-check-label" for=" @type.Type">
-                                            @type.Type
-                                        </label>
-                                    </div>
-                                </div>
-                            }
-
-                        </div>
-                        <div class="row ">
-                            <div class="col-12 col-lg-6 mt-5 ">
-                                <h2 class="fs-4">給您的場地命名</h2>
-                                <p class="fs16">敘述最能代表您場地類型創建一個能夠吸引客人興趣並描述您的空間的標題。 請勿包含您的公司名稱</p>
-                                <p class="fs20">可以試試包含以下內容：</p>
-                                <ul>
-                                    <li>位置-市區、市中心、碼頭</li>
-                                    <li>場地類型-閣樓、工作室、舞廳、頂樓公寓</li>
-                                    <li>獨特的形容詞-質感、寬敞、現代</li>
-                                </ul>
-                                <p><i class="me-1 far fa-lightbulb"></i>例如：“市中心閣樓享天際線景觀”</p>
-                                <div class="SpaceName">
-                                    <label for="SpaceName" class="form-label "></label>
-                                    <input type="text" required class="form-control" id="SpaceName" name="SpaceName" placeholder="輸入您場地的名稱">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 mt-5">
-                                <h2 class="fs-4">描述您的場地</h2>
-                                <p>描述您對場地所有的細節，以便讓客戶知道這場地所提供的服務</p>
-                                <p class="fs20">可以試試回答以下內容：</p>
-                                <ul>
-                                    <li>哪些活動適合在您的場地運用？</li>
-                                    <li>您的場地格局如何？每個區域如何使用？</li>
-                                    <li>您的場地有哪些獨特的功能或便利設施？</li>
-                                </ul>
-                                <p>不建議：</p>
-                                <ul>
-                                    <li>聯絡訊息-請勿包含您的電話、場地名稱、地址、電子信箱跟網路連結。</li>
-                                </ul>
-                            </div>
-                            <div class="col ">
-                                @*讓文字編輯器可以抓到並寫入資料庫需要在web.config 關閉<pages validateRequest="False" />*@
-                                <div class="col col-12  pb-5">
-                                    <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                    <textarea name="Introduction" class="form-control"
-                                              id="exampleFormControlTextarea1" rows="3"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 mt-3">
-                                <h2 class="fs-4">您的場地大小</h2>
-                                <p>描述當客戶預定您的場地時可以使用的大小</p>
-                            </div>
-                            <div class="col-12">
-                                <p><i class=" mt-2 me-1 far fa-lightbulb"></i>例如：您的場地有80坪，但是只提供40坪空間提供給可戶使用。</p>
-                            </div>
-                            <div class="col-12 col-xl-6 d-flex">
-                                <div class="mb-3 w-75">
-                                    <label for="area" class="form-label mt-3"></label>
-                                    <input type="text" name="MeasureOfArea" required class="form-control" id="area"
-                                           placeholder="500">
-                                </div>
-                                <div class="mb-3 ">
-                                    <label for="exampleFormControlInput1" class="form-label mt-3 "></label>
-                                    <input type="text" class="form-control text-center"
-                                           id="exampleFormControlInput1" placeholder="坪數" disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <h5>可以容納幾個人 </h5>
-                            <div class="col col-lg-6">
-                                <div class="form-floating">
-                                    <input class="form-control" name="Capacity" required placeholder="最大客人數" id="Maxpeople">
-                                    <label for="Maxpeople">最大客人數</label>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
+            <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            <div class="col-11 col-lg-9 d-flex align-items-start">
-                                <div class=" imgcontainer mt-3 me-2 ">
-                                    <img class=" speed-square" src="~/Assets/IMG/icons/time.svg" alt="">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button accordion-buttonAdd" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <div class="col-12 col-lg-9 d-flex align-items-start">
+                                <div class=" imgcontainer mt-1 me-2 ">
+                                    <img class=" location" src="~/Assets/IMG/icons/location-icon.svg" alt="">
                                 </div>
-                                <div class="textgroup mt-3 ">
-                                    <h6 class="fs18">3.營業時間&定價</h6>
-                                    <p class="editDetailsp ">營業日/定價</p>
+                                <div class="textgroup">
+                                    <h6 class="fs18">1.位置</h6>
+                                    <p class="editDetailsp ">地址</p>
                                 </div>
                             </div>
                         </button>
                     </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="row mt-5 ">
+                                <div class="col-12 ">
+                                    <h2 class="fs-4">地址</h2>
+                                    <p class="fs16">您的場地完整的地址，<br>不會公開顯示在<span>ZONERadar</span>的網站列表，只有當客戶完成預定後顯示。</p>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-md-6 col-xl-6">
+                                            <label for="country" class="form-label">國家</label>
+                                            <select class="form-select " name="CountryID" id="country" required>
+                                                <option selected disabled value="">請選擇國家</option>
+                                                <option value="1">台灣</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                請選擇國家
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-xl-6">
+                                            <div class="mb-3">
+                                                <label for="city" class="form-label mt-3">城市</label>
+                                                <select class="form-select" name="CityID" id="city" required>
+                                                    <option selected disabled value=""></option>
+                                                </select>
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                請填寫縣市
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-6 mt-3">
+                                            <label for="district" class="form-label">行政區</label>
+                                            <select class="form-select" name="" id="district" required>
+                                                <option selected disabled value="">請選擇行政區</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                請選擇行政區
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-xl-6">
+                                            <div class="mb-3">
+                                                <label for="ZipCode"
+                                                       class="form-label mt-3">郵遞區號</label>
+                                                <input type="text" readonly class="form-control" name="DistrictID" id="ZipCode" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-xl-6">
+                                            <div class="mb-3">
+                                                <label for="address" id="addresslabel" class="form-label mt-3">地址</label>
+                                                <input type="text" required class="form-control" name="Address" id="address" value="" placeholder="請輸入地址，從路名開始即可，例:中正路283巷45弄11號4樓" />
+                                            </div>
+                                            @*經緯度*@
+                                            <input type="hidden" class="form-control" name="Lat" id="target" />
+                                            <input type="hidden" class="form-control" name="Lng" id="target2" />
+
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button accordion-buttonAdd collapsed" onclick="trans()" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <div class="col-11 col-lg-9 d-flex align-items-start">
+                                <div class=" imgcontainer mt-2 me-2 ">
+                                    <i class="fs-2 bi bi-bricks mt-3"></i>
+                                </div>
+                                <div class="textgroup mt-2 ">
+                                    <h6 class="fs18">2.創建您的場地</h6>
+                                    <p class="editDetailsp">場地類型</p>
+                                </div>
+                            </div>
+                        </button>
+                    </h2>
+
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                          data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            <div class="operating_hours_row mt-5 row">
-                                <div class="col-12 border-bottom">
-                                    <h2 class="fs-4 operating_hours_title ">請問您的營業時間是？</h2>
-                                    <p class="operating_hours_space_introduce mt-4">
-                                        營業時間是指您的空間對外預訂開放的日期和時間（即您的空間可以使用的時間）。 客人將無法預訂營業時間以外的時間。
+                            <div class="row mt-5">
+                                <div class="col-12">
+                                    <h2 class="fs-4">說說您的場地類型</h2>
+                                    <p class="fs16">
+                                        敘述最能代表您場地類型
+                                        <br><i class=" mt-4 me-1 far fa-lightbulb"></i>
+                                        例如：“公寓”、“攝影棚”、“餐廳”.....
                                     </p>
                                 </div>
+                                @foreach (var type in spacetype)
+                                {
+                                    <div class="mb-3 col-lg-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="TypeDetailId" value="@type.TypeDetailId "
+                                                   id=" @type.Type">
+                                            <label class="form-check-label" for=" @type.Type">
+                                                @type.Type
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+
                             </div>
-                            <div class="row mt-4 border-bottom">
-                                <div class="col-6 col-xl-1  mt-auto mb-auto">
-                                    <p class="mt-xl-3 fs16">星期一</p>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" name="OperatingDay" type="checkbox" value="1"
-                                               id="flexSwitchCheckDefault">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
+                            <div class="row ">
+                                <div class="col-12 col-lg-6 mt-5 ">
+                                    <h2 class="fs-4">給您的場地命名</h2>
+                                    <p class="fs16">敘述最能代表您場地類型創建一個能夠吸引客人興趣並描述您的空間的標題。 請勿包含您的公司名稱</p>
+                                    <p class="fs20">可以試試包含以下內容：</p>
+                                    <ul>
+                                        <li>位置-市區、市中心、碼頭</li>
+                                        <li>場地類型-閣樓、工作室、舞廳、頂樓公寓</li>
+                                        <li>獨特的形容詞-質感、寬敞、現代</li>
+                                    </ul>
+                                    <p><i class="me-1 far fa-lightbulb"></i>例如：“市中心閣樓享天際線景觀”</p>
+                                    <div class="SpaceName">
+                                        <label for="SpaceName" class="form-label "></label>
+                                        <input type="text" required class="form-control" id="SpaceName" name="SpaceName" placeholder="輸入您場地的名稱">
+
                                     </div>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" value="Y1" name="Hours1"
-                                               id="flexRadioDefault1" disabled>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            全天(24hr)
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                    <div class="form-check">
-                                        <input class="form-check-input " type="radio" value="hr1" name="Hours1"
-                                               id="flexRadioDefault1hr" disabled>
-                                        <label class="form-check-label" for="flexRadioDefault1hr">
-                                            小時
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="d-xl-block col-5 col-xl-2 mb-4">
-                                    <label for="StateMon" class="form-label  "></label>
-                                    <select id="StateMon" class="form-select fs16 MonselectL "
-                                            aria-label="Default select example" name="StartTime" disabled>
-                                        <option id="MonS" value="">請選擇時間</option>
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-
-                                </div>
-
-                                <P class="col-2 mt-auto col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
-                                    to
-                                </P>
-
-                                <div class="col-5  d-xl-block  col-xl-2 mb-4">
-                                    <label for="StateMon" class="form-label  "></label>
-                                    <select id="StateMon" class="form-select fs16 MonselectR "
-                                            aria-label="Default select example" name="EndTime" disabled>
-                                        <option id="MonEnd"  value="">請選擇時間</option>
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
                                 </div>
                             </div>
-                            @*手機*@
-                            <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
-                                <div class="col-5">
-                                    <label for="StateMon" class="form-label  "></label>
-                                    <select id="StateMon" class="form-select  " aria-label="Default select example" name="StartTime"
-                                            disabled>-->
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
+                            <div class="row">
+                                <div class="col-12 mt-5">
+                                    <h2 class="fs-4">描述您的場地</h2>
+                                    <p>描述您對場地所有的細節，以便讓客戶知道這場地所提供的服務</p>
+                                    <p class="fs20">可以試試回答以下內容：</p>
+                                    <ul>
+                                        <li>哪些活動適合在您的場地運用？</li>
+                                        <li>您的場地格局如何？每個區域如何使用？</li>
+                                        <li>您的場地有哪些獨特的功能或便利設施？</li>
+                                    </ul>
+                                    <p>不建議：</p>
+                                    <ul>
+                                        <li>聯絡訊息-請勿包含您的電話、場地名稱、地址、電子信箱跟網路連結。</li>
+                                    </ul>
                                 </div>
-                                <P class="col-2 mt-4 text-center  text-start">to</P>
-                                <div class="col-5">
-                                    <label for="StateMon" class="form-label  "></label>
-                                    <select id="StateMon" class="form-select MonselectR " name="EndTime"
-                                            aria-label="Default select example" disabled>-->
-                                        @*<option >請選擇營業時間</option>*@
-                                        <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                            </div>-->
-
-                            <div class="row mt-4 border-bottom">
-                                <div class="col-6 col-xl-1  mt-auto mb-auto">
-                                    <p class="mt-xl-3 fs16">星期二</p>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="OperatingDay" value="2"
-                                               id="flexSwitchCheckDefault2">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault2">營業</label>
+                                <div class="col ">
+                                    @*讓文字編輯器可以抓到並寫入資料庫需要在web.config 關閉<pages validateRequest="False" />*@
+                                    <div class="col col-12  pb-5">
+                                        <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                        <textarea name="Introduction" class="form-control"
+                                                  id="exampleFormControlTextarea1" rows="3"></textarea>
                                     </div>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
-                                    <div class="form-check">
-                                        <input class="form-check-input TusAllDay " value="Y2" type="radio" name="Hours2"
-                                               id="flexRadioDefault2" disabled>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            全天(24hr)
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                    <div class="form-check">
-                                        <input class="form-check-input Tushour" value="hr2" type="radio" name="Hours2"
-                                               id="flexRadioDefault2hr" disabled>
-                                        <label class="form-check-label" for="flexRadioDefault2hr">
-                                            小時
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
-                                    <label for="StateTue" class="form-label  "></label>
-                                    <select id="StateTue" class="form-select fs16 TusselectL" name="StartTime"
-                                            aria-label="Default select example" disabled>
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-
-                                <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
-                                    to
-                                </P>
-
-                                <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
-                                    <label for="StateTue" class="form-label  "></label>
-                                    <select id="StateTue" class="form-select fs16 TusselectR" name="EndTime"
-                                            aria-label="Default select example" disabled>
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
                                 </div>
                             </div>
-                            @*手機*@
-                            <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
-                                <div class="col-5">
-                                    <label for="StateTue" class="form-label  "></label>
-                                    <select id="StateTue" class="form-select  TusselectL" name="StartTime"
-                                            aria-label="Default select example" disabled>-->
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                                <P class="col-2 mt-4 text-center  text-start">to</P>
-                                <div class="col-5">
-                                    <label for="StateTue" class="form-label  "></label>
-                                    <select id="StateTue" class="form-select TusselectR " name="EndTime"
-                                            aria-label="Default select example" disabled>-->
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                            </div>-->
 
-                            <div class="row mt-4 border-bottom">
-                                <div class="col-6 col-xl-1  mt-auto mb-auto">
-                                    <p class="mt-xl-3 fs16">星期三</p>
+                            <div class="row">
+                                <div class="col-12 mt-3">
+                                    <h2 class="fs-4">您的場地大小</h2>
+                                    <p>描述當客戶預定您的場地時可以使用的大小</p>
                                 </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="OperatingDay" value="3"
-                                               id="flexSwitchCheckDefault3">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault3">營業</label>
+                                <div class="col-12">
+                                    <p><i class=" mt-2 me-1 far fa-lightbulb"></i>例如：您的場地有80坪，但是只提供40坪空間提供給可戶使用。</p>
+                                </div>
+                                <div class="col-12 col-xl-6 d-flex">
+                                    <div class="mb-3 w-75">
+                                        <label for="area" class="form-label mt-3"></label>
+                                        <input type="text" name="MeasureOfArea" required class="form-control" id="area"
+                                               placeholder="500">
                                     </div>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" value="Y3" name="Hours3"
-                                               id="flexRadioDefault3" disabled>
-                                        <label class="form-check-label" for="flexRadioDefault3">
-                                            全天(24hr)
-                                        </label>
+                                    <div class="mb-3 ">
+                                        <label for="exampleFormControlInput1" class="form-label mt-3 "></label>
+                                        <input type="text" class="form-control text-center"
+                                               id="exampleFormControlInput1" placeholder="坪數" disabled>
                                     </div>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="hr3" type="radio" name="Hours3"
-                                               id="flexRadioDefault3hr" disabled>
-                                        <label class="form-check-label" for="flexRadioDefault3hr">
-                                            小時
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
-                                    <label for="State" class="form-label"></label>
-                                    <select id="StateWed" class="form-select fs16" aria-label="Default select example" name="StartTime"
-                                            disabled>
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-
-                                <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
-                                    to
-                                </P>
-
-                                <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
-                                    <label for="State" class="form-label "></label>
-                                    <select id="StateWed" class="form-select fs16" aria-label="Default select example" name="EndTime"
-                                            disabled>
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
                                 </div>
                             </div>
-                            @*手機*@
-                            <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
-                                <div class="col-5">
-                                    <label for="State" class="form-label "></label>
-                                    <select id="StateWed" class="form-select  " aria-label="Default select example" name="StartTime"
-                                            disabled>-->
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                                <P class="col-2 mt-4 text-center  text-start">to</P>
-                                <div class="col-5">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateWed" class="form-select  " aria-label="Default select example" name="EndTime"
-                                            disabled>-->
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                            </div>-->
-                            <div class="row mt-4 border-bottom">
-                                <div class="col-6 col-xl-1  mt-auto mb-auto">
-                                    <p class="mt-xl-3 fs16">星期四</p>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="OperatingDay" value="4"
-                                               id="flexSwitchCheckDefault4">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault4">營業</label>
+                            <div class="row mt-3">
+                                <h5>可以容納幾個人 </h5>
+                                <div class="col col-lg-6">
+                                    <div class="form-floating">
+                                        <input class="form-control" name="Capacity" required placeholder="最大客人數" id="Maxpeople">
+                                        <label for="Maxpeople">最大客人數</label>
                                     </div>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="Y4" disabled type="radio" name="Hours4"
-                                               id="flexRadioDefault4">
-                                        <label class="form-check-label" for="flexRadioDefault4" disabled>
-                                            全天(24hr)
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Hours4"
-                                               id="flexRadioDefault4hr"value="hr4" disabled>
-                                        <label class="form-check-label" for="flexRadioDefault4hr">
-                                            小時
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateThu" class="form-select fs16" aria-label="Default select example" name="StartTime"
-                                            disabled>
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-
-                                <P class="col-2 mt-auto fs16 d-none col-xl-1 d-xl-block  mb-auto text-center text-start">
-                                    to
-                                </P>
-
-                                <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateThu" class="form-select fs16" aria-label="Default select example" name="EndTime"
-                                            disabled>
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
                                 </div>
                             </div>
-                            @*手機*@
-                            @*<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
-                                <div class="col-5">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateThu" class="form-select  " aria-label="Default select example" name="StartTime"
-                                            disabled>
-                                        <option value="">請選擇營業時間</option>
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                                <P class="col-2 mt-4 text-center  text-start">to</P>
-                                <div class="col-5">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateThu" class="form-select  " aria-label="Default select example" name="EndTime"
-                                            disabled>
-                                        <option value="">請選擇營業時間</option>
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                            </div>*@
-                            <div class="row mt-4 border-bottom">
-                                <div class="col-6 col-xl-1  mt-auto mb-auto">
-                                    <p class="mt-xl-3 fs16">星期五</p>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="OperatingDay" value="5"
-                                               id="flexSwitchCheckDefault5">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault5">營業</label>
+
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <div class="col-11 col-lg-9 d-flex align-items-start">
+                                    <div class=" imgcontainer mt-3 me-2 ">
+                                        <img class=" speed-square" src="~/Assets/IMG/icons/time.svg" alt="">
+                                    </div>
+                                    <div class="textgroup mt-3 ">
+                                        <h6 class="fs18">3.營業時間&定價</h6>
+                                        <p class="editDetailsp ">營業日/定價</p>
                                     </div>
                                 </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
-                                    <div class="form-check">
-                                        <input class="form-check-input"value="Y5" type="radio" name="Hours5"
-                                               id="flexRadioDefault5" disabled>
-                                        <label class="form-check-label" for="flexRadioDefault5">
-                                            全天(24hr)
-                                        </label>
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="operating_hours_row mt-5 row">
+                                    <div class="col-12 border-bottom">
+                                        <h2 class="fs-4 operating_hours_title ">請問您的營業時間是？</h2>
+                                        <p class="operating_hours_space_introduce mt-4">
+                                            營業時間是指您的空間對外預訂開放的日期和時間（即您的空間可以使用的時間）。 客人將無法預訂營業時間以外的時間。
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Hours5"
-                                               id="flexRadioDefault5hr" value="hr5" disabled>
-                                        <label class="form-check-label" for="flexRadioDefault5hr">
-                                            小時
-                                        </label>
+                                <div class="row mt-4 border-bottom">
+                                    <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                        <p class="mt-xl-3 fs16">星期一</p>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" name="OperatingDay" type="checkbox" value="1"
+                                                   id="flexSwitchCheckDefault">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">營業</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="Y1" name="Hours1"
+                                                   id="flexRadioDefault1" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                全天(24hr)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                        <div class="form-check">
+                                            <input class="form-check-input " type="radio" value="hr1" name="Hours1"
+                                                   id="flexRadioDefault1hr" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault1hr">
+                                                小時
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-xl-block col-5 col-xl-2 mb-4">
+                                        <label for="StateMon" class="form-label  "></label>
+                                        <select id="StateMon" class="form-select fs16 MonselectL "
+                                                aria-label="Default select example" name="StartTime" disabled>
+                                            <option id="MonStart" value="">請選擇時間</option>
+                                            @foreach (var open in Operating)
+                                            {
+                                                <option  value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
+
+                                    </div>
+
+                                    <P class="col-2 mt-auto col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
+                                        to
+                                    </P>
+
+                                    <div class="col-5  d-xl-block  col-xl-2 mb-4">
+                                        <label for="StateMon" class="form-label  "></label>
+                                        <select id="StateMon" class="form-select fs16 MonselectR "
+                                                aria-label="Default select example" name="EndTime" disabled>
+                                            <option id="MonEnd" value="">請選擇時間</option>
+                                            @foreach (var open in Operating)
+                                            {
+                                                <option  value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
                                     </div>
                                 </div>
 
-                                <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateFri" class="form-select fs16" aria-label="Default select example" name="StartTime"
-                                            disabled>
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
+                                <div class="row mt-4 border-bottom">
+                                    <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                        <p class="mt-xl-3 fs16">星期二</p>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="OperatingDay" value="2"
+                                                   id="flexSwitchCheckDefault2">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault2">營業</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                        <div class="form-check">
+                                            <input class="form-check-input TusAllDay " value="Y2" type="radio" name="Hours2"
+                                                   id="flexRadioDefault2" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                全天(24hr)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                        <div class="form-check">
+                                            <input class="form-check-input Tushour" value="hr2" type="radio" name="Hours2"
+                                                   id="flexRadioDefault2hr" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault2hr">
+                                                小時
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class=" d-xl-block col-5 col-xl-2 mb-4">
+                                        <label for="StateTue" class="form-label  "></label>
+                                        <select id="StateTue" class="form-select fs16 TusselectL" name="StartTime"
+                                                aria-label="Default select example" disabled>
+                                            <option id="TueStart" value="">請選擇營業時間</option>
+                                            @foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
+                                        to
+                                    </P>
+
+                                    <div class="col-6 d-xl-block col-xl-2 mb-4">
+                                        <label for="StateTue" class="form-label  "></label>
+                                        <select id="StateTue" class="form-select fs16 TusselectR" name="EndTime"
+                                                aria-label="Default select example" disabled>
+                                            <option id="TueEnd" value="">請選擇營業時間</option>
+                                            @foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
+                                    </div>
                                 </div>
 
-                                <P class="col-2 mt-auto d-none fs16 col-xl-1 d-xl-block  mb-auto text-center text-start">
-                                    to
-                                </P>
+                                <div class="row mt-4 border-bottom">
+                                    <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                        <p class="mt-xl-3 fs16">星期三</p>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="OperatingDay" value="3"
+                                                   id="flexSwitchCheckDefault3">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault3">營業</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="Y3" name="Hours3"
+                                                   id="flexRadioDefault3" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault3">
+                                                全天(24hr)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                        <div class="form-check">
+                                            <input class="form-check-input" value="hr3" type="radio" name="Hours3"
+                                                   id="flexRadioDefault3hr" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault3hr">
+                                                小時
+                                            </label>
+                                        </div>
+                                    </div>
 
-                                <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateFri" class="form-select fs16" aria-label="Default select example" name="EndTime"
-                                            disabled>
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
+                                    <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
+                                        <label for="State" class="form-label"></label>
+                                        <select id="StateWed" class="form-select fs16" aria-label="Default select example" name="StartTime"
+                                                disabled>
+                                            <option id="WedStart" value="">請選擇營業時間</option>
+                                            @foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
+                                        to
+                                    </P>
+
+                                    <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                        <label for="State" class="form-label "></label>
+                                        <select id="StateWed" class="form-select fs16" aria-label="Default select example" name="EndTime"
+                                                disabled>
+                                            <option id="WedEnd" value="">請選擇營業時間</option>
+                                            @foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            @*手機*@
-                            <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
+                                <div class="row mt-4 border-bottom">
+                                    <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                        <p class="mt-xl-3 fs16">星期四</p>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="OperatingDay" value="4"
+                                                   id="flexSwitchCheckDefault4">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault4">營業</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                        <div class="form-check">
+                                            <input class="form-check-input" value="Y4" disabled type="radio" name="Hours4"
+                                                   id="flexRadioDefault4">
+                                            <label class="form-check-label" for="flexRadioDefault4" disabled>
+                                                全天(24hr)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="Hours4"
+                                                   id="flexRadioDefault4hr" value="hr4" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault4hr">
+                                                小時
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
+                                        <label for="State" class="form-label  "></label>
+                                        <select id="StateThu" class="form-select fs16" aria-label="Default select example" name="StartTime"
+                                                disabled>
+                                            @*<option value="">請選擇營業時間</option>*@
+                                            @foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <P class="col-2 mt-auto fs16 d-none col-xl-1 d-xl-block  mb-auto text-center text-start">
+                                        to
+                                    </P>
+
+                                    <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                        <label for="State" class="form-label  "></label>
+                                        <select id="StateThu" class="form-select fs16" aria-label="Default select example" name="EndTime"
+                                                disabled>
+                                            @*<option value="">請選擇營業時間</option>*@
+                                            @foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                @*手機*@
+                                @*<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
+                                        <div class="col-5">
+                                            <label for="State" class="form-label  "></label>
+                                            <select id="StateThu" class="form-select  " aria-label="Default select example" name="StartTime"
+                                                    disabled>
+                                                <option value="">請選擇營業時間</option>
+                                                @foreach (var open in Operating)
+                                                {
+                                                    <option value="@open.Value">@open.Text</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <P class="col-2 mt-4 text-center  text-start">to</P>
+                                        <div class="col-5">
+                                            <label for="State" class="form-label  "></label>
+                                            <select id="StateThu" class="form-select  " aria-label="Default select example" name="EndTime"
+                                                    disabled>
+                                                <option value="">請選擇營業時間</option>
+                                                @foreach (var open in Operating)
+                                                {
+                                                    <option value="@open.Value">@open.Text</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>*@
+                                <div class="row mt-4 border-bottom">
+                                    <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                        <p class="mt-xl-3 fs16">星期五</p>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="OperatingDay" value="5"
+                                                   id="flexSwitchCheckDefault5">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault5">營業</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                        <div class="form-check">
+                                            <input class="form-check-input" value="Y5" type="radio" name="Hours5"
+                                                   id="flexRadioDefault5" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault5">
+                                                全天(24hr)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="Hours5"
+                                                   id="flexRadioDefault5hr" value="hr5" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault5hr">
+                                                小時
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
+                                        <label for="State" class="form-label  "></label>
+                                        <select id="StateFri" class="form-select fs16" aria-label="Default select example" name="StartTime"
+                                                disabled>
+                                            @*<option value="">請選擇營業時間</option>*@
+                                            @foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <P class="col-2 mt-auto d-none fs16 col-xl-1 d-xl-block  mb-auto text-center text-start">
+                                        to
+                                    </P>
+
+                                    <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                        <label for="State" class="form-label  "></label>
+                                        <select id="StateFri" class="form-select fs16" aria-label="Default select example" name="EndTime"
+                                                disabled>
+                                            @*<option value="">請選擇營業時間</option>*@
+                                            @foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                @*手機*@
+                                <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
                                 <div class="col-5">
                                     <label for="State" class="form-label  "></label>
                                     <select id="StateFri" class="form-select fs16 " aria-label="Default select example" name="StartTime"
                                             disabled>-->
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        <!--@foreach (var open in Operating)
+                                @*<option value="">請選擇營業時間</option>*@
+                                <!--@foreach (var open in Operating)
                                         {
                                             <option value="@open.Value">@open.Text</option>
                                         }
@@ -666,80 +592,80 @@
                                     <label for="State" class="form-label  "></label>
                                     <select id="StateFri" class="form-select fs16  " aria-label="Default select example" name="EndTime"
                                             disabled>-->
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                            </div>-->
-                            <div class="row mt-4 border-bottom">
-                                <div class="col-6 col-xl-1  mt-auto mb-auto">
-                                    <p class="mt-xl-3 fs16 ">星期六</p>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input"  type="checkbox" name="OperatingDay" value="6"
-                                               id="flexSwitchCheckDefault6">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault6">營業</label>
+                                @*<option value="">請選擇營業時間</option>*@
+                                <!--@foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>-->
+                                <div class="row mt-4 border-bottom">
+                                    <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                        <p class="mt-xl-3 fs16 ">星期六</p>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="OperatingDay" value="6"
+                                                   id="flexSwitchCheckDefault6">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault6">營業</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                        <div class="form-check">
+                                            <input class="form-check-input" value="Y6" type="radio" name="Hours6"
+                                                   id="flexRadioDefault6" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault6">
+                                                全天(24hr)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="Hours6"
+                                                   id="flexRadioDefault6hr" value="hr6" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault6hr">
+                                                小時
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
+                                        <label for="State" class="form-label  "></label>
+                                        <select id="StateSat" class="form-select fs16" aria-label="Default select example" name="StartTime"
+                                                disabled>
+                                            @*<option value="">請選擇營業時間</option>*@
+                                            @foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
+                                        to
+                                    </P>
+
+                                    <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                        <label for="State" class="form-label  "></label>
+                                        <select id="StateSat" class="form-select fs16" aria-label="Default select example" name="EndTime"
+                                                disabled>
+                                            @*<option value="">請選擇營業時間</option>*@
+                                            @foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
-                                    <div class="form-check">
-                                        <input class="form-check-input"value="Y6"  type="radio" name="Hours6"
-                                               id="flexRadioDefault6" disabled>
-                                        <label class="form-check-label" for="flexRadioDefault6">
-                                            全天(24hr)
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="Hours6"
-                                               id="flexRadioDefault6hr" value="hr6" disabled>
-                                        <label class="form-check-label" for="flexRadioDefault6hr">
-                                            小時
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateSat" class="form-select fs16" aria-label="Default select example" name="StartTime"
-                                            disabled>
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-
-                                <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
-                                    to
-                                </P>
-
-                                <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateSat" class="form-select fs16" aria-label="Default select example" name="EndTime"
-                                            disabled>
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                            @*手機*@
-                            <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
+                                @*手機*@
+                                <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
                                 <div class="col-5">
                                     <label for="State" class="form-label  "></label>
                                     <select id="StateSat" class="form-select  fs16" aria-label="Default select example" name="StartTime"
                                             disabled>-->
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        <!--@foreach (var open in Operating)
+                                @*<option value="">請選擇營業時間</option>*@
+                                <!--@foreach (var open in Operating)
                                         {
                                             <option value="@open.Value">@open.Text</option>
                                         }
@@ -750,80 +676,80 @@
                                     <label for="State" class="form-label   "></label>
                                     <select id="StateSat" class="form-select fs16 " aria-label="Default select example" name="EndTime"
                                             disabled>-->
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                            </div>-->
-                            <div class="row mt-4 border-bottom">
-                                <div class="col-6 col-xl-1  mt-auto mb-auto">
-                                    <p class="mt-xl-3 fs16">星期日</p>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="OperatingDay" value="7"
-                                               id="flexSwitchCheckDefault7">
-                                        <label class="form-check-label" for="flexSwitchCheckDefault7">營業</label>
+                                @*<option value="">請選擇營業時間</option>*@
+                                <!--@foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>-->
+                                <div class="row mt-4 border-bottom">
+                                    <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                        <p class="mt-xl-3 fs16">星期日</p>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="OperatingDay" value="7"
+                                                   id="flexSwitchCheckDefault7">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault7">營業</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                        <div class="form-check">
+                                            <input class="form-check-input" value="Y7" type="radio" name="Hours7"
+                                                   id="flexRadioDefault7hr" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault7hr">
+                                                全天(24hr)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                        <div class="form-check">
+                                            <input class="form-check-input" value="hr7" type="radio" name="Hours7"
+                                                   id="flexRadioDefault7" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault7">
+                                                小時
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-none d-xl-block col-5 fs16 col-xl-2 mb-4">
+                                        <label for="State" class="form-label fs16 "></label>
+                                        <select id="StateSun" class="form-select fs16" aria-label="Default select example" name="StartTime"
+                                                disabled>
+                                            @*<option value="">請選擇營業時間</option>*@
+                                            @foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
+                                        to
+                                    </P>
+
+                                    <div class="d-none d-xl-block col-5 fs16 col-xl-2 mb-4">
+                                        <label for="State" class="form-label  fs16"></label>
+                                        <select id="StateSun" class="form-select fs16" aria-label="Default select example" name="EndTime"
+                                                disabled>
+                                            @*<option value="">請選擇營業時間</option>*@
+                                            @foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
-                                    <div class="form-check">
-                                        <input class="form-check-input" value="Y7" type="radio" name="Hours7"
-                                               id="flexRadioDefault7hr" disabled>
-                                        <label class="form-check-label" for="flexRadioDefault7hr">
-                                            全天(24hr)
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                    <div class="form-check">
-                                        <input class="form-check-input"value="hr7" type="radio" name="Hours7"
-                                               id="flexRadioDefault7" disabled>
-                                        <label class="form-check-label" for="flexRadioDefault7">
-                                            小時
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="d-none d-xl-block col-5 fs16 col-xl-2 mb-4">
-                                    <label for="State" class="form-label fs16 "></label>
-                                    <select id="StateSun" class="form-select fs16" aria-label="Default select example" name="StartTime"
-                                            disabled>
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-
-                                <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
-                                    to
-                                </P>
-
-                                <div class="d-none d-xl-block col-5 fs16 col-xl-2 mb-4">
-                                    <label for="State" class="form-label  fs16"></label>
-                                    <select id="StateSun" class="form-select fs16" aria-label="Default select example" name="EndTime"
-                                            disabled>
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        @foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                            @*手機*@
-                            <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
+                                @*手機*@
+                                <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
                                 <div class="col-5">
                                     <label for="State" class="form-label  "></label>
                                     <select id="StateSun" class="form-select fs16 " aria-label="Default select example" name="StartTime"
                                             disabled>-->
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        <!--@foreach (var open in Operating)
+                                @*<option value="">請選擇營業時間</option>*@
+                                <!--@foreach (var open in Operating)
                                         {
                                             <option value="@open.Value">@open.Text</option>
                                         }
@@ -834,101 +760,89 @@
                                     <label for="State" class="form-label  "></label>
                                     <select id="StateSun" class="form-select fs16 " aria-label="Default select example" name="EndTime"
                                             disabled>-->
-                                        @*<option value="">請選擇營業時間</option>*@
-                                        <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                            </div>-->
-                            <div class="row mt-5">
-                                <div class="col-12">
-                                    <h5>定價</h5>
-                                    <h6>小時計費</h6>
-                                </div>
-                                <div class="col-12 col-lg-6 price mt-3">
-                                    <p>小時計費</p>
-                                    <div class="form-floating">
-                                        <input class="form-control" placeholder="小時計費" name="PricePerHour" id="SpacePrice">
-                                        <label for="minSpacePrice">小時計費</label>
+                                @*<option value="">請選擇營業時間</option>*@
+                                <!--@foreach (var open in Operating)
+                                            {
+                                                <option value="@open.Value">@open.Text</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>-->
+                                <div class="row mt-5">
+                                    <div class="col-12">
+                                        <h5>定價</h5>
+                                        <h6>小時計費</h6>
+                                    </div>
+                                    <div class="col-12 col-lg-6 price mt-3">
+                                        <p>小時計費</p>
+                                        <div class="form-floating">
+                                            <input class="form-control" placeholder="小時計費" name="PricePerHour" id="SpacePrice">
+                                            <label for="minSpacePrice">小時計費</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6 SpacePrice mt-3">
+                                        <p>最低時數</p>
+                                        <div class="form-floating">
+                                            <input class="form-control" required name="MinHours" placeholder="必須是1-12小時" id="minSpacePrice">
+                                            <label for="minSpacePrice">必須是1-12小時</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-10 col-lg-6 MinPrice mt-3">
+                                        <p>折扣</p>
+                                        <div class="form-floating">
+                                            <input class="form-control" name="Hour" required placeholder="幾小時折扣" id="hourDiscount">
+                                            <label for="hourDiscount">逾多少小時</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-10 col-lg-6 mt-3">
+                                        <p>折扣數</p>
+                                        <div class="form-floating">
+                                            <input class="form-control" placeholder="多少折扣" name="Discount" id="Discount">
+                                            <label for="Discount">享多少折扣</label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-lg-6 SpacePrice mt-3"> 
-                                    <p>最低時數</p>
-                                    <div class="form-floating">
-                                        <input class="form-control" required name="MinHours" placeholder="必須是1-12小時" id="minSpacePrice">
-                                        <label for="minSpacePrice">必須是1-12小時</label>
-                                    </div>
-                                </div>
-                                <div class="col-10 col-lg-6 MinPrice mt-3">
-                                    <p>折扣</p>
-                                    <div class="form-floating">
-                                        <input class="form-control" name="Hour" required placeholder="幾小時折扣" id="hourDiscount">
-                                        <label for="hourDiscount">逾多少小時</label>
-                                    </div>
-                                </div>
-                                <div class="col-10 col-lg-6 mt-3">
-                                    <p>折扣數</p>
-                                    <div class="form-floating">
-                                        <input class="form-control" placeholder="多少折扣" name="Discount"  id="Discount">
-                                        <label for="Discount">享多少折扣</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                        <h5>便利設施</h5>
-                                        @foreach (var ametity in amenityAraeOne)
-                                        {
-                                            <div class="col-12 col-lg-3 ">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" value="@ametity.AmenityId" type="checkbox"
-                                                           name="AmenityDetailID" id="@ametity.AmenityId">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        @ametity.AmenityName
-                                                    </label>
-                                                </div>
+                                <div class="row mt-3">
+                                    <h5>便利設施</h5>
+                                    @foreach (var ametity in amenityAraeOne)
+                                    {
+                                        <div class="col-12 col-lg-3 ">
+                                            <div class="form-check">
+                                                <input class="form-check-input" value="@ametity.AmenityId" type="checkbox"
+                                                       name="AmenityDetailID" id="@ametity.AmenityId">
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    @ametity.AmenityName
+                                                </label>
                                             </div>
-                                        }
-                                    </div>
-                                    <div class="row mt-3">
-                                        <h5>場地空間</h5>
-                                        @foreach (var ametity in amenityAraeTwo)
-                                        {
-                                            <div class="col-12 col-lg-3 ">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" value="@ametity.AmenityId" type="checkbox"
-                                                           name="AmenityDetailID" id="@ametity.AmenityId">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        @ametity.AmenityName
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
-                                    <div class="row mt-3">
-                                        <h5>其他設施</h5>
-                                        @foreach (var ametity in amenityAraeThree)
-                                        {
-                                            <div class="col-12 col-lg-3 ">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" value="ametity.AmenityId" type="checkbox"
-                                                           name="addAmenityDetailID" id="@ametity.AmenityId">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        @ametity.AmenityName
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
+                                        </div>
+                                    }
                                 </div>
-                            <div class="row mt-3">
-                                <div class="col-6 col-lg-4">
-                                    <label for="Add" class="visually-hidden"></label>
-                                    <input type="text" name="addAmenityDetailID" class="form-control" id="Add" placeholder="其他設施">
+                                <div class="row mt-3">
+                                    <h5>場地空間</h5>
+                                    @foreach (var ametity in amenityAraeTwo)
+                                    {
+                                        <div class="col-12 col-lg-3 ">
+                                            <div class="form-check">
+                                                <input class="form-check-input" value="@ametity.AmenityId" type="checkbox"
+                                                       name="AmenityDetailID" id="@ametity.AmenityId">
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    @ametity.AmenityName
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
-                                <div class="col-4 col-lg-2">
-                                    <button type="submit" class="btn btn-primary mb-3">增加</button>
+                                <div class="row mt-3">
+                                    <h5>其他設施</h5>
+                                    <div class="col ">
+                                        <div class="col col-12  pb-5">
+                                            <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                            <textarea name="OtherAmenity" class="form-control"
+                                                      id="exampleFormControlTextarea1" rows="3">
+
+                                                </textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -970,13 +884,13 @@
                                                     </div>
                                                 </div>
                                         </div>*@
-                                       <div class="col-12 ">
-                                                <div class="row imgBox">
-                                                    <div class="row mb-5 justify-content-center">
-                                                        <input name="SpacePhotoUrl" type="file" class="filepond1">
-                                                    </div>
-                                                </div>
+                                    <div class="col-12 ">
+                                        <div class="row imgBox">
+                                            <div class="row mb-5 justify-content-center">
+                                                <input name="SpacePhotoUrl" type="file" class="filepond1">
+                                            </div>
                                         </div>
+                                    </div>
 
                                     <div class="row">
                                         <div class="col">
@@ -1145,171 +1059,172 @@
                             </button>
                         </h2>
                         <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
-                                     data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <div class="row">
-                                            <div class="col-12  mt-5">
-                                                <h2 class="fs-4">清潔與安全設施</h2>
-                                                <p class="fs16">填寫表格以將您的清潔協議和其他健康和安全措施添加到您的列表頁面</p>
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col-12  mt-5">
+                                        <h2 class="fs-4">清潔與安全設施</h2>
+                                        <p class="fs16">填寫表格以將您的清潔協議和其他健康和安全措施添加到您的列表頁面</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-12  mt-5">
+                                        <h2 class="fs-4">您採取哪些額外額外措施來保持來保持空間來保持空間清潔？</h2>
+                                        <p class="fs16">選擇有符合條件的條件的選項</p>
+                                    </div>
+                                    <div class="row">
+                                        @foreach (var cleanf in cleaningOne)
+                                        {
+                                            <div class="col col-12 col-lg-12 mt-1 mb-3 ">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" name="CleaningOptionID" type="checkbox" value="@cleanf.CleaningOptionId"
+                                                           id="flexCheckDefault">
+                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                        @cleanf.OptionDetail
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div>
+                                        }
+
                                         <div class="row">
-                                            <div class="col col-12  mt-5">
-                                                <h2 class="fs-4">您採取哪些額外額外措施來保持來保持空間來保持空間清潔？</h2>
+                                            <div class="col  mt-5">
+                                                <h2 class="fs-4">您為客人提供哪些額外的防護裝備？</h2>
                                                 <p class="fs16">選擇有符合條件的條件的選項</p>
                                             </div>
                                             <div class="row">
-                                                @foreach (var cleanf in cleaningOne)
+                                                @foreach (var cleanSec in cleaningTwo)
                                                 {
                                                     <div class="col col-12 col-lg-12 mt-1 mb-3 ">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" name="CleaningOptionID" type="checkbox" value="@cleanf.CleaningOptionId"
+                                                            <input class="form-check-input" name="CleaningOptionID" type="checkbox" value=" @cleanSec.CleaningOptionId"
                                                                    id="flexCheckDefault">
                                                             <label class="form-check-label" for="flexCheckDefault">
-                                                                @cleanf.OptionDetail
+                                                                @cleanSec.OptionDetail
                                                             </label>
                                                         </div>
                                                     </div>
                                                 }
-
-                                                <div class="row">
-                                                    <div class="col  mt-5">
-                                                        <h2 class="fs-4">您為客人提供哪些額外的防護裝備？</h2>
-                                                        <p class="fs16">選擇有符合條件的條件的選項</p>
-                                                    </div>
-                                                    <div class="row">
-                                                        @foreach (var cleanSec in cleaningTwo)
-                                                        {
-                                                            <div class="col col-12 col-lg-12 mt-1 mb-3 ">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" name="CleaningOptionID" type="checkbox" value=" @cleanSec.CleaningOptionId"
-                                                                           id="flexCheckDefault">
-                                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                                        @cleanSec.OptionDetail
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        }
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12  mt-5">
-                                                        <h2 class="fs-4">你做了什麼來幫助客人在你的空間內保持物理距離？</h2>
-                                                        <p class="fs16">選擇有符合條件的條件的選項</p>
-                                                    </div>
-                                                    <div class="row">
-                                                        @foreach (var cleanthird in cleaningThree)
-                                                        {
-                                                            <div class="col col-12 col-lg-12mt-1 mb-3">
-                                                                <div class="form-check ">
-                                                                    <input class="form-check-input" name="CleaningOptionID" type="checkbox" value=" @cleanthird.CleaningOptionId"
-                                                                           id="flexCheckChecked">
-                                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                                        @cleanthird.OptionDetail
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        }
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col  mt-5">
-                                                        <h2 class="fs-4">您添加了什麼標示來讓您的客人了解情況？</h2>
-                                                        <p class="fs16">選擇有符合條件的條件的選項</p>
-                                                    </div>
-                                                    <div class="row">
-                                                        @foreach (var cleanFour in cleaningFour)
-                                                        {
-                                                            <div class="col col-12 col-lg-12 mt-1 mb-3 ">
-                                                                <div class="form-check">
-                                                                    <input class="form-check-input" name="CleaningOptionID" type="checkbox" value="@cleanFour.CleaningOptionId"
-                                                                           id="flexCheckDefault">
-                                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                                        @cleanFour.OptionDetail
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        }
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingSeven">
-                                <button class="accordion-button accordion-buttonAdd accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                    <div class="row">
-                                        <div class="col-12 col-lg-12 d-flex align-items-start">
-                                            <div class=" imgcontainer me-2 mt-3 ">
-                                                <i class="bi fs-3 bi-cart-x-fill"></i>
-                                            </div>
-                                            <div class="textgroup mt-3 ">
-                                                <h6 class="fs18">8.取消政策</h6>
-                                                <p class="editDetailsp">選擇您的取消政策</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </button>
-                            </h2>
-                            <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
-                                 data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="row ">
-                                        <div class="col col-11  mt-5">
-                                            <h2 class="fs-4">選擇您的取消政策</h2>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="mt-auto mb-auto">
-                                                <i class=" mt-2 me-1 far fa-lightbulb"></i>
-                                                取消政策更靈活的房東會吸引更多預訂。
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <p>
-                                                <strong>取消寬限期：</strong>
-                                                所有預訂均受 <span class="logoS">ZONERadar</span>的寬限期政策約束，該政策為在收到預訂確認後 24
-                                                小時內但不遲於活動開始時間前 48 小時取消的預訂提供全額退款。
-                                            </p>
-                                        </div>
-                                    </div>
-                                    @foreach (var cancel in cancellations)
-                                    {
                                         <div class="row">
-                                            <div class="form-check col-12 col-lg-2">
-                                                <input class="form-check-input" value="@cancel.CancellationId" required type="radio" name="CancellationID"
-                                                       id="flexRadioDefault1">
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    @cancel.CancellationTitle
-                                                </label>
+                                            <div class="col-12  mt-5">
+                                                <h2 class="fs-4">你做了什麼來幫助客人在你的空間內保持物理距離？</h2>
+                                                <p class="fs16">選擇有符合條件的條件的選項</p>
                                             </div>
-                                            <div class="col-12 col-lg-12">
-                                                <p class="ms-3">
-                                                    @cancel.CancellationDetail
-                                                </p>
+                                            <div class="row">
+                                                @foreach (var cleanthird in cleaningThree)
+                                                {
+                                                    <div class="col col-12 col-lg-12mt-1 mb-3">
+                                                        <div class="form-check ">
+                                                            <input class="form-check-input" name="CleaningOptionID" type="checkbox" value=" @cleanthird.CleaningOptionId"
+                                                                   id="flexCheckChecked">
+                                                            <label class="form-check-label" for="flexCheckChecked">
+                                                                @cleanthird.OptionDetail
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                }
                                             </div>
                                         </div>
-                                    }
+                                        <div class="row">
+                                            <div class="col  mt-5">
+                                                <h2 class="fs-4">您添加了什麼標示來讓您的客人了解情況？</h2>
+                                                <p class="fs16">選擇有符合條件的條件的選項</p>
+                                            </div>
+                                            <div class="row">
+                                                @foreach (var cleanFour in cleaningFour)
+                                                {
+                                                    <div class="col col-12 col-lg-12 mt-1 mb-3 ">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" name="CleaningOptionID" type="checkbox" value="@cleanFour.CleaningOptionId"
+                                                                   id="flexCheckDefault">
+                                                            <label class="form-check-label" for="flexCheckDefault">
+                                                                @cleanFour.OptionDetail
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-        </div>
-        <div class="container containerForAdd">
-            <div class="row mt-5 mb-5">
-                <div class="col-12 text-center">
-                    <button type="submit" class="btn submitAdd deleteBtn" id="success">完成</button>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSeven">
+                            <button class="accordion-button accordion-buttonAdd accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                <div class="row">
+                                    <div class="col-12 col-lg-12 d-flex align-items-start">
+                                        <div class=" imgcontainer me-2 mt-3 ">
+                                            <i class="bi fs-3 bi-cart-x-fill"></i>
+                                        </div>
+                                        <div class="textgroup mt-3 ">
+                                            <h6 class="fs18">8.取消政策</h6>
+                                            <p class="editDetailsp">選擇您的取消政策</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+                             data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="row ">
+                                    <div class="col col-11  mt-5">
+                                        <h2 class="fs-4">選擇您的取消政策</h2>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="mt-auto mb-auto">
+                                            <i class=" mt-2 me-1 far fa-lightbulb"></i>
+                                            取消政策更靈活的房東會吸引更多預訂。
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p>
+                                            <strong>取消寬限期：</strong>
+                                            所有預訂均受 <span class="logoS">ZONERadar</span>的寬限期政策約束，該政策為在收到預訂確認後 24
+                                            小時內但不遲於活動開始時間前 48 小時取消的預訂提供全額退款。
+                                        </p>
+                                    </div>
+                                </div>
+                                @foreach (var cancel in cancellations)
+                                {
+                                    <div class="row">
+                                        <div class="form-check col-12 col-lg-2">
+                                            <input class="form-check-input" value="@cancel.CancellationId" required type="radio" name="CancellationID"
+                                                   id="flexRadioDefault1">
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                @cancel.CancellationTitle
+                                            </label>
+                                        </div>
+                                        <div class="col-12 col-lg-12">
+                                            <p class="ms-3">
+                                                @cancel.CancellationDetail
+                                            </p>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container containerForAdd">
+                <div class="row mt-5 mb-5">
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn submitAdd deleteBtn"  id="success">完成</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 
 }
 
@@ -1322,12 +1237,21 @@
     <link href="~/Assets/JS/addspace/CKEditor4/ckeditor/contents.css" />
 }
 @section endJS{
+    @*google map api*@
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWRDj0MF4QflzrSsWSw31qVzAvixwdk3w" type="text/javascript"></script>
+    <script src="~/Assets/JS/addspace/Latitude_and_Longitude.js"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
     <script src="~/Assets/JS/addspace/CKEditor4/ckeditor/config.js"></script>
     <script src="~/Assets/JS/addspace/CKEditor4/ckeditor/ckeditor.js"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script src="~/Assets/JS/addspace/ckeditor.js"></script>
     @*<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
     <script src="~/Assets/JS/addspace/addspace.js"></script>
     <script src="~/Assets/JS/addspace/CityandDistrictandZipcodeJavaScript.js"></script>
     <script src="~/Assets/JS/addspace/addSpaceOperating.js"></script>
+
 }

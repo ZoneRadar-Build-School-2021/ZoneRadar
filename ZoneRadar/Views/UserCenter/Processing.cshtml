@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UsercenterProcessingViewModel>
+﻿@model IEnumerable<OrderViewModel>
 @{
     ViewBag.Title = "Processing";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -42,7 +42,7 @@
                              style="background-image: url(@Html.DisplayFor(m => item.SpaceUrl));"></div>
                     </div>
                     <div class="col-sm-12 col-lg-8 px-3">
-                        <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceID)" class="d-inline-block mb-3 mt-3 mt-lg-0">
+                        <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceId)" class="d-inline-block mb-3 mt-3 mt-lg-0">
                             <h3 class="venue-name">@Html.DisplayFor(m => item.SpaceName)</h3>
                         </a>
                         <ul class="order-detial">
@@ -110,7 +110,7 @@
                             <span class="nt ms-4 fs-2 fw-bolder">
                                 NT$
                                 <span class="total-cost fs-2 fw-bolder">
-                                    @Html.DisplayFor(m => item.Money)
+                                    @Html.DisplayFor(m => item.TotalMoney)
                                 </span>
                             </span>
                         </p>

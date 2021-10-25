@@ -167,12 +167,8 @@ namespace ZoneRadar.Services
             var cleaningOptionList = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.CleaningOption)
                                      .GroupBy(x => x.CleaningCategory.Category);
 
-            // 找出滿時優惠的時數
-            var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID) == null ? 0 : _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Hour;
-
-            // 找出滿時優惠的折數
-            var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID) == null ? 0 : Decimal.Round(1 - (_repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Discount), 2);
-
+            // 找出滿時優惠的時數與折數
+            var spaceDiscounts = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID);
 
             var result = new SpaceDetailViewModel
             {
@@ -194,14 +190,13 @@ namespace ZoneRadar.Services
                 EndTimeList = originOperatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
                 CancellationTitle = targetSpace.Cancellation.CancellationTitle,
                 CancellationInfo = targetSpace.Cancellation.CancellationDetail,
-                HoursForDiscount = hoursForDiscount,
-                Discount = discount,
+                HoursForDiscount = spaceDiscounts == null ? 0 : spaceDiscounts.Hour,
+                Discount = spaceDiscounts == null ? 0 : decimal.Round(1 - spaceDiscounts.Discount, 2),
                 HostEmail = targetSpace.Member.Email
             };
 
             return result;
         }
-
 
         /// <summary>
         /// 收藏寫入資料庫(Steve)
@@ -222,7 +217,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 移除寫入資料庫(Steve)
+        /// 從資料庫中移除收藏(Steve)
         /// </summary>
         /// <param name="bookingPageVM"></param>
         /// <param name="memberID"></param>
@@ -392,15 +387,15 @@ namespace ZoneRadar.Services
             {
                 amenityAraeOneList = new List<AmenityAraeOne>(),
             };
-            var amenityOnes = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 1).Select(x => x).ToList();
-            foreach (var amenityOne in amenityOnes)
+            var amenitys = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 1).Select(x => x).ToList();
+            foreach (var amenityOne in amenitys)
             {
-                var amenityOneTemp = new AmenityAraeOne()
+                var amenityTemp = new AmenityAraeOne()
                 {
                     AmenityId = amenityOne.AmenityDetailID,
                     AmenityName = amenityOne.Amenity
                 };
-                result.amenityAraeOneList.Add(amenityOneTemp);
+                result.amenityAraeOneList.Add(amenityTemp);
             };
             return result;
         }
@@ -1158,9 +1153,11 @@ namespace ZoneRadar.Services
         /// <summary>
         /// 增加場地 增加地址的datamodel (Amber) 
         /// </summary>
+        
         public AddSpaceViewModel CreateSpace(AddSpaceViewModel addSpaceViewModel)
 
         {
+            
             var spacecity=addSpaceViewModel.CityID;
             var city = _repository.GetAll<City>().Where(x => x.CityName == spacecity).Select(x => x.CityID).FirstOrDefault();
             var space = new Space
@@ -1182,13 +1179,10 @@ namespace ZoneRadar.Services
                 DistrictID = addSpaceViewModel.DistrictID,
                 Address = addSpaceViewModel.Address,
                 PublishTime = DateTime.Today,
-                //Latitude = addSpaceViewModel.Latitude,
-                //Longitude = addSpaceViewModel.Longitude,
+                Latitude = addSpaceViewModel.Lat,
+                Longitude = addSpaceViewModel.Lng,
                 SpaceStatusID = 2,
                
-                //SpaceStatusID = addSpaceViewModel.SpaceStatusID,
-                //DiscontinuedDate = DateTime.UtcNow,
-                //DiscontinuedDate = addSpaceViewModel.DiscontinuedDate,
             };
            
             _repository.Create<Space>(space);
@@ -1304,8 +1298,7 @@ namespace ZoneRadar.Services
                 { "星期日", 7 }
             };
             var operatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).ToList();
-            var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Hour;
-            var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Discount;
+            var spaceDiscounts = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id);
             var targetSpace = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id);
             var orderTimeList = _repository.GetAll<OrderDetail>().Where(x => x.Order.SpaceID == id && x.Order.OrderStatusID != 5).ToList().Select(x => x.StartDateTime.ToString("yyyy-MM-dd"));
 
@@ -1314,14 +1307,13 @@ namespace ZoneRadar.Services
                 OperatingDayList = operatingList.Select(x => x.OperatingDay).ToList(),
                 StartTimeList = operatingList.Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
                 EndTimeList = operatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
-                HoursForDiscount = hoursForDiscount,
-                Discount = Decimal.Round((1 - discount), 2),
+                HoursForDiscount = spaceDiscounts == null ? 0 : spaceDiscounts.Hour,
+                Discount = spaceDiscounts == null ? 1 : decimal.Round((1 - spaceDiscounts.Discount), 2),
                 MinHour = targetSpace.MinHours,
                 PricePerHour = (int)targetSpace.PricePerHour,
                 Capacity = targetSpace.Capacity,
                 OrderTimeList = orderTimeList.ToList(),
             };
-
 
             return result;
         }
@@ -1374,86 +1366,63 @@ namespace ZoneRadar.Services
 
             return spaceManageList;
         }
-
+      
         /// <summary>
-        /// 將場地預定下架日期資訊存進資料庫(Jenny)
+        /// 將場地狀態資訊存進資料庫(下架、刪除、重新上架)(Jenny)
         /// </summary>
-        public void SetDiscontinuedDate(int userId, int spaceId, DateTime? discontinuedDate)
+        public SweetAlert SetSpaceStatus(SpaceStatusInformation spaceStatusInfo)
         {
-            var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceId && x.MemberID == userId);
-            if (space != null)
+            var sweetAlert = new SweetAlert { Alert = false };
+            try
             {
-                space.DiscontinuedDate = discontinuedDate;
-                if(discontinuedDate.Value.Date == DateTime.Today)
+                var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceStatusInfo.SpaceId && x.MemberID == spaceStatusInfo.UserId);
+                if (space != null)
                 {
-                    space.SpaceStatusID = 1;
-                }
-                try
-                {
+                    //儲存預定下架日期
+                    if (spaceStatusInfo.SpaceStatusId == (int)SpaceStatusEnum.Discontinued && spaceStatusInfo.DiscontinuedDate != null)
+                    {
+                        space.DiscontinuedDate = spaceStatusInfo.DiscontinuedDate.Value;
+                        //如果預定下架日期是當天，直接將場地狀態改成下架
+                        if (spaceStatusInfo.DiscontinuedDate.Value.Date == DateTime.Today)
+                        {
+                            space.SpaceStatusID = (int)SpaceStatusEnum.Discontinued;
+                        }
+                    }
+                    //取消下架
+                    if (spaceStatusInfo.SpaceStatusId == (int)SpaceStatusEnum.Discontinued && spaceStatusInfo.DiscontinuedDate == null)
+                    {
+                        space.DiscontinuedDate = null;
+                    }                   
+                    //刪除場地
+                    if (spaceStatusInfo.SpaceStatusId == (int)SpaceStatusEnum.Delete)
+                    {
+                        space.SpaceStatusID = (int)SpaceStatusEnum.Delete;
+                    }
+                    //重新上架
+                    if (spaceStatusInfo.SpaceStatusId == (int)SpaceStatusEnum.OnTheShelf)
+                    {
+                        space.SpaceStatusID = (int)SpaceStatusEnum.OnTheShelf;
+                        space.DiscontinuedDate = null;
+                    }
+
                     _repository.Update(space);
                     _repository.SaveChanges();
+                    return sweetAlert;
                 }
-                catch (Exception ex)
+                else
                 {
-                    throw new NotImplementedException();
+                    sweetAlert.Alert = true;
+                    sweetAlert.Message = "您並非該場地主";
+                    sweetAlert.Icon = false;
+                    return sweetAlert;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                throw new NotImplementedException();
-            }
-        }
-
-        /// <summary>
-        /// 刪除場地(Jenny)
-        /// </summary>
-        public void DeleteSpace(int userId, int spaceId)
-        {
-            var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceId && x.MemberID == userId && x.SpaceStatusID == 1);
-            if (space != null)
-            {
-                space.SpaceStatusID = 3;
-                try
-                {
-                    _repository.Update(space);
-                    _repository.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    throw new NotImplementedException();
-                }
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        /// <summary>
-        /// 重新上架場地(Jenny)
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="spaceId"></param>
-        public void Republish(int userId, int spaceId)
-        {
-            var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceId && x.MemberID == userId);
-            if (space != null)
-            {
-                space.SpaceStatusID = 2;
-                space.DiscontinuedDate = null;
-                try
-                {
-                    _repository.Update(space);
-                    _repository.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    throw new NotImplementedException();
-                }
-            }
-            else
-            {
-                throw new NotImplementedException();
+                sweetAlert.Alert = true;
+                sweetAlert.Message = "發生錯誤，請稍後再試！";
+                sweetAlert.Icon = false;
+                return sweetAlert;
             }
         }
     }

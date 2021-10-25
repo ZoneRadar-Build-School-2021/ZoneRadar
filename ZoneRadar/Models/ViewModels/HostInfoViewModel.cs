@@ -31,7 +31,7 @@ namespace ZoneRadar.Models.ViewModels
         public decimal PricePerHour { get; set; }
         public string SpacePhoto { get; set; }
         public int ReviewCount { get; set; }
-        public int Score { get; set; }
+        public double Score { get; set; }
         public string SpaceMemberPhoto { set; get; }
     }
 }
