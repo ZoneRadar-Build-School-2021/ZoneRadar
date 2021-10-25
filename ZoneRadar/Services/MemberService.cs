@@ -639,11 +639,11 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public ProfileViewModel GetProfileData(int memberID)
         {
-            var p = _repository.GetAll<Member>().ToList().FirstOrDefault(x => x.MemberID == memberID);
+            var p = _repository.GetAll<Member>().ToList().First(x => x.MemberID == memberID);
             var result = new ProfileViewModel()
             {
                 MemberID = p.MemberID,
-                //Photo = p.Photo,
+                Photo = p.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : p.Photo,
                 Name = p.Name,
                 Phone = p.Phone,
                 Email = p.Email,
@@ -662,7 +662,7 @@ namespace ZoneRadar.Services
         public ProfileViewModel EditProfileData(ProfileViewModel edit)
         {
             //抓取 --> 編輯資料
-            var p = _repository.GetAll<Member>().ToList().FirstOrDefault(x => x.MemberID == edit.MemberID);
+            var p = _repository.GetAll<Member>().ToList().First(x => x.MemberID == edit.MemberID);
             //p.Photo = edit.Photo;
             p.Name = edit.Name;
             p.Phone = edit.Phone;
