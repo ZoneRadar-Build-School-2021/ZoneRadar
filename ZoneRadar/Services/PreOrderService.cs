@@ -48,12 +48,10 @@ namespace ZoneRadar.Services
                     SpaceUrl = order.Space.SpacePhoto.First().SpacePhotoUrl,
                     OwnerName = order.Space.Member.Name,
                     OwnerPhone = order.Space.Member.Phone,
-                    //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
-                    Score = reviews.Where(x => x.Order.SpaceID == order.SpaceID && x.ToHost).Select(x => x.Score).Average(),
                     TotalMoney = resultDetail.Select(x => x.Money).Sum(),
                     Email = order.Member.Email,
                     OrderId = order.OrderID,
-                    RentDetail = resultDetail
+                    RentDetail = resultDetail,
                 });
             }
             return result;
