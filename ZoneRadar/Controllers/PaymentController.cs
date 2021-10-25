@@ -18,15 +18,20 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         public ActionResult Payment()
         {
-            //var ReturnURL = "";
+            var ReturnURL = "http://www.ecpay.com.tw/";
+            var ClientBackURL = "https://localhost:44322/UserCenter/Pending";
+            var MerchantTradeNo = "ECPay" + new Random().Next(0, 99999).ToString() + DateTime.Now;
+            var MerchantradeDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+            
+
 
             var order = new Dictionary<string, string>
             {
             //特店交易編號
-            { "MerchantTradeNo",  "ECPay" + new Random().Next(0, 99999).ToString() + DateTime.Now},
+            { "MerchantTradeNo", MerchantTradeNo },
 
             //特店交易時間 yyyy/MM/dd HH:mm:ss
-            { "MerchantTradeDate",  DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")},
+            { "MerchantTradeDate",  MerchantradeDate},
 
             //交易金額
             { "TotalAmount",  "100"},
@@ -53,10 +58,10 @@ namespace ZoneRadar.Controllers
             { "CustomField4",  ""},
 
             //綠界回傳付款資訊的至 此URL
-            { "ReturnURL",  "http://www.ecpay.com.tw/"},
+            { "ReturnURL", ReturnURL },
 
             //付款完成通知回傳的網址
-            { "ClientBackURL", "https://localhost:44322/UserCenter/Pending"},
+            { "ClientBackURL", ClientBackURL },
 
             //使用者於綠界 付款完成後，綠界將會轉址至 此URL
             { "OrderResultURL", ""},
