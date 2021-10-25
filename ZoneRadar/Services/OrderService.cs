@@ -228,21 +228,18 @@ namespace ZoneRadar.Services
         public List<ProcessingViewModel> GetHostCenter(int id) 
         {
             var result = new List<ProcessingViewModel>();
-            var resultdetail = new ProcessingViewModel 
-            {
-                orderdetailesforprcess = new List<OrderDetailesforPrcess>()
-            };
             var Orders = _repository.GetAll<Order>().Where(x=> x.OrderStatusID == 3 && x.Space.MemberID == id);
-            
             foreach (var order in Orders) 
-            { 
-                foreach(var o in order.OrderDetail) 
-                { 
-                    resultdetail.orderdetailesforprcess.Add(new OrderDetailesforPrcess {
+            {
+                var resultdetail = new ProcessingViewModel{ orderdetailesforprcess = new List<OrderDetailesforPrcess>() };
+                foreach (var o in order.OrderDetail)
+                {
+                    resultdetail.orderdetailesforprcess.Add(new OrderDetailesforPrcess
+                    {
                         StratTime = o.StartDateTime,
-                        EndTime =  o.EndDateTime,
+                        EndTime = o.EndDateTime,
                         People = o.Participants,
-                        SinglePrice = (int)SingleOrderDetailPrice(o.EndDateTime,o.StartDateTime,o.Order.Space.PricePerHour,o.Order.Space.SpaceDiscount.FirstOrDefault().Hour, o.Order.Space.SpaceDiscount.FirstOrDefault().Discount)
+                        SinglePrice = (int)SingleOrderDetailPrice(o.EndDateTime, o.StartDateTime, o.Order.Space.PricePerHour, o.Order.Space.SpaceDiscount.FirstOrDefault().Hour, o.Order.Space.SpaceDiscount.FirstOrDefault().Discount)
                     });
                 }
                 result.Add(new ProcessingViewModel
@@ -259,6 +256,7 @@ namespace ZoneRadar.Services
                     Total = resultdetail.orderdetailesforprcess.Select(x => x.SinglePrice).Sum()
                 });
             }
+            
             return result;
         }
 

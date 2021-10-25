@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,9 +9,17 @@ namespace ZoneRadar.Models.ViewModels
     public class AddSpaceViewModel
     {
         public int SpaceID { get;set; }
+       
+        [Required]
         public int CountryID { get; set; }
+       
+        [Required(ErrorMessage = "請選擇縣市")]
         public string CityID { get; set; }
+
+        [Required]
         public int DistrictID { get; set; }
+        
+        [Required]
         public string Address { get; set; }
         public int MemberID { get; set; }
         public string SpaceName { get; set; }
@@ -25,8 +34,8 @@ namespace ZoneRadar.Models.ViewModels
         public string ShootingEquipment { get; set; }
         public int CancellationID { get; set; }
         public DateTime PublishTime { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
+        public string Lat { get; set; }
+        public string Lng{ get; set; }
         public int SpaceStatusID { get; set; }
         public DateTime DiscontinuedDate { get; set; }
 
@@ -52,5 +61,7 @@ namespace ZoneRadar.Models.ViewModels
 
         public int Hour { get; set; }
         public decimal Discount { get; set; }
+
+
     }
 }

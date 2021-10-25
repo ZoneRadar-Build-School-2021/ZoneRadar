@@ -1,10 +1,9 @@
-﻿@model System.Collections.Generic.Dictionary<string, string>
+﻿@model Dictionary<string, string>
 @*@model ECPay.Payment.Integration.AllInOne*@
 @{
     ViewBag.Title = "Payment";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    //var Pay = ViewBag.Ecpay;
-    //int i = 0;
+    var Pay = ViewBag.Ecpay;
 }
 
 <div class="container">
@@ -81,53 +80,6 @@
                     </div>
                 </div>
                 <!-- Host Rules -->
-                <!--<p class="mt-5">
-                    <i class="far fa-file-alt"></i> Host Rules
-                </p>-->
-                <!--  -->
-                <!-- <button>Read more</button> -->
-                <!--<div class="mb-2">
-                    <div class="heavy">General Rules</div>
-                    <p class="text-gray-600 mt-2" style="word-wrap:break-word; font-size: 14px;">
-                        The studio,
-                        including the two toilets, will be handed over cleaned by us. With normal use, no final
-                        cleaning is expected.
-                    <p>
-                    <p class="text-gray-600" style="word-wrap:break-word; font-size: 14px;"></p>
-                    <p>
-                        In the studio there is also a bar with 3m gastronomy refrigerators and a dishwashing
-                        area with
-                        following 6m bar. The use and consumption of beverages can be individually regulated.
-                    </p>
-                </div>
-                <div>
-                    <div>
-                        <div class="heavy mt-4">All ages are allowed in the space</div>
-                    </div>
-                    <div>
-                        <div class="heavy mt-4">Production insurance is not required</div>
-                    </div>
-                    <div>
-                        <div class="heavy mt-4">Furniture and decorations may be moved</div>
-                    </div>
-                    <div>
-                        <div class="heavy mt-4">Smoke machines are allowed</div>
-                    </div>
-                    <div>
-                        <div class="heavy mt-4">Nudity is allowed</div>
-                    </div>
-                </div>
-                <div class="mt-4 mb-2">
-                    <div class="heavy">Security cameras and recording devices</div>
-                    <p class="text" style="white-space:nowrap; font-size: 14px;">
-                        向場地主確認確認空間中是否有監視攝像頭或記錄設備
-                    </p>
-                    <p class="text" style="word-wrap:break-word; font-size: 14px;">
-                        禁止在浴室或更衣室使用錄音裝置。
-                        <a href="#" target="_blank">ZoneRadar Services Agreement</a>
-
-                    </p>
-                </div>-->
                 <div class="form-input mt-5 p-2">
                     <div class="row mb-3">
                         <label for="validationServerUsername" class="col-2 col-sm-4 col-form-label">聯絡人 </label>
@@ -181,7 +133,8 @@
                     </div>
                     <div class="ps-1 d-flex host-pic">
                         <img src="https://picsum.photos/1920/1080/?random=1">
-                        <p class="text-center ps-4">整體千萬</p>
+                        @* img場地主相片 *@
+                        <p class="text-center ps-4">整體千萬 @*場地主名字*@</p>
                     </div>
                 </div>
                 <div>

@@ -33,17 +33,16 @@ namespace ZoneRadar.Controllers
         ///  場地主上架場地(Amber) 
         /// </summary>
         [Authorize]
-        public ActionResult AddSpace()
+        public ActionResult AddSpace(SpaceViewModel id)
         {
             var userId = 0;
             var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
             if (isAuthenticated)
             {
-                var model = new SpaceViewModel
+                var model = new SpaceViewModel( )
                 {
                     SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
                     cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
-                    addressAraeList = _spaceService.ShowAmenityByIdOne().addressAraeList,
 
                     amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
                     amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
@@ -71,7 +70,6 @@ namespace ZoneRadar.Controllers
             var userid = int.Parse(User.Identity.Name);
             space.MemberID = userid;
             var result = _spaceService.CreateSpace(space);
-            ViewData["Message"] = "成功新增場地";
             return RedirectToAction("SpaceManage", "HostCenter");
         }
         /// <summary>

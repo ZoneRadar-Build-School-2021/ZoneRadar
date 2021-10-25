@@ -387,15 +387,15 @@ namespace ZoneRadar.Services
             {
                 amenityAraeOneList = new List<AmenityAraeOne>(),
             };
-            var amenityOnes = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 1).Select(x => x).ToList();
-            foreach (var amenityOne in amenityOnes)
+            var amenitys = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 1).Select(x => x).ToList();
+            foreach (var amenityOne in amenitys)
             {
-                var amenityOneTemp = new AmenityAraeOne()
+                var amenityTemp = new AmenityAraeOne()
                 {
                     AmenityId = amenityOne.AmenityDetailID,
                     AmenityName = amenityOne.Amenity
                 };
-                result.amenityAraeOneList.Add(amenityOneTemp);
+                result.amenityAraeOneList.Add(amenityTemp);
             };
             return result;
         }
@@ -1153,9 +1153,11 @@ namespace ZoneRadar.Services
         /// <summary>
         /// 增加場地 增加地址的datamodel (Amber) 
         /// </summary>
+        
         public AddSpaceViewModel CreateSpace(AddSpaceViewModel addSpaceViewModel)
 
         {
+            
             var spacecity=addSpaceViewModel.CityID;
             var city = _repository.GetAll<City>().Where(x => x.CityName == spacecity).Select(x => x.CityID).FirstOrDefault();
             var space = new Space
@@ -1177,13 +1179,10 @@ namespace ZoneRadar.Services
                 DistrictID = addSpaceViewModel.DistrictID,
                 Address = addSpaceViewModel.Address,
                 PublishTime = DateTime.Today,
-                //Latitude = addSpaceViewModel.Latitude,
-                //Longitude = addSpaceViewModel.Longitude,
+                Latitude = addSpaceViewModel.Lat,
+                Longitude = addSpaceViewModel.Lng,
                 SpaceStatusID = 2,
                
-                //SpaceStatusID = addSpaceViewModel.SpaceStatusID,
-                //DiscontinuedDate = DateTime.UtcNow,
-                //DiscontinuedDate = addSpaceViewModel.DiscontinuedDate,
             };
            
             _repository.Create<Space>(space);
