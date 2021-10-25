@@ -101,7 +101,7 @@
                                             </div>
                                             @*經緯度*@
                                             <input type="hidden" class="form-control" name="Lat" id="target" />
-                                             <input type="hidden" class="form-control" name="Lng" id="target2" />
+                                            <input type="hidden" class="form-control" name="Lng" id="target2" />
 
                                         </div>
                                         
@@ -290,10 +290,10 @@
                                         <label for="StateMon" class="form-label  "></label>
                                         <select id="StateMon" class="form-select fs16 MonselectL "
                                                 aria-label="Default select example" name="StartTime" disabled>
-                                            <option id="MonS" value="">請選擇時間</option>
+                                            <option id="MonStart" value="">請選擇時間</option>
                                             @foreach (var open in Operating)
                                             {
-                                                <option id="shr" value="@open.Value">@open.Text</option>
+                                                <option  value="@open.Value">@open.Text</option>
                                             }
                                         </select>
 
@@ -310,37 +310,11 @@
                                             <option id="MonEnd" value="">請選擇時間</option>
                                             @foreach (var open in Operating)
                                             {
-                                                <option id="ehr" value="@open.Value">@open.Text</option>
+                                                <option  value="@open.Value">@open.Text</option>
                                             }
                                         </select>
                                     </div>
                                 </div>
-                                @*手機*@
-                                <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
-                                <div class="col-5">
-                                    <label for="StateMon" class="form-label  "></label>
-                                    <select id="StateMon" class="form-select  " aria-label="Default select example" name="StartTime"
-                                            disabled>-->
-                                @*<option value="">請選擇營業時間</option>*@
-                                <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                                <P class="col-2 mt-4 text-center  text-start">to</P>
-                                <div class="col-5">
-                                    <label for="StateMon" class="form-label  "></label>
-                                    <select id="StateMon" class="form-select MonselectR " name="EndTime"
-                                            aria-label="Default select example" disabled>-->
-                                @*<option >請選擇營業時間</option>*@
-                                <!--@foreach (var open in Operating)
-                                            {
-                                                <option value="@open.Value">@open.Text</option>
-                                            }
-                                        </select>
-                                    </div>
-                                </div>-->
 
                                 <div class="row mt-4 border-bottom">
                                     <div class="col-6 col-xl-1  mt-auto mb-auto">
@@ -375,7 +349,7 @@
                                         <label for="StateTue" class="form-label  "></label>
                                         <select id="StateTue" class="form-select fs16 TusselectL" name="StartTime"
                                                 aria-label="Default select example" disabled>
-                                            @*<option value="">請選擇營業時間</option>*@
+                                            <option id="TueStart" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
                                                 <option value="@open.Value">@open.Text</option>
@@ -391,7 +365,7 @@
                                         <label for="StateTue" class="form-label  "></label>
                                         <select id="StateTue" class="form-select fs16 TusselectR" name="EndTime"
                                                 aria-label="Default select example" disabled>
-                                            @*<option value="">請選擇營業時間</option>*@
+                                            <option id="TueEnd" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
                                                 <option value="@open.Value">@open.Text</option>
@@ -434,7 +408,7 @@
                                         <label for="State" class="form-label"></label>
                                         <select id="StateWed" class="form-select fs16" aria-label="Default select example" name="StartTime"
                                                 disabled>
-                                            @*<option value="">請選擇營業時間</option>*@
+                                            <option id="WedStart" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
                                                 <option value="@open.Value">@open.Text</option>
@@ -450,7 +424,7 @@
                                         <label for="State" class="form-label "></label>
                                         <select id="StateWed" class="form-select fs16" aria-label="Default select example" name="EndTime"
                                                 disabled>
-                                            @*<option value="">請選擇營業時間</option>*@
+                                            <option id="WedEnd" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
                                                 <option value="@open.Value">@open.Text</option>
@@ -458,32 +432,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                @*手機*@
-                                <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
-                                <div class="col-5">
-                                    <label for="State" class="form-label "></label>
-                                    <select id="StateWed" class="form-select  " aria-label="Default select example" name="StartTime"
-                                            disabled>-->
-                                @*<option value="">請選擇營業時間</option>*@
-                                <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                                <P class="col-2 mt-4 text-center  text-start">to</P>
-                                <div class="col-5">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateWed" class="form-select  " aria-label="Default select example" name="EndTime"
-                                            disabled>-->
-                                @*<option value="">請選擇營業時間</option>*@
-                                <!--@foreach (var open in Operating)
-                                            {
-                                                <option value="@open.Value">@open.Text</option>
-                                            }
-                                        </select>
-                                    </div>
-                                </div>-->
                                 <div class="row mt-4 border-bottom">
                                     <div class="col-6 col-xl-1  mt-auto mb-auto">
                                         <p class="mt-xl-3 fs16">星期四</p>

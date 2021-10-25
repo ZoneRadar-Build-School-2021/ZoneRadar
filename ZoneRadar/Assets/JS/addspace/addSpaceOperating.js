@@ -34,29 +34,25 @@
         //    StateMon4.disabled = false;
             //var starttime= document.getElementById("Mon");
             //starttime.removeAttribute('class');
-            var MonS = document.getElementById("MonS");
-            MonS.innerHTML = "06:00";
-            MonS.setAttribute("value", "06:00");
+            var MonStart = document.getElementById("MonStart");
+            MonStart.innerHTML = "06:00";
+            MonStart.setAttribute("value", "06:00");
             var MonEnd = document.getElementById("MonEnd");
             MonEnd.innerHTML = "23:00";
             MonEnd.setAttribute("value", "23:00");
         });
 
         flexRadioDefault2.addEventListener('click',function () {
-            var MonS = document.getElementById("MonS");
-            MonS.innerHTML = "請選擇營業時間";
+            var MonStart = document.getElementById("MonStart");
+            MonStart.innerHTML = "請選擇營業時間";
             
             var MonEnd = document.getElementById("MonEnd");
             MonEnd.innerHTML = "請選擇營業時間";
            
             let StateMon=document.querySelectorAll("#StateMon")[0];
             let StateMon2=document.querySelectorAll("#StateMon")[1];
-            //let StateMon3=document.querySelectorAll("#StateMon")[2];
-            //let StateMon4=document.querySelectorAll("#StateMon")[3];
             StateMon.disabled = false;
             StateMon2.disabled = false;
-        //    StateMon3.disabled=false;
-        //    StateMon4.disabled=false;
         });
 
 
@@ -77,37 +73,31 @@
                 Tuehour.checked=false;
                 let StateTue=document.querySelectorAll("#StateTue")[0];
                 let StateTue2=document.querySelectorAll("#StateTue")[1];
-                //let StateTue3=document.querySelectorAll("#StateTue")[2];
-                //let StateTue4=document.querySelectorAll("#StateTue")[3];
-                StateTue.disabled=true;
+
+                StateTue.disabled = true;
                 StateTue2.disabled=true;
-                //StateTue3.disabled=true;
-                //StateTue4.disabled=true;
-                flagtue=1;
             }
         });
     TueAllDay.addEventListener('click',function(){
 
         let StateTue=document.querySelectorAll("#StateTue")[0];
-        let StateTue2=document.querySelectorAll("#StateTue")[1];
-        //let StateTue3=document.querySelectorAll("#StateTue")[2];
-        //let StateTue4=document.querySelectorAll("#StateTue")[3];
+        let StateTue2 = document.querySelectorAll("#StateTue")[1];
+        var TueStart = document.getElementById("TueStart");
+        TueStart.innerHTML = "06:00";
+        TueStart.setAttribute("value", "06:00");
+        var TueEnd = document.getElementById("TueEnd");
+        TueEnd.innerHTML = "23:00";
+        TueEnd.setAttribute("value", "23:00");
+
         StateTue.disabled=true;
         StateTue2.disabled=true;
-        //StateTue3.disabled=true;
-        //StateTue4.disabled=true;
 
     });
     Tuehour.addEventListener('click',function(){
-
         let StateTue=document.querySelectorAll("#StateTue")[0];
         let StateTue2=document.querySelectorAll("#StateTue")[1];
-        //let StateTue3=document.querySelectorAll("#StateTue")[2];
-        //let StateTue4=document.querySelectorAll("#StateTue")[3];
         StateTue.disabled=false;
         StateTue2.disabled=false;
-    //    StateTue3.disabled=false;
-    //    StateTue4.disabled=false;
     })
 
 
@@ -131,8 +121,6 @@
             Wedhour.checked=false;
             let StateWed=document.querySelectorAll("#StateWed")[0];
             let StateWed2=document.querySelectorAll("#StateWed")[1];
-            //let StateWed3=document.querySelectorAll("#StateWed")[2];
-            //let StateWed4 = document.querySelectorAll("#StateWed")[3];
 
                //選擇時間
                //
@@ -144,24 +132,28 @@
            }
        });
        WedAllDay.addEventListener('click',function(){
-            let StateWed=document.querySelectorAll("#StateWed")[0];
-            let StateWed2=document.querySelectorAll("#StateWed")[1];
-            //let StateWed3=document.querySelectorAll("#StateWed")[2];
-            //let StateWed4=document.querySelectorAll("#StateWed")[3];
-            StateWed.disabled=true;
-            StateWed2.disabled=true;
-       //     StateWed3.document=true;
-       //     StateWed4.document=true;
+           let StateWed=document.querySelectorAll("#StateWed")[0];
+           let StateWed2 = document.querySelectorAll("#StateWed")[1];
+
+           var WedStart = document.getElementById("WedStart");
+           WedStart.innerHTML = "06:00";
+           WedStart.setAttribute("value", "06:00");
+           var WedEnd = document.getElementById("WedEnd");
+
+           WedEnd.innerHTML = "23:00";
+           WedEnd.setAttribute("value", "23:00");
+
+           StateWed.disabled = true;
+           StateWed2.disabled=true;
        });
          Wedhour.addEventListener('click',function(){
             let StateWed=document.querySelectorAll("#StateWed")[0];
             let StateWed2=document.querySelectorAll("#StateWed")[1];
-            //let StateWed3=document.querySelectorAll("#StateWed")[2];
-            //let StateWed4=document.querySelectorAll("#StateWed")[3];
-            StateWed.disabled=false;
+
+            StateWed.disabled = false;
             StateWed2.disabled=false;
-       //     StateWed3.document=false;
-       //     StateWed4.document=false;
+            StateWed3.document=false;
+            StateWed4.document=false;
        });
        //thursday
         let flexSwitchCheckDefaultThu=document.querySelector("#flexSwitchCheckDefault4");
