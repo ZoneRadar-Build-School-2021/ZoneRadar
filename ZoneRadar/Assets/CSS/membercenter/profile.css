@@ -17,8 +17,8 @@ img {
     vertical-align: middle;
 }
 .photo-card img {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 100%;
     border: 3px solid #049DD9;
 }
