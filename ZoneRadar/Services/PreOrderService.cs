@@ -38,7 +38,7 @@ namespace ZoneRadar.Services
                         RentTime = orderdetail.StartDateTime.ToString("yyyy-MM-dd HH:mm"),
                         RentBackTime = orderdetail.EndDateTime.ToString("yyyy-MM-dd HH:mm"),
                         People = orderdetail.Participants,
-                        Money = PayMentService.OrderDetailPrice(orderdetail.EndDateTime, orderdetail.StartDateTime, orderdetail.Order.Space.PricePerHour, orderdetail.Order.Space.SpaceDiscount.First().Hour, orderdetail.Order.Space.SpaceDiscount.First().Discount),
+                        Money = PayMentService.OrderDetailPrice(orderdetail.EndDateTime, orderdetail.StartDateTime, orderdetail.Order.Space.PricePerHour, orderdetail.Order.Space.SpaceDiscount.Any() ? orderdetail.Order.Space.SpaceDiscount.First().Hour : 1, orderdetail.Order.Space.SpaceDiscount.Any() ? orderdetail.Order.Space.SpaceDiscount.First().Discount : 0),
                     });
                 }
                 result.Add(new OrderViewModel
