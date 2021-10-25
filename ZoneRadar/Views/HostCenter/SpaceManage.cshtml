@@ -133,7 +133,7 @@
             </p>
             <p>近30天的被預定次數:<a href="~/HostCenter/History" class="booking-count mx-2 fs-5">@item.NumberOfOrders</a>次</p>
             <p>下架日期: @item.DiscontinuedDate</p>
-            <p class="text-end pt-3 pb-4 border-bottom border-3">
+            <p class="text-end pt-3 pb-4 border-bottom border-3 text-decoration-none">
                 <a class="edit-btn btn me-3" href="~/HostCenter/EditSpace?spaceId=@item.SpaceID">編輯場地</a>
                 <button class="republish-btn btn me-3" data-bs-toggle="modal" data-bs-target="#republish-modal-@item.SpaceID">重新上架</button>
                 <button class="delete-btn btn" data-bs-toggle="modal" data-bs-target="#delete-modal-@item.SpaceID">永久刪除</button>
@@ -185,7 +185,11 @@
     </div>
 </div>
 
-
+@{
+    bool alert = ViewData["Alert"] == null ? false : (bool)ViewData["Alert"];
+    //設定sweet alert的icon應為哪種樣式
+    string icon = ViewData["Icon"] == null ? string.Empty : (bool)ViewData["Icon"] ? "success" : "error";
+}
 
 @section topCss{
     <link href="~/Assets/CSS/hostCenter/editplace.css" rel="stylesheet" />
@@ -208,7 +212,18 @@
                     let submit_btn = document.querySelector(".discontinue-modal.show .submit-btn");
                     submit_btn.removeAttribute("disabled");
                 }
-            });          
+            });
         })
+
+        if (@Json.Encode(alert)) {
+            Swal.fire({
+                title: "@ViewData["Message"]",
+                icon: "@icon",
+                showConfirmButton: true,
+                confirmButtonColor: "#be7418",
+                confirmButtonText: "OK",
+                position: "top"
+            })
+        }
     </script>   
 }

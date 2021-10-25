@@ -94,6 +94,9 @@ namespace ZoneRadar.Controllers
             if (isAuthenticated)
             {
                 var spaceManageList = _spaceService.GetHostSpace(userId);
+                ViewData["Alert"] = TempData["Alert"];
+                ViewData["Message"] = TempData["Message"];
+                ViewData["Icon"] = TempData["Icon"];
                 return View(spaceManageList);
             }
             else
@@ -127,6 +130,8 @@ namespace ZoneRadar.Controllers
         /// <summary>
         /// 儲存場地預定下架日期(Jenny)
         /// </summary>
+        /// <param name="spaceId"></param>
+        /// <param name="discontinuedDate"></param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult SpaceDiscontinue(int spaceId, DateTime? discontinuedDate)
@@ -139,7 +144,17 @@ namespace ZoneRadar.Controllers
             }
             if (discontinuedDate.HasValue)
             {
-                _spaceService.SetDiscontinuedDate(userId, spaceId, discontinuedDate.Value);
+                var spaceStatusInfo = new SpaceStatusInformation()
+                {
+                    UserId = userId,
+                    SpaceId = spaceId,
+                    SpaceStatusId = (int)SpaceStatusEnum.Discontinued,
+                    DiscontinuedDate = discontinuedDate.Value
+                };
+                var sweetAlert = _spaceService.SetSpaceStatus(spaceStatusInfo);
+                TempData["Alert"] = sweetAlert.Alert;
+                TempData["Message"] = sweetAlert.Message;
+                TempData["Icon"] = sweetAlert.Icon;
                 return RedirectToAction("SpaceManage");
             }
             else
@@ -152,7 +167,7 @@ namespace ZoneRadar.Controllers
         /// <summary>
         /// 取消下架(Jenny)
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="spaceId"></param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult CancelDiscontinue(int spaceId)
@@ -165,7 +180,17 @@ namespace ZoneRadar.Controllers
             }
             else
             {
-                _spaceService.SetDiscontinuedDate(userId, spaceId, null);
+                //取消下架：SpaceStatusEnum設為Discontinued，但時間是null
+                var spaceStatusInfo = new SpaceStatusInformation()
+                {
+                    UserId = userId,
+                    SpaceId = spaceId,
+                    SpaceStatusId = (int)SpaceStatusEnum.Discontinued
+                };
+                var sweetAlert = _spaceService.SetSpaceStatus(spaceStatusInfo);
+                TempData["Alert"] = sweetAlert.Alert;
+                TempData["Message"] = sweetAlert.Message;
+                TempData["Icon"] = sweetAlert.Icon;
                 return RedirectToAction("SpaceManage");
             }
         }
@@ -173,6 +198,7 @@ namespace ZoneRadar.Controllers
         /// <summary>
         /// 刪除場地(Jenny)
         /// </summary>
+        /// <param name="spaceId"></param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult DeleteSpace(int spaceId)
@@ -185,7 +211,16 @@ namespace ZoneRadar.Controllers
             }
             else
             {
-                _spaceService.DeleteSpace(userId, spaceId);
+                var spaceStatusInfo = new SpaceStatusInformation()
+                {
+                    UserId = userId,
+                    SpaceId = spaceId,
+                    SpaceStatusId = (int)SpaceStatusEnum.Delete
+                };
+                var sweetAlert = _spaceService.SetSpaceStatus(spaceStatusInfo);
+                TempData["Alert"] = sweetAlert.Alert;
+                TempData["Message"] = sweetAlert.Message;
+                TempData["Icon"] = sweetAlert.Icon;
                 return RedirectToAction("SpaceManage");
             }
         }
@@ -206,7 +241,16 @@ namespace ZoneRadar.Controllers
             }
             else
             {
-                _spaceService.Republish(userId, spaceId);
+                var spaceStatusInfo = new SpaceStatusInformation()
+                {
+                    UserId = userId,
+                    SpaceId = spaceId,
+                    SpaceStatusId = (int)SpaceStatusEnum.OnTheShelf
+                };
+                var sweetAlert = _spaceService.SetSpaceStatus(spaceStatusInfo);
+                TempData["Alert"] = sweetAlert.Alert;
+                TempData["Message"] = sweetAlert.Message;
+                TempData["Icon"] = sweetAlert.Icon;
                 return RedirectToAction("SpaceManage");
             }
         }

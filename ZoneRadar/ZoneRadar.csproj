@@ -251,6 +251,8 @@
     <Compile Include="Models\ViewModels\SpaceManageViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceImg.cs" />
     <Compile Include="Models\ViewModels\SpaceReviewViewModel.cs" />
+    <Compile Include="Models\ViewModels\SpaceStatusInformation.cs" />
+    <Compile Include="Models\ViewModels\SpaceStatusEnum.cs" />
     <Compile Include="Models\ViewModels\SpaceViewModel.cs" />
     <Compile Include="Models\ViewModels\OrderViewModel.cs" />
     <Compile Include="Models\ViewModels\UserInfoViewModel.cs" />

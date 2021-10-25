@@ -1367,86 +1367,63 @@ namespace ZoneRadar.Services
 
             return spaceManageList;
         }
-
+      
         /// <summary>
-        /// 將場地預定下架日期資訊存進資料庫(Jenny)
+        /// 將場地狀態資訊存進資料庫(下架、刪除、重新上架)(Jenny)
         /// </summary>
-        public void SetDiscontinuedDate(int userId, int spaceId, DateTime? discontinuedDate)
+        public SweetAlert SetSpaceStatus(SpaceStatusInformation spaceStatusInfo)
         {
-            var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceId && x.MemberID == userId);
-            if (space != null)
+            var sweetAlert = new SweetAlert { Alert = false };
+            try
             {
-                space.DiscontinuedDate = discontinuedDate;
-                if(discontinuedDate.Value.Date == DateTime.Today)
+                var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceStatusInfo.SpaceId && x.MemberID == spaceStatusInfo.UserId);
+                if (space != null)
                 {
-                    space.SpaceStatusID = 1;
-                }
-                try
-                {
+                    //儲存預定下架日期
+                    if (spaceStatusInfo.SpaceStatusId == (int)SpaceStatusEnum.Discontinued && spaceStatusInfo.DiscontinuedDate != null)
+                    {
+                        space.DiscontinuedDate = spaceStatusInfo.DiscontinuedDate.Value;
+                        //如果預定下架日期是當天，直接將場地狀態改成下架
+                        if (spaceStatusInfo.DiscontinuedDate.Value.Date == DateTime.Today)
+                        {
+                            space.SpaceStatusID = (int)SpaceStatusEnum.Discontinued;
+                        }
+                    }
+                    //取消下架
+                    if (spaceStatusInfo.SpaceStatusId == (int)SpaceStatusEnum.Discontinued && spaceStatusInfo.DiscontinuedDate == null)
+                    {
+                        space.DiscontinuedDate = null;
+                    }                   
+                    //刪除場地
+                    if (spaceStatusInfo.SpaceStatusId == (int)SpaceStatusEnum.Delete)
+                    {
+                        space.SpaceStatusID = (int)SpaceStatusEnum.Delete;
+                    }
+                    //重新上架
+                    if (spaceStatusInfo.SpaceStatusId == (int)SpaceStatusEnum.OnTheShelf)
+                    {
+                        space.SpaceStatusID = (int)SpaceStatusEnum.OnTheShelf;
+                        space.DiscontinuedDate = null;
+                    }
+
                     _repository.Update(space);
                     _repository.SaveChanges();
+                    return sweetAlert;
                 }
-                catch (Exception ex)
+                else
                 {
-                    throw new NotImplementedException();
+                    sweetAlert.Alert = true;
+                    sweetAlert.Message = "您並非該場地主";
+                    sweetAlert.Icon = false;
+                    return sweetAlert;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                throw new NotImplementedException();
-            }
-        }
-
-        /// <summary>
-        /// 刪除場地(Jenny)
-        /// </summary>
-        public void DeleteSpace(int userId, int spaceId)
-        {
-            var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceId && x.MemberID == userId && x.SpaceStatusID == 1);
-            if (space != null)
-            {
-                space.SpaceStatusID = 3;
-                try
-                {
-                    _repository.Update(space);
-                    _repository.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    throw new NotImplementedException();
-                }
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        /// <summary>
-        /// 重新上架場地(Jenny)
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="spaceId"></param>
-        public void Republish(int userId, int spaceId)
-        {
-            var space = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == spaceId && x.MemberID == userId);
-            if (space != null)
-            {
-                space.SpaceStatusID = 2;
-                space.DiscontinuedDate = null;
-                try
-                {
-                    _repository.Update(space);
-                    _repository.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    throw new NotImplementedException();
-                }
-            }
-            else
-            {
-                throw new NotImplementedException();
+                sweetAlert.Alert = true;
+                sweetAlert.Message = "發生錯誤，請稍後再試！";
+                sweetAlert.Icon = false;
+                return sweetAlert;
             }
         }
     }
