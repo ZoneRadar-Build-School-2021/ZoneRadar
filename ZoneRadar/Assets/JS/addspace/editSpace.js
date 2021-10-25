@@ -277,6 +277,8 @@ CKEDITOR.replace('textPartPark');
 CKEDITOR.replace('textPartProjection');
 CKEDITOR.replace('textPartClean');
 CKEDITOR.replace('textPartTransportation');
+CKEDITOR.replace('OtherAmenity');
+
 
 
 ///上傳照片
