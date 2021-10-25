@@ -20,7 +20,7 @@ namespace ZoneRadar.Controllers
         {
             var ReturnURL = "http://www.ecpay.com.tw/";
             var ClientBackURL = "https://localhost:44322/UserCenter/Pending";
-            var MerchantTradeNo = "ECPay" + new Random().Next(0, 99999).ToString() + DateTime.Now;
+            var MerchantTradeNo = "ECPay" + new Random().Next(0, 999).ToString() + DateTime.Now.ToString("yyyyMMddHHmm");
             var MerchantradeDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             
 
@@ -40,10 +40,7 @@ namespace ZoneRadar.Controllers
             { "TradeDesc",  "無"},
 
             //商品名稱
-            { "ItemName",  "測試商品"},
-
-            //允許繳費有效天數(付款方式為 ATM 時，需設定此值)
-            { "ExpireDate",  "3"},
+            { "ItemName",  "XXX"},
 
             //自訂名稱欄位1
             { "CustomField1",  ""},
