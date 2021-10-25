@@ -1,4 +1,5 @@
-﻿var CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/bs20210831ta/upload';
+﻿//photo upload
+var CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/bs20210831ta/upload';
 var CLOUDINARY_UPLOAD_PRESET = 'hblvplct';
 
 var imgview = document.getElementById('imgpic');
@@ -30,3 +31,4 @@ fileupload.addEventListener('change', function (event) {
         console.error(err);
     });
 });
+
