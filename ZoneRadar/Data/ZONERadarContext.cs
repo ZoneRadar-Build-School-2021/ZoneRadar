@@ -2,8 +2,9 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
+using ZoneRadar.Models;
 
-namespace ZoneRadar.Models
+namespace ZoneRadar.Data
 {
     public partial class ZONERadarContext : DbContext
     {

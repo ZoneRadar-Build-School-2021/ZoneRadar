@@ -167,12 +167,8 @@ namespace ZoneRadar.Services
             var cleaningOptionList = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == targetSpace.SpaceID).Select(x => x.CleaningOption)
                                      .GroupBy(x => x.CleaningCategory.Category);
 
-            // 找出滿時優惠的時數
-            var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID) == null ? 0 : _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Hour;
-
-            // 找出滿時優惠的折數
-            var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID) == null ? 0 : Decimal.Round(1 - (_repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID).Discount), 2);
-
+            // 找出滿時優惠的時數與折數
+            var spaceDiscounts = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == targetSpace.SpaceID);
 
             var result = new SpaceDetailViewModel
             {
@@ -194,14 +190,13 @@ namespace ZoneRadar.Services
                 EndTimeList = originOperatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
                 CancellationTitle = targetSpace.Cancellation.CancellationTitle,
                 CancellationInfo = targetSpace.Cancellation.CancellationDetail,
-                HoursForDiscount = hoursForDiscount,
-                Discount = discount,
+                HoursForDiscount = spaceDiscounts == null ? 0 : spaceDiscounts.Hour,
+                Discount = spaceDiscounts == null ? 0 : decimal.Round(1 - spaceDiscounts.Discount, 2),
                 HostEmail = targetSpace.Member.Email
             };
 
             return result;
         }
-
 
         /// <summary>
         /// 收藏寫入資料庫(Steve)
@@ -222,7 +217,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 移除寫入資料庫(Steve)
+        /// 從資料庫中移除收藏(Steve)
         /// </summary>
         /// <param name="bookingPageVM"></param>
         /// <param name="memberID"></param>
@@ -1304,8 +1299,7 @@ namespace ZoneRadar.Services
                 { "星期日", 7 }
             };
             var operatingList = _repository.GetAll<Operating>().Where(x => x.SpaceID == id).ToList();
-            var hoursForDiscount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Hour;
-            var discount = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id).Discount;
+            var spaceDiscounts = _repository.GetAll<SpaceDiscount>().FirstOrDefault(x => x.SpaceID == id);
             var targetSpace = _repository.GetAll<Space>().FirstOrDefault(x => x.SpaceID == id);
             var orderTimeList = _repository.GetAll<OrderDetail>().Where(x => x.Order.SpaceID == id && x.Order.OrderStatusID != 5).ToList().Select(x => x.StartDateTime.ToString("yyyy-MM-dd"));
 
@@ -1314,14 +1308,13 @@ namespace ZoneRadar.Services
                 OperatingDayList = operatingList.Select(x => x.OperatingDay).ToList(),
                 StartTimeList = operatingList.Select(x => x.StartTime.ToString(@"hh\:mm")).ToList(),
                 EndTimeList = operatingList.Select(x => x.EndTime.ToString(@"hh\:mm")).ToList(),
-                HoursForDiscount = hoursForDiscount,
-                Discount = Decimal.Round((1 - discount), 2),
+                HoursForDiscount = spaceDiscounts == null ? 0 : spaceDiscounts.Hour,
+                Discount = spaceDiscounts == null ? 1 : decimal.Round((1 - spaceDiscounts.Discount), 2),
                 MinHour = targetSpace.MinHours,
                 PricePerHour = (int)targetSpace.PricePerHour,
                 Capacity = targetSpace.Capacity,
                 OrderTimeList = orderTimeList.ToList(),
             };
-
 
             return result;
         }
