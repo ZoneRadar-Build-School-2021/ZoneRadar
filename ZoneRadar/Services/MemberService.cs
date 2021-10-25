@@ -496,8 +496,21 @@ namespace ZoneRadar.Services
 
                 //會員所收藏的場地
                 var collection = _repository.GetAll<Collection>().Where(x => x.MemberID == memberId).Select(x=>x.SpaceID);
-                var spaces = _repository.GetAll<Space>().Where(x=> x.SpaceStatusID == 2 && collection.Contains(x.SpaceID));
-                var Score = _repository.GetAll<Review>().Where(x => x.ToHost && collection.Contains(x.Order.Space.SpaceID)).Select(x => x.Score).Average(); 
+                var spaces = _repository.GetAll<Space>().Where(x=> x.SpaceStatusID == 2 &&  collection.Contains(x.SpaceID));
+
+                //foreach (var s in spaces) 
+                //{
+                //    resultMemberCollection.MyCollection.Add(new Spaces {
+                //        SpaceId = s.SpaceID,
+                //        SpaceName = s.SpaceName,
+                //        Address = s.Address,
+                //        City = s.City.CityName,
+                //        District = s.District.DistrictName,
+                //        PricePerHour = s.PricePerHour,
+                //        ReviewCount = s.Order.Select(x=>x.Review.Where(y=>y.ToHost).Select(z=>z.ReviewContent)).Count(),
+                //        //Score = review.Where(x=>x.Order.Space.SpaceID == s.SpaceID).Select(x=>x.Score).Average()
+                //    });
+                //}
                 foreach (var sps in spaces)
                 {
                     resultMemberCollection.MyCollection.Add(new Spaces
@@ -509,9 +522,8 @@ namespace ZoneRadar.Services
                         District = sps.District.DistrictName,
                         City = sps.City.CityName,
                         PricePerHour = sps.PricePerHour,
-                        ReviewCount = sps.Order.Where(x => sps.SpaceID == x.SpaceID).Select(x => x.Review.Where(y => y.ToHost).Select(z => z.ReviewContent).Count()).Sum(),
-                        Score = Average(sps.Order.Where(x => sps.SpaceID == x.SpaceID).Select(x => x.Review.Where(y => y.ToHost == true).Select(z => z.ReviewContent).Count()).Sum(), sps.Order.Select(x => x.Review.Where(y => y.ToHost == true).Select(z => z.Score).Sum()).Sum())
-                        /*re.Where(x => x.Order.MemberID == s.MemberID && x.ToHost == true).Select(x => x.Score).Count()*/
+                        ReviewCount = sps.Order.Select(x => x.Review.Where(y => y.ToHost).Select(z => z.ReviewContent)).Count(),
+                        Score = Average(sps.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Count()).Sum(), sps.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Sum()).Sum())
                     });
                 }
                 time.Stop();
@@ -519,14 +531,16 @@ namespace ZoneRadar.Services
             }
 
         }
+
+
         /// <summary>
         /// Space平均評分 (Jack)
         /// </summar>
         /// <returns> 取得會員資訊 & 該會員所有被場地主的評價 </returns>
-        private static double Average(int count,int score)
+        private static double Average(int count, int score)
         {
             var result = 0;
-            if ( count == 0 ||  score == 0) 
+            if (count == 0 || score == 0)
             {
                 result = 0;
             }
@@ -570,27 +584,27 @@ namespace ZoneRadar.Services
                     Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
                 };
                 //找出會員是否有租借場地並且顯示 出被場地主的評價
-                var order = _repository.GetAll<Order>().Where(x => x.MemberID == u.MemberID && x.OrderStatusID == 4).Where(x=>x.Review.Select(y=>y.ToHost).Contains(false));
-                foreach (var o in order)
+                var review = _repository.GetAll<Review>().Where(x => x.ToHost == false && x.Order.MemberID == u.MemberID && x.Order.OrderStatusID == 4);
+
+                foreach (var r in review) 
                 {
-                    var or = o.Review.FirstOrDefault(x => x.OrderID == o.OrderID);
-                    resulthostinfoReview.ToUserReview.Add(new UserReview
-                    {
-                        SpaceId = o.Space.SpaceID,
-                        SpaceName = o.Space.SpaceName,
-                        SpaceMemberPhoto = o.Space.Member.Photo,
-                        District = o.Space.District.DistrictName,
-                        Address = o.Space.Address,
-                        PricePerHour = o.Space.PricePerHour,
-                        ReviewContent = or.ReviewContent,
-                        Recommend = or.Recommend,
-                        Score = or.Score,
-                        ReviewDate = or.ReviewDate,
-                        ReviewCount = o.Review.Where(x => x.OrderID == o.OrderID && x.ToHost == false).Count(),
-                        Name = o.Space.Member.Name,
-                        Id = o.Space.MemberID
-                    });
+                    resulthostinfoReview.ToUserReview.Add(new UserReview {
+                            SpaceId = r.Order.SpaceID,
+                            SpaceName = r.Order.Space.SpaceName,
+                            District = r.Order.Space.District.DistrictName,
+                            Address = r.Order.Space.Address,
+                            PricePerHour = r.Order.Space.PricePerHour,
+                            ReviewDate = r.ReviewDate,
+                            ReviewContent = r.ReviewContent,
+                            ReviewCount = r.ReviewContent.Count(),
+                            Recommend  = r.Recommend,
+                            SpaceMemberPhoto = r.Order.Space.Member.Photo,
+                            Name = r.Order.Space.Member.Name,
+                            Id = r.Order.Space.MemberID
+                        });
+                    
                 }
+                
                 time.Stop();
                 return resulthostinfoReview;
             }
