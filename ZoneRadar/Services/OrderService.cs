@@ -239,7 +239,7 @@ namespace ZoneRadar.Services
                         StratTime = o.StartDateTime,
                         EndTime = o.EndDateTime,
                         People = o.Participants,
-                        SinglePrice = (int)SingleOrderDetailPrice(o.EndDateTime, o.StartDateTime, o.Order.Space.PricePerHour, o.Order.Space.SpaceDiscount.FirstOrDefault().Hour, o.Order.Space.SpaceDiscount.FirstOrDefault().Discount)
+                        SinglePrice = PayMentService.OrderDetailPrice(o.EndDateTime, o.StartDateTime, o.Order.Space.PricePerHour, o.Order.Space.SpaceDiscount.First().Hour, o.Order.Space.SpaceDiscount.First().Discount)
                     });
                 }
                 result.Add(new ProcessingViewModel
@@ -264,20 +264,17 @@ namespace ZoneRadar.Services
         /// 計算價錢場地 (Jack)
         /// </summary>
         /// <returns></returns>
-        public decimal SingleOrderDetailPrice(DateTime eDate,DateTime sDate,decimal hourPirce,int hour,decimal discount) 
-        {
-            decimal dis = 0;
-            if ( (int)eDate.Subtract(sDate).TotalHours >= hour )
-            {
-                dis = discount;
-            }
-            else 
-            {
-                dis = 0;
-            }
-            var price = (decimal)eDate.Subtract(sDate).TotalHours * hourPirce*(1-dis);
-            return price;
-        }
+        //public decimal SingleOrderDetailPrice(DateTime eDate,DateTime sDate,decimal hourPirce,int hour,decimal discount) 
+        //{
+        //    decimal dis = 0;
+        //    if (eDate.Subtract(sDate).TotalHours >= hour )
+        //    {
+        //        dis = discount;
+        //    }
+        //    var price = (decimal)eDate.Subtract(sDate).TotalHours * hourPirce*(1-dis);
+        //    return price;
+        //}
+
         /// <summary>
         /// 找出場地主(ID)的歷史訂單使用中資料(Nick)
         /// </summary>

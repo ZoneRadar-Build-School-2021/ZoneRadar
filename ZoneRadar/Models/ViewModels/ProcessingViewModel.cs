@@ -15,7 +15,7 @@ namespace ZoneRadar.Models.ViewModels
         public string ContactName { get; set; }
         public string ContactPhone { get; set; }
         public string OrderEmail { get; set; }
-        public int Total { get; set; }
+        public decimal Total { get; set; }
         public List<OrderDetailesforPrcess> orderdetailesforprcess { get; set; }
 
     }
@@ -24,6 +24,6 @@ namespace ZoneRadar.Models.ViewModels
         public DateTime StratTime { get; set; }
         public DateTime EndTime { get; set; }
         public int People { get; set; }
-        public int SinglePrice { get; set; }
+        public decimal SinglePrice { get; set; }
     }
 }
