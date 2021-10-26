@@ -17,6 +17,7 @@ namespace ZoneRadar.Services
         // 計算訂單價錢
         public static decimal OrderDetailPrice(DateTime endDate, DateTime startDate, decimal hourPirce, int discountHour, decimal discount)
         {
+
             decimal HowMuchdiscount = 0;
             if (endDate.Subtract(startDate).TotalHours >= discountHour)
             {
