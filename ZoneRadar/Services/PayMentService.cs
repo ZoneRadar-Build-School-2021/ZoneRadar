@@ -15,11 +15,11 @@ namespace ZoneRadar.Services
             StandardNintyDays = 4
         }
         // 計算訂單價錢
-        public static decimal OrderDetailPrice(DateTime endDate, DateTime startDate, decimal hourPirce, int discountHour, decimal discount)
+        public static decimal OrderDetailPrice(double timesubtract, decimal hourPirce, int discountHour, decimal discount)
         {
 
             decimal HowMuchdiscount = 0;
-            if (endDate.Subtract(startDate).TotalHours >= discountHour)
+            if (timesubtract >= discountHour)
             {
                 HowMuchdiscount = discount;
             }
@@ -28,7 +28,7 @@ namespace ZoneRadar.Services
                 HowMuchdiscount = 0;
             }
             //double 轉成 decimal
-            var tempprice = (decimal)endDate.Subtract(startDate).TotalHours * hourPirce * (1 - HowMuchdiscount);
+            var tempprice = (decimal)timesubtract * hourPirce * (1 - HowMuchdiscount);
             //四捨五入
             var price = decimal.Round(tempprice);
             return price;
