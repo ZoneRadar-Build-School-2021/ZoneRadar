@@ -450,7 +450,6 @@ namespace ZoneRadar.Services
                         Address = s.Address,
                         SpacePhoto = s.SpacePhoto.First().SpacePhotoUrl,
                         District = s.District.DistrictName,
-                        //sps.FirstOrDefault(x => x.SpaceID == s.SpaceID).District.DistrictName,
                         City = s.City.CityName,
                         PricePerHour = s.PricePerHour,
                         Score = Average(s.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Count()).Sum(), s.Order.Select(x=>x.Review.Where(z=>z.ToHost == true).Select(y=>y.Score).Sum()).Sum()),
@@ -467,8 +466,6 @@ namespace ZoneRadar.Services
         /// <returns> 取得會員資訊 & 該會員所有收藏的場地 </returns>
         public MyCollectionViewModel GetMemberCollection(int? memberId)
         {
-            var time = new Stopwatch();
-            time.Start();
             var resultMemberCollection = new MyCollectionViewModel
             {
                 User = new User(),
@@ -497,20 +494,6 @@ namespace ZoneRadar.Services
                 //會員所收藏的場地
                 var collection = _repository.GetAll<Collection>().Where(x => x.MemberID == memberId).Select(x=>x.SpaceID);
                 var spaces = _repository.GetAll<Space>().Where(x=> x.SpaceStatusID == 2 &&  collection.Contains(x.SpaceID));
-
-                //foreach (var s in spaces) 
-                //{
-                //    resultMemberCollection.MyCollection.Add(new Spaces {
-                //        SpaceId = s.SpaceID,
-                //        SpaceName = s.SpaceName,
-                //        Address = s.Address,
-                //        City = s.City.CityName,
-                //        District = s.District.DistrictName,
-                //        PricePerHour = s.PricePerHour,
-                //        ReviewCount = s.Order.Select(x=>x.Review.Where(y=>y.ToHost).Select(z=>z.ReviewContent)).Count(),
-                //        //Score = review.Where(x=>x.Order.Space.SpaceID == s.SpaceID).Select(x=>x.Score).Average()
-                //    });
-                //}
                 foreach (var sps in spaces)
                 {
                     resultMemberCollection.MyCollection.Add(new Spaces
@@ -522,11 +505,10 @@ namespace ZoneRadar.Services
                         District = sps.District.DistrictName,
                         City = sps.City.CityName,
                         PricePerHour = sps.PricePerHour,
-                        ReviewCount = sps.Order.Select(x => x.Review.Where(y => y.ToHost).Select(z => z.ReviewContent)).Count(),
+                        ReviewCount = sps.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Count()).Sum(),
                         Score = Average(sps.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Count()).Sum(), sps.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Sum()).Sum())
                     });
                 }
-                time.Stop();
                 return resultMemberCollection;
             }
 
@@ -539,7 +521,7 @@ namespace ZoneRadar.Services
         /// <returns> 取得會員資訊 & 該會員所有被場地主的評價 </returns>
         private static double Average(int count, int score)
         {
-            var result = 0;
+            double result = 0;
             if (count == 0 || score == 0)
             {
                 result = 0;
@@ -557,8 +539,6 @@ namespace ZoneRadar.Services
         /// <returns> 取得會員資訊 & 該會員所有被場地主的評價 </returns>
         public UserInfoViewModel GetHostReview(int? memberId)
         {
-            var time = new Stopwatch();
-            time.Start();
             var resulthostinfoReview = new UserInfoViewModel
             {
                 User = new User(),
@@ -605,7 +585,6 @@ namespace ZoneRadar.Services
                     
                 }
                 
-                time.Stop();
                 return resulthostinfoReview;
             }
         }

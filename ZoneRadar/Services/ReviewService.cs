@@ -74,7 +74,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 新增完成訂單的評價(Nick)
+        /// 新增完成訂單(活動主)的評價(Nick)
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -95,8 +95,12 @@ namespace ZoneRadar.Services
 
 
             return review;
-        }   
-        
+        }
+        /// <summary>
+        /// 新增完成訂單(場地主)的評價(Nick)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public Review CreateHistoryReview(HostCenterHistoryViewModel model)
         {
             var review = new Review
