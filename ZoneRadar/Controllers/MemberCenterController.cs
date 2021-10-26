@@ -7,6 +7,11 @@ using ZoneRadar.Services;
 using System.Web.Security;
 using ZoneRadar.Models.ViewModels;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
+using Google.Apis.Auth;
+using System.Web.Configuration;
+using System.Net.Http;
+using ZoneRadar.Utilities;
 
 namespace ZoneRadar.Controllers
 {
@@ -505,6 +510,46 @@ namespace ZoneRadar.Controllers
         public void GoogleLoginCallback()
         {
 
+        }
+
+        /// <summary>
+        /// Javascript取得id_token，透過Ajax發送至這個Action，後端 ASP.net MVC 把 id_token 轉成 user_id
+        /// </summary>
+        /// <param name="idToken"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ActionResult> Test(string idToken)
+        {
+            string msg = "ok";
+            GoogleJsonWebSignature.Payload payLoad = null;
+            GoogleJsonWebSignature.ValidationSettings validationSettings = new GoogleJsonWebSignature.ValidationSettings
+            {
+                Audience = new List<string>() { GoogleOAuth.ClientId }
+            };
+            try
+            {
+                payLoad = await GoogleJsonWebSignature.ValidateAsync(idToken, validationSettings);
+            }
+            catch (InvalidJwtException ex)
+            {
+                msg = ex.Message;
+            }
+            catch (JsonReaderException ex)
+            {
+                msg = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+            }
+
+            if (msg == "ok" && payLoad != null)
+            {//都成功
+                string userId = payLoad.Subject; //Subject為Google的user id
+                msg = $@"您的 user_id :{userId}";
+            }
+
+            return Content(msg);
         }
     }
 }

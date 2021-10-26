@@ -166,11 +166,11 @@
                 <div class="modal-body text-center text-secondary">
                     <h3 class="fw-bolder">歡迎回來！</h3>
                     <p class="mb-4">請登入</p>
-                    <a href="#" id="third-register-google" class="third-register d-block mb-3 text-decoration-none text-secondary">
+                    <button id="third-login-google" class="third-register d-block w-100 mb-3 text-decoration-none text-secondary bg-white">
                         <img src="https://storage.googleapis.com/support-kms-prod/ZAl1gIwyUsvfwxoW9ns47iJFioHXODBbIkrK" alt="google">
                         Google 登入
-                    </a>
-                    <a href="#" id="third-register-facebook" class="third-register d-block mb-3 text-decoration-none text-secondary">
+                    </button>
+                    <a href="#" id="third-login-facebook" class="third-register d-block mb-3 text-decoration-none text-secondary">
                         <img src="https://www.facebook.com/images/fb_icon_325x325.png" alt="facebook">
                         Facebook 登入
                     </a>
@@ -361,6 +361,70 @@
         }, "密碼必須包含至少1個數字、小寫英文和大寫英文");
         $.validator.unobtrusive.adapters.addBool("safe");
     </script>
+
+
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        let GoolgeApp_Cient_Id = @GoogleOAuth.ClientId;
+        let id_token_to_userIDUrl = "@Url.Action("Test", "MemberCenter")";
+        $(function () {
+            $("#third-login-google").on("click", function () {
+                GoogleLogin(); //Google登入
+            });
+            $("#btnDisconnect").on("click", function () {
+                Google_disconnect(); //和Google App斷連
+            });
+        });
+
+        
+        function GoogleSigninInit() {
+            gapi.load('auth2', function () {
+                gapi.auth2.init({
+                    client_id: GoolgeApp_Cient_Id
+                });
+            });
+        }
+        //初始化gapi.auth2
+        GoogleSigninInit();
+
+        function GoogleLogin() {
+            let auth2 = gapi.auth2.getAuthInstance();//取得GoogleAuth物件
+            auth2.signIn().then(function (GoogleUser) {
+                console.log("Google登入成功");
+                let user_id = GoogleUser.getId();//取得user id，不過要發送至Server端的話，請使用↓id_token
+                let AuthResponse = GoogleUser.getAuthResponse(true);//true會回傳access token ，false則不會，自行決定。如果只需要Google登入功能應該不會使用到access token
+                let id_token = AuthResponse.id_token;//取得id_token
+                //將id_token傳到後端
+                $.ajax({
+                    url: id_token_to_userIDUrl,
+                    method: "post",
+                    data: { id_token: id_token },
+                    success: function (msg) {
+                        console.log(msg);
+                    }
+                });//end $.ajax
+
+            },
+            function (error) {
+                console.log("Google登入失敗");
+                console.log(error);
+            });
+        }//end function GoogleLogin
+
+
+
+        function Google_disconnect() {
+            let auth2 = gapi.auth2.getAuthInstance(); //取得GoogleAuth物件
+
+            auth2.disconnect().then(function () {
+                console.log('User disconnect.');
+            });
+        }
+    </script>
+    
+
+
 
 
     @RenderSection("endCSS", required: false)
