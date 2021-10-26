@@ -49,32 +49,38 @@ flexRadioDefault2.addEventListener('click', function () {
 
 //有問題
 //tuesday
-var flagtue = 1;
-let flexSwitchCheckDefaultTue = document.querySelector("#tue");
-let TueAllDay = document.querySelector('#flexRadioDefault2');
-let Tuehour = document.querySelector('#flexRadioDefault2hr');
-flexSwitchCheckDefaultTue.addEventListener("click", function () {
-    if (flagtue == 1) {
-        TueAllDay.disabled = false;
+var flag2 = 1;
+let Tue = document.querySelector("#O2");
+let TueAllDay = document.querySelector('#A2');
+let Tuehour = document.querySelector('#hr2');
+
+Tue.addEventListener("click", function () {
+    if (flag2 == 1) {
         Tuehour.disabled = false;
-        flagtue = 0;
+        TueAllDay.disabled = false;
+        flag2 = 0;
     } else {
-        TueAllDay.disabled = true;
         Tuehour.disabled = true;
+        TueAllDay.disabled = true;
         TueAllDay.checked = false;
         Tuehour.checked = false;
         let StateTue = document.querySelectorAll("#StateTue")[0];
         let StateTue2 = document.querySelectorAll("#StateTue")[1];
 
+        //選擇時間
+
         StateTue.disabled = true;
         StateTue2.disabled = true;
-        var flagtue = 1;
+        flag2 = 1;
     }
 });
 TueAllDay.addEventListener('click', function () {
+   
 
     let StateTue = document.querySelectorAll("#StateTue")[0];
     let StateTue2 = document.querySelectorAll("#StateTue")[1];
+    StateTue.disabled = true;
+    StateTue2.disabled = true;
     var TueStart = document.getElementById("TueStart");
     TueStart.innerHTML = "06:00";
     TueStart.setAttribute("value", "06:00");
@@ -82,8 +88,6 @@ TueAllDay.addEventListener('click', function () {
     TueEnd.innerHTML = "23:00";
     TueEnd.setAttribute("value", "23:00");
 
-    StateTue.disabled = true;
-    StateTue2.disabled = true;
 
 });
 Tuehour.addEventListener('click', function () {
@@ -124,11 +128,9 @@ flexSwitchCheckDefaultWed.addEventListener("click", function () {
         let StateWed2 = document.querySelectorAll("#StateWed")[1];
 
         //選擇時間
-        //
+       
         StateWed.disabled = true;
         StateWed2.disabled = true;
-        //StateWed3.document=true;
-        //StateWed4.document=true;
         flagWed = 1;
     }
 });
@@ -238,9 +240,9 @@ FridayAllDay.addEventListener("click", function () {
     FriStart.innerHTML = "06:00";
     FriStart.setAttribute("value", "06:00");
 
-    var ThuEnd = document.getElementById("ThuEnd");
-    ThuEnd.innerHTML = "23:00";
-    ThuEnd.setAttribute("value", "23:00");
+    var FriEnd = document.getElementById("FriEnd");
+    FriEnd.innerHTML = "23:00";
+    FriEnd.setAttribute("value", "23:00");
 
 });
 Fridayhour.addEventListener("click", function () {
@@ -323,8 +325,8 @@ flexSwitchCheckDefaultSun.addEventListener("click", function () {
     }
 });
 SunAllDay.addEventListener("click", function () {
-    StateSun.disabled = false;
-    StateSun2.disabled = false;
+    StateSun.disabled = true;
+    StateSun2.disabled = true;
     var SunStrat = document.getElementById("SunStrat");
     SunStrat.innerHTML = "06:00";
     SunStrat.setAttribute("value", "06:00");
@@ -333,14 +335,17 @@ SunAllDay.addEventListener("click", function () {
     SunEnd.innerHTML = "23:00";
     SunEnd.setAttribute("value", "23:00");
 
-    //         StateSun3.disabled=true;
-    //         StateSat4.disabled=true;
 });
 Sunhour.addEventListener('click', function () {
-    StateSun.disabled = true;
-    StateSun2.disabled = true;
-    //         StateSun3.disabled=false;
-    //         StateSun4.disabled=false;
+    var SunStrat = document.getElementById("SunStrat");
+    SunStrat.innerHTML = "請選擇營業時間";
+
+    var SunEnd = document.getElementById("SunEnd");
+    SunEnd.innerHTML = "請選擇營業時間";
+
+    StateSun.disabled = false;
+    StateSun2.disabled = false;
+
 });
 CKEDITOR.replace('OtherAmenity');
 ///營業時間 radio///

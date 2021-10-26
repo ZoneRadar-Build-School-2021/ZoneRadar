@@ -323,32 +323,33 @@
                                     <div class="col-6 col-xl-2  mt-auto mb-auto">
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" name="OperatingDay" value="2"
-                                                   id="flexSwitchCheckDefault2">
-                                            <label class="form-check-label" for="flexSwitchCheckDefault2">營業</label>
+                                                   id="O2">
+                                            <label class="form-check-label" for="O2">營業</label>
                                         </div>
                                     </div>
                                     <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
                                         <div class="form-check">
-                                            <input class="form-check-input TusAllDay " value="Y2" type="radio" name="Hours2"
-                                                   id="flexRadioDefault2" disabled>
-                                            <label class="form-check-label" for="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" value="Y2" name="Hours2"
+                                                   id="A2" disabled>
+                                            <label class="form-check-label" for="A2">
                                                 全天(24hr)
                                             </label>
                                         </div>
                                     </div>
                                     <div class="col-6 col-xl-2  mt-auto mb-auto">
                                         <div class="form-check">
-                                            <input class="form-check-input Tushour" value="hr2" type="radio" name="Hours2"
-                                                   id="flexRadioDefault2hr" disabled>
-                                            <label class="form-check-label" for="flexRadioDefault2hr">
+                                            <input class="form-check-input" value="hr2" type="radio" name="Hours2"
+                                                   id="hr2" disabled>
+                                            <label class="form-check-label" for="hr2">
                                                 小時
                                             </label>
                                         </div>
                                     </div>
-                                    <div class=" d-xl-block col-5 col-xl-2 mb-4">
-                                        <label for="StateTue" class="form-label  "></label>
-                                        <select id="StateTue" class="form-select fs16 TusselectL" name="StartTime"
-                                                aria-label="Default select example" disabled>
+
+                                    <div class="d-xl-block col-5 col-xl-2 mb-4">
+                                        <label for="StateTue" class="form-label"></label>
+                                        <select id="StateTue" class="form-select fs16" aria-label="Default select example" name="StartTime"
+                                                disabled>
                                             <option id="TueStart" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
@@ -361,10 +362,10 @@
                                         to
                                     </P>
 
-                                    <div class="col-6 d-xl-block col-xl-2 mb-4">
-                                        <label for="StateTue" class="form-label  "></label>
-                                        <select id="StateTue" class="form-select fs16 TusselectR" name="EndTime"
-                                                aria-label="Default select example" disabled>
+                                    <div class="d-xl-block col-5 col-xl-2 mb-4">
+                                        <label for="StateTue" class="form-label "></label>
+                                        <select id="StateTue" class="form-select fs16" aria-label="Default select example" name="EndTime"
+                                                disabled>
                                             <option id="TueEnd" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
@@ -404,7 +405,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
+                                    <div class="d-xl-block col-5 col-xl-2 mb-4">
                                         <label for="State" class="form-label"></label>
                                         <select id="StateWed" class="form-select fs16" aria-label="Default select example" name="StartTime"
                                                 disabled>
@@ -420,7 +421,7 @@
                                         to
                                     </P>
 
-                                    <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                    <div class="d-xl-block col-5 col-xl-2 mb-4">
                                         <label for="State" class="form-label "></label>
                                         <select id="StateWed" class="form-select fs16" aria-label="Default select example" name="EndTime"
                                                 disabled>
@@ -462,11 +463,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
-                                        <label for="State" class="form-label  "></label>
+                                    <div class="d-xl-block col-5 col-xl-2 mb-4">
+                                        <label for="StateThu" class="form-label  "></label>
                                         <select id="StateThu" class="form-select fs16" aria-label="Default select example" name="StartTime"
                                                 disabled>
-                                            @*<option value="">請選擇營業時間</option>*@
+                                            <option id="ThuStart" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
                                                 <option value="@open.Value">@open.Text</option>
@@ -478,11 +479,11 @@
                                         to
                                     </P>
 
-                                    <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
-                                        <label for="State" class="form-label  "></label>
+                                    <div class="d-xl-block col-5 col-xl-2 mb-4">
+                                        <label for="StateThu" class="form-label  "></label>
                                         <select id="StateThu" class="form-select fs16" aria-label="Default select example" name="EndTime"
                                                 disabled>
-                                            @*<option value="">請選擇營業時間</option>*@
+                                            <option id="ThuEnd" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
                                                 <option value="@open.Value">@open.Text</option>
@@ -490,32 +491,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                @*手機*@
-                                @*<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
-                                        <div class="col-5">
-                                            <label for="State" class="form-label  "></label>
-                                            <select id="StateThu" class="form-select  " aria-label="Default select example" name="StartTime"
-                                                    disabled>
-                                                <option value="">請選擇營業時間</option>
-                                                @foreach (var open in Operating)
-                                                {
-                                                    <option value="@open.Value">@open.Text</option>
-                                                }
-                                            </select>
-                                        </div>
-                                        <P class="col-2 mt-4 text-center  text-start">to</P>
-                                        <div class="col-5">
-                                            <label for="State" class="form-label  "></label>
-                                            <select id="StateThu" class="form-select  " aria-label="Default select example" name="EndTime"
-                                                    disabled>
-                                                <option value="">請選擇營業時間</option>
-                                                @foreach (var open in Operating)
-                                                {
-                                                    <option value="@open.Value">@open.Text</option>
-                                                }
-                                            </select>
-                                        </div>
-                                    </div>*@
                                 <div class="row mt-4 border-bottom">
                                     <div class="col-6 col-xl-1  mt-auto mb-auto">
                                         <p class="mt-xl-3 fs16">星期五</p>
@@ -546,11 +521,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
+                                    <div class="d-xl-block col-5 col-xl-2 mb-4">
                                         <label for="State" class="form-label  "></label>
                                         <select id="StateFri" class="form-select fs16" aria-label="Default select example" name="StartTime"
                                                 disabled>
-                                            @*<option value="">請選擇營業時間</option>*@
+                                            <option id="FriStart" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
                                                 <option value="@open.Value">@open.Text</option>
@@ -562,11 +537,11 @@
                                         to
                                     </P>
 
-                                    <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                    <div class="d-xl-block col-5 col-xl-2 mb-4">
                                         <label for="State" class="form-label  "></label>
                                         <select id="StateFri" class="form-select fs16" aria-label="Default select example" name="EndTime"
                                                 disabled>
-                                            @*<option value="">請選擇營業時間</option>*@
+                                            <option id="FriEnd" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
                                                 <option value="@open.Value">@open.Text</option>
@@ -574,32 +549,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                @*手機*@
-                                <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
-                                <div class="col-5">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateFri" class="form-select fs16 " aria-label="Default select example" name="StartTime"
-                                            disabled>-->
-                                @*<option value="">請選擇營業時間</option>*@
-                                <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                                <P class="col-2 mt-4 text-center  text-start">to</P>
-                                <div class="col-5">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateFri" class="form-select fs16  " aria-label="Default select example" name="EndTime"
-                                            disabled>-->
-                                @*<option value="">請選擇營業時間</option>*@
-                                <!--@foreach (var open in Operating)
-                                            {
-                                                <option value="@open.Value">@open.Text</option>
-                                            }
-                                        </select>
-                                    </div>
-                                </div>-->
                                 <div class="row mt-4 border-bottom">
                                     <div class="col-6 col-xl-1  mt-auto mb-auto">
                                         <p class="mt-xl-3 fs16 ">星期六</p>
@@ -630,11 +579,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="d-none d-xl-block col-5 col-xl-2 mb-4">
+                                    <div class="d-xl-block col-5 col-xl-2 mb-4">
                                         <label for="State" class="form-label  "></label>
                                         <select id="StateSat" class="form-select fs16" aria-label="Default select example" name="StartTime"
                                                 disabled>
-                                            @*<option value="">請選擇營業時間</option>*@
+                                            <option id="SatStart" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
                                                 <option value="@open.Value">@open.Text</option>
@@ -646,11 +595,11 @@
                                         to
                                     </P>
 
-                                    <div class="col-6 d-none d-xl-block col-xl-2 mb-4">
+                                    <div class="d-xl-block col-5 col-xl-2 mb-4">
                                         <label for="State" class="form-label  "></label>
                                         <select id="StateSat" class="form-select fs16" aria-label="Default select example" name="EndTime"
                                                 disabled>
-                                            @*<option value="">請選擇營業時間</option>*@
+                                            <option id="SatEnd" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
                                                 <option value="@open.Value">@open.Text</option>
@@ -658,32 +607,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                @*手機*@
-                                <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
-                                <div class="col-5">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateSat" class="form-select  fs16" aria-label="Default select example" name="StartTime"
-                                            disabled>-->
-                                @*<option value="">請選擇營業時間</option>*@
-                                <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                                <P class="col-2 mt-4 text-center  text-start">to</P>
-                                <div class="col-5">
-                                    <label for="State" class="form-label   "></label>
-                                    <select id="StateSat" class="form-select fs16 " aria-label="Default select example" name="EndTime"
-                                            disabled>-->
-                                @*<option value="">請選擇營業時間</option>*@
-                                <!--@foreach (var open in Operating)
-                                            {
-                                                <option value="@open.Value">@open.Text</option>
-                                            }
-                                        </select>
-                                    </div>
-                                </div>-->
                                 <div class="row mt-4 border-bottom">
                                     <div class="col-6 col-xl-1  mt-auto mb-auto">
                                         <p class="mt-xl-3 fs16">星期日</p>
@@ -698,8 +621,8 @@
                                     <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
                                         <div class="form-check">
                                             <input class="form-check-input" value="Y7" type="radio" name="Hours7"
-                                                   id="flexRadioDefault7hr" disabled>
-                                            <label class="form-check-label" for="flexRadioDefault7hr">
+                                                   id="flexRadioDefault7" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault7">
                                                 全天(24hr)
                                             </label>
                                         </div>
@@ -707,18 +630,18 @@
                                     <div class="col-6 col-xl-2  mt-auto mb-auto">
                                         <div class="form-check">
                                             <input class="form-check-input" value="hr7" type="radio" name="Hours7"
-                                                   id="flexRadioDefault7" disabled>
-                                            <label class="form-check-label" for="flexRadioDefault7">
+                                                   id="flexRadioDefault7hr" disabled>
+                                            <label class="form-check-label" for="flexRadioDefault7hr">
                                                 小時
                                             </label>
                                         </div>
                                     </div>
 
-                                    <div class="d-none d-xl-block col-5 fs16 col-xl-2 mb-4">
+                                    <div class="d-xl-block col-5 col-xl-2 mb-4">
                                         <label for="State" class="form-label fs16 "></label>
                                         <select id="StateSun" class="form-select fs16" aria-label="Default select example" name="StartTime"
                                                 disabled>
-                                            @*<option value="">請選擇營業時間</option>*@
+                                            <option id="SunStrat" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
                                                 <option value="@open.Value">@open.Text</option>
@@ -730,11 +653,11 @@
                                         to
                                     </P>
 
-                                    <div class="d-none d-xl-block col-5 fs16 col-xl-2 mb-4">
+                                    <div class="d-xl-block col-5 col-xl-2 mb-4">
                                         <label for="State" class="form-label  fs16"></label>
                                         <select id="StateSun" class="form-select fs16" aria-label="Default select example" name="EndTime"
                                                 disabled>
-                                            @*<option value="">請選擇營業時間</option>*@
+                                            <option id="SunEnd" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
                                                 <option value="@open.Value">@open.Text</option>
@@ -742,32 +665,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                @*手機*@
-                                <!--<div class="row d-xl-none d-flex  border-bottom  pb-4 mt-4">
-                                <div class="col-5">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateSun" class="form-select fs16 " aria-label="Default select example" name="StartTime"
-                                            disabled>-->
-                                @*<option value="">請選擇營業時間</option>*@
-                                <!--@foreach (var open in Operating)
-                                        {
-                                            <option value="@open.Value">@open.Text</option>
-                                        }
-                                    </select>
-                                </div>
-                                <P class="col-2 mt-4 text-center  text-start">to</P>
-                                <div class="col-5">
-                                    <label for="State" class="form-label  "></label>
-                                    <select id="StateSun" class="form-select fs16 " aria-label="Default select example" name="EndTime"
-                                            disabled>-->
-                                @*<option value="">請選擇營業時間</option>*@
-                                <!--@foreach (var open in Operating)
-                                            {
-                                                <option value="@open.Value">@open.Text</option>
-                                            }
-                                        </select>
-                                    </div>
-                                </div>-->
                                 <div class="row mt-5">
                                     <div class="col-12">
                                         <h5>定價</h5>
