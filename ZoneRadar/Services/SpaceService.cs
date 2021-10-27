@@ -1429,5 +1429,67 @@ namespace ZoneRadar.Services
                 return sweetAlert;
             }
         }
+
+        /// <summary>
+        /// 取得該編輯場地的照片
+        /// </summary>
+        /// <returns></returns>
+        public SpacePhotoViewModel GetSpacePhotoFromDB(int? id)
+        {
+            var urlList = _repository.GetAll<SpacePhoto>().Where(x => x.SpaceID == id).Select(x => x.SpacePhotoUrl);
+
+            var result = new SpacePhotoViewModel()
+            {
+                Name = "dt6vz3pav",
+                Preset = "c3caow1j",
+                PhotoUrlList = urlList.ToList(),
+            };
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// 儲存照片至資料庫(需確認是否可以每次都刪除舊的資料)
+        /// </summary>
+        /// <param name="SaveSpacePhotosVM"></param>
+        public void SaveSpacePhotosToDB(SaveSpacePhotosViewModel SaveSpacePhotosVM)
+        {
+            var spaceID = SaveSpacePhotosVM.SpaceID;
+            var urlList = SaveSpacePhotosVM.PhotoUrlList;
+            var originPhotos = _repository.GetAll<SpacePhoto>().Where(x => x.SpaceID == spaceID).ToList();
+            
+            // 確認原本是否有照片
+            if (originPhotos.Count != 0)
+            {
+                // 確認是否有重複的照片
+                var sameSpacePhoto = originPhotos.Where(x => urlList.Any(y => y == x.SpacePhotoUrl)).ToList();
+                // 若有，更新照片的排序
+                if (sameSpacePhoto.Count != 0)
+                {
+                    foreach (var entity in sameSpacePhoto)
+                    {
+                        entity.Sort = urlList.IndexOf(entity.SpacePhotoUrl);
+                        _repository.Update<SpacePhoto>(entity);
+                    }
+                    var photoList = sameSpacePhoto.Select(x => x.SpacePhotoUrl).Intersect(urlList);
+                    _repository.SaveChanges();
+                }
+            } 
+            // 若無，則新增照片
+            else
+            {
+                var photoList = urlList.Select(x => new SpacePhoto
+                {
+                    SpaceID = spaceID,
+                    Sort = urlList.IndexOf(x) + 1,
+                    SpacePhotoUrl = x
+                });
+                _repository.CreateRange<SpacePhoto>(photoList);
+                _repository.SaveChanges();
+            }
+            
+            _repository.Dispose();
+        }
     }
 }
