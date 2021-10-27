@@ -1,11 +1,10 @@
 ﻿@*@model Dictionary<string, string>*@
-@*@model OrderViewModel*@
+@model OrderViewModel
 @*@model ECPay.Payment.Integration.AllInOne*@
 @{
     ViewBag.Title = "Payment";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var item = Model;
-    int i = 0;
 }
 
 <div class="container">
@@ -29,7 +28,7 @@
                                         <span>$280.00</span>
                                     </div>
                                 </div>
-                                <div>
+                                @*<div>
                                     <hr class="dotted mt-1">
                                     <div class="d-flex table-row">
                                         <div class="title-field me-auto">場地折扣</div>
@@ -37,7 +36,7 @@
                                             <span>$26.60</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                                 <hr class="dotted mt-1">
                                 <div class="d-flex heavy table-row">
                                     <div class="title-field me-auto">總計</div>
@@ -136,11 +135,11 @@
                     <div class="ps-1 d-flex host-pic">
                         <img src="https://picsum.photos/1920/1080/?random=1">
                         @* img場地主相片 *@
-                        <p class="text-center ps-4">整體千萬 @*場地主名字*@</p>
+                        <p class="text-center ps-4"> @*場地主名字*@</p>
                     </div>
                 </div>
                 <div>
-                    <div class="heavy mt-4">Nudity is allowed</div>
+                    <div class="heavy mt-4"> 訂單細節 </div>
                 </div>
             </div>
         </div>

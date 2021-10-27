@@ -74,6 +74,11 @@ namespace ZoneRadar.Services
             return html;
         }
 
+        /// <summary>
+        /// 修改訂單狀態 (Jack)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public void EditOrderStatus(EcpayViewModel model) 
         {
             var order = _repository.GetAll<Order>().FirstOrDefault(x => x.OrderID == model.CustomField1);
@@ -81,7 +86,7 @@ namespace ZoneRadar.Services
             {
                 order.PaymentDate = DateTime.Parse(model.PaymentDate);
                 order.OrderStatusID = (int)Enums.Enums.OrderStatusID.OrderStatusIDforWating;
-                order.OrderNumber = int.Parse(DateTime.Now.ToString("yyMMddhhmm"));
+                order.OrderNumber = int.Parse(DateTime.Now.ToString("yyMMddhmms"));
                 try
                 {
                     _repository.Update(order);
@@ -93,5 +98,21 @@ namespace ZoneRadar.Services
                 }
             }
         }
+
+        /// <summary>
+        /// 找OrderNumber 重複
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public int Get(int num) 
+        {
+            var y = _repository.GetAll<Order>().FirstOrDefault(x=>x.OrderNumber == num );
+            if (y != null) 
+            {
+                return Get(num++);
+            }
+            return num;
+        }
+
     }
 }
