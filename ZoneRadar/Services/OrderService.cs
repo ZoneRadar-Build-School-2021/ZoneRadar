@@ -96,9 +96,9 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<OrderViewModel> GetUsercenterProcessingVM(int userid)
+        public List<UsercenterProcessingViewModel> GetUsercenterProcessingVM(int userid)
         {
-            var result = new List<OrderViewModel>();
+            var result = new List<UsercenterProcessingViewModel>();
 
             //訂單 ( 該會員ID 且 訂單狀態是使用中 且 場地狀態是上架中 )
             var orders = _repository.GetAll<Order>().Where(x => x.MemberID == userid && x.OrderStatusID == 3 && x.Space.SpaceStatusID == 2);
@@ -120,7 +120,7 @@ namespace ZoneRadar.Services
                         Money = PayMentService.OrderDetailPrice(totalhours, orderdetail.Order.Space.PricePerHour, orderdetail.Order.Space.SpaceDiscount.Any() ? orderdetail.Order.Space.SpaceDiscount.First().Hour : 1, orderdetail.Order.Space.SpaceDiscount.Any() ? orderdetail.Order.Space.SpaceDiscount.First().Discount : 0),
                     });
                 }
-                result.Add(new OrderViewModel
+                result.Add(new UsercenterProcessingViewModel
                 {
                     SpaceId = order.SpaceID,
                     OrderNumber = (int)order.OrderNumber,
