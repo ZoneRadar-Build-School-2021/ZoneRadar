@@ -358,23 +358,6 @@ namespace ZoneRadar.Services
         ///  找出memberName (Amber)
         /// </summary>
 
-        //public SomeOnesSpaceViewModel ShowOwnerName()
-        //{
-        //    var result = new SomeOnesSpaceViewModel()
-        //    {
-        //        SomeOnesSpaceNameList=new List<SomeOnesSpaceName>(),
-        //    };
-        //    var owner = _repository.GetAll<Member>().Where(x => x.MemberID == 2).Select(x => x.Name).FirstOrDefault();
-        //    foreach (var item in owner)
-        //    {
-        //        var ownerTemp = new SomeOnesSpaceName()
-        //        {
-        //            MamberName = item.ToString()
-        //        };
-        //        result.SomeOnesSpaceNameList.Add(ownerTemp);
-        //    }
-        //    return result;
-        //}
 
         /// <summary>
         ///  找出便利設施 (Amber)

@@ -74,11 +74,19 @@ namespace ZoneRadar.Controllers
         }
         /// <summary>
         /// 場地主編輯場地 (Amber)
+        /// Get
         /// </summary>
+        [HttpGet]
         public ActionResult EditSpace(int spaceId)
         {
             var model = _spaceService.ReadAnySpace(spaceId);
             return View(model);
+        }
+        [HttpPost]
+        public ActionResult EditSpace()
+        {
+
+            return View();
         }
 
         /// <summary>

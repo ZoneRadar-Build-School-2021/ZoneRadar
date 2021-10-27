@@ -321,7 +321,8 @@
                                 </p>
                             </div>
                         </div>
-                        @foreach (var item in compareOpenDay)
+                        
+                        @for (var item in compareOpenDay)
                         {
                             if (spaceOpenDay.Select(x => x.OperatingDay).Contains(item.OperatingDay))
                             {
@@ -359,7 +360,7 @@
                                         <label for="State" class="form-label fs16 mt-xl-1 "></label>
                                         <select id="State" class="form-select fs16 MonselectL "
                                                 aria-label="Default select example" disabled>
-                                            <option selected>@spaceOpenDay.Where(x => x.weekDay == item.weekDay).Select(x => x.StartTime).FirstOrDefault()</option>
+                                            <option>@spaceOpenDay.Where(x => x.weekDay == item.weekDay).Select(x => x.StartTime).FirstOrDefault()</option>
 
                                             @foreach (var open in Operating)
                                             {

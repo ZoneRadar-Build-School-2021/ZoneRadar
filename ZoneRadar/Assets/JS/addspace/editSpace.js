@@ -60,6 +60,7 @@ flexSwitchCheckDefault.addEventListener("click", function () {
 flexRadioDefault1.addEventListener("click", function () {
     StateMon.disabled = true;
     StateMon2.disabled = true;
+
 });
 
 flexRadioDefault2.addEventListener('click', function () {
