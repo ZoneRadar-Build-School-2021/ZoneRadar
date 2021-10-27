@@ -687,14 +687,21 @@ namespace ZoneRadar.Services
 
             var city = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.CityID).FirstOrDefault();
             var cityName = _repository.GetAll<City>().Where(x => x.CityID == city).Select(x => x).ToList();
+            //讀經緯
+            var lat = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.Latitude).FirstOrDefault();
+            var lng = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x.Longitude).FirstOrDefault();
+
             foreach (var cityname in cityName)
             {
                 var ciytTemp = new SomeOnesCity()
                 {
-                    CityName = cityname.CityName
+                    CityName = cityname.CityName,
+                    Lat = lat,
+                    Lng=lng
                 };
                 result.SomeOnesCitytList.Add(ciytTemp);
             };
+            
             ///<summary>
             //活動類型 把活動類別用戶有選的撈出來(Amber)
             

@@ -97,11 +97,11 @@
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="mb-3">
                                                 <label for="address" id="addresslabel" class="form-label mt-3">地址</label>
-                                                <input type="text" required class="form-control" name="Address" id="address" value="" placeholder="請輸入地址，從路名開始即可，例:中正路283巷45弄11號4樓" />
+                                                <input onblur="trans()" type="text" required class="form-control" name="Address" id="address" value="" placeholder="請輸入地址，從路名開始即可，例:中正路283巷45弄11號4樓" />
                                             </div>
                                             @*經緯度*@
-                                            <input type="hidden" class="form-control" name="Lat" id="target" />
-                                            <input type="hidden" class="form-control" name="Lng" id="target2" />
+                                            <input type="hidden" class="form-control" name="Lat" id="target" value=""/>
+                                            <input type="hidden" class="form-control" name="Lng" id="target2" value="" />
 
                                         </div>
 
@@ -114,7 +114,7 @@
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button accordion-buttonAdd collapsed" onclick="trans()" type="button" data-bs-toggle="collapse"
+                        <button class="accordion-button accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             <div class="col-11 col-lg-9 d-flex align-items-start">
                                 <div class=" imgcontainer mt-2 me-2 ">

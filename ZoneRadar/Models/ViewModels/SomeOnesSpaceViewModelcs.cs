@@ -124,6 +124,9 @@ namespace ZoneRadar.Models.ViewModels
     public class SomeOnesCity
     {
         public string CityName { get; set; }
+        //經緯度
+        public string Lat { get; set; }
+        public string Lng { get; set; }
     }
     public class SomeOnesSpaceType
     {

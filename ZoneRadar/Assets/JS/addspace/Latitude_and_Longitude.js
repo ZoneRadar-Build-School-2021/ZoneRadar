@@ -18,6 +18,7 @@ function delayedLoop() {
     window.setTimeout(delayedLoop, 1500);
 }
 
+
 function addressToLatLng(addr) {
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({
