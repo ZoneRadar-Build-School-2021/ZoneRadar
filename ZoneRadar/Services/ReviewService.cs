@@ -86,7 +86,7 @@ namespace ZoneRadar.Services
                 ToHost = true,
                 Score = (int)model.Score,
                 ReviewContent = model.ReviewContent,
-                ReviewDate = DateTime.Now,
+                ReviewDate = DateTime.UtcNow,
                 Recommend = model.Recommend
             };
 
@@ -109,7 +109,7 @@ namespace ZoneRadar.Services
                 ToHost = false,
                 Score = (int)model.Score,
                 ReviewContent = model.ReviewContent,
-                ReviewDate = DateTime.Now,
+                ReviewDate = DateTime.UtcNow,
                 Recommend = model.Recommend
             };
 
