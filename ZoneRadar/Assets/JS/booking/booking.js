@@ -10,10 +10,6 @@
     const submitBtn = document.querySelector('.btn-submit');
     const saveBtn = document.querySelector('.btn-save.btn');
     const heart = document.querySelector('.btn-save .fa-heart');
-    const map = L.map('map', {
-        center: [25.041824011585646, 121.53629849747963],
-        zoom: 17
-    });
     const swiper = new Swiper('.swiper', {
         loop: true,
         pagination: {
@@ -40,6 +36,7 @@
     let operationDayArr = [];
     let minHour, discount, hoursForDiscount, pricePerHour, orderDateArr, capacity, isCollection;
     let dayOfSelectedDate, attendee, startTime, endTimeStartFrom, endTime, selectedDate;
+    let lat, lng;
     let spaceID = '';
     let source = {};
     let isLogin;
@@ -75,7 +72,7 @@
             operationDayArr.forEach(day => {
                 if (day === 7) day = 0;
             });
-
+            
             minHour = source.MinHour;
             discount = source.Discount;
             orderDateArr = source.OrderTimeList;
@@ -83,15 +80,21 @@
             pricePerHour = source.PricePerHour;
             capacity = source.Capacity;
             isCollection = source.IsCollection;
+            lat = +(source.Latitude);
+            lng = +(source.Longitude);
             // 更新preOrderObj屬性
             preOrderObj.HoursForDiscount = hoursForDiscount;
             preOrderObj.Discount = discount;
             preOrderObj.PricePerHour = pricePerHour;
 
+            const map = L.map('map', {
+                center: [lat, lng],
+                zoom: 17
+            });
             renderCollection();
             setCard();
-            setMap();
-            setMarker();
+            setMap(map);
+            setMarker(map);
             extendDayBtn.addEventListener('click', extendADay);
             removeDayBtn.addEventListener('click', removeADay);
             submitBtn.addEventListener('click', submitOrder);
@@ -100,7 +103,7 @@
     }
 
     // 渲染地圖
-    function setMap() {
+    function setMap(map) {
         const osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
         const osm = new L.TileLayer(osmUrl, {
             minZoom: 8,
@@ -110,9 +113,9 @@
     }
 
     // 渲染地圖圖標
-    function setMarker() {
-        const marker = L.marker([25.041824011585646, 121.53629849747963]);
-        const circle = L.circle([25.041824011585646, 121.53629849747963], {
+    function setMarker(map) {
+        const marker = L.marker([lat, lng]);
+        const circle = L.circle([lat, lng], {
             color: '#D9831A',
             fillColor: '#D9831A',
             fillOpacity: 0.5,
