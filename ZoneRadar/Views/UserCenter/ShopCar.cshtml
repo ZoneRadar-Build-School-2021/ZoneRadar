@@ -113,7 +113,7 @@
                         </p>
                         <div class="col-12 text-end mt-2">
                             <button type="button" class="btn btn_close" data-bs-toggle="modal" data-bs-target="#B-@Html.DisplayFor(m => item.OrderId)">取消預購單</button>
-                            @Html.ActionLink("前往付款", "Payment", "EcPayment", new { id = item.OrderId }, new {@class = "btn btn_sendout"})
+                            @Html.ActionLink("前往付款", "Payment", "Payment", new OrderViewModel { OrderId = item.OrderId ,SpaceName = item.SpaceName ,TotalMoney = item.TotalMoney}, new {@class = "btn btn_sendout"})
                             @*<button type="button" class="btn btn_sendout">前往付款</button>*@
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                                     <p class="fs-2">是否確定取消？</p>
                                 </div>
                                 <div class="modal-footer justify-content-center">
-                                    @Html.ActionLink("取消預購單", "DeleteShopCarOrder", new { id = item.OrderId }, new { @class = "btn btn_close" })
+                                    @Html.ActionLink("取消預購單", "DeleteShopCarOrder", new { id = item.OrderId, }, new { @class = "btn btn_close" })
                                 </div>
                             </div>
                         </div>

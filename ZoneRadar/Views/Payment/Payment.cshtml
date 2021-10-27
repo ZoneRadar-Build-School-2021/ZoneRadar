@@ -1,9 +1,11 @@
-﻿@model Dictionary<string, string>
+﻿@*@model Dictionary<string, string>*@
+@*@model OrderViewModel*@
 @*@model ECPay.Payment.Integration.AllInOne*@
 @{
     ViewBag.Title = "Payment";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var Pay = ViewBag.Ecpay;
+    var item = Model;
+    int i = 0;
 }
 
 <div class="container">
@@ -18,7 +20,7 @@
                                 <div class="label undefined"> 場地租金 </div>
                             </div>
                         </div>
-                       
+
                         <div class="table-body mt-2">
                             <div class="add-ons-rows">
                                 <div class="d-flex table-row">
@@ -40,7 +42,7 @@
                                 <div class="d-flex heavy table-row">
                                     <div class="title-field me-auto">總計</div>
                                     <div data-testing-id="space-rental-total">
-                                        <span>$306.60</span>
+                                        <span>@item.TotalMoney</span>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Host Rules -->
+                <!-- form-input -->
                 <div class="form-input mt-5 p-2">
                     <div class="row mb-3">
                         <label for="validationServerUsername" class="col-2 col-sm-4 col-form-label">聯絡人 </label>
@@ -105,22 +107,24 @@
                 <div class="form-check mt-4">
                     <input class="form-check-input" type="checkbox" onclick="checkboxOnclick(this)" value="false" id="flexCheckAccpet">
                     <label class="form-check-label" for="flexCheckAccpet">
-                        I accept and understand these host rules and disclosures.
+                            我同意上述所說。
                     </label>
 
                 </div>
-                <form id="form" name="form" action="https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5" method="POST">
-                    @foreach (var key in Model.Keys.ToList())
-                    {
-                        <input type="hidden" name="@key" value="@Model[key]" />
-                    }
-                    <button class="Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled" type="submit"
-                            data-testing-id="booking-request-submit-button" id="submit-pay">
-                        送出
-                    </button>
-                </form>
+                @*<form id="form" name="form" action="https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5" method="POST">
+                @foreach (var key in Model.Keys.ToList())
+                {
+                    <input type="hidden" name="@key" value="@Model[key]" />
+                }*@
+                        @*<button class="Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled" type="submit"
+                        data-testing-id="booking-request-submit-button" id="submit-pay">
+                    送出
+                </button>*@
+                @*</form>*@
+                @Html.ActionLink("送出", "Ecpayment", new  OrderViewModel{ OrderId = Model.OrderId,TotalMoney =Model.TotalMoney,SpaceName =Model.SpaceName }, new { @class = "Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled submit-pay",@id= "submit-pay" })
 
-        </div>
+
+</div>
         <!-- col-5 電腦版 col-12手機板 -->
         <div class="col-lg-5 mt-5 col-sm-12">
             <div class="Host-card sticky-top">
