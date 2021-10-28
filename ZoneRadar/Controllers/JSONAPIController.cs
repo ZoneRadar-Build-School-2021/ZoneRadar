@@ -365,7 +365,7 @@ namespace ZoneRadar.Controllers
             var response = new APIResponse();
             try
             {
-                _spaceService.SaveSpacePhotosToDB(SaveSpacePhotosVM);
+                _spaceService.ReflashSpacePhotoFromDB(SaveSpacePhotosVM);
 
                 response.Status = "Success";
                 response.Message = string.Empty;
