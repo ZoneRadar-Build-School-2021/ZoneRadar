@@ -29,12 +29,10 @@ namespace ZoneRadar.Services
             List<UsercenterPendingViewModel> result = new List<UsercenterPendingViewModel>();
             //訂單 ( 該會員ID 且 訂單狀態是已付款 且 場地狀態是上架中 )
             var orders = _repository.GetAll<Order>().Where(x => x.MemberID == userid && x.OrderStatusID == 2 && x.Space.SpaceStatusID == 2);
-            var reviews = _repository.GetAll<Review>().Where(x=>orders.Select(order=>order.OrderID).Contains(x.OrderID)).ToList();
-
-            foreach(var order in orders.ToList())
+            var reviews = _repository.GetAll<Review>().Where(x => orders.Select(order => order.OrderID).Contains(x.OrderID)).ToList();
+            foreach (var order in orders.ToList())
             {
                 var resultDetail = new List<RentDetailViewModel>();
-
                 foreach (var orderdetail in order.OrderDetail)
                 {
                     var totalhours = (orderdetail.EndDateTime).Subtract(orderdetail.StartDateTime).TotalHours;
@@ -46,12 +44,10 @@ namespace ZoneRadar.Services
                         RentBackTime = orderdetail.EndDateTime.ToString("yyyy-MM-dd HH:mm"),
                         People = orderdetail.Participants,
                         Money = PayMentService.OrderDetailPrice(totalhours, orderdetail.Order.Space.PricePerHour, orderdetail.Order.Space.SpaceDiscount.Any() ? orderdetail.Order.Space.SpaceDiscount.First().Hour : 1, orderdetail.Order.Space.SpaceDiscount.Any() ? orderdetail.Order.Space.SpaceDiscount.First().Discount : 0),
-
                     });
                 }
-
                 //租借時間的第一天
-                var rentTimeFirst =DateTime.Parse(resultDetail.Select(x => x.RentTime).First());
+                var rentTimeFirst = DateTime.Parse(resultDetail.Select(x => x.RentTime).First());
                 //租借時間與現在時間差( 總小時數 )
                 var rentTimeToNow = rentTimeFirst.Subtract(DateTime.UtcNow).TotalHours;
                 //轉換成天數 或是 只有小時數
@@ -66,7 +62,7 @@ namespace ZoneRadar.Services
                 }
                 decimal cancelMoney = 0;
                 var totalReviews = reviews.Where(x => x.OrderID == order.OrderID && x.ToHost);
-                var score = totalReviews.Any()? totalReviews.Average(x=>x.Score):0;
+                var score = totalReviews.Any() ? totalReviews.Average(x => x.Score) : 0;
                 result.Add(new UsercenterPendingViewModel
                 {
                     SpaceId = order.SpaceID,
@@ -84,7 +80,7 @@ namespace ZoneRadar.Services
                     CancelTitle = order.Space.Cancellation.CancellationTitle,
                     CancelDetail = order.Space.Cancellation.CancellationDetail,
                     CancelTime = renttimedayorhour,
-                    CancelMoney = PayMentService.CancelPrice(order.Space.Cancellation.CancellationID , rentTimeToNow , cancelMoney , resultDetail.Select(x => x.Money).Sum()),
+                    CancelMoney = PayMentService.CancelPrice(order.Space.Cancellation.CancellationID, rentTimeToNow, cancelMoney, resultDetail.Select(x => x.Money).Sum()),
                     OrderStatus = order.OrderStatusID,
                     MemberId = order.MemberID,
                     ContactName = order.ContactName,
@@ -105,11 +101,12 @@ namespace ZoneRadar.Services
 
             //訂單 ( 該會員ID 且 訂單狀態是使用中 且 場地狀態是上架中 )
             var orders = _repository.GetAll<Order>().Where(x => x.MemberID == userid && x.OrderStatusID == 3 && x.Space.SpaceStatusID == 2);
-            var reviews = _repository.GetAll<Review>();
-            foreach (var order in orders)
+            var reviews = _repository.GetAll<Review>().Where(x => orders.Select(order => order.OrderID).Contains(x.OrderID)).ToList();
+            foreach (var order in orders.ToList())
             {
                 var resultDetail = new List<RentDetailViewModel>();
-
+                var totalReviews = reviews.Where(x => x.OrderID == order.OrderID && x.ToHost);
+                var score = totalReviews.Any() ? totalReviews.Average(x => x.Score) : 0;
                 foreach (var orderdetail in order.OrderDetail)
                 {
                     var totalhours = (orderdetail.EndDateTime).Subtract(orderdetail.StartDateTime).TotalHours;
@@ -133,7 +130,7 @@ namespace ZoneRadar.Services
                     OwnerName = order.Space.Member.Name,
                     OwnerPhone = order.Space.Member.Phone,
                     //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
-                    Score = reviews.Where(x => x.Order.SpaceID == order.SpaceID && x.ToHost).Select(x => x.Score).Average(),
+                    Score = score,
                     TotalMoney = resultDetail.Select(x => x.Money).Sum(),
                     Email = order.Member.Email,
                     OrderId = order.OrderID,
@@ -153,8 +150,8 @@ namespace ZoneRadar.Services
 
             //訂單 ( 該會員ID 且 訂單狀態是已完成OR已取消 且 場地狀態是上架中 )
             var orders = _repository.GetAll<Order>().Where(x => x.MemberID == userid && x.OrderStatusID == 4 || x.MemberID == userid && x.OrderStatusID == 5 && x.Space.SpaceStatusID == 2);
-            var reviews = _repository.GetAll<Review>();
-            foreach(var order in orders)
+            var reviews = _repository.GetAll<Review>().Where(x => orders.Select(order => order.OrderID).Contains(x.OrderID)).ToList();
+            foreach (var order in orders.ToList())
             {
                 var resultDetail = new List<RentDetailViewModel>();
                 foreach (var orderdetail in order.OrderDetail)
@@ -184,6 +181,8 @@ namespace ZoneRadar.Services
                 {
                     orderstaus = "訂單已取消";
                 }
+                var totalReviews = reviews.Where(x => x.OrderID == order.OrderID && x.ToHost);
+                var score = totalReviews.Any() ? totalReviews.Average(x => x.Score) : 0;
                 result.Add(new UsercenterCompletedViewModel
                 {
                     SpaceId = order.SpaceID,
@@ -194,7 +193,7 @@ namespace ZoneRadar.Services
                     OwnerName = order.Space.Member.Name,
                     OwnerPhone = order.Space.Member.Phone,
                     //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
-                    Score = reviews.Where(x => x.Order.SpaceID == order.SpaceID && x.ToHost).Select(x => x.Score).Average(),
+                    Score =score,
                     TotalMoney = resultDetail.Select(x => x.Money).Sum(),
                     Email = order.Member.Email,
                     OrderId = order.OrderID,
@@ -278,8 +277,8 @@ namespace ZoneRadar.Services
             var result = new List<HostCenterHistoryViewModel>();
             //訂單 ( 該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中 )
             var orders = _repository.GetAll<Order>().Where(x => x.Space.MemberID == userid && x.OrderStatusID == 4 );
-            var reviews = _repository.GetAll<Review>();
-            foreach(var order in orders)
+            var reviews = _repository.GetAll<Review>().Where(x => orders.Select(order => order.OrderID).Contains(x.OrderID)).ToList();
+            foreach (var order in orders.ToList())
             {
                 var resultDetail = new List<RentDetailViewModel>();
                 foreach (var orderdetail in order.OrderDetail)
@@ -297,7 +296,8 @@ namespace ZoneRadar.Services
                 }
                 //是否評價過
                 var hasReview = reviews.Where(x => x.ToHost == false).Any(x => x.OrderID == order.OrderID);
-
+                var totalReviews = reviews.Where(x => x.OrderID == order.OrderID && x.ToHost);
+                var score = totalReviews.Any() ? totalReviews.Average(x => x.Score) : 0;
                 result.Add(new HostCenterHistoryViewModel
                 {
                     SpaceId = order.SpaceID,
@@ -308,7 +308,7 @@ namespace ZoneRadar.Services
                     OwnerName = order.Space.Member.Name,
                     OwnerPhone = order.Space.Member.Phone,
                     //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
-                    Score = reviews.Where(x => x.Order.SpaceID == order.SpaceID && x.ToHost).Select(x => x.Score).Average(),
+                    Score = score,
                     TotalMoney = resultDetail.Select(x => x.Money).Sum(),
                     Email = order.Member.Email,
                     OrderId = order.OrderID,
