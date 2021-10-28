@@ -1,8 +1,8 @@
 ﻿flatpickr.localize(flatpickr.l10ns.zh_tw);
 flatpickr(".choose-date",
     {
-        enableTime: true,
+        enableTime: false,
         minDate: "today",
-        dateFormat: "Y-F-d H:i",
+        dateFormat: "Y/F/d",
         minuteIncrement: 30,
     });

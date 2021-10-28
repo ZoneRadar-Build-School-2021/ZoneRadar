@@ -4,11 +4,11 @@
 }
 
 
-<div class="text-center px-5 my-5">
+<div class="text-center px-5 my-5 pb-5">
     <img src="~/Assets/IMG/static/sent-email.png" alt="寄驗證信" class="img-resent-email" />
     <h3 id="count-down-timer" class="mt-5 mb-3"></h3>
     <h4 class="mb-3">驗證信已寄出，請至信箱確認信件，並在10分鐘內完成身分驗證。</h4>
-    <h5>若5分鐘後仍未收到驗證信，請點擊 <button type="button" class="resent-verification-email btn btn-primary" disabled="true">重發驗證信</button></h5>
+    <h5 class="d-flex align-items-center justify-content-center">若5分鐘後仍未收到驗證信，請點擊 <button type="button" class="resent-verification-email btn btn-primary ms-2" disabled>重發驗證信</button></h5>
 </div>
 
 @section topCSS
@@ -49,14 +49,8 @@
                 element.textContent = `${paddedFormat(min)}:${paddedFormat(sec)}`;
 
                 seconds_remaining = seconds_remaining - 1;
-                if (seconds_remaining == 590) {
-                    let btn = $("button.resent-verification-email");
-                    btn.removeAttr("disabled");
-                    btn.click(function () {
-                        postValue();
-                        seconds_remaining = 600;
-                        btn.attr("disabled");
-                    });
+                if (seconds_remaining < 300) {
+                    setBtn();
                 }
                 if (seconds_remaining < 0) {
                     clearInterval(countInterval)
@@ -84,6 +78,20 @@
                 }
             });
         }
+
+        function setBtn() {
+            let btn = document.querySelector('button.resent-verification-email');
+            btn.removeAttribute('disabled');
+            btn.addEventListener('click', clickHandler);
+        }
+
+        function clickHandler() {
+            postValue();
+            seconds_remaining = 600;
+            this.setAttribute('disabled', '');
+            this.removeEventListenr('click', clickHandler);
+        }
+
 
         window.onload = function () {
             //#region 倒數計時器

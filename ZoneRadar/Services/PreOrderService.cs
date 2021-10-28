@@ -20,9 +20,9 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<OrderViewModel> GetShopCarVM(int userid)
+        public List<CartsViewModel> GetShopCarVM(int userid)
         {
-            var result = new List<OrderViewModel>();
+            var result = new List<CartsViewModel>();
             //訂單 ( 該會員ID 且 訂單狀態是預購單 且 場地狀態是上架中 )
             var orders = _repository.GetAll<Order>().Where(x => x.MemberID == userid && x.OrderStatusID == 1 && x.Space.SpaceStatusID == 2);
             var reviews = _repository.GetAll<Review>();
@@ -31,6 +31,7 @@ namespace ZoneRadar.Services
                 var resultDetail = new List<RentDetailViewModel>();
                 foreach (var orderdetail in order.OrderDetail)
                 {
+                    var totalhours = (orderdetail.EndDateTime).Subtract(orderdetail.StartDateTime).TotalHours;
                     resultDetail.Add(new RentDetailViewModel
                     {
                         OrderDetailId = orderdetail.OrderDetailID,
@@ -38,22 +39,20 @@ namespace ZoneRadar.Services
                         RentTime = orderdetail.StartDateTime.ToString("yyyy-MM-dd HH:mm"),
                         RentBackTime = orderdetail.EndDateTime.ToString("yyyy-MM-dd HH:mm"),
                         People = orderdetail.Participants,
-                        Money = PayMentService.OrderDetailPrice(orderdetail.EndDateTime, orderdetail.StartDateTime, orderdetail.Order.Space.PricePerHour, orderdetail.Order.Space.SpaceDiscount.First().Hour, orderdetail.Order.Space.SpaceDiscount.First().Discount),
+                        Money = PayMentService.OrderDetailPrice(totalhours, orderdetail.Order.Space.PricePerHour, orderdetail.Order.Space.SpaceDiscount.Any() ? orderdetail.Order.Space.SpaceDiscount.First().Hour : 1, orderdetail.Order.Space.SpaceDiscount.Any() ? orderdetail.Order.Space.SpaceDiscount.First().Discount : 0),
                     });
                 }
-                result.Add(new OrderViewModel
+                result.Add(new CartsViewModel
                 {
                     SpaceId = order.SpaceID,
                     SpaceName = order.Space.SpaceName,
                     SpaceUrl = order.Space.SpacePhoto.First().SpacePhotoUrl,
                     OwnerName = order.Space.Member.Name,
                     OwnerPhone = order.Space.Member.Phone,
-                    //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
-                    Score = reviews.Where(x => x.Order.SpaceID == order.SpaceID && x.ToHost).Select(x => x.Score).Average(),
                     TotalMoney = resultDetail.Select(x => x.Money).Sum(),
                     Email = order.Member.Email,
                     OrderId = order.OrderID,
-                    RentDetail = resultDetail
+                    RentDetail = resultDetail,
                 });
             }
             return result;
