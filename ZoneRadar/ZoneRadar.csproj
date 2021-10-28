@@ -458,7 +458,7 @@
     <Content Include="Assets\JS\axios.min.js" />
     <Content Include="Assets\JS\booking\booking.js" />
     <Content Include="Assets\JS\bootstrap.bundle.min.js" />
-    <Content Include="Assets\JS\addspace\CityandDistrictandZipcodeJavaScript.js" />
+    <Content Include="Assets\JS\addspace\EditCityandDistrictandZipcodeJavaScript.js" />
     <Content Include="Assets\JS\dayjs.min.js" />
     <Content Include="Assets\JS\flatpickr.js" />
     <Content Include="Assets\JS\hostSellerCompleted\SellerOrderCompleted.js" />
