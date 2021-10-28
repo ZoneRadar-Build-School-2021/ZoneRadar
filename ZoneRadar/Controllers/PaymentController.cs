@@ -23,12 +23,12 @@ namespace ZoneRadar.Controllers
         /// 綠界
         /// </summary>
         /// <returns></returns>
-        public ActionResult Payment(OrderViewModel model)
+        public ActionResult Payment(CartsViewModel model)
         {
             return View(model);
         }
 
-        public ActionResult EcPayment(OrderViewModel model) 
+        public ActionResult EcPayment(CartsViewModel model) 
         {
             ViewData["EcPay"] = _ecpaymentservice.GetEcpayData(model);
             return View();

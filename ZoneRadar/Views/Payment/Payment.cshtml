@@ -1,5 +1,5 @@
 ﻿@*@model Dictionary<string, string>*@
-@model OrderViewModel
+@model CartsViewModel
 @*@model ECPay.Payment.Integration.AllInOne*@
 @{
     ViewBag.Title = "Payment";
@@ -120,7 +120,7 @@
                     送出
                 </button>*@
                 @*</form>*@
-                @Html.ActionLink("送出", "Ecpayment", new  OrderViewModel{ OrderId = Model.OrderId,TotalMoney =Model.TotalMoney,SpaceName =Model.SpaceName }, new { @class = "Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled submit-pay",@id= "submit-pay" })
+                @Html.ActionLink("送出", "Ecpayment", new CartsViewModel { OrderId = Model.OrderId,TotalMoney =Model.TotalMoney,SpaceName =Model.SpaceName }, new { @class = "Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled submit-pay",@id= "submit-pay" })
 
 
 </div>

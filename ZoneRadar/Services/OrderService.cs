@@ -29,8 +29,9 @@ namespace ZoneRadar.Services
             List<UsercenterPendingViewModel> result = new List<UsercenterPendingViewModel>();
             //訂單 ( 該會員ID 且 訂單狀態是已付款 且 場地狀態是上架中 )
             var orders = _repository.GetAll<Order>().Where(x => x.MemberID == userid && x.OrderStatusID == 2 && x.Space.SpaceStatusID == 2);
-            var reviews = _repository.GetAll<Review>();
-            foreach(var order in orders)
+            var reviews = _repository.GetAll<Review>().Where(x=>orders.Select(order=>order.OrderID).Contains(x.OrderID)).ToList();
+
+            foreach(var order in orders.ToList())
             {
                 var resultDetail = new List<RentDetailViewModel>();
 
@@ -64,6 +65,8 @@ namespace ZoneRadar.Services
                     renttimedayorhour = $"{(int)rentTimeToNow / 24} 天";
                 }
                 decimal cancelMoney = 0;
+                var totalReviews = reviews.Where(x => x.OrderID == order.OrderID && x.ToHost);
+                var score = totalReviews.Any()? totalReviews.Average(x=>x.Score):0;
                 result.Add(new UsercenterPendingViewModel
                 {
                     SpaceId = order.SpaceID,
@@ -74,7 +77,7 @@ namespace ZoneRadar.Services
                     OwnerName = order.Space.Member.Name,
                     OwnerPhone = order.Space.Member.Phone,
                     //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
-                    Score = reviews.Where(x => x.Order.SpaceID == order.SpaceID && x.ToHost).Select(x => x.Score).Average(),
+                    Score = score,
                     TotalMoney = resultDetail.Select(x => x.Money).Sum(),
                     Email = order.Member.Email,
                     OrderId = order.OrderID,

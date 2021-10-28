@@ -22,9 +22,9 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public String GetEcpayData(OrderViewModel model)
+        public String GetEcpayData(CartsViewModel model)
         {
-            var Url = "https://fd73-1-164-250-30.ngrok.io";
+            var Url = "https://1d91-1-164-250-30.ngrok.io";
             AllInOne oPayment = new AllInOne();
             var returnURL = "webapi/spaces/api/JSONAPI/GetEcpayData";
             /* 服務參數 */
@@ -86,7 +86,7 @@ namespace ZoneRadar.Services
             {
                 order.PaymentDate = DateTime.Parse(model.PaymentDate);
                 order.OrderStatusID = (int)Enums.Enums.OrderStatusID.OrderStatusIDforWating;
-                order.OrderNumber = int.Parse(DateTime.Now.ToString("yyMMddhmms"));
+                order.OrderNumber = int.Parse(DateTime.Now.ToString("yyMMddhhmm"));
                 try
                 {
                     _repository.Update(order);
