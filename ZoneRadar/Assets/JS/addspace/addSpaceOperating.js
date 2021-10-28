@@ -47,7 +47,7 @@ flexRadioDefault2.addEventListener('click', function () {
     StateMon2.disabled = false;
 });
 
-//有問題
+
 //tuesday
 var flag2 = 1;
 let Tue = document.querySelector("#O2");
