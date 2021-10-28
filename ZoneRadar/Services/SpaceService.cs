@@ -1274,24 +1274,11 @@ namespace ZoneRadar.Services
         /// <summary>
         ///  場地修改(Amber)
         /// </summary>
-        public SomeOnesSpaceViewModel EditSpace(SomeOnesSpaceViewModel editSpace)
+        public AddSpaceViewModel EditSpace(AddSpaceViewModel editSpace)
         {
             
             var space = new Space()
             {
-                MemberID=editSpace.SomeOnesSpaceList.Select(x=>x.MemberID).FirstOrDefault(),
-                SpaceName = editSpace.SomeOnesSpaceNameList.Select(x => x.SpaceName).FirstOrDefault(),
-                MeasureOfArea = editSpace.SomeOnesMeasureOfAreaandCapacityList.Select(x => x.MeasureOfArea).FirstOrDefault(),
-                Capacity = editSpace.SomeOnesMeasureOfAreaandCapacityList.Select(x => x.Capacity).FirstOrDefault(),
-                PricePerHour = editSpace.SomeOnesPriceList.Select(x => x.PricePerHour).FirstOrDefault(),
-                MinHours = editSpace.SomeOnesPriceList.Select(x => x.MinHours).FirstOrDefault(),
-                HostRules = editSpace.SomeOnesRulesList.Select(x => x.Rules).FirstOrDefault(),
-                Traffic = editSpace.SomeOnesTrafficList.Select(x => x.Traffic).FirstOrDefault(),
-                Parking = editSpace.SomeOnesParkingList.Select(x => x.Parking).FirstOrDefault(),
-                ShootingEquipment = editSpace.SomeOnesShootingList.Select(x => x.Shooting).FirstOrDefault(),
-                CancellationID = editSpace.SomeOnesCancelList.Select(x => x.CancellationID).FirstOrDefault(),
-                Latitude = editSpace.SomeOnesCitytList.Select(x => x.Lat).FirstOrDefault(),
-                Longitude=editSpace.SomeOnesCitytList.Select(x=>x.Lng).FirstOrDefault(),
 
             };
             _repository.Update<Space>(space);

@@ -83,7 +83,7 @@ namespace ZoneRadar.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult EditSpace(SomeOnesSpaceViewModel editspace)
+        public ActionResult EditSpace(AddSpaceViewModel editspace)
         {
             var userid = int.Parse(User.Identity.Name);
            

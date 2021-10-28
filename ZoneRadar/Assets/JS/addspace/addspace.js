@@ -1,4 +1,4 @@
-//郵遞區號
+
 
 //停車場的radio 是
 let Yes = document.querySelector("#Yes");

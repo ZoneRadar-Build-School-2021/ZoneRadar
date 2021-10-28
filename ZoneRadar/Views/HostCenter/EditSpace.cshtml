@@ -100,7 +100,7 @@
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="mb-3">
                                                 <label for="city" class="form-label mt-3">城市</label>
-                                                <select class="form-select" id="city" required>
+                                                <select class="form-select" id="city"  name="CityID" required>
                                                     @foreach (var c in ciy)
                                                     {
                                                         <option value="@c.CityName">@c.CityName</option>
@@ -131,7 +131,7 @@
                                                        class="form-label mt-3">郵遞區號</label>
                                                 @foreach (var add in adds)
                                                 {
-                                                    <input type="text" readonly class="form-control" id="ZipCode" placeholder="" value="@add.DistrictID" name="add.DistrictID">
+                                                    <input type="text" readonly class="form-control" id="ZipCode" placeholder="" value="@add.DistrictID" name="DistrictID">
                                                 }
                                             </div>
                                         </div>
@@ -193,7 +193,7 @@
                                         <div class="mb-3 col-lg-6">
                                             <div class="form-check">
 
-                                                <input class="form-check-input" checked type="checkbox" value="@type.TypeDetailId" id="flexCheckDefault">
+                                                <input class="form-check-input" name="TypeDetailId" checked type="checkbox" value="@type.TypeDetailId" id="flexCheckDefault">
 
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                     @type.Type
@@ -206,7 +206,7 @@
                                         <div class="mb-3 col-lg-6">
                                             <div class="form-check">
 
-                                                <input class="form-check-input" type="checkbox" value="@type.TypeDetailId" id="flexCheckDefault">
+                                                <input class="form-check-input" type="checkbox" name="TypeDetailId" value="@type.TypeDetailId" id="flexCheckDefault">
 
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                     @type.Type
@@ -255,7 +255,7 @@
                                 <div class="col ">
                                     <div class="col col-12  pb-5">
                                         <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                        <textarea name="textPartType" class="form-control"
+                                        <textarea name="Introduction" class="form-control"
                                                   id="exampleFormControlTextarea1" rows="3">
                                       @introduction[0].Introduction
                                     </textarea>
@@ -379,7 +379,7 @@
                                         </P>
                                         <div class="col-6  col-xl-2 mb-4">
                                             <label for="State" class="form-label  mt-xl-1 "></label>
-                                            <select id="State" class="form-select fs16 MonselectR "
+                                            <select id="State" name="StartTime" class="form-select fs16 MonselectR "
                                                     aria-label="Default select example" disabled>
                                                 <option selected>@spaceOpenDay.Where(x => x.weekDay == item.weekDay).Select(x => x.EndTime).FirstOrDefault().ToString(@"hh\:mm")</option>
 
