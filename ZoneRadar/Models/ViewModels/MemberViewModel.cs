@@ -35,7 +35,7 @@ namespace ZoneRadar.Models.ViewModels
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "密碼長度需為6~50字元")]
-        [Compare("RegisterPassword", ErrorMessage = "密碼不一致！")]
+        [Compare("RegisterPassword", ErrorMessage = "密碼不一致")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -90,7 +90,7 @@ namespace ZoneRadar.Models.ViewModels
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "密碼長度需為6~50字元")]
-        [Compare("NewPassword", ErrorMessage = "密碼不一致！")]
+        [Compare("NewPassword", ErrorMessage = "密碼不一致")]
         public string NewConfirmPassword { get; set; }
     }
 }

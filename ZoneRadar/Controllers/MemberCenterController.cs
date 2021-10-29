@@ -101,51 +101,27 @@ namespace ZoneRadar.Controllers
         /// 重設密碼(Post)(Jenny)
         /// </summary>
         /// <param name="resetPasswordVM"></param>
-        /// <returns></returns>
+        /// <returns>MemberResult型別的JSON字串</returns>
         [HttpPost]
-        public ActionResult ResetPassword(ResetZONERadarPasswordViewModel resetPasswordVM)
+        public string ResetPassword(ResetZONERadarPasswordViewModel resetPasswordVM)
         {
+            var memberResult = new MemberResult { IsSuccessful = false };
             if (!ModelState.IsValid || resetPasswordVM.NewPassword != resetPasswordVM.NewConfirmPassword)
             {
                 //輸入格式不正確或密碼不一致
-                ViewData["Alert"] = true;
-                ViewData["Message"] = "輸入格式不正確或密碼不一致，請重新輸入！";
-                ViewData["Icon"] = false;
-                return View();
-            }
-            //如果已重設密碼、登入了，又按上一頁
-            if (User.Identity.IsAuthenticated)
-            {
-                TempData["Alert"] = true;
-                TempData["Message"] = "現為登入狀態，無法以此方式重設密碼！";
-                TempData["Icon"] = false;
-                return RedirectToAction("Index", "Home");
+                memberResult.ShowMessage = "輸入格式不正確或密碼不一致，請重新輸入！";
+                return JsonConvert.SerializeObject(memberResult);
             }
 
             //修改會員密碼
-            var memberResult = _service.EditPassword(resetPasswordVM);
-            if (memberResult.IsSuccessful)
-            {
-                //讓使用者登入，呈現登入後的畫面
-                //建造加密表單驗證票證
-                var encryptedTicket = _service.CreateEncryptedTicket(memberResult.User);
+            memberResult = _service.EditPassword(resetPasswordVM);
+            return JsonConvert.SerializeObject(memberResult);
+        }
 
-                //建造cookie
-                _service.CreateCookie(encryptedTicket, Response);
-
-                TempData["Alert"] = true;
-                TempData["Message"] = memberResult.ShowMessage;
-                TempData["Icon"] = memberResult.IsSuccessful;
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                //密碼修改失敗，回去首頁，跳出錯誤訊息
-                TempData["Alert"] = true;
-                TempData["Message"] = memberResult.ShowMessage;
-                TempData["Icon"] = memberResult.IsSuccessful;
-                return RedirectToAction("Index", "Home");
-            }
+        [HttpGet]
+        public ActionResult ResetPasswordSuccess()
+        {
+            return View();
         }
 
         /// <summary>

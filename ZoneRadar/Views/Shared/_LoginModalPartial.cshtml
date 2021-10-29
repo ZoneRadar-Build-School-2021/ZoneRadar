@@ -13,7 +13,7 @@
     <button id="login-submit" class="w-100 text-decoration-none text-white mt-3">登入</button>*@
 @*}*@
 
-<form class="mb-3" id="form-vue">
+<form class="mb-3" id="login-form-vue">
     @*@Html.AntiForgeryToken()*@
     <input v-model="inputData.account" type="email" id="LoginEmail" :class="{ 'is-invalid': inputDataCheck.accountError }" class="form-control form-control-lg d-block" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
     <div class="invalid-feedback text-start mt-1">

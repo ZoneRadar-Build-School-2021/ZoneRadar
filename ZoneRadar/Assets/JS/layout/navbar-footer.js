@@ -11,30 +11,24 @@ document.querySelector("#a-register-modal").addEventListener("click", () => {
 
 
 //#region 登入modal的前端驗證(Vue)
-let form_vue = new Vue({
-    el: "#form-vue",
+let login_form_vue = new Vue({
+    el: "#login-form-vue",
     data: {
         inputData: {
             account: "",
-            password: "",
-            checkPassword: "",
-            name: "",
-            tel: "",
-            address: ""
+            password: ""
         },
         inputDataCheck: {
             accountError: false,
             accountErrorMsg: "",
             passwordError: false,
-            passwordErrorMsg: "",
-            checkPasswordError: false,
-            checkPasswordErrorMsg: ""
+            passwordErrorMsg: ""
         },
         isVerify: true
     },
     watch: {
         "inputData.account": {
-            immediate: true,
+            immediate: false,
             handler() {
                 let emailRegexp = /^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/
                 if (!emailRegexp.test(this.inputData.account)) {
@@ -49,7 +43,7 @@ let form_vue = new Vue({
             }
         },
         "inputData.password": {
-            immediate: true,
+            immediate: false,
             handler() {
                 let passwordRegexp = /^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/
                 if (this.inputData.password.length < 6 || this.inputData.password.length > 50) {
@@ -89,15 +83,15 @@ let login_btn = document.querySelector("#login-submit");
 login_btn.addEventListener("click", function () {
     let login_email = document.querySelector("#LoginEmail").value;
     let login_password = document.querySelector("#LoginPassword").value;
-    let form_data = new FormData();
-    form_data.append("LoginEmail", login_email);
-    form_data.append("LoginPassword", login_password);
+    let login_form_data = new FormData();
+    login_form_data.append("LoginEmail", login_email);
+    login_form_data.append("LoginPassword", login_password);
 
 
     axios({
         url: "/MemberCenter/Login",
         method: "POST",
-        data: form_data,
+        data: login_form_data,
         headers: {
             Accept: "application/json",
             "Content-Type": "application/x-www-form-urlencoded"
@@ -115,7 +109,7 @@ login_btn.addEventListener("click", function () {
         } else {
             icon_string = "error";
         }
-        if (location.search != undefined) {
+        if (location.search != "") {
             let queryString = location.search;
             let keyValue = queryString.split("?");
             let returnUrl = keyValue.find(function (item) {

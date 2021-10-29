@@ -605,6 +605,7 @@
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Home\Policy.cshtml" />
     <Content Include="Views\Payment\Payment.cshtml" />
+    <Content Include="Views\MemberCenter\ResetPasswordSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

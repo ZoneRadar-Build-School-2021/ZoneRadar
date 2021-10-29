@@ -389,7 +389,7 @@ namespace ZoneRadar.Services
                     _repository.SaveChanges();
                     memberResult.User = user;
                     memberResult.IsSuccessful = true;
-                    memberResult.ShowMessage = $"{user.Name}您好，密碼修改成功，歡迎您登入ZONERadar！";
+                    memberResult.ShowMessage = $"{user.Name}您好，密碼修改成功！";
                     return memberResult;
                 }
                 catch (Exception ex)
