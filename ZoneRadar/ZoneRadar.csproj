@@ -361,6 +361,13 @@
     <Content Include="Assets\IMG\member_card\Jetset Sound AV, LLC J..jpg" />
     <Content Include="Assets\IMG\member_card\Nicky K..jpg" />
     <Content Include="Assets\IMG\member_card\Sandro K..jpg" />
+    <Content Include="Assets\IMG\NoCollection%28user%29.png" />
+    <Content Include="Assets\IMG\NoOrder%28host%29.png" />
+    <Content Include="Assets\IMG\NoOrder%28user%29.png" />
+    <Content Include="Assets\IMG\NoPreOrder%28user%29.png" />
+    <Content Include="Assets\IMG\NoReview%28user%29.png" />
+    <Content Include="Assets\IMG\NoSearch.png" />
+    <Content Include="Assets\IMG\NoSpace%28host%29.png" />
     <Content Include="Assets\IMG\static\fistbump-over-desk.jpg" />
     <Content Include="Assets\IMG\static\sent-email.png" />
     <Content Include="Assets\IMG\Usercenter\chngstar.png" />

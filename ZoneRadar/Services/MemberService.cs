@@ -256,8 +256,8 @@ namespace ZoneRadar.Services
             var ticket = new FormsAuthenticationTicket(
             version: 1,
             name: user.MemberID.ToString(), //可以放使用者Id
-            issueDate: DateTime.UtcNow,//現在UTC時間
-            expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
+            issueDate: DateTime.Now,//現在UTC時間
+            expiration: DateTime.Now.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
             isPersistent: true,// 是否要記住我 true or false
             userData: jsonUserInfo, //可以放使用者角色名稱
             cookiePath: FormsAuthentication.FormsCookiePath);
