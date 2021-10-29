@@ -481,6 +481,7 @@
     <Content Include="Assets\JS\order_state\usercenter_shopcar.js" />
     <Content Include="Assets\JS\Payment\Paypage.js" />
     <Content Include="Assets\JS\searching\searching.js" />
+    <Content Include="Assets\JS\Sortable.min.js" />
     <Content Include="Assets\JS\static\Q&amp;A.js" />
     <Content Include="Assets\JS\sweetalert2.js" />
     <Content Include="Assets\JS\swiper-bundle.min.js" />
