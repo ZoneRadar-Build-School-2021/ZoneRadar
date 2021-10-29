@@ -18,5 +18,6 @@ namespace ZoneRadar.Models.ViewModels
         public bool Alert { get; set; }
         public string Message { get; set; }
         public bool Icon { get; set; }
+        public string IconString { get; set; }
     }
 }

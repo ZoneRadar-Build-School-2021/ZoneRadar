@@ -91,7 +91,7 @@ namespace ZoneRadar.Controllers
             else
             {
                 TempData["Alert"] = true;
-                TempData["Message"] = "找不到此會員，請重新嘗試！";
+                TempData["Message"] = "發生錯誤，請重新嘗試！";
                 TempData["Icon"] = false;
                 return RedirectToAction("Index", "Home");
             }
@@ -233,13 +233,13 @@ namespace ZoneRadar.Controllers
             {
                 //寄送驗證信
                 _service.SentEmail(Server, Request, Url, email);
-                var result = new { Icon = "success", Message = "已重發驗證信，請至信箱確認！" };
+                var result = new SweetAlert { Message = "已重發驗證信，請至信箱確認！", IconString = "success" };
                 var jsonResult = JsonConvert.SerializeObject(result);
                 return jsonResult;
             }
             else
             {
-                var result = new { Icon = "error", Message = "該帳號不符合未驗證條件，請重新註冊！" };
+                var result = new SweetAlert { Message = "該帳號不符合未驗證條件，請重新註冊！", IconString = "error" };
                 var jsonResult = JsonConvert.SerializeObject(result);
                 return jsonResult;
             }
@@ -305,7 +305,7 @@ namespace ZoneRadar.Controllers
             if (!User.Identity.IsAuthenticated)
             {
                 TempData["LoginModalPopup"] = true;
-            }         
+            }
             //如果想進入未授權畫面
             if (Request.QueryString["ReturnUrl"] != null)
             {
@@ -323,8 +323,8 @@ namespace ZoneRadar.Controllers
         /// <param name="loginVM"></param>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login([Bind(Include = "LoginEmail, LoginPassword")] LoginZONERadarViewModel loginVM)
+        //[ValidateAntiForgeryToken]
+        public string Login(LoginZONERadarViewModel loginVM)
         {
             //若未通過Model驗證(前端已先驗證過)
             if (!ModelState.IsValid)
@@ -333,7 +333,8 @@ namespace ZoneRadar.Controllers
                 TempData["Alert"] = true;
                 TempData["Message"] = "輸入格式不正確，請重新登入！";
                 TempData["Icon"] = false;
-                return Redirect(Request.UrlReferrer.AbsolutePath);
+                //return Redirect(Request.UrlReferrer.AbsolutePath);
+                return "錯";
             }
 
             var memberResult = _service.UserLogin(loginVM);
@@ -348,7 +349,8 @@ namespace ZoneRadar.Controllers
                 //TempData["Email"] = ModelState["LoginZONERadarVM.Email"];
 
                 //回到原本頁面並跳出錯誤訊息
-                return Redirect(Request.UrlReferrer.AbsolutePath);
+                //return Redirect(Request.UrlReferrer.AbsolutePath);
+                return "錯";
             }
 
             //建造加密表單驗證票證
@@ -360,10 +362,12 @@ namespace ZoneRadar.Controllers
             //導向使用者原先欲造訪的路由
             var originalUrl = _service.GetOriginalUrl(memberResult.User.MemberID.ToString());
 
-            TempData["Alert"] = true;
-            TempData["Message"] = memberResult.ShowMessage;
-            TempData["Icon"] = memberResult.IsSuccessful;
-            return Redirect(originalUrl);
+            //TempData["Alert"] = true;
+            //TempData["Message"] = memberResult.ShowMessage;
+            //TempData["Icon"] = memberResult.IsSuccessful;
+            //return Redirect(originalUrl);
+
+            return JsonConvert.SerializeObject(memberResult);
         }
 
         /// <summary>
