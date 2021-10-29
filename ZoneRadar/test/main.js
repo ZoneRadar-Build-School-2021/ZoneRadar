@@ -8,7 +8,7 @@
 
   let name, preset;
   let originImgs = [];
-  let uploadedImgs = [];
+  // spaceID需先存在razor page裡
   let spaceID = 168;
 
   // function定義
@@ -18,7 +18,6 @@
       name = res.data.Response.Name;
       preset = res.data.Response.Preset;
       originImgs = res.data.Response.PhotoUrlList;
-
       console.log(res.data.Response);
       if (originImgs.length) {
         originImgs.forEach(url => {
@@ -32,7 +31,10 @@
   function setSortable() {
     let sortable = new Sortable(previewZone, {
       animation: 150,
-      ghostClass: 'blue-background-class'
+      ghostClass: 'ghost',
+      onChange: function () {
+        imgSubmitBtn.removeAttribute('disabled');
+      },
     })
   }
 
@@ -112,14 +114,20 @@
 
     axios.post('/webapi/spaces/SavePhotos', SaveSpacePhotosVM).then(res => {
       console.log(res);
+      Swal.fire(
+        '上傳成功',
+        '請繼續填寫您的場地資訊!!!',
+        'success'
+      )
     }).catch(err => console.log(err));
   }
 
   // 執行區
   getPrams();
   setSortable();
+  // previewZone.addEventListener('click', checkUpdate, false);
   setUploadBtn();
   imageInput.addEventListener('change', queueAndProcess, false);
-  imgSubmitBtn.addEventListener('click', transferData, false)
+  imgSubmitBtn.addEventListener('click', transferData, false);
 
 })();
