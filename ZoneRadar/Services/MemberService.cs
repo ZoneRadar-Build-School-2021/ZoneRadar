@@ -62,8 +62,8 @@ namespace ZoneRadar.Services
                         Password = registerVM.RegisterPassword,
                         Name = registerVM.Name,
                         ReceiveEDM = false,
-                        SignUpDateTime = DateTime.UtcNow,
-                        LastLogin = DateTime.UtcNow
+                        SignUpDateTime = DateTime.Now,
+                        LastLogin = DateTime.Now
                     };
                     _repository.Create<Member>(member);
                     _repository.SaveChanges();
@@ -91,7 +91,7 @@ namespace ZoneRadar.Services
         public void SentEmail(HttpServerUtilityBase server, HttpRequestBase request, UrlHelper urlHelper, string userEmail)
         {
             //記錄有效的期限
-            var afterTenMinutes = DateTime.UtcNow.AddMinutes(10).ToString();
+            var afterTenMinutes = DateTime.Now.AddMinutes(10).ToString();
             var route = new RouteValueDictionary { { "email", userEmail }, { "expired", afterTenMinutes } };
             //製作驗證信的連結
             var verificationLink = urlHelper.Action("ConfirmEmail", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
@@ -164,8 +164,8 @@ namespace ZoneRadar.Services
                 {
                     var user = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == email.ToUpper());
                     //將會員的註冊時間和登入時間改成現在時間，代表驗證成功
-                    user.SignUpDateTime = DateTime.UtcNow;
-                    user.LastLogin = DateTime.UtcNow;
+                    user.SignUpDateTime = DateTime.Now;
+                    user.LastLogin = DateTime.Now;
                     user.IsVerify = true;
                     _repository.Update(user);
                     _repository.SaveChanges();
@@ -215,7 +215,7 @@ namespace ZoneRadar.Services
             {
                 try
                 {
-                    user.LastLogin = DateTime.UtcNow;
+                    user.LastLogin = DateTime.Now;
                     _repository.Update(user);
                     _repository.SaveChanges();
                     memberResult.User = user;
@@ -256,8 +256,8 @@ namespace ZoneRadar.Services
             var ticket = new FormsAuthenticationTicket(
             version: 1,
             name: user.MemberID.ToString(), //可以放使用者Id
-            issueDate: DateTime.UtcNow,//現在UTC時間
-            expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
+            issueDate: DateTime.Now,//現在UTC時間
+            expiration: DateTime.Now.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
             isPersistent: true,// 是否要記住我 true or false
             userData: jsonUserInfo, //可以放使用者角色名稱
             cookiePath: FormsAuthentication.FormsCookiePath);
@@ -301,7 +301,7 @@ namespace ZoneRadar.Services
         public void SentResetPasswordEmail(HttpServerUtilityBase server, HttpRequestBase request, UrlHelper urlHelper, string userEmail)
         {
             userEmail = HttpUtility.HtmlEncode(userEmail);
-            var afterTenMinutes = DateTime.UtcNow.AddMinutes(10).ToString();
+            var afterTenMinutes = DateTime.Now.AddMinutes(10).ToString();
             var resetCode = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == userEmail.ToUpper()).Password;
             var route = new RouteValueDictionary { { "email", userEmail }, { "resetCode", resetCode }, { "expired", afterTenMinutes } };
             //製作驗證信的連結
@@ -384,7 +384,7 @@ namespace ZoneRadar.Services
                 {
                     //改成新密碼
                     user.Password = resetPasswordVM.NewPassword;
-                    user.LastLogin = DateTime.UtcNow;
+                    user.LastLogin = DateTime.Now;
                     _repository.Update(user);
                     _repository.SaveChanges();
                     memberResult.User = user;

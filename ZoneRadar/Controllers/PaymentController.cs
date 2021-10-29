@@ -20,8 +20,8 @@ namespace ZoneRadar.Controllers
         {
             var ReturnURL = "http://www.ecpay.com.tw/";
             var ClientBackURL = "https://localhost:44322/UserCenter/Pending";
-            var MerchantTradeNo = "ECPay" + new Random().Next(0, 999).ToString() + DateTime.UtcNow.ToString("yyyyMMddHHmm");
-            var MerchantradeDate = DateTime.UtcNow.ToString("yyyy/MM/dd HH:mm:ss");
+            var MerchantTradeNo = "ECPay" + new Random().Next(0, 999).ToString() + DateTime.Now.ToString("yyyyMMddHHmm");
+            var MerchantradeDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             
 
 
