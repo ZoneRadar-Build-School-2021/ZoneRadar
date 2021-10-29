@@ -28,7 +28,7 @@ Yesprojection.addEventListener('click', function () {
     }
 
 });
-/營業時間 radio///
+///營業時間 radio/
 
 let openday = document.querySelector("#openday");
 openday.addEventListener("click", function () {
@@ -62,7 +62,7 @@ openday.addEventListener("click", function () {
     tueAll.setAttribute("id", "flexRadioDefault2");
     
     tueHour.setAttribute("value", "hr2");
-    tueHour.setAttribute("name", "Hour2");
+    tueHour.setAttribute("name", "Hours2");
     tueHour.setAttribute("id", "flexRadioDefault2")
 
 
@@ -82,11 +82,11 @@ openday.addEventListener("click", function () {
     allDayLabelwed.setAttribute("for", "flexRadioDefault3");
     hourLabelwed.setAttribute("for", "flexRadioDefault3");
     wedAll.setAttribute("value", "Y3");
-    wedAll.setAttribute("name", "Hour3");
+    wedAll.setAttribute("name", "Hours3");
     wedAll.setAttribute("id", "flexRadioDefault3");
 
     wedHour.setAttribute("value", "hr3");
-    wedHour.setAttribute("name", "Hour3");
+    wedHour.setAttribute("name", "Hours3");
     wedHour.setAttribute("id", "flexRadioDefault3")
 
     //星期四
@@ -106,11 +106,11 @@ openday.addEventListener("click", function () {
     hourLabelThu.setAttribute("for", "flexRadioDefault4");
 
     ThuAll.setAttribute("value", "Y4");
-    ThuAll.setAttribute("name", "Hour4");
+    ThuAll.setAttribute("name", "Hours4");
     ThuAll.setAttribute("id", "flexRadioDefault4");
 
     ThuHour.setAttribute("value", "hr4");
-    ThuHour.setAttribute("name", "Hour4");
+    ThuHour.setAttribute("name", "Hours4");
     ThuHour.setAttribute("id", "flexRadioDefault4");
 
     //星期五
@@ -130,11 +130,11 @@ openday.addEventListener("click", function () {
     hourLabelFri.setAttribute("for", "flexRadioDefault5");
 
     FriAll.setAttribute("value", "Y5");
-    FriAll.setAttribute("name", "Hour5");
+    FriAll.setAttribute("name", "Hours5");
     FriAll.setAttribute("id", "flexRadioDefault5");
 
     FriHour.setAttribute("value", "hr5");
-    FriHour.setAttribute("name", "Hour5");
+    FriHour.setAttribute("name", "Hours5");
     FriHour.setAttribute("id", "flexRadioDefault5");
 
     //星期六
@@ -154,11 +154,11 @@ openday.addEventListener("click", function () {
     hourLabelSat.setAttribute("for", "flexRadioDefault6");
 
     SatAll.setAttribute("value", "Y6");
-    SatAll.setAttribute("name", "Hour6");
+    SatAll.setAttribute("name", "Hours6");
     SatAll.setAttribute("id", "flexRadioDefault6");
 
     SatHour.setAttribute("value", "hr6");
-    SatHour.setAttribute("name", "Hour6");
+    SatHour.setAttribute("name", "Hours6");
     SatHour.setAttribute("id", "flexRadioDefault6");
 
     //星期日
@@ -178,11 +178,11 @@ openday.addEventListener("click", function () {
     hourLabelSun.setAttribute("for", "flexRadioDefault7");
 
     SunAll.setAttribute("value", "Y7");
-    SunAll.setAttribute("name", "Hour7");
+    SunAll.setAttribute("name", "Hours7");
     SunAll.setAttribute("id", "flexRadioDefault7");
 
     SunHour.setAttribute("value", "hr7");
-    SunHour.setAttribute("name", "Hour7");
+    SunHour.setAttribute("name", "Hours7");
     SunHour.setAttribute("id", "flexRadioDefault7");
 
 });
@@ -431,14 +431,11 @@ Sunhour.addEventListener('click', function () {
     StateSun.disabled = false;
     StateSun2.disabled = false;
 });
-
-
-CKEDITOR.replace('textPartType');
-CKEDITOR.replace('textPartRule');
-CKEDITOR.replace('textPartPark');
-CKEDITOR.replace('textPartProjection');
-CKEDITOR.replace('textPartClean');
-CKEDITOR.replace('textPartTransportation');
+CKEDITOR.replace('Introduction');
+CKEDITOR.replace('HostRules');
+CKEDITOR.replace('Parking');
+CKEDITOR.replace('ShootingEquipment');
+CKEDITOR.replace('Traffic');
 CKEDITOR.replace('OtherAmenity');
 
 

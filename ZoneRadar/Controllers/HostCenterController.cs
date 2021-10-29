@@ -63,7 +63,6 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        //public ActionResult AddSpace(AddSpaceViewModel space, AddOperatingViewModel addOperating)
 
         public ActionResult AddSpace(AddSpaceViewModel space)
         {
@@ -83,12 +82,14 @@ namespace ZoneRadar.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult EditSpace(AddSpaceViewModel editspace)
+        [ValidateInput(false)]
+        public ActionResult EditSpace( AddSpaceViewModel editspace)
         {
             var userid = int.Parse(User.Identity.Name);
-           
+            editspace.MemberID = userid;
+
             var result = _spaceService.EditSpace(editspace);
-            return RedirectToAction("SpaceManage", "HostCenter");
+            return RedirectToAction("EditSpace", result);
         }
 
         /// <summary>

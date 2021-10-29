@@ -50,5 +50,20 @@ namespace ZoneRadar.Repositories
         {
             _context.Dispose();
         }
+
+        internal void Update<T>(List<T> imgs)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void Delete<T>(List<T> typeOld)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void Create<T>(List<T> cleaningProtocol)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

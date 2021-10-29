@@ -85,10 +85,10 @@
                                     <div class="row mb-3">
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <label for="country" class="form-label">國家</label>
-                                            <select class="form-select" id="country" required>
+                                            <select name="CountryID" readonly class="form-select" id="country" required>
                                                 @foreach (var cou in country)
                                                 {
-                                                    <option value="1" selected disabled>@cou.CountryName</option>
+                                                    <option value="1" selected >@cou.CountryName</option>
                                                 }
                                             </select>
                                             <div class="invalid-feedback">
@@ -100,7 +100,7 @@
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="mb-3">
                                                 <label for="city" class="form-label mt-3">城市</label>
-                                                <select class="form-select" id="city"  name="CityID" required>
+                                                <select class="form-select" id="city"  name="CityID" >
                                                     @foreach (var c in ciy)
                                                     {
                                                         <option value="@c.CityName">@c.CityName</option>
@@ -113,7 +113,7 @@
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-6 mt-3">
                                             <label for="district" class="form-label">行政區</label>
-                                            <select class="form-select" name="district" id="district" required>
+                                            <select class="form-select" name="district" id="district" >
                                                 @foreach (var d in district)
                                                 {
                                                     <option value="@d.DistrictName">@d.DistrictName</option>
@@ -346,7 +346,7 @@
                                         </div>
                                         <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" value="Y1" disabled name="Hours1"
+                                                <input class="form-check-input" type="radio" value="Y1"  name="Hours1"
                                                        id="flexRadioDefault1">
                                                 <label id="allDayLabel" class="form-check-label" for="flexRadioDefault1">
                                                     全天(24hr)
@@ -355,7 +355,7 @@
                                         </div>
                                         <div class="col-6 col-xl-2  mt-auto mb-auto">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" value="hr1" name="Hours1"
+                                                <input class="form-check-input" checked type="radio" value="hr1" name="Hours1"
                                                        id="flexRadioDefault1">
                                                 <label id="hourLabel" class="form-check-label" for="flexRadioDefault1">
                                                     小時
@@ -365,11 +365,10 @@
 
                                         <div class="col-6 col-xl-2 mb-4">
                                             <label for="State" class="form-label fs16 mt-xl-1 "></label>
-                                            <select id="State" class="form-select fs16 MonselectL "
-                                                    aria-label="Default select example" disabled>
+                                            <select id="State" name="StartTime"  class="form-select fs16 MonselectL "
+                                                    aria-label="Default select example" >
                                                 <option>@spaceOpenDay.Where(x => x.weekDay == item.weekDay).Select(x => x.StartTime).FirstOrDefault().ToString(@"hh\:mm")</option>
 
-                                                <option value="06:00:00">06:00</option>
 
 
                                             </select>
@@ -379,8 +378,8 @@
                                         </P>
                                         <div class="col-6  col-xl-2 mb-4">
                                             <label for="State" class="form-label  mt-xl-1 "></label>
-                                            <select id="State" name="StartTime" class="form-select fs16 MonselectR "
-                                                    aria-label="Default select example" disabled>
+                                            <select id="State" name="Endtime" class="form-select fs16 MonselectR "
+                                                    aria-label="Default select example" >
                                                 <option selected>@spaceOpenDay.Where(x => x.weekDay == item.weekDay).Select(x => x.EndTime).FirstOrDefault().ToString(@"hh\:mm")</option>
 
                                                 @foreach (var open in Operating)
@@ -399,14 +398,14 @@
                                         </div>
                                         <div class="col-6 col-xl-2  mt-auto mb-auto">
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="radio" value="Y1" disabled name="Hours1"
+                                                <input class="form-check-input" type="radio" value="Y1"  name="Hours1"
                                                        id="flexSwitchCheckDefault">
                                                 <label id="openlabel" class="form-check-label" for="flexSwitchCheckDefault">營業</label>
                                             </div>
                                         </div>
                                         <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
                                             <div class="form-check">
-                                                <input class="form-check-input" disabled type="radio" name="Hours1"
+                                                <input class="form-check-input"  type="radio" name="Hours1"
                                                        id="flexRadioDefault1">
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     全天(24hr)
@@ -416,7 +415,7 @@
                                         <div class="col-6 col-xl-2  mt-auto mb-auto">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" value="hr1" name="Hours1"
-                                                       id="flexRadioDefault1" disabled>
+                                                       id="flexRadioDefault1" >
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     小時
                                                 </label>
@@ -424,8 +423,8 @@
                                         </div>
                                         <div class="col-6 col-xl-2 mb-4">
                                             <label for="State" class="form-label  "></label>
-                                            <select id="State" class="form-select fs16 MonselectL "
-                                                    aria-label="Default select example" disabled>
+                                            <select id="State" name="StartTime" class="form-select fs16 MonselectL "
+                                                    aria-label="Default select example" >
                                                 <option selected>@item.StartTime</option>
 
                                                 @foreach (var open in Operating)
@@ -439,8 +438,8 @@
                                         </P>
                                         <div class="col-6 d-xl-block col-xl-2 mb-4">
                                             <label for="State" class="form-label  "></label>
-                                            <select id="State" class="form-select fs16 MonselectR "
-                                                    aria-label="Default select example" disabled>
+                                            <select id="State" name="EndTime" class="form-select fs16 MonselectR "
+                                                    aria-label="Default select example" >
                                                 <option selected>@item.EndTime</option>
 
                                                 @foreach (var open in Operating)
@@ -480,7 +479,7 @@
                                     <div class="col-10 col-lg-6 MinPrice mt-3">
                                         <p>折扣</p>
                                         <div class="form-floating">
-                                            <input class="form-control" required placeholder="幾小時折扣" name="Hours" value="@item.Hours" id="hourDiscount">
+                                            <input class="form-control" required placeholder="幾小時折扣" name="Hour" value="@item.Hours" id="hourDiscount">
                                             <label for="hourDiscount">逾多少小時</label>
                                         </div>
                                     </div>
@@ -501,9 +500,9 @@
                                     {
                                         <div class="col-12 col-lg-3 ">
                                             <div class="form-check">
-                                                <input class="form-check-input" checked value="" type="checkbox"
-                                                       name="flexRadioDefault" id="@ametityOne.AmenityName">
-                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                <input class="form-check-input" checked value="@ametityOne.AmenityId" type="checkbox"
+                                                       name="AmenityDetailID" id="@ametityOne.AmenityId">
+                                                <label class="form-check-label" for="AmenityDetailID">
                                                     @ametityOne.AmenityName
                                                 </label>
                                             </div>
@@ -513,9 +512,9 @@
                                     {
                                         <div class="col-12 col-lg-3 ">
                                             <div class="form-check">
-                                                <input class="form-check-input" value="" type="checkbox"
-                                                       name="flexRadioDefault" id="@ametityOne.AmenityName">
-                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                <input class="form-check-input" value="@ametityOne.AmenityId" type="checkbox"
+                                                       name="AmenityDetailID" id="@ametityOne.AmenityId">
+                                                <label class="form-check-label" for="AmenityDetailID">
                                                     @ametityOne.AmenityName
                                                 </label>
                                             </div>
@@ -531,9 +530,9 @@
                                     {
                                         <div class="col-12 col-lg-3 ">
                                             <div class="form-check">
-                                                <input class="form-check-input" checked value="" type="checkbox"
-                                                       name="flexRadioDefault" id="@ametityTwo.AmenityId">
-                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                <input class="form-check-input" checked value="@ametityTwo.AmenityId" type="checkbox"
+                                                       name="AmenityDetailID" id="@ametityTwo.AmenityId">
+                                                <label class="form-check-label" for="AmenityDetailID">
                                                     @ametityTwo.AmenityName
                                                 </label>
                                             </div>
@@ -543,8 +542,8 @@
                                     {
                                         <div class="col-12 col-lg-3 ">
                                             <div class="form-check">
-                                                <input class="form-check-input" value="" type="checkbox"
-                                                       name="flexRadioDefault" id="@ametityTwo.AmenityId">
+                                                <input class="form-check-input" value="@ametityTwo.AmenityId" type="checkbox"
+                                                       name="AmenityDetailID" id="@ametityTwo.AmenityId">
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     @ametityTwo.AmenityName
                                                 </label>
@@ -575,7 +574,6 @@
                                     data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                 <div class="col-11  col-lg-9 d-flex align-items-start">
                                     <div class=" imgcontainer mt-3 me-2 ">
-                                        <img class=" addphoto " src="~/Assets/IMG/icons/addphoto.png" alt="">
                                     </div>
                                     <div class="textgroup  mt-2">
                                         <h6 class="fs18">4.上傳照片</h6>
@@ -607,7 +605,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-5 justify-content-center">
-                                                <input type="file" class="filepond">
+                                                <input type="file" name="SpacePhotoUrl" class="filepondx">
                                             </div>
                                         </div>
                                     </div>
@@ -627,9 +625,6 @@
                             <button class="accordion-button accordion-buttonAdd collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                                 <div class="col-11 col-lg-9 d-flex align-items-start">
-                                    <div class=" imgcontainer mt-3 me-2 ">
-                                        <img class=" addphoto " src="~/Assets/IMG/icons/parking.svg" alt="">
-                                    </div>
                                     <div class="textgroup  mt-3">
                                         <h6 class="fs18">5.其他資訊</h6>
                                         <p class="editDetailsp">交通方式/停車資訊/攝影設備</p>
@@ -653,7 +648,7 @@
                                     </div>
                                     <div class="col-12 pb-5">
                                         <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                        <textarea name="textPartTransportation" class="form-control" id="exampleFormControlTextarea1" rows="3">
+                                        <textarea name="Traffic" class="form-control" id="exampleFormControlTextarea1" rows="3">
                                            @traffic[0].Traffic   
                                     </textarea>
                                         <p class="fs16 mt-1"><i class="fas fs-6 fa-lock p-1 "></i>不用擔心，僅會在客戶完成訂單提供。</p>
@@ -682,7 +677,7 @@
                                         </div>
                                         <div class="col col-12 parkingpart pb-5">
                                             <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                            <textarea name="textPartPark" class="form-control" id="exampleFormControlTextarea1" rows="3">
+                                            <textarea name="Parking" class="form-control" id="exampleFormControlTextarea1" rows="3">
                                         @parking[0].Parking
                                         </textarea>
                                         </div>
@@ -711,7 +706,7 @@
                                         <div class="col parking">
                                             <div class="col col-12 parkingpart pb-5">
                                                 <label for="exampleFormControlTextarea1" class="form-label "></label>
-                                                <textarea name="textPartProjection" class="form-control" id="exampleFormControlTextarea1" rows="3">
+                                                <textarea name="ShootingEquipment" class="form-control" id="exampleFormControlTextarea1" rows="3">
                                                 @shooting[0].Shooting
                                             </textarea>
                                             </div>
@@ -759,7 +754,7 @@
                                         <div class="col ">
                                             <div class="col col-12  pb-5">
                                                 <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                                <textarea name="textPartRule" class="form-control" id="exampleFormControlTextarea1" rows="3">
+                                                <textarea name="HostRules" class="form-control" id="exampleFormControlTextarea1" rows="3">
                                                 @rules[0].Rules
                                             </textarea>
                                             </div>
@@ -805,7 +800,7 @@
                                                 {
                                                     <div class="col col-12 col-lg-12 mt-1 mb-3 ">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" checked type="checkbox" value="@Options.OptionDetail"
+                                                            <input class="form-check-input" name="CleaningOptionID" checked type="checkbox" value="@Options.CleaningOptionID"
                                                                    id="flexCheckDefault">
                                                             <label class="form-check-label" for="flexCheckDefault">
                                                                 @Options.OptionDetail
@@ -817,7 +812,7 @@
                                                 {
                                                     <div class="col col-12 col-lg-12 mt-1 mb-3 ">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="@Options.OptionDetail"
+                                                            <input class="form-check-input" name="CleaningOptionID" type="checkbox" value="@Options.CleaningOptionID"
                                                                    id="flexCheckDefault">
                                                             <label class="form-check-label" for="flexCheckDefault">
                                                                 @Options.OptionDetail
@@ -839,9 +834,9 @@
                                                         {
                                                             <div class="col col-12 col-lg-12 mt-1 mb-3 ">
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" checked type="checkbox" value=" @cleansec.OptionDetail"
-                                                                           id="flexCheckDefault">
-                                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                                    <input class="form-check-input" name="CleaningOptionID" checked type="checkbox" value=" @cleansec.CleaningOptionID"
+                                                                           id="@cleansec.OptionDetail">
+                                                                    <label class="form-check-label" for="@cleansec.OptionDetail">
                                                                         @cleansec.OptionDetail
                                                                     </label>
                                                                 </div>
@@ -851,9 +846,9 @@
                                                         {
                                                             <div class="col col-12 col-lg-12 mt-1 mb-3 ">
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" value=" @cleansec.OptionDetail"
-                                                                           id="flexCheckDefault">
-                                                                    <label class="form-check-label" for="flexCheckDefault">
+                                                                    <input class="form-check-input" name="CleaningOptionID" type="checkbox" value="@cleansec.CleaningOptionID"
+                                                                           id="@cleansec.OptionDetail">
+                                                                    <label class="form-check-label" for="@cleansec.OptionDetail">
                                                                         @cleansec.OptionDetail
                                                                     </label>
                                                                 </div>
@@ -874,7 +869,7 @@
                                                         {
                                                             <div class="col col-12 col-lg-12mt-1 mb-3">
                                                                 <div class="form-check ">
-                                                                    <input class="form-check-input" checked type="checkbox" value=" @cleanthird.OptionDetail"
+                                                                    <input class="form-check-input" name="CleaningOptionID" checked type="checkbox" value=" @cleanthird.CleaningOptionID"
                                                                            id="flexCheckChecked">
                                                                     <label class="form-check-label" for="flexCheckChecked">
                                                                         @cleanthird.OptionDetail
@@ -886,7 +881,7 @@
                                                         {
                                                             <div class="col col-12 col-lg-12mt-1 mb-3">
                                                                 <div class="form-check ">
-                                                                    <input class="form-check-input" type="checkbox" value=" @cleanthird.OptionDetail"
+                                                                    <input class="form-check-input" name="CleaningOptionID" type="checkbox" value=" @cleanthird.CleaningOptionID"
                                                                            id="flexCheckChecked">
                                                                     <label class="form-check-label" for="flexCheckChecked">
                                                                         @cleanthird.OptionDetail
@@ -909,7 +904,7 @@
                                                         {
                                                             <div class="col col-12 col-lg-12 mt-1 mb-3 ">
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" checked type="checkbox" value="@cleanFourth.OptionDetail"
+                                                                    <input class="form-check-input" name="CleaningOptionID" checked type="checkbox" value="@cleanFourth.CleaningOptionID"
                                                                            id="flexCheckDefault">
                                                                     <label class="form-check-label" for="flexCheckDefault">
                                                                         @cleanFourth.OptionDetail
@@ -921,7 +916,7 @@
                                                         {
                                                             <div class="col col-12 col-lg-12 mt-1 mb-3 ">
                                                                 <div class="form-check">
-                                                                    <input class="form-check-input" type="checkbox" value="@cleanFourth.OptionDetail"
+                                                                    <input class="form-check-input" name="CleaningOptionID" type="checkbox" value="@cleanFourth.CleaningOptionID"
                                                                            id="flexCheckDefault">
                                                                     <label class="form-check-label" for="flexCheckDefault">
                                                                         @cleanFourth.OptionDetail
@@ -985,7 +980,7 @@
                                             {
                                                 <div class="row">
                                                     <div class="form-check col-12 col-lg-2">
-                                                        <input class="form-check-input" value="@all.CancellationID" required type="radio" checked name="flexRadioDefault"
+                                                        <input class="form-check-input"  value="@all.CancellationID"  type="radio" checked  name="CancellationID"
                                                                id="flexRadioDefault1">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             @all.CancellationTitle
@@ -1002,7 +997,7 @@
                                             {
                                                 <div class="row">
                                                     <div class="form-check col-12 col-lg-2">
-                                                        <input class="form-check-input" value="@all.CancellationID" required type="radio" name="flexRadioDefault"
+                                                        <input class="form-check-input" value="@all.CancellationID" required type="radio" name="CancellationID"
                                                                id="flexRadioDefault1">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             @all.CancellationTitle
@@ -1028,6 +1023,13 @@
             <div class="row mt-5 mb-5">
                 <div class="col-12 text-center">
                     <button type="submit" class="btn submitAdd deleteBtn">完成</button>
+
+                    @foreach (var item in adds)
+                    {
+                        <input type="hidden" name="SpaceID"  value="@item.SpaceID" />
+                    }
+                    @*<button type="submit" class="btn submitAdd deleteBtn" >完成</button>*@
+
                 </div>
             </div>
         </div>
@@ -1065,7 +1067,7 @@
     <script src="~/Assets/JS/addspace/ckeditor.js"></script>
     @*<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>*@
     <script src="~/Assets/JS/addspace/editSpace.js"></script>
-    <script src="~/Assets/JS/addspace/CityandDistrictandZipcodeJavaScript.js"></script>
+    <script src="~/Assets/JS/addspace/EditCityandDistrictandZipcodeJavaScript.js"></script>
 }
 
 
