@@ -25,10 +25,11 @@ img {
 .photo-upload{
     margin-top: 30px;
 }
-.photo-upload .btn{
-    color:#0077a7;
+.photo-upload .btn {
+    color: #0077a7;
     background-color: white;
     border-color: #0077a7;
+    margin: 5px;
 }
 .photo-upload .btn:hover{
     color:black;
