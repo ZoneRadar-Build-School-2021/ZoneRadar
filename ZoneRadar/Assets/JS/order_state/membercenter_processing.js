@@ -1,9 +1,9 @@
 flatpickr("#basicDate_rent", {
-  dateFormat: "Y , F , d"
+  dateFormat: "Y/F/d"
 });
 
 flatpickr("#basicDate_rentback", {
-  dateFormat: "F, d Y"
+    dateFormat: "Y/F/d"
 });
 
 flatpickr("#timePicker_rent", {

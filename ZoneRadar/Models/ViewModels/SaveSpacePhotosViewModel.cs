@@ -5,8 +5,9 @@ using System.Web;
 
 namespace ZoneRadar.Models.ViewModels
 {
-    public class SpaceImg
+    public class SaveSpacePhotosViewModel
     {
-        
+        public int SpaceID { get; set; }
+        public List<string> PhotoUrlList { get; set; }
     }
 }
