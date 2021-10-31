@@ -215,6 +215,7 @@ namespace ZoneRadar.Services
             if(order != null)
             {
                 order.OrderStatusID = 5;
+                order.CancelDateTime = DateTime.Now;
                 try
                 {
                     _repository.Update(order);
