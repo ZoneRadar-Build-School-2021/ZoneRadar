@@ -24,14 +24,17 @@ let login_form_vue = new Vue({
             passwordError: false,
             passwordErrorMsg: ""
         },
-        isVerify: true
+        isVerify: false
     },
     watch: {
         "inputData.account": {
-            immediate: false,
+            immediate: true,
             handler() {
                 let emailRegexp = /^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/
-                if (!emailRegexp.test(this.inputData.account)) {
+                if ( this.inputData.account == "") {
+                    this.inputDataCheck.accountError = true;
+                    this.inputDataCheck.accountErrorMsg = "請填寫此欄位";
+                } else if (!emailRegexp.test(this.inputData.account)) {
                     this.inputDataCheck.accountError = true;
                     this.inputDataCheck.accountErrorMsg = "Email輸入格式錯誤";
                 } else {
@@ -43,10 +46,13 @@ let login_form_vue = new Vue({
             }
         },
         "inputData.password": {
-            immediate: false,
+            immediate: true,
             handler() {
                 let passwordRegexp = /^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/
-                if (this.inputData.password.length < 6 || this.inputData.password.length > 50) {
+                if ( this.inputData.password == "") {
+                    this.inputDataCheck.passwordError = true;
+                    this.inputDataCheck.passwordErrorMsg = "請填寫此欄位";
+                } else if (this.inputData.password.length < 6 || this.inputData.password.length > 50) {
                     this.inputDataCheck.passwordError = true;
                     this.inputDataCheck.passwordErrorMsg = "密碼長度需為6~50字元";
                 } else if (!passwordRegexp.test(this.inputData.password)) {
@@ -106,18 +112,25 @@ login_btn.addEventListener("click", function () {
                 item.classList.add("d-none");
             })
             icon_string = "success";
+            //放上大頭貼
+            let user_photos = document.querySelectorAll(".user-pic img");
+            user_photos.forEach(item => {
+                item.setAttribute("src", response.data.Photo);
+            })
+            //登入成功後，若有ReturnUrl字串，導去該頁
+            if (location.search != "") {
+                let queryString = location.search;
+                let keyValue = queryString.split("?");
+                let returnUrl = keyValue.find(function (item) {
+                    return item.includes("ReturnUrl");
+                })
+                let returnUrlArr = returnUrl.split("=");
+                window.location = `${location.origin}${returnUrlArr[1]}`;
+            }
         } else {
             icon_string = "error";
         }
-        if (location.search != "") {
-            let queryString = location.search;
-            let keyValue = queryString.split("?");
-            let returnUrl = keyValue.find(function (item) {
-                return item.includes("ReturnUrl");
-            })
-            let returnUrlArr = returnUrl.split("=");           
-            window.location = `${location.origin}${returnUrlArr[1]}`;
-        }
+        
         Swal.fire({
             title: response.data.ShowMessage,
             icon: icon_string,

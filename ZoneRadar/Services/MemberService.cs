@@ -139,7 +139,7 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        public bool SearchUser(string email, bool verified)
+        public bool IsUser(string email, bool verified)
         {
             email = HttpUtility.HtmlEncode(email);
             bool hasInfo = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == verified);
@@ -406,6 +406,29 @@ namespace ZoneRadar.Services
                 memberResult.ShowMessage = "找不到此會員！";
                 return memberResult;
             }
+        }
+
+        /// <summary>
+        /// 綁定Google(Jenny)
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="googleId"></param>
+        /// <returns></returns>
+        public Member BindGoogle(string email, int googleId)
+        {
+            var user = _repository.GetAll<Member>().FirstOrDefault(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify);
+            if (user.GoogleLoginID == null)
+            {
+                user.GoogleLoginID = googleId;
+            }
+            return user;
+        }
+
+        public void UpdateLastLogin(Member user)
+        {         
+            user.LastLogin = DateTime.Now;
+            _repository.Update(user);
+            _repository.SaveChanges();
         }
 
         /// <summary>

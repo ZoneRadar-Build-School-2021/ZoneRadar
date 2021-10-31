@@ -47,7 +47,7 @@ namespace ZoneRadar.Controllers
         public ActionResult ForgetPassword(string email)
         {
             //確認是否有此會員
-            var hasUserInfo = _service.SearchUser(email, true);
+            var hasUserInfo = _service.IsUser(email, true);
             if (hasUserInfo)
             {
                 //寄送重設密碼信
@@ -204,7 +204,7 @@ namespace ZoneRadar.Controllers
         {
             //Ajax
             //確認是否有此帳號的註冊紀錄但還未驗證
-            var hasRegisterInfo = _service.SearchUser(email, false);
+            var hasRegisterInfo = _service.IsUser(email, false);
             if (hasRegisterInfo)
             {
                 //寄送驗證信
@@ -302,6 +302,7 @@ namespace ZoneRadar.Controllers
         //[ValidateAntiForgeryToken]
         public string Login(LoginZONERadarViewModel loginVM)
         {
+            var result = new JSMemberResult { IsSuccessful = false };
             //若未通過Model驗證(前端已先驗證過)
             if (!ModelState.IsValid)
             {
@@ -342,8 +343,10 @@ namespace ZoneRadar.Controllers
             //TempData["Message"] = memberResult.ShowMessage;
             //TempData["Icon"] = memberResult.IsSuccessful;
             //return Redirect(originalUrl);
-
-            return JsonConvert.SerializeObject(memberResult);
+            result.Photo = memberResult.User.Photo;
+            result.IsSuccessful = memberResult.IsSuccessful;
+            result.ShowMessage = memberResult.ShowMessage;
+            return JsonConvert.SerializeObject(result);
         }
 
         /// <summary>
@@ -487,18 +490,13 @@ namespace ZoneRadar.Controllers
             return View("EditProfile");
         }
 
-        public void GoogleLoginCallback()
-        {
-
-        }
-
         /// <summary>
-        /// Javascript取得id_token，透過Ajax發送至這個Action，後端 ASP.net MVC 把 id_token 轉成 user_id
+        /// Javascript取得idToken，透過Ajax發送至這個Action，後端把idToken轉成userId
         /// </summary>
         /// <param name="idToken"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult> Test(string idToken)
+        public async Task<string> GoogleLoginCallback(string idToken)
         {
             string msg = "ok";
             GoogleJsonWebSignature.Payload payLoad = null;
@@ -523,13 +521,53 @@ namespace ZoneRadar.Controllers
                 msg = ex.Message;
             }
 
-            if (msg == "ok" && payLoad != null)
-            {//都成功
-                string userId = payLoad.Subject; //Subject為Google的user id
-                msg = $@"您的 user_id :{userId}";
-            }
 
-            return Content(msg);
+            var result = new JSMemberResult { IsSuccessful = false };
+            // 第三方Google登入取得payLoad成功
+            if (msg == "ok" && payLoad != null)
+            {
+                int.TryParse(payLoad.Subject, out int googleId); //Subject為Google的userId
+                msg = $"您的 user_id :{googleId}";
+
+                var isUser = _service.IsUser(payLoad.Email, true);
+                //原始網站是否有此gmail的會員
+                if (isUser)
+                {
+                    //若還沒綁定，將其綁定後登入
+                    var user = _service.BindGoogle(payLoad.Email, googleId);
+                    var encryptedTicket = _service.CreateEncryptedTicket(user);
+                    _service.CreateCookie(encryptedTicket, Response);
+                    _service.UpdateLastLogin(user);
+                    result.IsSuccessful = true;
+                    result.Photo = user.Photo;
+                    result.ShowMessage = $"{user.Name}您好，歡迎您加入ZONERadar！";
+                    return JsonConvert.SerializeObject(result);
+                }
+                else //如果沒有gmail的註冊紀錄，導去輸入框畫面
+                {
+                    var bindingToGoogleOrRegisterUrl = "/MemberCenter/BindingToGoogleOrRegister";
+                    result.IsSuccessful = true;
+                    result.RedirectUrl = bindingToGoogleOrRegisterUrl;
+                    return JsonConvert.SerializeObject(result);
+                }
+            }
+            else
+            {
+                result.ShowMessage = "發生錯誤，請重新嘗試！";
+                return JsonConvert.SerializeObject(result);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult BindingToGoogleOrRegister()
+        {
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult BindingToGoogleOrRegister(int i)
+        {
+            return null;
         }
     }
 }

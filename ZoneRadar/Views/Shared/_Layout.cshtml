@@ -273,7 +273,6 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="~/Assets/JS/axios.min.js"></script>
     <script src="~/Assets/JS/leaflet.js"></script>
     <script src="~/Assets/JS/flatpickr.js"></script>
@@ -282,7 +281,10 @@
     <script src="~/Assets/JS/zh-tw.js"></script>
     <script src="~/Assets/JS/bootstrap.bundle.min.js"></script>
     <script src="~/Assets/JS/sweetalert2.js"></script>
+    <script src="~/Assets/JS/vue.js"></script>
     <script src="~/Assets/JS/layout/navbar-footer.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
@@ -361,14 +363,15 @@
     </script>
 
 
-    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
     <script>
         let GoolgeApp_Cient_Id = "@GoogleOAuth.ClientId";
-        let id_token_to_userIDUrl = "@Url.Action("Test", "MemberCenter")";
+        let id_token_to_userIDUrl = "@Url.Action("GoogleLoginCallback", "MemberCenter")";
         $(function () {
+            GoogleSigninInit(); //初始化gapi.auth2
             $("#third-login-google").on("click", function () {
-                GoogleSigninInit(); //初始化gapi.auth2
+                let login_modal = document.querySelector("#login-modal");
+                bootstrap.Modal.getOrCreateInstance(login_modal).hide();
                 GoogleLogin(); //Google登入
             });
             $("#btnDisconnect").on("click", function () {
@@ -388,18 +391,56 @@
             let auth2 = gapi.auth2.getAuthInstance();//取得GoogleAuth物件
             auth2.signIn().then(function (GoogleUser) {
                 console.log("Google登入成功");
-                let user_id = GoogleUser.getId();//取得user id，不過要發送至Server端的話，請使用↓id_token
-                let AuthResponse = GoogleUser.getAuthResponse(true);//true會回傳access token ，false則不會，自行決定。如果只需要Google登入功能應該不會使用到access token
+                let user_id = GoogleUser.getId();//取得user id，不過要發送至Server端的話，請使用id_token
+                let AuthResponse = GoogleUser.getAuthResponse(true); //回傳access token
                 let id_token = AuthResponse.id_token;//取得id_token
                 //將id_token傳到後端
                 $.ajax({
                     url: id_token_to_userIDUrl,
                     method: "post",
-                    data: { id_token: id_token },
-                    success: function (msg) {
-                        console.log(msg);
+                    data: { idToken: id_token },
+                    success: function (response) {
+                        let result = JSON.parse(response);
+                        if (result.IsSuccessful) {
+                            //如果未有gmail註冊紀錄→導去輸入框頁
+                            if (result.RedirectUrl != null) {
+                                window.location = `${location.origin}${result.RedirectUrl}`;
+                            }
+                            member_only.forEach(item => {
+                                item.classList.remove("d-none");
+                            })
+                            customer_only.forEach(item => {
+                                item.classList.add("d-none");
+                            })
+                            icon_string = "success";
+                            //放上大頭貼
+                            let user_photos = document.querySelectorAll(".user-pic img");
+                            user_photos.forEach(item => {
+                                item.setAttribute("src", result.Photo);
+                            })
+                            //登入成功後，若有ReturnUrl字串，導去該頁
+                            if (location.search != "") {
+                                let queryString = location.search;
+                                let keyValue = queryString.split("?");
+                                let returnUrl = keyValue.find(function (item) {
+                                    return item.includes("ReturnUrl");
+                                })
+                                let returnUrlArr = returnUrl.split("=");
+                                window.location = `${location.origin}${returnUrlArr[1]}`;
+                            }
+                        } else {
+                            icon_string = "error";
+                        }
+                        Swal.fire({
+                            title: result.ShowMessage,
+                            icon: icon_string,
+                            showConfirmButton: true,
+                            confirmButtonColor: "#be7418",
+                            confirmButtonText: "OK",
+                            position: "top"
+                        })
                     }
-                });//end $.ajax
+                });
 
             },
             function (error) {

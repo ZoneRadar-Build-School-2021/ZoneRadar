@@ -93,4 +93,15 @@ namespace ZoneRadar.Models.ViewModels
         [Compare("NewPassword", ErrorMessage = "密碼不一致")]
         public string NewConfirmPassword { get; set; }
     }
+
+    /// <summary>
+    /// JS登入結果(含會員資料)(Jenny)
+    /// </summary>
+    public class JSMemberResult
+    {
+        public string Photo { get; set; }
+        public bool IsSuccessful { get; set; }
+        public string ShowMessage { get; set; }
+        public string RedirectUrl { get; set; }
+    }
 }
