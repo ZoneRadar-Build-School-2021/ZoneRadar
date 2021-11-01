@@ -234,6 +234,8 @@
     <Compile Include="Models\ViewModels\BookingCardViewModel.cs" />
     <Compile Include="Models\ViewModels\BookingPageViewModel.cs" />
     <Compile Include="Models\ViewModels\CalculateViewModel.cs" />
+    <Compile Include="Models\ViewModels\SaveSpacePhotosViewModel.cs" />
+    <Compile Include="Models\ViewModels\SpacePhotoViewModel.cs" />
     <Compile Include="Models\ViewModels\ProcessingViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\PreOrderViewModel.cs" />
@@ -249,7 +251,6 @@
     <Compile Include="Models\ViewModels\QueryViewModel.cs" />
     <Compile Include="Models\ViewModels\SearchingPageViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceManageViewModel.cs" />
-    <Compile Include="Models\ViewModels\SpaceImg.cs" />
     <Compile Include="Models\ViewModels\SpaceReviewViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceStatusInformation.cs" />
     <Compile Include="Models\ViewModels\SpaceStatusEnum.cs" />
@@ -480,6 +481,7 @@
     <Content Include="Assets\JS\order_state\usercenter_shopcar.js" />
     <Content Include="Assets\JS\Payment\Paypage.js" />
     <Content Include="Assets\JS\searching\searching.js" />
+    <Content Include="Assets\JS\Sortable.min.js" />
     <Content Include="Assets\JS\static\Q&amp;A.js" />
     <Content Include="Assets\JS\sweetalert2.js" />
     <Content Include="Assets\JS\swiper-bundle.min.js" />
