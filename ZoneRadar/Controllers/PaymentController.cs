@@ -25,7 +25,14 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         public ActionResult Payment(CartsViewModel model)
         {
-            if (User.Identity.IsAuthenticated && model.OrderId > 0)
+            var ReturnURL = "http://www.ecpay.com.tw/";
+            var ClientBackURL = "https://localhost:44322/UserCenter/Pending";
+            var MerchantTradeNo = "ECPay" + new Random().Next(0, 999).ToString() + DateTime.UtcNow.ToString("yyyyMMddHHmm");
+            var MerchantradeDate = DateTime.UtcNow.ToString("yyyy/MM/dd HH:mm:ss");
+            
+
+
+            var order = new Dictionary<string, string>
             {
                 var Model = _ecpaymentservice.GetPaymentData(model.OrderId);
                 ViewData["OrderId"] = model.OrderId;
