@@ -58,7 +58,7 @@ namespace ZoneRadar.Controllers
                 };
                 return View(model);
             }
-            ViewData["Open"] = "cheked";
+           
             return View();
         }
         [HttpPost]
