@@ -26,6 +26,7 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public List<UsercenterPendingViewModel> GetUsercenterPendingVM(int userid)
         {
+            
             List<UsercenterPendingViewModel> result = new List<UsercenterPendingViewModel>();
             //訂單 ( 該會員ID 且 訂單狀態是已付款 且 場地狀態是上架中 )
             var orders = _repository.GetAll<Order>().Where(x => x.MemberID == userid && x.OrderStatusID == 2 && x.Space.SpaceStatusID == 2);
@@ -247,7 +248,7 @@ namespace ZoneRadar.Services
                         StratTime = o.StartDateTime,
                         EndTime = o.EndDateTime,
                         People = o.Participants,
-                        SinglePrice = (int)SingleOrderDetailPrice(o.EndDateTime, o.StartDateTime, o.Order.Space.PricePerHour, o.Order.Space.SpaceDiscount.FirstOrDefault().Hour, o.Order.Space.SpaceDiscount.FirstOrDefault().Discount)
+                        SinglePrice = PayMentService.OrderDetailPrice(o.EndDateTime.Subtract(o.StartDateTime).TotalHours,o.Order.Space.PricePerHour, o.Order.Space.SpaceDiscount.Any() ? o.Order.Space.SpaceDiscount.First().Hour : 1,o.Order.Space.SpaceDiscount.Any() ? o.Order.Space.SpaceDiscount.First().Discount : 0)
                     });
                 }
                 result.Add(new ProcessingViewModel
@@ -264,28 +265,10 @@ namespace ZoneRadar.Services
                     Total = resultdetail.orderdetailesforprcess.Select(x => x.SinglePrice).Sum()
                 });
             }
-            
             return result;
         }
 
         /// <summary>
-        /// 計算價錢場地 (Jack)
-        /// </summary>
-        /// <returns></returns>
-        public decimal SingleOrderDetailPrice(DateTime eDate,DateTime sDate,decimal hourPirce,int hour,decimal discount) 
-        {
-            decimal dis = 0;
-            if ( (int)eDate.Subtract(sDate).TotalHours >= hour )
-            {
-                dis = discount;
-            }
-            else 
-            {
-                dis = 0;
-            }
-            var price = (decimal)eDate.Subtract(sDate).TotalHours * hourPirce*(1-dis);
-            return price;
-        }
         /// <summary>
         /// 找出場地主(ID)的歷史訂單使用中資料(Nick)
         /// </summary>

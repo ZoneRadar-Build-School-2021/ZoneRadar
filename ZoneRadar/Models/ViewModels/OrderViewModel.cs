@@ -15,6 +15,7 @@ namespace ZoneRadar.Models.ViewModels
         public decimal Money { get; set; }
         public int OrderDetailId { get; set; }
         public int OrderId { get; set; }
+        public int hours { get; set; }
     }
     // 訂單
     public class OrderViewModel
@@ -36,7 +37,7 @@ namespace ZoneRadar.Models.ViewModels
     // 預購單 CartVM
     public class CartsViewModel : OrderViewModel
     {
-
+        public double Hours { get; set; }
     }
     // 訂單 UsercenterPendingVM
     public class UsercenterPendingViewModel : OrderViewModel
@@ -54,7 +55,7 @@ namespace ZoneRadar.Models.ViewModels
     // 訂單 UsercenterProcessingVM
     public class UsercenterProcessingViewModel : OrderViewModel
     {
-        
+       
     }
     // 訂單 UsercenterCompletedVM
     public class UsercenterCompletedViewModel : OrderViewModel
