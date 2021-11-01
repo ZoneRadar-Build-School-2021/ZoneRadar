@@ -236,7 +236,6 @@
     <Compile Include="Models\ViewModels\BookingPageViewModel.cs" />
     <Compile Include="Models\ViewModels\CalculateViewModel.cs" />
     <Compile Include="Models\ViewModels\EcpayViewModel.cs" />
-    <Compile Include="Models\ViewModels\PaymentViewModel.cs" />
     <Compile Include="Models\ViewModels\ProcessingViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\PreOrderViewModel.cs" />

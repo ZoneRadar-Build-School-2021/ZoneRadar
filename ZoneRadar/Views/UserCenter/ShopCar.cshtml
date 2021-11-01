@@ -113,7 +113,7 @@
                         </p>
                         <div class="col-12 text-end mt-2">
                             <button type="button" class="btn btn_close" data-bs-toggle="modal" data-bs-target="#B-@Html.DisplayFor(m => item.OrderId)">取消預購單</button>
-                           @Html.ActionLink("前往付款", "Payment", "Payment", new { OrderId = item.OrderId, SpaceName = item.SpaceName, TotalMoney = item.TotalMoney}, new {@class = "btn btn_sendout"})
+                            @Html.ActionLink("前往付款", "Payment", "Payment", new OrderViewModel { OrderId = item.OrderId ,SpaceName = item.SpaceName ,TotalMoney = item.TotalMoney}, new {@class = "btn btn_sendout"})
                             @*<button type="button" class="btn btn_sendout">前往付款</button>*@
                         </div>
                     </div>
