@@ -25,7 +25,14 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         public ActionResult Payment(CartsViewModel model)
         {
-            return View();
+            
+            var paymentdata = _ecpaymentservice.GetPaymentData(model);
+
+            ViewData["OrderId"] = model.OrderId;
+            ViewData["SpaceName"] = model.SpaceName;
+            ViewData["TotalMoney"] = model.TotalMoney;
+
+            return View(paymentdata);
         }
 
         public ActionResult EcPayment(CartsViewModel model) 
