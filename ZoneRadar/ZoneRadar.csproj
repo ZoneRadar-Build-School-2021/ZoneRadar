@@ -475,6 +475,7 @@
     <Content Include="Assets\JS\leaflet.js" />
     <Content Include="Assets\JS\leaflet.markercluster.js" />
     <Content Include="Assets\JS\membercenter\profile.js" />
+    <Content Include="Assets\JS\membercenter\vue.min.js" />
     <Content Include="Assets\JS\order_state\membercenter_completed.js" />
     <Content Include="Assets\JS\order_state\membercenter_pending.js" />
     <Content Include="Assets\JS\order_state\membercenter_processing.js" />
