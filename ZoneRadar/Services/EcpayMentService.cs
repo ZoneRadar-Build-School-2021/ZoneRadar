@@ -141,6 +141,8 @@ namespace ZoneRadar.Services
                               RentDetail = payments.RentDetail,
                               CancellationTitle = o.Space.Cancellation.CancellationTitle,
                               CancellationDetail = o.Space.Cancellation.CancellationDetail,
+                              Discount = o.Space.SpaceDiscount.FirstOrDefault().Discount,
+                              Discounthours = o.Space.SpaceDiscount.FirstOrDefault().Hour
                           }).FirstOrDefault();
                           
             

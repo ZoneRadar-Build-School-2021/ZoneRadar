@@ -24,21 +24,66 @@
                                 <div class="label undefined"> 場地租金 </div>
                             </div>
                         </div>
-                        <div class="table-body mt-2">
-                            <div class="add-ons-rows">
-                                <div class="d-flex table-row">
-                                    @*@foreach (var ment in item.payments)*@
-                                    @*{*@
-                                    <div class="title-field me-auto">場地價格</div>
-                                    <div data-testing-id="space-rental-subtotal">
-                                        <span> @item.PricePerHour.ToString("C0") </span> X
-                                        <span> @item.RentDetail.Sum(x=>x.hours)</span>
-                                    </div>
-                                    @*}*@
-                                </div>
+                        <!--<div class="table-body mt-2">
+                        <div class="row">
+                            <div class="d-flex table-row">-->
+                        @*@foreach (var ment in item.payments)*@
+                        @*{*@
+                        <!--@if (item.RentDetail.Sum(x => x.hours) >= item.Discounthours)
+                        {
+                            <div class="title-field me-auto">場地價格</div>
+                            <div data-testing-id="space-rental-subtotal">
+                                <span> @item.PricePerHour.ToString("C0") </span> X
+                                <span> @item.RentDetail.Sum(x => x.hours)</span>
+                            </div>
+
+                            <hr>
+                            <div class="title-field me-auto">
+                                <div class="title-field me-auto">場地折扣</div>
+                                <div data-testing-id="cleaning-fee"><span>$80.00</span></div>
+                            </div>
+
+
+                        }
+                        else
+                        {
+                            <div class="title-field me-auto">場地價格</div>
+                            <div data-testing-id="space-rental-subtotal">
+                                <span> @item.PricePerHour.ToString("C0") </span> X
+                                <span> @item.RentDetail.Sum(x => x.hours)</span>
+                            </div>
+                        }-->
+                        @*}*@
+                        <!--</div>
                                 <hr class="dotted mt-1">
                                 <div class="d-flex heavy table-row">
                                     <div class="title-field me-auto">總計</div>
+                                    <div data-testing-id="space-rental-total">
+                                        <span>@TotalMoney</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="table-body">
+                            <div class="row">
+                                <div class="d-flex table-row">
+                                    <div class="title-field me-auto">Subtotal</div>
+                                    <div data-testing-id="space-rental-subtotal">
+                                        <span>$200.00</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <hr class="dotted mt-1 mb-1">
+                                    <div class="d-flex table-row">
+                                        <div class="title-field me-auto">Cleaning</div>
+                                        <div data-testing-id="cleaning-fee">
+                                            <span>$80.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="dotted mt-1 mb-1">
+                                <div class="d-flex heavy table-row">
+                                    <div class="title-field me-auto">場地價格</div>
                                     <div data-testing-id="space-rental-total">
                                         <span>@TotalMoney</span>
                                     </div>
@@ -174,7 +219,7 @@
                             <div>
                                 <div class="p-2">
                                     <div>
-                                        <span class="fw-light"> @item.RentDetail.Sum(x=>x.People) 人</span>
+                                        <span class="fw-light"> @item.RentDetail.Sum(x => x.People) 人</span>
                                     </div>
                                 </div>
                             </div>
