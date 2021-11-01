@@ -11,21 +11,16 @@ namespace ZoneRadar.Services.Tests
     [TestClass()]
     public class PayMentServiceTests
     {
-       [TestMethod()]
-        public void Given_totaltime_11_HourPrice_120_DiscountHour_8_Discount_085_When_CalculateMoney_Then_1122()
+        [DataRow(11, 8, 15 , 120 , 1122)]
+        [TestMethod()]
+        public void ComputeMoney(int totalhour , int discountHour , int discount , int hourmoney , int expected)
+        //                           總共時數         最少折扣小時          折扣        一小時多少錢       計算金額
         {
-            //預期結果
-            decimal expected = 1122;
-            var totalhour = 11d;
-            int discountHour = 8;
-            var discount = 0.15;
-            int hourmoney = 120;
-
-            //tempdiscount
-            double tempdiscount;
+ 
+            decimal tempdiscount;
             if (totalhour >= discountHour)
             {
-                tempdiscount = discount;
+                tempdiscount = discount * 0.01m;
             }
             else
             {
@@ -37,5 +32,6 @@ namespace ZoneRadar.Services.Tests
 
             Assert.AreEqual(expected, price);
         }
+
     }
 }
