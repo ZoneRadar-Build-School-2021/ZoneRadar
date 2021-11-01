@@ -25,7 +25,28 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         public ActionResult Payment(CartsViewModel model)
         {
-            return View(model);
+            if (User.Identity.IsAuthenticated && model.OrderId > 0)
+            {
+                var Model = _ecpaymentservice.GetPaymentData(model.OrderId);
+                ViewData["OrderId"] = model.OrderId;
+                ViewData["SpaceName"] = model.SpaceName;
+                ViewData["TotalMoney"] = model.TotalMoney;
+
+                return View(Model);
+            }
+            else 
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+            //if (!memberId.HasValue)
+            //{
+            //    return RedirectToRoute(new { controller = "Home", action = "Index" });
+            //}
+            //else
+            //{
+            //    var MemCollectionSpaces = _service.GetMemberCollection(memberId.Value);
+            //    return View(MemCollectionSpaces);
+            //}
         }
 
         public ActionResult EcPayment(CartsViewModel model) 

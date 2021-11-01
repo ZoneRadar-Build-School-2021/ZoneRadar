@@ -24,9 +24,8 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public String GetEcpayData(CartsViewModel model)
         {
-            var Url = "https://1d91-1-164-250-30.ngrok.io";
+            var Url = "https://zoneradar20211028194812.azurewebsites.net";
             AllInOne oPayment = new AllInOne();
-            var returnURL = "webapi/spaces/api/JSONAPI/GetEcpayData";
             /* 服務參數 */
             oPayment.ServiceMethod = HttpMethod.HttpPOST;//介接服務時，呼叫 API 的方法
             oPayment.ServiceURL = "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5";//要呼叫介接服務的網址
@@ -86,7 +85,7 @@ namespace ZoneRadar.Services
             {
                 order.PaymentDate = DateTime.Parse(model.PaymentDate);
                 order.OrderStatusID = (int)Enums.Enums.OrderStatusID.OrderStatusIDforWating;
-                order.OrderNumber = int.Parse(DateTime.Now.ToString("yyMMddhhmm"));
+                order.OrderNumber = Get(int.Parse(DateTime.Now.ToString("yyMMddhhmm")));
                 try
                 {
                     _repository.Update(order);
@@ -114,5 +113,38 @@ namespace ZoneRadar.Services
             return num;
         }
 
+
+        public PaymentViewModel GetPaymentData(int orderId)
+        {
+            var payments = new PaymentViewModel { RentDetail = new List<RentDetailViewModel>() };
+            var Order = _repository.GetAll<Order>().Where(x=>x.OrderID == orderId).ToList();
+            var orderdetails = _repository.GetAll<OrderDetail>().Where(x => x.OrderID == orderId).ToList();
+            foreach (var od in orderdetails)
+            {
+                var totalHousr = (int)od.EndDateTime.Subtract(od.StartDateTime).TotalHours;
+                payments.RentDetail.Add(new RentDetailViewModel
+                {
+                    RentTime = od.StartDateTime.ToString(),
+                    RentBackTime = od.EndDateTime.ToString(),
+                    hours = totalHousr,
+                    People = od.Participants
+                });
+            }
+
+            var ruselt = (from o in Order
+                          select new PaymentViewModel
+                          {
+                              SpaceId = o.Space.SpaceID,
+                              UserName = o.Space.Member.Name,
+                              UserPhoto = o.Space.Member.Photo,
+                              PricePerHour = o.Space.PricePerHour,
+                              RentDetail = payments.RentDetail,
+                              CancellationTitle = o.Space.Cancellation.CancellationTitle,
+                              CancellationDetail = o.Space.Cancellation.CancellationDetail,
+                          }).FirstOrDefault();
+                          
+            
+            return ruselt;
+        }
     }
 }

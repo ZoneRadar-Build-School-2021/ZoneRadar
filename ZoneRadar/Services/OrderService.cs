@@ -26,6 +26,7 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public List<UsercenterPendingViewModel> GetUsercenterPendingVM(int userid)
         {
+            
             List<UsercenterPendingViewModel> result = new List<UsercenterPendingViewModel>();
             //訂單 ( 該會員ID 且 訂單狀態是已付款 且 場地狀態是上架中 )
             var orders = _repository.GetAll<Order>().Where(x => x.MemberID == userid && x.OrderStatusID == 2 && x.Space.SpaceStatusID == 2);
