@@ -43,7 +43,9 @@ namespace ZoneRadar.Models
 
         public bool IsVerify { get; set; }
 
-        public int? GoogleLoginID { get; set; }
+        public string GoogleID { get; set; }
+
+        public bool IsGoogleLogin { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Collection> Collection { get; set; }

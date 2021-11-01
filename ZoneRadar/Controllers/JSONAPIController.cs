@@ -21,9 +21,10 @@ namespace ZoneRadar.Controllers
         private readonly PreOrderService _preOrderService;
         private readonly ZONERadarRepository _repository;
         private FilterViewModel _filterDataFromIndex;
-
+        private readonly EcpayMentService _ecpaymentservice;
         public JSONAPIController()
         {
+            _ecpaymentservice = new EcpayMentService();
             _spaceService = new SpaceService();
             _preOrderService = new PreOrderService();
             _repository = new ZONERadarRepository();
@@ -326,61 +327,33 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
-        /// 取得cloudinary參數
+        /// 回復綠界
         /// </summary>
+        /// <param name="EcpayViewModel"></param>
         /// <returns></returns>
-        [Route("GetUploadPrams")]
-        [AcceptVerbs("GET")]
-        public APIResponse GetUploadPrams()
+        [Route("api/JSONAPI/GetEcpayData")]
+        [HttpPost]
+        public IHttpActionResult GetEcpayData(EcpayViewModel model) 
         {
-            var response = new APIResponse();
-            try
+            if (model.RtnCode == 1)
             {
-                response.Status = "Success";
-                response.Message = string.Empty;
-                // id須由外部傳入
-                response.Response = _spaceService.GetSpacePhotoFromDB(168);
-
-                return response;
+                _ecpaymentservice.EditOrderStatus(model);
+                
             }
-            catch (Exception ex)
-            {
-                response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
-                response.Response = null;
-
-                return response;
-            }
+            return Ok("1|OK");
         }
 
         /// <summary>
-        /// 將上傳照片存入資料庫
+        /// 綠界回復
         /// </summary>
-        /// <param name="SaveSpacePhotosVM"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
-        [Route("SavePhotos")]
-        [AcceptVerbs("POST")]
-        public APIResponse SavePhotos(SaveSpacePhotosViewModel SaveSpacePhotosVM)
-        {
-            var response = new APIResponse();
-            try
-            {
-                _spaceService.ReflashSpacePhotoFromDB(SaveSpacePhotosVM);
+        //[Route("api/JSONAPI/GetEcpay")]
+        //[HttpPost]
+        //public IHttpActionResult GetEcpay(EcpayViewModel model)
+        //{
+        //    return Json(model);
+        //}
 
-                response.Status = "Success";
-                response.Message = string.Empty;
-                response.Response = null;
-
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
-                response.Response = null;
-
-                return response;
-            }
-        }
     }
 }
