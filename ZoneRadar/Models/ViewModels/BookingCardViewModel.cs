@@ -17,5 +17,7 @@ namespace ZoneRadar.Models.ViewModels
         public int Capacity { get; set; }
         public List<string> OrderTimeList { get; set; }
         public bool IsCollection { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
     }
 }

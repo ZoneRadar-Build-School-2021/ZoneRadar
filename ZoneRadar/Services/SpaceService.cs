@@ -34,7 +34,7 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public List<SelectedSpaceViewModel> GetSelectedSpace()
         {
-            var spaces = _repository.GetAll<Space>().Where(x=>x.SpaceStatusID == 2).ToList();
+            var spaces = _repository.GetAll<Space>().Where(x => x.SpaceStatusID == 2).ToList();
             var orders = _repository.GetAll<Order>().Where(x => x.OrderStatus.OrderStatusID == 2).ToList();
             var reviews = _repository.GetAll<Review>().Where(x => x.ToHost).ToList();
             var spacePhotos = _repository.GetAll<SpacePhoto>().ToList();
@@ -448,7 +448,7 @@ namespace ZoneRadar.Services
                 {
                     CancellationTitle = cancel.CancellationTitle,
                     CancellationDetail = cancel.CancellationDetail,
-                    CancellationId=cancel.CancellationID
+                    CancellationId = cancel.CancellationID
                 };
                 result.cancellationAraesList.Add(canceltemp);
             }
@@ -706,7 +706,7 @@ namespace ZoneRadar.Services
             };
             
             //活動類型 把活動類別用戶有選的撈出來(Amber)
-            
+
 
             List<SpaceType> spacetypes = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == spaceId).ToList();
             foreach (var item in spacetypes)
@@ -800,7 +800,7 @@ namespace ZoneRadar.Services
                 var someonsdiscountsTemp = new SomeOnesDiscount()
                 {
                     SpaceId = item.SpaceID,
-                    Discount =Math.Floor(10m*(1m-(item.Discount))),
+                    Discount = Math.Floor(10m * (1m - (item.Discount))),
                     Hours = item.Hour
                 };
                 result.SomeOnesDiscountsList.Add(someonsdiscountsTemp);
@@ -1143,12 +1143,12 @@ namespace ZoneRadar.Services
         /// <summary>
         /// 增加場地 增加地址的datamodel (Amber) 
         /// </summary>
-        
+
         public AddSpaceViewModel CreateSpace(AddSpaceViewModel addSpaceViewModel)
 
         {
-            
-            var spacecity=addSpaceViewModel.CityID;
+
+            var spacecity = addSpaceViewModel.CityID;
             var city = _repository.GetAll<City>().Where(x => x.CityName == spacecity).Select(x => x.CityID).FirstOrDefault();
             var space = new Space
             {
@@ -1172,9 +1172,9 @@ namespace ZoneRadar.Services
                 Latitude = addSpaceViewModel.Lat,
                 Longitude = addSpaceViewModel.Lng,
                 SpaceStatusID = 2,
-               
+
             };
-           
+
             _repository.Create<Space>(space);
             _repository.SaveChanges();
 
@@ -1185,26 +1185,31 @@ namespace ZoneRadar.Services
                 Hour= addSpaceViewModel.Hour,
                 Discount=1m-((addSpaceViewModel.Discount)/10.00m),
             };
-            List <SpacePhoto> imgs = new List<SpacePhoto>();
+            List<SpacePhoto> imgs = new List<SpacePhoto>();
             foreach (var item in addSpaceViewModel.SpacePhotoUrl)
             {
-                var i=1;
+                var i = 1;
                 //imgs.Add(new SpacePhoto { SpaceID = spaceid, SpacePhotoUrl = item });
                 imgs.Add(new SpacePhoto { SpaceID = addSpaceViewModel.SpaceID,
                     SpacePhotoUrl = item,
                     Sort = i
-                }); 
+                });
                 i++;
             }
             
+            //List<Operating> operating = new List<Operating>();
+            //foreach (var item in addS6paceViewModel.OperatingDay)
+            //{
+            //    operating.Add(new Operating { SpaceID = spaceid, OperatingDay = item});
+            //}
          
             List<SpaceType> type = new List<SpaceType>();
             foreach (var item in addSpaceViewModel.TypeDetailID)
             {
                 type.Add(new SpaceType { SpaceID = addSpaceViewModel.SpaceID, TypeDetailID = item });
             }
-            List<CleaningProtocol> cleaningProtocol=new List<CleaningProtocol>();
-            foreach (var item in addSpaceViewModel.CleaningOptionID) 
+            List<CleaningProtocol> cleaningProtocol = new List<CleaningProtocol>();
+            foreach (var item in addSpaceViewModel.CleaningOptionID)
             {
                 cleaningProtocol.Add(new CleaningProtocol { SpaceID = addSpaceViewModel.SpaceID, CleaningOptionID = item });
             }
@@ -1447,6 +1452,8 @@ namespace ZoneRadar.Services
                 PricePerHour = (int)targetSpace.PricePerHour,
                 Capacity = targetSpace.Capacity,
                 OrderTimeList = orderTimeList.ToList(),
+                Latitude = targetSpace.Latitude,
+                Longitude = targetSpace.Longitude,
             };
 
             return result;
@@ -1473,7 +1480,7 @@ namespace ZoneRadar.Services
                 foreach (var order in space.Order)
                 {
                     //計算場地近30天的被預訂次數
-                    var details = order.OrderDetail.Where(x => x.StartDateTime.Date.AddDays(30) >= DateTime.UtcNow.Date);
+                    var details = order.OrderDetail.Where(x => x.StartDateTime.Date.AddDays(30) >= DateTime.Now.Date);
                     orderDetails.AddRange(details);
 
                     //找出最後被預定日期並加一天
@@ -1500,7 +1507,7 @@ namespace ZoneRadar.Services
 
             return spaceManageList;
         }
-      
+
         /// <summary>
         /// 將場地狀態資訊存進資料庫(下架、刪除、重新上架)(Jenny)
         /// </summary>
@@ -1526,7 +1533,7 @@ namespace ZoneRadar.Services
                     if (spaceStatusInfo.SpaceStatusId == (int)SpaceStatusEnum.Discontinued && spaceStatusInfo.DiscontinuedDate == null)
                     {
                         space.DiscontinuedDate = null;
-                    }                   
+                    }
                     //刪除場地
                     if (spaceStatusInfo.SpaceStatusId == (int)SpaceStatusEnum.Delete)
                     {
@@ -1558,6 +1565,55 @@ namespace ZoneRadar.Services
                 sweetAlert.Icon = false;
                 return sweetAlert;
             }
+        }
+
+        /// <summary>
+        /// 取得該編輯場地的照片
+        /// </summary>
+        /// <returns></returns>
+        public SpacePhotoViewModel GetSpacePhotoFromDB(int? id)
+        {
+            var urlList = _repository.GetAll<SpacePhoto>().Where(x => x.SpaceID == id).Select(x => x.SpacePhotoUrl);
+
+            var result = new SpacePhotoViewModel()
+            {
+                Name = "dt6vz3pav",
+                Preset = "c3caow1j",
+                PhotoUrlList = urlList.ToList(),
+            };
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// 儲存照片至資料庫(需確認是否可以每次都刪除舊的資料)
+        /// </summary>
+        /// <param name="SaveSpacePhotosVM"></param>
+        public void ReflashSpacePhotoFromDB(SaveSpacePhotosViewModel SaveSpacePhotosVM)
+        {
+            var spaceID = SaveSpacePhotosVM.SpaceID;
+            var urlList = SaveSpacePhotosVM.PhotoUrlList;
+            var originPhotos = _repository.GetAll<SpacePhoto>().Where(x => x.SpaceID == spaceID).ToList();
+
+            if (originPhotos.Count != 0)
+            {
+                foreach (var entity in originPhotos)
+                {
+                    _repository.Delete<SpacePhoto>(entity);
+                }
+            }
+
+            var photoList = urlList.Select(x => new SpacePhoto
+            {
+                SpaceID = spaceID,
+                Sort = urlList.IndexOf(x) + 1,
+                SpacePhotoUrl = x
+            });
+
+            _repository.CreateRange<SpacePhoto>(photoList);
+            _repository.SaveChanges();
+            _repository.Dispose();
         }
     }
 }
