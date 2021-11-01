@@ -8,8 +8,8 @@ namespace ZoneRadar.Models.ViewModels
 {
     public class AddSpaceViewModel
     {
-        public int SpaceID { get;set; }
        
+        public int SpaceID { get; set; }
         [Required]
         public int CountryID { get; set; }
        

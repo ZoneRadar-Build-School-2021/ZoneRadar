@@ -208,6 +208,8 @@ namespace ZoneRadar.Models.ViewModels
         public string weekDay { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
+        public int value { get; set; }
+        public string name { get; set; }
     }
     
 

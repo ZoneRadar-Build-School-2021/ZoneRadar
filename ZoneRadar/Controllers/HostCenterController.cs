@@ -53,11 +53,12 @@ namespace ZoneRadar.Controllers
                     CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
                     CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
                     //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
-
+                    SpaceId=_spaceService.GetSpaceId().SpaceId,
                     Operating = _spaceService.Operating(),
                 };
                 return View(model);
             }
+            ViewData["Open"] = "cheked";
             return View();
         }
         [HttpPost]

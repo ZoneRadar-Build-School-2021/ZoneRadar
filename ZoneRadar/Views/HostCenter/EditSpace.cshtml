@@ -44,6 +44,7 @@
     var compareOpenDay = Model._compareOperatingDay;
     var Operating = Model.Operating;
     var owner = Model.SpaceOwnerNameList;
+
 }
 
 @using (Html.BeginForm("EditSpace", "HostCenter", FormMethod.Post))
@@ -88,7 +89,7 @@
                                             <select name="CountryID" readonly class="form-select" id="country" required>
                                                 @foreach (var cou in country)
                                                 {
-                                                    <option value="1" selected >@cou.CountryName</option>
+                                                    <option value="1" selected>@cou.CountryName</option>
                                                 }
                                             </select>
                                             <div class="invalid-feedback">
@@ -100,7 +101,7 @@
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="mb-3">
                                                 <label for="city" class="form-label mt-3">城市</label>
-                                                <select class="form-select" id="city"  name="CityID" >
+                                                <select class="form-select" id="city" name="CityID">
                                                     @foreach (var c in ciy)
                                                     {
                                                         <option value="@c.CityName">@c.CityName</option>
@@ -113,7 +114,7 @@
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-6 mt-3">
                                             <label for="district" class="form-label">行政區</label>
-                                            <select class="form-select" name="district" id="district" >
+                                            <select class="form-select" name="district" id="district">
                                                 @foreach (var d in district)
                                                 {
                                                     <option value="@d.DistrictName">@d.DistrictName</option>
@@ -328,14 +329,20 @@
                                     </p>
                                 </div>
                             </div>
+                            @{
+                                int i = 1;
+                                string Hours = "Hours";
+                                string Y = "Y";
+                                string hr = "hr"; 
 
+                            }
                             @foreach (var item in compareOpenDay)
                             {
                                 if (spaceOpenDay.Select(x => x.OperatingDay).Contains(item.OperatingDay))
                                 {
                                     <div class="row mt-4 border-bottom">
                                         <div class="col-6 col-xl-1  mt-auto mb-auto">
-                                            <p class="mt-xl-3 fs16 ">@item.weekDay</p>
+                                            <p class="mt-xl-3 fs16 ">@item.weekDay </p>
                                         </div>
                                         <div class="col-6 col-xl-2  mt-auto mb-auto">
                                             <div class="form-check form-switch">
@@ -346,7 +353,7 @@
                                         </div>
                                         <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" value="Y1"  name="Hours1"
+                                                <input class="form-check-input" type="radio"  value="@(Y+i)" name="@(Hours+i)"
                                                        id="flexRadioDefault1">
                                                 <label id="allDayLabel" class="form-check-label" for="flexRadioDefault1">
                                                     全天(24hr)
@@ -355,7 +362,7 @@
                                         </div>
                                         <div class="col-6 col-xl-2  mt-auto mb-auto">
                                             <div class="form-check">
-                                                <input class="form-check-input" checked type="radio" value="hr1" name="Hours1"
+                                                <input class="form-check-input" checked type="radio" value="@(hr+i)" name="@(Hours+i)"
                                                        id="flexRadioDefault1">
                                                 <label id="hourLabel" class="form-check-label" for="flexRadioDefault1">
                                                     小時
@@ -365,12 +372,15 @@
 
                                         <div class="col-6 col-xl-2 mb-4">
                                             <label for="State" class="form-label fs16 mt-xl-1 "></label>
-                                            <select id="State" name="StartTime"  class="form-select fs16 MonselectL "
-                                                    aria-label="Default select example" >
-                                                <option>@spaceOpenDay.Where(x => x.weekDay == item.weekDay).Select(x => x.StartTime).FirstOrDefault().ToString(@"hh\:mm")</option>
+                                            <select id="State" name="StartTime" class="form-select fs16 MonselectL "
+                                                    aria-label="Default select example">
+                                                @*<option>@spaceOpenDay.Where(x => x.weekDay == item.weekDay).Select(x => x.StartTime).FirstOrDefault().ToString(@"hh\:mm")</option>
+                                                @foreach (var open in Operating)
+                                                {
+                                                    <option value="@open.Value">@open.Text</option>
+                                                }*@
 
-
-
+                                                    <option value="@Operating[0].Value">@Operating[0].Text</option>
                                             </select>
                                         </div>
                                         <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
@@ -379,7 +389,7 @@
                                         <div class="col-6  col-xl-2 mb-4">
                                             <label for="State" class="form-label  mt-xl-1 "></label>
                                             <select id="State" name="Endtime" class="form-select fs16 MonselectR "
-                                                    aria-label="Default select example" >
+                                                    aria-label="Default select example">
                                                 <option selected>@spaceOpenDay.Where(x => x.weekDay == item.weekDay).Select(x => x.EndTime).FirstOrDefault().ToString(@"hh\:mm")</option>
 
                                                 @foreach (var open in Operating)
@@ -394,18 +404,18 @@
                                 {
                                     <div class="row mt-4 border-bottom">
                                         <div class="col-6 col-xl-1  mt-auto mb-auto">
-                                            <p class="mt-xl-3 fs16 ">@item.weekDay</p>
+                                            <p class="mt-xl-3 fs16 ">@item.weekDay </p>
                                         </div>
                                         <div class="col-6 col-xl-2  mt-auto mb-auto">
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="radio" value="Y1"  name="Hours1"
+                                                <input class="form-check-input" type="checkbox" value="1" name="OperatingDay"
                                                        id="flexSwitchCheckDefault">
                                                 <label id="openlabel" class="form-check-label" for="flexSwitchCheckDefault">營業</label>
                                             </div>
                                         </div>
                                         <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
                                             <div class="form-check">
-                                                <input class="form-check-input"  type="radio" name="Hours1"
+                                                <input class="form-check-input" type="radio" value="@(Y+i)" name="@(Hours+i)"
                                                        id="flexRadioDefault1">
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     全天(24hr)
@@ -414,8 +424,8 @@
                                         </div>
                                         <div class="col-6 col-xl-2  mt-auto mb-auto">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" value="hr1" name="Hours1"
-                                                       id="flexRadioDefault1" >
+                                                <input class="form-check-input" type="radio" value="@(hr+i)" name="@(Hours+i)"
+                                                       id="flexRadioDefault1">
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     小時
                                                 </label>
@@ -424,7 +434,7 @@
                                         <div class="col-6 col-xl-2 mb-4">
                                             <label for="State" class="form-label  "></label>
                                             <select id="State" name="StartTime" class="form-select fs16 MonselectL "
-                                                    aria-label="Default select example" >
+                                                    aria-label="Default select example">
                                                 <option selected>@item.StartTime</option>
 
                                                 @foreach (var open in Operating)
@@ -439,7 +449,7 @@
                                         <div class="col-6 d-xl-block col-xl-2 mb-4">
                                             <label for="State" class="form-label  "></label>
                                             <select id="State" name="EndTime" class="form-select fs16 MonselectR "
-                                                    aria-label="Default select example" >
+                                                    aria-label="Default select example">
                                                 <option selected>@item.EndTime</option>
 
                                                 @foreach (var open in Operating)
@@ -450,6 +460,7 @@
                                         </div>
                                     </div>
                                 }
+                                i++;
                             }
                             <div class="row mt-5">
                                 <div class="col-12">
@@ -600,12 +611,19 @@
                                     <div class="col-12 ">
                                         <div class="row imgBox">
                                             <div class=" row justify-content-center ">
-                                                <div class="col-1 mt-5 ">
-                                                    <img class=" addphoto " src="mebercenter-img/addphoto.png" alt="">
-                                                </div>
+                                                @*<div class="col-1 mt-5 ">
+                                                        <img class=" addphoto " src="mebercenter-img/addphoto.png" alt="">
+                                                    </div>*@
                                             </div>
-                                            <div class="row mb-5 justify-content-center">
-                                                <input type="file" name="SpacePhotoUrl" class="filepondx">
+                                            <!-- 隱藏檔案上傳的input -->
+                                            <input type="file" id="image-input" multiple accept="image/*" style="display:none">
+                                            <!-- 選擇檔案的按鈕 -->
+                                            <button href="" id="file-select" class="btn btn-img-select">請選擇場地圖片</button>
+
+                                            <!-- 上傳照片縮圖區 -->
+                                            <div id="preview-zone" class="w-100 d-flex flex-wrap border rounded mt-4 border-3 p-3"></div>
+                                            <div class="row p-3">
+                                                <button type="button" class="img-upload-btn btn mt-4 ms-auto" disabled>確認上傳</button>
                                             </div>
                                         </div>
                                     </div>
@@ -980,7 +998,7 @@
                                             {
                                                 <div class="row">
                                                     <div class="form-check col-12 col-lg-2">
-                                                        <input class="form-check-input"  value="@all.CancellationID"  type="radio" checked  name="CancellationID"
+                                                        <input class="form-check-input" value="@all.CancellationID" type="radio" checked name="CancellationID"
                                                                id="flexRadioDefault1">
                                                         <label class="form-check-label" for="flexRadioDefault1">
                                                             @all.CancellationTitle
@@ -1019,6 +1037,24 @@
                 </div>
             </div>
         </div>
+        <!-- 縮圖模板，放在html的最後面 -->
+        <template id="thumbnail-template">
+            <div class="wrap p-0 mb-4 mx-3 border border-3 rounded">
+                <div class="thumbnail-holder">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+        </template>
+
+        <!-- 縮圖loading模板，放在html的最後面 -->
+        <template id="placeholder-template">
+            <div class="wrap p-0 mb-4 mx-3 border border-3 rounded placeholder-glow">
+                <div class="thumbnail-holder placeholder col-12">
+                    <i class="fas fa-times d-none"></i>
+                </div>
+            </div>
+        </template>
+
         <div class="container containerForAdd">
             <div class="row mt-5 mb-5">
                 <div class="col-12 text-center">
@@ -1026,7 +1062,7 @@
 
                     @foreach (var item in adds)
                     {
-                        <input type="hidden" name="SpaceID"  value="@item.SpaceID" />
+                        <input type="hidden" name="SpaceID" value="@item.SpaceID" />
                     }
                     @*<button type="submit" class="btn submitAdd deleteBtn" >完成</button>*@
 
@@ -1034,6 +1070,9 @@
             </div>
         </div>
     </div>
+    <p id="mySpaceId" name="SpaceID" class="d-none">@adds.Select(x=>x.SpaceID).FirstOrDefault()</p>
+
+
 }
 
 
@@ -1050,7 +1089,7 @@
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="~/Assets/CSS/membercenter/membercenter.css" rel="stylesheet" />
-
+    <link href="~/Assets/CSS/hostCenter/style.css" rel="stylesheet" />
 
 }
 @section endJS{
@@ -1068,6 +1107,15 @@
     @*<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>*@
     <script src="~/Assets/JS/addspace/editSpace.js"></script>
     <script src="~/Assets/JS/addspace/EditCityandDistrictandZipcodeJavaScript.js"></script>
+    <!-- Sortable -->
+    @*<script src='https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js'
+        integrity='sha512-zYXldzJsDrNKV+odAwFYiDXV2Cy37cwizT+NkuiPGsa9X1dOz04eHvUWVuxaJ299GvcJT31ug2zO4itXBjFx4w=='
+        crossorigin='anonymous'></script>*@
+    <script src="~/Assets/JS/Sortable.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- 自己的 -->
+    <script src="~/Assets/JS/addspace/main.js"></script>
 }
 
 
