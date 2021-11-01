@@ -160,18 +160,18 @@
     <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border-bottom-0">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center text-secondary">
                     <h3 class="fw-bolder">歡迎回來！</h3>
                     <p class="mb-4">請登入</p>
-                    <button id="third-login-google" class="third-login d-block w-100 mb-3 text-decoration-none text-secondary">
+                    <button id="third-login-google" class="third-login d-block w-100 mb-3 text-decoration-none text-secondary" data-bs-dismiss="modal">
                         <img src="https://storage.googleapis.com/support-kms-prod/ZAl1gIwyUsvfwxoW9ns47iJFioHXODBbIkrK" alt="google">
                         Google 登入
                     </button>
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email</div>
-                    @Html.Partial("_LoginModalPartial", new LoginZONERadarViewModel())
+                    @Html.Partial("_LoginModalPartial")
                     <a href="~/MemberCenter/ForgetPassword" id="forget-password" class="text-decoration-none d-inline-block mb-4">忘記密碼</a>
                     <p class="mb-5">還沒有ZONERadar帳號？<a href="#register-modal" id="a-register-modal" data-bs-toggle="modal" class="text-decoration-none">立即註冊</a></p>
                 </div>
@@ -183,13 +183,13 @@
     <div class="modal fade" id="register-modal" tabindex="-1" aria-labelledby="register-modal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border-bottom-0">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center text-secondary">
                     <h3 class="fw-bolder">加入 ZONERadar</h3>
                     <p class="mb-4">和場地主訂購空間</p>
-                    <button id="third-register-google" class="third-register d-block w-100 mb-3 text-decoration-none text-secondary">
+                    <button id="third-register-google" class="third-register d-block w-100 mb-3 text-decoration-none text-secondary" data-bs-dismiss="modal">
                         <img src="https://storage.googleapis.com/support-kms-prod/ZAl1gIwyUsvfwxoW9ns47iJFioHXODBbIkrK" alt="google">
                         使用 Google 註冊
                     </button>
@@ -198,6 +198,37 @@
                     <p class="mb-2">當您註冊時，代表您已同意ZONERadar的服務條款及隱私權政策</p>
                     <a href="~/MemberCenter/ResentVerificationEmail" id="forget-password" class="text-decoration-none d-inline-block mb-4">重發驗證信</a>
                     <p class="mb-5">已有ZONERadar帳號？<a href="#login-modal" id="a-login-modal" data-bs-toggle="modal" class="text-decoration-none">登入</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Google綁定Modal -->
+    <div class="modal fade" id="bindGoogle-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="bindGoogle-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                </div>
+                <div class="modal-body text-center text-secondary">
+                    <h3 class="fw-bolder">歡迎回來！</h3>
+                    <p class="mb-4">請輸入已註冊成功的帳號或立即註冊</p>
+                    <form class="mb-3" id="bindGoogle-form-vue">
+                        <input type="hidden" id="google-id" value="" />
+                        <input type="hidden" id="google-email" value="" />
+                        <input type="hidden" id="google-name" value="" />
+                        <input type="hidden" id="google-photo" value="" />
+                        <input v-model="inputData.account" type="email" id="bindGoogleEmail" :class="{ 'is-invalid': inputDataCheck.accountError }" class="form-control form-control-lg d-block" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
+                        <div class="invalid-feedback text-start mt-1">
+                            {{inputDataCheck.accountErrorMsg}}
+                        </div>
+                        <input v-model="inputData.password" type="password" id="bindGooglePassword" :class="{ 'is-invalid': inputDataCheck.passwordError }" class="form-control form-control-lg d-block mt-3" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" required>
+                        <div class="invalid-feedback text-start mt-1">
+                            {{inputDataCheck.passwordErrorMsg}}
+                        </div>
+                        <button type="button" id="bindGoogle-register-submit" class="w-100 text-decoration-none text-white mt-3" data-bs-dismiss="modal" :disabled="!isVerify">立即註冊</button>
+                        <button type="button" id="bindGoogle-bind-submit" class="w-100 text-decoration-none text-white mt-3" data-bs-dismiss="modal" :disabled="!isVerify">綁定</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -282,7 +313,6 @@
     <script src="~/Assets/JS/bootstrap.bundle.min.js"></script>
     <script src="~/Assets/JS/sweetalert2.js"></script>
     <script src="~/Assets/JS/vue.js"></script>
-    <script src="~/Assets/JS/layout/navbar-footer.js"></script>
     <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     @Scripts.Render("~/bundles/jquery")
@@ -360,108 +390,13 @@
             return this.optional(element) || (reg.test(value));
         }, "密碼必須包含至少1個數字、小寫英文和大寫英文");
         $.validator.unobtrusive.adapters.addBool("safe");
-    </script>
 
-
-
-    <script>
+        //設定Google client ID和送至後端的Url
         let GoolgeApp_Cient_Id = "@GoogleOAuth.ClientId";
         let id_token_to_userIDUrl = "@Url.Action("GoogleLoginCallback", "MemberCenter")";
-        $(function () {
-            GoogleSigninInit(); //初始化gapi.auth2
-            $("#third-login-google").on("click", function () {
-                let login_modal = document.querySelector("#login-modal");
-                bootstrap.Modal.getOrCreateInstance(login_modal).hide();
-                GoogleLogin(); //Google登入
-            });
-            $("#btnDisconnect").on("click", function () {
-                Google_disconnect(); //和Google App斷連
-            });
-        });
-
-        function GoogleSigninInit() {
-            gapi.load('auth2', function () {
-                gapi.auth2.init({
-                    client_id: GoolgeApp_Cient_Id
-                });
-            });
-        }
-
-        function GoogleLogin() {
-            let auth2 = gapi.auth2.getAuthInstance();//取得GoogleAuth物件
-            auth2.signIn().then(function (GoogleUser) {
-                console.log("Google登入成功");
-                let user_id = GoogleUser.getId();//取得user id，不過要發送至Server端的話，請使用id_token
-                let AuthResponse = GoogleUser.getAuthResponse(true); //回傳access token
-                let id_token = AuthResponse.id_token;//取得id_token
-                //將id_token傳到後端
-                $.ajax({
-                    url: id_token_to_userIDUrl,
-                    method: "post",
-                    data: { idToken: id_token },
-                    success: function (response) {
-                        let result = JSON.parse(response);
-                        if (result.IsSuccessful) {
-                            //如果未有gmail註冊紀錄→導去輸入框頁
-                            if (result.RedirectUrl != null) {
-                                window.location = `${location.origin}${result.RedirectUrl}`;
-                            }
-                            member_only.forEach(item => {
-                                item.classList.remove("d-none");
-                            })
-                            customer_only.forEach(item => {
-                                item.classList.add("d-none");
-                            })
-                            icon_string = "success";
-                            //放上大頭貼
-                            let user_photos = document.querySelectorAll(".user-pic img");
-                            user_photos.forEach(item => {
-                                item.setAttribute("src", result.Photo);
-                            })
-                            //登入成功後，若有ReturnUrl字串，導去該頁
-                            if (location.search != "") {
-                                let queryString = location.search;
-                                let keyValue = queryString.split("?");
-                                let returnUrl = keyValue.find(function (item) {
-                                    return item.includes("ReturnUrl");
-                                })
-                                let returnUrlArr = returnUrl.split("=");
-                                window.location = `${location.origin}${returnUrlArr[1]}`;
-                            }
-                        } else {
-                            icon_string = "error";
-                        }
-                        Swal.fire({
-                            title: result.ShowMessage,
-                            icon: icon_string,
-                            showConfirmButton: true,
-                            confirmButtonColor: "#be7418",
-                            confirmButtonText: "OK",
-                            position: "top"
-                        })
-                    }
-                });
-
-            },
-            function (error) {
-                console.log("Google登入失敗");
-                console.log(error);
-            });
-        }//end function GoogleLogin
-
-
-
-        function Google_disconnect() {
-            let auth2 = gapi.auth2.getAuthInstance(); //取得GoogleAuth物件
-
-            auth2.disconnect().then(function () {
-                console.log('User disconnect.');
-            });
-        }
     </script>
 
-
-
+    <script src="~/Assets/JS/layout/navbar-footer.js"></script>
 
     @RenderSection("endCSS", required: false)
     @RenderSection("endJS", required: false)

@@ -212,11 +212,7 @@ footer.shared-footer {
     box-shadow: none;
 }
 
-#login-modal .modal-header, #register-modal .modal-header {
-    border-bottom: none;
-}
-
-#login-modal .modal-body, #register-modal .modal-body {
+#login-modal .modal-body, #register-modal .modal-body, #bindGoogle-modal .modal-body {
     padding: 0 2rem;
 }
 

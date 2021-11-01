@@ -102,6 +102,23 @@ namespace ZoneRadar.Models.ViewModels
         public string Photo { get; set; }
         public bool IsSuccessful { get; set; }
         public string ShowMessage { get; set; }
-        public string RedirectUrl { get; set; }
+        public bool HasBindGoogle { get; set; }
+        public string GoogleId { get; set; }
+        public string GoogleEmail { get; set; }
+        public string GoogleName { get; set; }
+        public string GooglePhoto { get; set; }
+    }
+
+    /// <summary>
+    /// 以Google帳號註冊或綁定的ViewModel(Jenny)
+    /// </summary>
+    public class BindGoogleViewModel
+    {
+        public string LoginEmail { get; set; }
+        public string LoginPassword { get; set; }
+        public string GoogleId { get; set; }
+        public string GoogleEmail { get; set; }
+        public string GoogleName { get; set; }
+        public string GooglePhoto { get; set; }
     }
 }

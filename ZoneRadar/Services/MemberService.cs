@@ -147,6 +147,24 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
+        /// 確認原始網站是否帳號為Gmail、或已綁定GoogleLoginID(Jenny)
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public bool IsGoogleUser(string email, int googleId, bool verified)
+        {
+            email = HttpUtility.HtmlEncode(email);
+            bool isGoogleUser = false;
+            bool hasGmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == verified);
+            bool hasGoogleLoginId = _repository.GetAll<Member>().Any(x => x.GoogleLoginID == googleId && x.IsVerify == verified);
+            if (hasGmail || hasGoogleLoginId)
+            {
+                isGoogleUser = true;
+            }
+            return isGoogleUser;
+        }
+
+        /// <summary>
         /// 點擊驗證連結後做確認，是否有此會員的註冊紀錄(Jenny)
         /// </summary>
         /// <param name="email"></param>
@@ -416,7 +434,7 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public Member BindGoogle(string email, int googleId)
         {
-            var user = _repository.GetAll<Member>().FirstOrDefault(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify);
+            var user = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify && x.GoogleLoginID == googleId);
             if (user.GoogleLoginID == null)
             {
                 user.GoogleLoginID = googleId;
@@ -424,11 +442,58 @@ namespace ZoneRadar.Services
             return user;
         }
 
-        public void UpdateLastLogin(Member user)
-        {         
+        /// <summary>
+        /// 綁定Google(非Gmail帳號)(Jenny)
+        /// </summary>
+        /// <param name="bindGoogleVM"></param>
+        /// <returns></returns>
+        public Member BindGoogle(BindGoogleViewModel bindGoogleVM)
+        {
+            bindGoogleVM.LoginEmail = HttpUtility.HtmlEncode(bindGoogleVM.LoginEmail);
+            bindGoogleVM.LoginPassword = HttpUtility.HtmlEncode(bindGoogleVM.LoginPassword).MD5Hash();
+
+            var user = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == bindGoogleVM.LoginEmail.ToUpper() && x.Password == bindGoogleVM.LoginPassword && x.IsVerify);
+            user.GoogleLoginID = 22222;
             user.LastLogin = DateTime.Now;
             _repository.Update(user);
             _repository.SaveChanges();
+            return user;
+        }
+
+        /// <summary>
+        /// 修改前次登入時間(Jenny)
+        /// </summary>
+        /// <param name="user"></param>
+        public void UpdateLastLogin(Member user)
+        {
+            user.LastLogin = DateTime.Now;
+            _repository.Update(user);
+            _repository.SaveChanges();
+        }
+
+        /// <summary>
+        /// 以Gmail註冊為會員(Jenny)
+        /// </summary>
+        /// <param name="bindGoogleVM"></param>
+        /// <returns></returns>
+        public Member RegisterWithGoogle(BindGoogleViewModel bindGoogleVM)
+        {
+            //待修改
+            var user = new Member
+            {
+                Email = bindGoogleVM.GoogleEmail,
+                Password = "jwiejdlwkjldzdqqsq2323",
+                Photo = bindGoogleVM.GooglePhoto,
+                Name = bindGoogleVM.GoogleName,
+                ReceiveEDM = false,
+                SignUpDateTime = DateTime.Now,
+                LastLogin = DateTime.Now,
+                IsVerify = true,
+                GoogleLoginID = 22222
+            };
+            _repository.Create(user);
+            _repository.SaveChanges();
+            return user;
         }
 
         /// <summary>
