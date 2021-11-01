@@ -70,7 +70,7 @@ namespace ZoneRadar.Controllers
             var expiredTime = new DateTime();
             DateTime.TryParse(expired, out expiredTime);
             //超過10分鐘無效
-            if (DateTime.UtcNow > expiredTime)
+            if (DateTime.Now > expiredTime)
             {
                 TempData["Alert"] = true;
                 TempData["Message"] = "超過10分鐘有效時間，請重新嘗試！";
@@ -184,7 +184,7 @@ namespace ZoneRadar.Controllers
                 if (memberResult.IsSuccessful)
                 {
                     //測試：用Session記錄註冊資訊
-                    //Session["ConfirmRegister"] = new List<string>() { registerResult.User.Email, DateTime.UtcNow.AddMinutes(10).ToString() };
+                    //Session["ConfirmRegister"] = new List<string>() { registerResult.User.Email, DateTime.Now.AddMinutes(10).ToString() };
 
                     //接著寄送驗證信
                     _service.SentEmail(Server, Request, Url, memberResult.User.Email);
@@ -255,7 +255,7 @@ namespace ZoneRadar.Controllers
             var expiredTime = new DateTime();
             DateTime.TryParse(expired, out expiredTime);
             //超過10分鐘無效
-            if (DateTime.UtcNow > expiredTime)
+            if (DateTime.Now > expiredTime)
             {
                 TempData["Alert"] = true;
                 TempData["Message"] = "超過10分鐘有效時間，請重新註冊！";

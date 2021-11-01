@@ -50,7 +50,7 @@ namespace ZoneRadar.Services
                 //租借時間的第一天
                 var rentTimeFirst = DateTime.Parse(resultDetail.Select(x => x.RentTime).First());
                 //租借時間與現在時間差( 總小時數 )
-                var rentTimeToNow = rentTimeFirst.Subtract(DateTime.UtcNow).TotalHours;
+                var rentTimeToNow = rentTimeFirst.Subtract(DateTime.Now).TotalHours;
                 //轉換成天數 或是 只有小時數
                 string renttimedayorhour;
                 if (rentTimeToNow <= 24)
@@ -216,6 +216,7 @@ namespace ZoneRadar.Services
             if(order != null)
             {
                 order.OrderStatusID = 5;
+                order.CancelDateTime = DateTime.Now;
                 try
                 {
                     _repository.Update(order);
