@@ -11,7 +11,6 @@
     var TotalMoney = ViewData["TotalMoney"];
     int qwe = 0;
 }
-
 <div class="container">
     <div class="row">
         <!-- col-7 電腦版 col-12手機板 -->
@@ -24,21 +23,63 @@
                                 <div class="label undefined"> 場地租金 </div>
                             </div>
                         </div>
-                        <div class="table-body mt-2">
-                            <div class="add-ons-rows">
-                                <div class="d-flex table-row">
-                                    @*@foreach (var ment in item.payments)*@
-                                    @*{*@
-                                    <div class="title-field me-auto">場地價格</div>
-                                    <div data-testing-id="space-rental-subtotal">
-                                        <span> @item.PricePerHour.ToString("C0") </span> X
-                                        <span> @item.RentDetail.Sum(x=>x.hours)</span>
-                                    </div>
-                                    @*}*@
-                                </div>
+                        <!--<div class="table-body mt-2">
+                        <div class="row">
+                            <div class="d-flex table-row">-->
+                        @*@foreach (var ment in item.payments)*@
+                        @*{*@
+                        <!--@if (item.RentDetail.Sum(x => x.hours) >= item.Discounthours)
+                        {
+                            <div class="title-field me-auto">場地價格</div>
+                            <div data-testing-id="space-rental-subtotal">
+                                <span> @item.PricePerHour.ToString("C0") </span> X
+                                <span> @item.RentDetail.Sum(x => x.hours)</span>
+                            </div>
+                            <hr>
+                            <div class="title-field me-auto">
+                                <div class="title-field me-auto">場地折扣</div>
+                                <div data-testing-id="cleaning-fee"><span>$80.00</span></div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="title-field me-auto">場地價格</div>
+                            <div data-testing-id="space-rental-subtotal">
+                                <span> @item.PricePerHour.ToString("C0") </span> X
+                                <span> @item.RentDetail.Sum(x => x.hours)</span>
+                            </div>
+                        }-->
+                        @*}*@
+                        <!--</div>
                                 <hr class="dotted mt-1">
                                 <div class="d-flex heavy table-row">
                                     <div class="title-field me-auto">總計</div>
+                                    <div data-testing-id="space-rental-total">
+                                        <span>@TotalMoney</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="table-body">
+                            <div class="row">
+                                <div class="d-flex table-row">
+                                    <div class="title-field me-auto">Subtotal</div>
+                                    <div data-testing-id="space-rental-subtotal">
+                                        <span>$200.00</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <hr class="dotted mt-1 mb-1">
+                                    <div class="d-flex table-row">
+                                        <div class="title-field me-auto">Cleaning</div>
+                                        <div data-testing-id="cleaning-fee">
+                                            <span>$80.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="dotted mt-1 mb-1">
+                                <div class="d-flex heavy table-row">
+                                    <div class="title-field me-auto">場地價格</div>
                                     <div data-testing-id="space-rental-total">
                                         <span>@TotalMoney</span>
                                     </div>
@@ -91,7 +132,6 @@
                         <div id="validationServerUsernameFeedback" class="invalid-feedback">
                             請填寫聯絡人
                         </div>
-
                     </div>
                     <div class="row mt-3">
                         <label for="validationServerPhone" class="col-2 col-sm-4 col-form-label">聯絡電話 </label>
@@ -101,7 +141,6 @@
                         <div id="validationServerPhoneFeedback" class="invalid-feedback">
                             請填連絡電話
                         </div>
-
                     </div>
                 </div>
                 <div class="form-check mt-4">
@@ -109,7 +148,6 @@
                     <label class="form-check-label" for="flexCheckAccpet">
                         我同意上述所說。
                     </label>
-
                 </div>
                 @*<form id="form" name="form" action="https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5" method="POST">
                     @foreach (var key in Model.Keys.ToList())
@@ -122,8 +160,6 @@
                     </button>*@
                 @*</form>*@
                 @Html.ActionLink("送出", "Ecpayment", new CartsViewModel { OrderId = (int)OrderId, TotalMoney = (decimal)TotalMoney, SpaceName = (string)spacename }, new { @class = "Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled submit-pay", @id = "submit-pay" })
-
-
         </div>
         <!-- col-5 電腦版 col-12手機板 -->
         <div class="col-lg-5 mt-5 col-sm-12">
@@ -133,13 +169,11 @@
                     <div class="ps-3">
                         <label class="font-monospace">Host</label>
                     </div>
-
                     <div class="ps-1 d-flex host-pic">
                         <img src="@item.UserPhoto">
                         @* img場地主相片 *@
                         <p class="text-center ps-4"> @item.UserName </p>
                     </div>
-
                 </div>
                 <div>
                     @* 租賃時間 *@
@@ -174,26 +208,21 @@
                             <div>
                                 <div class="p-2">
                                     <div>
-                                        <span class="fw-light"> @item.RentDetail.Sum(x=>x.People) 人</span>
+                                        <span class="fw-light"> @item.RentDetail.Sum(x => x.People) 人</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 @section topCSS
 {
     <link href="~/Assets/CSS/Pay/Paypage.css" rel="stylesheet" />
 }
-
 @section endJS
 {
     <script src="~/Assets/JS/Payment/Paypage.js"></script>
-}
