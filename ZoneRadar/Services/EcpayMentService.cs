@@ -24,7 +24,7 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public String GetEcpayData(CartsViewModel model)
         {
-            var Url = "https://edec-1-164-219-249.ngrok.io";
+            var Url = "https://zoneradar-frontstage.azurewebsites.net/";
             AllInOne oPayment = new AllInOne();
             //var returnURL = "webapi/spaces/api/JSONAPI/GetEcpayData";
             /* 服務參數 */
@@ -135,7 +135,7 @@ namespace ZoneRadar.Services
                      select new PaymentViewModel
                      {
                          Discounthours = o.Space.SpaceDiscount.FirstOrDefault().Hour,
-                         Discount = o.Space.SpaceDiscount.FirstOrDefault().Discount,
+                         DiscountPrice = o.Space.SpaceDiscount.FirstOrDefault().Discount*model.TotalMoney,
                          UserName = o.Space.Member.Name,
                          UserPhoto = o.Space.Member.Photo,
                          CancellationDetail = o.Space.Cancellation.CancellationDetail,

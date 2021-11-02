@@ -62,19 +62,22 @@
                         <div class="table-body">
                             <div class="row">
                                 <div class="d-flex table-row">
-                                    <div class="title-field me-auto">Subtotal</div>
+                                    <div class="title-field me-auto"> 場地計算 </div>
                                     <div data-testing-id="space-rental-subtotal">
-                                        <span>$200.00</span>
+                                        <span> </span> 
                                     </div>
                                 </div>
                                 <div>
                                     <hr class="dotted mt-1 mb-1">
+                                    @if(item.RentDetail.Sum(x=>x.hours) >= item.Discounthours)
+                                    { 
                                     <div class="d-flex table-row">
-                                        <div class="title-field me-auto">Cleaning</div>
+                                        <div class="title-field me-auto"> 場地折扣 </div>
                                         <div data-testing-id="cleaning-fee">
-                                            <span>$80.00</span>
+                                            <span>-@item.DiscountPrice</span>
                                         </div>
                                     </div>
+                                    }
                                 </div>
                                 <hr class="dotted mt-1 mb-1">
                                 <div class="d-flex heavy table-row">
