@@ -49,7 +49,7 @@ namespace ZoneRadar.Services
             if (isSameEmail)
             {
                 //如果已經有一樣的Email
-                memberResult.ShowMessage = "已有相同的Email，請重新註冊！";
+                memberResult.ShowMessage = "該Email已有人使用，請重新註冊！";
                 return memberResult;
             }
             else
@@ -63,7 +63,9 @@ namespace ZoneRadar.Services
                         Name = registerVM.Name,
                         ReceiveEDM = false,
                         SignUpDateTime = DateTime.Now,
-                        LastLogin = DateTime.Now
+                        LastLogin = DateTime.Now,
+                        IsVerify = false,
+                        IsGoogleLogin = false
                     };
                     _repository.Create<Member>(member);
                     _repository.SaveChanges();
@@ -147,7 +149,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 確認原始網站是否帳號為Gmail、或已綁定GoogleLoginID(Jenny)
+        /// 確認原始網站是否有此Gmail帳號、或已綁定GoogleLoginID(Jenny)
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
@@ -155,7 +157,9 @@ namespace ZoneRadar.Services
         {
             email = HttpUtility.HtmlEncode(email);
             bool isGoogleUser = false;
+            //是否有此gmail
             bool hasGmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == verified);
+            //是否有此GoogleID
             bool hasGoogleLoginId = _repository.GetAll<Member>().Any(x => x.GoogleID == googleId && x.IsVerify == verified);
             if (hasGmail || hasGoogleLoginId)
             {
@@ -434,23 +438,16 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public Member BindGoogle(string email, string googleId)
         {
-            var user = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify && x.GoogleID == googleId);
+            var user = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify);
             if (user.GoogleID == null)
             {
                 user.GoogleID = googleId;
             }
-            return user;
-        }
-
-        /// <summary>
-        /// 修改前次登入時間(Jenny)
-        /// </summary>
-        /// <param name="user"></param>
-        public void UpdateLastLogin(Member user)
-        {
+            user.IsGoogleLogin = true;
             user.LastLogin = DateTime.Now;
             _repository.Update(user);
             _repository.SaveChanges();
+            return user;
         }
 
         /// <summary>
@@ -471,7 +468,8 @@ namespace ZoneRadar.Services
                 SignUpDateTime = DateTime.Now,
                 LastLogin = DateTime.Now,
                 IsVerify = true,
-                GoogleID = registerWithGoogle.GoogleId
+                GoogleID = registerWithGoogle.GoogleId,
+                IsGoogleLogin = true
             };
             _repository.Create(user);
             _repository.SaveChanges();

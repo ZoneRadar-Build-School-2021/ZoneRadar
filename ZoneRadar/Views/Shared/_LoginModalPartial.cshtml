@@ -13,7 +13,6 @@
 @*}*@
 
 <form class="mb-3" id="login-form-vue">
-    @*@Html.AntiForgeryToken()*@
     <input v-model="inputData.account" type="email" id="LoginEmail" :class="{ 'is-invalid': inputDataCheck.accountError }" class="form-control form-control-lg d-block" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
     <div class="invalid-feedback text-start mt-1">
         {{inputDataCheck.accountErrorMsg}}
@@ -22,11 +21,5 @@
     <div class="invalid-feedback text-start mt-1">
         {{inputDataCheck.passwordErrorMsg}}
     </div>
-
-    @*@Html.EditorFor(model => model.LoginEmail, new { htmlAttributes = new { @class = "form-control form-control-lg d-block", type = "email", placeholder = "Email", required = "true" } })
-        @Html.ValidationMessageFor(model => model.LoginEmail, "", new { @class = "text-danger d-block text-start mt-1" })
-        @Html.EditorFor(model => model.LoginPassword, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mt-3", type = "password", placeholder = "Password", required = "true" } })
-        @Html.ValidationMessageFor(model => model.LoginPassword, "", new { @class = "text-danger d-block text-start mt-1" })*@
-
     <button type="button" id="login-submit" class="w-100 text-decoration-none text-white mt-3" data-bs-dismiss="modal" :disabled="!isVerify">登入</button>
 </form>

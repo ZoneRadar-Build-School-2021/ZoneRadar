@@ -100,7 +100,7 @@
                                         </div>
                                     </div>
                                     <a class="nav-link" href="~/MemberCenter/EditProfile">修改個人資訊</a>
-                                    <a class="nav-link" href="~/MemberCenter/SignOut">登出</a>
+                                    <a class="nav-link sign-out-btn" href="#">登出</a>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                                     </div>
                                 </li>
                                 <li><a class="dropdown-item" href="~/MemberCenter/EditProfile">修改個人資訊</a></li>
-                                <li><a class="dropdown-item" href="~/MemberCenter/SignOut">登出</a></li>
+                                <li><a class="dropdown-item sign-out-btn" href="#">登出</a></li>
                             </ul>
                         </div>
                     </li>
@@ -194,9 +194,8 @@
                         使用 Google 註冊
                     </button>
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email註冊</div>
-                    @Html.Partial("_RegisterModalPartial", new RegisterZONERadarViewModel())
+                    @Html.Partial("_RegisterModalPartial")
                     <p class="mb-2">當您註冊時，代表您已同意ZONERadar的服務條款及隱私權政策</p>
-                    <a href="~/MemberCenter/ResentVerificationEmail" id="forget-password" class="text-decoration-none d-inline-block mb-4">重發驗證信</a>
                     <p class="mb-5">已有ZONERadar帳號？<a href="#login-modal" id="a-login-modal" data-bs-toggle="modal" class="text-decoration-none">登入</a></p>
                 </div>
             </div>

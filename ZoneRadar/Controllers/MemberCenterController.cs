@@ -72,8 +72,7 @@ namespace ZoneRadar.Controllers
         [HttpGet]
         public ActionResult ResetPassword(string email, string resetCode, string expired)
         {
-            var expiredTime = new DateTime();
-            DateTime.TryParse(expired, out expiredTime);
+            DateTime.TryParse(expired, out DateTime expiredTime);
             //超過10分鐘無效
             if (DateTime.Now > expiredTime)
             {
@@ -233,8 +232,7 @@ namespace ZoneRadar.Controllers
             //var test = (List<string>)Session["ConfirmRegister"];
             //var xxx = Request.Cookies["ConfirmRegister"].Value;
 
-            var expiredTime = new DateTime();
-            DateTime.TryParse(expired, out expiredTime);
+            DateTime.TryParse(expired, out DateTime expiredTime);
             //超過10分鐘無效
             if (DateTime.Now > expiredTime)
             {
@@ -307,11 +305,11 @@ namespace ZoneRadar.Controllers
             if (!ModelState.IsValid)
             {
                 //回到原本頁面並跳出錯誤訊息
-                TempData["Alert"] = true;
-                TempData["Message"] = "輸入格式不正確，請重新登入！";
-                TempData["Icon"] = false;
-                //return Redirect(Request.UrlReferrer.AbsolutePath);
-                return "錯";
+                //TempData["Alert"] = true;
+                //TempData["Message"] = "輸入格式不正確，請重新登入！";
+                //TempData["Icon"] = false;
+                result.ShowMessage = "輸入格式不正確，請重新登入！";
+                return JsonConvert.SerializeObject(result);
             }
 
             var memberResult = _service.UserLogin(loginVM);
@@ -319,15 +317,14 @@ namespace ZoneRadar.Controllers
             //找不到此會員
             if (memberResult.User == null)
             {
-                TempData["Alert"] = true;
-                TempData["Message"] = memberResult.ShowMessage;
-                TempData["Icon"] = memberResult.IsSuccessful;
-                //TempData["Email"] = loginVM.Email;
-                //TempData["Email"] = ModelState["LoginZONERadarVM.Email"];
-
+                //TempData["Alert"] = true;
+                //TempData["Message"] = memberResult.ShowMessage;
+                //TempData["Icon"] = memberResult.IsSuccessful;
+                result.IsSuccessful = memberResult.IsSuccessful;
+                result.ShowMessage = memberResult.ShowMessage;
                 //回到原本頁面並跳出錯誤訊息
                 //return Redirect(Request.UrlReferrer.AbsolutePath);
-                return "錯";
+                return JsonConvert.SerializeObject(result);
             }
 
             //建造加密表單驗證票證
@@ -353,10 +350,10 @@ namespace ZoneRadar.Controllers
         /// 登出(Jenny)
         /// </summary>
         /// <returns></returns>
-        public ActionResult SignOut()
+        public string SignOut()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
+            return "OK";
         }
 
         /// <summary>
@@ -498,7 +495,6 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public async Task<string> GoogleLoginCallback(string idToken)
         {
-            string msg = "ok";
             var result = new JSMemberResult { IsSuccessful = false, ExceptionMsg = "ok" };
             GoogleJsonWebSignature.Payload payLoad = null;
             GoogleJsonWebSignature.ValidationSettings validationSettings = new GoogleJsonWebSignature.ValidationSettings
@@ -523,7 +519,7 @@ namespace ZoneRadar.Controllers
             }
 
 
-            // 第三方Google登入取得payLoad成功
+            //第三方Google登入取得payLoad成功
             if (result.ExceptionMsg == "ok" && payLoad != null)
             {
                 string googleId = payLoad.Subject; //Subject為Google的userId
@@ -536,8 +532,6 @@ namespace ZoneRadar.Controllers
                     var user = _service.BindGoogle(payLoad.Email, googleId);
                     var encryptedTicket = _service.CreateEncryptedTicket(user);
                     _service.CreateCookie(encryptedTicket, Response);
-                    _service.UpdateLastLogin(user);
-                    //result.HasBindGoogle = true;
                     result.IsSuccessful = true;
                     result.Photo = user.Photo;
                     result.ShowMessage = $"{user.Name}您好，歡迎您加入ZONERadar！";

@@ -18,7 +18,6 @@ namespace ZoneRadar.Models.ViewModels
     public class RegisterZONERadarViewModel
     {
         [Required(ErrorMessage = "請填寫此欄位")]
-        [StringLength(20)]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "請填寫此欄位")]
