@@ -479,7 +479,6 @@
     <Content Include="Assets\JS\leaflet.js" />
     <Content Include="Assets\JS\leaflet.markercluster.js" />
     <Content Include="Assets\JS\membercenter\profile.js" />
-    <Content Include="Assets\JS\membercenter\vue.min.js" />
     <Content Include="Assets\JS\order_state\membercenter_completed.js" />
     <Content Include="Assets\JS\order_state\membercenter_pending.js" />
     <Content Include="Assets\JS\order_state\membercenter_processing.js" />
@@ -536,6 +535,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\vue.js" />
+    <Content Include="Scripts\vue.min.js" />
     <Content Include="Views\MemberCenter\ResetPasswordEmailContent.html" />
     <Content Include="Views\MemberCenter\VerificationEmailContent.html" />
     <Content Include="Web.config" />

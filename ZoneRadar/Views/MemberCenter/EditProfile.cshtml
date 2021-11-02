@@ -80,7 +80,7 @@
                         <label for="descript" class="col-form-label">描述</label>
                     </div>
                     <div class="col-12 col-md-8">
-                        <textarea v-model="inputData.Description" class="form-control" id="description" rows="5">@Model.Description</textarea>
+                        <textarea v-model="inputData.Description" class="form-control" name="Description" id="description" rows="5">@Model.Description</textarea>
                     </div>
                 </div>
                 <div class="saved-button align-items-center mb-5 mt-5 d-flex justify-content-center">
@@ -106,5 +106,4 @@
 @section endJS{
     <script src="~/Assets/JS/membercenter/profile.js"></script>
     <script src="~/Assets/JS/axios.min.js"></script>
-    <script src="~/Assets/JS/membercenter/vue.min.js"></script>
 }

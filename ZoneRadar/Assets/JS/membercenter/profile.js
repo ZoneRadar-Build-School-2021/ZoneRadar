@@ -41,7 +41,7 @@ let app = new Vue({
             Name: '',
             Phone: '',
             Description: '',
-            Checked: false
+            Checked: ''
         },
         inputDataCheck: {
             NameError: false,
@@ -51,7 +51,7 @@ let app = new Vue({
             Name: '',
             Phone: '',
             Description: '',
-            Checked: false
+            Checked: ''
         },
     },
     watch: {
