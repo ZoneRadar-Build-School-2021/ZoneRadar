@@ -55,10 +55,10 @@
                         <a class="become-host-link nav-link" href="~/HostCenter/AddSpace">成為場地主</a>
                     </li>
                     <li class="customer-only d-none nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#register-modal">註冊</a>
+                        <a class="nav-link" href="#register-modal" data-bs-toggle="modal">註冊</a>
                     </li>
                     <li class="customer-only d-none nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login-modal">登入</a>
+                        <a class="nav-link" href="#login-modal" data-bs-toggle="modal">登入</a>
                     </li>
                     <!-- 登入後，手機出現 -->
                     <li class="member-only d-none nav-item d-md-none">
@@ -157,59 +157,50 @@
     </nav>
 
     <!-- 登入Modal -->
-    <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border-bottom-0">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center text-secondary">
                     <h3 class="fw-bolder">歡迎回來！</h3>
                     <p class="mb-4">請登入</p>
-                    <a href="#" id="third-register-google" class="third-register d-block mb-3 text-decoration-none text-secondary">
+                    <button id="third-login-google" class="third-login d-block w-100 mb-3 text-decoration-none text-secondary" data-bs-dismiss="modal">
                         <img src="https://storage.googleapis.com/support-kms-prod/ZAl1gIwyUsvfwxoW9ns47iJFioHXODBbIkrK" alt="google">
                         Google 登入
-                    </a>
-                    <a href="#" id="third-register-facebook" class="third-register d-block mb-3 text-decoration-none text-secondary">
-                        <img src="https://www.facebook.com/images/fb_icon_325x325.png" alt="facebook">
-                        Facebook 登入
-                    </a>
+                    </button>
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email</div>
-                    @Html.Partial("_LoginModalPartial", new LoginZONERadarViewModel())
+                    @Html.Partial("_LoginModalPartial")
                     <a href="~/MemberCenter/ForgetPassword" id="forget-password" class="text-decoration-none d-inline-block mb-4">忘記密碼</a>
-                    <p class="mb-5">還沒有ZONERadar帳號？<a href="#" id="a-register-modal" data-bs-toggle="modal" data-bs-target="#register-modal" class="text-decoration-none">立即註冊</a></p>
+                    <p class="mb-5">還沒有ZONERadar帳號？<a href="#register-modal" id="a-register-modal" data-bs-toggle="modal" class="text-decoration-none">立即註冊</a></p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- 註冊Modal -->
-    <div class="modal fade" id="register-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="register-modal" tabindex="-1" aria-labelledby="register-modal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border-bottom-0">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center text-secondary">
                     <h3 class="fw-bolder">加入 ZONERadar</h3>
                     <p class="mb-4">和場地主訂購空間</p>
-                    <a href="#" id="third-register-google" class="third-register d-block mb-3 text-decoration-none text-secondary">
+                    <button id="third-register-google" class="third-register d-block w-100 mb-3 text-decoration-none text-secondary" data-bs-dismiss="modal">
                         <img src="https://storage.googleapis.com/support-kms-prod/ZAl1gIwyUsvfwxoW9ns47iJFioHXODBbIkrK" alt="google">
                         使用 Google 註冊
-                    </a>
-                    <a href="#" id="third-register-facebook" class="third-register d-block mb-3 text-decoration-none text-secondary">
-                        <img src="https://www.facebook.com/images/fb_icon_325x325.png" alt="facebook">
-                        使用 Facebook 註冊
-                    </a>
+                    </button>
                     <div class="email-register-text mb-3 d-flex flex-row align-items-center justify-content-center">或使用email註冊</div>
-                    @Html.Partial("_RegisterModalPartial", new RegisterZONERadarViewModel())
+                    @Html.Partial("_RegisterModalPartial")
                     <p class="mb-2">當您註冊時，代表您已同意ZONERadar的服務條款及隱私權政策</p>
-                    <a href="~/MemberCenter/ResentVerificationEmail" id="forget-password" class="text-decoration-none d-inline-block mb-4">重發驗證信</a>
-                    <p class="mb-5">已有ZONERadar帳號？<a href="#" id="a-login-modal" data-bs-toggle="modal" data-bs-target="#login-modal" class="text-decoration-none">登入</a></p>
+                    <p class="mb-5">已有ZONERadar帳號？<a href="#login-modal" id="a-login-modal" data-bs-toggle="modal" class="text-decoration-none">登入</a></p>
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
 
     @RenderBody()
 
@@ -289,7 +280,9 @@
     <script src="~/Assets/JS/zh-tw.js"></script>
     <script src="~/Assets/JS/bootstrap.bundle.min.js"></script>
     <script src="~/Assets/JS/sweetalert2.js"></script>
-    <script src="~/Assets/JS/layout/navbar-footer.js"></script>
+    <script src="~/Assets/JS/vue.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
@@ -308,6 +301,11 @@
         //判斷登入與否，決定導覽列顯示的介面
         let customer_only = document.querySelectorAll(".customer-only");
         let member_only = document.querySelectorAll(".member-only");
+        let alerting = @Json.Encode(alert);
+        //使用者按上一頁時，強制將alert改為false
+        window.onpopstate = (event) => {
+            alerting = false;
+        }
         if (@Json.Encode(isAuthenticated)) {
             member_only.forEach(item => {
                 item.classList.remove("d-none");
@@ -333,7 +331,7 @@
         }
 
         //跳出sweet alert提示訊息
-        if (@Json.Encode(alert)) {
+        if (alerting) {
             Swal.fire({
                 title: "@ViewData["Message"]",
                 icon: "@icon",
@@ -351,17 +349,22 @@
                 this.removeEventListener('click', redirectToPreURL)
             }
 
-                document.querySelector('.swal2-confirm.swal2-styled').addEventListener('click', redirectToPreURL);
+            document.querySelector('.swal2-confirm.swal2-styled').addEventListener('click', redirectToPreURL);
         }
 
         //註冊密碼驗證
         $.validator.addMethod("safe", function (value, element) {
-            let reg = /^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-zA-Z])(?=.*\d).*$/;
+            let reg = /^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/;
             return this.optional(element) || (reg.test(value));
         }, "密碼必須包含至少1個數字、小寫英文和大寫英文");
         $.validator.unobtrusive.adapters.addBool("safe");
+
+        //設定Google client ID和送至後端的Url
+        let GoolgeApp_Cient_Id = "@GoogleOAuth.ClientId";
+        let id_token_to_userIDUrl = "@Url.Action("GoogleLoginCallback", "MemberCenter")";
     </script>
 
+    <script src="~/Assets/JS/layout/navbar-footer.js"></script>
 
     @RenderSection("endCSS", required: false)
     @RenderSection("endJS", required: false)
