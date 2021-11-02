@@ -350,10 +350,10 @@ namespace ZoneRadar.Controllers
         /// 登出(Jenny)
         /// </summary>
         /// <returns></returns>
-        public string SignOut()
+        public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
-            return "OK";
+            return RedirectToAction("Index", "Home");
         }
 
         /// <summary>

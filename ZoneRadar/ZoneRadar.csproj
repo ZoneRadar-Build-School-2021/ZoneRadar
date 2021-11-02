@@ -504,7 +504,7 @@
     <Content Include="Assets\JS\static\Q&amp;A.js" />
     <Content Include="Assets\JS\sweetalert2.js" />
     <Content Include="Assets\JS\swiper-bundle.min.js" />
-    <Content Include="Assets\JS\vue.js" />
+    <Content Include="Assets\JS\vue.min.js" />
     <Content Include="Assets\JS\zh-tw.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

@@ -1,21 +1,13 @@
 
 //導覽列顯示登入後的介面
-function changeNavInterface(isAuthenticated) {
-    if (isAuthenticated) {
-        member_only.forEach(item => {
-            item.classList.remove("d-none");
-        })
-        customer_only.forEach(item => {
-            item.classList.add("d-none");
-        })
-    } else {
-        member_only.forEach(item => {
-            item.classList.add("d-none");
-        })
-        customer_only.forEach(item => {
-            item.classList.remove("d-none");
-        })
-    }
+function changeNavInterface() {
+    member_only.forEach(item => {
+        item.classList.remove("d-none");
+    })
+    customer_only.forEach(item => {
+        item.classList.add("d-none");
+    })
+
 }
 
 //放上使用者大頭貼
@@ -287,7 +279,7 @@ login_btn.addEventListener("click", function () {
     }).then(response => {
         let icon_string;
         if (response.data.IsSuccessful) {
-            changeNavInterface(true);
+            changeNavInterface();
             icon_string = "success";
             //放上大頭貼
             changeUserPhoto(response.data.Photo);
@@ -349,7 +341,7 @@ function GoogleLogin() {
                 let result = JSON.parse(response);
                 //Google第三方登入成功
                 if (result.IsSuccessful) {
-                    changeNavInterface(true);
+                    changeNavInterface();
                     icon_string = "success";
                     //放上大頭貼
                     changeUserPhoto(result.Photo);
@@ -382,17 +374,4 @@ function Google_disconnect() {
         console.log('User disconnect.');
     });
 }
-//#endregion
-
-//#region 原始網站登出功能
-let sign_out_btn = document.querySelectorAll(".sign-out-btn");
-sign_out_btn.forEach(item => {
-    item.addEventListener("click", () => {
-        axios.get("/MemberCenter/SignOut")
-            .then(response => {
-                changeNavInterface(false);
-            })
-            .catch(error => { })
-    })
-})
 //#endregion
