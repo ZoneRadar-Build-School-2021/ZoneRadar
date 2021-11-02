@@ -242,7 +242,6 @@
     <Compile Include="Models\ViewModels\PreOrderViewModel.cs" />
     <Compile Include="Models\ViewModels\SomeOnesSpaceViewModel.cs" />
     <Compile Include="Models\ViewModels\SaveSpacePhotosViewModel.cs" />
-    <Compile Include="Models\ViewModels\SomeOnesSpaceViewModelcs.cs" />
     <Compile Include="Models\ViewModels\SpaceDetailViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceBriefViewModel.cs" />
     <Compile Include="Models\ViewModels\FilterViewModel.cs" />
