@@ -499,6 +499,7 @@ namespace ZoneRadar.Controllers
         public async Task<string> GoogleLoginCallback(string idToken)
         {
             string msg = "ok";
+            var result = new JSMemberResult { IsSuccessful = false, ExceptionMsg = "ok" };
             GoogleJsonWebSignature.Payload payLoad = null;
             GoogleJsonWebSignature.ValidationSettings validationSettings = new GoogleJsonWebSignature.ValidationSettings
             {
@@ -510,24 +511,22 @@ namespace ZoneRadar.Controllers
             }
             catch (InvalidJwtException ex)
             {
-                msg = ex.Message;
+                result.ExceptionMsg = ex.Message;
             }
             catch (JsonReaderException ex)
             {
-                msg = ex.Message;
+                result.ExceptionMsg = ex.Message;
             }
             catch (Exception ex)
             {
-                msg = ex.Message;
+                result.ExceptionMsg = ex.Message;
             }
 
 
-            var result = new JSMemberResult { IsSuccessful = false, HasBindGoogle = false };
             // 第三方Google登入取得payLoad成功
-            if (msg == "ok" && payLoad != null)
+            if (result.ExceptionMsg == "ok" && payLoad != null)
             {
-                int.TryParse(payLoad.Subject, out int googleId); //Subject為Google的userId
-                msg = $"您的 user_id :{googleId}";
+                string googleId = payLoad.Subject; //Subject為Google的userId
 
                 var IsGoogleUser = _service.IsGoogleUser(payLoad.Email, googleId, true);
                 //原始網站是否有此gmail的會員或有綁定GoogleLoginID
@@ -538,69 +537,33 @@ namespace ZoneRadar.Controllers
                     var encryptedTicket = _service.CreateEncryptedTicket(user);
                     _service.CreateCookie(encryptedTicket, Response);
                     _service.UpdateLastLogin(user);
-                    result.HasBindGoogle = true;
+                    //result.HasBindGoogle = true;
                     result.IsSuccessful = true;
                     result.Photo = user.Photo;
                     result.ShowMessage = $"{user.Name}您好，歡迎您加入ZONERadar！";
-                    return JsonConvert.SerializeObject(result);
                 }
-                else //如果沒有gmail的註冊紀錄，彈出Google綁定Modal
+                else //如果沒有gmail的註冊紀錄，將其註冊成為會員
                 {
-                    result.GoogleId = payLoad.Subject;
-                    result.GoogleEmail = payLoad.Email;
-                    result.GoogleName = payLoad.Name;
-                    result.GooglePhoto = payLoad.Picture;
+                    var registerWithGoogle = new RegisterWithGoogle
+                    {
+                        GoogleId = googleId,
+                        GoogleEmail = payLoad.Email,
+                        GoogleName = payLoad.Name,
+                        GooglePhoto = payLoad.Picture
+                    };
+                    var user = _service.RegisterWithGoogle(registerWithGoogle);
+                    var encryptedTicket = _service.CreateEncryptedTicket(user);
+                    _service.CreateCookie(encryptedTicket, Response);
                     result.IsSuccessful = true;
-                    return JsonConvert.SerializeObject(result);
+                    result.Photo = user.Photo;
+                    result.ShowMessage = $"{user.Name}您好，歡迎您加入ZONERadar！";
                 }
             }
             else
             {
                 result.ShowMessage = "發生錯誤，請重新嘗試！";
-                return JsonConvert.SerializeObject(result);
             }
-        }
-
-        [HttpGet]
-        public ActionResult BindingToGoogleOrRegister()
-        {
-            return null;
-        }
-
-        /// <summary>
-        /// 點選綁定按鈕→綁定GoogleLoginID(Jenny)
-        /// </summary>
-        /// <param name="bindGoogleVM"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public string BindingToGoogle(BindGoogleViewModel bindGoogleVM)
-        {
-            var result = new JSMemberResult();
-            var user = _service.BindGoogle(bindGoogleVM);
-            var encryptedTicket = _service.CreateEncryptedTicket(user);
-            _service.CreateCookie(encryptedTicket, Response);
-            result.ShowMessage = $"{user.Name}您好，歡迎您加入ZONERadar！";
-            result.Photo = user.Photo;
-            result.IsSuccessful = true;
             return JsonConvert.SerializeObject(result);
-        }
-
-        /// <summary>
-        /// 點選立即註冊按鈕→以Gmail註冊(Jenny)
-        /// </summary>
-        /// <param name="bindGoogleVM"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public string RegisterWithGoogle(BindGoogleViewModel bindGoogleVM)
-        {
-            var result = new JSMemberResult();
-            var user = _service.RegisterWithGoogle(bindGoogleVM);
-            var encryptedTicket = _service.CreateEncryptedTicket(user);
-            _service.CreateCookie(encryptedTicket, Response);
-            result.ShowMessage = $"{user.Name}您好，歡迎您加入ZONERadar！";
-            result.Photo = user.Photo;
-            result.IsSuccessful = true;
-            return JsonConvert.SerializeObject(result);
-        }
+        }        
     }
 }

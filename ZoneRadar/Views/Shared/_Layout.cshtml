@@ -201,38 +201,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-
-    <!-- Google綁定Modal -->
-    <div class="modal fade" id="bindGoogle-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="bindGoogle-modal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header border-bottom-0">
-                </div>
-                <div class="modal-body text-center text-secondary">
-                    <h3 class="fw-bolder">歡迎回來！</h3>
-                    <p class="mb-4">請輸入已註冊成功的帳號或立即註冊</p>
-                    <form class="mb-3" id="bindGoogle-form-vue">
-                        <input type="hidden" id="google-id" value="" />
-                        <input type="hidden" id="google-email" value="" />
-                        <input type="hidden" id="google-name" value="" />
-                        <input type="hidden" id="google-photo" value="" />
-                        <input v-model="inputData.account" type="email" id="bindGoogleEmail" :class="{ 'is-invalid': inputDataCheck.accountError }" class="form-control form-control-lg d-block" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
-                        <div class="invalid-feedback text-start mt-1">
-                            {{inputDataCheck.accountErrorMsg}}
-                        </div>
-                        <input v-model="inputData.password" type="password" id="bindGooglePassword" :class="{ 'is-invalid': inputDataCheck.passwordError }" class="form-control form-control-lg d-block mt-3" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" required>
-                        <div class="invalid-feedback text-start mt-1">
-                            {{inputDataCheck.passwordErrorMsg}}
-                        </div>
-                        <button type="button" id="bindGoogle-register-submit" class="w-100 text-decoration-none text-white mt-3" data-bs-dismiss="modal" :disabled="!isVerify">立即註冊</button>
-                        <button type="button" id="bindGoogle-bind-submit" class="w-100 text-decoration-none text-white mt-3" data-bs-dismiss="modal" :disabled="!isVerify">綁定</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    </div>    
 
     @RenderBody()
 

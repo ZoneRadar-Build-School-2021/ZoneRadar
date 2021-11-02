@@ -212,7 +212,7 @@ footer.shared-footer {
     box-shadow: none;
 }
 
-#login-modal .modal-body, #register-modal .modal-body, #bindGoogle-modal .modal-body {
+#login-modal .modal-body, #register-modal .modal-body {
     padding: 0 2rem;
 }
 
