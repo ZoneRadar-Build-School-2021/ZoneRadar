@@ -614,7 +614,6 @@
     <Content Include="Views\Payment\Payment.cshtml" />
     <Content Include="Views\Payment\EcPayment.cshtml" />
     <Content Include="Views\MemberCenter\ResetPasswordSuccess.cshtml" />
-    <Content Include="Views\MemberCenter\BindingToGoogleOrRegister.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
