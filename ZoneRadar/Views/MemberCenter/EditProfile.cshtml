@@ -24,8 +24,9 @@
                     </div>
                     <div class="photo-upload mb-2 d-flex justify-content-center">
                         @*<button type="button" class="btn btn-outline-info">上傳大頭照</button>*@
-                        <input id="uploadid" type="button" class="btn" value="上傳大頭照" />
-                        <input id="fileid" type="file" hidden />
+                        <input id="upload" type="button" class="btn" value="上傳大頭照" />
+                        <input id="deletepic" type="button" class="btn" value="移除大頭照" />
+                        <input id="files" type="file" hidden />
                     </div>
                     <!--<div class="col-12 col-md-4 fileUpload mb-2 btn btn-outline-info">
                         <input type="file" class="upload">
@@ -94,7 +95,7 @@
                 <hr>
                 <div class="email-information mb-3 form-check text-center">
                     @*<input type="checkbox" class="form-check-input float-none" id="ReceiveEDM" name="ReceiveEDM" value="@Model.ReceiveEDM" />*@
-                    @Html.CheckBoxFor(model => model.ReceiveEDM, new { @class = "form-check-input float-none" })
+                    @Html.CheckBoxFor(model => model.ReceiveEDM, new { @class = "form-check-input float-none", id = "check" })
                     <label class="form-check-label" for="ReceiveEDM">透過電子郵件像我發送獨家優惠、靈感、新聞和社群消息</label>
                 </div>
             </div>

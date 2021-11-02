@@ -21,280 +21,288 @@
             </a>
         </ul>
     </div>
-    @foreach (var item in Model)
+    @if (Model.Count() == 0)
     {
-        if (item.OrederStatus == "訂單已完成")
+        <img src="~/Assets/IMG/NoOrder(user).png" />
+    }
+    else
+    {
+        foreach (var item in Model)
         {
-            <!--訂單已完成-->
-            <div class="row align-items-end">
-                <div class="order-card py-4 py-lg-5">
-                    <div class="row">
-                        <div class="memberbuyer_pending_num_ordernum col-sm-12 col-md-6 col-lg-6 mb-3">
-                            <p>
-                                訂單編號：
-                                <span class="ms-1">@Html.DisplayFor(m => item.OrderNumber)</span>
-                            </p>
-                        </div>
-                        <div class="memberbuyer_pending_num_date col-sm-12 col-md-6 col-lg-6 mb-3">
-                            <p>
-                                <span>@Html.DisplayFor(m => item.OrederStatus)</span>
-                            </p>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                            <div class="venue-pic mt-2 mt-lg-0"
-                                 style="background-image: url(@Html.DisplayFor(m => item.SpaceUrl));"></div>
-                        </div>
-                        <div class="col-sm-12 col-lg-8 px-3">
-                            <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceId)" class="d-inline-block mb-3 mt-3 mt-lg-0">
-                                <h3 class="venue-name">@Html.DisplayFor(m => item.SpaceName)</h3>
-                            </a>
-                            <ul class="order-detial">
-                                <li class="mb-2 fs-5">
-                                    場地主姓名:<a href="mailto:@Html.DisplayFor(m => item.Email)" class="customer-name mx-2">@Html.DisplayFor(m => item.OwnerName)</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                                                                                                                    title="連絡他"></i>
-                                </li>
-                                <li class="mb-2 fs-5">場地主電話：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.OwnerPhone)</span></li>
-                                <li class="mb-2 fs-5">下單日期：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.PaidTime)</span></li>
-                                <li class="mb-2 fs-5">
-                                    場地評價：
-                                    <span class="contact-phone">
-                                        @if (item.Score == 0)
-                                        {
-                                            <span>目前沒有任何評價</span>
-                                        }
-                                        else if (item.Score % 1 == 0)
-                                        {
-                                            for (int i = 0; i < item.Score; i++)
+            if (item.OrederStatus == "訂單已完成")
+            {
+                <!--訂單已完成-->
+                <div class="row align-items-end">
+                    <div class="order-card py-4 py-lg-5">
+                        <div class="row">
+                            <div class="memberbuyer_pending_num_ordernum col-sm-12 col-md-6 col-lg-6 mb-3">
+                                <p>
+                                    訂單編號：
+                                    <span class="ms-1">@Html.DisplayFor(m => item.OrderNumber)</span>
+                                </p>
+                            </div>
+                            <div class="memberbuyer_pending_num_date col-sm-12 col-md-6 col-lg-6 mb-3">
+                                <p>
+                                    <span>@Html.DisplayFor(m => item.OrederStatus)</span>
+                                </p>
+                            </div>
+                            <div class="col-sm-12 col-lg-4">
+                                <div class="venue-pic mt-2 mt-lg-0"
+                                     style="background-image: url(@Html.DisplayFor(m => item.SpaceUrl));"></div>
+                            </div>
+                            <div class="col-sm-12 col-lg-8 px-3">
+                                <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceId)" class="d-inline-block mb-3 mt-3 mt-lg-0">
+                                    <h3 class="venue-name">@Html.DisplayFor(m => item.SpaceName)</h3>
+                                </a>
+                                <ul class="order-detial">
+                                    <li class="mb-2 fs-5">
+                                        場地主姓名:<a href="mailto:@Html.DisplayFor(m => item.Email)" class="customer-name mx-2">@Html.DisplayFor(m => item.OwnerName)</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                                                                                                                        title="連絡他"></i>
+                                    </li>
+                                    <li class="mb-2 fs-5">場地主電話：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.OwnerPhone)</span></li>
+                                    <li class="mb-2 fs-5">下單日期：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.PaidTime)</span></li>
+                                    <li class="mb-2 fs-5">
+                                        場地評價：
+                                        <span class="contact-phone">
+                                            @if (item.Score == 0)
                                             {
-                                                <i class="fas fa-star"></i>
+                                                <span>目前沒有任何評價</span>
                                             }
-                                        }
-                                        else
-                                        {
-                                            for (int i = 0; i < (item.Score - 1); i++)
+                                            else if (item.Score % 1 == 0)
                                             {
-                                                <i class="fas fa-star"></i>
-                                            }
-                                            <i class="fas fa-star-half-alt"></i>
-                                        }
-                                    </span>
-                                </li>
-                                <li class="mt-3">
-                                    <div class="collapse" id="order-@Html.DisplayFor(m => item.OrderNumber)">
-                                        <div class="datetime-card py-2">
-                                            <div class="row">
-                                                @foreach (var rentdetail in item.RentDetail)
+                                                for (int i = 0; i < item.Score; i++)
                                                 {
-                                                    <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
-                                                        <i class="far fa-calendar-check me-1"></i>租借日期:
-                                                        <span class="date ms-2">@Html.DisplayFor(m => rentdetail.RentTime)</span>
-                                                    </div>
-                                                    <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
-                                                        <i class="far fa-calendar-check me-1"></i>租還日期:
-                                                        <span class="date ms-2">@Html.DisplayFor(m => rentdetail.RentBackTime)</span>
-                                                    </div>
-                                                    <div class="col-sm-12 d-flex col-lg-3 align-items-center mb-1">
-                                                        <i class="far fa-user me-1"></i>人數:
-                                                        <span class="participant ms-2 me-1">@Html.DisplayFor(m => rentdetail.People)</span>人
-                                                    </div>
+                                                    <i class="fas fa-star"></i>
                                                 }
+                                            }
+                                            else
+                                            {
+                                                for (int i = 0; i < (item.Score - 1); i++)
+                                                {
+                                                    <i class="fas fa-star"></i>
+                                                }
+                                                <i class="fas fa-star-half-alt"></i>
+                                            }
+                                        </span>
+                                    </li>
+                                    <li class="mt-3">
+                                        <div class="collapse" id="order-@Html.DisplayFor(m => item.OrderNumber)">
+                                            <div class="datetime-card py-2">
+                                                <div class="row">
+                                                    @foreach (var rentdetail in item.RentDetail)
+                                                    {
+                                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
+                                                            <i class="far fa-calendar-check me-1"></i>租借日期:
+                                                            <span class="date ms-2">@Html.DisplayFor(m => rentdetail.RentTime)</span>
+                                                        </div>
+                                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
+                                                            <i class="far fa-calendar-check me-1"></i>租還日期:
+                                                            <span class="date ms-2">@Html.DisplayFor(m => rentdetail.RentBackTime)</span>
+                                                        </div>
+                                                        <div class="col-sm-12 d-flex col-lg-3 align-items-center mb-1">
+                                                            <i class="far fa-user me-1"></i>人數:
+                                                            <span class="participant ms-2 me-1">@Html.DisplayFor(m => rentdetail.People)</span>人
+                                                        </div>
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="toggle-btn">
-                                        <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-@Html.DisplayFor(m => item.OrderNumber)"
-                                           role="button" aria-expanded="false" aria-controls="order-@Html.DisplayFor(m => item.OrderNumber)"></a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-12">
-                            <p class="cost text-end">
-                                訂單總額:
-                                <span class="nt ms-4 fs-2 fw-bolder">
-                                    NT$
-                                    <span class="total-cost fs-2 fw-bolder">
-                                        @Html.DisplayFor(m => item.TotalMoney)
+                                        <div class="toggle-btn">
+                                            <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-@Html.DisplayFor(m => item.OrderNumber)"
+                                               role="button" aria-expanded="false" aria-controls="order-@Html.DisplayFor(m => item.OrderNumber)"></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-12">
+                                <p class="cost text-end">
+                                    訂單總額:
+                                    <span class="nt ms-4 fs-2 fw-bolder">
+                                        NT$
+                                        <span class="total-cost fs-2 fw-bolder">
+                                            @Html.DisplayFor(m => item.TotalMoney)
+                                        </span>
                                     </span>
-                                </span>
-                            </p>
-                            <div class="col-12 text-end mt-2">
-                                @Html.ActionLink("再買一次", "BookingPage", "Booking", new { id = item.SpaceId }, new { @class = "btn btn_cancel" })
-                                @if (item.HasReview)
-                                {
-                                    <button class="btn btn_sendscore me-2" data-bs-toggle="modal" data-bs-target="#B-@Html.DisplayFor(m => item.OrderNumber)" disabled>評價 / 評分</button>
-                                }
-                                else
-                                {
-                                    <button class="btn btn_sendscore me-2" data-bs-toggle="modal" data-bs-target="#B-@Html.DisplayFor(m =>item.OrderNumber)">評價 / 評分</button>
-                                }
+                                </p>
+                                <div class="col-12 text-end mt-2">
+                                    @Html.ActionLink("再買一次", "BookingPage", "Booking", new { id = item.SpaceId }, new { @class = "btn btn_cancel" })
+                                    @if (item.HasReview)
+                                    {
+                                        <button class="btn btn_sendscore me-2" data-bs-toggle="modal" data-bs-target="#B-@Html.DisplayFor(m => item.OrderNumber)" disabled>評價 / 評分</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn_sendscore me-2" data-bs-toggle="modal" data-bs-target="#B-@Html.DisplayFor(m =>item.OrderNumber)">評價 / 評分</button>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Modal -->
-                <form method="post" action="~/UserCenter/CreatCompletedReview">
-                    <div class="modal fade" id="B-@Html.DisplayFor(m => item.OrderNumber)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered ">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>@Html.DisplayFor(m => item.OrderNumber)</span></h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="score_star mt-2">
-                                        <p>您對於這次的場地的滿意度為幾顆星：</p>
-                                        <div>
-                                            <div class="col-6">
-                                                <select class="myselect form-select form-select-sm mt-3 text-center" onchange="success()" aria-label=".form-select-sm example" name="Score">
-                                                    <option selected class="d-none">請選擇星數</option>
-                                                    <option value="1">1星</option>
-                                                    <option value="2">2星</option>
-                                                    <option value="3">3星</option>
-                                                    <option value="4">4星</option>
-                                                    <option value="5">5星</option>
-                                                </select>
+                    <!-- Modal -->
+                    <form method="post" action="~/UserCenter/CreatCompletedReview">
+                        <div class="modal fade" id="B-@Html.DisplayFor(m => item.OrderNumber)" tabindex="-1" aria-labelledby="order_ModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered ">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>@Html.DisplayFor(m => item.OrderNumber)</span></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="score_star mt-2">
+                                            <p>您對於這次的場地的滿意度為幾顆星：</p>
+                                            <div>
+                                                <div class="col-6">
+                                                    <select class="myselect form-select form-select-sm mt-3 text-center" onchange="success()" aria-label=".form-select-sm example" name="Score">
+                                                        <option selected class="d-none">請選擇星數</option>
+                                                        <option value="1">1星</option>
+                                                        <option value="2">2星</option>
+                                                        <option value="3">3星</option>
+                                                        <option value="4">4星</option>
+                                                        <option value="5">5星</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-6"></div>
                                             </div>
-                                            <div class="col-6"></div>
+                                        </div>
+                                        <div class="customer_evaluation mt-3">
+                                            <p>您對於這次的場地有什麼需要改進或是想對我們說的話？</p>
+                                            <textarea class="form-control mt-3" id="textsend" oninput="success()" aria-label="With textarea" name="ReviewContent"></textarea>
+                                        </div>
+                                        <div class="customer_eveluation_recommend mt-3">
+                                            <p>您是否會推薦其他人</p>
+                                            <div class="customer_evelution_radio mt-2 form-check">
+                                                <input class="myradio form-check-input" type="radio" onclick="success()" value="true" name="Recommend"
+                                                       id="flexRadioDefault1">
+                                                <label class="form-check-label ms-1" for="flexRadioDefault1">
+                                                    <i class="fas fa-check me-1"></i>我會推薦給其他人
+                                                </label>
+                                            </div>
+                                            <div class="customer_evelution_radio form-check">
+                                                <input class="myradio form-check-input" type="radio" onclick="success()" value="false" name="Recommend"
+                                                       id="flexRadioDefault2">
+                                                <label class="form-check-label ms-1" for="flexRadioDefault2">
+                                                    <i class="fas fa-times me-2"></i>我不會推薦給其他人
+                                                </label>
+                                            </div>
+                                            <input type="hidden" value="@Html.DisplayFor(m => item.OrderId)" name="OrderId" />
                                         </div>
                                     </div>
-                                    <div class="customer_evaluation mt-3">
-                                        <p>您對於這次的場地有什麼需要改進或是想對我們說的話？</p>
-                                        <textarea class="form-control mt-3" id="textsend" oninput="success()" aria-label="With textarea" name="ReviewContent"></textarea>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn_close" data-bs-dismiss="modal">關閉</button>
+                                        <button type="submit" class="mybtn btn btn_sendscore">送出</button>
                                     </div>
-                                    <div class="customer_eveluation_recommend mt-3">
-                                        <p>您是否會推薦其他人</p>
-                                        <div class="customer_evelution_radio mt-2 form-check">
-                                            <input class="myradio form-check-input" type="radio" onclick="success()" value="true" name="Recommend"
-                                                   id="flexRadioDefault1">
-                                            <label class="form-check-label ms-1" for="flexRadioDefault1">
-                                                <i class="fas fa-check me-1"></i>我會推薦給其他人
-                                            </label>
-                                        </div>
-                                        <div class="customer_evelution_radio form-check">
-                                            <input class="myradio form-check-input" type="radio" onclick="success()" value="false" name="Recommend"
-                                                   id="flexRadioDefault2">
-                                            <label class="form-check-label ms-1" for="flexRadioDefault2">
-                                                <i class="fas fa-times me-2"></i>我不會推薦給其他人
-                                            </label>
-                                        </div>
-                                        <input type="hidden" value="@Html.DisplayFor(m => item.OrderId)" name="OrderId" />
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn_close" data-bs-dismiss="modal">關閉</button>
-                                    <button type="submit" class="mybtn btn btn_sendscore">送出</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                </form>
-            </div>
-        }
-        else
-        {
-            <!--訂單已取消-->
-            <div class="row align-items-end">
-                <div class="order-card py-4 py-lg-5">
-                    <div class="row">
-                        <div class="memberbuyer_pending_num_ordernum cancel col-sm-12 col-md-6 col-lg-6 mb-3">
-                            <p>
-                                訂單編號：
-                                <span class="ms-1">@Html.DisplayFor(m => item.OrderNumber)</span>
-                            </p>
-                        </div>
-                        <div class="memberbuyer_pending_num_date col-sm-12 col-md-6 col-lg-6 mb-3">
-                            <p>
-                                <span>@Html.DisplayFor(m => item.OrederStatus)</span>
-                            </p>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                            <div class="venue-pic mt-2 mt-lg-0"
-                                 style="background-image: url(@Html.DisplayFor(m => item.SpaceUrl));"></div>
-                        </div>
-                        <div class="col-sm-12 col-lg-8 px-3">
-                            <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceId)" class="d-inline-block mb-3 mt-3 mt-lg-0">
-                                <h3 class="venue-name cancel">@Html.DisplayFor(m => item.SpaceName)</h3>
-                            </a>
-                            <ul class="order-detial">
-                                <li class="mb-2 cancel fs-5">
-                                    場地主姓名:<a href="mailto:@Html.DisplayFor(m => item.Email)" class="customer-name mx-2">@Html.DisplayFor(m => item.OwnerName)</a><i class="fas fa-comment-dots ms-2 cancel fs-4" data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                                           title="連絡他"></i>
-                                </li>
-                                <li class="mb-2 cancel fs-5">場地主電話：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.OwnerPhone)</span></li>
-                                <li class="mb-2 cancel fs-5">下單日期：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.PaidTime)</span></li>
-                                <li class="mb-2 cancel fs-5">
-                                    場地評價：
-                                    <span class="contact-phone">
-                                        @if (item.Score == 0)
-                                        {
-                                            <span>目前沒有任何評價</span>
-                                        }
-                                        else if (item.Score % 1 == 0)
-                                        {
-                                            for (int i = 0; i < item.Score; i++)
+                    </form>
+                </div>
+            }
+            else
+            {
+                <!--訂單已取消-->
+                <div class="row align-items-end">
+                    <div class="order-card py-4 py-lg-5">
+                        <div class="row">
+                            <div class="memberbuyer_pending_num_ordernum cancel col-sm-12 col-md-6 col-lg-6 mb-3">
+                                <p>
+                                    訂單編號：
+                                    <span class="ms-1">@Html.DisplayFor(m => item.OrderNumber)</span>
+                                </p>
+                            </div>
+                            <div class="memberbuyer_pending_num_date col-sm-12 col-md-6 col-lg-6 mb-3">
+                                <p>
+                                    <span>@Html.DisplayFor(m => item.OrederStatus)</span>
+                                </p>
+                            </div>
+                            <div class="col-sm-12 col-lg-4">
+                                <div class="venue-pic mt-2 mt-lg-0"
+                                     style="background-image: url(@Html.DisplayFor(m => item.SpaceUrl));"></div>
+                            </div>
+                            <div class="col-sm-12 col-lg-8 px-3">
+                                <a href="~/Booking/BookingPage/@Html.DisplayFor(m => item.SpaceId)" class="d-inline-block mb-3 mt-3 mt-lg-0">
+                                    <h3 class="venue-name cancel">@Html.DisplayFor(m => item.SpaceName)</h3>
+                                </a>
+                                <ul class="order-detial">
+                                    <li class="mb-2 cancel fs-5">
+                                        場地主姓名:<a href="mailto:@Html.DisplayFor(m => item.Email)" class="customer-name mx-2">@Html.DisplayFor(m => item.OwnerName)</a><i class="fas fa-comment-dots ms-2 cancel fs-4" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                                                                                                                        title="連絡他"></i>
+                                    </li>
+                                    <li class="mb-2 cancel fs-5">場地主電話：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.OwnerPhone)</span></li>
+                                    <li class="mb-2 cancel fs-5">下單日期：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.PaidTime)</span></li>
+                                    <li class="mb-2 cancel fs-5">
+                                        場地評價：
+                                        <span class="contact-phone">
+                                            @if (item.Score == 0)
                                             {
-                                                <i class="fas fa-star"></i>
+                                                <span>目前沒有任何評價</span>
                                             }
-                                        }
-                                        else
-                                        {
-                                            for (int i = 0; i < (item.Score - 1); i++)
+                                            else if (item.Score % 1 == 0)
                                             {
-                                                <i class="fas fa-star"></i>
-                                            }
-                                            <i class="fas fa-star-half-alt"></i>
-                                        }
-                                    </span>
-                                </li>
-                                <li class="mt-3">
-                                    <div class="collapse" id="order-@Html.DisplayFor(m => item.OrderNumber)">
-                                        <div class="datetime-card py-2">
-                                            <div class="row">
-                                                @foreach (var rentdatil in item.RentDetail)
+                                                for (int i = 0; i < item.Score; i++)
                                                 {
-                                                    <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
-                                                        <i class="far fa-calendar-check me-1"></i>租借日期:
-                                                        <span class="date ms-2">@Html.DisplayFor(m => rentdatil.RentTime)</span>
-                                                    </div>
-                                                    <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
-                                                        <i class="far fa-calendar-check me-1"></i>租還日期:
-                                                        <span class="date ms-2">@Html.DisplayFor(m => rentdatil.RentBackTime)</span>
-                                                    </div>
-                                                    <div class="col-sm-12 d-flex col-lg-3 align-items-center mb-1">
-                                                        <i class="far fa-user me-1"></i>人數:
-                                                        <span class="participant ms-2 me-1">@Html.DisplayFor(m => rentdatil.People)</span>人
-                                                    </div>
+                                                    <i class="fas fa-star"></i>
                                                 }
+                                            }
+                                            else
+                                            {
+                                                for (int i = 0; i < (item.Score - 1); i++)
+                                                {
+                                                    <i class="fas fa-star"></i>
+                                                }
+                                                <i class="fas fa-star-half-alt"></i>
+                                            }
+                                        </span>
+                                    </li>
+                                    <li class="mt-3">
+                                        <div class="collapse" id="order-@Html.DisplayFor(m => item.OrderNumber)">
+                                            <div class="datetime-card py-2">
+                                                <div class="row">
+                                                    @foreach (var rentdatil in item.RentDetail)
+                                                    {
+                                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
+                                                            <i class="far fa-calendar-check me-1"></i>租借日期:
+                                                            <span class="date ms-2">@Html.DisplayFor(m => rentdatil.RentTime)</span>
+                                                        </div>
+                                                        <div class="col-sm-12 d-flex col-lg-4 align-items-center mb-1">
+                                                            <i class="far fa-calendar-check me-1"></i>租還日期:
+                                                            <span class="date ms-2">@Html.DisplayFor(m => rentdatil.RentBackTime)</span>
+                                                        </div>
+                                                        <div class="col-sm-12 d-flex col-lg-3 align-items-center mb-1">
+                                                            <i class="far fa-user me-1"></i>人數:
+                                                            <span class="participant ms-2 me-1">@Html.DisplayFor(m => rentdatil.People)</span>人
+                                                        </div>
+                                                    }
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="toggle-btn">
-                                        <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-@Html.DisplayFor(m => item.OrderNumber)"
-                                           role="button" aria-expanded="false" aria-controls="order-@Html.DisplayFor(m => item.OrderNumber)"></a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-12">
-                            <p class="cost cancel text-end">
-                                訂單總額:
-                                <span class="nt ms-4 cancel fs-2 fw-bolder">
-                                    NT$
-                                    <span class="total-cost cancel fs-2 fw-bolder">
-                                        @Html.DisplayFor(m => item.TotalMoney)
+                                        <div class="toggle-btn">
+                                            <a class="read-more btn px-0 collapsed" data-bs-toggle="collapse" href="#order-@Html.DisplayFor(m => item.OrderNumber)"
+                                               role="button" aria-expanded="false" aria-controls="order-@Html.DisplayFor(m => item.OrderNumber)"></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-12">
+                                <p class="cost cancel text-end">
+                                    訂單總額:
+                                    <span class="nt ms-4 cancel fs-2 fw-bolder">
+                                        NT$
+                                        <span class="total-cost cancel fs-2 fw-bolder">
+                                            @Html.DisplayFor(m => item.TotalMoney)
+                                        </span>
                                     </span>
-                                </span>
-                            </p>
-                            <div class="col-12 text-end mt-2">
-                                <button type="button" class="btn btn_cancel" disabled>再買一次</button>
-                                <button type="button" class="btn btn_sendscore" disabled>評價 / 評分</button>
+                                </p>
+                                <div class="col-12 text-end mt-2">
+                                    <button type="button" class="btn btn_cancel" disabled>再買一次</button>
+                                    <button type="button" class="btn btn_sendscore" disabled>評價 / 評分</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
+
         }
 
     }
