@@ -9,7 +9,6 @@
     var OrderId = ViewData["OrderId"];
     var spacename = ViewData["SpaceName"];
     var TotalMoney = ViewData["TotalMoney"];
-    int qwe = 0;
 }
 <div class="container">
     <div class="row">
@@ -55,7 +54,7 @@
                                 <div class="d-flex heavy table-row">
                                     <div class="title-field me-auto">總計</div>
                                     <div data-testing-id="space-rental-total">
-                                        <span>@TotalMoney</span>
+                                        <span></span>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +80,7 @@
                                 <div class="d-flex heavy table-row">
                                     <div class="title-field me-auto">場地價格</div>
                                     <div data-testing-id="space-rental-total">
-                                        <span>@TotalMoney</span>
+                                        <span>  </span>
                                     </div>
                                 </div>
                             </div>
@@ -192,7 +191,7 @@
                                         </div>
                                         <div>
                                             <span class="fw-light">
-                                                <i class="far fa-clock me-2"></i>@DateTime.Parse(o.RentTime).ToString("HH-mm") ~ @DateTime.Parse(o.RentBackTime).ToString("HH-mm")
+                                                <i class="far fa-clock me-2"></i>@DateTime.Parse(o.RentTime).ToString("HH:mm") ~ @DateTime.Parse(o.RentBackTime).ToString("HH:mm")
                                                 @*@DateTime.Parse(o.RentBackTime).ToString("yyyy-MM-dd tt h-mm")*@
                                             </span>
                                         </div>
@@ -226,3 +225,4 @@
 @section endJS
 {
     <script src="~/Assets/JS/Payment/Paypage.js"></script>
+}

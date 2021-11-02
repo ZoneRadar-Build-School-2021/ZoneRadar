@@ -338,7 +338,6 @@ namespace ZoneRadar.Controllers
             if (model.RtnCode == 1)
             {
                 _ecpaymentservice.EditOrderStatus(model);
-                
             }
             return Ok("1|OK");
         }
