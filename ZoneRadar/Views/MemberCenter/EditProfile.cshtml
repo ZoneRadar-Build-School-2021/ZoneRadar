@@ -3,13 +3,15 @@
 @{
     ViewBag.Title = "PersonalInfo";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var profileJS = Json.Encode(Model);
 }
 
 <form action="/MemberCenter/EditProfile" method="post">
     @Html.AntiForgeryToken()
-    <input name="MemberID" type="hidden" value="@Model.MemberID"/>
+    <input name="MemberID" type="hidden" value="@Model.MemberID" />
 
-    <div class="profile container">
+    <div id="app" class="profile container">
         <div class="row">
             <div class="col-12">
                 <div class="profile-photo d-flex justify-content-center">
@@ -19,14 +21,13 @@
                 <div class="photo-button mb-3">
                     <div class="photo-card mb-2 d-flex justify-content-center">
                         <div class="photo">
-                            <img class="mt-4" src="@Model.Photo" id="imgpic">
+                            <img class="mt-4" :src="inputData.Photo" id="imgpic">
                         </div>
                     </div>
                     <div class="photo-upload mb-2 d-flex justify-content-center">
                         @*<button type="button" class="btn btn-outline-info">上傳大頭照</button>*@
-                        <input id="upload" type="button" class="btn" value="上傳大頭照" />
-                        <input id="deletepic" type="button" class="btn" value="移除大頭照" />
-                        <input id="files" type="file" hidden />
+                        <input type="button" class="btn" value="上傳大頭照" />
+                        <input type="button" class="btn" value="移除大頭照" />
                     </div>
                     <!--<div class="col-12 col-md-4 fileUpload mb-2 btn btn-outline-info">
                         <input type="file" class="upload">
@@ -41,9 +42,10 @@
                         <label for="InputName" class="col-form-label">姓名</label>
                     </div>
                     <div class="col-12 col-md-8">
-                        @*<input id="InputName" type="text" value="@Model.Name" name="Name" class="form-control" aria-describedby="">*@
-                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", type = "text", required = "true", id = "name" } })
-                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger d-block text-start mt-1" })
+                        <input type="text" id="InputName" class="form-control" v-model="inputData.Name" name="Name" :class="inputDataCheck.NameError" aria-describedby="">
+                    </div>
+                    <div class="col-12 col-md-4 text-danger small mt-1">
+                        {{ inputDataCheck.NameErrorMsg }}
                     </div>
                 </div>
                 <div class="tel row align-items-center mb-3 d-flex justify-content-center">
@@ -51,9 +53,7 @@
                         <label for="InputTel" class="col-form-label">電話</label>
                     </div>
                     <div class="col-12 col-md-8">
-                        <input id="phone" type="text" value="@Model.Phone" name="Phone" class="form-control" aria-describedby="telverify">
-                        @*@Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", type = "text", required = "true", id = "phone"} })
-                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger d-block text-start mt-1" })*@
+                        <input id="phone" type="text" v-model="inputData.Phone" name="Phone" class="form-control" aria-describedby="telverify">
                     </div>
                     <div class="d-none verify">
                         <span id="telverify" class="text-danger ">
@@ -67,7 +67,7 @@
                         <label for="InputEmail" class="col-form-label">電子郵件</label>
                     </div>
                     <div class="col-12 col-md-8">
-                        <input id="InputEmail" type="text" readonly value="@Model.Email" name="Email" class="form-control" aria-describedby="emailverify">
+                        <input id="InputEmail" type="text" readonly v-model="inputData.Email" name="Email" class="form-control" aria-describedby="emailverify">
                     </div>
                     <div class="d-none verify">
                         <span id="emailverify" class="text-danger">
@@ -81,21 +81,18 @@
                         <label for="descript" class="col-form-label">描述</label>
                     </div>
                     <div class="col-12 col-md-8">
-                        <textarea class="form-control" id="description" name="Description" rows="5">@Model.Description</textarea>
+                        <textarea v-model="inputData.Description" class="form-control" name="Description" id="description" rows="5"></textarea>
                     </div>
                 </div>
                 <div class="saved-button align-items-center mb-5 mt-5 d-flex justify-content-center">
-                    <input id="submit" type="submit" value="儲存" class="btn btn-default" disabled/>
-                    @*<button type="button" class="btn btn-outline-danger">儲存</button>*@
-                    @*<button id="save" type="button" class="btn" onclick="myFunction();">儲存</button>*@
+                    <input id="submit" type="submit" value="儲存" class="btn btn-default" :disabled="isDisabled" />
                 </div>
                 <div class="email-preferences d-flex justify-content-center">
                     <h3>電子郵件選項</h3>
                 </div>
                 <hr>
                 <div class="email-information mb-3 form-check text-center">
-                    @*<input type="checkbox" class="form-check-input float-none" id="ReceiveEDM" name="ReceiveEDM" value="@Model.ReceiveEDM" />*@
-                    @Html.CheckBoxFor(model => model.ReceiveEDM, new { @class = "form-check-input float-none", id = "check" })
+                    <input type="checkbox" class="form-check-input float-none" id="Check" v-model="inputData.ReceiveEDM" />
                     <label class="form-check-label" for="ReceiveEDM">透過電子郵件像我發送獨家優惠、靈感、新聞和社群消息</label>
                 </div>
             </div>
@@ -108,6 +105,10 @@
 }
 
 @section endJS{
+    <script>
+        let profileData = @Html.Raw(profileJS);
+    </script>
     <script src="~/Assets/JS/membercenter/profile.js"></script>
     <script src="~/Assets/JS/axios.min.js"></script>
 }
+
