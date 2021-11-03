@@ -55,7 +55,6 @@ namespace ZoneRadar.Models.ViewModels
         public List<SomeOnesCancel> SomeOnesCancelAllList { get; set; }
         public List<SomeOnesCancel> SomeOnesCancelList { get; set; }
         public List<SpaceoperatingDay> SpaceoperatingDaysList { get; set; }
-        public List<SpaceoperatingDay> _compareOperatingDay { get; set; }
     }
 
     public class SomeOnesSpaceName
@@ -204,12 +203,17 @@ namespace ZoneRadar.Models.ViewModels
     public class SpaceoperatingDay
     {
         public int SpaceId { get; set; }
-        public int OperatingDay { get; set; }
-        public string weekDay { get; set; }
+        public int OperatingDay { get; set; }//1~7
+        public string WeekDay { get; set; }//星期一~星期日
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
-        public int value { get; set; }
-        public string name { get; set; }
+        public string isOpen { get; set; }//checked
+        public string AllDayValue { get; set; }//Y1~Y7
+        public string isAllDayCheck { get; set; }//checked
+        public string isHourCheck { get; set; }//checked
+        public string HoursValue { get; set; }//hr1~hr7
+
+        public string TagName { get; set; }//Hours1~Hours7
     }
     
 

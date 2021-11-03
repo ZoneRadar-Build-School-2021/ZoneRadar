@@ -80,6 +80,7 @@ namespace ZoneRadar.Controllers
         public ActionResult EditSpace(int spaceId)
         {
             var model = _spaceService.ReadAnySpace(spaceId);
+            
             return View(model);
         }
         [HttpPost]
@@ -90,7 +91,7 @@ namespace ZoneRadar.Controllers
             editspace.MemberID = userid;
 
             var result = _spaceService.EditSpace(editspace);
-            return RedirectToAction("EditSpace", result);
+            return RedirectToAction("SpaceManage", result);
         }
 
         /// <summary>

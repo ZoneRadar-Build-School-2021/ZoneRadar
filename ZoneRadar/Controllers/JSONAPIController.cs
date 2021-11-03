@@ -334,14 +334,15 @@ namespace ZoneRadar.Controllers
         [AcceptVerbs("GET")]
         public APIResponse GetUploadPrams()
         {
-            var spaceId = _repository.GetAll<Space>().Max(x => x.SpaceID);
+            //var uaerid=_spaceService.
+            //var spaceID = _spaceService.GetHostSpace();
             var response = new APIResponse();
             try
             {
                 response.Status = "Success";
                 response.Message = string.Empty;
                 // id須由外部傳入
-                response.Response = _spaceService.GetSpacePhotoFromDB(spaceId);
+                response.Response = _spaceService.GetSpacePhotoFromDB(4);
 
                 return response;
             }

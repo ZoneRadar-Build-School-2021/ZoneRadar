@@ -573,27 +573,27 @@ namespace ZoneRadar.Services
         /// </summary>
         public List<SelectListItem> Operating()
         {
-            var Operating = new List<SelectListItem>
-            {
-                new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
-                new SelectListItem { Value = "07:00:00.0000000", Text = "07:00"},
-                new SelectListItem { Value = "08:00:00.0000000", Text = "08:00"},
-                new SelectListItem { Value = "09:00:00.0000000", Text = "09:00"},
-                new SelectListItem { Value = "10:00:00.0000000", Text = "10:00"},
-                new SelectListItem { Value = "11:00:00.0000000", Text = "11:00"},
-                new SelectListItem { Value = "12:00:00.0000000", Text = "12:00"},
-                new SelectListItem { Value = "13:00:00.0000000", Text = "13:00"},
-                new SelectListItem { Value = "14:00:00.0000000", Text = "14:00"},
-                new SelectListItem { Value = "15:00:00.0000000", Text = "15:00"},
-                new SelectListItem { Value = "16:00:00.0000000", Text = "16:00"},
-                new SelectListItem { Value = "17:00:00.0000000", Text = "17:00"},
-                new SelectListItem { Value = "18:00:00.0000000", Text = "18:00"},
-                new SelectListItem { Value = "19:00:00.0000000", Text = "19:00"},
-                new SelectListItem { Value = "20:00:00.0000000", Text = "20:00"},
-                new SelectListItem { Value = "21:00:00.0000000", Text = "21:00"},
-                new SelectListItem { Value = "22:00:00.0000000", Text = "22:00"},
-                new SelectListItem { Value = "23:00:00.0000000", Text = "23:00"},
-                new SelectListItem { Value = "00:00:00.0000000", Text = "00:00"},
+            var Operating = new List<SelectListItem> {
+            new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
+            new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
+            new SelectListItem { Value = "07:00:00.0000000", Text = "07:00"},
+            new SelectListItem { Value = "08:00:00.0000000", Text = "08:00"},
+            new SelectListItem { Value = "09:00:00.0000000", Text = "09:00"},
+            new SelectListItem { Value = "10:00:00.0000000", Text = "10:00"},
+            new SelectListItem { Value = "11:00:00.0000000", Text = "11:00"},
+            new SelectListItem { Value = "12:00:00.0000000", Text = "12:00"},
+            new SelectListItem { Value = "13:00:00.0000000", Text = "13:00"},
+            new SelectListItem { Value = "14:00:00.0000000", Text = "14:00"},
+            new SelectListItem { Value = "15:00:00.0000000", Text = "15:00"},
+            new SelectListItem { Value = "16:00:00.0000000", Text = "16:00"},
+            new SelectListItem { Value = "17:00:00.0000000", Text = "17:00"},
+            new SelectListItem { Value = "18:00:00.0000000", Text = "18:00"},
+            new SelectListItem { Value = "19:00:00.0000000", Text = "19:00"},
+            new SelectListItem { Value = "20:00:00.0000000", Text = "20:00"},
+            new SelectListItem { Value = "21:00:00.0000000", Text = "21:00"},
+            new SelectListItem { Value = "22:00:00.0000000", Text = "22:00"},
+            new SelectListItem { Value = "23:00:00.0000000", Text = "23:00"},
+            new SelectListItem { Value = "00:00:00.0000000", Text = "00:00"},
             };
             return Operating;
         }
@@ -655,14 +655,12 @@ namespace ZoneRadar.Services
                 SomeOnesCleanRuleThreeList = new List<SomeOnesCleanRule>(),
                 SomeOnesCleanRuleFourList = new List<SomeOnesCleanRule>(),
                 SpaceoperatingDaysList = new List<SpaceoperatingDay>(),
-                _compareOperatingDay = new List<SpaceoperatingDay>(),
-                Operating = new List<SelectListItem>(),
                 SpaceOwnerNameList = new List<SomeOnesSpaceName>(),
+                Operating = new List<SelectListItem>()
             };
-            //spaceId
-
-            //找 地址( Amber) 
-            var adds = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
+          
+        //找 地址( Amber) 
+        var adds = _repository.GetAll<Space>().Where(x => x.SpaceID == spaceId).Select(x => x).ToList();
             foreach (var add in adds)
             {
                 var addsTemp = new SomeOnesSpace()
@@ -670,7 +668,7 @@ namespace ZoneRadar.Services
                     Address = add.Address,
                     DistrictID = add.DistrictID,
                     Country = add.Country,
-                    SpaceID=add.SpaceID,
+                    SpaceID = add.SpaceID,
                 };
                 result.SomeOnesSpaceList.Add(addsTemp);
             }
@@ -707,11 +705,11 @@ namespace ZoneRadar.Services
                 {
                     CityName = cityname.CityName,
                     Lat = lat,
-                    Lng=lng
+                    Lng = lng
                 };
                 result.SomeOnesCitytList.Add(ciytTemp);
             };
-            
+
             //活動類型 把活動類別用戶有選的撈出來(Amber)
 
 
@@ -770,7 +768,7 @@ namespace ZoneRadar.Services
 
                 result.SomeOnesSpaceIntroductionList.Add(spaceIntroductiontemp);
             };
-            
+
             /// <summary>
             ///  場地大小人數(Amber) 
             /// </summary>
@@ -833,8 +831,8 @@ namespace ZoneRadar.Services
                 var temp = new SomeOnesAmenity()
                 {
                     Amenity = item.Amenity,
-                    AmenityId=item.AmenityDetailID,
-                    
+                    AmenityId = item.AmenityDetailID,
+
                 };
                 result.SomeOnesAmenityList.Add(temp);
             }
@@ -865,7 +863,7 @@ namespace ZoneRadar.Services
                 var temp = new AmenityAraeOne()
                 {
                     AmenityName = item.Amenity,
-                    AmenityId=item.AmenityDetailID
+                    AmenityId = item.AmenityDetailID
                 };
                 result.amenityAraeOneList.Add(temp);
             }
@@ -878,7 +876,7 @@ namespace ZoneRadar.Services
                 var temp = new AmenityAraeTwo()
                 {
                     AmenityName = item.Amenity,
-                    AmenityId=item.AmenityDetailID
+                    AmenityId = item.AmenityDetailID
                 };
                 result.amenityAraeTwoList.Add(temp);
             }
@@ -1098,9 +1096,111 @@ namespace ZoneRadar.Services
             }
             /// <summary>
             /// 營業時間 有被選的 (Amber) 
+            int[] OperatingDays = { 1, 2, 3, 4, 5, 6, 7 };
+           List<SpaceoperatingDay> conpare = new List<SpaceoperatingDay>();
+            conpare.Add(new SpaceoperatingDay()
+            {
+                SpaceId = 999,
+                OperatingDay = 1,
+                StartTime = new TimeSpan(6, 0, 0),
+                EndTime = new TimeSpan(23, 0, 0),
+                isOpen = "",
+                isAllDayCheck = "",
+                isHourCheck = "",
+                WeekDay = "星期一",
+                AllDayValue = "Y1",
+                HoursValue = "hr1",
+                TagName = "Hours1"
+            });
 
-            int[] OperatingDays = { 1,2,3,4,5,6,7};
+            conpare.Add(new SpaceoperatingDay()
+            {
+                SpaceId = 999,
+                OperatingDay = 2,
+                StartTime = new TimeSpan(6, 0, 0),
+                EndTime = new TimeSpan(23, 0, 0),
+                isOpen = "",
+                isAllDayCheck = "",
+                isHourCheck = "",
+                WeekDay = "星期二",
+                AllDayValue = "Y2",
+                HoursValue = "hr2",
+                TagName = "Hours2"
+            });
+
+            conpare.Add(new SpaceoperatingDay()
+            {
+                SpaceId = 999,
+                OperatingDay = 3,
+                StartTime = new TimeSpan(6, 0, 0),
+                EndTime = new TimeSpan(23, 0, 0),
+                isOpen = "",
+                isAllDayCheck = "",
+                isHourCheck = "",
+                WeekDay = "星期三",
+                AllDayValue = "Y3",
+                HoursValue = "hr3",
+                TagName = "Hours3"
+            });
+            conpare.Add(new SpaceoperatingDay()
+            {
+                SpaceId = 999,
+                OperatingDay = 4,
+                StartTime = new TimeSpan(6, 0, 0),
+                EndTime = new TimeSpan(23, 0, 0),
+                isOpen = "",
+                isAllDayCheck = "",
+                isHourCheck = "",
+                WeekDay = "星期四",
+                AllDayValue = "Y4",
+                HoursValue = "hr4",
+                TagName = "Hours4"
+            });
+            conpare.Add(new SpaceoperatingDay()
+            {
+                SpaceId = 999,
+                OperatingDay = 5,
+                StartTime = new TimeSpan(6, 0, 0),
+                EndTime = new TimeSpan(23, 0, 0),
+                isOpen = "",
+                isAllDayCheck = "",
+                isHourCheck = "",
+                WeekDay = "星期五",
+                AllDayValue = "Y5",
+                HoursValue = "hr5",
+                TagName = "Hours5"
+            });
+            conpare.Add(new SpaceoperatingDay()
+            {
+                SpaceId = 999,
+                OperatingDay = 6,
+                StartTime = new TimeSpan(6, 0, 0),
+                EndTime = new TimeSpan(23, 0, 0),
+                isOpen = "",
+                isAllDayCheck = "",
+                isHourCheck = "",
+                WeekDay = "星期六",
+                AllDayValue = "Y6",
+                HoursValue = "hr6",
+                TagName = "Hours6"
+            });
+            conpare.Add(new SpaceoperatingDay()
+            {
+                SpaceId = 999,
+                OperatingDay = 7,
+                StartTime = new TimeSpan(6, 0, 0),
+                EndTime = new TimeSpan(23, 0, 0),
+                isOpen = "",
+                isAllDayCheck = "",
+                isHourCheck = "",
+                WeekDay = "星期日",
+                AllDayValue = "Y7",
+                HoursValue = "hr7",
+                TagName = "Hours7"
+            });
             var openDays = _repository.GetAll<Operating>().Where(x => x.SpaceID == spaceId).ToList();
+            //IEnumerable<double>
+
             foreach (var item in openDays)
             {
                 var operatingday = new SpaceoperatingDay()
@@ -1110,27 +1210,181 @@ namespace ZoneRadar.Services
                     StartTime = item.StartTime,
                     EndTime = item.EndTime,
                 };
+                //1.判斷資料庫中該spaceID一到日是否有營業
                 if (OperatingDays.Contains(operatingday.OperatingDay))
                 {
-                    operatingday.weekDay = "星期一";
+                    //有營業 營業的checkbox checked
+                    operatingday.isOpen = "checked";
+                    //2.判斷是全天還是小時
+                    //全天的開時間跟結束時間
+                    TimeSpan start = new TimeSpan(6, 0, 0);
+                    TimeSpan end = new TimeSpan(23, 0, 0);
+                    if (operatingday.StartTime.Equals(start) && operatingday.EndTime.Equals(end))
+                    {
+                        //符合全天的條件全天的 radiobox checked 
+                        operatingday.isAllDayCheck = "checked";
+                    }
+                    else
+                    {
+                        //反之
+                        operatingday.isHourCheck = "checked";
+                    }
+                    //每個要的值
+                    if (operatingday.OperatingDay == 1)
+                    {
+                        operatingday.WeekDay = "星期一";
+                        operatingday.AllDayValue = "Y1";
+                        operatingday.HoursValue = "hr1";
+                        operatingday.TagName = "Hours1";
+                    }
+                    else if (operatingday.OperatingDay == 2)
+                    {
+                        operatingday.WeekDay = "星期二";
+                        operatingday.AllDayValue = "Y2";
+                        operatingday.HoursValue = "hr2";
+                        operatingday.TagName = "Hours2";
+                    }
+                    else if (operatingday.OperatingDay == 3)
+                    {
+                        operatingday.WeekDay = "星期三";
+                        operatingday.AllDayValue = "Y3";
+                        operatingday.HoursValue = "hr3";
+                        operatingday.TagName = "Hours3";
+                    }
+                    else if (operatingday.OperatingDay == 4)
+                    {
+                        operatingday.WeekDay = "星期四";
+                        operatingday.AllDayValue = "Y4";
+                        operatingday.HoursValue = "hr4";
+                        operatingday.TagName = "Hours4";
+                    }
+                    else if (operatingday.OperatingDay == 5)
+                    {
+                        operatingday.WeekDay = "星期五";
+                        operatingday.AllDayValue = "Y5";
+                        operatingday.HoursValue = "hr5";
+                        operatingday.TagName = "Hours5";
+                    }
+                    else if (operatingday.OperatingDay == 6)
+                    {
+                        operatingday.WeekDay = "星期六";
+                        operatingday.AllDayValue = "Y6";
+                        operatingday.HoursValue = "hr6";
+                        operatingday.TagName = "Hours6";
+                    }
+                    else
+                    {
+                        operatingday.WeekDay = "星期日";
+                        operatingday.AllDayValue = "Y7";
+                        operatingday.HoursValue = "hr7";
+                        operatingday.TagName = "Hours7";
+                    }
                 }
+                //if (openDays.Count<7)
+                //{
+                //    //operatingday.isOpen = "";
+                //    if (operatingday.OperatingDay == 1)
+                //    {
+                //        operatingday.WeekDay = "星期一";
+                //        operatingday.AllDayValue = "Y1";
+                //        operatingday.HoursValue = "hr1";
+                //        operatingday.TagName = "Hours1";
+                //    }
+
+                //}
                 else
-                { 
-                    operatingday.weekDay = "星期日";
+                {
+                    operatingday.isOpen = "";
+                    if (operatingday.OperatingDay == 1)
+                    {
+                        operatingday.WeekDay = "星期一";
+                        operatingday.AllDayValue = "Y1";
+                        operatingday.HoursValue = "hr1";
+                        operatingday.TagName = "Hours1";
+                    }
+                    else if (operatingday.OperatingDay == 2)
+                    {
+                        operatingday.WeekDay = "星期二";
+                        operatingday.AllDayValue = "Y2";
+                        operatingday.HoursValue = "hr2";
+                        operatingday.TagName = "Hours2";
+                    }
+                    else if (operatingday.OperatingDay == 3)
+                    {
+                        operatingday.WeekDay = "星期三";
+                        operatingday.AllDayValue = "Y3";
+                        operatingday.HoursValue = "hr3";
+                        operatingday.TagName = "Hours3";
+                    }
+                    else if (operatingday.OperatingDay == 4)
+                    {
+                        operatingday.WeekDay = "星期四";
+                        operatingday.AllDayValue = "Y4";
+                        operatingday.HoursValue = "hr4";
+                        operatingday.TagName = "Hours4";
+                    }
+                    else if (operatingday.OperatingDay == 5)
+                    {
+                        operatingday.WeekDay = "星期五";
+                        operatingday.AllDayValue = "Y5";
+                        operatingday.HoursValue = "hr5";
+                        operatingday.TagName = "Hours5";
+                    }
+                    else if (operatingday.OperatingDay == 6)
+                    {
+                        operatingday.WeekDay = "星期六";
+                        operatingday.AllDayValue = "Y6";
+                        operatingday.HoursValue = "hr6";
+                        operatingday.TagName = "Hours6";
+                    }
+                    else
+                    {
+                        operatingday.WeekDay = "星期日";
+                        operatingday.AllDayValue = "Y7";
+                        operatingday.HoursValue = "hr7";
+                        operatingday.TagName = "Hours7";
+                    }
+
                 }
-
                 result.SpaceoperatingDaysList.Add(operatingday);
-            }
-            List<SpaceoperatingDay> _compareOperatingDay = new List<SpaceoperatingDay>();
-            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 1, weekDay = "星期一" });
-            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 2, weekDay = "星期二" });
-            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 3, weekDay = "星期三" });
-            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 4, weekDay = "星期四" });
-            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 5, weekDay = "星期五" });
-            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 6, weekDay = "星期六" });
-            result._compareOperatingDay.Add(new SpaceoperatingDay { OperatingDay = 7, weekDay = "星期日" });
-            return result;
 
+            }
+            //foreach (var item in Operating)
+            //{
+
+            //}
+            var Operating = new List<SelectListItem> 
+            {
+            new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
+            new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
+            new SelectListItem { Value = "07:00:00.0000000", Text = "07:00"},
+            new SelectListItem { Value = "08:00:00.0000000", Text = "08:00"},
+            new SelectListItem { Value = "09:00:00.0000000", Text = "09:00"},
+            new SelectListItem { Value = "10:00:00.0000000", Text = "10:00"},
+            new SelectListItem { Value = "11:00:00.0000000", Text = "11:00"},
+            new SelectListItem { Value = "12:00:00.0000000", Text = "12:00"},
+            new SelectListItem { Value = "13:00:00.0000000", Text = "13:00"},
+            new SelectListItem { Value = "14:00:00.0000000", Text = "14:00"},
+            new SelectListItem { Value = "15:00:00.0000000", Text = "15:00"},
+            new SelectListItem { Value = "16:00:00.0000000", Text = "16:00"},
+            new SelectListItem { Value = "17:00:00.0000000", Text = "17:00"},
+            new SelectListItem { Value = "18:00:00.0000000", Text = "18:00"},
+            new SelectListItem { Value = "19:00:00.0000000", Text = "19:00"},
+            new SelectListItem { Value = "20:00:00.0000000", Text = "20:00"},
+            new SelectListItem { Value = "21:00:00.0000000", Text = "21:00"},
+            new SelectListItem { Value = "22:00:00.0000000", Text = "22:00"},
+            new SelectListItem { Value = "23:00:00.0000000", Text = "23:00"},
+            new SelectListItem { Value = "00:00:00.0000000", Text = "00:00"},
+            };
+            //foreach (var item in Operating)
+            //{
+            //    var Operatings=new Operating()
+            //    {
+
+            //    }
+            //}
+            //result.Operating.Add(Operating);
+            return result;
         }
         /// <summary>
         /// 增加場地 增加地址的datamodel (Amber) 
@@ -1256,20 +1510,12 @@ namespace ZoneRadar.Services
             return addSpaceViewModel;
         }
 
-        //todo
-        /// <summary>
-        ///  //上傳到雲 (Amber) 
-        /// </summary>
-
 
         /// <summary>
         ///  場地修改(Amber)
         /// </summary>
         public AddSpaceViewModel EditSpace(AddSpaceViewModel addSpaceViewModel)
-
         {
-           
-
             var spacecity = addSpaceViewModel.CityID;
             var city = _repository.GetAll<City>().Where(x => x.CityName == spacecity).Select(x => x.CityID).FirstOrDefault();
 
@@ -1308,13 +1554,13 @@ namespace ZoneRadar.Services
             _repository.Update<SpaceDiscount>(SpaceDiscountID);
             _repository.SaveChanges();
 
-            var imgUpdate = _repository.GetAll<SpacePhoto>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID&& x.Sort==2).FirstOrDefault();
-            if (imgUpdate!=null)
-            {
-                _repository.Delete<SpacePhoto>(imgUpdate);
-                _repository.SaveChanges();
-            }
-            
+            //var imgUpdate = _repository.GetAll<SpacePhoto>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID&& x.Sort==2).FirstOrDefault();
+            //if (imgUpdate!=null)
+            //{
+            //    _repository.Delete<SpacePhoto>(imgUpdate);
+            //    _repository.SaveChanges();
+            //}
+
 
             var typeOld = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID).ToList();
 
@@ -1323,22 +1569,29 @@ namespace ZoneRadar.Services
                 _repository.Delete<SpaceType>(item);
                 _repository.SaveChanges();
             }
+            //todo
 
-            List <SpaceType> type = new List<SpaceType>();
+            List<SpaceType> type = new List<SpaceType>();
             foreach (var item in addSpaceViewModel.TypeDetailID)
             {
                 type.Add(new SpaceType { SpaceID = addSpaceViewModel.SpaceID, TypeDetailID = item });
             }
+
             _repository.CreateRange<SpaceType>(type);
             _repository.SaveChanges();
 
+            //var cleaningProtocolOld = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID).ToList();
+            //foreach (var item in cleaningProtocolOld)
+            //{
+            //    _repository.Delete<CleaningProtocol>(item);
+            //    _repository.SaveChanges();
+            //}
             var cleaningProtocolOld = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID).ToList();
             foreach (var item in cleaningProtocolOld)
             {
                 _repository.Delete<CleaningProtocol>(item);
                 _repository.SaveChanges();
             }
-
             List<CleaningProtocol> cleaningProtocol = new List<CleaningProtocol>();
             foreach (var item in addSpaceViewModel.CleaningOptionID)
             {
@@ -1353,7 +1606,6 @@ namespace ZoneRadar.Services
                 _repository.Delete<SpaceAmenity>(item);
                 _repository.SaveChanges();
             }
-
             List<SpaceAmenity> spaceAmenity = new List<SpaceAmenity>();
             foreach (var item in addSpaceViewModel.AmenityDetailID)
             {
@@ -1406,8 +1658,6 @@ namespace ZoneRadar.Services
             _repository.CreateRange<Operating>(ope);
             _repository.SaveChanges();
 
-            
-            
            
             
             return addSpaceViewModel;

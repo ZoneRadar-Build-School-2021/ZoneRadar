@@ -44,8 +44,6 @@
     fileSelect.addEventListener('click', function (e) {
       if (imageInput) {
           imageInput.click();
-
-
       }
       e.preventDefault();
     }, false);
