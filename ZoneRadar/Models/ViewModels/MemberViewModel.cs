@@ -51,6 +51,7 @@ namespace ZoneRadar.Models.ViewModels
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "密碼長度需為6~50字元")]
+        [QualifiedPassword(ErrorMessage = "密碼必須包含至少1個數字、小寫英文和大寫英文")]
         public string LoginPassword { get; set; }
     }
 

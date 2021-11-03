@@ -2,6 +2,8 @@
     'https://raw.githubusercontent.com/NickWang841231/NickWang841231.github.io/master/JS%E4%B8%8A%E8%AA%B2/TaiwanAddress_simple/TaiwanAddress_simple.json';
 
 let citySelect, districtSelect, ZipCode;
+
+
 window.onload = function () {
     citySelect = document.getElementById('city');
     districtSelect = document.getElementById('district');
@@ -20,6 +22,9 @@ window.onload = function () {
     //4.註冊Submit Button的click提交事件
     //submitButton.addEventListener('click', submitData);
 };
+
+
+
 
 let zipcodeArray = [];
 
@@ -45,8 +50,8 @@ function createSelectOptions(url) {
             //建立city option ---請選擇縣市---
             let option2 = document.createElement("option");
             option2.value = "";
-            option2.text = "請選擇縣市";
-            option2.setAttribute("selected", "");
+            //option2.text = "請選擇縣市";
+            //option2.setAttribute("selected", "");
             city.add(option2, 0);
 
         })
@@ -122,10 +127,10 @@ function showSelectOption() {
     //如果city或district有任一個未選, 則submit disable*
     if (cityValue != "" && districtValue != "") {
         ZipCode.setAttribute('value', zipcode);
-        submitButton.disabled = false;
+        // submitButton.disabled = false;
     } else {
         ZipCode.setAttribute('value',);
-        submitButton.disabled = true;
+        // submitButton.disabled = true;
     }
 }
 
