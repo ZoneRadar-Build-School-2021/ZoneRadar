@@ -326,65 +326,6 @@ namespace ZoneRadar.Controllers
             }
         }
 
-        /// <summary>
-        /// 取得cloudinary參數
-        /// </summary>
-        /// <returns></returns>
-        [Route("GetUploadPrams")]
-        [AcceptVerbs("GET")]
-        public APIResponse GetUploadPrams()
-        {
-            var spaceId = _repository.GetAll<Space>().Max(x => x.SpaceID);
-            var response = new APIResponse();
-            try
-            {
-                response.Status = "Success";
-                response.Message = string.Empty;
-                // id須由外部傳入
-                response.Response = _spaceService.GetSpacePhotoFromDB(spaceId);
-
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
-                response.Response = null;
-
-                return response;
-            }
-        }
-
-        /// <summary>
-        /// 將上傳照片存入資料庫
-        /// </summary>
-        /// <param name="SaveSpacePhotosVM"></param>
-        /// <returns></returns>
-        [Route("SavePhotos")]
-        [AcceptVerbs("POST")]
-        public APIResponse SavePhotos(SaveSpacePhotosViewModel SaveSpacePhotosVM)
-        {
-            var response = new APIResponse();
-            try
-            {
-                _spaceService.ReflashSpacePhotoFromDB(SaveSpacePhotosVM);
-
-                response.Status = "Success";
-                response.Message = string.Empty;
-                response.Response = null;
-
-                return response;
-            }
-
-            catch (Exception ex)
-            {
-                response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
-                response.Response = null;
-
-                return response;
-            }
-        }
 
 
         /// <summary>
@@ -429,7 +370,7 @@ namespace ZoneRadar.Controllers
                 response.Status = "Success";
                 response.Message = string.Empty;
                 // id須由外部傳入
-                response.Response = _spaceService.GetSpacePhotoFromDB(168);
+                response.Response = _spaceService.GetSpacePhotoFromDB(4);
 
                 return response;
             }
