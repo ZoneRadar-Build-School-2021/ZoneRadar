@@ -8,8 +8,8 @@ namespace ZoneRadar.Models.ViewModels
 {
     public class AddSpaceViewModel
     {
-        public int SpaceID { get;set; }
        
+        public int SpaceID { get; set; }
         [Required]
         public int CountryID { get; set; }
        
@@ -61,7 +61,7 @@ namespace ZoneRadar.Models.ViewModels
 
         public int Hour { get; set; }
         public decimal Discount { get; set; }
-
+        public int Sort { get; set; }
 
     }
 }

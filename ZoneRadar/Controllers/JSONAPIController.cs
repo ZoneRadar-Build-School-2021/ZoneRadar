@@ -326,6 +326,8 @@ namespace ZoneRadar.Controllers
             }
         }
 
+
+
         /// <summary>
         /// 回復綠界
         /// </summary>
@@ -368,7 +370,7 @@ namespace ZoneRadar.Controllers
                 response.Status = "Success";
                 response.Message = string.Empty;
                 // id須由外部傳入
-                response.Response = _spaceService.GetSpacePhotoFromDB(168);
+                response.Response = _spaceService.GetSpacePhotoFromDB(4);
 
                 return response;
             }

@@ -53,17 +53,17 @@ namespace ZoneRadar.Controllers
                     CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
                     CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
                     //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
-
+                    SpaceId=_spaceService.GetSpaceId().SpaceId,
                     Operating = _spaceService.Operating(),
                 };
                 return View(model);
             }
+           
             return View();
         }
         [HttpPost]
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        //public ActionResult AddSpace(AddSpaceViewModel space, AddOperatingViewModel addOperating)
 
         public ActionResult AddSpace(AddSpaceViewModel space)
         {
@@ -74,11 +74,24 @@ namespace ZoneRadar.Controllers
         }
         /// <summary>
         /// 場地主編輯場地 (Amber)
+        /// Get
         /// </summary>
+        [HttpGet]
         public ActionResult EditSpace(int spaceId)
         {
             var model = _spaceService.ReadAnySpace(spaceId);
+            
             return View(model);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult EditSpace( AddSpaceViewModel editspace)
+        {
+            var userid = int.Parse(User.Identity.Name);
+            editspace.MemberID = userid;
+
+            var result = _spaceService.EditSpace(editspace);
+            return RedirectToAction("SpaceManage", result);
         }
 
         /// <summary>

@@ -39,23 +39,18 @@ namespace ZoneRadar.Controllers
                 return RedirectToAction("Index", "Home");
             }
             
-
-            //if (!memberId.HasValue)
-            //{
-            //    return RedirectToRoute(new { controller = "Home", action = "Index" });
-            //}
-            //else
-            //{
-            //    var MemCollectionSpaces = _service.GetMemberCollection(memberId.Value);
-            //    return View(MemCollectionSpaces);
-            //}
         }
 
-        public ActionResult EcPayment(CartsViewModel model) 
+        public ActionResult EcPayment(PaymentViewModel model) 
         {
             ViewData["EcPay"] = _ecpaymentservice.GetEcpayData(model);
             return View();
         }
-        
+        [HttpPost]
+        public ActionResult ContactData(FormCollection model)
+        {
+            return View();
+        }
+
     }
 }

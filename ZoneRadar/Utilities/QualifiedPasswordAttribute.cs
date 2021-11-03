@@ -28,7 +28,7 @@ namespace ZoneRadar.Utilities
         public override bool IsValid(object value)
         {
             string password = (string)value;
-            Regex rgx = new Regex(@"^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$", RegexOptions.IgnoreCase);
+            Regex rgx = new Regex(@"^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$");
 
             if (rgx.IsMatch(password))
             {
