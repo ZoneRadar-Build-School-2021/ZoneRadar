@@ -22,7 +22,7 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public String GetEcpayData(CartsViewModel model)
+        public String GetEcpayData(PaymentViewModel model)
         {
             var Url = "https://zoneradar-frontstage.azurewebsites.net/";
             AllInOne oPayment = new AllInOne();
@@ -100,7 +100,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 找OrderNumber 重複
+        /// 找OrderNumber 重複 (Jack)
         /// </summary>
         /// <param name="num"></param>
         /// <returns></returns>
@@ -114,6 +114,11 @@ namespace ZoneRadar.Services
             return num;
         }
 
+        /// <summary>
+        /// 產生結帳頁面資料(Jack)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public PaymentViewModel GetPaymentData(CartsViewModel model) 
         {
             var result = new PaymentViewModel();
@@ -122,11 +127,11 @@ namespace ZoneRadar.Services
             result.RentDetail = new List<RentDetailViewModel>();
             foreach (var od in orderdetails) 
             {
-                result.RentDetail.Add(new RentDetailViewModel 
+                result.RentDetail.Add(new RentDetailViewModel
                 {
                     RentTime = od.StartDateTime.ToString(),
                     RentBackTime = od.EndDateTime.ToString(),
-                    hours = (decimal) od.EndDateTime.Subtract(od.StartDateTime).TotalHours,
+                    hours = (decimal)od.EndDateTime.Subtract(od.StartDateTime).TotalHours,
                     People = od.Participants
                 });
             }
@@ -134,8 +139,9 @@ namespace ZoneRadar.Services
             result = (from o in order.ToList()
                      select new PaymentViewModel
                      {
+                         PricePerHour = o.Space.PricePerHour,
                          Discounthours = o.Space.SpaceDiscount.FirstOrDefault().Hour,
-                         DiscountPrice = o.Space.SpaceDiscount.FirstOrDefault().Discount*model.TotalMoney,
+                         Discount = o.Space.SpaceDiscount.FirstOrDefault().Discount,
                          UserName = o.Space.Member.Name,
                          UserPhoto = o.Space.Member.Photo,
                          CancellationDetail = o.Space.Cancellation.CancellationDetail,

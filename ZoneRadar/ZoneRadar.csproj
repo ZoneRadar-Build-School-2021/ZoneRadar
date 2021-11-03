@@ -48,7 +48,25 @@
     <Reference Include="ECPay.Payment.Integration">
       <HintPath>.\ECPay.Payment.Integration.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Apis, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.55.0\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.55.0\lib\net461\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.55.0\lib\net461\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.55.0\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.55.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.55.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -110,9 +128,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -123,9 +138,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
+    <!--<Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
+    </Reference>-->
     <Reference Include="System.Net.Http.Formatting">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -240,8 +255,8 @@
     <Compile Include="Models\ViewModels\ProcessingViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\PreOrderViewModel.cs" />
+    <Compile Include="Models\ViewModels\SomeOnesSpaceViewModel.cs" />
     <Compile Include="Models\ViewModels\SaveSpacePhotosViewModel.cs" />
-    <Compile Include="Models\ViewModels\SomeOnesSpaceViewModelcs.cs" />
     <Compile Include="Models\ViewModels\SpaceDetailViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceBriefViewModel.cs" />
     <Compile Include="Models\ViewModels\FilterViewModel.cs" />
@@ -256,7 +271,6 @@
     <Compile Include="Models\ViewModels\SpacePhotoViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceReviewViewModel.cs" />
     <Compile Include="Models\ViewModels\SpaceStatusInformation.cs" />
-    <Compile Include="Models\ViewModels\SpaceStatusEnum.cs" />
     <Compile Include="Models\ViewModels\SpaceViewModel.cs" />
     <Compile Include="Models\ViewModels\OrderViewModel.cs" />
     <Compile Include="Models\ViewModels\UserInfoViewModel.cs" />
@@ -271,7 +285,8 @@
     <Compile Include="Services\ReviewService.cs" />
     <Compile Include="Services\SpaceService.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Utilities\HashService.cs" />
+    <Compile Include="Utilities\GoogleOAuth.cs" />
+    <Compile Include="Utilities\HashCodeTool.cs" />
     <Compile Include="Utilities\QualifiedPasswordAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -356,11 +371,11 @@
     <Content Include="Assets\IMG\NoOrder%28user%29.png" />
     <Content Include="Assets\IMG\NoPreOrder%28user%29.png" />
     <Content Include="Assets\IMG\NoReview%28user%29.png" />
-    <Content Include="Assets\IMG\NoSearch.png" />
     <Content Include="Assets\IMG\NoSpace%28host%29.png" />
     <Content Include="Assets\IMG\static\fistbump-over-desk.jpg" />
     <Content Include="Assets\IMG\static\sent-email.png" />
     <Content Include="Assets\IMG\Usercenter\chngstar.png" />
+    <Content Include="Assets\IMG\NoSearch.png" />
     <Content Include="Assets\IMG\Usercenter\star.png" />
     <Content Include="Assets\IMG\ZONERadar.png" />
     <Content Include="Assets\JS\addspace\addspace.js" />
@@ -465,12 +480,14 @@
     <Content Include="Assets\JS\addspace\CityandDistrictandZipcodeJavaScript.js" />
     <Content Include="Assets\JS\addspace\editSpace.js" />
     <Content Include="Assets\JS\addspace\Latitude_and_Longitude.js" />
+    <Content Include="Assets\JS\addspace\main.js" />
+    <Content Include="Assets\CSS\hostCenter\style.css" />
     <Content Include="Assets\JS\addspace\text.js" />
     <Content Include="Assets\JS\addspace\validation.js" />
     <Content Include="Assets\JS\axios.min.js" />
     <Content Include="Assets\JS\booking\booking.js" />
     <Content Include="Assets\JS\bootstrap.bundle.min.js" />
-    <Content Include="Assets\JS\addspace\CityandDistrictandZipcodeJavaScript.js" />
+    <Content Include="Assets\JS\addspace\EditCityandDistrictandZipcodeJavaScript.js" />
     <Content Include="Assets\JS\dayjs.min.js" />
     <Content Include="Assets\JS\flatpickr.js" />
     <Content Include="Assets\JS\hostSellerCompleted\SellerOrderCompleted.js" />
@@ -489,6 +506,7 @@
     <Content Include="Assets\JS\static\Q&amp;A.js" />
     <Content Include="Assets\JS\sweetalert2.js" />
     <Content Include="Assets\JS\swiper-bundle.min.js" />
+    <Content Include="Assets\JS\vue.min.js" />
     <Content Include="Assets\JS\zh-tw.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -599,6 +617,8 @@
     <Content Include="Views\Home\Policy.cshtml" />
     <Content Include="Views\Payment\Payment.cshtml" />
     <Content Include="Views\Payment\EcPayment.cshtml" />
+    <Content Include="Views\MemberCenter\ResetPasswordSuccess.cshtml" />
+    <Content Include="Views\Home\NotFound404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -53,17 +53,17 @@ namespace ZoneRadar.Controllers
                     CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
                     CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
                     //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
-
+                    SpaceId=_spaceService.GetSpaceId().SpaceId,
                     Operating = _spaceService.Operating(),
                 };
                 return View(model);
             }
+           
             return View();
         }
         [HttpPost]
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        //public ActionResult AddSpace(AddSpaceViewModel space, AddOperatingViewModel addOperating)
 
         public ActionResult AddSpace(AddSpaceViewModel space)
         {
@@ -74,11 +74,24 @@ namespace ZoneRadar.Controllers
         }
         /// <summary>
         /// 場地主編輯場地 (Amber)
+        /// Get
         /// </summary>
+        [HttpGet]
         public ActionResult EditSpace(int spaceId)
         {
             var model = _spaceService.ReadAnySpace(spaceId);
+            
             return View(model);
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult EditSpace( AddSpaceViewModel editspace)
+        {
+            var userid = int.Parse(User.Identity.Name);
+            editspace.MemberID = userid;
+
+            var result = _spaceService.EditSpace(editspace);
+            return RedirectToAction("SpaceManage", result);
         }
 
         /// <summary>
@@ -87,9 +100,8 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         public ActionResult SpaceManage()
         {
-            int userId;
-            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
-            if (isAuthenticated)
+            var parseId =  int.TryParse(User.Identity.Name, out int userId);
+            if (User.Identity.IsAuthenticated)
             {
                 var spaceManageList = _spaceService.GetHostSpace(userId);
                 ViewData["Alert"] = TempData["Alert"];
@@ -134,9 +146,8 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public ActionResult SpaceDiscontinue(int spaceId, DateTime? discontinuedDate)
         {
-            int userId;
-            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
-            if (!isAuthenticated)
+            var parseId = int.TryParse(User.Identity.Name, out int userId);
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -170,9 +181,8 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public ActionResult CancelDiscontinue(int spaceId)
         {
-            int userId;
-            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
-            if (!isAuthenticated)
+            var parseId = int.TryParse(User.Identity.Name, out int userId);
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -201,9 +211,8 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public ActionResult DeleteSpace(int spaceId)
         {
-            int userId;
-            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
-            if (!isAuthenticated)
+            var parseId = int.TryParse(User.Identity.Name, out int userId);
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -231,9 +240,8 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public ActionResult RepublishSpace(int spaceId)
         {
-            int userId;
-            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
-            if (!isAuthenticated)
+            var parseId = int.TryParse(User.Identity.Name, out int userId);
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }

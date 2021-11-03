@@ -18,7 +18,6 @@ namespace ZoneRadar.Models.ViewModels
     public class RegisterZONERadarViewModel
     {
         [Required(ErrorMessage = "請填寫此欄位")]
-        [StringLength(20)]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "請填寫此欄位")]
@@ -28,14 +27,14 @@ namespace ZoneRadar.Models.ViewModels
 
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
-        [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "密碼長度需為6~50字元")]
         [QualifiedPassword(ErrorMessage = "密碼必須包含至少1個數字、小寫英文和大寫英文")]
         public string RegisterPassword { get; set; }
 
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
-        [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
-        [Compare("RegisterPassword", ErrorMessage = "密碼不一致！")]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "密碼長度需為6~50字元")]
+        [Compare("RegisterPassword", ErrorMessage = "密碼不一致")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -51,7 +50,8 @@ namespace ZoneRadar.Models.ViewModels
 
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
-        [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "密碼長度需為6~50字元")]
+        [QualifiedPassword(ErrorMessage = "密碼必須包含至少1個數字、小寫英文和大寫英文")]
         public string LoginPassword { get; set; }
     }
 
@@ -84,13 +84,35 @@ namespace ZoneRadar.Models.ViewModels
 
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
-        [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "密碼長度需為6~50字元")]
         public string NewPassword { get; set; }
 
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
-        [StringLength(50, MinimumLength = 6, ErrorMessage = "最少需6個字元")]
-        [Compare("NewPassword", ErrorMessage = "密碼不一致！")]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "密碼長度需為6~50字元")]
+        [Compare("NewPassword", ErrorMessage = "密碼不一致")]
         public string NewConfirmPassword { get; set; }
+    }
+
+    /// <summary>
+    /// JS登入結果(含會員資料)(Jenny)
+    /// </summary>
+    public class JSMemberResult
+    {
+        public string Photo { get; set; }
+        public bool IsSuccessful { get; set; }
+        public string ShowMessage { get; set; }
+        public string ExceptionMsg { get; set; }
+    }
+
+    /// <summary>
+    /// 以Google帳號註冊會員(Jenny)
+    /// </summary>
+    public class RegisterWithGoogle
+    {
+        public string GoogleId { get; set; }
+        public string GoogleEmail { get; set; }
+        public string GoogleName { get; set; }
+        public string GooglePhoto { get; set; }
     }
 }
