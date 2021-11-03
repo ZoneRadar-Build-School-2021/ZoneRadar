@@ -212,10 +212,6 @@ footer.shared-footer {
     box-shadow: none;
 }
 
-#login-modal .modal-header, #register-modal .modal-header {
-    border-bottom: none;
-}
-
 #login-modal .modal-body, #register-modal .modal-body {
     padding: 0 2rem;
 }
@@ -228,19 +224,20 @@ footer.shared-footer {
         color: #0077a7;
     }
 
-#login-modal .third-register, #register-modal .third-register {
+#login-modal button.third-login, #register-modal button.third-register {
     padding: 12px 20px;
     border-radius: .3rem;
     border: 1px solid #ccc;
+    background-color: white;
 }
 
-    #login-modal .third-register img, #register-modal .third-register img {
-        width: 26px;
-    }
+#login-modal .third-login img, #register-modal .third-register img {
+    width: 26px;
+}
 
-    #login-modal .third-register:hover, #register-modal .third-register:hover {
-        background-color: rgb(236, 236, 236);
-    }
+#login-modal button.third-login:hover, #register-modal button.third-register:hover {
+    background-color: rgb(236, 236, 236);
+}
 
 #login-modal .email-register-text, #register-modal .email-register-text {
     color: rgb(153, 153, 153);
@@ -294,9 +291,14 @@ footer.shared-footer {
         box-shadow: none;
     }
 
-#register-modal form + p {
-    font-size: 14px;
-}
+    #login-submit:disabled, #register-submit:disabled {
+        background-color: #049DD9;
+        opacity: .65;
+    }
+
+        #register-modal form + p {
+            font-size: 14px;
+        }
 /* #endregion */
 
 
