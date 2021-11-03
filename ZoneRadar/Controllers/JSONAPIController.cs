@@ -56,7 +56,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -99,7 +99,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -129,7 +129,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -169,7 +169,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -198,7 +198,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -229,7 +229,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -260,7 +260,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -291,7 +291,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -319,23 +319,51 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
             }
         }
 
+
+
         /// <summary>
-        /// 取得cloudinary參數
+        /// 回復綠界
+        /// </summary>
+        /// <param name="EcpayViewModel"></param>
+        /// <returns></returns>
+        [Route("api/JSONAPI/GetEcpayData")]
+        [HttpPost]
+        public IHttpActionResult GetEcpayData(EcpayViewModel model) 
+        {
+            if (model.RtnCode == 1)
+            {
+                _ecpaymentservice.EditOrderStatus(model);
+            }
+            return Ok("1|OK");
+        }
+
+        /// <summary>
+        /// 綠界回復
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        //[Route("api/JSONAPI/GetEcpay")]
+        //[HttpPost]
+        //public IHttpActionResult GetEcpay(EcpayViewModel model)
+        //{
+        //    return Json(model);
+        //}
+
+        /// <summary>
+        /// 取得cloudinary參數(Steve)
         /// </summary>
         /// <returns></returns>
         [Route("GetUploadPrams")]
         [AcceptVerbs("GET")]
         public APIResponse GetUploadPrams()
         {
-            //var uaerid=_spaceService.
-            //var spaceID = _spaceService.GetHostSpace();
             var response = new APIResponse();
             try
             {
@@ -349,7 +377,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -357,7 +385,7 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
-        /// 將上傳照片存入資料庫
+        /// 將上傳照片存入資料庫(Steve)
         /// </summary>
         /// <param name="SaveSpacePhotosVM"></param>
         /// <returns></returns>
@@ -376,46 +404,15 @@ namespace ZoneRadar.Controllers
 
                 return response;
             }
-
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
             }
         }
-
-
-        /// <summary>
-        /// 回復綠界
-        /// </summary>
-        /// <param name="EcpayViewModel"></param>
-        /// <returns></returns>
-        [Route("api/JSONAPI/GetEcpayData")]
-        [HttpPost]
-        public IHttpActionResult GetEcpayData(EcpayViewModel model) 
-        {
-            if (model.RtnCode == 1)
-            {
-                _ecpaymentservice.EditOrderStatus(model);
-                
-            }
-            return Ok("1|OK");
-        }
-
-        /// <summary>
-        /// 綠界回復
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        //[Route("api/JSONAPI/GetEcpay")]
-        //[HttpPost]
-        //public IHttpActionResult GetEcpay(EcpayViewModel model)
-        //{
-        //    return Json(model);
-        //}
 
     }
 }

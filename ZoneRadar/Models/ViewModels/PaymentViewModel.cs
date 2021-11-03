@@ -12,7 +12,9 @@ namespace ZoneRadar.Models.ViewModels
         public decimal PricePerHour { get; set; }
         public string CancellationTitle { get; set; }
         public string CancellationDetail { get; set; }
-        public decimal Discount { get; set; }
         public decimal Discounthours { get; set; }
+        public decimal Discount { get; set; }
+        public string ContactName { get; set; }
+        public string ContactPhone { get; set; }
     }
 }

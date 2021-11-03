@@ -69,7 +69,7 @@
                     let result = JSON.parse(response);
                     Swal.fire({
                         title: result.Message,
-                        icon: result.Icon,
+                        icon: result.IconString,
                         showConfirmButton: true,
                         confirmButtonColor: "#be7418",
                         confirmButtonText: "OK",
@@ -89,7 +89,7 @@
             postValue();
             seconds_remaining = 600;
             this.setAttribute('disabled', '');
-            this.removeEventListenr('click', clickHandler);
+            this.removeEventListener('click', clickHandler);
         }
 
 

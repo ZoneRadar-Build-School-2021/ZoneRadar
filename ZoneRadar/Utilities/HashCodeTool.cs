@@ -7,7 +7,7 @@ using System.Web;
 
 namespace ZoneRadar.Utilities
 {
-    public static class HashService
+    public static class HashCodeTool
     {
         //加密是不會提供還原密碼API的
         public static string MD5Hash(this string rawString)

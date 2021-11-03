@@ -100,9 +100,8 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         public ActionResult SpaceManage()
         {
-            int userId;
-            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
-            if (isAuthenticated)
+            var parseId =  int.TryParse(User.Identity.Name, out int userId);
+            if (User.Identity.IsAuthenticated)
             {
                 var spaceManageList = _spaceService.GetHostSpace(userId);
                 ViewData["Alert"] = TempData["Alert"];
@@ -147,9 +146,8 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public ActionResult SpaceDiscontinue(int spaceId, DateTime? discontinuedDate)
         {
-            int userId;
-            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
-            if (!isAuthenticated)
+            var parseId = int.TryParse(User.Identity.Name, out int userId);
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -183,9 +181,8 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public ActionResult CancelDiscontinue(int spaceId)
         {
-            int userId;
-            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
-            if (!isAuthenticated)
+            var parseId = int.TryParse(User.Identity.Name, out int userId);
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -214,9 +211,8 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public ActionResult DeleteSpace(int spaceId)
         {
-            int userId;
-            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
-            if (!isAuthenticated)
+            var parseId = int.TryParse(User.Identity.Name, out int userId);
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -244,9 +240,8 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public ActionResult RepublishSpace(int spaceId)
         {
-            int userId;
-            var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
-            if (!isAuthenticated)
+            var parseId = int.TryParse(User.Identity.Name, out int userId);
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }

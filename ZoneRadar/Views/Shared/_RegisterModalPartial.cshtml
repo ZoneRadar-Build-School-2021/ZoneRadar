@@ -1,13 +1,12 @@
-﻿@model RegisterZONERadarViewModel
-
+﻿
 <!--註冊表單-->
-@using (Html.BeginForm("Register", "MemberCenter", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { @class = "mb-3" }))
+@*@using (Html.BeginForm("Register", "MemberCenter", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post, new { @class = "mb-3" }))
 {
-    @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()*@
     @*<input type="text" id="input-name-register" name="RegisterZONERadarVM.Name" class="form-control form-control-lg d-block mb-3" placeholder="Name" aria-label="password" aria-describedby="basic-addon2" required>
         <input type="email" id="input-email-register" name="RegisterZONERadarVM.Email" class="form-control form-control-lg d-block mb-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
         <input type="password" id="input-password-register" name="RegisterZONERadarVM.Password" class="form-control form-control-lg d-block mb-3" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" required>*@
-    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control form-control-lg d-block", type = "text", placeholder = "Name", required = "true" } })
+    @*@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control form-control-lg d-block", type = "text", placeholder = "Name", required = "true" } })
     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger d-block text-start mt-1" })
     @Html.EditorFor(model => model.RegisterEmail, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mt-3", type = "email", placeholder = "Email", required = "true" } })
     @Html.ValidationMessageFor(model => model.RegisterEmail, "", new { @class = "text-danger d-block text-start mt-1" })
@@ -16,4 +15,25 @@
     @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control form-control-lg d-block mt-3", type = "password", placeholder = "Confirm Password", required = "true" } })
     @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger d-block text-start mt-1" })
     <button type="submit" id="register-submit" class="w-100 text-decoration-none text-white mt-3">以Email註冊</button>
-}
+}*@
+
+
+<form class="mb-3" id="register-form-vue">
+    <input v-model="inputData.name" type="text" id="RegisterName" :class="{ 'is-invalid': inputDataCheck.nameError }" class="form-control form-control-lg d-block" placeholder="Name" aria-label="password" aria-describedby="basic-addon1" required>
+    <div class="invalid-feedback text-start mt-1">
+        {{inputDataCheck.nameErrorMsg}}
+    </div>
+    <input v-model="inputData.account" type="email" id="RegisterEmail" :class="{ 'is-invalid': inputDataCheck.accountError }" class="form-control form-control-lg d-block mt-3" placeholder="Email" aria-label="email" aria-describedby="basic-addon2" required>
+    <div class="invalid-feedback text-start mt-1">
+        {{inputDataCheck.accountErrorMsg}}
+    </div>
+    <input v-model="inputData.password" type="password" id="RegisterPassword" :class="{ 'is-invalid': inputDataCheck.passwordError }" class="form-control form-control-lg d-block mt-3" placeholder="Password" aria-label="password" aria-describedby="basic-addon3" required>
+    <div class="invalid-feedback text-start mt-1">
+        {{inputDataCheck.passwordErrorMsg}}
+    </div>
+    <input v-model="inputData.confirmPassword" type="password" id="RegisterConfirmPassword" :class="{ 'is-invalid': inputDataCheck.confirmPasswordError }" class="form-control form-control-lg d-block mt-3" placeholder="ConfirmPassword" aria-label="confirmPassword" aria-describedby="basic-addon4" required>
+    <div class="invalid-feedback text-start mt-1">
+        {{inputDataCheck.confirmPasswordErrorMsg}}
+    </div>
+    <button type="button" id="register-submit" class="w-100 text-decoration-none text-white mt-3" data-bs-dismiss="modal" :disabled="!isVerify">以Email註冊</button>
+</form>

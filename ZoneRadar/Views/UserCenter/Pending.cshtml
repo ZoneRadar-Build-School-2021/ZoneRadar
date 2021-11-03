@@ -52,10 +52,24 @@
                             </a>
                             <ul class="order-detial">
                                 <li class="mb-2 fs-5">
-                                    場地主姓名:<a href="mailto:@Html.DisplayFor(m => item.Email)" class="customer-name mx-2">@Html.DisplayFor(m => item.OwnerName)</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    場地主姓名：<a href="mailto:@Html.DisplayFor(m => item.Email)" class="customer-name mx-2">@Html.DisplayFor(m => item.OwnerName)</a><i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top"
                                                                                                                                                                     title="連絡他"></i>
                                 </li>
-                                <li class="mb-2 fs-5">場地主電話：<span class="contact-phone mx-2">@Html.DisplayFor(m => item.OwnerPhone)</span></li>
+                                <li class="mb-2 fs-5">
+                                    場地主電話：
+                                    @if (item.OwnerPhone == null)
+                                    {
+                                        <span class="contact-phone mx-2">
+                                            場地主目前沒有提供電話
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="contact-phone mx-2">
+                                            @Html.DisplayFor(m => item.OwnerPhone)
+                                        </span>
+                                    }
+                                </li>
                                 <li class="mb-2 fs-5">
                                     場地評價：
                                     <span class="contact-phone">

@@ -22,11 +22,11 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public String GetEcpayData(CartsViewModel model)
+        public String GetEcpayData(PaymentViewModel model)
         {
-            var Url = "https://1d91-1-164-250-30.ngrok.io";
+            var Url = "https://zoneradar-frontstage.azurewebsites.net/";
             AllInOne oPayment = new AllInOne();
-            var returnURL = "webapi/spaces/api/JSONAPI/GetEcpayData";
+            //var returnURL = "webapi/spaces/api/JSONAPI/GetEcpayData";
             /* 服務參數 */
             oPayment.ServiceMethod = HttpMethod.HttpPOST;//介接服務時，呼叫 API 的方法
             oPayment.ServiceURL = "https://payment-stage.ecpay.com.tw/Cashier/AioCheckOut/V5";//要呼叫介接服務的網址
@@ -100,7 +100,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 找OrderNumber 重複
+        /// 找OrderNumber 重複 (Jack)
         /// </summary>
         /// <param name="num"></param>
         /// <returns></returns>
@@ -114,5 +114,42 @@ namespace ZoneRadar.Services
             return num;
         }
 
+        /// <summary>
+        /// 產生結帳頁面資料(Jack)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public PaymentViewModel GetPaymentData(CartsViewModel model) 
+        {
+            var result = new PaymentViewModel();
+            var order = _repository.GetAll<Order>().Where(x => x.OrderID == model.OrderId);
+            var orderdetails = _repository.GetAll<OrderDetail>().Where(x => x.OrderID == model.OrderId);
+            result.RentDetail = new List<RentDetailViewModel>();
+            foreach (var od in orderdetails) 
+            {
+                result.RentDetail.Add(new RentDetailViewModel
+                {
+                    RentTime = od.StartDateTime.ToString(),
+                    RentBackTime = od.EndDateTime.ToString(),
+                    hours = (decimal)od.EndDateTime.Subtract(od.StartDateTime).TotalHours,
+                    People = od.Participants
+                });
+            }
+
+            result = (from o in order.ToList()
+                     select new PaymentViewModel
+                     {
+                         PricePerHour = o.Space.PricePerHour,
+                         Discounthours = o.Space.SpaceDiscount.FirstOrDefault().Hour,
+                         Discount = o.Space.SpaceDiscount.FirstOrDefault().Discount,
+                         UserName = o.Space.Member.Name,
+                         UserPhoto = o.Space.Member.Photo,
+                         CancellationDetail = o.Space.Cancellation.CancellationDetail,
+                         CancellationTitle = o.Space.Cancellation.CancellationTitle,
+                         RentDetail = result.RentDetail
+                     }).FirstOrDefault();
+
+            return result;
+        }
     }
 }
