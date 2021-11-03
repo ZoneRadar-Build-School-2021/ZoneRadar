@@ -86,35 +86,36 @@
                 </div>
 
                 <!-- form-input -->
-                <form method="post">
-                    <div class="row mb-3 mt-3">
-                        <label for="validationServerUsername" class="col-2 col-form-label">聯絡人 </label>
-                        <div class="col-6 col-sm-6">
-                            <input type="text" class="form-control" id="inputName" placeholder="請輸入聯絡人姓名" name="ContactName" value="@Request.Form["ContactName"]">
-                        </div>
-                        <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                            請填寫聯絡人
-                        </div>
+                @*<form method="post">*@
+                <div class="row mb-3 mt-3">
+                    <label for="validationServerUsername" class="col-2 col-form-label">聯絡人 </label>
+                    <div class="col-6 col-sm-6">
+                        <input type="text" class="form-control" id="inputName" placeholder="請輸入聯絡人姓名" name="ContactName" value="@Request.Form["ContactName"]">
                     </div>
-                    <div class="row mt-3">
-                        <label for="validationServerPhone" class="col-2 col-form-label">聯絡電話 </label>
-                        <div class="col-6 col-sm-6">
-                            <input type="tel" class="form-control" id="inputtel" placeholder="請輸入聯絡人電話號碼" name="ContactPhone" value="@Request.Form["ContactPhone"]">
-                        </div>
-                        <div id="validationServerPhoneFeedback" class="invalid-feedback">
-                            請填連絡電話
-                        </div>
+                    <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                        請填寫聯絡人
                     </div>
+                </div>
+                <div class="row mt-3">
+                    <label for="validationServerPhone" class="col-2 col-form-label">聯絡電話 </label>
+                    <div class="col-6 col-sm-6">
+                        <input type="tel" class="form-control" id="inputtel" placeholder="請輸入聯絡人電話號碼" name="ContactPhone" value="@Request.Form["ContactPhone"]">
+                    </div>
+                    <div id="validationServerPhoneFeedback" class="invalid-feedback">
+                        請填連絡電話
+                    </div>
+                </div>
 
-                    <div class="form-check mt-4">
-                        <input class="form-check-input" type="checkbox" onclick="checkboxOnclick(this)" value="false" id="flexCheckAccpet">
-                        <label class="form-check-label" for="flexCheckAccpet">
-                            我同意上述所說。
-                        </label>
-                    </div>
+                <div class="form-check mt-4">
+                    <input class="form-check-input" type="checkbox" onclick="checkboxOnclick(this)" value="false" id="flexCheckAccpet">
+                    <label class="form-check-label" for="flexCheckAccpet">
+                        我同意上述所說。
+                    </label>
+                </div>
 
-                    @Html.ActionLink("送出", "Ecpayment", new PaymentViewModel { OrderId = (int)OrderId, TotalMoney = (decimal)TotalMoney, SpaceName = (string)spacename , ContactName = Name, ContactPhone = Phone }, new { @class = "Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled submit-pay", @id = "submit-pay",@tpye="submit" })
-                </form>            
+                @Html.ActionLink("送出", "Ecpayment", new PaymentViewModel { OrderId = (int)OrderId, TotalMoney = (decimal)TotalMoney, SpaceName = (string)spacename, ContactName = Name, ContactPhone = Phone }, new { @class = "Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled submit-pay", @id = "submit-pay", @tpye = "submit" })
+        </div>
+        @*</form>*@
         <!-- col-5 電腦版 col-12手機板 -->
         <div class="col-lg-5 mt-5 col-sm-12">
             <div class="Host-card sticky-top">
