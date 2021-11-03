@@ -31,14 +31,25 @@
                             </a>
                             <ul class="order-detial">
                                 <li class="mb-2 fs-5">
-                                    場地主姓名:
+                                    場地主姓名：
                                     <a href="mailto:@Html.DisplayFor(m => item.Email)" class="customer-name mx-2">@Html.DisplayFor(m => item.OwnerName)</a>
                                     <i class="fas fa-comment-dots ms-2 fs-4" data-bs-toggle="tooltip" data-bs-placement="top"
                                        title="連絡他"></i>
                                 </li>
                                 <li class="mb-2 fs-5">
                                     場地主電話：
-                                    <span class="contact-phone mx-2">@Html.DisplayFor(m => item.OwnerPhone)</span>
+                                    @if (item.OwnerPhone == null)
+                                    {
+                                        <span class="contact-phone mx-2">
+                                            場地主目前沒有提供電話
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="contact-phone mx-2">
+                                            @Html.DisplayFor(m => item.OwnerPhone)
+                                        </span>
+                                    }
                                 </li>
                                 <li class="mt-3">
                                     <div class="collapse" id="order-@Html.DisplayFor(m => item.OrderId)">
@@ -119,7 +130,7 @@
                             </p>
                             <div class="col-12 text-end mt-2">
                                 <button type="button" class="btn btn_close" data-bs-toggle="modal" data-bs-target="#B-@Html.DisplayFor(m => item.OrderId)">取消預購單</button>
-                                @Html.ActionLink("前往付款", "Payment", "Payment", new { id = item.OrderId }, new { @class = "btn btn_sendout" })
+                                @Html.ActionLink("前往付款", "Payment", "Payment", new CartsViewModel { OrderId = item.OrderId ,SpaceName = item.SpaceName ,TotalMoney = item.TotalMoney }, new { @class = "btn btn_sendout" })
                                 @*<button type="button" class="btn btn_sendout">前往付款</button>*@
                             </div>
                         </div>

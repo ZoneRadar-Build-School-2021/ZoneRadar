@@ -15,6 +15,7 @@ namespace ZoneRadar.Models.ViewModels
         public decimal Money { get; set; }
         public int OrderDetailId { get; set; }
         public int OrderId { get; set; }
+        public decimal hours { get; set; }
     }
     // 訂單
     public class OrderViewModel

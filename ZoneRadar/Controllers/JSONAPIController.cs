@@ -56,7 +56,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -99,7 +99,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -129,7 +129,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -169,7 +169,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -198,7 +198,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -229,7 +229,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -260,7 +260,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -291,7 +291,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -319,7 +319,7 @@ namespace ZoneRadar.Controllers
             catch (Exception ex)
             {
                 response.Status = "Fail";
-                response.Message = $"發生錯誤，{ex.ToString()}";
+                response.Message = ex.Message;
                 response.Response = null;
 
                 return response;
@@ -399,7 +399,6 @@ namespace ZoneRadar.Controllers
             if (model.RtnCode == 1)
             {
                 _ecpaymentservice.EditOrderStatus(model);
-                
             }
             return Ok("1|OK");
         }
@@ -415,6 +414,64 @@ namespace ZoneRadar.Controllers
         //{
         //    return Json(model);
         //}
+
+        /// <summary>
+        /// 取得cloudinary參數(Steve)
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetUploadPrams")]
+        [AcceptVerbs("GET")]
+        public APIResponse GetUploadPrams()
+        {
+            var response = new APIResponse();
+            try
+            {
+                response.Status = "Success";
+                response.Message = string.Empty;
+                // id須由外部傳入
+                response.Response = _spaceService.GetSpacePhotoFromDB(168);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = ex.Message;
+                response.Response = null;
+
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// 將上傳照片存入資料庫(Steve)
+        /// </summary>
+        /// <param name="SaveSpacePhotosVM"></param>
+        /// <returns></returns>
+        [Route("SavePhotos")]
+        [AcceptVerbs("POST")]
+        public APIResponse SavePhotos(SaveSpacePhotosViewModel SaveSpacePhotosVM)
+        {
+            var response = new APIResponse();
+            try
+            {
+                _spaceService.ReflashSpacePhotoFromDB(SaveSpacePhotosVM);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = null;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = ex.Message;
+                response.Response = null;
+
+                return response;
+            }
+        }
 
     }
 }

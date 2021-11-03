@@ -13,7 +13,7 @@ namespace ZoneRadar.Utilities
     /// </summary>
     public class QualifiedPasswordAttribute : ValidationAttribute, IClientValidatable
     {
-        //When implemented in a class, returns client validation rules for that class.
+        //When implemented in a class, returns client validation rules for that class.前端的驗證
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
         {
             var rule = new ModelClientValidationRule()
@@ -24,11 +24,11 @@ namespace ZoneRadar.Utilities
             yield return rule;
         }
 
-        //Determines whether the specified value of the object is valid.
+        //Determines whether the specified value of the object is valid.後端的驗證
         public override bool IsValid(object value)
         {
             string password = (string)value;
-            Regex rgx = new Regex(@"^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-zA-Z])(?=.*\d).*$", RegexOptions.IgnoreCase);
+            Regex rgx = new Regex(@"^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$", RegexOptions.IgnoreCase);
 
             if (rgx.IsMatch(password))
             {
