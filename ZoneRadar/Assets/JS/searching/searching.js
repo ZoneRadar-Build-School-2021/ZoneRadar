@@ -448,7 +448,11 @@
                 .then(res => {
                     if (res.data.Status === 'Success') {
                         let spaceList = res.data.Response;
-                        renderSpaceCards(spaceList);
+                        if (!spaceList.length) {
+                            showNoResult();
+                        } else {
+                            renderSpaceCards(spaceList);
+                        }
                     }
                 })
         }
@@ -557,6 +561,11 @@
             })
         }
 
+        function showNoResult() {
+            cardListNode.innerHTML = '';
+            let noResult = document.querySelector('#no-result').content.cloneNode(true);
+            cardListNode.appendChild(noResult)
+        }
 
     })
 })();

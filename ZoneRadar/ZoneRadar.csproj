@@ -371,11 +371,11 @@
     <Content Include="Assets\IMG\NoOrder%28user%29.png" />
     <Content Include="Assets\IMG\NoPreOrder%28user%29.png" />
     <Content Include="Assets\IMG\NoReview%28user%29.png" />
-    <Content Include="Assets\IMG\NoSearch.png" />
     <Content Include="Assets\IMG\NoSpace%28host%29.png" />
     <Content Include="Assets\IMG\static\fistbump-over-desk.jpg" />
     <Content Include="Assets\IMG\static\sent-email.png" />
     <Content Include="Assets\IMG\Usercenter\chngstar.png" />
+    <Content Include="Assets\IMG\NoSearch.png" />
     <Content Include="Assets\IMG\Usercenter\star.png" />
     <Content Include="Assets\IMG\ZONERadar.png" />
     <Content Include="Assets\JS\addspace\addspace.js" />
@@ -616,6 +616,7 @@
     <Content Include="Views\Payment\Payment.cshtml" />
     <Content Include="Views\Payment\EcPayment.cshtml" />
     <Content Include="Views\MemberCenter\ResetPasswordSuccess.cshtml" />
+    <Content Include="Views\Home\NotFound404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
