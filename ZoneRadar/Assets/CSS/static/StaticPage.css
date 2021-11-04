@@ -31,7 +31,7 @@
     background-position: left center;
     background-image: url(/Assets/IMG/static/About01.jpg);
     background-size: cover;
-    height:300px;
+    height: 300px;
 }
 
 .main-our-team {
@@ -41,6 +41,7 @@
     background-image: url(/Assets/IMG/static/AboutMain.jpg);
     background-size: cover;
 }
+
 .join-our-team {
     background-position: bottom center;
     height: 85vh;
@@ -123,8 +124,18 @@ li p {
     padding: 0 0;
 }
 
+.about-text,.about-text-p p {
+    text-indent: 15px;
+    font-size: 15px;
+}
+
 @media only screen and (max-width: 500px) {
     h2, h3 {
         white-space: pre;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .about-text h2, h3 {
+        white-space: nowrap !important;
     }
 }
