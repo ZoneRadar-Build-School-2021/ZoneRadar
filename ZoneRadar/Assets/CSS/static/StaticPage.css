@@ -124,7 +124,7 @@ li p {
     padding: 0 0;
 }
 
-.about-text,.about-text-p p {
+.about-text, .about-text-p p {
     text-indent: 15px;
     font-size: 15px;
 }
@@ -133,8 +133,7 @@ li p {
     h2, h3 {
         white-space: pre;
     }
-}
-@media only screen and (max-width: 500px) {
+
     .about-text h2, h3 {
         white-space: nowrap !important;
     }
@@ -145,6 +144,7 @@ li p {
         background-image: url(/Assets/IMG/static/About02.jpg);
         background-size: cover;
     }
+
     .main-our-team {
         background-position: left right;
         /*object-fit: contain;*/
@@ -153,3 +153,4 @@ li p {
         background-size: cover;
     }
 }
+
