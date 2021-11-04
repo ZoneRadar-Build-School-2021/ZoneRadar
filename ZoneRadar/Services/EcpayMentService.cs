@@ -24,7 +24,8 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public String GetEcpayData(PaymentViewModel model)
         {
-            var Url = "https://zoneradar-frontstage.azurewebsites.net/";
+            //var Url = "https://zoneradar-frontstage.azurewebsites.net";
+            var Url = "https://ec8e-1-164-244-111.ngrok.io";
             AllInOne oPayment = new AllInOne();
             //var returnURL = "webapi/spaces/api/JSONAPI/GetEcpayData";
             /* 服務參數 */
@@ -51,6 +52,8 @@ namespace ZoneRadar.Services
                                              //oPayment.Send.PlatformID = "";//特約合作平台商代號
 
             oPayment.Send.CustomField1 = model.OrderId.ToString();
+            oPayment.Send.CustomField2 = model.ContactName;
+            oPayment.Send.CustomField3 = model.ContactPhone;
             //oPayment.SendExtend.Desc_1 = "test1";//交易描述 1
             //oPayment.SendExtend.Desc_2 = "test2";//交易描述 2
             //oPayment.SendExtend.Desc_3 = "test3";//交易描述 3
@@ -87,6 +90,8 @@ namespace ZoneRadar.Services
                 order.PaymentDate = DateTime.Parse(model.PaymentDate);
                 order.OrderStatusID = (int)Enums.Enums.OrderStatusID.OrderStatusIDforWating;
                 order.OrderNumber = int.Parse(DateTime.Now.ToString("yyMMddhhmm"));
+                order.ContactName = model.CustomField2;
+                order.ContactPhone = model.CustomField3;
                 try
                 {
                     _repository.Update(order);

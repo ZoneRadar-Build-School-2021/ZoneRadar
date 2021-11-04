@@ -1,7 +1,4 @@
-﻿@*@model Dictionary<string, string>*@
-@*@model CartsViewModel*@
-@model PaymentViewModel
-@*@model ECPay.Payment.Integration.AllInOne*@
+﻿@model PaymentViewModel
 @{
     ViewBag.Title = "Payment";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,8 +6,6 @@
     var OrderId = ViewData["OrderId"];
     var spacename = ViewData["SpaceName"];
     var TotalMoney = ViewData["TotalMoney"];
-    var Name = Request.Form["ContactName"];
-    var Phone = Request.Form["ContactPhone"];
 }
 <div class="container">
     <div class="row">
@@ -33,11 +28,11 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <hr class="dotted mt-1 mb-1">
                                     @foreach (var rd in item.RentDetail)
                                     {
                                         if (rd.hours >= item.Discounthours)
                                         {
+                                            <hr class="dotted mt-1 mb-1">
                                             <div class="d-flex table-row">
                                                 <div class="title-field me-auto"> 場地折扣 </div>
                                                 <div data-testing-id="cleaning-fee">
@@ -86,11 +81,14 @@
                 </div>
 
                 <!-- form-input -->
-                @*<form method="post">*@
+                @*@Html.TextBox("聯絡人", ViewBag.StartDate as string, new { placeholder = "Start Date" })
+        @Html.TextBox("聯絡人電話", ViewBag.EndDate as string, new { placeholder = "End Date" })*@
+
+            <form action="~/Payment/Ecpayment" method="post">
                 <div class="row mb-3 mt-3">
                     <label for="validationServerUsername" class="col-2 col-form-label">聯絡人 </label>
                     <div class="col-6 col-sm-6">
-                        <input type="text" class="form-control" id="inputName" placeholder="請輸入聯絡人姓名" name="ContactName" value="@Request.Form["ContactName"]">
+                        <input type="text" class="form-control" id="inputName" placeholder="請輸入聯絡人姓名" name="ContactName" value="@Model.ContactName">
                     </div>
                     <div id="validationServerUsernameFeedback" class="invalid-feedback">
                         請填寫聯絡人
@@ -99,7 +97,7 @@
                 <div class="row mt-3">
                     <label for="validationServerPhone" class="col-2 col-form-label">聯絡電話 </label>
                     <div class="col-6 col-sm-6">
-                        <input type="tel" class="form-control" id="inputtel" placeholder="請輸入聯絡人電話號碼" name="ContactPhone" value="@Request.Form["ContactPhone"]">
+                        <input type="tel" class="form-control" id="inputtel" placeholder="請輸入聯絡人電話號碼" name="ContactPhone" value="@Model.ContactPhone">
                     </div>
                     <div id="validationServerPhoneFeedback" class="invalid-feedback">
                         請填連絡電話
@@ -112,10 +110,41 @@
                         我同意上述所說。
                     </label>
                 </div>
+                <input type="hidden" value="@OrderId" name="OrderId" />
+                <input type="hidden" value="@spacename" name="SpaceName" />
+                <input type="hidden" value="@TotalMoney" name="totalmoney" />
+                <button class="Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled submit-pay" id="submit-pay" type="submit"> 送出 </button>
+                @*@Html.ActionLink("送出", "Ecpayment", new PaymentViewModel { OrderId = (int)OrderId, TotalMoney = (decimal)TotalMoney, SpaceName = (string)spacename }, new { @class = "Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled submit-pay", @id = "submit-pay", @tpye = "submit" })*@
+            </form>
+                @*<form action="/Payment/ContactData" method="post">
+            <div class="row mb-3 mt-3">
+                <label for="validationServerUsername" class="col-2 col-form-label">聯絡人 </label>
+                <div class="col-6 col-sm-6">
+                    <input type="text" class="form-control" id="inputName" placeholder="請輸入聯絡人姓名" name="ContactName" value="@Model.ContactName">
+                </div>
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    請填寫聯絡人
+                </div>
+            </div>
+            <div class="row mt-3">
+                <label for="validationServerPhone" class="col-2 col-form-label">聯絡電話 </label>
+                <div class="col-6 col-sm-6">
+                    <input type="tel" class="form-control" id="inputtel" placeholder="請輸入聯絡人電話號碼" name="ContactPhone" value="@Model.ContactPhone">
+                </div>
+                <div id="validationServerPhoneFeedback" class="invalid-feedback">
+                    請填連絡電話
+                </div>
+            </div>
 
-                @Html.ActionLink("送出", "Ecpayment", new PaymentViewModel { OrderId = (int)OrderId, TotalMoney = (decimal)TotalMoney, SpaceName = (string)spacename, ContactName = Name, ContactPhone = Phone }, new { @class = "Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled submit-pay", @id = "submit-pay", @tpye = "submit" })
-        </div>
-        @*</form>*@
+            <div class="form-check mt-4">
+                <input class="form-check-input" type="checkbox" onclick="checkboxOnclick(this)" value="false" id="flexCheckAccpet">
+                <label class="form-check-label" for="flexCheckAccpet">
+                    我同意上述所說。
+                </label>
+            </div>
+            @Html.ActionLink("送出", "Ecpayment", new PaymentViewModel { OrderId = (int)OrderId, TotalMoney = (decimal)TotalMoney, SpaceName = (string)spacename}, new { @class = "Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled submit-pay", @id = "submit-pay", @tpye = "submit" })
+        </form>*@
+</div>
         <!-- col-5 電腦版 col-12手機板 -->
         <div class="col-lg-5 mt-5 col-sm-12">
             <div class="Host-card sticky-top">

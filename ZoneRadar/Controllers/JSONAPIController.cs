@@ -326,8 +326,6 @@ namespace ZoneRadar.Controllers
             }
         }
 
-
-
         /// <summary>
         /// 回復綠界
         /// </summary>
