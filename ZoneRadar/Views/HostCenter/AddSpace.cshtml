@@ -20,7 +20,6 @@
 @using (Html.BeginForm("AddSpace", "HostCenter", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    <input type="checkbox" @ViewData["Open"] />
     <div id="app" class="main mymain form-horizontal">
         <div class="container containerForAdd ">
             <!-- 開頭問候文區 -->
