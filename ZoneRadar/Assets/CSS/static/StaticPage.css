@@ -19,10 +19,32 @@
     background-size: cover;
     min-height: 400px;
 } */
+
+.about-our-team02 {
+    background-position: left center;
+    background-image: url(/Assets/IMG/static/About03.jpg);
+    background-size: cover;
+    height: 300px;
+}
+
+.about-our-team01 {
+    background-position: left center;
+    background-image: url(/Assets/IMG/static/About01.jpg);
+    background-size: cover;
+    height:300px;
+}
+
+.main-our-team {
+    background-position: center center;
+    /*object-fit: contain;*/
+    height: 85vh;
+    background-image: url(/Assets/IMG/static/AboutMain.jpg);
+    background-size: cover;
+}
 .join-our-team {
-    object-fit: cover;
-    height: 65vh;
-    background-image: url(/Assets/IMG/static/fistbump-over-desk.jpg);
+    background-position: bottom center;
+    height: 85vh;
+    background-image: url(/Assets/IMG/static/About02.jpg);
     background-size: cover;
 }
 
