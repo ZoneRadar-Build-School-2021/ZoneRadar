@@ -138,4 +138,18 @@ li p {
     .about-text h2, h3 {
         white-space: nowrap !important;
     }
+
+    .join-our-team {
+        background-position: left right;
+        height: 45vh;
+        background-image: url(/Assets/IMG/static/About02.jpg);
+        background-size: cover;
+    }
+    .main-our-team {
+        background-position: left right;
+        /*object-fit: contain;*/
+        height: 45vh;
+        background-image: url(/Assets/IMG/static/AboutMain.jpg);
+        background-size: cover;
+    }
 }
