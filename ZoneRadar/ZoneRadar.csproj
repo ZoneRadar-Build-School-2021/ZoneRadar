@@ -208,6 +208,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\EcpayApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HostCenterController.cs" />
     <Compile Include="Controllers\JSONAPIController.cs" />
@@ -372,6 +373,7 @@
     <Content Include="Assets\IMG\NoPreOrder%28user%29.png" />
     <Content Include="Assets\IMG\NoReview%28user%29.png" />
     <Content Include="Assets\IMG\NoSpace%28host%29.png" />
+    <Content Include="Assets\IMG\QRcode\ZoneRardarQR.png" />
     <Content Include="Assets\IMG\static\About03.jpg" />
     <Content Include="Assets\IMG\static\About02.jpg" />
     <Content Include="Assets\IMG\static\About01.jpg" />
