@@ -1,296 +1,228 @@
 ﻿@model UserInfoViewModel
 @{
-    ViewBag.Title = Model.User.Name +" - BuyerCard";
+    ViewBag.Title = Model.User.Name + " - BuyerCard";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var user = Model.User;
     var review = Model.ToUserReview;
     //https://localhost:44322/MemberCenter/UserInfo?memberId=19
 }
 
-<div class="member member_container container mt-5 pb-3">
-    <div class="member_card row">
-        <div class="member_card_pic text-center col-sm-12 col-md-4 col-lg-3">
-            <img class="mt-4" src="@user.Photo" />
-        </div>
-
-        <!--會員卡 + 介紹-->
-        <div class="member_card_introduce col-sm-12 col-md-8 col-lg-9">
-            <div class="member_card mt-4 row">
-                <div class="member_card_introduce_name col-12">
-                    <h3>
-                       @user.Name
-                        <a href="mailto:@user.Email">
-                            <i class="ms-3 fas fa-comment-dots" data-bs-toggle="tooltip" data-bs-placement="right" title="聯絡我">
-                            </i>
-                        </a>
-                    </h3>
-                    <p class="mt-4">加入時間：<span class="ms-3">@user.SignUpDateTime.ToString("yyyy-MM-dd")</span></p>
-                </div>
+@if (user.Id > 0 && review.Count() >= 0)
+{
+    <div class="member member_container container mt-5 pb-3">
+        <div class="member_card row">
+            <div class="member_card_pic text-center col-sm-12 col-md-4 col-lg-3">
+                <img class="mt-4" src="@user.Photo" />
             </div>
-            <div class="member_card row mt-auto">
-                <div class="col-sm-4 col-md-4">
-                    <div class="member_verifcation">
-                        <p class="member_verifcation_item text-center">認證</p>
-                        <p class="member_verifcation_item"><i class="me-3 fas fa-check"></i>Email</p>
-                        <p class="member_verifcation_item">
-                            @if (user.Phone != null)
-                            {
-                                <i class="me-3 fas fa-check"></i>
-                            }
-                            else
-                            {
-                                <i class="me-3 fas fa-times"></i>
-                            }Phone
+
+            <!--會員卡 + 介紹-->
+            <div class="member_card_introduce col-sm-12 col-md-8 col-lg-9">
+                <div class="member_card mt-4 row">
+                    <div class="member_card_introduce_name col-12">
+                        <h3>
+                            @user.Name
+                            <a href="mailto:@user.Email">
+                                <i class="ms-3 fas fa-comment-dots" data-bs-toggle="tooltip" data-bs-placement="right" title="聯絡我">
+                                </i>
+                            </a>
+                        </h3>
+                        <p class="mt-4">
+                            加入時間：
+                            <span class="ms-3">@user.SignUpDateTime.ToString("yyyy-MM-dd")</span>
                         </p>
-                        <p class="member_verifcation_item">
-                            評價 <span class="member_verifcation_reviews"> 
-                            @if (review.Select(x => x.ReviewContent) == null)
-                            {
-                                <span>(0)</span>
-                            }
-                            else
-                            {
-                                <span>(@review.Select(x => x.ReviewContent).Count())</span>
-                            }
+                    </div>
+                </div>
+                <div class="member_card row mt-auto">
+                    <div class="col-sm-4 col-md-4">
+                        <div class="member_verifcation">
+                            <p class="member_verifcation_item text-center">認證</p>
+                            <p class="member_verifcation_item">
+                                <i class="me-3 fas fa-check"></i>Email
+                            </p>
+                            <p class="member_verifcation_item">
+                                @if (user.Phone != null)
+                                {
+                                    <i class="me-3 fas fa-check"></i>
+                                }
+                                else
+                                {
+                                    <i class="me-3 fas fa-times"></i>
+                                }Phone
+                            </p>
+                            <p class="member_verifcation_item">
+                                評價
+                                <span class="member_verifcation_reviews">
+                                    @if (review.Select(x => x.ReviewContent) == null)
+                                    {
+                                        <span>(0)</span>
+                                    }
+                                    else
+                                    {
+                                        <span>(@review.Select(x => x.ReviewContent).Count())</span>
+                                    }
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 col-md-8">
+                        <div class="member_verifcation_message">
+                            <p>關於我：</p>
+                            <span class="member_verifcation_aboutme mt-2">
+                                @user.Description
                             </span>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-sm-8 col-md-8">
-                    <div class="member_verifcation_message">
-                        <p>關於我：</p>
-                        <span class="member_verifcation_aboutme mt-2">
-                           @user.Description 
-                        </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="member_container container mt-5 p-2">
-    <div class="member_choose row p-2">
-        <div class="col-6 text-center">
-            <h4 class="pb-2">
-                <a href="~/MemberCenter/Member/@user.Id" class="myplace_title active p-1">
-                    <i class="me-2 fas fa-pencil-alt"></i>來自賣家的評價
-                </a>
-            </h4>
+    <div class="member_container container mt-5 p-2">
+        <div class="member_choose row p-2">
+            <div class="col-6 text-center">
+                <h4 class="pb-2">
+                    <a href="~/MemberCenter/Member/@user.Id" class="myplace_title active p-1">
+                        <i class="me-2 fas fa-pencil-alt"></i>來自賣家的評價
+                    </a>
+                </h4>
+            </div>
+            <div class="col-6 text-center">
+                <h4 class="pb-2">
+                    <a href="~/MemberCenter/Collection/@user.Id" class="myplace_title p-1">
+                        <i class="me-2 fas fa-heart"></i>我的收藏
+                    </a>
+                </h4>
+            </div>
         </div>
-        <div class="col-6 text-center">
-            <h4 class="pb-2">
-                <a href="~/MemberCenter/Collection/@user.Id" class="myplace_title p-1">
-                    <i class="me-2 fas fa-heart"></i>我的收藏
-                </a>
-            </h4>
-        </div>
-    </div>
-    
-    <div class="reviewsfromhost row justify-content-center p-3 mt-2">
-        <div class="reviewsfromhost_avgstar col-12">
-            <p>
-                平均評價：
-                @if (review.Select(x => x.Score).Sum() > 0)
-                {
-                    for (var i = 0; i < (review.Select(x => x.Score).Average()); i++)
+
+        <div class="reviewsfromhost row justify-content-center p-3 mt-2">
+            <div class="reviewsfromhost_avgstar col-12">
+                <p>
+                    平均評價：
+                    @if (review.Select(x => x.Score).Sum() > 0)
                     {
-                        <i class="fas fa-star"></i>
+                        for (var i = 0; i < (review.Select(x => x.Score).Average()); i++)
+                        {
+                            <i class="fas fa-star"></i>
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                    <i class="ms-2 me-1 fas fs-5 fa-check"></i>
+                    <span class="me-1">
+                        @review.Where(x => x.Recommend == true).Count()
+                    </span>
+                    |
+                    <i class="ms-2 me-1 fs-5 fas fa-times"></i>
+                    <span>
+                        @review.Where(x => x.Recommend == false).Count()
+                    </span>
+                </p>
+            </div>
+            <div class="reviewsfromhost_review col-12">
+                @if (review.Count() > 0)
+                {
+                    foreach (var r in review)
+                    {
+                        <div class="reviewsfromhost_review_card row mt-4">
+                            <div class="reviewsfromhost_review_card_pic mb-3 col-sm-2 col-md-2 col-lg-2">
+                                <a href="~/MemberCenter/Host/@r.Id">
+                                    <img src="@r.SpaceMemberPhoto" />
+                                </a>
+                            </div>
+                            <div class="reviewsfromhost_review_card_txt mb-4 col-sm-10 col-md-10 col-lg-10">
+                                <div class="reviewsfromhost_review_card_txt_name">
+                                    <a href="~/MemberCenter/Host/@r.Id">@r.Name</a>
+                                </div>
+                                <div class="reviewsfromhost_review_card_txt_star mt-2">
+                                    @if (r.Score == 0)
+                                    {
+                                        <span>目前沒有任何評價</span>
+                                    }
+                                    else if (r.Score % 1 == 0)
+                                    {
+                                        for (int i = 0; i < r.Score; i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int i = 0; i < (r.Score - 1); i++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
+                                        <i class="fas fa-star-half-alt"></i>
+                                    }
+                                </div>
+                                @if (r.Recommend == true)
+                                {
+                                    <div class="reviewsfromhost_review_card_txt_check mt-2">
+                                        <i class="me-1 fas fa-check"></i>我還會想再次接待他們
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="reviewsfromhost_review_card_txt_check mt-2">
+                                        <i class="me-1 fas fa-times"></i>我不會想再次接待他們
+                                    </div>
+                                }
+                                <p class="mt-3">
+                                    "
+                                    <span class="reviewsfromhost_review_card_txt_msg">
+                                        @r.ReviewContent
+                                    </span>
+                                    "
+                                </p>
+                                <p class="reviewsfromhost_review_card_txt_date">
+                                    <span>@r.ReviewDate.ToString("yyyy-MM-dd")</span>
+                                </p>
+                                <a href="~/Booking/BookingPage/@r.SpaceId">
+                                    <span class="reviewsfromhost_review_card_txt_place">@r.SpaceName</span>
+                                </a>
+                                <div class="reviewsfromhost_review_card_txt_location">
+                                    <div class="reviewsfromhost_review_card_txt_location_a">
+                                        <a href="~/Searching/SearchingPage/@r.City">
+                                            <span>@r.City</span>
+                                        </a>
+                                        <a href="~/Searching/SearchingPage/@r.District">
+                                            <span>@r.District</span>
+                                        </a>
+                                        <a href="~/Searching/SearchingPage/@r.Address">
+                                            <span>@r.Address</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     }
                 }
                 else
                 {
-
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-8 offset-lg-2 col-sm-12">
+                                <img src="~/Assets/IMG/NoReview(user).png" />
+                            </div>
+                        </div>
+                    </div>
                 }
-                <i class="ms-2 me-1 fas fs-5 fa-check"></i>
-                <span class="me-1">
-                    @review.Where(x => x.Recommend == true).Count()
-                </span>
-                |
-                <i class="ms-2 me-1 fs-5 fas fa-times"></i>
-                <span>
-                    @review.Where(x => x.Recommend == false).Count()
-                </span>
-            </p>
-        </div>
-        <div class="reviewsfromhost_review col-12">
-            @foreach (var r in review)
-            {
-            <div class="reviewsfromhost_review_card row mt-4">
-                <div class="reviewsfromhost_review_card_pic mb-3 col-sm-2 col-md-2 col-lg-2">
-                    <a href="~/MemberCenter/Host/@r.Id">
-                        <img src="@r.SpaceMemberPhoto" />
-                    </a>
-                </div>
-                <div class="reviewsfromhost_review_card_txt mb-4 col-sm-10 col-md-10 col-lg-10">
-                    <div class="reviewsfromhost_review_card_txt_name">
-                        <a href="~/MemberCenter/Host/@r.Id">@r.Name</a>
-                    </div>
-                    <div class="reviewsfromhost_review_card_txt_star mt-2">
-                        @if (r.Score == 0)
-                        {
-                            <span>目前沒有任何評價</span>
-                        }
-                        else if (r.Score % 1 == 0)
-                        {
-                            for (int i = 0; i < r.Score; i++)
-                            {
-                                <i class="fas fa-star"></i>
-                            }
-                        }
-                        else
-                        {
-                            for (int i = 0; i < (r.Score - 1); i++)
-                            {
-                                <i class="fas fa-star"></i>
-                            }
-                            <i class="fas fa-star-half-alt"></i>
-                        }
-                    </div>
-                        @if (r.Recommend == true)
-                        {
-                            <div class="reviewsfromhost_review_card_txt_check mt-2">
-                                <i class="me-1 fas fa-check"></i>我還會想再次接待他們
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="reviewsfromhost_review_card_txt_check mt-2">
-                                <i class="me-1 fas fa-times"></i>我不會想再次接待他們
-                            </div>
-                        }
-                        <p class="mt-3">
-                            "
-                            <span class="reviewsfromhost_review_card_txt_msg">
-                                @r.ReviewContent
-                            </span>
-                            "
-                        </p>
-                        <p class="reviewsfromhost_review_card_txt_date">
-                            <span>@r.ReviewDate.ToString("yyyy-MM-dd")</span>
-                        </p>
-                        <a href="~/Booking/BookingPage/@r.SpaceId">
-                            <span class="reviewsfromhost_review_card_txt_place">@r.SpaceName</span>
-                        </a>
-                        <div class="reviewsfromhost_review_card_txt_location">
-                            <div class="reviewsfromhost_review_card_txt_location_a">
-                                <a href="~/Searching/SearchingPage/@r.City">
-                                    <span>@r.City</span>
-                                </a>
-                                <a href="~/Searching/SearchingPage/@r.District">
-                                    <span>@r.District</span>
-                                </a>
-                                <a href="~/Searching/SearchingPage/@r.Address">
-                                    <span>@r.Address</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
             </div>
-            }
-            @*<div class="reviewsfromhost_review_card row mt-4">
-            <div class="reviewsfromhost_review_card_pic mb-3 col-sm-2 col-md-2 col-lg-2">
-                <a href="HostInfo">
-                    <img src="~/Assets/IMG/member_card/Jetset Sound AV, LLC J..jpg" />
-                </a>
-            </div>
-            <div class="reviewsfromhost_review_card_txt mb-4 col-sm-10 col-md-10 col-lg-10">
-                <div class="reviewsfromhost_review_card_txt_name">
-                    <a href="HostInfo">Jetset Sound AV, LLC J.</a>
-                </div>
-                <div class="reviewsfromhost_review_card_txt_star mt-2">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-"></i>
-                    <i class="fas fa-star-"></i>
-                </div>
-                <div class="reviewsfromhost_review_card_txt_check mt-2">
-                    <i class="me-1 fas fa-times"></i>我不會想再次接待他們
-                </div>
-                <p class="mt-3">
-                    "
-                    <span class="reviewsfromhost_review_card_txt_msg">
-                        特色讓人，命運氣氛楠雅作戰就好病毒和你說話提前獲取普遍小心刷新，轉換起點還在播放房屋監控各自則是顯示形勢姓名，至今宣傳可憐對手數量類型機票策略將會緊急升級發表不需要，預計控制結合我去說話手指希望女孩子團隊，生命水晶姑娘條件信箱她的建立某種思考，軟體市委一。
-                    </span>
-                    "
-                </p>
-                <p class="reviewsfromhost_review_card_txt_date">
-                    <span>2021.08.20</span>
-                </p>
-                <a href="~/Booking/BookingPage">
-                    <span class="reviewsfromhost_review_card_txt_place mt-2">
-                        Build School
-                        幹什麼這種還要便利商店信箱和我現實共享表情予以黑色所謂，多年保障寵物精選拿出會員價，沒有臺灣球員聯盟明顯服飾，一致長度商品背後豪華不少山西律師服務圖片聯繫眼中提升，穩定住宅獲取，手中興趣兩次生氣不能下載女子電子郵件正好事故有效特別說到，不好意思，電信春天。
-                    </span>
-                </a>
-                <div class="reviewsfromhost_review_card_txt_location mt-2">
-                    <div class="reviewsfromhost_review_card_txt_location_a">
-                        <a href="~/Searching/SearchingPage">
-                            <span>台北</span>
-                        </a>
-                        <a href="~/Searching/SearchingPage">
-                            <span>大安區</span>
-                        </a>
-                        <a href="~/Searching/SearchingPage">
-                            <span>忠孝東路三段96號11號樓之1</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="reviewsfromhost_review_card row mt-4">
-            <div class="reviewsfromhost_review_card_pic mb-3 col-sm-2 col-md-2 col-lg-2">
-                <a href="HostInfo">
-                    <img src="~/Assets/IMG/member_card/Nicky K..jpg" />
-                </a>
-            </div>
-            <div class="reviewsfromhost_review_card_txt mb-4 col-sm-10 col-md-10 col-lg-10">
-                <div class="reviewsfromhost_review_card_txt_name">
-                    <a href="HostInfo">Jetset Sound AV, LLC J.</a>
-                </div>
-                <div class="reviewsfromhost_review_card_txt_star mt-2">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="reviewsfromhost_review_card_txt_check mt-2">
-                    <i class="me-1 fas fa-check"></i>我還會想再次接待他們
-                </div>
-                <p class="mt-3">
-                    "
-                    <span class="reviewsfromhost_review_card_txt_msg">
-                        特色讓人，命運氣氛楠雅作戰就好病毒和你說話提前獲取普遍小心刷新，轉換起點還在播放房屋監控各自則是顯示形勢姓名，至今宣傳可憐對手數量類型機票策略將會緊急升級發表不需要，預計控制結合我去說話手指希望女孩子團隊，生命水晶姑娘條件信箱她的建立某種思考，軟體市委一。
-                    </span>
-                    "
-                </p>
-                <p class="reviewsfromhost_review_card_txt_date">
-                    <span>2021.08.20</span>
-                </p>
-                <a href="~/Booking/BookingPage">
-                    <span class="reviewsfromhost_review_card_txt_place">Build School</span>
-                </a>
-                <div class="reviewsfromhost_review_card_txt_location">
-                    <div class="reviewsfromhost_review_card_txt_location_a">
-                        <a href="~/Searching/SearchingPage">
-                            <span>台北</span>
-                        </a>
-                        <a href="~/Searching/SearchingPage">
-                            <span>大安區</span>
-                        </a>
-                        <a href="~/Searching/SearchingPage">
-                            <span>忠孝東路三段96號11號樓之1</span>
-                        </a>
-                        </div>
-                    </div>
-                </div>
-             </div>*@
         </div>
     </div>
-</div>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-sm-12">
+                <img src="~/Assets/IMG/NoReview(user).png" />
+            </div>
+        </div>
+    </div>
+}
 @section topCSS{
     <link href="~/Assets/CSS/member_card/memberstyle_buyer_evaluation.css" rel="stylesheet" />
 }

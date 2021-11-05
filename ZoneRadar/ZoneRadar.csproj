@@ -208,6 +208,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\EcpayApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HostCenterController.cs" />
     <Compile Include="Controllers\JSONAPIController.cs" />
@@ -371,11 +372,16 @@
     <Content Include="Assets\IMG\NoOrder%28user%29.png" />
     <Content Include="Assets\IMG\NoPreOrder%28user%29.png" />
     <Content Include="Assets\IMG\NoReview%28user%29.png" />
-    <Content Include="Assets\IMG\NoSearch.png" />
     <Content Include="Assets\IMG\NoSpace%28host%29.png" />
+    <Content Include="Assets\IMG\QRcode\ZoneRardarQR.png" />
+    <Content Include="Assets\IMG\static\About03.jpg" />
+    <Content Include="Assets\IMG\static\About02.jpg" />
+    <Content Include="Assets\IMG\static\About01.jpg" />
+    <Content Include="Assets\IMG\static\AboutMain.jpg" />
     <Content Include="Assets\IMG\static\fistbump-over-desk.jpg" />
     <Content Include="Assets\IMG\static\sent-email.png" />
     <Content Include="Assets\IMG\Usercenter\chngstar.png" />
+    <Content Include="Assets\IMG\NoSearch.png" />
     <Content Include="Assets\IMG\Usercenter\star.png" />
     <Content Include="Assets\IMG\ZONERadar.png" />
     <Content Include="Assets\JS\addspace\addspace.js" />
@@ -553,6 +559,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\vue.js" />
+    <Content Include="Scripts\vue.min.js" />
     <Content Include="Views\MemberCenter\ResetPasswordEmailContent.html" />
     <Content Include="Views\MemberCenter\VerificationEmailContent.html" />
     <Content Include="Web.config" />
@@ -616,6 +624,7 @@
     <Content Include="Views\Payment\Payment.cshtml" />
     <Content Include="Views\Payment\EcPayment.cshtml" />
     <Content Include="Views\MemberCenter\ResetPasswordSuccess.cshtml" />
+    <Content Include="Views\Home\NotFound404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

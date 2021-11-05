@@ -10,8 +10,8 @@
   let originImgs = [];
   // spaceID需先存在razor page裡
     //let spaceID = 168;
-    var spaceID = parseInt(document.querySelector('#mySpaceId').innerHTML);
-   /* let spaceID = 168;*/
+   // var spaceID = parseInt(document.querySelector('#mySpaceId').innerHTML);
+    let spaceID =4;
   // function定義
   // 從後端獲得上傳所需資訊
   function getPrams() {

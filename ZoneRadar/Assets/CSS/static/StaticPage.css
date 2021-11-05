@@ -19,10 +19,33 @@
     background-size: cover;
     min-height: 400px;
 } */
+
+.about-our-team02 {
+    background-position: left center;
+    background-image: url(/Assets/IMG/static/About03.jpg);
+    background-size: cover;
+    height: 300px;
+}
+
+.about-our-team01 {
+    background-position: left center;
+    background-image: url(/Assets/IMG/static/About01.jpg);
+    background-size: cover;
+    height: 300px;
+}
+
+.main-our-team {
+    background-position: center center;
+    /*object-fit: contain;*/
+    height: 85vh;
+    background-image: url(/Assets/IMG/static/AboutMain.jpg);
+    background-size: cover;
+}
+
 .join-our-team {
-    object-fit: cover;
-    height: 65vh;
-    background-image: url(/Assets/IMG/static/fistbump-over-desk.jpg);
+    background-position: bottom center;
+    height: 85vh;
+    background-image: url(/Assets/IMG/static/About02.jpg);
     background-size: cover;
 }
 
@@ -101,8 +124,33 @@ li p {
     padding: 0 0;
 }
 
+.about-text, .about-text-p p {
+    text-indent: 15px;
+    font-size: 15px;
+}
+
 @media only screen and (max-width: 500px) {
     h2, h3 {
         white-space: pre;
     }
+
+    .about-text h2, h3 {
+        white-space: nowrap !important;
+    }
+
+    .join-our-team {
+        background-position: left right;
+        height: 45vh;
+        background-image: url(/Assets/IMG/static/About02.jpg);
+        background-size: cover;
+    }
+
+    .main-our-team {
+        background-position: left right;
+        /*object-fit: contain;*/
+        height: 45vh;
+        background-image: url(/Assets/IMG/static/AboutMain.jpg);
+        background-size: cover;
+    }
 }
+

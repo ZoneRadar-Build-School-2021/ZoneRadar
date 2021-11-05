@@ -477,7 +477,7 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditProfile([Bind(Include = "MemberID,Name,Email,Phone,Description,ReceiveEDM")] ProfileViewModel edit)
+        public ActionResult EditProfile([Bind(Include = "MemberID,Photo,Name,Email,Phone,Description,ReceiveEDM")] ProfileViewModel edit)
         {
             if (ModelState.IsValid)
             {
@@ -486,6 +486,12 @@ namespace ZoneRadar.Controllers
             }
             return View("EditProfile");
         }
+
+        ///<summary>
+        ///
+        ///</summary>
+        ///<param name=""></param>
+        ///<returns></returns>
 
         /// <summary>
         /// Javascript取得idToken，透過Ajax發送至這個Action，後端把idToken轉成userId
