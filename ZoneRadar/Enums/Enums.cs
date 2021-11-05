@@ -24,4 +24,10 @@ namespace ZoneRadar.Enums
             StandardNintyDays = 4
         }
     }
+    public enum SpaceStatusEnum
+    {
+        Discontinued = 1,
+        OnTheShelf = 2,
+        Delete = 3
+    }
 }

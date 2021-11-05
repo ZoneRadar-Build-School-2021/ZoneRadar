@@ -155,17 +155,15 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public bool IsGoogleUser(string email, string googleId, bool verified)
         {
-            email = HttpUtility.HtmlEncode(email);
-            bool isGoogleUser = false;
-            //是否有此gmail
-            bool hasGmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == verified);
             //是否有此GoogleID
-            bool hasGoogleLoginId = _repository.GetAll<Member>().Any(x => x.GoogleID == googleId && x.IsVerify == verified);
-            if (hasGmail || hasGoogleLoginId)
+            bool hasGoogleId = _repository.GetAll<Member>().Any(x => x.GoogleID == googleId && x.IsVerify == verified);
+            if (hasGoogleId)
             {
-                isGoogleUser = true;
+                return hasGoogleId;
             }
-            return isGoogleUser;
+            //是否有此gmail
+            bool hasGmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == verified);            
+            return hasGmail;
         }
 
         /// <summary>

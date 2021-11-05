@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ZoneRadar.Models;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Repositories;
+using ZoneRadar.Enums;
 
 namespace ZoneRadar.Services
 {
@@ -37,7 +38,7 @@ namespace ZoneRadar.Services
             var spaces = _repository.GetAll<Space>().Where(x => x.SpaceStatusID == 2).ToList();
             var orders = _repository.GetAll<Order>().Where(x => x.OrderStatus.OrderStatusID == 2).ToList();
             var reviews = _repository.GetAll<Review>().Where(x => x.ToHost).ToList();
-            var spacePhotos = _repository.GetAll<SpacePhoto>().ToList();
+            //var spacePhotos = _repository.GetAll<SpacePhoto>().ToList();
 
             var selectedSpaces = new List<SelectedSpaceViewModel>();
 
@@ -48,8 +49,8 @@ namespace ZoneRadar.Services
                 double scoreAvg = spaceReview.Count() == 0 ? 0 : spaceReview.Average(x => x.Score);
 
                 //場地圖片資料表還沒建好，先寫防呆程式
-                var spacePhoto = spacePhotos.FirstOrDefault(x => x.SpaceID == item.SpaceID);
-                var spacePhotoUrl = spacePhoto == null ? "" : spacePhoto.SpacePhotoUrl;
+                //var spacePhoto = spacePhotos.FirstOrDefault(x => x.SpaceID == item.SpaceID);
+                //var spacePhotoUrl = spacePhoto == null ? "" : spacePhoto.SpacePhotoUrl;
 
                 selectedSpaces.Add(
                     new SelectedSpaceViewModel
@@ -58,7 +59,7 @@ namespace ZoneRadar.Services
                         CityName = item.City.CityName,
                         Capacity = item.Capacity,
                         PricePerHour = item.PricePerHour,
-                        SpacePhoto = spacePhotoUrl,
+                        SpacePhoto = item.SpacePhoto.First(x => x.Sort == 1).SpacePhotoUrl,
                         Score = scoreAvg
                     });
             }
@@ -98,15 +99,6 @@ namespace ZoneRadar.Services
             }).ToList();
 
             return cityOptions;
-        }
-
-
-        /// <summary>
-        /// 關閉資料庫連線(Jenny)
-        /// </summary>
-        public void DisposeCtx()
-        {
-            _repository.Dispose();
         }
 
         /// <summary>
