@@ -487,6 +487,12 @@ namespace ZoneRadar.Controllers
             return View("EditProfile");
         }
 
+        ///<summary>
+        ///
+        ///</summary>
+        ///<param name=""></param>
+        ///<returns></returns>
+
         /// <summary>
         /// Javascript取得idToken，透過Ajax發送至這個Action，後端把idToken轉成userId
         /// </summary>

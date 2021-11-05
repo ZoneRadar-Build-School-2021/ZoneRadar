@@ -700,6 +700,13 @@ namespace ZoneRadar.Services
             _repository.Dispose();
 
             return edit;
-        }        
+        }
+
+        /// <summary>
+        /// 大頭照上傳(昶安)
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+
     }
 }
