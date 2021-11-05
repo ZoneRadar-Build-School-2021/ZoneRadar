@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ZoneRadar.Services;
 using ZoneRadar.Models.ViewModels;
 using System.Net;
+using ZoneRadar.Enums;
 
 namespace ZoneRadar.Controllers
 {
