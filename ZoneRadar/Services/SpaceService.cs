@@ -1097,109 +1097,8 @@ namespace ZoneRadar.Services
             /// <summary>
             /// 營業時間 有被選的 (Amber) 
             int[] OperatingDays = { 1, 2, 3, 4, 5, 6, 7 };
-           List<SpaceoperatingDay> conpare = new List<SpaceoperatingDay>();
-            conpare.Add(new SpaceoperatingDay()
-            {
-                SpaceId = 999,
-                OperatingDay = 1,
-                StartTime = new TimeSpan(6, 0, 0),
-                EndTime = new TimeSpan(23, 0, 0),
-                isOpen = "",
-                isAllDayCheck = "",
-                isHourCheck = "",
-                WeekDay = "星期一",
-                AllDayValue = "Y1",
-                HoursValue = "hr1",
-                TagName = "Hours1"
-            });
 
-            conpare.Add(new SpaceoperatingDay()
-            {
-                SpaceId = 999,
-                OperatingDay = 2,
-                StartTime = new TimeSpan(6, 0, 0),
-                EndTime = new TimeSpan(23, 0, 0),
-                isOpen = "",
-                isAllDayCheck = "",
-                isHourCheck = "",
-                WeekDay = "星期二",
-                AllDayValue = "Y2",
-                HoursValue = "hr2",
-                TagName = "Hours2"
-            });
-
-            conpare.Add(new SpaceoperatingDay()
-            {
-                SpaceId = 999,
-                OperatingDay = 3,
-                StartTime = new TimeSpan(6, 0, 0),
-                EndTime = new TimeSpan(23, 0, 0),
-                isOpen = "",
-                isAllDayCheck = "",
-                isHourCheck = "",
-                WeekDay = "星期三",
-                AllDayValue = "Y3",
-                HoursValue = "hr3",
-                TagName = "Hours3"
-            });
-            conpare.Add(new SpaceoperatingDay()
-            {
-                SpaceId = 999,
-                OperatingDay = 4,
-                StartTime = new TimeSpan(6, 0, 0),
-                EndTime = new TimeSpan(23, 0, 0),
-                isOpen = "",
-                isAllDayCheck = "",
-                isHourCheck = "",
-                WeekDay = "星期四",
-                AllDayValue = "Y4",
-                HoursValue = "hr4",
-                TagName = "Hours4"
-            });
-            conpare.Add(new SpaceoperatingDay()
-            {
-                SpaceId = 999,
-                OperatingDay = 5,
-                StartTime = new TimeSpan(6, 0, 0),
-                EndTime = new TimeSpan(23, 0, 0),
-                isOpen = "",
-                isAllDayCheck = "",
-                isHourCheck = "",
-                WeekDay = "星期五",
-                AllDayValue = "Y5",
-                HoursValue = "hr5",
-                TagName = "Hours5"
-            });
-            conpare.Add(new SpaceoperatingDay()
-            {
-                SpaceId = 999,
-                OperatingDay = 6,
-                StartTime = new TimeSpan(6, 0, 0),
-                EndTime = new TimeSpan(23, 0, 0),
-                isOpen = "",
-                isAllDayCheck = "",
-                isHourCheck = "",
-                WeekDay = "星期六",
-                AllDayValue = "Y6",
-                HoursValue = "hr6",
-                TagName = "Hours6"
-            });
-            conpare.Add(new SpaceoperatingDay()
-            {
-                SpaceId = 999,
-                OperatingDay = 7,
-                StartTime = new TimeSpan(6, 0, 0),
-                EndTime = new TimeSpan(23, 0, 0),
-                isOpen = "",
-                isAllDayCheck = "",
-                isHourCheck = "",
-                WeekDay = "星期日",
-                AllDayValue = "Y7",
-                HoursValue = "hr7",
-                TagName = "Hours7"
-            });
             var openDays = _repository.GetAll<Operating>().Where(x => x.SpaceID == spaceId).ToList();
-            //IEnumerable<double>
 
             foreach (var item in openDays)
             {
@@ -1280,18 +1179,6 @@ namespace ZoneRadar.Services
                         operatingday.TagName = "Hours7";
                     }
                 }
-                //if (openDays.Count<7)
-                //{
-                //    //operatingday.isOpen = "";
-                //    if (operatingday.OperatingDay == 1)
-                //    {
-                //        operatingday.WeekDay = "星期一";
-                //        operatingday.AllDayValue = "Y1";
-                //        operatingday.HoursValue = "hr1";
-                //        operatingday.TagName = "Hours1";
-                //    }
-
-                //}
                 else
                 {
                     operatingday.isOpen = "";
@@ -1347,12 +1234,9 @@ namespace ZoneRadar.Services
 
                 }
                 result.SpaceoperatingDaysList.Add(operatingday);
-
+               
             }
-            //foreach (var item in Operating)
-            //{
 
-            //}
             var Operating = new List<SelectListItem> 
             {
             new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
