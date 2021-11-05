@@ -77,7 +77,10 @@ b-c {
 }
 
 .btn-check:focus + .btn-primary,
-.btn-primary:focus,
-.form-check-input:focus {
+.btn-primary:focus, .form-check-input:focus,
+.form-control.is-invalid:focus, .was-validated .form-control:invalid:focus,
+.form-control.is-invalid, .was-validated .form-control:invalid {
+    border-color:white !important;
     box-shadow: none !important;
 }
+
