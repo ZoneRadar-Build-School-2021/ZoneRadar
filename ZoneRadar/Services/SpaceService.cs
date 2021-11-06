@@ -1260,14 +1260,6 @@ namespace ZoneRadar.Services
             new SelectListItem { Value = "23:00:00.0000000", Text = "23:00"},
             new SelectListItem { Value = "00:00:00.0000000", Text = "00:00"},
             };
-            //foreach (var item in Operating)
-            //{
-            //    var Operatings=new Operating()
-            //    {
-
-            //    }
-            //}
-            //result.Operating.Add(Operating);
             return result;
         }
         /// <summary>
@@ -1694,6 +1686,22 @@ namespace ZoneRadar.Services
                 return sweetAlert;
             }
         }
+        /// <summary>
+        //新增場地的照片
+        /// </summary>
+        /// <returns></returns>
+        //public SpacePhotoViewModel CreateSpacePhotoFromDB()
+        //{
+
+        //    var result = new SpacePhotoViewModel()
+        //    {
+        //        Name = "dt6vz3pav",
+        //        Preset = "c3caow1j",
+        //        PhotoUrlList = urlList.ToList(),
+        //    };
+
+        //    return result;
+        //}
 
         /// <summary>
         /// 取得該編輯場地的照片
