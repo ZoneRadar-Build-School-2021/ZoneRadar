@@ -41,14 +41,16 @@ namespace ZoneRadar.Controllers
             
         }
 
-        public ActionResult EcPayment(PaymentViewModel model) 
+        //public ActionResult EcPayment(PaymentViewModel model) 
+        //{
+        //string ContactName, string ContactPhone, int OrderId, string SpaceId, int TotalMoney
+        //    ViewData["EcPay"] = _ecpaymentservice.GetEcpayData(model);
+        //    return View();
+        //}
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult EcPayment(PaymentViewModel model)
         {
             ViewData["EcPay"] = _ecpaymentservice.GetEcpayData(model);
-            return View();
-        }
-        [HttpPost]
-        public ActionResult ContactData(FormCollection model)
-        {
             return View();
         }
 

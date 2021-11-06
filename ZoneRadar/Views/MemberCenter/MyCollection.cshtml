@@ -6,51 +6,51 @@
     var Myspaces = Model.MyCollection;
     /*https://localhost:44322/MemberCenter/MyCollection?memberId=1*/
 }
-
-<div class="member member_container container mt-5 pb-3">
-    <div class="member_card row">
-        <div class="member_card_pic text-center col-sm-12 col-md-4 col-lg-3">
-            <img class="mt-4" src="@user.Photo" />
-        </div>
-
-        <!--會員卡 + 介紹-->
-        <div class="member_card_introduce col-sm-12 col-md-8 col-lg-9">
-            <div class="member_card mt-4 row">
-                <div class="member_card_introduce_name col-12">
-                    <h3>
-                        @user.Name
-                        <a href="mailto:@user.Email">
-                            <i class="ms-3 fas fa-comment-dots" data-bs-toggle="tooltip" data-bs-placement="right" title="聯絡我">
-                            </i>
-                        </a>
-                    </h3>
-                    <p class="mt-4">
-                        加入時間：
-                        <span class="ms-3">@user.SignUpDateTime.ToString("yyyy-MM-dd")</span>
-                    </p>
-                </div>
+@if (user.Id > 0 && Myspaces.Count() >= 0)
+{
+    <div class="member member_container container mt-5 pb-3">
+        <div class="member_card row">
+            <div class="member_card_pic text-center col-sm-12 col-md-4 col-lg-3">
+                <img class="mt-4" src="@user.Photo" />
             </div>
-            <div class="member_card row mt-auto">
-                <div class="col-sm-4 col-md-4">
-                    <div class="member_verifcation">
-                        <p class="member_verifcation_item text-center">認證</p>
-                        <p class="member_verifcation_item">
-                            <i class="me-3 fas fa-check"></i>Email
+            @*會員卡 + 介紹*@
+            <div class="member_card_introduce col-sm-12 col-md-8 col-lg-9">
+                <div class="member_card mt-4 row">
+                    <div class="member_card_introduce_name col-12">
+                        <h3>
+                            @user.Name
+                            <a href="mailto:@user.Email">
+                                <i class="ms-3 fas fa-comment-dots" data-bs-toggle="tooltip" data-bs-placement="right" title="聯絡我">
+                                </i>
+                            </a>
+                        </h3>
+                        <p class="mt-4">
+                            加入時間：
+                            <span class="ms-3">@user.SignUpDateTime.ToString("yyyy-MM-dd")</span>
                         </p>
-                        <p class="member_verifcation_item">
-                            @if (user.Phone != null)
-                            {
-                                <i class="me-3 fas fa-check"></i>
-                            }
-                            else
-                            {
-                                <i class="me-3 fas fa-times"></i>
-                            }Phone
-                        </p>
-                        <p class="member_verifcation_item">
-                            <i class="me-3 fas fa-check"></i>評價
-                            <span class="member_verifcation_reviews"> 
+                    </div>
+                </div>
+                <div class="member_card row mt-auto">
+                    <div class="col-sm-4 col-md-4">
+                        <div class="member_verifcation">
+                            <p class="member_verifcation_item text-center">認證</p>
+                            <p class="member_verifcation_item">
+                                <i class="me-3 fas fa-check"></i>Email
+                            </p>
+                            <p class="member_verifcation_item">
+                                @if (user.Phone != null)
+                                {
+                                    <i class="me-3 fas fa-check"></i>
+                                }
+                                else
+                                {
+                                    <i class="me-3 fas fa-times"></i>
+                                }Phone
+                            </p>
+                            <p class="member_verifcation_item">
+                                <i class="me-3 fas fa-check"></i>評價
                                 <span class="member_verifcation_reviews">
+                                    <span class="member_verifcation_reviews">
                                         @if (Myspaces.Select(x => x.ReviewCount) == null)
                                         {
                                             <span>(0)</span>
@@ -59,89 +59,113 @@
                                         {
                                             <span>(@Myspaces.Select(x => x.ReviewCount).Sum())</span>
                                         }
+                                    </span>
                                 </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 col-md-8">
+                        <div class="member_verifcation_message">
+                            <p>關於我：</p>
+                            <span class="member_verifcation_aboutme mt-2">
+                                @user.Description
                             </span>
-                        </p>
-                    </div>
-                </div>
-                <div class="col-sm-8 col-md-8">
-                    <div class="member_verifcation_message">
-                        <p>關於我：</p>
-                        <span class="member_verifcation_aboutme mt-2">
-                            @user.Description
-                        </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="member_container container mt-5">
-    <div class="member_choose row p-2">
-        <div class="col-6 text-center">
-            <h4 class="pb-2">
-                <a href="~/MemberCenter/Member/@user.Id" class="myplace_title p-1">
-                    <i class="me-2 fas fa-pencil-alt"></i>來自賣家的評價
-                </a>
-            </h4>
-        </div>
-        <div class="col-6 text-center">
-            <h4 class="pb-2">
-                <a href="~/MemberCenter/Collection/@user.Id" class="myplace_title active p-1">
-                    <i class="me-2 fas fa-heart"></i>我的收藏
-                </a>
-            </h4>
-        </div>
-    </div>
-    <div class="reviewsfromhost row p-3 mt-2">
-        @foreach (var My in Myspaces)
-        {
-            <div class="mt-4 myplace_space_card col-sm-12 col-md-6 col-lg-6">
-                <a class="space_card_pic" href="~/Booking/BookingPage/@My.SpaceId"><img class="pe-2" src="@My.SpacePhoto"></a>
-                <span class="myplace_space_card_distinct">@My.PricePerHour.ToString("C0") / hr</span>
-                <div class="space_card mt-4">
-                    <a href="~/Booking/BookingPage/@My" class="space_card_title fs-5">
-                        @My.SpaceName
+    <div class="member_container container mt-5">
+        <div class="member_choose row p-2">
+            <div class="col-6 text-center">
+                <h4 class="pb-2">
+                    <a href="~/MemberCenter/Member/@user.Id" class="myplace_title p-1">
+                        <i class="me-2 fas fa-pencil-alt"></i>來自賣家的評價
                     </a>
-                    <div class="space_card_location mt-1">
-                        <a href="~/Searching/SearchingPage/@My.City" class="space_card_location_a">
-                            <span>@My.City</span>
-                        </a>
-                        <a href="~/Searching/SearchingPage/@My.District" class="space_card_location_a">
-                            <span>@My.District</span>
-                        </a>
-                        <a href="~/Searching/SearchingPage/@My.Address" class="space_card_location_a">
-                            <span>@My.Address</span>
-                        </a>
-                    </div>
-                    <div class="space_card_star mt-1">
-                        @if (My.Score == 0)
-                        {
-                            <span>目前沒有任何評價</span>
-                        }
-                        else if (My.Score % 1 == 0)
-                        {
-                            for (int i = 0; i < My.Score; i++)
-                            {
-                                <i class="fas fa-star"></i>
-                            }
-                        }
-                        else
-                        {
-                            for (int i = 0; i < (My.Score - 1); i++)
-                            {
-                                <i class="fas fa-star"></i>
-                            }
-                            <i class="fas fa-star-half-alt"></i>
-                        }
-                        <span class="me-2"> (@My.ReviewCount)</span>
+                </h4>
+            </div>
+            <div class="col-6 text-center">
+                <h4 class="pb-2">
+                    <a href="~/MemberCenter/Collection/@user.Id" class="myplace_title active p-1">
+                        <i class="me-2 fas fa-heart"></i>我的收藏
+                    </a>
+                </h4>
+            </div>
+        </div>
+        <div class="reviewsfromhost row p-3 mt-2">
+            @if (Myspaces.Count() == 0)
+            {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2 col-sm-12">
+                            <img src="~/Assets/IMG/NoCollection(user).png" />
+                        </div>
                     </div>
                 </div>
-            </div>
             }
+            else
+            {
+                foreach (var My in Myspaces)
+                {
+                    <div class="mt-4 myplace_space_card col-sm-12 col-md-6 col-lg-6">
+                        <a class="space_card_pic" href="~/Booking/BookingPage/@My.SpaceId"><img class="pe-2" src="@My.SpacePhoto"></a>
+                        <span class="myplace_space_card_distinct">@My.PricePerHour.ToString("C0") / hr</span>
+                        <div class="space_card mt-4">
+                            <a href="~/Booking/BookingPage/@My" class="space_card_title fs-5">
+                                @My.SpaceName
+                            </a>
+                            <div class="space_card_location mt-1">
+                                <a href="~/Searching/SearchingPage/@My.City" class="space_card_location_a">
+                                    <span>@My.City</span>
+                                </a>
+                                <a href="~/Searching/SearchingPage/@My.District" class="space_card_location_a">
+                                    <span>@My.District</span>
+                                </a>
+                                <a href="~/Searching/SearchingPage/@My.Address" class="space_card_location_a">
+                                    <span>@My.Address</span>
+                                </a>
+                            </div>
+                            <div class="space_card_star mt-1">
+                                @if (My.Score == 0)
+                                {
+                                    <span>目前沒有任何評價</span>
+                                }
+                                else if (My.Score % 1 == 0)
+                                {
+                                    for (int i = 0; i < My.Score; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                }
+                                else
+                                {
+                                    for (int i = 0; i < (My.Score - 1); i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                    <i class="fas fa-star-half-alt"></i>
+                                }
+                                <span class="me-2"> (@My.ReviewCount)</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
     </div>
-</div>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-sm-12">
+                <img src="~/Assets/IMG/NoCollection(user).png" />
+            </div>
+        </div>
+    </div>
+}
 
 @section topCSS{
     <link href="~/Assets/CSS/member_card/memberstyle_buyer_collect.css" rel="stylesheet" />

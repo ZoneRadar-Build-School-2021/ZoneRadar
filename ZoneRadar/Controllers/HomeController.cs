@@ -62,8 +62,6 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
-
-        [Authorize]
         public ActionResult FAQ()
         {
             return View();

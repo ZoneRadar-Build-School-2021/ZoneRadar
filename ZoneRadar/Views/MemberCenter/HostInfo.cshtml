@@ -7,117 +7,140 @@
     var spaces = Model.Spaces;
     /*https://localhost:44322/MemberCenter/hostinfo?memberId=1*/
 }
-
-<div class="member member_container container mt-5 pb-3">
-    <div class="member_card row">
-        <div class="member_card_pic text-center col-sm-12 col-md-4 col-lg-3">
-            <img class="mt-4" src="@user.Photo" />
-        </div>
-        <!--會員卡 + 介紹-->
-
-        <div class="member_card_introduce col-sm-12 col-md-8 col-lg-9">
-            <div class="member_card mt-4 row">
-                <div class="member_card_introduce_name col-12">
-                    <h3>
-                        @user.Name
-                        <a href="mailto:@user.Email">
-                            <i class="ms-3 fas fa-comment-dots" data-bs-toggle="tooltip" data-bs-placement="right" title="聯絡我">
-                            </i>
-                        </a>
-                    </h3>
-                    <p class="mt-4">
-                        加入時間：
-                        <span class="ms-3">
-                            @user.SignUpDateTime.ToString("yyyy-MM-dd")
-                        </span>
-                    </p>
-                </div>
+@if (user.Id > 0 && spaces.Count() >= 0)
+{
+    <div class="member member_container container mt-5 pb-3">
+        <div class="member_card row">
+            <div class="member_card_pic text-center col-sm-12 col-md-4 col-lg-3">
+                <img class="mt-4" src="@user.Photo" />
             </div>
-            <div class="member_card row mt-auto">
-                <div class="col-sm-4 col-md-3">
-                    <div class="member_verifcation">
-                        <p class="member_verifcation_item text-center">認證</p>
-                        <p class="member_verifcation_item">
-                            <i class="me-3 fas fa-check"></i>
-                            Email
+            <!--會員卡 + 介紹-->
+            <div class="member_card_introduce col-sm-12 col-md-8 col-lg-9">
+                <div class="member_card mt-4 row">
+                    <div class="member_card_introduce_name col-12">
+                        <h3>
+                            @user.Name
+                            <a href="mailto:@user.Email">
+                                <i class="ms-3 fas fa-comment-dots" data-bs-toggle="tooltip" data-bs-placement="right" title="聯絡我">
+                                </i>
+                            </a>
+                        </h3>
+                        <p class="mt-4">
+                            加入時間：
+                            <span class="ms-3">
+                                @user.SignUpDateTime.ToString("yyyy-MM-dd")
+                            </span>
                         </p>
-                        <p class="member_verifcation_item">
-                            @if (user.Phone != null)
-                            {
+                    </div>
+                </div>
+                <div class="member_card row mt-auto">
+                    <div class="col-sm-4 col-md-3">
+                        <div class="member_verifcation">
+                            <p class="member_verifcation_item text-center">認證</p>
+                            <p class="member_verifcation_item">
                                 <i class="me-3 fas fa-check"></i>
-                            }
-                            else
-                            {
-                                <i class="me-3 fas fa-times"></i>
-                            }Phone
-                        </p>
+                                Email
+                            </p>
+                            <p class="member_verifcation_item">
+                                @if (user.Phone != null)
+                                {
+                                    <i class="me-3 fas fa-check"></i>
+                                }
+                                else
+                                {
+                                    <i class="me-3 fas fa-times"></i>
+                                }Phone
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-8 col-md-9">
-                    <div class="member_verifcation_message">
-                        <p>關於我：</p>
-                        <span class="member_verifcation_aboutme mt-2">@user.Description</span>
+                    <div class="col-sm-8 col-md-9">
+                        <div class="member_verifcation_message">
+                            <p>關於我：</p>
+                            <span class="member_verifcation_aboutme mt-2">@user.Description</span>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
-
     </div>
-</div>
 
-<div class="member_container container mt-5">
-    <h4 class="myplace_title pb-2">
-        <i class="me-2 fas fa-home"></i>我的空間
-    </h4>
-
-    <div class="myplace row p-3 mt-2">
-        @foreach (var sp in spaces)
+    <div class="member_container container mt-5">
+        <h4 class="myplace_title pb-2">
+            <i class="me-2 fas fa-home"></i>我的空間
+        </h4>
+        @if (spaces.Count() > 0)
         {
-            <div class="mt-4 myplace_space_card col-sm-12 col-md-6 col-lg-6">
-                <a class="space_card_pic" href="~/Booking/BookingPage/@sp.SpaceId"><img class="pe-2" src="@sp.SpacePhoto"></a>
-                <span class="myplace_space_card_distinct">@sp.PricePerHour.ToString("C0") / hr</span>
-                <div class="space_card mt-4">
-                    <a href="~/Booking/BookingPage/@sp.SpaceId" class="space_card_title fs-5">
-                        @sp.SpaceName
-                    </a>
-                    <div class="space_card_location mt-1">
-                        <a href="~/Searching/SearchingPage/@sp.City" class="space_card_location_a">
-                            <span>@sp.City</span>
-                        </a>
-                        <a href="~/Searching/SearchingPage/@sp.District" class="space_card_location_a">
-                            <span>@sp.District</span>
-                        </a>
-                        <a href="~/Searching/SearchingPage/@sp.Address" class="space_card_location_a">
-                            <span>@sp.Address</span>
-                        </a>
+            <div class="myplace row p-3 mt-2">
+                @foreach (var sp in spaces)
+                {
+                    <div class="mt-4 myplace_space_card col-sm-12 col-md-6 col-lg-6">
+                        <a class="space_card_pic" href="~/Booking/BookingPage/@sp.SpaceId"><img class="pe-2" src="@sp.SpacePhoto"></a>
+                        <span class="myplace_space_card_distinct">@sp.PricePerHour.ToString("C0") / hr</span>
+                        <div class="space_card mt-4">
+                            <a href="~/Booking/BookingPage/@sp.SpaceId" class="space_card_title fs-5">
+                                @sp.SpaceName
+                            </a>
+                            <div class="space_card_location mt-1">
+                                <a href="~/Searching/SearchingPage/@sp.City" class="space_card_location_a">
+                                    <span>@sp.City</span>
+                                </a>
+                                <a href="~/Searching/SearchingPage/@sp.District" class="space_card_location_a">
+                                    <span>@sp.District</span>
+                                </a>
+                                <a href="~/Searching/SearchingPage/@sp.Address" class="space_card_location_a">
+                                    <span>@sp.Address</span>
+                                </a>
+                            </div>
+                            <div class="space_card_star mt-1">
+                                @if (sp.Score == 0)
+                                {
+                                    <span>目前沒有任何評價</span>
+                                }
+                                else if (sp.Score % 1 == 0)
+                                {
+                                    for (int i = 0; i < sp.Score; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                }
+                                else
+                                {
+                                    for (int i = 0; i < (sp.Score - 1); i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                    <i class="fas fa-star-half-alt"></i>
+                                }
+                                <span class="me-2">(@sp.ReviewCount)</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="space_card_star mt-1">
-                        @if (sp.Score == 0)
-                        {
-                            <span>目前沒有任何評價</span>
-                        }
-                        else if (sp.Score % 1 == 0)
-                        {
-                            for (int i = 0; i < sp.Score; i++)
-                            {
-                                <i class="fas fa-star"></i>
-                            }
-                        }
-                        else
-                        {
-                            for (int i = 0; i < (sp.Score - 1); i++)
-                            {
-                                <i class="fas fa-star"></i>
-                            }
-                            <i class="fas fa-star-half-alt"></i>
-                        }
-                        <span class="me-2">(@sp.ReviewCount)</span>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 col-sm-12">
+                        <img src="~/Assets/IMG/NoSpace(host).png" />
                     </div>
                 </div>
             </div>
         }
     </div>
-</div>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-sm-12">
+                <img src="~/Assets/IMG/NoSpace(host).png" />
+            </div>
+        </div>
+    </div>
+}
 
 @section topCSS{
     <link href="~/Assets/CSS/member_card/memberstyle_seller.css" rel="stylesheet" />
