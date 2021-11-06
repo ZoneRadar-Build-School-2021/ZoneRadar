@@ -198,6 +198,11 @@ input[type="text"]:focus {
         transition: .3s;
     }
 
+.no-result-container {
+    max-width: 1000px;
+    margin: auto;
+}
+
 @media screen and (min-width: 768px) {
     .more-filter {
         max-width: 30%;

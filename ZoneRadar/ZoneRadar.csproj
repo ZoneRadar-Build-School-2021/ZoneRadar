@@ -329,6 +329,9 @@
     <Content Include="Assets\CSS\webfonts\fa-brands-400.svg" />
     <Content Include="Assets\CSS\webfonts\fa-regular-400.svg" />
     <Content Include="Assets\CSS\webfonts\fa-solid-900.svg" />
+    <Content Include="Assets\IMG\400BadRequest.png" />
+    <Content Include="Assets\IMG\404NotFound.png" />
+    <Content Include="Assets\IMG\500InternalServiceError.png" />
     <Content Include="Assets\IMG\head.png" />
     <Content Include="Assets\IMG\icons\addphoto.png" />
     <Content Include="Assets\IMG\icons\apple_tv.svg" />
@@ -625,6 +628,8 @@
     <Content Include="Views\Payment\EcPayment.cshtml" />
     <Content Include="Views\MemberCenter\ResetPasswordSuccess.cshtml" />
     <Content Include="Views\Home\NotFound404.cshtml" />
+    <Content Include="Views\Home\BadRequest.cshtml" />
+    <Content Include="Views\Home\ServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

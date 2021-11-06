@@ -70,5 +70,13 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
+        public ActionResult BadRequest()
+        {
+            return View();
+        }
+        public ActionResult ServerError()
+        {
+            return View();
+        }
     }
 }

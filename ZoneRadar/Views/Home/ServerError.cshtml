@@ -1,0 +1,22 @@
+@{
+    ViewBag.Title = "系統發生錯誤";
+}
+
+<div class="server-err-container">
+    <img class="server-err d-block" src="~/Assets/IMG/500InternalServiceError.png" alt="500InternalServiceError" />
+</div>
+
+@section topCSS {
+    <style>
+        .server-err-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .server-err {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+}
+
