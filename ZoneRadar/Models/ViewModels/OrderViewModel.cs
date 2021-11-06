@@ -68,6 +68,7 @@ namespace ZoneRadar.Models.ViewModels
     // 訂單 HostcenterHistoryVM
     public class HostCenterHistoryViewModel : OrderViewModel
     {
+        public string SearchDateTime { get; set; }
         public string UserName { get; set; }
         public string ContactName { get; set; }
         public string ContactPhone { get; set; }
