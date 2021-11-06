@@ -628,6 +628,8 @@
     <Content Include="Views\Payment\EcPayment.cshtml" />
     <Content Include="Views\MemberCenter\ResetPasswordSuccess.cshtml" />
     <Content Include="Views\Home\NotFound404.cshtml" />
+    <Content Include="Views\Home\BadRequest.cshtml" />
+    <Content Include="Views\Home\ServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
