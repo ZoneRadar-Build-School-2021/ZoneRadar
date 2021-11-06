@@ -37,6 +37,7 @@
     var startTimeList = details.StartTimeList;
     var endTimeList = details.EndTimeList;
     var spaceID = briefs.SpaceID;
+    var validationText = $"人數需少於{briefs.Capacity}人";
 }
 
 <!-- Body -->
@@ -361,7 +362,7 @@
         </div>
         <div class="validate-row input-group mt-0 d-none">
             <span class="text-danger form-control me-1 border-0 pt-0"><i class="fas fa-exclamation-circle d-none"></i></span>
-            <span class="not-validate-text text-danger form-control ms-1 border-0 ps-0 text-start pt-0"><i class="fas fa-exclamation-circle"></i>人數超過限制</span>
+            <span class="not-validate-text text-danger form-control ms-1 border-0 ps-0 text-start pt-0"><i class="fas fa-exclamation-circle me-1"></i>@validationText</span>
         </div>
         <div class="input-group mb-2">
             <input type="text" placeholder="開始時間" class="start-time form-control rounded me-1" disabled>
