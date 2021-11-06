@@ -63,17 +63,16 @@
     function initialize() {
         axios.get(getURL).then(res => {
             source = res.data.Response;
-            console.log({source});
             // 營業起始時間
             operationStartArr = source.StartTimeList;
             // 營業結束時間
             operationEndArr = source.EndTimeList;
             // 星期幾有營業
-            operationDayArr = source.OperatingDayList;
-            operationDayArr.forEach(day => {
+            source.OperatingDayList.forEach(day => {
                 if (day === 7) day = 0;
+                operationDayArr.push(day);
             });
-            
+
             minHour = source.MinHour;
             discount = source.Discount;
             orderDateArr = source.OrderTimeList;
