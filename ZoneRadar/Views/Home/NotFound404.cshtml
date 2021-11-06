@@ -1,5 +1,9 @@
+@{
+    ViewBag.Title = "找不到頁面";
+}
+
 <div class="not-found-container">
-    <img class="not-found d-block mx-auto" src="~/Assets/IMG/404NotFound.png"  alt="404NotFound"/>
+    <img class="not-found d-block" src="~/Assets/IMG/404NotFound.png" alt="404NotFound" />
 </div>
 
 @section topCSS {
@@ -8,5 +12,10 @@
             max-width: 1100px;
             margin: auto;
         }
-    </style>    
+
+        .not-found {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
 }
