@@ -192,10 +192,30 @@
     // 設定人數選項
     function setAttendee(attendeeNode, startTimeNode, endTimeNode) {
         attendeeNode.addEventListener('change', function (e) {
-            // 只能輸入數字
             const reg = /^[0-9]+(\.[0-9]{1,3})?$/;
+            if (!reg.test(this.value)) {
+                this.value = '';
+                return;
+            }
+
+            let parentNode = this.parentNode.parentNode;
+            let validateRow = parentNode.querySelector('.validate-row');
+            // 只能輸入數字
             // 如果人數 > 50，數字顯示50
-            if (this.value > capacity) this.value = capacity;
+            if (this.value > capacity) {
+                this.classList.add('not-validate');
+                validateRow.classList.remove('d-none');
+
+                submitBtn.setAttribute('disabled', '');
+                extendDayBtn.setAttribute('disabled', '');
+                return;
+            } else {
+                this.classList.remove('not-validate');
+                validateRow.classList.add('d-none');
+
+                submitBtn.removeAttribute('disabled');
+                extendDayBtn.removeAttribute('disabled');
+            };
             // 暫存參加人數
             attendee = this.value;
             let whichCard = e.target.parentNode.parentNode.classList[2];
