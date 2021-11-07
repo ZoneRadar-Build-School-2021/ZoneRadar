@@ -1,4 +1,8 @@
-﻿//停車場的 是否
+﻿/*/*const { checked } = require("modernizr");*/
+
+/*const { forEach } = require("angular");*/
+
+//停車場的 是否
 var yesflag = 1;
 var parkingPart = document.querySelector("#parkingPart");
 let flexSwitchCheckDefaultYes = document.querySelector("#flexSwitchCheckDefaultYes");
@@ -28,996 +32,1017 @@ Yesprojection.addEventListener('click', function () {
     }
 
 });
-///營業時間 radio/
-
-//let openday = document.querySelector("#openday");
-//openday.addEventListener("click", function () {
-//    //星期一
-//    let monAll = document.querySelectorAll("#flexRadioDefault1")[0];
-//    monAll.setAttribute("value", "Y1");
-
-//    let monHour = document.querySelectorAll("#flexRadioDefault1")[1];
-//    monHour.setAttribute("value", "hr1");
-    
-
-//    //星期二
-//    let tueOpen = document.querySelectorAll("#flexSwitchCheckDefault")[1];
-//    tueOpen.setAttribute("value", 2);
-//    tueOpen.setAttribute("name", "OperatingDay");
-//    tueOpen.setAttribute("id", 'flexSwitchCheckDefault2');
-//    tueOpen.setAttribute("for", "flexSwitchCheckDefault2");
-//    let openlabel = document.querySelectorAll("#openlabel")[1];
-//    openlabel.setAttribute('for',"flexSwitchCheckDefault2")
-//    //星期二的 全天 小時 label for設定
-//    let tueAll = document.querySelectorAll('#flexRadioDefault1')[2];
-//    let tueHour = document.querySelectorAll('#flexRadioDefault1')[3];
-//    let allDayLabeltue = document.querySelectorAll("#allDayLabel")[1];
-//    let hourLabeltue = document.querySelectorAll("#hourLabel")[1];
-
-//    allDayLabeltue.setAttribute("for", "flexRadioDefault2");
-//    hourLabeltue.setAttribute("for", "flexRadioDefault2");
-
-//    tueAll.setAttribute("value", "Y2");
-//    tueAll.setAttribute("name", "Hour2");
-//    tueAll.setAttribute("id", "flexRadioDefault2");
-    
-//    tueHour.setAttribute("value", "hr2");
-//    tueHour.setAttribute("name", "Hours2");
-//    tueHour.setAttribute("checked","checked")
-//    tueHour.setAttribute("id", "flexRadioDefault2")
 
 
-//    //星期三
-//    let wedOpen = document.querySelectorAll("#flexSwitchCheckDefault")[1];
-//    wedOpen.setAttribute("value", 3);
-//    wedOpen.setAttribute("name", "OperatingDay");
-//    wedOpen.setAttribute("id", 'flexSwitchCheckDefault3');
-//    wedOpen.setAttribute("for", "flexSwitchCheckDefault3");
-//    let openlabel3 = document.querySelectorAll("#openlabel")[2];
-//    openlabel3.setAttribute('for', "flexSwitchCheckDefault3")
-
-//    let wedAll = document.querySelectorAll('#flexRadioDefault1')[2];
-//    let wedHour = document.querySelectorAll('#flexRadioDefault1')[3];
-//    let allDayLabelwed = document.querySelectorAll("#allDayLabel")[2];
-//    let hourLabelwed = document.querySelectorAll("#hourLabel")[2];
-//    allDayLabelwed.setAttribute("for", "flexRadioDefault3");
-//    hourLabelwed.setAttribute("for", "flexRadioDefault3");
-//    wedAll.setAttribute("value", "Y3");
-//    wedAll.setAttribute("name", "Hours3");
-//    wedAll.setAttribute("id", "flexRadioDefault3");
-
-//    wedHour.setAttribute("value", "hr3");
-//    wedHour.setAttribute("name", "Hours3");
-//    wedHour.setAttribute("id", "flexRadioDefault3")
-
-//    //星期四
-//    let ThuOpen = document.querySelectorAll("#flexSwitchCheckDefault")[1];
-//    ThuOpen.setAttribute("value", 4);
-//    ThuOpen.setAttribute("name", "OperatingDay");
-//    ThuOpen.setAttribute("id", 'flexSwitchCheckDefault4');
-//    ThuOpen.setAttribute("for", "flexSwitchCheckDefault4");
-//    let openlabel4 = document.querySelectorAll("#openlabel")[3];
-//    openlabel4.setAttribute('for', "flexSwitchCheckDefault4")
-
-//    let ThuAll = document.querySelectorAll('#flexRadioDefault1')[2];
-//    let ThuHour = document.querySelectorAll('#flexRadioDefault1')[3];
-//    let allDayLabelThu = document.querySelectorAll("#allDayLabel")[3];
-//    let hourLabelThu = document.querySelectorAll("#hourLabel")[3];
-//    allDayLabelThu.setAttribute("for", "flexRadioDefault4");
-//    hourLabelThu.setAttribute("for", "flexRadioDefault4");
-
-//    ThuAll.setAttribute("value", "Y4");
-//    ThuAll.setAttribute("name", "Hours4");
-//    ThuAll.setAttribute("id", "flexRadioDefault4");
-
-//    ThuHour.setAttribute("value", "hr4");
-//    ThuHour.setAttribute("name", "Hours4");
-//    ThuHour.setAttribute("id", "flexRadioDefault4");
-
-//    //星期五
-//    let FriOpen = document.querySelectorAll("#flexSwitchCheckDefault")[1];
-//    FriOpen.setAttribute("value", 5);
-//    FriOpen.setAttribute("name", "OperatingDay");
-//    FriOpen.setAttribute("id", 'flexSwitchCheckDefault5');
-//    FriOpen.setAttribute("for", "flexSwitchCheckDefault5");
-//    let openlabel5 = document.querySelectorAll("#openlabel")[4];//改
-//    openlabel5.setAttribute('for', "flexSwitchCheckDefault5");
-
-//    let FriAll = document.querySelectorAll('#flexRadioDefault1')[2];
-//    let FriHour = document.querySelectorAll('#flexRadioDefault1')[3];
-//    let allDayLabelFri = document.querySelectorAll("#allDayLabel")[4];
-//    let hourLabelFri = document.querySelectorAll("#hourLabel")[4];//改
-//    allDayLabelFri.setAttribute("for", "flexRadioDefault5");
-//    hourLabelFri.setAttribute("for", "flexRadioDefault5");
-
-//    FriAll.setAttribute("value", "Y5");
-//    FriAll.setAttribute("name", "Hours5");
-//    FriAll.setAttribute("id", "flexRadioDefault5");
-
-//    FriHour.setAttribute("value", "hr5");
-//    FriHour.setAttribute("name", "Hours5");
-//    FriHour.setAttribute("id", "flexRadioDefault5");
-
-//    //星期六
-//    let SatOpen = document.querySelectorAll("#flexSwitchCheckDefault")[1];
-//    SatOpen.setAttribute("value", 6);
-//    SatOpen.setAttribute("name", "OperatingDay");
-//    SatOpen.setAttribute("id", 'flexSwitchCheckDefault6');
-//    SatOpen.setAttribute("for", "flexSwitchCheckDefault6");
-//    let openlabel6 = document.querySelectorAll("#openlabel")[5];//改
-//    openlabel6.setAttribute('for', "flexSwitchCheckDefault6");
-
-//    let SatAll = document.querySelectorAll('#flexRadioDefault1')[2];
-//    let SatHour = document.querySelectorAll('#flexRadioDefault1')[3];
-//    let allDayLabelSat = document.querySelectorAll("#allDayLabel")[5];//改
-//    let hourLabelSat = document.querySelectorAll("#hourLabel")[5];//改
-//    allDayLabelSat.setAttribute("for", "flexRadioDefault6");
-//    hourLabelSat.setAttribute("for", "flexRadioDefault6");
-
-//    SatAll.setAttribute("value", "Y6");
-//    SatAll.setAttribute("name", "Hours6");
-//    SatAll.setAttribute("id", "flexRadioDefault6");
-
-//    SatHour.setAttribute("value", "hr6");
-//    SatHour.setAttribute("name", "Hours6");
-//    SatHour.setAttribute("id", "flexRadioDefault6");
-
-//    //星期日
-//    let SunOpen = document.querySelectorAll("#flexSwitchCheckDefault")[1];
-//    SunOpen.setAttribute("value", 7);
-//    SunOpen.setAttribute("name", "OperatingDay");
-//    SunOpen.setAttribute("id", 'flexSwitchCheckDefault7');
-//    SunOpen.setAttribute("for", "flexSwitchCheckDefault7");
-//    let openlabel7 = document.querySelectorAll("#openlabel")[6];//改
-//    openlabel7.setAttribute('for', "flexSwitchCheckDefault7");
-
-//    let SunAll = document.querySelectorAll('#flexRadioDefault1')[2];
-//    let SunHour = document.querySelectorAll('#flexRadioDefault1')[3];
-//    let allDayLabelSun = document.querySelectorAll("#allDayLabel")[6];//改
-//    let hourLabelSun = document.querySelectorAll("#hourLabel")[6];//改
-//    allDayLabelSun.setAttribute("for", "flexRadioDefault7");
-//    hourLabelSun.setAttribute("for", "flexRadioDefault7");
-
-//    SunAll.setAttribute("value", "Y7");
-//    SunAll.setAttribute("name", "Hours7");
-//    SunAll.setAttribute("id", "flexRadioDefault7");
-
-//    SunHour.setAttribute("value", "hr7");
-//    SunHour.setAttribute("name", "Hours7");
-//    SunHour.setAttribute("id", "flexRadioDefault7");
-
-//});
-    
+//datlist
+//datlist2
+console.log(datlist[0].OperatingDay);
 
 
+//monday~Sun
+//營業 checkbox
+let MonOpen = document.querySelector("#MonOpen");
+let TueOpen = document.querySelector("#TueOpen");
+let WedOpen = document.querySelector("#WedOpen");
+let ThuOpen = document.querySelector("#ThuOpen");
+let FriOpen = document.querySelector("#FriOpen");
+let SatOpen = document.querySelector("#SatOpen");
+let SunOpen = document.querySelector("#SunOpen");
 
-var flag = 1;
-//monday
-//營業
-let flexSwitchCheckDefault = document.querySelectorAll("#flexSwitchCheckDefault")[0];
-//全天
-let flexRadioDefault1 = document.querySelectorAll('#flexRadioDefault1')[0];
-//小時
-let flexRadioDefault2 = document.querySelectorAll('#flexRadioDefault1')[1];
+//全天 monday~Sun radio
+let MonAllDay = document.querySelector("#MonAllDay");
+let TueAllDay = document.querySelector("#TueAllDay");
+let WedAllDay = document.querySelector("#WedAllDay");
+let ThuAllDay = document.querySelector("#ThuAllDay");
+let FriAllDay = document.querySelector("#FriAllDay");
+let SatAllDay = document.querySelector("#SatAllDay");
+let SunAllDay = document.querySelector("#SunAllDay");
 
-//開始時間
-let StateMon = document.querySelectorAll("#State")[0];
-//結束時間
-let StateMon2 = document.querySelectorAll("#State")[1];
-flexSwitchCheckDefault.addEventListener("click", function () {
-    if (flag == 0) {
-        flexRadioDefault1.disabled = false;
-        flexRadioDefault2.disabled = false;
-        flag = 1;
-    } else {
-        flexRadioDefault1.disabled = true;
-        flexRadioDefault2.disabled = true;
-        StateMon.disabled = true;
-        StateMon2.disabled = true;
-        flexRadioDefault2.checked = false;
-        flexRadioDefault1.checked = false;
-        flag = 0;
+//小時 monday~Sun radio
+let MonHours = document.querySelector("#MonHours");
+let TueHours = document.querySelector("#TueHours");
+let WedHours = document.querySelector("#WedHours");
+let ThuHours = document.querySelector("#ThuHours");
+let FriHours = document.querySelector("#FriHours");
+let SatHours = document.querySelector("#SatHours");
+let SunHours = document.querySelector("#SunHours");
+
+//選擇營業時間的 下拉選單開始 結束 monday~Sun Select
+let StateMonS = document.querySelector("#StateMonS");
+let StateMonE = document.querySelector("#StateMonE");
+
+let StateTueS = document.querySelector("#StateTueS");
+let StateTueE = document.querySelector("#StateTueE");
+
+let StateWedS = document.querySelector("#StateWedS");
+let StateWedE = document.querySelector("#StateWedE");
+
+let StateThuS = document.querySelector("#StateThuS");
+let StateThuE = document.querySelector("#StateThuE");
+
+let StateFriS = document.querySelector("#StateFriS");
+let StateFriE = document.querySelector("#StateFriE");
+
+let StateSatS = document.querySelector("#StateSatS");
+let StateSatE = document.querySelector("#StateSatE");
+
+let StateSunS = document.querySelector("#StateSunS");
+let StateSunE = document.querySelector("#StateSunE");
+
+//選擇營業時間的一開始顯示資料庫的 要修改的時候變成時間 下拉選單開始 結束 monday~Sun Select
+let StartTimeoptionMon = document.querySelector("#StartTimeoptionMon");
+let EndTimeoptionMon = document.querySelector("#EndTimeoptionMon");
+
+let StartTimeoptionTue = document.querySelector("#StartTimeoptionTue");
+let EndTimeoptionTue = document.querySelector("#EndTimeoptionTue");
+
+let StarTimeoptionWed = document.querySelector("#StarTimeoptionWed");
+let EndTimeoptionWed = document.querySelector("#EndTimeoptionWed");
+
+let StartTimeoptionThu = document.querySelector("#StartTimeoptionThu");
+let EndTimeoptionThu = document.querySelector("#EndTimeoptionThu");
+
+let StartTimeoptionFri = document.querySelector("#StartTimeoptionFri");
+let EndTimeoptionFri = document.querySelector("#EndTimeoptionFri");
+
+let StartTimeoptionSat = document.querySelector("#StartTimeoptionSat");
+let EndTimeoptionSat = document.querySelector("#EndTimeoptionSat");
+
+let StartTimeoptionSun = document.querySelector("#StartTimeoptionSun");
+let EndTimeoptionSun = document.querySelector("#EndTimeoptionSun");
+
+console.log(datlist[0]);
+let Newdatalist = new Array();
+let compare=[1,2,3,4,5,6,7]
+for (var i = 0; i < datlist.length; i++) {
+    Newdatalist.push(datlist[i].OperatingDay);
+}
+console.log(Newdatalist);
+
+for (var i = 0; i < Newdatalist.length; i++) {
+    switch (Newdatalist[i]) {
+        case 1:
+            console.log(Newdatalist[i])
+            MonOpen.checked = true;
+            MonAllDay.disabled = false;
+            MonHours.disabled = false;
+            if (datlist[i].StartTime.Hours == 6 && datlist[i].EndTime.Hours == 23) {
+                MonAllDay.setAttribute('checked', "checked");
+                MonAllDay.checked = true;
+
+                StartTimeoptionMon.innerHTML = "06:00";
+                StartTimeoptionMon.value = "06:00";
+                EndTimeoptionMon.innerHTML = "23:00";
+                EndTimeoptionMon.value = "23:00";
+            }
+            else {
+                MonHours.checked = true;
+                var ShourString = (datlist[i].StartTime.Hours).toString();
+                var EhourString = (datlist[i].EndTime.Hours).toString();
+                StartTimeoptionMon.innerHTML = ShourString.padStart(2, '0') + ":00";
+                StartTimeoptionMon.value.innerHTML = ShourString.padStart(2, '0') + ":00";
+                EndTimeoptionMon.innerHTML = EhourString.padStart(2, '0') + ":00";
+                EndTimeoptionMon.value = EhourString.padStart(2, '0') + ":00";
+            }
+            break;
+        case 2:
+            TueOpen.checked = true;
+            TueAllDay.disabled = false;
+            TueHours.disabled = false;
+            if (datlist[i].StartTime.Hours == 6 && datlist[i].EndTime.Hours == 23) {
+                TueAllDay.setAttribute('checked', "checked");
+                TueAllDay.checked = true;
+
+                StartTimeoptionTue.innerHTML = "06:00";
+                StartTimeoptionTue.value = "06:00";
+                EndTimeoptionTue.innerHTML = "23:00";
+                EndTimeoptionTue.value = "23:00";
+            }
+            else {
+                TueHours.checked = true;
+                var ShourString = (datlist[i].StartTime.Hours).toString();
+                var EhourString = (datlist[i].EndTime.Hours).toString();
+
+                StartTimeoptionTue.innerHTML = ShourString.padStart(2, '0') + ":00";
+                StartTimeoptionTue.value = ShourString.padStart(2, '0') + ":00";
+                EndTimeoptionTue.innerHTML = EhourString.padStart(2, '0') + ":00";
+                EndTimeoptionTue.value = EhourString.padStart(2, '0') + ":00";
+            }
+
+            break;
+
+        case 3:
+            WedOpen.checked = true;
+            WedAllDay.disabled = false;
+            WedHours.disabled = false;
+            if (datlist[i].StartTime.Hours == 6 && datlist[i].EndTime.Hours == 23) {
+                WedAllDay.setAttribute('checked', "checked");
+                WedAllDay.checked = true;
+
+                StarTimeoptionWed.innerHTML = "06:00";
+                StarTimeoptionWed.value = "06:00";
+                EndTimeoptionWed.innerHTML = "23:00";
+                EndTimeoptionWed.value = "23:00";
+            }
+            else {
+                WedHours.checked = true;
+                var ShourString = (datlist[i].StartTime.Hours).toString();
+                var EhourString = (datlist[i].EndTime.Hours).toString();
+
+                StarTimeoptionWed.innerHTML = ShourString.padStart(2, '0') + ":00";
+                StarTimeoptionWed.value = ShourString.padStart(2, '0') + ":00";
+                EndTimeoptionWed.innerHTML = EhourString.padStart(2, '0') + ":00";
+                EndTimeoptionWed.value = EhourString.padStart(2, '0') + ":00";
+            }
+
+            break;
+        case 4:
+            ThuOpen.checked = true;
+            ThuAllDay.disabled = false;
+            ThuHours.disabled = false;
+            if (datlist[i].StartTime.Hours == 6 && datlist[i].EndTime.Hours == 23) {
+                ThuAllDay.setAttribute('checked', "checked");
+                ThuAllDay.checked = true;
+                StartTimeoptionThu.innerHTML = "06:00";
+                StartTimeoptionThu.value = "06:00";
+                EndTimeoptionThu.innerHTML = "23:00";
+                EndTimeoptionThu.value = "23:00";
+            }
+            else {
+                ThuHours.checked = true;
+                var ShourString = (datlist[i].StartTime.Hours).toString();
+                var EhourString = (datlist[i].EndTime.Hours).toString();
+
+                StartTimeoptionThu.innerHTML = ShourString.padStart(2, '0') + ":00";
+                StartTimeoptionThu.value = ShourString.padStart(2, '0') + ":00";
+                EndTimeoptionThu.innerHTML = EhourString.padStart(2, '0') + ":00";
+                EndTimeoptionThu.value = EhourString.padStart(2, '0') + ":00";
+            }
+            break;
+        case 5:
+            FriOpen.checked = true;
+            FriAllDay.disabled = false;
+            FriHours.disabled = false;
+            if (datlist[i].StartTime.Hours == 6 && datlist[i].EndTime.Hours == 23) {
+                FriAllDay.setAttribute('checked', "checked");
+                FriAllDay.checked = true;
+                StartTimeoptionFri.innerHTML = "06:00";
+                StartTimeoptionFri.value = "06:00";
+                EndTimeoptionFri.innerHTML = "23:00";
+                EndTimeoptionFri.value = "23:00";
+            }
+            else {
+                FriHours.checked = true;
+                var ShourString = (datlist[i].StartTime.Hours).toString();
+                var EhourString = (datlist[i].EndTime.Hours).toString();
+
+                StartTimeoptionFri.innerHTML = ShourString.padStart(2, '0') + ":00";
+                EndTimeoptionFri.innerHTML = EhourString.padStart(2, '0') + ":00";
+                StartTimeoptionFri.value = ShourString.padStart(2, '0') + ":00";
+                EndTimeoptionFri.value = EhourString.padStart(2, '0') + ":00";
+
+            }
+            break;
+        case 6:
+            SatOpen.checked = true;
+            SatAllDay.disabled = false;
+            SatHours.disabled = false;
+            if (datlist[i].StartTime.Hours == 6 && datlist[i].EndTime.Hours == 23) {
+                SatAllDay.setAttribute('checked', "checked");
+                SatAllDay.checked = true;
+                StartTimeoptionSat.innerHTML = "06:00";
+                StartTimeoptionSat.value = "06:00";
+                EndTimeoptionSat.innerHTML = "23:00";
+                EndTimeoptionSat.value = "23:00";
+            }
+            else {
+                SatHours.checked = true;
+                var ShourString = (datlist[i].StartTime.Hours).toString();
+                var EhourString = (datlist[i].EndTime.Hours).toString();
+
+                StartTimeoptionSat.innerHTML = ShourString.padStart(2, '0') + ":00";
+                StartTimeoptionSat.value = ShourString.padStart(2, '0') + ":00";
+                EndTimeoptionSat.innerHTML = EhourString.padStart(2, '0') + ":00";
+                EndTimeoptionSat.value = ShourString.padStart(2, '0') + ":00";
+            }
+            break;
+        case 7:
+            SunOpen.checked = true;
+            SunAllDay.disabled = false;
+            SunHours.disabled = false;
+            if (datlist[i].StartTime.Hours == 6 && datlist[i].EndTime.Hours == 23) {
+                SunAllDay.setAttribute('checked', "checked");
+                SunAllDay.checked = true;
+                StartTimeoptionSun.innerHTML = "06:00";
+                StartTimeoptionSun.value = "06:00";
+                EndTimeoptionSun.innerHTML = "23:00";
+                EndTimeoptionSun.value = "23:00";
+
+            }
+            else {
+                SunHours.checked = true;
+                var ShourString = (datlist[i].StartTime.Hours).toString();
+                var EhourString = (datlist[i].EndTime.Hours).toString();
+
+                StartTimeoptionSun.innerHTML = ShourString.padStart(2, '0') + ":00";
+                StartTimeoptionSun.value = ShourString.padStart(2, '0') + ":00";
+                EndTimeoptionSun.innerHTML = EhourString.padStart(2, '0') + ":00";
+                EndTimeoptionSun.value = EhourString.padStart(2, '0') + ":00";
+            }
+            break;
+        default:
+            console.log(`Sorry, we are out of `);
+            break;
+
     }
-});
-flexRadioDefault1.addEventListener("click", function () {
-    StateMon.disabled = true;
-    StateMon2.disabled = true;
-    StateMon2.length = 1;
-    StateMon.length = 1;
-    let TimeoptionS = document.querySelectorAll("#Timeoption")[0];
-    TimeoptionS.innerHTML= "06:00";
-    TimeoptionS.value = "06:00";
+   }
 
-    let TimeoptionE = document.querySelectorAll("#Timeoption")[1];
-    TimeoptionE.value= "23:00";
-    TimeoptionE.innerHTML ="23:00";
+    //todo
 
-});
+    MonOpen.addEventListener("click", function () {
+        if (MonOpen.checked == false) {
+            MonAllDay.disabled = true;
+            MonHours.disabled = true;
+            StartTimeoptionMon.innerHTML = "選擇營業時間";
+            EndTimeoptionMon.innerHTML = "選擇營業時間";
 
-flexRadioDefault2.addEventListener('click', function () {
+            MonAllDay.checked = false;
+            MonHours.checked = false;
+            StateMonS.disabled = true;
+            StateMonE.disabled = true;
+            console.log("關")
+            flagMon = 0;
+            console.log("打開")
+        }
+        else if (MonOpen.checked == true) {
+            MonAllDay.disabled = false;
+            MonHours.disabled = false;
+            StateMonS.disabled = true;
+            StateMonE.disabled = true;
+            flagMon = 0;
+        }
+    });
+    MonAllDay.addEventListener("click", function () {
+        StartTimeoptionMon.innerHTML = "06:00";
+        EndTimeoptionMon.innerHTML = "23:00";
+        StateMonS.disabled = true;
+        StateMonE.disabled = true;
+        StateMonS.length = 1;
+        StateMonE.length = 1;
+    });
+    MonHours.addEventListener('click', function () {
+        StateMonS.disabled = false;
+        StateMonE.disabled = false;
+        StartTimeoptionMon.innerHTML = "06:00";
+        EndTimeoptionMon.innerHTML = "23:00";
+        let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
+        let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
+        let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
+        let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
+        let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
+        let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
+        let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
+        let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
+        let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
+        let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
+        let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
+        let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
+        let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
+        let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
+        let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
+        let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
+        let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
 
-    let StateMon = document.querySelectorAll("#State")[0];
-    let StateMon2 = document.querySelectorAll("#State")[1];
-    StateMon.disabled = false;
-    StateMon2.disabled = false;
+        let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
+        let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
+        let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
+        let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
+        let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
+        let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
+        let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
+        let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
+        let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
+        let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
+        let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
+        let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
+        let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
+        let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
+        let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
+        let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
+        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
 
-    let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
-    let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
-    let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
-    let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
-    let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
-    let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
-    let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
-    let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
-    let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
-    let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
-    let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
-    let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
-    let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
-    let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
-    let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
-    let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
-    let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
+        StateMonS.appendChild(option1);
+        StateMonS.appendChild(option2);
+        StateMonS.appendChild(option3);
+        StateMonS.appendChild(option4);
+        StateMonS.appendChild(option5);
+        StateMonS.appendChild(option6);
+        StateMonS.appendChild(option7);
+        StateMonS.appendChild(option8);
+        StateMonS.appendChild(option9);
+        StateMonS.appendChild(option10);
+        StateMonS.appendChild(option11);
+        StateMonS.appendChild(option12);
+        StateMonS.appendChild(option13);
+        StateMonS.appendChild(option14);
+        StateMonS.appendChild(option15);
+        StateMonS.appendChild(option16);
+        StateMonS.appendChild(option17);
 
-    let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
-    let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
-    let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
-    let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
-    let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
-    let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
-    let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
-    let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
-    let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
-    let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
-    let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
-    let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
-    let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
-    let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
-    let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
-    let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
-    let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
+        StateMonE.appendChild(option18);
+        StateMonE.appendChild(option19);
+        StateMonE.appendChild(option20);
+        StateMonE.appendChild(option21);
+        StateMonE.appendChild(option22);
+        StateMonE.appendChild(option23);
+        StateMonE.appendChild(option24);
+        StateMonE.appendChild(option25);
+        StateMonE.appendChild(option26);
+        StateMonE.appendChild(option27);
+        StateMonE.appendChild(option28);
+        StateMonE.appendChild(option29);
+        StateMonE.appendChild(option30);
+        StateMonE.appendChild(option31);
+        StateMonE.appendChild(option32);
+        StateMonE.appendChild(option33);
+        StateMonE.appendChild(option34);
 
-    StateMon.appendChild(option1);
-    StateMon.appendChild(option2);
-    StateMon.appendChild(option3);
-    StateMon.appendChild(option4);
-    StateMon.appendChild(option5);
-    StateMon.appendChild(option6);
-    StateMon.appendChild(option7);
-    StateMon.appendChild(option8);
-    StateMon.appendChild(option9);
-    StateMon.appendChild(option10);
-    StateMon.appendChild(option11);
-    StateMon.appendChild(option12);
-    StateMon.appendChild(option13);
-    StateMon.appendChild(option14);
-    StateMon.appendChild(option15);
-    StateMon.appendChild(option16);
-    StateMon.appendChild(option17);
+    });
+    TueOpen.addEventListener("click", function () {
+        if (TueOpen.checked == false) {
+            TueAllDay.disabled = true;
+            TueHours.disabled = true;
+            EndTimeoptionTue.innerHTML = "選擇營業時間";
+            StartTimeoptionTue.innerHTML = "選擇營業時間";
+            TueAllDay.checked = false;
+            TueHours.checked = false;
+            StateTueS.disabled = true;
+            StateTueE.disabled = true;
+            console.log("關")
+        }
+        else if (TueOpen.checked == true) {
+            flagTue = 1;
+            TueAllDay.disabled = false;
+            TueHours.disabled = false;
+            StateTueS.disabled = true;
+            StateTueE.disabled = true;
+            flagTue = 0;
+            console.log("打開")
+        }
 
-    StateMon2.appendChild(option18);
-    StateMon2.appendChild(option19);
-    StateMon2.appendChild(option20);
-    StateMon2.appendChild(option21);
-    StateMon2.appendChild(option22);
-    StateMon2.appendChild(option23);
-    StateMon2.appendChild(option24);
-    StateMon2.appendChild(option25);
-    StateMon2.appendChild(option26);
-    StateMon2.appendChild(option27);
-    StateMon2.appendChild(option28);
-    StateMon2.appendChild(option29);
-    StateMon2.appendChild(option30);
-    StateMon2.appendChild(option31);
-    StateMon2.appendChild(option32);
-    StateMon2.appendChild(option33);
-    StateMon2.appendChild(option34);
-});
+    });
+    TueAllDay.addEventListener("click", function () {
+        StartTimeoptionTue.innerHTML = "06:00";
+        EndTimeoptionTue.innerHTML = "23:00";
+        StateTueS.length = 1;
+        StateTueE.length = 1;
+        StateTueS.disabled = true;
+        StateTueE.disabled = true;
+    });
+    TueHours.addEventListener('click', function () {
+        StateTueS.disabled = false;
+        StateTueE.disabled = false;
+        let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
+        let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
+        let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
+        let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
+        let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
+        let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
+        let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
+        let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
+        let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
+        let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
+        let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
+        let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
+        let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
+        let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
+        let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
+        let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
+        let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
+
+        let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
+        let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
+        let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
+        let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
+        let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
+        let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
+        let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
+        let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
+        let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
+        let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
+        let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
+        let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
+        let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
+        let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
+        let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
+        let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
+        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
+
+        StateTueS.appendChild(option1);
+        StateTueS.appendChild(option2);
+        StateTueS.appendChild(option3);
+        StateTueS.appendChild(option4);
+        StateTueS.appendChild(option5);
+        StateTueS.appendChild(option6);
+        StateTueS.appendChild(option7);
+        StateTueS.appendChild(option8);
+        StateTueS.appendChild(option9);
+        StateTueS.appendChild(option10);
+        StateTueS.appendChild(option11);
+        StateTueS.appendChild(option12);
+        StateTueS.appendChild(option13);
+        StateTueS.appendChild(option14);
+        StateTueS.appendChild(option15);
+        StateTueS.appendChild(option16);
+        StateTueS.appendChild(option17);
+
+        StateTueE.appendChild(option18);
+        StateTueE.appendChild(option19);
+        StateTueE.appendChild(option20);
+        StateTueE.appendChild(option21);
+        StateTueE.appendChild(option22);
+        StateTueE.appendChild(option23);
+        StateTueE.appendChild(option24);
+        StateTueE.appendChild(option25);
+        StateTueE.appendChild(option26);
+        StateTueE.appendChild(option27);
+        StateTueE.appendChild(option28);
+        StateTueE.appendChild(option29);
+        StateTueE.appendChild(option30);
+        StateTueE.appendChild(option31);
+        StateTueE.appendChild(option32);
+        StateTueE.appendChild(option33);
+        StateTueE.appendChild(option34);
+
+    });
+    WedOpen.addEventListener("click", function () {
+        if (WedOpen.checked == false) {
+            WedAllDay.disabled = true;
+            WedHours.disabled = true;
+            EndTimeoptionWed.innerHTML = "選擇營業時間";
+            StarTimeoptionWed.innerHTML = "選擇營業時間";
+            WedAllDay.checked = false;
+            WedHours.checked = false;
+            StateWedS.disabled = true;
+            StateWedE.disabled = true;
+            console.log("關")
+        }
+        else if (WedOpen.checked == true) {
+            WedAllDay.disabled = false;
+            WedHours.disabled = false;
+            StateWedS.disabled = true;
+            StateWedE.disabled = true;
+            console.log("打開")
+        }
+    });
+    WedAllDay.addEventListener("click", function () {
+        StarTimeoptionWed.innerHTML = "06:00";
+        EndTimeoptionWed.innerHTML = "23:00";
+        StateWedS.length = 1;
+        StateWedE.length = 1;
+        StateWedS.disabled = true;
+        StateWedE.disabled = true;
+    });
+    WedHours.addEventListener('click', function () {
+        StateWedS.disabled = false;
+        StateWedE.disabled = false;
+        let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
+        let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
+        let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
+        let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
+        let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
+        let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
+        let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
+        let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
+        let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
+        let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
+        let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
+        let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
+        let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
+        let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
+        let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
+        let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
+        let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
+
+        let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
+        let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
+        let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
+        let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
+        let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
+        let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
+        let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
+        let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
+        let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
+        let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
+        let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
+        let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
+        let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
+        let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
+        let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
+        let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
+        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
+
+        StateWedS.appendChild(option1);
+        StateWedS.appendChild(option2);
+        StateWedS.appendChild(option3);
+        StateWedS.appendChild(option4);
+        StateWedS.appendChild(option5);
+        StateWedS.appendChild(option6);
+        StateWedS.appendChild(option7);
+        StateWedS.appendChild(option8);
+        StateWedS.appendChild(option9);
+        StateWedS.appendChild(option10);
+        StateWedS.appendChild(option11);
+        StateWedS.appendChild(option12);
+        StateWedS.appendChild(option13);
+        StateWedS.appendChild(option14);
+        StateWedS.appendChild(option15);
+        StateWedS.appendChild(option16);
+        StateWedS.appendChild(option17);
+
+        StateWedE.appendChild(option18);
+        StateWedE.appendChild(option19);
+        StateWedE.appendChild(option20);
+        StateWedE.appendChild(option21);
+        StateWedE.appendChild(option22);
+        StateWedE.appendChild(option23);
+        StateWedE.appendChild(option24);
+        StateWedE.appendChild(option25);
+        StateWedE.appendChild(option26);
+        StateWedE.appendChild(option27);
+        StateWedE.appendChild(option28);
+        StateWedE.appendChild(option29);
+        StateWedE.appendChild(option30);
+        StateWedE.appendChild(option31);
+        StateWedE.appendChild(option32);
+        StateWedE.appendChild(option33);
+        StateWedE.appendChild(option34);
+
+    });
 
 
-//tuesday
-var flagtue=0;
-let flexSwitchCheckDefaultTue = document.querySelectorAll("#flexSwitchCheckDefault")[1];
-let TueAllDay = document.querySelectorAll('#flexRadioDefault1')[2];
-let Tuehour = document.querySelectorAll('#flexRadioDefault1')[3];
-flexSwitchCheckDefaultTue.addEventListener("click", function () {
-    if (flagtue == 1) {
-        TueAllDay.disabled = false;
-        Tuehour.disabled = false;
-        flagtue = 0;
-    } else {
-        TueAllDay.disabled = true;
-        Tuehour.disabled = true;
-        TueAllDay.checked = false;
-        Tuehour.checked = false;
-        let StateTue = document.querySelectorAll("#State")[2];
-        let StateTue2 = document.querySelectorAll("#State")[3];
-        StateTue.disabled = true;
-        StateTue2.disabled = true;
-        flagtue = 1;
-    }
-});
-TueAllDay.addEventListener('click', function () {
+    ///
+    ThuOpen.addEventListener("click", function () {
+        if (ThuOpen.checked == false) {
 
-    let StateTue = document.querySelectorAll("#State")[2];
-    let StateTue2 = document.querySelectorAll("#State")[3];
-    StateTue.length = 1;
-    StateTue2.length = 1;
-    let TimeoptionS = document.querySelectorAll("#Timeoption")[2];
-    TimeoptionS.innerHTML= "06:00";
-    TimeoptionS.value= "06:00";
+            ThuAllDay.disabled = true;
+            ThuHours.disabled = true;
+            EndTimeoptionThu.innerHTML = "選擇營業時間";
+            StartTimeoptionThu.innerHTML = "選擇營業時間";
+            ThuAllDay.checked = false;
+            ThuHours.checked = false;
+            StateThuS.disabled = true;
+            StateThuE.disabled = true;
+            console.log("關")
+        }
+        else if (ThuOpen.checked == true) {
+            ThuAllDay.disabled = false;
+            ThuHours.disabled = false;
+            StateThuS.disabled = true;
+            StateThuE.disabled = true;
+            console.log("打開")
+        }
+    });
+    ThuAllDay.addEventListener("click", function () {
+        StartTimeoptionThu.innerHTML = "06:00";
+        EndTimeoptionThu.innerHTML = "23:00";
+        StateThuS.length = 1;
+        StateThuE.length = 1;
+        StateThuS.disabled = true;
+        StateThuE.disabled = true;
+    });
+    ThuHours.addEventListener('click', function () {
+        StateThuS.disabled = false;
+        StateThuE.disabled = false;
+        let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
+        let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
+        let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
+        let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
+        let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
+        let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
+        let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
+        let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
+        let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
+        let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
+        let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
+        let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
+        let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
+        let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
+        let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
+        let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
+        let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
 
-    let TimeoptionE = document.querySelectorAll("#Timeoption")[3];
-    TimeoptionE.value = "23:00";
-    TimeoptionE.innerHTML = "23:00";
-    StateTue.disabled = true;
-    StateTue2.disabled = true;
+        let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
+        let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
+        let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
+        let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
+        let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
+        let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
+        let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
+        let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
+        let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
+        let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
+        let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
+        let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
+        let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
+        let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
+        let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
+        let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
+        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
 
-});
-Tuehour.addEventListener('click', function () {
+        StateThuS.appendChild(option1);
+        StateThuS.appendChild(option2);
+        StateThuS.appendChild(option3);
+        StateThuS.appendChild(option4);
+        StateThuS.appendChild(option5);
+        StateThuS.appendChild(option6);
+        StateThuS.appendChild(option7);
+        StateThuS.appendChild(option8);
+        StateThuS.appendChild(option9);
+        StateThuS.appendChild(option10);
+        StateThuS.appendChild(option11);
+        StateThuS.appendChild(option12);
+        StateThuS.appendChild(option13);
+        StateThuS.appendChild(option14);
+        StateThuS.appendChild(option15);
+        StateThuS.appendChild(option16);
+        StateThuS.appendChild(option17);
 
-    let StateTue = document.querySelectorAll("#State")[2];
-    let StateTue2 = document.querySelectorAll("#State")[3];
-    StateTue.disabled = false;
-    StateTue2.disabled = false;
-    let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
-    let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
-    let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
-    let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
-    let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
-    let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
-    let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
-    let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
-    let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
-    let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
-    let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
-    let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
-    let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
-    let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
-    let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
-    let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
-    let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
+        StateThuE.appendChild(option18);
+        StateThuE.appendChild(option19);
+        StateThuE.appendChild(option20);
+        StateThuE.appendChild(option21);
+        StateThuE.appendChild(option22);
+        StateThuE.appendChild(option23);
+        StateThuE.appendChild(option24);
+        StateThuE.appendChild(option25);
+        StateThuE.appendChild(option26);
+        StateThuE.appendChild(option27);
+        StateThuE.appendChild(option28);
+        StateThuE.appendChild(option29);
+        StateThuE.appendChild(option30);
+        StateThuE.appendChild(option31);
+        StateThuE.appendChild(option32);
+        StateThuE.appendChild(option33);
+        StateThuE.appendChild(option34);
 
-    let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
-    let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
-    let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
-    let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
-    let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
-    let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
-    let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
-    let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
-    let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
-    let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
-    let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
-    let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
-    let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
-    let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
-    let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
-    let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
-    let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
+    });
+    ///5
+    FriOpen.addEventListener("click", function () {
+        if (FriOpen.checked == false) {
 
-    StateTue.appendChild(option1);
-    StateTue.appendChild(option2);
-    StateTue.appendChild(option3);
-    StateTue.appendChild(option4);
-    StateTue.appendChild(option5);
-    StateTue.appendChild(option6);
-    StateTue.appendChild(option7);
-    StateTue.appendChild(option8);
-    StateTue.appendChild(option9);
-    StateTue.appendChild(option10);
-    StateTue.appendChild(option11);
-    StateTue.appendChild(option12);
-    StateTue.appendChild(option13);
-    StateTue.appendChild(option14);
-    StateTue.appendChild(option15);
-    StateTue.appendChild(option16);
-    StateTue.appendChild(option17);
+            FriAllDay.disabled = true;
+            FriHours.disabled = true;
+            EndTimeoptionFri.innerHTML = "選擇營業時間";
+            StartTimeoptionFri.innerHTML = "選擇營業時間";
+            FriAllDay.checked = false;
+            FriHours.checked = false;
+            StateThuS.disabled = true;
+            StateThuE.disabled = true;
+            console.log("關")
+        }
+        else if (FriOpen.checked == true) {
+            FriAllDay.disabled = false;
+            FriHours.disabled = false;
+            StateFriS.disabled = true;
+            StateFriE.disabled = true;
+            console.log("打開")
+        }
+    });
+    FriAllDay.addEventListener("click", function () {
+        StartTimeoptionFri.innerHTML = "06:00";
+        EndTimeoptionFri.innerHTML = "23:00";
+        StateFriS.length = 1;
+        StateFriE.length = 1;
+        StateFriS.disabled = true;
+        StateFriE.disabled = true;
+    });
+    FriHours.addEventListener('click', function () {
+        StateFriS.disabled = false;
+        StateFriE.disabled = false;
+        let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
+        let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
+        let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
+        let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
+        let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
+        let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
+        let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
+        let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
+        let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
+        let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
+        let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
+        let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
+        let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
+        let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
+        let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
+        let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
+        let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
 
-    StateTue2.appendChild(option18);
-    StateTue2.appendChild(option19);
-    StateTue2.appendChild(option20);
-    StateTue2.appendChild(option21);
-    StateTue2.appendChild(option22);
-    StateTue2.appendChild(option23);
-    StateTue2.appendChild(option24);
-    StateTue2.appendChild(option25);
-    StateTue2.appendChild(option26);
-    StateTue2.appendChild(option27);
-    StateTue2.appendChild(option28);
-    StateTue2.appendChild(option29);
-    StateTue2.appendChild(option30);
-    StateTue2.appendChild(option31);
-    StateTue2.appendChild(option32);
-    StateTue2.appendChild(option33);
-    StateTue2.appendChild(option34);
+        let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
+        let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
+        let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
+        let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
+        let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
+        let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
+        let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
+        let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
+        let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
+        let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
+        let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
+        let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
+        let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
+        let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
+        let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
+        let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
+        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
 
-})
+        StateFriS.appendChild(option1);
+        StateFriS.appendChild(option2);
+        StateFriS.appendChild(option3);
+        StateFriS.appendChild(option4);
+        StateFriS.appendChild(option5);
+        StateFriS.appendChild(option6);
+        StateFriS.appendChild(option8);
+        StateFriS.appendChild(option9);
+        StateFriS.appendChild(option10);
+        StateFriS.appendChild(option11);
+        StateFriS.appendChild(option12);
+        StateFriS.appendChild(option13);
+        StateFriS.appendChild(option14);
+        StateFriS.appendChild(option15);
+        StateFriS.appendChild(option16);
+        StateFriS.appendChild(option17);
 
-//wednesday
-let flexSwitchCheckDefaultWed = document.querySelectorAll("#flexSwitchCheckDefault")[2];
-let WedAllDay = document.querySelectorAll("#flexRadioDefault1")[4];
-let Wedhour = document.querySelectorAll("#flexRadioDefault1")[5];
-var flagWed=1;
-flexSwitchCheckDefaultWed.addEventListener("click", function () {
-    if ((flagWed == 0)) {
-        Wedhour.disabled = false;
-        WedAllDay.disabled = false;
-        flagWed = 1;
-    } else {
-        Wedhour.disabled = true;
-        WedAllDay.disabled = true;
-        WedAllDay.checked = false;
-        Wedhour.checked = false;
-        let StateWed = document.querySelectorAll("#State")[4];
-        let StateWed2 = document.querySelectorAll("#State")[5];
+        StateFriE.appendChild(option18);
+        StateFriE.appendChild(option19);
+        StateFriE.appendChild(option20);
+        StateFriE.appendChild(option21);
+        StateFriE.appendChild(option22);
+        StateFriE.appendChild(option23);
+        StateFriE.appendChild(option24);
+        StateFriE.appendChild(option25);
+        StateFriE.appendChild(option26);
+        StateFriE.appendChild(option27);
+        StateFriE.appendChild(option28);
+        StateFriE.appendChild(option29);
+        StateFriE.appendChild(option30);
+        StateFriE.appendChild(option31);
+        StateFriE.appendChild(option32);
+        StateFriE.appendChild(option33);
+        StateFriE.appendChild(option34);
+    });
+    ///6
+    SatOpen.addEventListener("click", function () {
+        if (SatOpen.checked == false) {
+            SatAllDay.disabled = true;
+            SatHours.disabled = true;
+            EndTimeoptionSat.innerHTML = "選擇營業時間";
+            StartTimeoptionSat.innerHTML = "選擇營業時間";
+            SatAllDay.checked = false;
+            SatHours.checked = false;
+            StateSatS.disabled = true;
+            StateSatE.disabled = true;
+            console.log("關")
+        }
+        else if (SatOpen.checked == true) {
+            SatAllDay.disabled = false;
+            SatHours.disabled = false;
+            StateSatS.disabled = true;
+            StateSatE.disabled = true;
+            console.log("打開")
+        }
+    });
+    SatAllDay.addEventListener("click", function () {
+        StartTimeoptionSat.innerHTML = "06:00";
+        EndTimeoptionSat.innerHTML = "23:00";
+        StateSatS.length = 1;
+        StateSatE.length = 1;
+        StateSatS.disabled = true;
+        StateSatE.disabled = true;
+    });
+    SatHours.addEventListener('click', function () {
+        StateSatS.disabled = false;
+        StateSatE.disabled = false;
+        let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
+        let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
+        let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
+        let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
+        let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
+        let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
+        let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
+        let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
+        let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
+        let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
+        let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
+        let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
+        let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
+        let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
+        let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
+        let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
+        let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
 
-        //選擇時間
-        StateWed.disabled = true;
-        StateWed2.disabled = true;
-        flagWed = 0;
-    }
-});
-WedAllDay.addEventListener('click', function () {
-    let StateWed = document.querySelectorAll("#State")[4];
-    let StateWed2 = document.querySelectorAll("#State")[5];
-    StateWed.disabled = true;
-    StateWed2.disabled = true;
-    let TimeoptionS = document.querySelectorAll("#Timeoption")[4];
-    TimeoptionS.innerHTML = "06:00";
-    TimeoptionS.value = "06:00";
+        let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
+        let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
+        let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
+        let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
+        let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
+        let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
+        let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
+        let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
+        let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
+        let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
+        let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
+        let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
+        let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
+        let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
+        let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
+        let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
+        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
 
-    let TimeoptionE = document.querySelectorAll("#Timeoption")[5];
-    TimeoptionE.value = "23:00";
-    TimeoptionE.innerHTML = "23:00";
-    StateWed.length = 1;
-    StateWed2.length = 1;
-})
+        StateSatS.appendChild(option1);
+        StateSatS.appendChild(option2);
+        StateSatS.appendChild(option3);
+        StateSatS.appendChild(option4);
+        StateSatS.appendChild(option5);
+        StateSatS.appendChild(option6);
+        StateSatS.appendChild(option8);
+        StateSatS.appendChild(option9);
+        StateSatS.appendChild(option10);
+        StateSatS.appendChild(option11);
+        StateSatS.appendChild(option12);
+        StateSatS.appendChild(option13);
+        StateSatS.appendChild(option14);
+        StateSatS.appendChild(option15);
+        StateSatS.appendChild(option16);
+        StateSatS.appendChild(option17);
 
-Wedhour.addEventListener('click', function () {
-    let StateWed = document.querySelectorAll("#State")[4];
-    let StateWed2 = document.querySelectorAll("#State")[5];
-    StateWed.disabled = false;
-    StateWed2.disabled = false;
+        StateSatE.appendChild(option18);
+        StateSatE.appendChild(option19);
+        StateSatE.appendChild(option20);
+        StateSatE.appendChild(option21);
+        StateSatE.appendChild(option22);
+        StateSatE.appendChild(option23);
+        StateSatE.appendChild(option24);
+        StateSatE.appendChild(option25);
+        StateSatE.appendChild(option26);
+        StateSatE.appendChild(option27);
+        StateSatE.appendChild(option28);
+        StateSatE.appendChild(option29);
+        StateSatE.appendChild(option30);
+        StateSatE.appendChild(option31);
+        StateSatE.appendChild(option32);
+        StateSatE.appendChild(option33);
+        StateSatE.appendChild(option34);
+    });
 
-    let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
-    let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
-    let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
-    let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
-    let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
-    let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
-    let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
-    let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
-    let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
-    let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
-    let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
-    let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
-    let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
-    let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
-    let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
-    let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
-    let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
+    //Sun
+    SunOpen.addEventListener("click", function () {
+        if (SunOpen.checked == false) {
+            SunAllDay.disabled = true;
+            SunHours.disabled = true;
+            EndTimeoptionSun.innerHTML = "選擇營業時間";
+            StartTimeoptionSun.innerHTML = "選擇營業時間";
+            SunAllDay.checked = false;
+            SunHours.checked = false;
+            StateSunS.disabled = true;
+            StateSunE.disabled = true;
+            console.log("關")
+        }
+        else if (SunOpen.checked == true) {
+            SunAllDay.disabled = false;
+            SunHours.disabled = false;
+            StateSunS.disabled = true;
+            StateSunE.disabled = true;
+            console.log("打開")
+        }
+    });
+    SunAllDay.addEventListener("click", function () {
+        StartTimeoptionSun.innerHTML = "06:00";
+        EndTimeoptionSun.innerHTML = "23:00";
+        StateSunS.length = 1;
+        StateSunE.length = 1;
+        StateSunS.disabled = true;
+        StateSunE.disabled = true;
+    });
+    SunHours.addEventListener('click', function () {
+        StateSunS.disabled = false;
+        StateSunE.disabled = false;
+        let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
+        let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
+        let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
+        let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
+        let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
+        let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
+        let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
+        let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
+        let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
+        let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
+        let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
+        let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
+        let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
+        let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
+        let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
+        let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
+        let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
 
-    let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
-    let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
-    let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
-    let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
-    let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
-    let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
-    let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
-    let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
-    let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
-    let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
-    let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
-    let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
-    let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
-    let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
-    let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
-    let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
-    let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
+        let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
+        let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
+        let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
+        let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
+        let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
+        let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
+        let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
+        let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
+        let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
+        let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
+        let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
+        let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
+        let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
+        let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
+        let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
+        let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
+        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
 
-    StateWed.appendChild(option1);
-    StateWed.appendChild(option2);
-    StateWed.appendChild(option3);
-    StateWed.appendChild(option4);
-    StateWed.appendChild(option5);
-    StateWed.appendChild(option6);
-    StateWed.appendChild(option7);
-    StateWed.appendChild(option8);
-    StateWed.appendChild(option9);
-    StateWed.appendChild(option10);
-    StateWed.appendChild(option11);
-    StateWed.appendChild(option12);
-    StateWed.appendChild(option13);
-    StateWed.appendChild(option14);
-    StateWed.appendChild(option15);
-    StateWed.appendChild(option16);
-    StateWed.appendChild(option17);
+        StateSunS.appendChild(option1);
+        StateSunS.appendChild(option2);
+        StateSunS.appendChild(option3);
+        StateSunS.appendChild(option4);
+        StateSunS.appendChild(option5);
+        StateSunS.appendChild(option6);
+        StateSunS.appendChild(option8);
+        StateSunS.appendChild(option9);
+        StateSunS.appendChild(option10);
+        StateSunS.appendChild(option11);
+        StateSunS.appendChild(option12);
+        StateSunS.appendChild(option13);
+        StateSunS.appendChild(option14);
+        StateSunS.appendChild(option15);
+        StateSunS.appendChild(option16);
+        StateSunS.appendChild(option17);
 
-    StateWed2.appendChild(option18);
-    StateWed2.appendChild(option19);
-    StateWed2.appendChild(option20);
-    StateWed2.appendChild(option21);
-    StateWed2.appendChild(option22);
-    StateWed2.appendChild(option23);
-    StateWed2.appendChild(option24);
-    StateWed2.appendChild(option25);
-    StateWed2.appendChild(option26);
-    StateWed2.appendChild(option27);
-    StateWed2.appendChild(option28);
-    StateWed2.appendChild(option29);
-    StateWed2.appendChild(option30);
-    StateWed2.appendChild(option31);
-    StateWed2.appendChild(option32);
-    StateWed2.appendChild(option33);
-    StateWed2.appendChild(option34);
+        StateSunE.appendChild(option18);
+        StateSunE.appendChild(option19);
+        StateSunE.appendChild(option20);
+        StateSunE.appendChild(option21);
+        StateSunE.appendChild(option22);
+        StateSunE.appendChild(option23);
+        StateSunE.appendChild(option24);
+        StateSunE.appendChild(option25);
+        StateSunE.appendChild(option26);
+        StateSunE.appendChild(option27);
+        StateSunE.appendChild(option28);
+        StateSunE.appendChild(option29);
+        StateSunE.appendChild(option30);
+        StateSunE.appendChild(option31);
+        StateSunE.appendChild(option32);
+        StateSunE.appendChild(option33);
+        StateSunE.appendChild(option34);
+    });
 
-});
-//thursday
-let flexSwitchCheckDefaultThu = document.querySelectorAll("#flexSwitchCheckDefault")[3];
-let ThuAllDay = document.querySelectorAll("#flexRadioDefault1")[6];
-let Thuhour = document.querySelectorAll("#flexRadioDefault1")[7];
-let StateThu = document.querySelectorAll("#State")[6];
-let StateThu2 = document.querySelectorAll("#State")[7];
-var flagThu=1;
-flexSwitchCheckDefaultThu.addEventListener("click", function () {
-    if (flagThu == 0) {
-        ThuAllDay.disabled = false;
-        Thuhour.disabled = false;
-        flagThu = 1;
-    } else {
-        ThuAllDay.disabled = true;
-        Thuhour.disabled = true;
-        ThuAllDay.checked = false;
-        Thuhour.checked = false;
-        StateThu.disabled = true;
-        StateThu2.disabled = true;
-        flagThu = 0;
-    }
-});
-ThuAllDay.addEventListener('click', function () {
-    StateThu.disabled = true;
-    StateThu2.disabled = true;
-    StateThu.length = 1;
-    StateThu2.length = 1;
-    let TimeoptionS = document.querySelectorAll("#Timeoption")[6];
-    TimeoptionS.innerHTML = "06:00";
-    TimeoptionS.value = "06:00";
+    CKEDITOR.replace('Introduction');
+    CKEDITOR.replace('HostRules');
+    CKEDITOR.replace('Parking');
+    CKEDITOR.replace('ShootingEquipment');
+    CKEDITOR.replace('Traffic');
+    CKEDITOR.replace('OtherAmenity');
 
-    let TimeoptionE = document.querySelectorAll("#Timeoption")[7];
-    TimeoptionE.value = "23:00";
-    TimeoptionE.innerHTML = "23:00";
-   
-})
-Thuhour.addEventListener("click", function () {
-    StateThu.disabled = false;
-    StateThu2.disabled = false;
-
-    let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
-    let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
-    let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
-    let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
-    let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
-    let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
-    let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
-    let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
-    let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
-    let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
-    let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
-    let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
-    let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
-    let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
-    let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
-    let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
-    let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
-
-    let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
-    let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
-    let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
-    let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
-    let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
-    let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
-    let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
-    let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
-    let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
-    let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
-    let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
-    let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
-    let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
-    let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
-    let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
-    let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
-    let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
-
-    StateThu.appendChild(option1);
-    StateThu.appendChild(option2);
-    StateThu.appendChild(option3);
-    StateThu.appendChild(option4);
-    StateThu.appendChild(option5);
-    StateThu.appendChild(option6);
-    StateThu.appendChild(option7);
-    StateThu.appendChild(option8);
-    StateThu.appendChild(option9);
-    StateThu.appendChild(option10);
-    StateThu.appendChild(option11);
-    StateThu.appendChild(option12);
-    StateThu.appendChild(option13);
-    StateThu.appendChild(option14);
-    StateThu.appendChild(option15);
-    StateThu.appendChild(option16);
-    StateThu.appendChild(option17);
-
-    StateThu2.appendChild(option18);
-    StateThu2.appendChild(option19);
-    StateThu2.appendChild(option20);
-    StateThu2.appendChild(option21);
-    StateThu2.appendChild(option22);
-    StateThu2.appendChild(option23);
-    StateThu2.appendChild(option24);
-    StateThu2.appendChild(option25);
-    StateThu2.appendChild(option26);
-    StateThu2.appendChild(option27);
-    StateThu2.appendChild(option28);
-    StateThu2.appendChild(option29);
-    StateThu2.appendChild(option30);
-    StateThu2.appendChild(option31);
-    StateThu2.appendChild(option32);
-    StateThu2.appendChild(option33);
-    StateThu2.appendChild(option34);
-
-})
-
-//friday
-let flexSwitchCheckDefaultFri = document.querySelectorAll("#flexSwitchCheckDefault")[4];
-let FridayAllDay = document.querySelectorAll("#flexRadioDefault1")[8];
-let Fridayhour = document.querySelectorAll("#flexRadioDefault1")[9];
-let StateFri = document.querySelectorAll("#State")[8];
-let StateFri2 = document.querySelectorAll('#State')[9];
-var flagFri=1;
-flexSwitchCheckDefaultFri.addEventListener('click', function () {
-    if (flagFri == 0) {
-        FridayAllDay.disabled = false;
-        Fridayhour.disabled = false;
-        flagFri = 1;
-    } else {
-        FridayAllDay.disabled = true;
-        Fridayhour.disabled = true;
-        StateFri.disabled = true;
-        StateFri2.disabled = true;
-        FridayAllDay.checked = false;
-        Fridayhour.checked = false;
-        flagFri = 0;
-    }
-});
-FridayAllDay.addEventListener("click", function () {
-    StateFri.disabled = true;
-    StateFri2.disabled = true;
-    StateFri.length = 1;
-    StateFri2.length = 1;
-    let TimeoptionS = document.querySelectorAll("#Timeoption")[8];
-    TimeoptionS.innerHTML = "06:00";
-    TimeoptionS.value = "06:00";
-
-    let TimeoptionE = document.querySelectorAll("#Timeoption")[9];
-    TimeoptionE.value = "23:00";
-    TimeoptionE.innerHTML = "23:00";
-
-});
-Fridayhour.addEventListener("click", function () {
-    StateFri.disabled = false;
-    StateFri2.disabled = false;
-    let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
-    let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
-    let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
-    let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
-    let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
-    let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
-    let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
-    let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
-    let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
-    let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
-    let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
-    let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
-    let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
-    let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
-    let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
-    let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
-    let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
-
-    let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
-    let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
-    let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
-    let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
-    let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
-    let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
-    let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
-    let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
-    let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
-    let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
-    let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
-    let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
-    let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
-    let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
-    let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
-    let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
-    let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
-
-    StateFri.appendChild(option1);
-    StateFri.appendChild(option2);
-    StateFri.appendChild(option3);
-    StateFri.appendChild(option4);
-    StateFri.appendChild(option5);
-    StateFri.appendChild(option6);
-    StateFri.appendChild(option7);
-    StateFri.appendChild(option8);
-    StateFri.appendChild(option9);
-    StateFri.appendChild(option10);
-    StateFri.appendChild(option11);
-    StateFri.appendChild(option12);
-    StateFri.appendChild(option13);
-    StateFri.appendChild(option14);
-    StateFri.appendChild(option15);
-    StateFri.appendChild(option16);
-    StateFri.appendChild(option17);
-
-    StateFri2.appendChild(option18);
-    StateFri2.appendChild(option19);
-    StateFri2.appendChild(option20);
-    StateFri2.appendChild(option21);
-    StateFri2.appendChild(option22);
-    StateFri2.appendChild(option23);
-    StateFri2.appendChild(option24);
-    StateFri2.appendChild(option25);
-    StateFri2.appendChild(option26);
-    StateFri2.appendChild(option27);
-    StateFri2.appendChild(option28);
-    StateFri2.appendChild(option29);
-    StateFri2.appendChild(option30);
-    StateFri2.appendChild(option31);
-    StateFri2.appendChild(option32);
-    StateFri2.appendChild(option33);
-    StateFri2.appendChild(option34);
-
-})
-
-//saturday
-let flexSwitchCheckDefaultSat = document.querySelectorAll("#flexSwitchCheckDefault")[5];
-let SatAllday = document.querySelectorAll("#flexRadioDefault1")[10];
-let Sathour = document.querySelectorAll('#flexRadioDefault1')[11];
-let StateSat = document.querySelectorAll("#State")[10];
-let StateSat2 = document.querySelectorAll("#State")[11];
-var flagSat=1;
-flexSwitchCheckDefaultSat.addEventListener('click', function () {
-    if ((flagSat == 0)) {
-        SatAllday.disabled = false;
-        Sathour.disabled = false;
-        flagSat = 1;
-    } else {
-        SatAllday.disabled = true;
-        Sathour.disabled = true;
-        SatAllday.checked = false;
-        Sathour.checked = false;
-        StateSat.disabled = true;
-        StateSat2.disabled = true;
-        flagSat = 0;
-    };
-});
-SatAllday.addEventListener("click", function () {
-    StateSat.disabled = true;
-    StateSat2.disabled = true;
-    StateSat.length = 1;
-    StateSat2.length = 1;
-    let TimeoptionS = document.querySelectorAll("#Timeoption")[10];
-    TimeoptionS.innerHTML = "06:00";
-    TimeoptionS.value = "06:00";
-
-    let TimeoptionE = document.querySelectorAll("#Timeoption")[11];
-    TimeoptionE.value = "23:00";
-    TimeoptionE.innerHTML = "23:00";
-
-});
-Sathour.addEventListener('click', function () {
-    StateSat.disabled = false;
-    StateSat2.disabled = false;
-
-    let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
-    let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
-    let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
-    let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
-    let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
-    let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
-    let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
-    let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
-    let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
-    let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
-    let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
-    let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
-    let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
-    let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
-    let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
-    let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
-    let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
-
-    let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
-    let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
-    let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
-    let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
-    let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
-    let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
-    let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
-    let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
-    let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
-    let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
-    let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
-    let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
-    let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
-    let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
-    let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
-    let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
-    let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
-
-    StateSat.appendChild(option1);
-    StateSat.appendChild(option2);
-    StateSat.appendChild(option3);
-    StateSat.appendChild(option4);
-    StateSat.appendChild(option5);
-    StateSat.appendChild(option6);
-    StateSat.appendChild(option7);
-    StateSat.appendChild(option8);
-    StateSat.appendChild(option9);
-    StateSat.appendChild(option10);
-    StateSat.appendChild(option11);
-    StateSat.appendChild(option12);
-    StateSat.appendChild(option13);
-    StateSat.appendChild(option14);
-    StateSat.appendChild(option15);
-    StateSat.appendChild(option16);
-    StateSat.appendChild(option17);
-
-    StateSat2.appendChild(option18);
-    StateSat2.appendChild(option19);
-    StateSat2.appendChild(option20);
-    StateSat2.appendChild(option21);
-    StateSat2.appendChild(option22);
-    StateSat2.appendChild(option23);
-    StateSat2.appendChild(option24);
-    StateSat2.appendChild(option25);
-    StateSat2.appendChild(option26);
-    StateSat2.appendChild(option27);
-    StateSat2.appendChild(option28);
-    StateSat2.appendChild(option29);
-    StateSat2.appendChild(option30);
-    StateSat2.appendChild(option31);
-    StateSat2.appendChild(option32);
-    StateSat2.appendChild(option33);
-    StateSat2.appendChild(option34);
-
-});
-
-//sunday 
-let flexSwitchCheckDefaultSun = document.querySelectorAll("#flexSwitchCheckDefault")[6];
-let SunAllDay = document.querySelectorAll("#flexRadioDefault1")[12];
-let Sunhour = document.querySelectorAll('#flexRadioDefault1')[13];
-let StateSun = document.querySelectorAll('#State')[12];
-let StateSun2 = document.querySelectorAll("#State")[13];
-var flagSun=1;
-flexSwitchCheckDefaultSun.addEventListener("click", function () {
-    if (flagSun == 0) {
-        SunAllDay.disabled = false;
-        Sunhour.disabled = false;
-        flagSun = 1;
-    } else {
-        SunAllDay.disabled = true;
-        Sunhour.disabled = true;
-        SunAllDay.checked = false;
-        Sunhour.checked = false;
-        StateSun.disabled = true;
-        StateSun2.disabled = true;
-        flagSun = 0;
-    }
-});
-SunAllDay.addEventListener("click", function () {
-    StateSun.disabled = true;
-    StateSun2.disabled = true;
-    StateSun.length = 1;
-    StateSun2.length = 1;
-    let TimeoptionS = document.querySelectorAll("#Timeoption")[12];
-    TimeoptionS.innerHTML = "06:00";
-    TimeoptionS.value = "06:00";
-
-    let TimeoptionE = document.querySelectorAll("#Timeoption")[13];
-    TimeoptionE.value = "23:00";
-    TimeoptionE.innerHTML = "23:00";
-});
-Sunhour.addEventListener('click', function () {
-    StateSun.disabled = false;
-    StateSun2.disabled = false;
-
-    let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
-    let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
-    let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
-    let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
-    let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
-    let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
-    let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
-    let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
-    let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
-    let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
-    let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
-    let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
-    let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
-    let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
-    let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
-    let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
-    let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
-
-    let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
-    let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
-    let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
-    let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
-    let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
-    let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
-    let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
-    let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
-    let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
-    let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
-    let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
-    let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
-    let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
-    let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
-    let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
-    let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
-    let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
-
-    StateSun.appendChild(option1);
-    StateSun.appendChild(option2);
-    StateSun.appendChild(option3);
-    StateSun.appendChild(option4);
-    StateSun.appendChild(option5);
-    StateSun.appendChild(option6);
-    StateSun.appendChild(option7);
-    StateSun.appendChild(option8);
-    StateSun.appendChild(option9);
-    StateSun.appendChild(option10);
-    StateSun.appendChild(option11);
-    StateSun.appendChild(option12);
-    StateSun.appendChild(option13);
-    StateSun.appendChild(option14);
-    StateSun.appendChild(option15);
-    StateSun.appendChild(option16);
-    StateSun.appendChild(option17);
-
-    StateSun2.appendChild(option18);
-    StateSun2.appendChild(option19);
-    StateSun2.appendChild(option20);
-    StateSun2.appendChild(option21);
-    StateSun2.appendChild(option22);
-    StateSun2.appendChild(option23);
-    StateSun2.appendChild(option24);
-    StateSun2.appendChild(option25);
-    StateSun2.appendChild(option26);
-    StateSun2.appendChild(option27);
-    StateSun2.appendChild(option28);
-    StateSun2.appendChild(option29);
-    StateSun2.appendChild(option30);
-    StateSun2.appendChild(option31);
-    StateSun2.appendChild(option32);
-    StateSun2.appendChild(option33);
-    StateSun2.appendChild(option34);
-
-});
-CKEDITOR.replace('Introduction');
-CKEDITOR.replace('HostRules');
-CKEDITOR.replace('Parking');
-CKEDITOR.replace('ShootingEquipment');
-CKEDITOR.replace('Traffic');
-CKEDITOR.replace('OtherAmenity');
-
-//刪除 時間option
-//function removeOption() {
-//    var deleteObj = document.getElementById("Timeoption");
-//    deleteObj.classList.add("d-none");
-//};
-
-///上傳照片
-FilePond.parse(document.body);

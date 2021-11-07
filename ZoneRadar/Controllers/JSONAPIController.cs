@@ -330,7 +330,7 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [Route("GetUploadPrams")]
         [AcceptVerbs("GET")]
-        public APIResponse GetUploadPrams()
+        public APIResponse GetUploadPrams(int? id)
         {
             var response = new APIResponse();
             try
@@ -338,7 +338,7 @@ namespace ZoneRadar.Controllers
                 response.Status = "Success";
                 response.Message = string.Empty;
                 // id須由外部傳入
-                response.Response = _spaceService.GetSpacePhotoFromDB(4);
+                response.Response = _spaceService.GetSpacePhotoFromDB(id);
 
                 return response;
             }

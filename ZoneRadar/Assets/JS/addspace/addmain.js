@@ -1,3 +1,4 @@
+
 (function () {
   // DOM元素
   const imageInput = document.querySelector('#image-input');
@@ -9,22 +10,23 @@
   let originImgs = [];
   // spaceID需先存在razor page裡
     //let spaceID = 168;
-    let  spaceID = parseInt(document.querySelector('#mySpaceId').innerHTML);
+    //let  spaceID = parseInt(document.querySelector('#mySpaceId').innerHTML);
   //  let spaceID =4;
   // function定義
   // 從後端獲得上傳所需資訊
-  function getPrams() {
-      axios.get(`/webapi/spaces/GetUploadPrams?id=${spaceID}`).then(res => {
-      name = res.data.Response.Name;
-      preset = res.data.Response.Preset;
-      originImgs = res.data.Response.PhotoUrlList;
-      if (originImgs.length) {
-        originImgs.forEach(url => {
-          showThumbnail(url)
-        })
-      }
-    }).catch(err => console.log(err))
-  }
+  //function getPrams() {
+  //    axios.get(`/webapi/spaces/GetUploadPrams?id=${spaceID}`).then(res => {
+  //    name = res.data.Response.Name;
+  //    preset = res.data.Response.Preset;
+  //    originImgs = res.data.Response.PhotoUrlList;
+  //    console.log(res.data.Response);
+  //    if (originImgs.length) {
+  //      originImgs.forEach(url => {
+  //        showThumbnail(url)
+  //      })
+  //    }
+  //  }).catch(err => console.log(err))
+  //}
 
   // 設定可拖曳的區域
   function setSortable() {
@@ -41,7 +43,7 @@
   function setUploadBtn() {
     fileSelect.addEventListener('click', function (e) {
       if (imageInput) {
-        imageInput.click();
+          imageInput.click();
       }
       e.preventDefault();
     }, false);
@@ -73,50 +75,30 @@
       data: formData,
     }).then(res => {
       let imgUrl = res.data.secure_url;
-
       showThumbnail(imgUrl);
     });
   }
 
   // 產生縮圖
   function showThumbnail(imgUrl) {
-    // const imgTemplate = document.querySelector('#placeholder-template').content.cloneNode(true);
-    // const thumbnail = imgTemplate.querySelector('.thumbnail-holder');
-    // const closeBtn = imgTemplate.querySelector('.thumbnail-holder .fa-times');
-
-    // thumbnail.style.backgroundImage = `url("${imgUrl}")`;
-
-    // thumbnail.dataset.url = imgUrl;
-    // imgTemplate.classList = 'wrap p-0 mb-4 mx-3 border border-3 rounded';
-    // thumbnail.classList = 'thumbnail-holder';
-    // closeBtn.classList = 'fas fa-times';
-
-    // previewZone.appendChild(imgTemplate);
-    
-    // closeBtn.addEventListener('click', removeThumbnail);
     const imgTemplate = document.querySelector('#placeholder-template').content.cloneNode(true);
+    const thumbnail = imgTemplate.querySelector('.thumbnail-holder');
+    const closeBtn = imgTemplate.querySelector('.thumbnail-holder .fa-times');
+
+    thumbnail.style.backgroundImage = `url("${imgUrl}")`;
+    
+    thumbnail.dataset.url = imgUrl;
+    imgTemplate.classList = 'wrap p-0 mb-4 mx-3 border border-3 rounded';
+    thumbnail.classList = 'thumbnail-holder';
+    closeBtn.classList = 'fas fa-times';
+
     previewZone.appendChild(imgTemplate);
-
-    setTimeout(function() {
-      const placeholder = previewZone.querySelector('.wrap.placeholder-glow');
-      const thumbnail = placeholder.querySelector('.thumbnail-holder');
-      const closeBtn = placeholder.querySelector('.thumbnail-holder .fa-times');
-
-      thumbnail.style.backgroundImage = `url("${imgUrl}")`;
-
-      thumbnail.dataset.url = imgUrl;
-      placeholder.classList = 'wrap p-0 mb-4 mx-3 border border-3 rounded';
-      thumbnail.classList = 'thumbnail-holder';
-      closeBtn.classList = 'fas fa-times';
-
-      closeBtn.addEventListener('click', removeThumbnail);
-    }, 1500)
+    closeBtn.addEventListener('click', removeThumbnail);
   }
 
   // 隱藏取消的縮圖
   function removeThumbnail() {
     this.parentNode.parentNode.classList.add('d-none');
-    imgSubmitBtn.removeAttribute('disabled');
     this.removeEventListener('click', removeThumbnail);
   }
 
@@ -125,7 +107,7 @@
     let imgGroup = previewZone.querySelectorAll('div:not(.d-none) > .thumbnail-holder');
 
     let SaveSpacePhotosVM = {
-      SpaceID: spaceID,
+        SpaceID: spaceID,
       PhotoUrlList: [],
     }
     imgGroup.forEach(node => {
@@ -134,18 +116,16 @@
 
     axios.post('/webapi/spaces/SavePhotos', SaveSpacePhotosVM).then(res => {
       console.log(res);
-      Swal.fire({
-        title: '上傳成功',
-        text: '請繼續填寫您的場地資訊!!!',
-        icon: 'success',
-        allowOutsideClick: false,
-        confirmButtonColor: '#049DD9'
-      })
+      Swal.fire(
+        '上傳成功',
+        '請繼續填寫您的場地資訊!!!',
+        'success'
+      )
     }).catch(err => console.log(err));
   }
 
   // 執行區
-  getPrams();
+  //getPrams();
   setSortable();
   // previewZone.addEventListener('click', checkUpdate, false);
   setUploadBtn();
