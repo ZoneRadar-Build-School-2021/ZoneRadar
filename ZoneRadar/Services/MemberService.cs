@@ -60,6 +60,7 @@ namespace ZoneRadar.Services
                     {
                         Email = registerVM.RegisterEmail,
                         Password = registerVM.RegisterPassword,
+                        Photo = "https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png",
                         Name = registerVM.Name,
                         ReceiveEDM = false,
                         SignUpDateTime = DateTime.Now,
@@ -67,7 +68,7 @@ namespace ZoneRadar.Services
                         IsVerify = false,
                         IsGoogleLogin = false
                     };
-                    _repository.Create<Member>(member);
+                    _repository.Create(member);
                     _repository.SaveChanges();
                     memberResult.User = member;
                     memberResult.IsSuccessful = true;
@@ -81,23 +82,47 @@ namespace ZoneRadar.Services
                     return memberResult;
                 }
             }
-        }
+        }        
 
         /// <summary>
-        /// 寄送驗證信(Jenny)
+        /// 產生驗證連結(Jenny)
         /// </summary>
-        /// <param name="server"></param>
-        /// <param name="request"></param>
-        /// <param name="urlHelper"></param>
-        /// <param name="userEmail"></param>
-        public void SentEmail(HttpServerUtilityBase server, HttpRequestBase request, UrlHelper urlHelper, string userEmail)
+        /// <param name="generateLink"></param>
+        /// <returns></returns>
+        public string GenerateVerifyLink(GenerateLink generateLink)
         {
             //記錄有效的期限
             var afterTenMinutes = DateTime.Now.AddMinutes(10).ToString();
-            var route = new RouteValueDictionary { { "email", userEmail }, { "expired", afterTenMinutes } };
+            var route = new RouteValueDictionary { { "email", generateLink.UserEmail }, { "expired", afterTenMinutes } };
             //製作驗證信的連結
-            var verificationLink = urlHelper.Action("ConfirmEmail", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
+            var verificationLink = generateLink.UrlHelper.Action("ConfirmEmail", "MemberCenter", route, generateLink.Request.Url.Scheme, generateLink.Request.Url.Host);
+            return verificationLink;
+        }
 
+        /// <summary>
+        /// 產生重設密碼連結(Jenny)
+        /// </summary>
+        /// <param name="generateLink"></param>
+        /// <returns></returns>
+        public string GenerateResetPasswordLink(GenerateLink generateLink)
+        {
+            generateLink.UserEmail = HttpUtility.HtmlEncode(generateLink.UserEmail);
+            //記錄有效的期限
+            var afterTenMinutes = DateTime.Now.AddMinutes(10).ToString();
+            //取得亂數
+            var resetCode = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == generateLink.UserEmail.ToUpper()).Password;
+            var route = new RouteValueDictionary { { "email", generateLink.UserEmail }, { "resetCode", resetCode }, { "expired", afterTenMinutes } };
+            //製作驗證信的連結
+            var verificationLink = generateLink.UrlHelper.Action("ResetPassword", "MemberCenter", route, generateLink.Request.Url.Scheme, generateLink.Request.Url.Host);
+            return verificationLink;
+        }
+
+        /// <summary>
+        /// 寄信(Jenny)
+        /// </summary>
+        /// <param name="emailContent"></param>
+        public void SentEmail(EmailContent emailContent)
+        {
             //寄件人資訊
             string ZONERadarAccount = "zoneradar2021@gmail.com";
             string ZONERadarPassword = "@Bs202106";
@@ -110,13 +135,13 @@ namespace ZoneRadar.Services
             };
 
             //產生信件，編輯信件的相關內容
-            string verificationEmailContent = File.ReadAllText(Path.Combine(server.MapPath("~/Views/MemberCenter/VerificationEmailContent.html")));
-            MailMessage mail = new MailMessage(ZONERadarAccount, userEmail)
+            string verificationEmailContent = File.ReadAllText(Path.Combine(emailContent.Server.MapPath($"~/Views/MemberCenter/{emailContent.EmailContentFileName}.html")));
+            MailMessage mail = new MailMessage(ZONERadarAccount, emailContent.UserEmail)
             {
-                Subject = "ZONERadar會員確認信",
+                Subject = emailContent.EmailSubject,
                 SubjectEncoding = Encoding.UTF8,
                 IsBodyHtml = true,
-                Body = verificationEmailContent.Replace("verificationLink", verificationLink),
+                Body = verificationEmailContent.Replace(emailContent.OldLink, emailContent.NewLink),
                 BodyEncoding = Encoding.UTF8
             };
 
@@ -182,7 +207,9 @@ namespace ZoneRadar.Services
             {
                 try
                 {
-                    var user = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == email.ToUpper());
+                    var users = _repository.GetAll<Member>().Where(x => x.Email.ToUpper() == email.ToUpper());
+                    var maxSignUpTime = users.Max(x => x.SignUpDateTime.ToString());
+                    var user = users.First(x => x.SignUpDateTime.ToString() == maxSignUpTime);
                     //將會員的註冊時間和登入時間改成現在時間，代表驗證成功
                     user.SignUpDateTime = DateTime.Now;
                     user.LastLogin = DateTime.Now;
@@ -269,7 +296,7 @@ namespace ZoneRadar.Services
             var userInfo = new UserInfo
             {
                 MemberId = user.MemberID,
-                MemberPhoto = user.Photo == null ? "https://i.imgur.com/iMtHYtP.png" : user.Photo
+                MemberPhoto = user.Photo
             };
             var jsonUserInfo = JsonConvert.SerializeObject(userInfo);
             //建立FormsAuthenticationTicket
