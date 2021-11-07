@@ -1,13 +1,11 @@
-
 (function () {
   // DOM元素
   const imageInput = document.querySelector('#image-input');
   const fileSelect = document.querySelector('#file-select');
   const previewZone = document.querySelector('#preview-zone');
   const imgSubmitBtn = document.querySelector('.img-upload-btn');
-
+  var CLOUDINARY_UPLOAD_PRESET = "c3caow1j";
   let name, preset;
-  let originImgs = [];
   // spaceID需先存在razor page裡
     //let spaceID = 168;
     //let  spaceID = parseInt(document.querySelector('#mySpaceId').innerHTML);
@@ -60,11 +58,13 @@
   }
 
   // 上傳圖片至cloudinary
-  function upload(file) {
-    const url = `https://api.cloudinary.com/v1_1/${name}/upload`;
+    function upload(file) {
+    //const url = `https://api.cloudinary.com/v1_1/${name}/upload`;
+        const url = 'https://api.cloudinary.com/v1_1/dt6vz3pav/upload';
+      
     let formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', preset);
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
 
     axios({
       url: url,
@@ -74,11 +74,11 @@
       },
       data: formData,
     }).then(res => {
-      let imgUrl = res.data.secure_url;
-      showThumbnail(imgUrl);
+        let imgUrl = res.data.secure_url;
+        showThumbnail(imgUrl);
+      
     });
-  }
-
+    }
   // 產生縮圖
   function showThumbnail(imgUrl) {
     const imgTemplate = document.querySelector('#placeholder-template').content.cloneNode(true);
@@ -93,7 +93,11 @@
     closeBtn.classList = 'fas fa-times';
 
     previewZone.appendChild(imgTemplate);
-    closeBtn.addEventListener('click', removeThumbnail);
+      closeBtn.addEventListener('click', removeThumbnail);
+      console.log(imgUrl);
+
+         
+     
   }
 
   // 隱藏取消的縮圖
@@ -103,26 +107,39 @@
   }
 
   // 取得並存入所有剩下的圖片
-  function transferData() {
-    let imgGroup = previewZone.querySelectorAll('div:not(.d-none) > .thumbnail-holder');
+    function transferData() {
+        let imgGroup = previewZone.querySelectorAll('div:not(.d-none) > .thumbnail-holder');
 
-    let SaveSpacePhotosVM = {
-        SpaceID: spaceID,
-      PhotoUrlList: [],
-    }
-    imgGroup.forEach(node => {
-      SaveSpacePhotosVM.PhotoUrlList.push(node.dataset.url);
-    })
+        let SaveSpacePhotosVM = {
+            //  SpaceID: spaceID,
+            PhotoUrlList: [],
+        }
+        let i = 0;
+        imgGroup.forEach(node => {
+            SaveSpacePhotosVM.PhotoUrlList.push(node.dataset.url);
+            let imgUrlinput = document.querySelectorAll('.imgUrl')[i];
+            imgUrlinput.setAttribute('value', node.dataset.url)
+            imgUrlinput.setAttribute('name',"SpacePhotoUrl")
+            i++;
+        })
+        
+        Swal.fire(
+            '上傳成功',
+            '請繼續填寫您的場地資訊!!!',
+            'success'
+        )
+        console.log(SaveSpacePhotosVM.PhotoUrlList)
+    };
 
-    axios.post('/webapi/spaces/SavePhotos', SaveSpacePhotosVM).then(res => {
-      console.log(res);
-      Swal.fire(
-        '上傳成功',
-        '請繼續填寫您的場地資訊!!!',
-        'success'
-      )
-    }).catch(err => console.log(err));
-  }
+  //  axios.post('/webapi/spaces/SavePhotos', SaveSpacePhotosVM).then(res => {
+  //    console.log(res);
+  //    Swal.fire(
+  //      '上傳成功',
+  //      '請繼續填寫您的場地資訊!!!',
+  //      'success'
+  //    )
+  //  }).catch(err => console.log(err));
+  //}
 
   // 執行區
   //getPrams();

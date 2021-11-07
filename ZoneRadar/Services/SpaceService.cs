@@ -1292,7 +1292,7 @@ namespace ZoneRadar.Services
             _repository.Create<Space>(space);
             _repository.SaveChanges();
 
-           var spaceid = _repository.GetAll<Space>().Max(x => x.SpaceID);
+            var spaceid = _repository.GetAll<Space>().Where(x => x.SpaceName== addSpaceViewModel.SpaceName).Select(x => x.SpaceID).FirstOrDefault();
             var spaceDiscount=new SpaceDiscount
             {
                 SpaceID = spaceid,
@@ -1300,24 +1300,18 @@ namespace ZoneRadar.Services
                 Discount=1m-((addSpaceViewModel.Discount)/10.00m),
             };
             List<SpacePhoto> imgs = new List<SpacePhoto>();
+            var y = 1;
             foreach (var item in addSpaceViewModel.SpacePhotoUrl)
             {
-                var i = 1;
-                //imgs.Add(new SpacePhoto { SpaceID = spaceid, SpacePhotoUrl = item });
                 imgs.Add(new SpacePhoto
                 {
                     SpaceID = spaceid,
                     SpacePhotoUrl = item,
-                    Sort = i
+                    Sort = y
                 });
-                i++;
+                y++;
             }
 
-            //List<Operating> operating = new List<Operating>();
-            //foreach (var item in addS6paceViewModel.OperatingDay)
-            //{
-            //    operating.Add(new Operating { SpaceID = spaceid, OperatingDay = item});
-            //}
 
             List<SpaceType> type = new List<SpaceType>();
             foreach (var item in addSpaceViewModel.TypeDetailID)
@@ -1678,22 +1672,7 @@ namespace ZoneRadar.Services
                 return sweetAlert;
             }
         }
-        /// <summary>
-        //新增場地的照片
-        /// </summary>
-        /// <returns></returns>
-        //public SpacePhotoViewModel CreateSpacePhotoFromDB()
-        //{
-
-        //    var result = new SpacePhotoViewModel()
-        //    {
-        //        Name = "dt6vz3pav",
-        //        Preset = "c3caow1j",
-        //        PhotoUrlList = urlList.ToList(),
-        //    };
-
-        //    return result;
-        //}
+  
 
         /// <summary>
         /// 取得該編輯場地的照片
