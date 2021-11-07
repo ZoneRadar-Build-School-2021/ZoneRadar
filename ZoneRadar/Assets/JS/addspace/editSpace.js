@@ -140,7 +140,9 @@ for (var i = 0; i < Newdatalist.length; i++) {
                 var ShourString = (datlist[i].StartTime.Hours).toString();
                 var EhourString = (datlist[i].EndTime.Hours).toString();
                 StartTimeoptionMon.innerHTML = ShourString.padStart(2, '0') + ":00";
+                StartTimeoptionMon.value.innerHTML = ShourString.padStart(2, '0') + ":00";
                 EndTimeoptionMon.innerHTML = EhourString.padStart(2, '0') + ":00";
+                EndTimeoptionMon.value = EhourString.padStart(2, '0') + ":00";
             }
             break;
         case 2:
@@ -162,7 +164,9 @@ for (var i = 0; i < Newdatalist.length; i++) {
                 var EhourString = (datlist[i].EndTime.Hours).toString();
 
                 StartTimeoptionTue.innerHTML = ShourString.padStart(2, '0') + ":00";
+                StartTimeoptionTue.value = ShourString.padStart(2, '0') + ":00";
                 EndTimeoptionTue.innerHTML = EhourString.padStart(2, '0') + ":00";
+                EndTimeoptionTue.value = EhourString.padStart(2, '0') + ":00";
             }
 
             break;
@@ -186,7 +190,9 @@ for (var i = 0; i < Newdatalist.length; i++) {
                 var EhourString = (datlist[i].EndTime.Hours).toString();
 
                 StarTimeoptionWed.innerHTML = ShourString.padStart(2, '0') + ":00";
+                StarTimeoptionWed.value = ShourString.padStart(2, '0') + ":00";
                 EndTimeoptionWed.innerHTML = EhourString.padStart(2, '0') + ":00";
+                EndTimeoptionWed.value = EhourString.padStart(2, '0') + ":00";
             }
 
             break;
@@ -208,7 +214,9 @@ for (var i = 0; i < Newdatalist.length; i++) {
                 var EhourString = (datlist[i].EndTime.Hours).toString();
 
                 StartTimeoptionThu.innerHTML = ShourString.padStart(2, '0') + ":00";
+                StartTimeoptionThu.value = ShourString.padStart(2, '0') + ":00";
                 EndTimeoptionThu.innerHTML = EhourString.padStart(2, '0') + ":00";
+                EndTimeoptionThu.value = EhourString.padStart(2, '0') + ":00";
             }
             break;
         case 5:
@@ -228,9 +236,11 @@ for (var i = 0; i < Newdatalist.length; i++) {
                 var ShourString = (datlist[i].StartTime.Hours).toString();
                 var EhourString = (datlist[i].EndTime.Hours).toString();
 
-
                 StartTimeoptionFri.innerHTML = ShourString.padStart(2, '0') + ":00";
                 EndTimeoptionFri.innerHTML = EhourString.padStart(2, '0') + ":00";
+                StartTimeoptionFri.value = ShourString.padStart(2, '0') + ":00";
+                EndTimeoptionFri.value = EhourString.padStart(2, '0') + ":00";
+
             }
             break;
         case 6:
@@ -251,7 +261,9 @@ for (var i = 0; i < Newdatalist.length; i++) {
                 var EhourString = (datlist[i].EndTime.Hours).toString();
 
                 StartTimeoptionSat.innerHTML = ShourString.padStart(2, '0') + ":00";
+                StartTimeoptionSat.value = ShourString.padStart(2, '0') + ":00";
                 EndTimeoptionSat.innerHTML = EhourString.padStart(2, '0') + ":00";
+                EndTimeoptionSat.value = ShourString.padStart(2, '0') + ":00";
             }
             break;
         case 7:
@@ -273,7 +285,9 @@ for (var i = 0; i < Newdatalist.length; i++) {
                 var EhourString = (datlist[i].EndTime.Hours).toString();
 
                 StartTimeoptionSun.innerHTML = ShourString.padStart(2, '0') + ":00";
+                StartTimeoptionSun.value = ShourString.padStart(2, '0') + ":00";
                 EndTimeoptionSun.innerHTML = EhourString.padStart(2, '0') + ":00";
+                EndTimeoptionSun.value = EhourString.padStart(2, '0') + ":00";
             }
             break;
         default:
@@ -297,7 +311,6 @@ for (var i = 0; i < Newdatalist.length; i++) {
             StateMonS.disabled = true;
             StateMonE.disabled = true;
             console.log("關")
-            flagMon = 0;
             flagMon = 0;
             console.log("打開")
         }

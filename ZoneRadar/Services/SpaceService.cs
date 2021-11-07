@@ -1405,7 +1405,7 @@ namespace ZoneRadar.Services
             spaceUpdate.CityID = city;
             spaceUpdate.DistrictID = addSpaceViewModel.DistrictID;
             spaceUpdate.Address = addSpaceViewModel.Address;
-            spaceUpdate.PublishTime = DateTime.Today;
+            spaceUpdate.PublishTime = _repository.GetAll<Space>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID).Select(x => x.PublishTime).FirstOrDefault();
             spaceUpdate.Latitude = addSpaceViewModel.Lat;
             spaceUpdate.Longitude = addSpaceViewModel.Lng;
 
