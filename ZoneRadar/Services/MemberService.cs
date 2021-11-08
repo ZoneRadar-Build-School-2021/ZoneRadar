@@ -664,11 +664,11 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public ProfileViewModel GetProfileData(int memberID)
         {
-            var p = _repository.GetAll<Member>().ToList().First(x => x.MemberID == memberID);
+            var p = _repository.GetAll<Member>().First(x => x.MemberID == memberID);
             var result = new ProfileViewModel()
             {
                 MemberID = p.MemberID,
-                Photo = p.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : p.Photo,
+                //Photo = p.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : p.Photo,
                 Name = p.Name,
                 Phone = p.Phone,
                 Email = p.Email,
@@ -687,7 +687,7 @@ namespace ZoneRadar.Services
         public ProfileViewModel EditProfileData(ProfileViewModel edit)
         {
             //抓取 --> 編輯資料
-            var p = _repository.GetAll<Member>().ToList().First(x => x.MemberID == edit.MemberID);
+            var p = _repository.GetAll<Member>().First(x => x.MemberID == edit.MemberID);
             //p.Photo = edit.Photo;
             p.Name = edit.Name;
             p.Phone = edit.Phone;
@@ -703,10 +703,46 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 大頭照上傳(昶安)
+        /// 取得大頭照片
+        /// </summary>
+        /// <returns></returns>
+        public ProfileImgViewModel GetProfilePhotoFromDB(int memberID)
+        {
+            var url = _repository.GetAll<Member>().First(x => x.MemberID == memberID).Photo;
+
+            var result = new ProfileImgViewModel()
+            {
+                Name = "dt6vz3pav",
+                Preset = "yp7sicxt",
+                ProfileImgUrl = url.ToString(),
+            };
+
+            return result;
+        }
+
+        /// <summary>
+        /// 儲存照片至資料庫
         /// </summary>
         /// <param name=""></param>
-        /// <returns></returns>
+        public void ReflashProfilePhotoFromDB(SaveProfileImgViewModel SaveProfileImgVM)
+        {
+            var memberID = SaveProfileImgVM.MemberID;
+            var url = SaveProfileImgVM.ProfileImgUrl;
 
+            var profileimage = url.Select(x => new Member
+            {
+                MemberID = memberID,
+                Photo = url
+            });
+
+            _repository.Create(profileimage);
+            _repository.SaveChanges();
+            _repository.Dispose();
+        }
+
+        /// <summary>
+        /// 刪除照片
+        /// </summary>
+        /// <param name=""></param>
     }
 }

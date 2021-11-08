@@ -22,6 +22,8 @@ namespace ZoneRadar.Controllers
         private readonly ZONERadarRepository _repository;
         private FilterViewModel _filterDataFromIndex;
         private readonly EcpayMentService _ecpaymentservice;
+        private readonly MemberService _memberService;
+
         public JSONAPIController()
         {
             _ecpaymentservice = new EcpayMentService();
@@ -29,6 +31,7 @@ namespace ZoneRadar.Controllers
             _preOrderService = new PreOrderService();
             _repository = new ZONERadarRepository();
             _filterDataFromIndex = new FilterViewModel();
+            _memberService = new MemberService();
         }
 
         /// <summary>
@@ -333,7 +336,7 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [Route("api/JSONAPI/GetEcpayData")]
         [HttpPost]
-        public IHttpActionResult GetEcpayData(EcpayViewModel model) 
+        public IHttpActionResult GetEcpayData(EcpayViewModel model)
         {
             if (model.RtnCode == 1)
             {
@@ -412,5 +415,63 @@ namespace ZoneRadar.Controllers
             }
         }
 
+        /// <summary>
+        /// 取得cloudinary參數2(昶安)
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetImagePrams")]
+        [AcceptVerbs("GET")]
+        public APIResponse GetImagePrams()
+        {
+            var response = new APIResponse();
+            try
+            {
+                int memberID = int.Parse(User.Identity.Name);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = _memberService.GetProfilePhotoFromDB(memberID);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = ex.Message;
+                response.Response = null;
+
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// 將上傳照片存入資料庫(昶安)
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        [Route("SaveImg")]
+        [AcceptVerbs("POST")]
+        public APIResponse SaveImage(SaveProfileImgViewModel SaveProfileImgVM)
+        {
+            var response = new APIResponse();
+            try
+            {
+                _memberService.ReflashProfilePhotoFromDB(SaveProfileImgVM);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = null;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = ex.Message;
+                response.Response = null;
+
+                return response;
+            }
+        }
     }
 }

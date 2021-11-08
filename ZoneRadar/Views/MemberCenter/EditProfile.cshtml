@@ -21,12 +21,13 @@
                 <div class="photo-button mb-3">
                     <div class="photo-card mb-2 d-flex justify-content-center">
                         <div class="photo">
-                            <img class="mt-4" :src="inputData.Photo" id="imgpic">
+                            <img class="mt-4" v-bind:src="profileimage" v-on:click="$refs.fileInput.click()" >
                         </div>
                     </div>
                     <div class="photo-upload mb-2 d-flex justify-content-center">
                         @*<button type="button" class="btn btn-outline-info">上傳大頭照</button>*@
-                        <input type="button" class="btn" value="上傳大頭照" />
+                        <input type="file" style="display:none" ref="fileInput" v-on:change="fileChange" name="Photo"/>
+                        <input type="button" class="btn" v-on:click="imgUpload" value="上傳大頭照" />
                         <input type="button" class="btn" value="移除大頭照" />
                     </div>
                     <!--<div class="col-12 col-md-4 fileUpload mb-2 btn btn-outline-info">

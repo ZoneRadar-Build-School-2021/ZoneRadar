@@ -4,7 +4,7 @@ let app = new Vue({
     data: {
         isDisabled: true,
         inputData: {
-            Photo: profileData.Photo,
+            //Photo: profileData.Photo,
             Name: profileData.Name,
             Phone: profileData.Phone,
             Email: profileData.Email,
@@ -16,19 +16,20 @@ let app = new Vue({
             NameErrorMsg: ''
         },
         originalinputData: {
-            Photo: profileData.Photo,
+            //Photo: profileData.Photo,
             Name: profileData.Name,
             Phone: profileData.Phone,
             Email: profileData.Email,
             Description: profileData.Description,
             ReceiveEDM: profileData.ReceiveEDM
         },
+        profileimage: 'https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con'
     },
     watch: {
         inputData: {
             deep: true,
             handler() {
-                if (this.originalinputData.Photo === this.inputData.Photo && this.originalinputData.Name === this.inputData.Name && this.originalinputData.Phone === this.inputData.Phone && this.originalinputData.Description === this.inputData.Description && this.originalinputData.ReceiveEDM === this.inputData.ReceiveEDM) {
+                if (this.originalinputData.Name === this.inputData.Name && this.originalinputData.Phone === this.inputData.Phone && this.originalinputData.Description === this.inputData.Description && this.originalinputData.ReceiveEDM === this.inputData.ReceiveEDM) {
                     this.isDisabled = true;
                 }
                 else if (this.inputData.Name === '') {
@@ -52,4 +53,29 @@ let app = new Vue({
             }
         }
     },
+    methods: {
+        fileChange(e) {
+            const file = e.target.files[0]
+            this.profileimage = URL.createObjectURL(file)
+        },
+        imgUpload() {
+            let formData = new FormData();
+            formData.append('file', this.imageData);
+            formData.append('upload_preset', 'yp7sicxt');
+            axios.post("https://api.cloudinary.com/v1_1/dt6vz3pav/upload", formData, {
+                onUploadProgress: uploadEvent => {
+                    console.log('Upload Progress: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
+                },
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            })
+            .then(response => {
+                //...
+            })
+            .catch(e => {
+                //...
+            })
+        }
+    }
 })
