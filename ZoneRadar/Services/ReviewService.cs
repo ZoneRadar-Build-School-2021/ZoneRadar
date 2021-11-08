@@ -22,9 +22,9 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public List<ToSpaceReviewViewModel> GetSpaceReviews()
         {
-            var members = _repository.GetAll<Member>().ToList();
-            var reviews = _repository.GetAll<Review>().Where(x => x.ToHost).ToList();
-            var orders = _repository.GetAll<Order>().ToList();
+            var reviews = _repository.GetAll<Review>().Where(x => x.ToHost).OrderByDescending(x => x.Score).Take(8).ToList();
+            var orders = reviews.Select(x => x.Order);
+            var members = orders.Select(x => x.Member).Distinct();
 
             var spaceReviews = new List<ToSpaceReviewViewModel>();
 
@@ -33,16 +33,14 @@ namespace ZoneRadar.Services
                 spaceReviews.Add(
                     new ToSpaceReviewViewModel
                     {
-                        SpaceId = item.Order.SpaceID,
-                        MemberName = members.First(x => x.MemberID == item.Order.MemberID).Name,
+                        SpaceId = orders.First(x => x.OrderID == item.OrderID).SpaceID,
+                        MemberName = members.First(x => x.MemberID == orders.First(y => y.OrderID == item.OrderID).MemberID).Name,
                         ReviewContent = item.ReviewContent,
                         Score = item.Score
                     });
             }
 
-            var topSpaceReviews = spaceReviews.OrderByDescending(x => x.Score).Take(8).ToList();
-
-            return topSpaceReviews;
+            return spaceReviews;
         }
 
         /// <summary>
