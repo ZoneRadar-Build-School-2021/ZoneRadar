@@ -336,7 +336,7 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [Route("api/JSONAPI/GetEcpayData")]
         [HttpPost]
-        public IHttpActionResult GetEcpayData(EcpayViewModel model)
+        public IHttpActionResult GetEcpayData(EcpayViewModel model) 
         {
             if (model.RtnCode == 1)
             {
@@ -346,24 +346,12 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
-        /// 綠界回復
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        //[Route("api/JSONAPI/GetEcpay")]
-        //[HttpPost]
-        //public IHttpActionResult GetEcpay(EcpayViewModel model)
-        //{
-        //    return Json(model);
-        //}
-
-        /// <summary>
         /// 取得cloudinary參數(Steve)
         /// </summary>
         /// <returns></returns>
         [Route("GetUploadPrams")]
         [AcceptVerbs("GET")]
-        public APIResponse GetUploadPrams()
+        public APIResponse GetUploadPrams(int? id)
         {
             var response = new APIResponse();
             try
@@ -371,9 +359,10 @@ namespace ZoneRadar.Controllers
                 response.Status = "Success";
                 response.Message = string.Empty;
                 // id須由外部傳入
-                response.Response = _spaceService.GetSpacePhotoFromDB(4);
+                response.Response = _spaceService.GetSpacePhotoFromDB(id);
 
                 return response;
+
             }
             catch (Exception ex)
             {
