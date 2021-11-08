@@ -94,7 +94,6 @@
 
     previewZone.appendChild(imgTemplate);
       closeBtn.addEventListener('click', removeThumbnail);
-      console.log(imgUrl);
 
          
      
