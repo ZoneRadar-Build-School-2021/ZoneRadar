@@ -411,24 +411,7 @@ namespace ZoneRadar.Services
         /// </summary>
         /// 第三類
         /// 其他
-        public SpaceViewModel ShowAmenityByIdThree()
-        {
-            var result = new SpaceViewModel()
-            {
-                amenityAraeThreeList = new List<AmenityAraeThree>(),
-            };
-            var amenityThrees = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 3).Select(x => x).ToList();
-            foreach (var amenityThree in amenityThrees)
-            {
-                var amenityThreeTemp = new AmenityAraeThree()
-                {
-                    AmenityId = amenityThree.AmenityDetailID,
-                    AmenityName = amenityThree.Amenity
-                };
-                result.amenityAraeThreeList.Add(amenityThreeTemp);
-            }
-            return result;
-        }
+       
 
 
         /// <summary>
@@ -628,7 +611,6 @@ namespace ZoneRadar.Services
 
                 amenityAraeOneList = new List<AmenityAraeOne>(),
                 amenityAraeTwoList = new List<AmenityAraeTwo>(),
-                amenityAraeThreeList = new List<AmenityAraeThree>(),
                 SomeOnesAmenityList = new List<SomeOnesAmenity>(),
                 SomeTwoAmenityList = new List<SomeOnesAmenity>(),
                 SomeThreeAmenityList = new List<SomeOnesAmenity>(),
@@ -648,7 +630,7 @@ namespace ZoneRadar.Services
                 SomeOnesCleanRuleFourList = new List<SomeOnesCleanRule>(),
                 SpaceoperatingDaysList = new List<SpaceoperatingDay>(),
                 SpaceOwnerNameList = new List<SomeOnesSpaceName>(),
-                Operating = new List<SelectListItem>()
+                Operating = new List<SelectListItem>(),
             };
           
         //找 地址( Amber) 
@@ -661,6 +643,7 @@ namespace ZoneRadar.Services
                     DistrictID = add.DistrictID,
                     Country = add.Country,
                     SpaceID = add.SpaceID,
+                    OtherAmenitys=add.OtherAmenity,
                 };
                 result.SomeOnesSpaceList.Add(addsTemp);
             }
@@ -702,10 +685,11 @@ namespace ZoneRadar.Services
                 result.SomeOnesCitytList.Add(ciytTemp);
             };
 
+        
             //活動類型 把活動類別用戶有選的撈出來(Amber)
 
 
-            List<SpaceType> spacetypes = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == spaceId).ToList();
+            List <SpaceType> spacetypes = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == spaceId).ToList();
             foreach (var item in spacetypes)
             {
                 SomeOnesTypeDetail someOnesTypeDetail = new SomeOnesTypeDetail();
@@ -872,18 +856,7 @@ namespace ZoneRadar.Services
                 };
                 result.amenityAraeTwoList.Add(temp);
             }
-            /// <summary>
-            /// 其他場地空間選項 (Amber)
-            /// </summary>
-            var AmenityOptionThree = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 3).ToList();
-            foreach (var item in AmenityOptionThree)
-            {
-                var temp = new AmenityAraeThree()
-                {
-                    AmenityName = item.Amenity,
-                };
-                result.amenityAraeThreeList.Add(temp);
-            }
+      
             /// <summary>
             /// 場地條款( Amber )
             /// </summary>
@@ -1286,6 +1259,7 @@ namespace ZoneRadar.Services
                 Latitude = addSpaceViewModel.Lat,
                 Longitude = addSpaceViewModel.Lng,
                 SpaceStatusID = 2,
+                OtherAmenity=addSpaceViewModel.OtherAmenity,
 
             };
 
@@ -1402,6 +1376,7 @@ namespace ZoneRadar.Services
             spaceUpdate.PublishTime = _repository.GetAll<Space>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID).Select(x => x.PublishTime).FirstOrDefault();
             spaceUpdate.Latitude = addSpaceViewModel.Lat;
             spaceUpdate.Longitude = addSpaceViewModel.Lng;
+            spaceUpdate.OtherAmenity = addSpaceViewModel.OtherAmenity;
 
             _repository.Update<Space>(spaceUpdate);
             _repository.SaveChanges();

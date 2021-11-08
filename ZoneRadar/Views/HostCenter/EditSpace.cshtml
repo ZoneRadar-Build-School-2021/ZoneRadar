@@ -23,7 +23,7 @@
     var cancel = Model.SomeOnesCancelList;
     var Optionscleanone = Model.CleanRuleOptionsOneList;
     var cleanone = Model.SomeOnesCleanRuleOneList;
-
+    var other = Model.SomeOnesSpaceList;
     var Optionscleantwo = Model.CleanRuleOptionsTwoList;
     var cleantwo = Model.SomeOnesCleanRuleTwoList;
 
@@ -39,7 +39,6 @@
     var amenityAraeTwo = Model.amenityAraeTwoList;
     var someTwoAmenity = Model.SomeTwoAmenityList;
 
-    var amenityAraeThree = Model.amenityAraeThreeList;
     var someThreeAmenity = Model.SomeThreeAmenityList;
     var test = Json.Encode(Model.SpaceoperatingDaysList);
     var spaceOpenDay = Model.SpaceoperatingDaysList;
@@ -1028,7 +1027,7 @@
                                             <label for="exampleFormControlTextarea1" class="form-label"></label>
                                             <textarea name="OtherAmenity" class="form-control"
                                                       id="exampleFormControlTextarea1" rows="3">
-
+                                                @other.Select(x => x.OtherAmenitys).FirstOrDefault();
                                          </textarea>
                                         </div>
                                     </div>

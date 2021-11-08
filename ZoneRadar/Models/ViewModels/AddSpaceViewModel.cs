@@ -38,7 +38,7 @@ namespace ZoneRadar.Models.ViewModels
         public string Lng{ get; set; }
         public int SpaceStatusID { get; set; }
         public DateTime DiscontinuedDate { get; set; }
-
+        public string OtherAmenity { get; set; }
 
         public List<int> OperatingDay { get; set; }
         public string Hours1 { get; set; }
