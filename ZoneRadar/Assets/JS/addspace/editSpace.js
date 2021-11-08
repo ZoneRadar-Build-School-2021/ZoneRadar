@@ -140,7 +140,7 @@ for (var i = 0; i < Newdatalist.length; i++) {
                 var ShourString = (datlist[i].StartTime.Hours).toString();
                 var EhourString = (datlist[i].EndTime.Hours).toString();
                 StartTimeoptionMon.innerHTML = ShourString.padStart(2, '0') + ":00";
-                StartTimeoptionMon.value.innerHTML = ShourString.padStart(2, '0') + ":00";
+                StartTimeoptionMon.value= ShourString.padStart(2, '0') + ":00";
                 EndTimeoptionMon.innerHTML = EhourString.padStart(2, '0') + ":00";
                 EndTimeoptionMon.value = EhourString.padStart(2, '0') + ":00";
             }
