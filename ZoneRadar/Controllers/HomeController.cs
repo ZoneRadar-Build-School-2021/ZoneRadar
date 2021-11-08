@@ -62,13 +62,19 @@ namespace ZoneRadar.Controllers
         {
             return View();
         }
-
-        [Authorize]
         public ActionResult FAQ()
         {
             return View();
         }
         public ActionResult NotFound404()
+        {
+            return View();
+        }
+        public ActionResult BadRequest()
+        {
+            return View();
+        }
+        public ActionResult ServerError()
         {
             return View();
         }

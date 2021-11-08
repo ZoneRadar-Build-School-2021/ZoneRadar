@@ -4,8 +4,7 @@ using System.Linq;
 using System.Web;
 
 namespace ZoneRadar.Models.ViewModels
-{
-    public enum SpaceStatusEnum { Discontinued = 1, OnTheShelf = 2, Delete = 3 }
+{    
     public class SpaceStatusInformation
     {
         public int UserId { get; set; }

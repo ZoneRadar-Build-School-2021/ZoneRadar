@@ -30,14 +30,7 @@ namespace ZoneRadar.Utilities
             string password = (string)value;
             Regex rgx = new Regex(@"^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$");
 
-            if (rgx.IsMatch(password))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return rgx.IsMatch(password);
         }
     }
 }

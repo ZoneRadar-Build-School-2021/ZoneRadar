@@ -122,7 +122,7 @@ function showSelectOption() {
     //如果city或district有任一個未選, 則submit disable*
     if (cityValue != "" && districtValue != "") {
         ZipCode.setAttribute('value', zipcode);
-        submitButton.disabled = false;
+        
     } else {
         ZipCode.setAttribute('value',);
         submitButton.disabled = true;

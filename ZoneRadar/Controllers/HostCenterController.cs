@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ZoneRadar.Services;
 using ZoneRadar.Models.ViewModels;
 using System.Net;
+using ZoneRadar.Enums;
 
 namespace ZoneRadar.Controllers
 {
@@ -91,7 +92,7 @@ namespace ZoneRadar.Controllers
             editspace.MemberID = userid;
 
             var result = _spaceService.EditSpace(editspace);
-            return RedirectToAction("SpaceManage", result);
+            return RedirectToAction("SpaceManage", "HostCenter");
         }
 
         /// <summary>

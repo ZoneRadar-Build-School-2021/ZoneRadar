@@ -263,6 +263,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\EcpayApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HostCenterController.cs" />
     <Compile Include="Controllers\JSONAPIController.cs" />
@@ -385,6 +386,9 @@
     <Content Include="Assets\CSS\webfonts\fa-brands-400.svg" />
     <Content Include="Assets\CSS\webfonts\fa-regular-400.svg" />
     <Content Include="Assets\CSS\webfonts\fa-solid-900.svg" />
+    <Content Include="Assets\IMG\400BadRequest.png" />
+    <Content Include="Assets\IMG\404NotFound.png" />
+    <Content Include="Assets\IMG\500InternalServiceError.png" />
     <Content Include="Assets\IMG\head.png" />
     <Content Include="Assets\IMG\icons\addphoto.png" />
     <Content Include="Assets\IMG\icons\apple_tv.svg" />
@@ -429,6 +433,7 @@
     <Content Include="Assets\IMG\NoPreOrder%28user%29.png" />
     <Content Include="Assets\IMG\NoReview%28user%29.png" />
     <Content Include="Assets\IMG\NoSpace%28host%29.png" />
+    <Content Include="Assets\IMG\QRcode\ZoneRardarQR.png" />
     <Content Include="Assets\IMG\static\About03.jpg" />
     <Content Include="Assets\IMG\static\About02.jpg" />
     <Content Include="Assets\IMG\static\About01.jpg" />
@@ -541,6 +546,7 @@
     <Content Include="Assets\JS\addspace\CityandDistrictandZipcodeJavaScript.js" />
     <Content Include="Assets\JS\addspace\editSpace.js" />
     <Content Include="Assets\JS\addspace\Latitude_and_Longitude.js" />
+    <Content Include="Assets\JS\addspace\addmain.js" />
     <Content Include="Assets\JS\addspace\main.js" />
     <Content Include="Assets\CSS\hostCenter\style.css" />
     <Content Include="Assets\JS\addspace\text.js" />
@@ -680,6 +686,8 @@
     <Content Include="Views\Payment\EcPayment.cshtml" />
     <Content Include="Views\MemberCenter\ResetPasswordSuccess.cshtml" />
     <Content Include="Views\Home\NotFound404.cshtml" />
+    <Content Include="Views\Home\BadRequest.cshtml" />
+    <Content Include="Views\Home\ServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

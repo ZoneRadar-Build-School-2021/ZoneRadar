@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ZoneRadar.Models;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Repositories;
+using ZoneRadar.Enums;
 
 namespace ZoneRadar.Services
 {
@@ -37,7 +38,7 @@ namespace ZoneRadar.Services
             var spaces = _repository.GetAll<Space>().Where(x => x.SpaceStatusID == 2).ToList();
             var orders = _repository.GetAll<Order>().Where(x => x.OrderStatus.OrderStatusID == 2).ToList();
             var reviews = _repository.GetAll<Review>().Where(x => x.ToHost).ToList();
-            var spacePhotos = _repository.GetAll<SpacePhoto>().ToList();
+            //var spacePhotos = _repository.GetAll<SpacePhoto>().ToList();
 
             var selectedSpaces = new List<SelectedSpaceViewModel>();
 
@@ -48,8 +49,8 @@ namespace ZoneRadar.Services
                 double scoreAvg = spaceReview.Count() == 0 ? 0 : spaceReview.Average(x => x.Score);
 
                 //場地圖片資料表還沒建好，先寫防呆程式
-                var spacePhoto = spacePhotos.FirstOrDefault(x => x.SpaceID == item.SpaceID);
-                var spacePhotoUrl = spacePhoto == null ? "" : spacePhoto.SpacePhotoUrl;
+                //var spacePhoto = spacePhotos.FirstOrDefault(x => x.SpaceID == item.SpaceID);
+                //var spacePhotoUrl = spacePhoto == null ? "" : spacePhoto.SpacePhotoUrl;
 
                 selectedSpaces.Add(
                     new SelectedSpaceViewModel
@@ -58,7 +59,7 @@ namespace ZoneRadar.Services
                         CityName = item.City.CityName,
                         Capacity = item.Capacity,
                         PricePerHour = item.PricePerHour,
-                        SpacePhoto = spacePhotoUrl,
+                        SpacePhoto = item.SpacePhoto.First(x => x.Sort == 1).SpacePhotoUrl,
                         Score = scoreAvg
                     });
             }
@@ -98,15 +99,6 @@ namespace ZoneRadar.Services
             }).ToList();
 
             return cityOptions;
-        }
-
-
-        /// <summary>
-        /// 關閉資料庫連線(Jenny)
-        /// </summary>
-        public void DisposeCtx()
-        {
-            _repository.Dispose();
         }
 
         /// <summary>
@@ -341,7 +333,7 @@ namespace ZoneRadar.Services
             {
                 SpaceID = x.SpaceID,
                 SpaceName = x.SpaceName,
-                SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).Select(y => y.SpacePhotoUrl).ToList(),
+                SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).OrderBy(y => y.Sort).Select(y => y.SpacePhotoUrl).ToList(),
                 Address = x.Address,
                 Capacity = x.Capacity,
                 PricePerHour = x.PricePerHour,
@@ -1097,109 +1089,8 @@ namespace ZoneRadar.Services
             /// <summary>
             /// 營業時間 有被選的 (Amber) 
             int[] OperatingDays = { 1, 2, 3, 4, 5, 6, 7 };
-           List<SpaceoperatingDay> conpare = new List<SpaceoperatingDay>();
-            conpare.Add(new SpaceoperatingDay()
-            {
-                SpaceId = 999,
-                OperatingDay = 1,
-                StartTime = new TimeSpan(6, 0, 0),
-                EndTime = new TimeSpan(23, 0, 0),
-                isOpen = "",
-                isAllDayCheck = "",
-                isHourCheck = "",
-                WeekDay = "星期一",
-                AllDayValue = "Y1",
-                HoursValue = "hr1",
-                TagName = "Hours1"
-            });
 
-            conpare.Add(new SpaceoperatingDay()
-            {
-                SpaceId = 999,
-                OperatingDay = 2,
-                StartTime = new TimeSpan(6, 0, 0),
-                EndTime = new TimeSpan(23, 0, 0),
-                isOpen = "",
-                isAllDayCheck = "",
-                isHourCheck = "",
-                WeekDay = "星期二",
-                AllDayValue = "Y2",
-                HoursValue = "hr2",
-                TagName = "Hours2"
-            });
-
-            conpare.Add(new SpaceoperatingDay()
-            {
-                SpaceId = 999,
-                OperatingDay = 3,
-                StartTime = new TimeSpan(6, 0, 0),
-                EndTime = new TimeSpan(23, 0, 0),
-                isOpen = "",
-                isAllDayCheck = "",
-                isHourCheck = "",
-                WeekDay = "星期三",
-                AllDayValue = "Y3",
-                HoursValue = "hr3",
-                TagName = "Hours3"
-            });
-            conpare.Add(new SpaceoperatingDay()
-            {
-                SpaceId = 999,
-                OperatingDay = 4,
-                StartTime = new TimeSpan(6, 0, 0),
-                EndTime = new TimeSpan(23, 0, 0),
-                isOpen = "",
-                isAllDayCheck = "",
-                isHourCheck = "",
-                WeekDay = "星期四",
-                AllDayValue = "Y4",
-                HoursValue = "hr4",
-                TagName = "Hours4"
-            });
-            conpare.Add(new SpaceoperatingDay()
-            {
-                SpaceId = 999,
-                OperatingDay = 5,
-                StartTime = new TimeSpan(6, 0, 0),
-                EndTime = new TimeSpan(23, 0, 0),
-                isOpen = "",
-                isAllDayCheck = "",
-                isHourCheck = "",
-                WeekDay = "星期五",
-                AllDayValue = "Y5",
-                HoursValue = "hr5",
-                TagName = "Hours5"
-            });
-            conpare.Add(new SpaceoperatingDay()
-            {
-                SpaceId = 999,
-                OperatingDay = 6,
-                StartTime = new TimeSpan(6, 0, 0),
-                EndTime = new TimeSpan(23, 0, 0),
-                isOpen = "",
-                isAllDayCheck = "",
-                isHourCheck = "",
-                WeekDay = "星期六",
-                AllDayValue = "Y6",
-                HoursValue = "hr6",
-                TagName = "Hours6"
-            });
-            conpare.Add(new SpaceoperatingDay()
-            {
-                SpaceId = 999,
-                OperatingDay = 7,
-                StartTime = new TimeSpan(6, 0, 0),
-                EndTime = new TimeSpan(23, 0, 0),
-                isOpen = "",
-                isAllDayCheck = "",
-                isHourCheck = "",
-                WeekDay = "星期日",
-                AllDayValue = "Y7",
-                HoursValue = "hr7",
-                TagName = "Hours7"
-            });
             var openDays = _repository.GetAll<Operating>().Where(x => x.SpaceID == spaceId).ToList();
-            //IEnumerable<double>
 
             foreach (var item in openDays)
             {
@@ -1280,18 +1171,6 @@ namespace ZoneRadar.Services
                         operatingday.TagName = "Hours7";
                     }
                 }
-                //if (openDays.Count<7)
-                //{
-                //    //operatingday.isOpen = "";
-                //    if (operatingday.OperatingDay == 1)
-                //    {
-                //        operatingday.WeekDay = "星期一";
-                //        operatingday.AllDayValue = "Y1";
-                //        operatingday.HoursValue = "hr1";
-                //        operatingday.TagName = "Hours1";
-                //    }
-
-                //}
                 else
                 {
                     operatingday.isOpen = "";
@@ -1347,12 +1226,9 @@ namespace ZoneRadar.Services
 
                 }
                 result.SpaceoperatingDaysList.Add(operatingday);
-
+               
             }
-            //foreach (var item in Operating)
-            //{
 
-            //}
             var Operating = new List<SelectListItem> 
             {
             new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
@@ -1376,14 +1252,6 @@ namespace ZoneRadar.Services
             new SelectListItem { Value = "23:00:00.0000000", Text = "23:00"},
             new SelectListItem { Value = "00:00:00.0000000", Text = "00:00"},
             };
-            //foreach (var item in Operating)
-            //{
-            //    var Operatings=new Operating()
-            //    {
-
-            //    }
-            //}
-            //result.Operating.Add(Operating);
             return result;
         }
         /// <summary>
@@ -1424,7 +1292,7 @@ namespace ZoneRadar.Services
             _repository.Create<Space>(space);
             _repository.SaveChanges();
 
-           var spaceid = _repository.GetAll<Space>().Max(x => x.SpaceID);
+            var spaceid = _repository.GetAll<Space>().Where(x => x.SpaceName== addSpaceViewModel.SpaceName).Select(x => x.SpaceID).FirstOrDefault();
             var spaceDiscount=new SpaceDiscount
             {
                 SpaceID = spaceid,
@@ -1432,24 +1300,18 @@ namespace ZoneRadar.Services
                 Discount=1m-((addSpaceViewModel.Discount)/10.00m),
             };
             List<SpacePhoto> imgs = new List<SpacePhoto>();
+            var y = 1;
             foreach (var item in addSpaceViewModel.SpacePhotoUrl)
             {
-                var i = 1;
-                //imgs.Add(new SpacePhoto { SpaceID = spaceid, SpacePhotoUrl = item });
                 imgs.Add(new SpacePhoto
                 {
                     SpaceID = spaceid,
                     SpacePhotoUrl = item,
-                    Sort = i
+                    Sort = y
                 });
-                i++;
+                y++;
             }
 
-            //List<Operating> operating = new List<Operating>();
-            //foreach (var item in addS6paceViewModel.OperatingDay)
-            //{
-            //    operating.Add(new Operating { SpaceID = spaceid, OperatingDay = item});
-            //}
 
             List<SpaceType> type = new List<SpaceType>();
             foreach (var item in addSpaceViewModel.TypeDetailID)
@@ -1537,7 +1399,7 @@ namespace ZoneRadar.Services
             spaceUpdate.CityID = city;
             spaceUpdate.DistrictID = addSpaceViewModel.DistrictID;
             spaceUpdate.Address = addSpaceViewModel.Address;
-            spaceUpdate.PublishTime = DateTime.Today;
+            spaceUpdate.PublishTime = _repository.GetAll<Space>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID).Select(x => x.PublishTime).FirstOrDefault();
             spaceUpdate.Latitude = addSpaceViewModel.Lat;
             spaceUpdate.Longitude = addSpaceViewModel.Lng;
 
@@ -1810,6 +1672,7 @@ namespace ZoneRadar.Services
                 return sweetAlert;
             }
         }
+  
 
         /// <summary>
         /// 取得該編輯場地的照片

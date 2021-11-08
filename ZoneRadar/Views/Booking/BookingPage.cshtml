@@ -37,6 +37,7 @@
     var startTimeList = details.StartTimeList;
     var endTimeList = details.EndTimeList;
     var spaceID = briefs.SpaceID;
+    var validationText = $"人數需少於{briefs.Capacity}人";
 }
 
 <!-- Body -->
@@ -173,7 +174,7 @@
                                 }
                                 @if (@details.ShootingEquipment != null)
                                 {
-                                    <div class="card card-body border-0">@details.ShootingEquipment</div>
+                            <div class="card card-body border-0">@Html.Raw(details.ShootingEquipment)</div>
                                 }
                             </div>
                         </div>
@@ -244,7 +245,7 @@
                         </a>
                         <div class="collapse" id="traffic">
                             <div class="card card-body border-0">
-                                @details.TrafficInfo
+                                @Html.Raw(details.TrafficInfo)
                             </div>
                         </div>
                     </div>
@@ -358,6 +359,10 @@
         <div class="input-group mb-2">
             <input type="text" placeholder="開始日期" class="start-date form-control rounded me-1">
             <input type="text" placeholder="參加人數" class="attendees form-control rounded ms-1" aria-label=".form-control attendees" disabled>
+        </div>
+        <div class="validate-row input-group mt-0 d-none">
+            <span class="text-danger form-control me-1 border-0 pt-0"><i class="fas fa-exclamation-circle d-none"></i></span>
+            <span class="not-validate-text text-danger form-control ms-1 border-0 ps-0 text-start pt-0"><i class="fas fa-exclamation-circle me-1"></i>@validationText</span>
         </div>
         <div class="input-group mb-2">
             <input type="text" placeholder="開始時間" class="start-time form-control rounded me-1" disabled>

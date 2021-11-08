@@ -24,8 +24,8 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public String GetEcpayData(PaymentViewModel model)
         {
-            //var Url = "https://zoneradar-frontstage.azurewebsites.net";
-            var Url = "https://ec8e-1-164-244-111.ngrok.io";
+            var Url = "https://zoneradar-frontstage.azurewebsites.net";
+            //var Url = "https://9693-1-164-244-111.ngrok.io";
             AllInOne oPayment = new AllInOne();
             //var returnURL = "webapi/spaces/api/JSONAPI/GetEcpayData";
             /* 服務參數 */
@@ -36,7 +36,7 @@ namespace ZoneRadar.Services
             oPayment.MerchantID = "2000132";//ECPay提供的特店編號
 
             /* 基本參數 */
-            oPayment.Send.ReturnURL = Url + "/webapi/spaces/api/JSONAPI/GetEcpayData";//付款完成通知回傳的網址
+            oPayment.Send.ReturnURL = Url + "/api/EcpayAPI/GetEcpayData";//付款完成通知回傳的網址
             oPayment.Send.ClientBackURL = Url +"/UserCenter/Pending";//瀏覽器端返回的廠商網址
             oPayment.Send.OrderResultURL = "";//"http://localhost:53045/webapi/spaces/api/JSONAPI/GetEcpay";//瀏覽器端回傳付款結果網址
             oPayment.Send.MerchantTradeNo = "ZoneRadar" + new Random().Next(0, 9).ToString() + DateTime.Now.ToString("yyMMddHHmm");//廠商的交易編號
@@ -156,5 +156,7 @@ namespace ZoneRadar.Services
 
             return result;
         }
+
+
     }
 }

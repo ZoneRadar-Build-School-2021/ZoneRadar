@@ -82,69 +82,41 @@
 
                 <!-- form-input -->
                 @*@Html.TextBox("聯絡人", ViewBag.StartDate as string, new { placeholder = "Start Date" })
-        @Html.TextBox("聯絡人電話", ViewBag.EndDate as string, new { placeholder = "End Date" })*@
+                    @Html.TextBox("聯絡人電話", ViewBag.EndDate as string, new { placeholder = "End Date" })*@
 
-            <form action="~/Payment/Ecpayment" method="post">
-                <div class="row mb-3 mt-3">
-                    <label for="validationServerUsername" class="col-2 col-form-label">聯絡人 </label>
-                    <div class="col-6 col-sm-6">
-                        <input type="text" class="form-control" id="inputName" placeholder="請輸入聯絡人姓名" name="ContactName" value="@Model.ContactName">
+                <form action="~/Payment/Ecpayment" method="post" data-toggle="validator" id="Myform" onsubmit="return checkboxOnclick(this)">
+                    <div class="row mb-3 mt-3">
+                        <label for="validationServerUsername" class="col-2 form-label">聯絡人 </label>
+                        <div class="col-6 col-sm-6">
+                            <input type="text" class="form-control is-invalid" id="inputName" placeholder="請輸入聯絡人姓名" 
+                                   name="ContactName" value="@Model.ContactName" required>
+                            <div class="help-block with-errors"> </div>
+                        </div>
+                        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                            請填寫聯絡人
+                        </div>
                     </div>
-                    <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                        請填寫聯絡人
+                    <div class="row mt-3">
+                        <label for="validationServerPhone" class="col-2 form-label">聯絡電話 </label>
+                        <div class="col-6 col-sm-6">
+                            <input type="tel" class="form-control is-invalid" id="inputPhone" placeholder="請輸入聯絡人電話號碼" pattern="^[0-9]+$"
+                                   name="ContactPhone" value="@Model.ContactPhone" required>
+                        </div>
+                        <div id="validationServerPhoneFeedback" class="invalid-feedback">
+                            請填連絡電話
+                        </div>
                     </div>
-                </div>
-                <div class="row mt-3">
-                    <label for="validationServerPhone" class="col-2 col-form-label">聯絡電話 </label>
-                    <div class="col-6 col-sm-6">
-                        <input type="tel" class="form-control" id="inputtel" placeholder="請輸入聯絡人電話號碼" name="ContactPhone" value="@Model.ContactPhone">
+                    <div class="form-check mt-4">
+                        <input type="checkbox" class="form-check-input" id="flexCheckAccpet" @*onclick="checkboxOnclick(this)"*@ required>
+                        <label class="form-check-label" for="validationFormCheck1">我同意上述所說。</label>
                     </div>
-                    <div id="validationServerPhoneFeedback" class="invalid-feedback">
-                        請填連絡電話
-                    </div>
-                </div>
 
-                <div class="form-check mt-4">
-                    <input class="form-check-input" type="checkbox" onclick="checkboxOnclick(this)" value="false" id="flexCheckAccpet">
-                    <label class="form-check-label" for="flexCheckAccpet">
-                        我同意上述所說。
-                    </label>
-                </div>
-                <input type="hidden" value="@OrderId" name="OrderId" />
-                <input type="hidden" value="@spacename" name="SpaceName" />
-                <input type="hidden" value="@TotalMoney" name="totalmoney" />
-                <button class="Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled submit-pay" id="submit-pay" type="submit"> 送出 </button>
-                @*@Html.ActionLink("送出", "Ecpayment", new PaymentViewModel { OrderId = (int)OrderId, TotalMoney = (decimal)TotalMoney, SpaceName = (string)spacename }, new { @class = "Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled submit-pay", @id = "submit-pay", @tpye = "submit" })*@
-            </form>
-                @*<form action="/Payment/ContactData" method="post">
-            <div class="row mb-3 mt-3">
-                <label for="validationServerUsername" class="col-2 col-form-label">聯絡人 </label>
-                <div class="col-6 col-sm-6">
-                    <input type="text" class="form-control" id="inputName" placeholder="請輸入聯絡人姓名" name="ContactName" value="@Model.ContactName">
-                </div>
-                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                    請填寫聯絡人
-                </div>
-            </div>
-            <div class="row mt-3">
-                <label for="validationServerPhone" class="col-2 col-form-label">聯絡電話 </label>
-                <div class="col-6 col-sm-6">
-                    <input type="tel" class="form-control" id="inputtel" placeholder="請輸入聯絡人電話號碼" name="ContactPhone" value="@Model.ContactPhone">
-                </div>
-                <div id="validationServerPhoneFeedback" class="invalid-feedback">
-                    請填連絡電話
-                </div>
-            </div>
-
-            <div class="form-check mt-4">
-                <input class="form-check-input" type="checkbox" onclick="checkboxOnclick(this)" value="false" id="flexCheckAccpet">
-                <label class="form-check-label" for="flexCheckAccpet">
-                    我同意上述所說。
-                </label>
-            </div>
-            @Html.ActionLink("送出", "Ecpayment", new PaymentViewModel { OrderId = (int)OrderId, TotalMoney = (decimal)TotalMoney, SpaceName = (string)spacename}, new { @class = "Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 disabled submit-pay", @id = "submit-pay", @tpye = "submit" })
-        </form>*@
-</div>
+                    <input type="hidden" value="@OrderId" name="OrderId" />
+                    <input type="hidden" value="@spacename" name="SpaceName" />
+                    <input type="hidden" value="@TotalMoney" name="totalmoney" />
+                    <button class="Button btn btn-primary submit-bkg-req-btn mt-4 mb-4 submit-pay" id="submit-pay" type="submit"> 送出 </button>
+                </form>
+        </div>
         <!-- col-5 電腦版 col-12手機板 -->
         <div class="col-lg-5 mt-5 col-sm-12">
             <div class="Host-card sticky-top">
