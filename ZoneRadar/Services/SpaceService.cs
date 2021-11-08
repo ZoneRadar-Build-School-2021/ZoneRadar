@@ -333,7 +333,7 @@ namespace ZoneRadar.Services
             {
                 SpaceID = x.SpaceID,
                 SpaceName = x.SpaceName,
-                SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).Select(y => y.SpacePhotoUrl).ToList(),
+                SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).OrderBy(y => y.Sort).Select(y => y.SpacePhotoUrl).ToList(),
                 Address = x.Address,
                 Capacity = x.Capacity,
                 PricePerHour = x.PricePerHour,
