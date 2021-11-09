@@ -47,7 +47,6 @@ namespace ZoneRadar.Controllers
 
                     amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
                     amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
-                    amenityAraeThreeList = _spaceService.ShowAmenityByIdThree().amenityAraeThreeList,
 
                     CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
                     CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
@@ -92,7 +91,7 @@ namespace ZoneRadar.Controllers
             editspace.MemberID = userid;
 
             var result = _spaceService.EditSpace(editspace);
-            return RedirectToAction("SpaceManage", result);
+            return RedirectToAction("SpaceManage", "HostCenter");
         }
 
         /// <summary>

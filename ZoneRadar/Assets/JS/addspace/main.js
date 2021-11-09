@@ -8,13 +8,13 @@
   let name, preset;
   let originImgs = [];
   // spaceID需先存在razor page裡
-  //let spaceID = 168;
-  // var spaceID = parseInt(document.querySelector('#mySpaceId').innerHTML);
-  let spaceID = 4;
+    //let spaceID = 168;
+    let  spaceID = parseInt(document.querySelector('#mySpaceId').innerHTML);
+  //  let spaceID =4;
   // function定義
   // 從後端獲得上傳所需資訊
   function getPrams() {
-    axios.get('/webapi/spaces/GetUploadPrams').then(res => {
+      axios.get(`/webapi/spaces/GetUploadPrams?id=${spaceID}`).then(res => {
       name = res.data.Response.Name;
       preset = res.data.Response.Preset;
       originImgs = res.data.Response.PhotoUrlList;
@@ -80,21 +80,21 @@
 
   // 產生縮圖
   function showThumbnail(imgUrl) {
-    // const imgTemplate = document.querySelector('#placeholder-template').content.cloneNode(true);
-    // const thumbnail = imgTemplate.querySelector('.thumbnail-holder');
-    // const closeBtn = imgTemplate.querySelector('.thumbnail-holder .fa-times');
+     const imgTemplate = document.querySelector('#placeholder-template').content.cloneNode(true);
+     const thumbnail = imgTemplate.querySelector('.thumbnail-holder');
+     const closeBtn = imgTemplate.querySelector('.thumbnail-holder .fa-times');
 
-    // thumbnail.style.backgroundImage = `url("${imgUrl}")`;
+     thumbnail.style.backgroundImage = `url("${imgUrl}")`;
 
-    // thumbnail.dataset.url = imgUrl;
-    // imgTemplate.classList = 'wrap p-0 mb-4 mx-3 border border-3 rounded';
-    // thumbnail.classList = 'thumbnail-holder';
-    // closeBtn.classList = 'fas fa-times';
+     thumbnail.dataset.url = imgUrl;
+     imgTemplate.classList = 'wrap p-0 mb-4 mx-3 border border-3 rounded';
+     thumbnail.classList = 'thumbnail-holder';
+     closeBtn.classList = 'fas fa-times';
 
-    // previewZone.appendChild(imgTemplate);
+     previewZone.appendChild(imgTemplate);
     
-    // closeBtn.addEventListener('click', removeThumbnail);
-    const imgTemplate = document.querySelector('#placeholder-template').content.cloneNode(true);
+     closeBtn.addEventListener('click', removeThumbnail);
+    //const imgTemplate = document.querySelector('#placeholder-template').content.cloneNode(true);
     previewZone.appendChild(imgTemplate);
 
     setTimeout(function() {

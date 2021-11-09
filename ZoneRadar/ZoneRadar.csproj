@@ -489,6 +489,7 @@
     <Content Include="Assets\JS\addspace\CityandDistrictandZipcodeJavaScript.js" />
     <Content Include="Assets\JS\addspace\editSpace.js" />
     <Content Include="Assets\JS\addspace\Latitude_and_Longitude.js" />
+    <Content Include="Assets\JS\addspace\addmain.js" />
     <Content Include="Assets\JS\addspace\main.js" />
     <Content Include="Assets\CSS\hostCenter\style.css" />
     <Content Include="Assets\JS\addspace\text.js" />

@@ -68,11 +68,11 @@
             // 營業結束時間
             operationEndArr = source.EndTimeList;
             // 星期幾有營業
-            operationDayArr = source.OperatingDayList;
-            operationDayArr.forEach(day => {
+            source.OperatingDayList.forEach(day => {
                 if (day === 7) day = 0;
+                operationDayArr.push(day);
             });
-            
+
             minHour = source.MinHour;
             discount = source.Discount;
             orderDateArr = source.OrderTimeList;
@@ -142,17 +142,15 @@
         const startTimeNode = cloneNode.querySelector('.start-time');
         const endTimeNode = cloneNode.querySelector('.end-time');
 
-
-
         // 每張卡片加上編號
         cloneNode.querySelector('.order-item').classList.add(`index-${cardIndex}`);
         orderDetailNode.appendChild(cloneNode);
-        setCalendar(dateNode, attendeeNode);
-        setAttendee(attendeeNode, startTimeNode, endTimeNode);
+        setCalendar(dateNode, attendeeNode, startTimeNode, endTimeNode);
+        setAttendee(attendeeNode);
     }
 
     // 設定日曆
-    function setCalendar(dateNode, attendeeNode) {
+    function setCalendar(dateNode, attendeeNode, startTimeNode, endTimeNode) {
         // 如果preOrderObj裡沒有值，日曆第一天為今天，若有值，第一天為前一次預訂 + 1天
         let calendarMinDate = dayjs().format(dateFormat);
         if ((cardIndex - 1) >= 0) {
@@ -177,8 +175,12 @@
                 selectedDate = dateStr;
                 // 確認並暫存選到日期是星期幾
                 dayOfSelectedDate = dayjs(dateStr).day();
-                // 開啟人數選項
+                // 開啟其他選項
                 attendeeNode.removeAttribute('disabled');
+                startTimeNode.removeAttribute('disabled');
+                endTimeNode.removeAttribute('disabled');
+                // 設定起始時間
+                setStartTime(startTimeNode, endTimeNode);
                 // input來自第幾幾張卡片
                 let whichCard = instance.input.parentNode.parentNode.classList[2];
                 whichCardIndex = whichCard.split('-')[1];
@@ -190,7 +192,7 @@
     }
 
     // 設定人數選項
-    function setAttendee(attendeeNode, startTimeNode, endTimeNode) {
+    function setAttendee(attendeeNode) {
         attendeeNode.addEventListener('change', function (e) {
             const reg = /^[0-9]+(\.[0-9]{1,3})?$/;
             if (!reg.test(this.value)) {
@@ -220,9 +222,6 @@
             attendee = this.value;
             let whichCard = e.target.parentNode.parentNode.classList[2];
             whichCardIndex = whichCard.split('-')[1];
-            // 開啟開始時間選項
-            startTimeNode.removeAttribute('disabled');
-            setStartTime(startTimeNode, endTimeNode);
             // 確認是否開放加一天
             inputGroups = [selectedDate, attendee, startTime, endTime];
             checkExtendDayBtn(inputGroups);
@@ -237,7 +236,6 @@
         let todayMinTime = operationStartArr[dayIndex];
         // 最晚為當天最晚營業時間 - 最少預定時數
         let todayMaxTime = dayjs(`${selectedDate} ${operationEndArr[dayIndex]}`).subtract(minHour, 'hour').format(timeFormat);
-
         flatpickr(startTimeNode, {
             enableTime: true,
             noCalendar: true,
@@ -332,7 +330,6 @@
     }
 
     function calculate(preOrderObj) {
-        console.log(preOrderObj);
         const calculationNode = document.querySelector('.booking-card .calculation');
         const priceNode = calculationNode.querySelector('.venue-price');
         const totalHourNode = calculationNode.querySelector('.total-hour');

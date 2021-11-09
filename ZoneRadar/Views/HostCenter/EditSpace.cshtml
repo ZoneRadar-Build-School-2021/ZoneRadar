@@ -3,6 +3,8 @@
     ViewBag.Title = "SellerCenter";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var adds = Model.SomeOnesSpaceList;
+
+
     var country = Model.SomeOnesCountryList;
     var district = Model.SomeOnesDistrictList;
     var ciy = Model.SomeOnesCitytList;
@@ -21,7 +23,7 @@
     var cancel = Model.SomeOnesCancelList;
     var Optionscleanone = Model.CleanRuleOptionsOneList;
     var cleanone = Model.SomeOnesCleanRuleOneList;
-
+    var other = Model.SomeOnesSpaceList;
     var Optionscleantwo = Model.CleanRuleOptionsTwoList;
     var cleantwo = Model.SomeOnesCleanRuleTwoList;
 
@@ -37,9 +39,8 @@
     var amenityAraeTwo = Model.amenityAraeTwoList;
     var someTwoAmenity = Model.SomeTwoAmenityList;
 
-    var amenityAraeThree = Model.amenityAraeThreeList;
     var someThreeAmenity = Model.SomeThreeAmenityList;
-
+    var test = Json.Encode(Model.SpaceoperatingDaysList);
     var spaceOpenDay = Model.SpaceoperatingDaysList;
     var Operating = Model.Operating;
     var owner = Model.SpaceOwnerNameList;
@@ -48,8 +49,8 @@
 
 @using (Html.BeginForm("EditSpace", "HostCenter", FormMethod.Post))
 {
-    <div class="main">
-        <div class="container containerForAdd ">
+    <div class="main mymain">
+        <div class="container  containerForAdd ">
             <!-- 開頭問候文區 -->
             <div class="row">
                 <div class="col mb-3 mt-3">
@@ -328,100 +329,595 @@
                                     </p>
                                 </div>
                             </div>
-                            @foreach (var item in spaceOpenDay)
-                            {
-                                    <div class="row mt-4 border-bottom">
-                                        <div class="col-6 col-xl-1  mt-auto mb-auto">
-                                            <p class="mt-xl-3 fs16 ">@item.WeekDay </p>
-                                        </div>
-                                        <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" @item.isOpen type="checkbox" name="OperatingDay" value="@item.OperatingDay"
-                                                       id="flexSwitchCheckDefault">
-                                                <label id="openlabel" class="form-check-label" for="flexSwitchCheckDefault">營業</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio"  @item.isAllDayCheck value="@item.AllDayValue" name="@item.TagName"
-                                                       id="flexRadioDefault1">
-                                                <label id="allDayLabel" class="form-check-label" for="flexRadioDefault1">
-                                                    全天(24hr)
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-xl-2  mt-auto mb-auto">
-                                            <div class="form-check">
-                                                <input class="form-check-input" @item.isHourCheck type="radio" value="@item.HoursValue" name="@item.TagName"
-                                                       id="flexRadioDefault1">
-                                                <label id="hourLabel" class="form-check-label" for="flexRadioDefault1">
-                                                    小時
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-6 col-xl-2 mb-4">
-                                            <label for="State" class="form-label fs16 mt-xl-1 "></label>
-                                            <select id="State" name="StartTime" class="form-select fs16 MonselectL"
-                                                    aria-label="Default select example ">
-                                                <option selected id="Timeoption" value="@item.StartTime">@item.StartTime.ToString(@"hh\:mm")</option>
-                                                <option value="06:00:00.0000000">06:00</option>
-                                                <option value="07:00:00.0000000">07:00</option>
-                                                <option value="08:00:00.0000000">08:00</option>
-                                                <option value="09:00:00.0000000">09:00</option>
-                                                <option value="10:00:00.0000000">10:00</option>
-                                                <option value="11:00:00.0000000">11:00</option>
-                                                <option value="12:00:00.0000000">12:00</option>
-                                                <option value="13:00:00.0000000">13:00</option>
-                                                <option value="14:00:00.0000000">14:00</option>
-                                                <option value="15:00:00.0000000">15:00</option>
-                                                <option value="16:00:00.0000000">16:00</option>
-                                                <option value="17:00:00.0000000">17:00</option>
-                                                <option value="18:00:00.0000000">18:00</option>
-                                                <option value="19:00:00.0000000">19:00</option>
-                                                <option value="20:00:00.0000000">20:00</option>
-                                                <option value="21:00:00.0000000">21:00</option>
-                                                <option value="22:00:00.0000000">22:00</option>
-                                                <option value="23:00:00.0000000">23:00</option>
-
-                                                @{
-                                                    foreach (var item1 in Operating)
-                                                    {
-                                                        <option value="@item1.Value">@item1.Text</option>
-                                                    }
-                                                }
-                                            </select>
-                                        </div>
-                                        <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
-                                            to
-                                        </P>
-                                        <div class="col-6  col-xl-2 mb-4">
-                                            <label for="State" class="form-label  mt-xl-1 "></label>
-                                            <select id="State" name="Endtime" class="form-select fs16 MonselectR "
-                                                    aria-label="Default select example">
-                                                <option selected id="Timeoption" value="@item.EndTime">@item.EndTime.ToString(@"hh\:mm")</option>
-                                                <option value="06:00:00.0000000">06:00</option>
-                                                <option value="07:00:00.0000000">07:00</option>
-                                                <option value="08:00:00.0000000">08:00</option>
-                                                <option value="09:00:00.0000000">06:00</option>
-                                                <option value="10:00:00.0000000">10:00</option>
-                                                <option value="11:00:00.0000000">11:00</option>
-                                                <option value="12:00:00.0000000">12:00</option>
-                                                <option value="13:00:00.0000000">13:00</option>
-                                                <option value="14:00:00.0000000">14:00</option>
-                                                <option value="15:00:00.0000000">15:00</option>
-                                                <option value="16:00:00.0000000">16:00</option>
-                                                <option value="17:00:00.0000000">17:00</option>
-                                                <option value="18:00:00.0000000">18:00</option>
-                                                <option value="19:00:00.0000000">19:00</option>
-                                                <option value="20:00:00.0000000">20:00</option>
-                                                <option value="21:00:00.0000000">21:00</option>
-                                                <option value="22:00:00.0000000">22:00</option>
-                                                <option value="23:00:00.0000000">23:00</option>
-                                            </select>
-                                        </div>
+                            <div class="row mt-4 border-bottom">
+                                <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                    <p class="mt-xl-3 fs16">星期一</p>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" name="OperatingDay" type="checkbox" value="1"
+                                               id="MonOpen">
+                                        <label class="form-check-label" for="MonOpen">營業</label>
                                     </div>
-                            }
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="Y1" name="Hours1"
+                                               id="MonAllDay" disabled>
+                                        <label class="form-check-label" for="MonAllDay">
+                                            全天(24hr)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input " type="radio" value="hr1" name="Hours1"
+                                               id="MonHours" disabled>
+                                        <label class="form-check-label" for="MonHours">
+                                            小時
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-xl-2 mb-4">
+                                    <label for="StateMonS" class="form-label fs16 mt-xl-1 "></label>
+                                    <select id="StateMonS" name="StartTime" class="form-select fs16"
+                                            aria-label="Default select example " >
+                                        <option  id="StartTimeoptionMon" value=" ">選擇營業時間 </option>
+                                        <option value="06:00:00.0000000">06:00</option>
+                                        <option value="07:00:00.0000000">07:00</option>
+                                        <option value="08:00:00.0000000">08:00</option>
+                                        <option value="09:00:00.0000000">09:00</option>
+                                        <option value="10:00:00.0000000">10:00</option>
+                                        <option value="11:00:00.0000000">11:00</option>
+                                        <option value="12:00:00.0000000">12:00</option>
+                                        <option value="13:00:00.0000000">13:00</option>
+                                        <option value="14:00:00.0000000">14:00</option>
+                                        <option value="15:00:00.0000000">15:00</option>
+                                        <option value="16:00:00.0000000">16:00</option>
+                                        <option value="17:00:00.0000000">17:00</option>
+                                        <option value="18:00:00.0000000">18:00</option>
+                                        <option value="19:00:00.0000000">19:00</option>
+                                        <option value="20:00:00.0000000">20:00</option>
+                                        <option value="21:00:00.0000000">21:00</option>
+                                        <option value="22:00:00.0000000">22:00</option>
+                                        <option value="23:00:00.0000000">23:00</option>
+                                    </select>
+                                </div>
+                                <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
+                                    ~
+                                </P>
+                                <div class="col-6  col-xl-2 mb-4">
+                                    <label for="StateMonE" class="form-label  mt-xl-1 "></label>
+                                    <select id="StateMonE" name="Endtime" class="form-select fs16"
+                                            aria-label="Default select example" >
+                                        <option  id="EndTimeoptionMon" value=" ">選擇營業時間 </option>
+                                        <option value="06:00:00.0000000">06:00</option>
+                                        <option value="07:00:00.0000000">07:00</option>
+                                        <option value="08:00:00.0000000">08:00</option>
+                                        <option value="09:00:00.0000000">06:00</option>
+                                        <option value="10:00:00.0000000">10:00</option>
+                                        <option value="11:00:00.0000000">11:00</option>
+                                        <option value="12:00:00.0000000">12:00</option>
+                                        <option value="13:00:00.0000000">13:00</option>
+                                        <option value="14:00:00.0000000">14:00</option>
+                                        <option value="15:00:00.0000000">15:00</option>
+                                        <option value="16:00:00.0000000">16:00</option>
+                                        <option value="17:00:00.0000000">17:00</option>
+                                        <option value="18:00:00.0000000">18:00</option>
+                                        <option value="19:00:00.0000000">19:00</option>
+                                        <option value="20:00:00.0000000">20:00</option>
+                                        <option value="21:00:00.0000000">21:00</option>
+                                        <option value="22:00:00.0000000">22:00</option>
+                                        <option value="23:00:00.0000000">23:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-4 border-bottom">
+                                <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                    <p class="mt-xl-3 fs16">星期二</p>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="OperatingDay" value="2"
+                                               id="TueOpen">
+                                        <label class="form-check-label" for="TueOpen">營業</label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="Y2" name="Hours2"
+                                               id="TueAllDay" disabled>
+                                        <label class="form-check-label" for="TueAllDay">
+                                            全天(24hr)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" value="hr2" type="radio" name="Hours2"
+                                               id="TueHours" disabled>
+                                        <label class="form-check-label" for="TueHours">
+                                            小時
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2 mb-4">
+                                    <label for="StateTueS" class="form-label fs16 mt-xl-1 "></label>
+                                    <select id="StateTueS" name="StartTime" class="form-select fs16"
+                                            aria-label="Default select example " >
+                                        <option  id="StartTimeoptionTue" value=" ">選擇營業時間 </option>
+                                        <option value="06:00:00.0000000">06:00</option>
+                                        <option value="07:00:00.0000000">07:00</option>
+                                        <option value="08:00:00.0000000">08:00</option>
+                                        <option value="09:00:00.0000000">09:00</option>
+                                        <option value="10:00:00.0000000">10:00</option>
+                                        <option value="11:00:00.0000000">11:00</option>
+                                        <option value="12:00:00.0000000">12:00</option>
+                                        <option value="13:00:00.0000000">13:00</option>
+                                        <option value="14:00:00.0000000">14:00</option>
+                                        <option value="15:00:00.0000000">15:00</option>
+                                        <option value="16:00:00.0000000">16:00</option>
+                                        <option value="17:00:00.0000000">17:00</option>
+                                        <option value="18:00:00.0000000">18:00</option>
+                                        <option value="19:00:00.0000000">19:00</option>
+                                        <option value="20:00:00.0000000">20:00</option>
+                                        <option value="21:00:00.0000000">21:00</option>
+                                        <option value="22:00:00.0000000">22:00</option>
+                                        <option value="23:00:00.0000000">23:00</option>
+
+                                    </select>
+                                </div>
+                                <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
+                                    ~
+                                </P>
+                                <div class="col-6  col-xl-2 mb-4">
+                                    <label for="StateTueE" class="form-label  mt-xl-1 "></label>
+                                    <select id="StateTueE" name="Endtime" class="form-select fs16  "
+                                            aria-label="Default select example" >
+                                        <option  id="EndTimeoptionTue" value=" ">選擇營業時間 </option>
+                                        <option value="06:00:00.0000000">06:00</option>
+                                        <option value="07:00:00.0000000">07:00</option>
+                                        <option value="08:00:00.0000000">08:00</option>
+                                        <option value="09:00:00.0000000">06:00</option>
+                                        <option value="10:00:00.0000000">10:00</option>
+                                        <option value="11:00:00.0000000">11:00</option>
+                                        <option value="12:00:00.0000000">12:00</option>
+                                        <option value="13:00:00.0000000">13:00</option>
+                                        <option value="14:00:00.0000000">14:00</option>
+                                        <option value="15:00:00.0000000">15:00</option>
+                                        <option value="16:00:00.0000000">16:00</option>
+                                        <option value="17:00:00.0000000">17:00</option>
+                                        <option value="18:00:00.0000000">18:00</option>
+                                        <option value="19:00:00.0000000">19:00</option>
+                                        <option value="20:00:00.0000000">20:00</option>
+                                        <option value="21:00:00.0000000">21:00</option>
+                                        <option value="22:00:00.0000000">22:00</option>
+                                        <option value="23:00:00.0000000">23:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-4 border-bottom">
+                                <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                    <p class="mt-xl-3 fs16">星期三</p>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="OperatingDay" value="3"
+                                               id="WedOpen">
+                                        <label class="form-check-label" for="WedOpen">營業</label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" disabled value="Y3" name="Hours3"
+                                               id="WedAllDay">
+                                        <label class="form-check-label" for="WedAllDay">
+                                            全天(24hr)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" disabled value="hr3" type="radio" name="Hours3"
+                                               id="WedHours">
+                                        <label class="form-check-label" for="WedHours">
+                                            小時
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2 mb-4">
+                                    <label for="StateWedS" class="form-label fs16 mt-xl-1 "></label>
+                                    <select id="StateWedS" name="StartTime" class="form-select fs16"
+                                            aria-label="Default select example " >
+                                        <option  id="StarTimeoptionWed" value=" ">選擇營業時間 </option>
+                                        <option value="06:00:00.0000000">06:00</option>
+                                        <option value="07:00:00.0000000">07:00</option>
+                                        <option value="08:00:00.0000000">08:00</option>
+                                        <option value="09:00:00.0000000">09:00</option>
+                                        <option value="10:00:00.0000000">10:00</option>
+                                        <option value="11:00:00.0000000">11:00</option>
+                                        <option value="12:00:00.0000000">12:00</option>
+                                        <option value="13:00:00.0000000">13:00</option>
+                                        <option value="14:00:00.0000000">14:00</option>
+                                        <option value="15:00:00.0000000">15:00</option>
+                                        <option value="16:00:00.0000000">16:00</option>
+                                        <option value="17:00:00.0000000">17:00</option>
+                                        <option value="18:00:00.0000000">18:00</option>
+                                        <option value="19:00:00.0000000">19:00</option>
+                                        <option value="20:00:00.0000000">20:00</option>
+                                        <option value="21:00:00.0000000">21:00</option>
+                                        <option value="22:00:00.0000000">22:00</option>
+                                        <option value="23:00:00.0000000">23:00</option>
+
+                                    </select>
+                                </div>
+                                <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
+                                    ~
+                                </P>
+                                <div class="col-6  col-xl-2 mb-4">
+                                    <label for="StateWedE" class="form-label  mt-xl-1 "></label>
+                                    <select id="StateWedE" name="Endtime" class="form-select fs16 MonselectR "
+                                            aria-label="Default select example ">
+                                        <option  id="EndTimeoptionWed" value=" " >選擇營業時間 </option>
+                                        <option value="06:00:00.0000000">06:00</option>
+                                        <option value="07:00:00.0000000">07:00</option>
+                                        <option value="08:00:00.0000000">08:00</option>
+                                        <option value="09:00:00.0000000">06:00</option>
+                                        <option value="10:00:00.0000000">10:00</option>
+                                        <option value="11:00:00.0000000">11:00</option>
+                                        <option value="12:00:00.0000000">12:00</option>
+                                        <option value="13:00:00.0000000">13:00</option>
+                                        <option value="14:00:00.0000000">14:00</option>
+                                        <option value="15:00:00.0000000">15:00</option>
+                                        <option value="16:00:00.0000000">16:00</option>
+                                        <option value="17:00:00.0000000">17:00</option>
+                                        <option value="18:00:00.0000000">18:00</option>
+                                        <option value="19:00:00.0000000">19:00</option>
+                                        <option value="20:00:00.0000000">20:00</option>
+                                        <option value="21:00:00.0000000">21:00</option>
+                                        <option value="22:00:00.0000000">22:00</option>
+                                        <option value="23:00:00.0000000">23:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-4 border-bottom">
+                                <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                    <p class="mt-xl-3 fs16">星期四</p>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="OperatingDay" value="4"
+                                               id="ThuOpen">
+                                        <label class="form-check-label" for="ThuOpen">營業</label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                    <div class="form-check">
+                                        <input class="form-check-input" value="Y4" disabled type="radio" name="Hours4"
+                                               id="ThuAllDay" >
+                                        <label class="form-check-label" for="ThuAllDay">
+                                            全天(24hr)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Hours4"
+                                               id="ThuHours" value="hr4">
+                                        <label class="form-check-label" for="ThuHours" disabled>
+                                            小時
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2 mb-4">
+                                    <label for="StateThuS" class="form-label fs16 mt-xl-1 "></label>
+                                    <select id="StateThuS" name="StartTime" class="form-select fs16 MonselectL"
+                                            aria-label="Default select example " >
+                                        <option  id="StartTimeoptionThu" value=" ">選擇營業時間 </option>
+                                        <option value="06:00:00.0000000">06:00</option>
+                                        <option value="07:00:00.0000000">07:00</option>
+                                        <option value="08:00:00.0000000">08:00</option>
+                                        <option value="09:00:00.0000000">09:00</option>
+                                        <option value="10:00:00.0000000">10:00</option>
+                                        <option value="11:00:00.0000000">11:00</option>
+                                        <option value="12:00:00.0000000">12:00</option>
+                                        <option value="13:00:00.0000000">13:00</option>
+                                        <option value="14:00:00.0000000">14:00</option>
+                                        <option value="15:00:00.0000000">15:00</option>
+                                        <option value="16:00:00.0000000">16:00</option>
+                                        <option value="17:00:00.0000000">17:00</option>
+                                        <option value="18:00:00.0000000">18:00</option>
+                                        <option value="19:00:00.0000000">19:00</option>
+                                        <option value="20:00:00.0000000">20:00</option>
+                                        <option value="21:00:00.0000000">21:00</option>
+                                        <option value="22:00:00.0000000">22:00</option>
+                                        <option value="23:00:00.0000000">23:00</option>
+
+                                    </select>
+                                </div>
+                                <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
+                                    ~
+                                </P>
+                                <div class="col-6  col-xl-2 mb-4">
+                                    <label for="StateThuE" class="form-label  mt-xl-1 "></label>
+                                    <select id="StateThuE" name="Endtime" class="form-select fs16 MonselectR "
+                                            aria-label="Default select example" >
+                                        <option  id="EndTimeoptionThu" value=" ">選擇營業時間 </option>
+                                        <option value="06:00:00.0000000">06:00</option>
+                                        <option value="07:00:00.0000000">07:00</option>
+                                        <option value="08:00:00.0000000">08:00</option>
+                                        <option value="09:00:00.0000000">06:00</option>
+                                        <option value="10:00:00.0000000">10:00</option>
+                                        <option value="11:00:00.0000000">11:00</option>
+                                        <option value="12:00:00.0000000">12:00</option>
+                                        <option value="13:00:00.0000000">13:00</option>
+                                        <option value="14:00:00.0000000">14:00</option>
+                                        <option value="15:00:00.0000000">15:00</option>
+                                        <option value="16:00:00.0000000">16:00</option>
+                                        <option value="17:00:00.0000000">17:00</option>
+                                        <option value="18:00:00.0000000">18:00</option>
+                                        <option value="19:00:00.0000000">19:00</option>
+                                        <option value="20:00:00.0000000">20:00</option>
+                                        <option value="21:00:00.0000000">21:00</option>
+                                        <option value="22:00:00.0000000">22:00</option>
+                                        <option value="23:00:00.0000000">23:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-4 border-bottom">
+                                <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                    <p class="mt-xl-3 fs16">星期五</p>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="OperatingDay" value="5"
+                                               id="FriOpen">
+                                        <label class="form-check-label" for="FriOpen">營業</label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                    <div class="form-check">
+                                        <input class="form-check-input" value="Y5" type="radio" name="Hours5"
+                                               id="FriAllDay" disabled>
+                                        <label class="form-check-label" for="FriAllDay">
+                                            全天(24hr)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Hours5"
+                                               id="FriHours" value="hr5" disabled>
+                                        <label class="form-check-label" for="FriHours">
+                                            小時
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2 mb-4">
+                                    <label for="StateFriS" class="form-label fs16 mt-xl-1 "></label>
+                                    <select id="StateFriS" name="StartTime" class="form-select fs16 "
+                                            aria-label="Default select example "  >
+                                        <option  id="StartTimeoptionFri" value=" ">選擇營業時間 </option>
+                                        <option value="06:00:00.0000000">06:00</option>
+                                        <option value="07:00:00.0000000">07:00</option>
+                                        <option value="08:00:00.0000000">08:00</option>
+                                        <option value="09:00:00.0000000">09:00</option>
+                                        <option value="10:00:00.0000000">10:00</option>
+                                        <option value="11:00:00.0000000">11:00</option>
+                                        <option value="12:00:00.0000000">12:00</option>
+                                        <option value="13:00:00.0000000">13:00</option>
+                                        <option value="14:00:00.0000000">14:00</option>
+                                        <option value="15:00:00.0000000">15:00</option>
+                                        <option value="16:00:00.0000000">16:00</option>
+                                        <option value="17:00:00.0000000">17:00</option>
+                                        <option value="18:00:00.0000000">18:00</option>
+                                        <option value="19:00:00.0000000">19:00</option>
+                                        <option value="20:00:00.0000000">20:00</option>
+                                        <option value="21:00:00.0000000">21:00</option>
+                                        <option value="22:00:00.0000000">22:00</option>
+                                        <option value="23:00:00.0000000">23:00</option>
+
+                                    </select>
+                                </div>
+                                <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
+                                    ~
+                                </P>
+                                <div class="col-6  col-xl-2 mb-4">
+                                    <label for="StateFriE" class="form-label  mt-xl-1 "></label>
+                                    <select id="StateFriE" name="Endtime" class="form-select fs16 MonselectR "
+                                            aria-label="Default select example" >
+                                        <option  id="EndTimeoptionFri" value=" ">選擇營業時間</option>
+                                        <option value="06:00:00.0000000">06:00</option>
+                                        <option value="07:00:00.0000000">07:00</option>
+                                        <option value="08:00:00.0000000">08:00</option>
+                                        <option value="09:00:00.0000000">06:00</option>
+                                        <option value="10:00:00.0000000">10:00</option>
+                                        <option value="11:00:00.0000000">11:00</option>
+                                        <option value="12:00:00.0000000">12:00</option>
+                                        <option value="13:00:00.0000000">13:00</option>
+                                        <option value="14:00:00.0000000">14:00</option>
+                                        <option value="15:00:00.0000000">15:00</option>
+                                        <option value="16:00:00.0000000">16:00</option>
+                                        <option value="17:00:00.0000000">17:00</option>
+                                        <option value="18:00:00.0000000">18:00</option>
+                                        <option value="19:00:00.0000000">19:00</option>
+                                        <option value="20:00:00.0000000">20:00</option>
+                                        <option value="21:00:00.0000000">21:00</option>
+                                        <option value="22:00:00.0000000">22:00</option>
+                                        <option value="23:00:00.0000000">23:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-4 border-bottom">
+                                <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                    <p class="mt-xl-3 fs16 ">星期六</p>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="OperatingDay" value="6"
+                                               id="SatOpen">
+                                        <label class="form-check-label" for="SatOpen">營業</label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                    <div class="form-check">
+                                        <input class="form-check-input" value="Y6" type="radio" name="Hours6"
+                                               id="SatAllDay" disabled>
+                                        <label class="form-check-label" for="SatAllDay">
+                                            全天(24hr)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="Hours6"
+                                               id="SatHours" value="hr6" disabled>
+                                        <label class="form-check-label" for="SatHours">
+                                            小時
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2 mb-4">
+                                    <label for="StateSatS" class="form-label fs16 mt-xl-1 "></label>
+                                    <select id="StateSatS" name="StartTime" class="form-select fs16 "
+                                            aria-label="Default select example " >
+                                        <option  id="StartTimeoptionSat" value=" ">選擇營業時間</option>
+                                        <option value="06:00:00.0000000">06:00</option>
+                                        <option value="07:00:00.0000000">07:00</option>
+                                        <option value="08:00:00.0000000">08:00</option>
+                                        <option value="09:00:00.0000000">09:00</option>
+                                        <option value="10:00:00.0000000">10:00</option>
+                                        <option value="11:00:00.0000000">11:00</option>
+                                        <option value="12:00:00.0000000">12:00</option>
+                                        <option value="13:00:00.0000000">13:00</option>
+                                        <option value="14:00:00.0000000">14:00</option>
+                                        <option value="15:00:00.0000000">15:00</option>
+                                        <option value="16:00:00.0000000">16:00</option>
+                                        <option value="17:00:00.0000000">17:00</option>
+                                        <option value="18:00:00.0000000">18:00</option>
+                                        <option value="19:00:00.0000000">19:00</option>
+                                        <option value="20:00:00.0000000">20:00</option>
+                                        <option value="21:00:00.0000000">21:00</option>
+                                        <option value="22:00:00.0000000">22:00</option>
+                                        <option value="23:00:00.0000000">23:00</option>
+
+                                    </select>
+                                </div>
+                                <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
+                                    ~
+                                </P>
+                                <div class="col-6  col-xl-2 mb-4">
+                                    <label for="StateSatE" class="form-label  mt-xl-1 "></label>
+                                    <select id="StateSatE" name="Endtime" class="form-select fs16"
+                                            aria-label="Default select example" >
+                                        <option  id="EndTimeoptionSat" value=" ">選擇營業時間</option>
+                                        <option value="06:00:00.0000000">06:00</option>
+                                        <option value="07:00:00.0000000">07:00</option>
+                                        <option value="08:00:00.0000000">08:00</option>
+                                        <option value="09:00:00.0000000">06:00</option>
+                                        <option value="10:00:00.0000000">10:00</option>
+                                        <option value="11:00:00.0000000">11:00</option>
+                                        <option value="12:00:00.0000000">12:00</option>
+                                        <option value="13:00:00.0000000">13:00</option>
+                                        <option value="14:00:00.0000000">14:00</option>
+                                        <option value="15:00:00.0000000">15:00</option>
+                                        <option value="16:00:00.0000000">16:00</option>
+                                        <option value="17:00:00.0000000">17:00</option>
+                                        <option value="18:00:00.0000000">18:00</option>
+                                        <option value="19:00:00.0000000">19:00</option>
+                                        <option value="20:00:00.0000000">20:00</option>
+                                        <option value="21:00:00.0000000">21:00</option>
+                                        <option value="22:00:00.0000000">22:00</option>
+                                        <option value="23:00:00.0000000">23:00</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-4 border-bottom">
+                                <div class="col-6 col-xl-1  mt-auto mb-auto">
+                                    <p class="mt-xl-3 fs16">星期日</p>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="OperatingDay" value="7"
+                                               id="SunOpen">
+                                        <label class="form-check-label" for="SunOpen">營業</label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto justify-content-between">
+                                    <div class="form-check">
+                                        <input class="form-check-input" value="Y7" type="radio" name="Hours7"
+                                               id="SunAllDay">
+                                        <label class="form-check-label" for="SunAllDay" disabled>
+                                            全天(24hr)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2  mt-auto mb-auto">
+                                    <div class="form-check">
+                                        <input class="form-check-input" value="hr7" type="radio" name="Hours7"
+                                               id="SunHours" disabled>
+                                        <label class="form-check-label" for="SunHours">
+                                            小時
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-xl-2 mb-4">
+                                    <label for="StateSunS" class="form-label fs16 mt-xl-1 "></label>
+                                    <select id="StateSunS" name="StartTime" class="form-select fs16 "
+                                            aria-label="Default select example " >
+                                        <option  id="StartTimeoptionSun" value=" ">選擇營業時間</option>
+                                        <option value="06:00:00.0000000">06:00</option>
+                                        <option value="07:00:00.0000000">07:00</option>
+                                        <option value="08:00:00.0000000">08:00</option>
+                                        <option value="09:00:00.0000000">09:00</option>
+                                        <option value="10:00:00.0000000">10:00</option>
+                                        <option value="11:00:00.0000000">11:00</option>
+                                        <option value="12:00:00.0000000">12:00</option>
+                                        <option value="13:00:00.0000000">13:00</option>
+                                        <option value="14:00:00.0000000">14:00</option>
+                                        <option value="15:00:00.0000000">15:00</option>
+                                        <option value="16:00:00.0000000">16:00</option>
+                                        <option value="17:00:00.0000000">17:00</option>
+                                        <option value="18:00:00.0000000">18:00</option>
+                                        <option value="19:00:00.0000000">19:00</option>
+                                        <option value="20:00:00.0000000">20:00</option>
+                                        <option value="21:00:00.0000000">21:00</option>
+                                        <option value="22:00:00.0000000">22:00</option>
+                                        <option value="23:00:00.0000000">23:00</option>
+
+                                    </select>
+                                </div>
+                                <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
+                                    ~
+                                </P>
+                                <div class="col-6  col-xl-2 mb-4">
+                                    <label for="StateSunE" class="form-label  mt-xl-1 "></label>
+                                    <select id="StateSunE" name="Endtime" class="form-select fs16 "
+                                            aria-label="Default select example" >
+                                        <option  id="EndTimeoptionSun" value=" ">選擇營業時間</option>
+                                        <option value="06:00:00.0000000">06:00</option>
+                                        <option value="07:00:00.0000000">07:00</option>
+                                        <option value="08:00:00.0000000">08:00</option>
+                                        <option value="09:00:00.0000000">06:00</option>
+                                        <option value="10:00:00.0000000">10:00</option>
+                                        <option value="11:00:00.0000000">11:00</option>
+                                        <option value="12:00:00.0000000">12:00</option>
+                                        <option value="13:00:00.0000000">13:00</option>
+                                        <option value="14:00:00.0000000">14:00</option>
+                                        <option value="15:00:00.0000000">15:00</option>
+                                        <option value="16:00:00.0000000">16:00</option>
+                                        <option value="17:00:00.0000000">17:00</option>
+                                        <option value="18:00:00.0000000">18:00</option>
+                                        <option value="19:00:00.0000000">19:00</option>
+                                        <option value="20:00:00.0000000">20:00</option>
+                                        <option value="21:00:00.0000000">21:00</option>
+                                        <option value="22:00:00.0000000">22:00</option>
+                                        <option value="23:00:00.0000000">23:00</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="row mt-5">
                                 <div class="col-12">
                                     <h5>定價</h5>
@@ -531,7 +1027,7 @@
                                             <label for="exampleFormControlTextarea1" class="form-label"></label>
                                             <textarea name="OtherAmenity" class="form-control"
                                                       id="exampleFormControlTextarea1" rows="3">
-
+                                                @other.Select(x => x.OtherAmenitys).FirstOrDefault()
                                          </textarea>
                                         </div>
                                     </div>
@@ -1032,17 +1528,11 @@
             </div>
         </div>
     </div>
-    <p id="mySpaceId" name="SpaceID" class="d-none">@adds.Select(x=>x.SpaceID).FirstOrDefault()</p>
+   
+    <p id="mySpaceId" name="SpaceID" class="d-none">@adds.Select(x => x.SpaceID).FirstOrDefault()</p>
 
 
 }
-
-
-
-
-
-
-
 @*</form>*@
 
 @section topCSS
@@ -1054,8 +1544,12 @@
     <link href="~/Assets/CSS/hostCenter/style.css" rel="stylesheet" />
 
 }
+
 @section endJS{
     @*google map api*@
+    <script>
+        let datlist =@Html.Raw(test);
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWRDj0MF4QflzrSsWSw31qVzAvixwdk3w" type="text/javascript"></script>
     <script src="~/Assets/JS/addspace/Latitude_and_Longitude.js"></script>
@@ -1079,7 +1573,6 @@
     <!-- 自己的 -->
     <script src="~/Assets/JS/addspace/main.js"></script>
 }
-
 
 
 
