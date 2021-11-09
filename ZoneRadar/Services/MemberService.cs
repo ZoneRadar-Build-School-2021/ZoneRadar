@@ -631,8 +631,7 @@ namespace ZoneRadar.Services
                 };
                 //找出會員是否有租借場地並且顯示 出被場地主的評價
                 var review = _repository.GetAll<Review>().Where(x => x.ToHost == false && x.Order.MemberID == u.MemberID && x.Order.OrderStatusID == 4);
-
-                foreach (var r in review) 
+                foreach (var r in review.ToList()) 
                 {
                     resulthostinfoReview.ToUserReview.Add(new UserReview {
                             SpaceId = r.Order.SpaceID,
@@ -641,6 +640,7 @@ namespace ZoneRadar.Services
                             Address = r.Order.Space.Address,
                             PricePerHour = r.Order.Space.PricePerHour,
                             ReviewDate = r.ReviewDate,
+                            Score = r.Score,
                             ReviewContent = r.ReviewContent,
                             ReviewCount = r.ReviewContent.Count(),
                             Recommend  = r.Recommend,
@@ -650,7 +650,6 @@ namespace ZoneRadar.Services
                         });
                     
                 }
-                
                 return resulthostinfoReview;
             }
         }

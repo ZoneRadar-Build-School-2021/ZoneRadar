@@ -45,16 +45,16 @@ namespace ZoneRadar.Controllers
         //}
 
 
-        [Route("api/historyapi/SearchHistoryList")]
-        [HttpPost]
-        public IHttpActionResult SearchHistoryList(HostCenterHistoryViewModel model)
-        {
-            var a = model.SpaceName;
-            var b = model.UserName;
-            var c = model.SearchDateTime;
+        //[Route("api/historyapi/SearchHistoryList")]
+        //[HttpPost]
+        //public IHttpActionResult SearchHistoryList(HostCenterHistoryViewModel model)
+        //{
+        //    var a = model.SpaceName;
+        //    var b = model.UserName;
+        //    var c = model.SearchDateTime;
             
 
-            return Ok("1|OK");
-        }
+        //    return Ok("1|OK");
+        //}
     }
 }

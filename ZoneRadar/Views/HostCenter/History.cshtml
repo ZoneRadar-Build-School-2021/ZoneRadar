@@ -17,45 +17,54 @@
         </ul>
     </div>
     <div class="main mt-2">
-        <div class="search-orders container border-top">
-            <div class="row mt-3">
-                <div class="col-12 d-lg-none">
-                    <button class="btn w-100" data-bs-toggle="modal" data-bs-target="#search-modal">
-                        <i class="fas fa-search me-2"></i>搜尋訂單
-                    </button>
-                </div>
-                <div class="col-lg-3 d-none d-lg-block">
-                    <input type="text" class="form-control text-center" placeholder="輸入場地名稱" id="space-name">
-                </div>
-                <div class="col-lg-3 d-none d-lg-block">
-                    <input type="text" class="form-control text-center" placeholder="輸入活動主" id="member-name">
-                </div>
-                <div class="col-lg-3 col-date d-none d-lg-block ">
-                    <input type="text" class="choose-date form-control text-center" id="basicDate_rent" placeholder="選擇時間"
-                           data-input>
-                </div>
-                <div class="col-lg-3 col-btn d-none d-lg-block">
-                    <button class="search-orders-btn btn w-100"><i class="fas fa-search"></i></button>
+        <form action="~/HostCenter/History" method="post">
+
+            <div class="search-orders container border-top">
+                <div class="row mt-3">
+                    @* Submit *@
+
+                    <div class="col-12 d-lg-none">
+
+                        <button class="btn w-100" data-bs-toggle="modal" data-bs-target="#search-modal">
+                            <i class="fas fa-search me-2"></i>搜尋訂單
+                        </button>
+                    </div>
+                    <div class="col-lg-3 d-none d-lg-block">
+                        <input type="text" class="form-control text-center" placeholder="輸入場地名稱" id="space-name"  name="SpaceName">
+                    </div>
+                    <div class="col-lg-3 d-none d-lg-block">
+                        <input type="text" class="form-control text-center" placeholder="輸入活動主" id="member-name" name="UserName">
+                    </div>
+                    <div class="col-lg-3 col-date d-none d-lg-block ">
+                        <input type="text" class="choose-date form-control text-center" id="basicDate_rent" placeholder="選擇時間"
+                               data-input name="SearchDateTime">
+                    </div>
+                    <div class="col-lg-3 col-btn d-none d-lg-block">
+                        <button class="search-orders-btn btn w-100" id="search-date"><i class="fas fa-search"></i></button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
+        @*  *@
 
         <div class="modal fade" id="search-modal" tabindex="-1" aria-labelledby="search-modalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="/api/historyapi/SearchHistoryList" method="post">
+                    @* Submit *@
+                    <form action="~/HostCenter/History" method="post" >
                         <div class="modal-header">
                             <h5 class="modal-title">搜尋訂單</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <input type="text" class="form-control w-100 mb-2" placeholder="輸入場地名稱" id="space-name" name="SpaceName">
-                            <input type="text" class="form-control w-100 mb-2" placeholder="輸入活動主" id="member-name"  name="UserName">
+                            <input type="text" class="form-control w-100 mb-2" placeholder="輸入活動主" id="member-name" name="UserName">
                             <input type="text" class="choose-date form-control mb-2" id="basicDate_rent"
                                    placeholder="選擇時間" data-input name="SearchDateTime">
-                            <button class="search-orders-btn btn w-100"><i class="fas fa-search"></i></button>
+                            <button class="search-orders-btn btn w-100" id="search-date"><i class="fas fa-search"></i></button>
                         </div>
                     </form>
+                    @*  *@
                 </div>
             </div>
         </div>
@@ -214,3 +223,9 @@
 @section endJS{
     <script src="~/Assets/JS/hostSellerCompleted/SellerOrderCompleted.js"></script>
 }
+
+<script>
+    let submit = document.querySelector("#search-date");
+    submit.addEventListener("click",)
+    
+</script>
