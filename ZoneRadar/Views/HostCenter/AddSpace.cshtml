@@ -7,7 +7,6 @@
     var cancellations = Model.cancellationAraesList;
     var amenityAraeOne = Model.amenityAraeOneList;
     var amenityAraeTwo = Model.amenityAraeTwoList;
-    var amenityAraeThree = Model.amenityAraeThreeList;
     var cleaningOne = Model.CleanFisrtPartList;
     var cleaningTwo = Model.CleanSecPartList;
     var cleaningThree = Model.CleanThirdPartList;
@@ -360,7 +359,7 @@
                                     </div>
 
                                     <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
-                                        to
+                                        ~
                                     </P>
 
                                     <div class="d-xl-block col-5 col-xl-2 mb-4">
@@ -419,7 +418,7 @@
                                     </div>
 
                                     <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
-                                        to
+                                        ~
                                     </P>
 
                                     <div class="d-xl-block col-5 col-xl-2 mb-4">
@@ -477,7 +476,7 @@
                                     </div>
 
                                     <P class="col-2 mt-auto fs16 d-none col-xl-1 d-xl-block  mb-auto text-center text-start">
-                                        to
+                                        ~
                                     </P>
 
                                     <div class="d-xl-block col-5 col-xl-2 mb-4">
@@ -535,7 +534,7 @@
                                     </div>
 
                                     <P class="col-2 mt-auto d-none fs16 col-xl-1 d-xl-block  mb-auto text-center text-start">
-                                        to
+                                        ~
                                     </P>
 
                                     <div class="d-xl-block col-5 col-xl-2 mb-4">
@@ -593,7 +592,7 @@
                                     </div>
 
                                     <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
-                                        to
+                                        ~
                                     </P>
 
                                     <div class="d-xl-block col-5 col-xl-2 mb-4">
@@ -651,7 +650,7 @@
                                     </div>
 
                                     <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
-                                        to
+                                        ~
                                     </P>
 
                                     <div class="d-xl-block col-5 col-xl-2 mb-4">
@@ -737,7 +736,7 @@
                                             <label for="exampleFormControlTextarea1" class="form-label"></label>
                                             <textarea name="OtherAmenity" class="form-control"
                                                       id="exampleFormControlTextarea1" rows="3">
-
+                                                
                                             </textarea>
                                         </div>
                                     </div>
@@ -785,7 +784,7 @@
                                                     <img class=" addphoto " src="mebercenter-img/addphoto.png" alt=""> </div>*@
                                             </div>
                                             <!-- 隱藏檔案上傳的input -->
-                                            <input type="file" name="SpacePhotoUrl" id="image-input" multiple accept="image/*" style="display:none">
+                                            <input type="file" id="image-input" multiple accept="image/*" style="display:none">
 
                                             <!-- 上傳照片縮圖區 -->
                                             <div id="preview-zone" class="w-100 d-flex flex-wrap mt-4 p-3"></div>
@@ -1100,7 +1099,7 @@
                                 {
                                     <div class="row">
                                         <div class="form-check col-12 col-lg-2">
-                                            <input class="form-check-input" value="@cancel.CancellationId" required type="radio" name="CancellationID"
+                                            <input class="form-check-input" value="@cancel.CancellationId" type="radio" name="CancellationID"
                                                    id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 @cancel.CancellationTitle
@@ -1147,7 +1146,16 @@
     </div>
     @*<input type="hidden" value="@spaceId" id="mySpaceId">*@
     <p id="mySpaceId" name="SpaceID" class="d-none">@spaceId</p>
-
+    <input type="hidden"  class="imgUrl"  value=""/>
+    <input type="hidden"  class="imgUrl"  value=""/>
+    <input type="hidden"  class="imgUrl"  value=""/>
+    <input type="hidden"  class="imgUrl"  value=""/>
+    <input type="hidden"  class="imgUrl"  value=""/>
+    <input type="hidden"  class="imgUrl"  value=""/>
+    <input type="hidden"  class="imgUrl"  value=""/>
+    <input type="hidden"  class="imgUrl"  value=""/>
+    <input type="hidden"  class="imgUrl"  value=""/>
+    <input type="hidden"  class="imgUrl"  value=""/>
 
 }
 

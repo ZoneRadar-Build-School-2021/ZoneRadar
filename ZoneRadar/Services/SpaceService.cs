@@ -333,7 +333,7 @@ namespace ZoneRadar.Services
             {
                 SpaceID = x.SpaceID,
                 SpaceName = x.SpaceName,
-                SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).Select(y => y.SpacePhotoUrl).ToList(),
+                SpaceImageURLList = x.SpacePhoto.Where(y => y.SpaceID == x.SpaceID).OrderBy(y => y.Sort).Select(y => y.SpacePhotoUrl).ToList(),
                 Address = x.Address,
                 Capacity = x.Capacity,
                 PricePerHour = x.PricePerHour,
@@ -411,24 +411,7 @@ namespace ZoneRadar.Services
         /// </summary>
         /// 第三類
         /// 其他
-        public SpaceViewModel ShowAmenityByIdThree()
-        {
-            var result = new SpaceViewModel()
-            {
-                amenityAraeThreeList = new List<AmenityAraeThree>(),
-            };
-            var amenityThrees = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 3).Select(x => x).ToList();
-            foreach (var amenityThree in amenityThrees)
-            {
-                var amenityThreeTemp = new AmenityAraeThree()
-                {
-                    AmenityId = amenityThree.AmenityDetailID,
-                    AmenityName = amenityThree.Amenity
-                };
-                result.amenityAraeThreeList.Add(amenityThreeTemp);
-            }
-            return result;
-        }
+       
 
 
         /// <summary>
@@ -628,7 +611,6 @@ namespace ZoneRadar.Services
 
                 amenityAraeOneList = new List<AmenityAraeOne>(),
                 amenityAraeTwoList = new List<AmenityAraeTwo>(),
-                amenityAraeThreeList = new List<AmenityAraeThree>(),
                 SomeOnesAmenityList = new List<SomeOnesAmenity>(),
                 SomeTwoAmenityList = new List<SomeOnesAmenity>(),
                 SomeThreeAmenityList = new List<SomeOnesAmenity>(),
@@ -648,7 +630,7 @@ namespace ZoneRadar.Services
                 SomeOnesCleanRuleFourList = new List<SomeOnesCleanRule>(),
                 SpaceoperatingDaysList = new List<SpaceoperatingDay>(),
                 SpaceOwnerNameList = new List<SomeOnesSpaceName>(),
-                Operating = new List<SelectListItem>()
+                Operating = new List<SelectListItem>(),
             };
           
         //找 地址( Amber) 
@@ -661,6 +643,7 @@ namespace ZoneRadar.Services
                     DistrictID = add.DistrictID,
                     Country = add.Country,
                     SpaceID = add.SpaceID,
+                    OtherAmenitys=add.OtherAmenity,
                 };
                 result.SomeOnesSpaceList.Add(addsTemp);
             }
@@ -702,10 +685,11 @@ namespace ZoneRadar.Services
                 result.SomeOnesCitytList.Add(ciytTemp);
             };
 
+        
             //活動類型 把活動類別用戶有選的撈出來(Amber)
 
 
-            List<SpaceType> spacetypes = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == spaceId).ToList();
+            List <SpaceType> spacetypes = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == spaceId).ToList();
             foreach (var item in spacetypes)
             {
                 SomeOnesTypeDetail someOnesTypeDetail = new SomeOnesTypeDetail();
@@ -872,18 +856,7 @@ namespace ZoneRadar.Services
                 };
                 result.amenityAraeTwoList.Add(temp);
             }
-            /// <summary>
-            /// 其他場地空間選項 (Amber)
-            /// </summary>
-            var AmenityOptionThree = _repository.GetAll<AmenityDetail>().Where(x => x.AmenityCategoryID == 3).ToList();
-            foreach (var item in AmenityOptionThree)
-            {
-                var temp = new AmenityAraeThree()
-                {
-                    AmenityName = item.Amenity,
-                };
-                result.amenityAraeThreeList.Add(temp);
-            }
+      
             /// <summary>
             /// 場地條款( Amber )
             /// </summary>
@@ -1286,13 +1259,14 @@ namespace ZoneRadar.Services
                 Latitude = addSpaceViewModel.Lat,
                 Longitude = addSpaceViewModel.Lng,
                 SpaceStatusID = 2,
+                OtherAmenity=addSpaceViewModel.OtherAmenity,
 
             };
 
             _repository.Create<Space>(space);
             _repository.SaveChanges();
 
-           var spaceid = _repository.GetAll<Space>().Max(x => x.SpaceID);
+            var spaceid = _repository.GetAll<Space>().Where(x => x.SpaceName== addSpaceViewModel.SpaceName).Select(x => x.SpaceID).FirstOrDefault();
             var spaceDiscount=new SpaceDiscount
             {
                 SpaceID = spaceid,
@@ -1300,24 +1274,18 @@ namespace ZoneRadar.Services
                 Discount=1m-((addSpaceViewModel.Discount)/10.00m),
             };
             List<SpacePhoto> imgs = new List<SpacePhoto>();
+            var y = 1;
             foreach (var item in addSpaceViewModel.SpacePhotoUrl)
             {
-                var i = 1;
-                //imgs.Add(new SpacePhoto { SpaceID = spaceid, SpacePhotoUrl = item });
                 imgs.Add(new SpacePhoto
                 {
                     SpaceID = spaceid,
                     SpacePhotoUrl = item,
-                    Sort = i
+                    Sort = y
                 });
-                i++;
+                y++;
             }
 
-            //List<Operating> operating = new List<Operating>();
-            //foreach (var item in addS6paceViewModel.OperatingDay)
-            //{
-            //    operating.Add(new Operating { SpaceID = spaceid, OperatingDay = item});
-            //}
 
             List<SpaceType> type = new List<SpaceType>();
             foreach (var item in addSpaceViewModel.TypeDetailID)
@@ -1408,6 +1376,7 @@ namespace ZoneRadar.Services
             spaceUpdate.PublishTime = _repository.GetAll<Space>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID).Select(x => x.PublishTime).FirstOrDefault();
             spaceUpdate.Latitude = addSpaceViewModel.Lat;
             spaceUpdate.Longitude = addSpaceViewModel.Lng;
+            spaceUpdate.OtherAmenity = addSpaceViewModel.OtherAmenity;
 
             _repository.Update<Space>(spaceUpdate);
             _repository.SaveChanges();
@@ -1678,22 +1647,7 @@ namespace ZoneRadar.Services
                 return sweetAlert;
             }
         }
-        /// <summary>
-        //新增場地的照片
-        /// </summary>
-        /// <returns></returns>
-        //public SpacePhotoViewModel CreateSpacePhotoFromDB()
-        //{
-
-        //    var result = new SpacePhotoViewModel()
-        //    {
-        //        Name = "dt6vz3pav",
-        //        Preset = "c3caow1j",
-        //        PhotoUrlList = urlList.ToList(),
-        //    };
-
-        //    return result;
-        //}
+  
 
         /// <summary>
         /// 取得該編輯場地的照片

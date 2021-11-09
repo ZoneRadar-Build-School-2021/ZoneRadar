@@ -47,7 +47,6 @@ namespace ZoneRadar.Controllers
 
                     amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
                     amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
-                    amenityAraeThreeList = _spaceService.ShowAmenityByIdThree().amenityAraeThreeList,
 
                     CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
                     CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,

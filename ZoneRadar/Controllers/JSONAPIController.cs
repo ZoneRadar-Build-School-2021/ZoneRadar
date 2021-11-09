@@ -341,6 +341,7 @@ namespace ZoneRadar.Controllers
                 response.Response = _spaceService.GetSpacePhotoFromDB(id);
 
                 return response;
+
             }
             catch (Exception ex)
             {
