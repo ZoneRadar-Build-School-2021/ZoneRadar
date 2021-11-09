@@ -356,7 +356,7 @@ namespace ZoneRadar.Services
             catch (Exception ex)
             {
                 //未處理
-                //throw ex;
+                throw ex;
             }
             finally
             {
