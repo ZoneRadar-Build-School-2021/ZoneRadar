@@ -28,14 +28,13 @@ namespace ZoneRadar.Controllers
         {
             if (!id.HasValue)
             {
-                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                return RedirectToAction("BadRequest", "Home");
+                return RedirectToAction("NotFound404", "Home");
             }
 
             var targetSpace = _spaceService.GetSpaceByID(id);
             if (targetSpace == null)
             {
-                return new HttpNotFoundResult();
+                return RedirectToAction("BadRequest", "Home"); ;
             }
 
             var model = new BookingPageViewModel

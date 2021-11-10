@@ -283,7 +283,7 @@ namespace ZoneRadar.Controllers
 
             if (userid == 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("BadRequest", "Home"); ;
             }
             var model = _orderService.GetHostCenterHistoryVM(userid);
 
