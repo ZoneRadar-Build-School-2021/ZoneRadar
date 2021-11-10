@@ -28,8 +28,6 @@
     <link href="~/Assets/CSS/layout/navbar-footer.css" rel="stylesheet" />
     @RenderSection("topCSS", required: false)
     @RenderSection("topJS", required: false)
-
-    <script src="~/Scripts/vue.js"></script>
 </head>
 <body>
     <!-- navbar -->
@@ -305,9 +303,8 @@
         let customer_only = document.querySelectorAll(".customer-only");
         let member_only = document.querySelectorAll(".member-only");
         let alerting = @Json.Encode(alert);
-        //使用者按上一頁時，強制將alert改為false
         window.onpopstate = (event) => {
-            alerting = false;
+            location.reload();
         }
         if (@Json.Encode(isAuthenticated)) {
             member_only.forEach(item => {

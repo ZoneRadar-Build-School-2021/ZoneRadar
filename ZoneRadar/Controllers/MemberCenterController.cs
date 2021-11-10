@@ -306,13 +306,10 @@ namespace ZoneRadar.Controllers
                 //讓使用者登入，呈現登入後的畫面
                 var encryptedTicket = _service.CreateEncryptedTicket(memberResult.User);
                 _service.CreateCookie(encryptedTicket, Response);
-                //導回原本的畫面
-                var originalUrl = _service.GetOriginalUrl(memberResult.User.MemberID.ToString());
 
                 TempData["Alert"] = true;
                 TempData["Message"] = memberResult.ShowMessage;
                 TempData["Icon"] = memberResult.IsSuccessful;
-                return Redirect(originalUrl);
             }
             else
             {
@@ -320,8 +317,8 @@ namespace ZoneRadar.Controllers
                 TempData["Alert"] = true;
                 TempData["Message"] = memberResult.ShowMessage;
                 TempData["Icon"] = memberResult.IsSuccessful;
-                return RedirectToAction("Index", "Home");
             }
+            return RedirectToAction("Index", "Home");
         }
 
         /// <summary>
