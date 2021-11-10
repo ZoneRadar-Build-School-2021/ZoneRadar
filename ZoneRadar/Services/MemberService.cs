@@ -125,7 +125,7 @@ namespace ZoneRadar.Services
         {
             //寄件人資訊
             string ZONERadarAccount = "zoneradar2021@gmail.com";
-            string ZONERadarPassword = "@Bs202106";
+            string ZONERadarPassword = "aqfawvgueskwtdqd";
 
             //產生能寄信的SmtpClient執行個體
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
