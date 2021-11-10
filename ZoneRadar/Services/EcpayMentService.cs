@@ -39,8 +39,8 @@ namespace ZoneRadar.Services
             oPayment.Send.ReturnURL = Url + "/api/EcpayAPI/GetEcpayData";//付款完成通知回傳的網址
             oPayment.Send.ClientBackURL = Url +"/UserCenter/Pending";//瀏覽器端返回的廠商網址
             oPayment.Send.OrderResultURL = "";//"http://localhost:53045/webapi/spaces/api/JSONAPI/GetEcpay";//瀏覽器端回傳付款結果網址
-            oPayment.Send.MerchantTradeNo = "ZoneRadar" + new Random().Next(0, 9).ToString() + DateTime.Now.ToString("yyMMddHHmm");//廠商的交易編號
-            oPayment.Send.MerchantTradeDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");//廠商的交易時間。
+            oPayment.Send.MerchantTradeNo = "ZoneRadar" + new Random().Next(0, 9).ToString() + DateTime.UtcNow.AddHours(8).ToString("yyMMddHHmm");//廠商的交易編號
+            oPayment.Send.MerchantTradeDate = DateTime.UtcNow.AddHours(8).ToString("yyyy/MM/dd HH:mm:ss");//廠商的交易時間。
             oPayment.Send.TotalAmount = model.TotalMoney;//交易總金額
             oPayment.Send.TradeDesc = "交易描述";//交易描述
             oPayment.Send.ChoosePayment = PaymentMethod.Credit;//使用的付款方式
@@ -89,7 +89,7 @@ namespace ZoneRadar.Services
             {
                 order.PaymentDate = DateTime.Parse(model.PaymentDate);
                 order.OrderStatusID = (int)Enums.Enums.OrderStatusID.OrderStatusIDforWating;
-                order.OrderNumber = int.Parse(DateTime.Now.ToString("yyMMddhhmm"));
+                order.OrderNumber = int.Parse(DateTime.UtcNow.AddHours(8).ToString("yyMMddhhmm"));
                 order.ContactName = model.CustomField2;
                 order.ContactPhone = model.CustomField3;
                 try
