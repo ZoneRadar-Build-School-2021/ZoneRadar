@@ -1561,7 +1561,7 @@ namespace ZoneRadar.Services
                 foreach (var order in space.Order)
                 {
                     //計算場地近30天的被預訂次數
-                    var details = order.OrderDetail.Where(x => x.StartDateTime.Date.AddDays(30) >= DateTime.Now.Date);
+                    var details = order.OrderDetail.Where(x => x.StartDateTime.Date.AddDays(30) >= DateTime.UtcNow.AddHours(8).Date);
                     orderDetails.AddRange(details);
 
                     //找出最後被預定日期並加一天
