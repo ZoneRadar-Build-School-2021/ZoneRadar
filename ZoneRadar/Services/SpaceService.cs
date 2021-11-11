@@ -1391,12 +1391,7 @@ namespace ZoneRadar.Services
             _repository.Update<SpaceDiscount>(SpaceDiscountID);
             _repository.SaveChanges();
 
-            //var imgUpdate = _repository.GetAll<SpacePhoto>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID&& x.Sort==2).FirstOrDefault();
-            //if (imgUpdate!=null)
-            //{
-            //    _repository.Delete<SpacePhoto>(imgUpdate);
-            //    _repository.SaveChanges();
-            //}
+           
 
 
             var typeOld = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID).ToList();
@@ -1406,7 +1401,7 @@ namespace ZoneRadar.Services
                 _repository.Delete<SpaceType>(item);
                 _repository.SaveChanges();
             }
-            //todo
+           
 
             List<SpaceType> type = new List<SpaceType>();
             foreach (var item in addSpaceViewModel.TypeDetailID)
@@ -1417,12 +1412,7 @@ namespace ZoneRadar.Services
             _repository.CreateRange<SpaceType>(type);
             _repository.SaveChanges();
 
-            //var cleaningProtocolOld = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID).ToList();
-            //foreach (var item in cleaningProtocolOld)
-            //{
-            //    _repository.Delete<CleaningProtocol>(item);
-            //    _repository.SaveChanges();
-            //}
+           
             var cleaningProtocolOld = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID).ToList();
             foreach (var item in cleaningProtocolOld)
             {

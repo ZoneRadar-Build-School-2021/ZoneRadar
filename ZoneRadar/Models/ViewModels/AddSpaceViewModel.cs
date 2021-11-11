@@ -19,7 +19,7 @@ namespace ZoneRadar.Models.ViewModels
         [Required]
         public int DistrictID { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "請填寫地址")]
         public string Address { get; set; }
         public int MemberID { get; set; }
         public string SpaceName { get; set; }

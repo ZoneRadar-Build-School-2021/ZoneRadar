@@ -1,8 +1,4 @@
-﻿/*/*const { checked } = require("modernizr");*/
-
-/*const { forEach } = require("angular");*/
-
-//停車場的 是否
+﻿//停車場的 是否
 var yesflag = 1;
 var parkingPart = document.querySelector("#parkingPart");
 let flexSwitchCheckDefaultYes = document.querySelector("#flexSwitchCheckDefaultYes");
