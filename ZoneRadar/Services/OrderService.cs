@@ -89,7 +89,8 @@ namespace ZoneRadar.Services
                     RentDetail = resultDetail
                 });
             }
-            return result;
+            var resultorder = result.OrderByDescending(x => x.PaidTime).ToList();
+            return resultorder;
         }
         /// <summary>
         /// 找出使用者(ID)的使用中資料(Nick)
@@ -138,7 +139,8 @@ namespace ZoneRadar.Services
                     RentDetail = resultDetail
                 });
             }
-            return result;
+            var resultorder = result.OrderByDescending(x => x.PaidTime).ToList();
+            return resultorder;
         }
         /// <summary>
         /// 找出使用者(ID)的已完成資料(Nick)
@@ -203,7 +205,8 @@ namespace ZoneRadar.Services
                     HasReview = hasReview,
                 });
             }
-            return result;
+            var resultorder = result.OrderByDescending(x => x.PaidTime).ToList();
+            return resultorder;
         }
         /// <summary>
         /// 刪除已付款的訂單(Nick)
