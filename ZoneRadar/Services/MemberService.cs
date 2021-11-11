@@ -673,7 +673,8 @@ namespace ZoneRadar.Services
                             Recommend  = r.Recommend,
                             SpaceMemberPhoto = r.Order.Space.Member.Photo,
                             Name = r.Order.Space.Member.Name,
-                            Id = r.Order.Space.MemberID
+                            Id = r.Order.Space.MemberID,
+                            Score = r.Score
                         });
                     
                 }
