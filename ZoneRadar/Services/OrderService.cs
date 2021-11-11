@@ -74,7 +74,7 @@ namespace ZoneRadar.Services
                     OwnerName = order.Space.Member.Name,
                     OwnerPhone = order.Space.Member.Phone,
                     //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
-                    Score = score,
+                    Score = Average(order.Space.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Count()).Sum(), order.Space.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Sum()).Sum()),
                     TotalMoney = resultDetail.Select(x => x.Money).Sum(),
                     Email = order.Member.Email,
                     OrderId = order.OrderID,
@@ -131,7 +131,7 @@ namespace ZoneRadar.Services
                     OwnerName = order.Space.Member.Name,
                     OwnerPhone = order.Space.Member.Phone,
                     //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
-                    Score = score,
+                    Score = Average(order.Space.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Count()).Sum(), order.Space.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Sum()).Sum()),
                     TotalMoney = resultDetail.Select(x => x.Money).Sum(),
                     Email = order.Member.Email,
                     OrderId = order.OrderID,
@@ -194,7 +194,7 @@ namespace ZoneRadar.Services
                     OwnerName = order.Space.Member.Name,
                     OwnerPhone = order.Space.Member.Phone,
                     //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
-                    Score =score,
+                    Score = Average(order.Space.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Count()).Sum(), order.Space.Order.Select(x => x.Review.Where(z => z.ToHost == true).Select(y => y.Score).Sum()).Sum()),
                     TotalMoney = resultDetail.Select(x => x.Money).Sum(),
                     Email = order.Member.Email,
                     OrderId = order.OrderID,
@@ -454,7 +454,25 @@ namespace ZoneRadar.Services
             }
             return result;
         }
-
+        /// <summary>
+        /// 平均分數
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="score"></param>
+        /// <returns></returns>
+        private static double Average(int count, int score)
+        {
+            double result = 0;
+            if (count == 0 || score == 0)
+            {
+                result = 0;
+            }
+            else
+            {
+                result = score / count;
+            }
+            return result;
+        }
         /// <summary>
         /// 搜尋方法
         /// </summary>
