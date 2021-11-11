@@ -117,6 +117,10 @@
     searchingBar.addEventListener('change', function () {
       filter.Keywords = this.value;
     })
+    searchingBarBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      requestForSpaces(filter);
+    })
     // 按Enter搜尋
     window.addEventListener('keyup', function (e) {
       if (e.key !== 'Enter') return;
@@ -347,6 +351,7 @@
     filter.HighPrice = '';
     filter.LowPrice = '';
     filter.Attendees = '';
+    filter.Type = '';
     filter.Area = '';
     filter.Amenities.length = 0;
 
@@ -388,11 +393,11 @@
     cardListNode.innerHTML = '';
     setPlaceholder();
     setTimeout(() => {
-      removePlaceholder();
       axios.post('/webapi/spaces/GetFilteredSpaces', filter)
         .then(res => {
+          removePlaceholder();
           let spaceList = res.data.Response;
-          if (spaceList.length === 0) {
+          if (!spaceList.length) {
             showNoResult();
           } else {
             renderSpaceCards(spaceList);
