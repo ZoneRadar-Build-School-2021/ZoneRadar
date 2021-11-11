@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "BookingPage";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var reviews = Model.Reviews.OrderBy(x => x.ReviewDate);
+    var reviews = Model.Reviews;
     var briefs = Model.SpaceBreifInfo;
     var details = Model.SpaceDetailInfo;
     float total = 0;
@@ -320,7 +320,7 @@
                                 <div class="review-content mb-3">
                                     <p>@review.ReviewContent</p>
                                 </div>
-                                <p class="review-time pb-3 border-bottom">@review.ReviewDate</p>
+                                <p class="review-time pb-3 border-bottom">@review.ReviewDate.ToString("yyyy/MM/dd")</p>
                             </div>
                         </div>
                     }

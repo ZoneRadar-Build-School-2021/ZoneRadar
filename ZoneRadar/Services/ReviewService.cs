@@ -52,7 +52,7 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public List<SpaceReviewViewModel> GetTargetSpaceReviews(Space targetSpace)
         {
-            var reviewList = _repository.GetAll<Review>().Where(x => x.ToHost == true && x.Order.SpaceID == targetSpace.SpaceID).Select(x => x).ToList();
+            var reviewList = _repository.GetAll<Review>().Where(x => x.ToHost == true && x.Order.SpaceID == targetSpace.SpaceID).OrderByDescending(x => x.ReviewDate).ToList();
 
             var spaceReviewList = new List<SpaceReviewViewModel>();
 
