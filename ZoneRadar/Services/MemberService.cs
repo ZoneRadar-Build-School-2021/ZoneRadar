@@ -668,7 +668,7 @@ namespace ZoneRadar.Services
             var result = new ProfileViewModel()
             {
                 MemberID = p.MemberID,
-                //Photo = p.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : p.Photo,
+                Photo = p.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : p.Photo,
                 Name = p.Name,
                 Phone = p.Phone,
                 Email = p.Email,
@@ -687,15 +687,15 @@ namespace ZoneRadar.Services
         public ProfileViewModel EditProfileData(ProfileViewModel edit)
         {
             //抓取 --> 編輯資料
-            var p = _repository.GetAll<Member>().First(x => x.MemberID == edit.MemberID);
-            //p.Photo = edit.Photo;
-            p.Name = edit.Name;
-            p.Phone = edit.Phone;
-            p.Description = edit.Description;
-            p.ReceiveEDM = edit.ReceiveEDM;
+            var o = _repository.GetAll<Member>().First(x => x.MemberID == edit.MemberID);
+            o.Photo = edit.Photo;
+            o.Name = edit.Name;
+            o.Phone = edit.Phone;
+            o.Description = edit.Description;
+            o.ReceiveEDM = edit.ReceiveEDM;
 
             //更新
-            _repository.Update(p);
+            _repository.Update(o);
             _repository.SaveChanges();
             _repository.Dispose();
 
@@ -723,26 +723,36 @@ namespace ZoneRadar.Services
         /// <summary>
         /// 儲存照片至資料庫
         /// </summary>
-        /// <param name=""></param>
+        /// <param name="SaveProfileImgVM"></param>
         public void ReflashProfilePhotoFromDB(SaveProfileImgViewModel SaveProfileImgVM)
         {
-            var memberID = SaveProfileImgVM.MemberID;
-            var url = SaveProfileImgVM.ProfileImgUrl;
+            var profileimg = _repository.GetAll<Member>().First(x => x.MemberID == SaveProfileImgVM.MemberID);
+            var imgurl = SaveProfileImgVM.ProfileImgUrl;
 
-            var profileimage = url.Select(x => new Member
-            {
-                MemberID = memberID,
-                Photo = url
-            });
+            profileimg.Photo = imgurl;
 
-            _repository.Create(profileimage);
+            _repository.Update(profileimg);
             _repository.SaveChanges();
             _repository.Dispose();
         }
 
         /// <summary>
-        /// 刪除照片
+        /// 移除大頭照成預設頭像
         /// </summary>
-        /// <param name=""></param>
+        /// <param name="SaveProfileImgVM"></param>
+        public void RemoveProfilePhoto(SaveProfileImgViewModel SaveProfileImgVM)
+        {
+            var oriimg = _repository.GetAll<Member>().First(x => x.MemberID == SaveProfileImgVM.MemberID);
+            var imgurl = SaveProfileImgVM.ProfileImgUrl;
+
+            //imgurl = "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con";
+
+            oriimg.Photo = imgurl;
+
+            //_repository.Update(oriimg);
+            _repository.Delete(imgurl);
+            _repository.SaveChanges();
+            _repository.Dispose();
+        }
     }
 }

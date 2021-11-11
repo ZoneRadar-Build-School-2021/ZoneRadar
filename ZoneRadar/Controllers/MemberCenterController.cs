@@ -482,6 +482,11 @@ namespace ZoneRadar.Controllers
             if (ModelState.IsValid)
             {
                 var model = _service.EditProfileData(edit);
+
+                ViewData["Alert"] = true;
+                ViewData["Message"] = "編輯成功";
+                ViewData["Icon"] = true;
+
                 return View(model);
             }
             return View("EditProfile");
