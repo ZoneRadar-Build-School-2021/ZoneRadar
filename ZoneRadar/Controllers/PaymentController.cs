@@ -23,6 +23,7 @@ namespace ZoneRadar.Controllers
         /// 綠界
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         public ActionResult Payment(CartsViewModel model)
         {
             if (User.Identity.IsAuthenticated && model.OrderId != 0)
@@ -48,6 +49,7 @@ namespace ZoneRadar.Controllers
         //    return View();
         //}
         [AcceptVerbs(HttpVerbs.Post)]
+        [Authorize]
         public ActionResult EcPayment(PaymentViewModel model)
         {
             ViewData["EcPay"] = _ecpaymentservice.GetEcpayData(model);

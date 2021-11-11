@@ -516,6 +516,7 @@ namespace ZoneRadar.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         public ActionResult EditProfile()
         {
             var userID = int.Parse(User.Identity.Name); //特定帳號
@@ -530,6 +531,7 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult EditProfile([Bind(Include = "MemberID,Photo,Name,Email,Phone,Description,ReceiveEDM")] ProfileViewModel edit)
         {
             if (ModelState.IsValid)

@@ -10,6 +10,7 @@ using ZoneRadar.Enums;
 
 namespace ZoneRadar.Controllers
 {
+    [Authorize]
     public class HostCenterController : Controller
     {
         private readonly SpaceService _spaceService;
@@ -33,7 +34,6 @@ namespace ZoneRadar.Controllers
         /// <summary>
         ///  場地主上架場地(Amber) 
         /// </summary>
-        [Authorize]
         public ActionResult AddSpace(SpaceViewModel id)
         {
             var userId = 0;
