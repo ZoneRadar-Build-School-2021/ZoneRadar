@@ -121,6 +121,14 @@ a {
     color: #9b9b9b;
 }
 
+.ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+}
+
 .read-review {
     color: #049DD9;
 }
