@@ -184,7 +184,8 @@ namespace ZoneRadar.Services
                 CancellationInfo = targetSpace.Cancellation.CancellationDetail,
                 HoursForDiscount = spaceDiscounts == null ? 0 : spaceDiscounts.Hour,
                 Discount = spaceDiscounts == null ? 0 : decimal.Round(1 - spaceDiscounts.Discount, 2),
-                HostEmail = targetSpace.Member.Email
+                HostEmail = targetSpace.Member.Email,
+                OtherAmenity = targetSpace.OtherAmenity
             };
 
             return result;

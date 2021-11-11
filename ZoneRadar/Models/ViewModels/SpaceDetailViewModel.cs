@@ -28,5 +28,6 @@ namespace ZoneRadar.Models.ViewModels
         public string CancellationInfo { get; set; }
         public int HoursForDiscount { get; set; }
         public Decimal Discount { get; set; }
+        public string OtherAmenity { get; set; }
     }
 }

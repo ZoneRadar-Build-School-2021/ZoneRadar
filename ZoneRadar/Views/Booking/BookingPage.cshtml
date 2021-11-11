@@ -222,6 +222,11 @@
                                             }
                                         </ul>
                                     }
+                                    @if (details.OtherAmenity != null)
+                                    {
+                                        <h5 class="mb-3">其他設施</h5>
+                                        @Html.Raw(details.OtherAmenity)
+                                    }
                                 </div>
                             </div>
                             <a class="read-more collapsed btn p-3 fw-bolder" data-bs-toggle="collapse" href="#facility" role="button" aria-expanded="false" aria-controls="facility"></a>
