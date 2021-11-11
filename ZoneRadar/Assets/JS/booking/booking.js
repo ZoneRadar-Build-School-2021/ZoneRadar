@@ -175,7 +175,9 @@
       "disable": [
         // disable掉有被預訂和沒有營業的日期
         function (date) {
-          return (operationDayArr.indexOf(date.getDay()) === -1 || orderDateArr.indexOf(dayjs(date).format(dateFormat)) !== -1);
+          return (operationDayArr.indexOf(date.getDay()) === -1 ||
+                  orderDateArr.indexOf(dayjs(date).format(dateFormat)) !== -1 ||
+                  dayjs(date).format(dateFormat) === dayjs().format(dateFormat));
         }
       ],
       onChange: function (selectedDates, dateStr, instance) {
