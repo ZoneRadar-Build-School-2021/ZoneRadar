@@ -35,9 +35,17 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public List<SelectedSpaceViewModel> GetSelectedSpace()
         {
-            var spaces = _repository.GetAll<Space>().Where(x => x.SpaceStatusID == 2).ToList();
-            var orders = _repository.GetAll<Order>().Where(x => x.OrderStatus.OrderStatusID == 2).ToList();
+            //找出針對場地的評論
             var reviews = _repository.GetAll<Review>().Where(x => x.ToHost).ToList();
+            //找出有評論的訂單(訂單會是已完成狀態)
+            var orders = reviews.Select(x => x.Order);
+            //找出有訂單、有評論且上架的場地
+            var spaces = orders.Select(x => x.Space).Where(x => x.SpaceStatusID == 2).Distinct();
+            //找出場地的城市名稱
+            var cities = spaces.Select(x => x.City).Distinct();
+            //找出場地的圖片
+            var photos = spaces.Select(x => x.SpacePhoto.First(y => y.Sort == 1));
+
             //var spacePhotos = _repository.GetAll<SpacePhoto>().ToList();
 
             var selectedSpaces = new List<SelectedSpaceViewModel>();
@@ -45,21 +53,22 @@ namespace ZoneRadar.Services
             foreach (var item in spaces)
             {
                 //計算場地平均分數
-                var spaceReview = item.Order.Select(x => x.Review.FirstOrDefault(y => y.ToHost)).OfType<Review>().ToList();
-                double scoreAvg = spaceReview.Count() == 0 ? 0 : spaceReview.Average(x => x.Score);
+                //找出該場地所有訂單的orderID
+                var orderIDs = orders.Where(x => x.SpaceID == item.SpaceID).Select(x => x.OrderID);
+                //找出該場地的所有評論並計算平均分數
+                var scoreAvg = reviews.Where(x => orderIDs.Contains(x.OrderID)).Average(x => x.Score);
 
                 //場地圖片資料表還沒建好，先寫防呆程式
                 //var spacePhoto = spacePhotos.FirstOrDefault(x => x.SpaceID == item.SpaceID);
                 //var spacePhotoUrl = spacePhoto == null ? "" : spacePhoto.SpacePhotoUrl;
-
                 selectedSpaces.Add(
                     new SelectedSpaceViewModel
                     {
                         SpaceId = item.SpaceID,
-                        CityName = item.City.CityName,
+                        CityName = cities.First(x => x.CityID == item.CityID ).CityName,
                         Capacity = item.Capacity,
                         PricePerHour = item.PricePerHour,
-                        SpacePhoto = item.SpacePhoto.First(x => x.Sort == 1).SpacePhotoUrl,
+                        SpacePhoto = photos.First(x=>x.SpaceID == item.SpaceID).SpacePhotoUrl,
                         Score = scoreAvg
                     });
             }

@@ -19,10 +19,14 @@ namespace ZoneRadar.Controllers
         /// <summary>
         /// 搜尋頁(Steve)
         /// </summary>
-        /// <returns></returns>       
+        /// <returns></returns>
         [HttpGet]
         public ActionResult SearchingPage()
         {
+            ViewData["LoginModalPopup"] = TempData["LoginModalPopup"];
+            ViewData["Alert"] = TempData["Alert"];
+            ViewData["Message"] = TempData["Message"];
+            ViewData["Icon"] = TempData["Icon"];
             return View();
         }
 
