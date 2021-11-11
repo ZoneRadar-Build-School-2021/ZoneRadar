@@ -63,8 +63,8 @@ namespace ZoneRadar.Services
                         Photo = "https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png",
                         Name = registerVM.Name,
                         ReceiveEDM = false,
-                        SignUpDateTime = DateTime.Now,
-                        LastLogin = DateTime.Now,
+                        SignUpDateTime = DateTime.UtcNow,
+                        LastLogin = DateTime.UtcNow,
                         IsVerify = false,
                         IsGoogleLogin = false
                     };
@@ -92,7 +92,7 @@ namespace ZoneRadar.Services
         public string GenerateVerifyLink(GenerateLink generateLink)
         {
             //記錄有效的期限
-            var afterTenMinutes = DateTime.Now.AddMinutes(10).ToString();
+            var afterTenMinutes = DateTime.UtcNow.AddMinutes(10).ToString();
             var route = new RouteValueDictionary { { "email", generateLink.UserEmail }, { "expired", afterTenMinutes } };
             //製作驗證信的連結
             var verificationLink = generateLink.UrlHelper.Action("ConfirmEmail", "MemberCenter", route, generateLink.Request.Url.Scheme, generateLink.Request.Url.Host);
@@ -108,7 +108,7 @@ namespace ZoneRadar.Services
         {
             generateLink.UserEmail = HttpUtility.HtmlEncode(generateLink.UserEmail);
             //記錄有效的期限
-            var afterTenMinutes = DateTime.Now.AddMinutes(10).ToString();
+            var afterTenMinutes = DateTime.UtcNow.AddMinutes(10).ToString();
             //取得亂數
             var resetCode = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == generateLink.UserEmail.ToUpper()).Password;
             var route = new RouteValueDictionary { { "email", generateLink.UserEmail }, { "resetCode", resetCode }, { "expired", afterTenMinutes } };
@@ -211,8 +211,8 @@ namespace ZoneRadar.Services
                     var maxSignUpTime = users.Max(x => x.SignUpDateTime.ToString());
                     var user = users.First(x => x.SignUpDateTime.ToString() == maxSignUpTime);
                     //將會員的註冊時間和登入時間改成現在時間，代表驗證成功
-                    user.SignUpDateTime = DateTime.Now;
-                    user.LastLogin = DateTime.Now;
+                    user.SignUpDateTime = DateTime.UtcNow;
+                    user.LastLogin = DateTime.UtcNow;
                     user.IsVerify = true;
                     _repository.Update(user);
                     _repository.SaveChanges();
@@ -262,7 +262,7 @@ namespace ZoneRadar.Services
             {
                 try
                 {
-                    user.LastLogin = DateTime.Now;
+                    user.LastLogin = DateTime.UtcNow;
                     _repository.Update(user);
                     _repository.SaveChanges();
                     memberResult.User = user;
@@ -303,8 +303,8 @@ namespace ZoneRadar.Services
             var ticket = new FormsAuthenticationTicket(
             version: 1,
             name: user.MemberID.ToString(), //可以放使用者Id
-            issueDate: DateTime.Now,//現在UTC時間
-            expiration: DateTime.Now.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
+            issueDate: DateTime.UtcNow,//現在UTC時間
+            expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
             isPersistent: true,// 是否要記住我 true or false
             userData: jsonUserInfo, //可以放使用者角色名稱
             cookiePath: FormsAuthentication.FormsCookiePath);
@@ -348,7 +348,7 @@ namespace ZoneRadar.Services
         public void SentResetPasswordEmail(HttpServerUtilityBase server, HttpRequestBase request, UrlHelper urlHelper, string userEmail)
         {
             userEmail = HttpUtility.HtmlEncode(userEmail);
-            var afterTenMinutes = DateTime.Now.AddMinutes(10).ToString();
+            var afterTenMinutes = DateTime.UtcNow.AddMinutes(10).ToString();
             var resetCode = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == userEmail.ToUpper()).Password;
             var route = new RouteValueDictionary { { "email", userEmail }, { "resetCode", resetCode }, { "expired", afterTenMinutes } };
             //製作驗證信的連結
@@ -431,7 +431,7 @@ namespace ZoneRadar.Services
                 {
                     //改成新密碼
                     user.Password = resetPasswordVM.NewPassword;
-                    user.LastLogin = DateTime.Now;
+                    user.LastLogin = DateTime.UtcNow;
                     _repository.Update(user);
                     _repository.SaveChanges();
                     memberResult.User = user;
@@ -469,7 +469,7 @@ namespace ZoneRadar.Services
                 user.GoogleID = googleId;
             }
             user.IsGoogleLogin = true;
-            user.LastLogin = DateTime.Now;
+            user.LastLogin = DateTime.UtcNow;
             _repository.Update(user);
             _repository.SaveChanges();
             return user;
@@ -490,8 +490,8 @@ namespace ZoneRadar.Services
                 Photo = registerWithGoogle.GooglePhoto,
                 Name = registerWithGoogle.GoogleName,
                 ReceiveEDM = false,
-                SignUpDateTime = DateTime.Now,
-                LastLogin = DateTime.Now,
+                SignUpDateTime = DateTime.UtcNow,
+                LastLogin = DateTime.UtcNow,
                 IsVerify = true,
                 GoogleID = registerWithGoogle.GoogleId,
                 IsGoogleLogin = true
