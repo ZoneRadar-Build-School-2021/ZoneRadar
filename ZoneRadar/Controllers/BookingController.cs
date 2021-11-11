@@ -28,22 +28,26 @@ namespace ZoneRadar.Controllers
         {
             if (!id.HasValue)
             {
-                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 return RedirectToAction("BadRequest", "Home");
             }
 
             var targetSpace = _spaceService.GetSpaceByID(id);
             if (targetSpace == null)
             {
-                return new HttpNotFoundResult();
+                return RedirectToAction("NotFound404", "Home");
             }
 
             var model = new BookingPageViewModel
             {
                 SpaceBreifInfo = _spaceService.GetTargetSpaceBriefInfo(targetSpace),
                 SpaceDetailInfo = _spaceService.GetTargetSpaceDetail(targetSpace),
-                Reviews = _reviewService.GetTargetSpaceReviews(targetSpace)
+                Reviews = _reviewService.GetTargetSpacePreloadReviews(targetSpace)
             };
+
+            ViewData["LoginModalPopup"] = TempData["LoginModalPopup"];
+            ViewData["Alert"] = TempData["Alert"];
+            ViewData["Message"] = TempData["Message"];
+            ViewData["Icon"] = TempData["Icon"];
 
             return View(model);
         }

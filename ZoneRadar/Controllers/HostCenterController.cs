@@ -142,6 +142,18 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
+        /// 場地主訂單 - 歷史訂單(Nick) 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult History(HostCenterHistoryViewModel model)
+        {
+            var userid = int.Parse(User.Identity.Name);
+            var model2 = _orderService.GetHostCenterHistoryVM(model,userid);
+            return View(model2);
+        }
+
+        /// <summary>
         /// 儲存場地預定下架日期(Jenny)
         /// </summary>
         /// <param name="spaceId"></param>
@@ -275,7 +287,7 @@ namespace ZoneRadar.Controllers
 
             if (userid == 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("BadRequest", "Home"); ;
             }
             var model = _orderService.GetHostCenterHistoryVM(userid);
 

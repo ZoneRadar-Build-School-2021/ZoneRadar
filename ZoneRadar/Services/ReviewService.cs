@@ -22,9 +22,9 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public List<ToSpaceReviewViewModel> GetSpaceReviews()
         {
-            var members = _repository.GetAll<Member>().ToList();
-            var reviews = _repository.GetAll<Review>().Where(x => x.ToHost).ToList();
-            var orders = _repository.GetAll<Order>().ToList();
+            var reviews = _repository.GetAll<Review>().Where(x => x.ToHost).OrderByDescending(x => x.Score).Take(8).ToList();
+            var orders = reviews.Select(x => x.Order);
+            var members = orders.Select(x => x.Member).Distinct();
 
             var spaceReviews = new List<ToSpaceReviewViewModel>();
 
@@ -33,16 +33,14 @@ namespace ZoneRadar.Services
                 spaceReviews.Add(
                     new ToSpaceReviewViewModel
                     {
-                        SpaceId = item.Order.SpaceID,
-                        MemberName = members.First(x => x.MemberID == item.Order.MemberID).Name,
+                        SpaceId = orders.First(x => x.OrderID == item.OrderID).SpaceID,
+                        MemberName = members.First(x => x.MemberID == orders.First(y => y.OrderID == item.OrderID).MemberID).Name,
                         ReviewContent = item.ReviewContent,
                         Score = item.Score
                     });
             }
 
-            var topSpaceReviews = spaceReviews.OrderByDescending(x => x.Score).Take(8).ToList();
-
-            return topSpaceReviews;
+            return spaceReviews;
         }
 
         /// <summary>
@@ -50,9 +48,9 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="targetSpace"></param>
         /// <returns></returns>
-        public List<SpaceReviewViewModel> GetTargetSpaceReviews(Space targetSpace)
+        public List<SpaceReviewViewModel> GetTargetSpacePreloadReviews(Space targetSpace)
         {
-            var reviewList = _repository.GetAll<Review>().Where(x => x.ToHost == true && x.Order.SpaceID == targetSpace.SpaceID).Select(x => x).ToList();
+            var reviewList = _repository.GetAll<Review>().Where(x => x.ToHost == true && x.Order.SpaceID == targetSpace.SpaceID).OrderByDescending(x => x.ReviewDate).ToList();
 
             var spaceReviewList = new List<SpaceReviewViewModel>();
 
@@ -86,7 +84,7 @@ namespace ZoneRadar.Services
                 ToHost = true,
                 Score = (int)model.Score,
                 ReviewContent = model.ReviewContent,
-                ReviewDate = DateTime.Now,
+                ReviewDate = DateTime.UtcNow.AddHours(8),
                 Recommend = model.Recommend
             };
 
@@ -96,6 +94,7 @@ namespace ZoneRadar.Services
 
             return review;
         }
+
         /// <summary>
         /// 新增完成訂單(場地主)的評價(Nick)
         /// </summary>
@@ -109,7 +108,7 @@ namespace ZoneRadar.Services
                 ToHost = false,
                 Score = (int)model.Score,
                 ReviewContent = model.ReviewContent,
-                ReviewDate = DateTime.Now,
+                ReviewDate = DateTime.UtcNow.AddHours(8),
                 Recommend = model.Recommend
             };
 
@@ -117,6 +116,40 @@ namespace ZoneRadar.Services
             _repository.SaveChanges();
 
             return review;
+        }
+
+
+        /// <summary>
+        /// 取得更多場地評價(Steve)
+        /// </summary>
+        /// <param name="spaceId">場地ID</param>
+        /// <param name="sentCount">已經送出幾則評價</param>
+        /// <param name="addCount">要求要送出的評價</param>
+        /// <returns></returns>
+        public List<SpaceReviewViewModel> GetTargetSpaceMoreReviews(int spaceId, int sentCount, int addCount)
+        {     
+            var reviewList = _repository.GetAll<Review>().Where(x => x.ToHost == true && x.Order.SpaceID == spaceId).OrderByDescending(x => x.ReviewDate);
+            var totalCount = reviewList.Count();
+            var preLoadCount = BookingPageViewModel.NUM_OF_PRELOADED_REVIEW + sentCount;
+            var result = reviewList.Skip(preLoadCount).Take(addCount).ToList();
+
+            var spaceReviewList = new List<SpaceReviewViewModel>();
+            foreach (var review in result)
+            {
+                spaceReviewList.Add(new SpaceReviewViewModel
+                {
+                    Score = review.Score,
+                    ReviewContent = review.ReviewContent,
+                    ReviewDate = review.ReviewDate,
+                    IsRecommend = review.Recommend,
+                    ReviewedMemberName = review.Order.Member.Name,
+                    ReviewedMemberPhoto = review.Order.Member.Photo,
+                    UserID = review.Order.MemberID,
+                    NotLoadedCount = totalCount - preLoadCount - addCount,
+                });
+            }
+
+            return spaceReviewList;
         }
     }
 }
