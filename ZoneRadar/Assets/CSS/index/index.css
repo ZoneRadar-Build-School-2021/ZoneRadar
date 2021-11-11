@@ -33,22 +33,10 @@ html, body {
 .slide-img {
     opacity: 0;
     transition: 2s;
+    background-size: cover;
+    background-position: center;
 }
 
-    .slide-img:nth-child(1) {
-        background: url(https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80) center center;
-        background-size: cover;
-    }
-
-    .slide-img:nth-child(2) {
-        background: url(https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80) center center;
-        background-size: cover;
-    }
-
-    .slide-img:nth-child(3) {
-        background: url(https://images.unsplash.com/photo-1595329088732-d3b286981166?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1934&q=80) center center;
-        background-size: cover;
-    }
 
 .slide-img-show {
     opacity: 1;
@@ -132,6 +120,9 @@ html, body {
         box-shadow: inset 0px -50px 40px rgba(0, 0, 0, .3);
         border-radius: 2px;
         transition: .3s;
+
+        background-size: cover;
+        background-position: center;
     }
 
         .swiper-activity .swiper-slide:hover {
@@ -139,46 +130,7 @@ html, body {
             transition: .3s;
         }
 
-    .swiper-activity .swiper-slide-lecture {
-        background: url("https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80") center center;
-        background-size: cover;
-    }
-
-    .swiper-activity .swiper-slide-party {
-        background: url("https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80") center center;
-        background-size: cover;
-    }
-
-    .swiper-activity .swiper-slide-meeting {
-        background: url("https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80") center center;
-        background-size: cover;
-    }
-
-    .swiper-activity .swiper-slide-dinner {
-        background: url("https://images.unsplash.com/photo-1586511925558-a4c6376fe65f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80") center center;
-        background-size: cover;
-    }
-
-    .swiper-activity .swiper-slide-photograph {
-        background: url("https://images.unsplash.com/photo-1510127034890-ba27508e9f1c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80") center center;
-        background-size: cover;
-    }
-
-    .swiper-activity .swiper-slide-announce {
-        background: url("https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80") center center;
-        background-size: cover;
-    }
-
-    .swiper-activity .swiper-slide-concert {
-        background: url("https://images.unsplash.com/photo-1465847899084-d164df4dedc6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80") center center;
-        background-size: cover;
-    }
-
-    .swiper-activity .swiper-slide-exhibition {
-        background: url("https://images.unsplash.com/photo-1563000215-e31a8ddcb2d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=738&q=80") center center;
-        background-size: cover;
-    }
-
+    
     .swiper-activity .swiper-slide span {
         position: absolute;
         left: 0;
@@ -235,8 +187,8 @@ div.swiper-button-prev {
         }
 
     .characteristic-section .col-md-img {
-        background: url("https://images.unsplash.com/photo-1583135630256-a25ea659d1d7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80") center center;
         background-size: cover;
+        background-position: center;
     }
 
     .characteristic-section .col-text {
@@ -283,11 +235,13 @@ div.swiper-button-prev {
     box-shadow: inset 0px -50px 40px rgba(0, 0, 0, .3);
     border-radius: 5px;
     transition: .3s;
+    background-size: cover;
+    background-position: center;
 }
 
     .location-category .swiper-slide:hover, .location-category .max-slide:hover {
         opacity: .8;
-        transition: .3s;
+        transition: .3s;        
     }
 
 .location-category span {
@@ -296,106 +250,6 @@ div.swiper-button-prev {
     bottom: 10%;
     font-weight: bolder;
     font-size: 20px;
-}
-
-.location-category .Taipei {
-    background: url("https://cdn.pixabay.com/photo/2016/11/23/04/56/taipei-1851948_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .NewTaipeiCity {
-    background: url("https://cdn.pixabay.com/photo/2014/06/25/03/05/night-view-376830_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Tauyuan {
-    background: url("https://cdn.pixabay.com/photo/2016/10/13/08/14/taiwan-1737087_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Hsinchu {
-    background: url("https://cdn.pixabay.com/photo/2014/05/11/14/35/hsinchu-county-north-po-342031_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Miaoli {
-    background: url("https://cdn.pixabay.com/photo/2015/11/14/05/12/valley-of-the-gods-1042788_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Taichung {
-    background: url("https://cdn.pixabay.com/photo/2016/05/29/05/57/taiwan-1422441_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Nantou {
-    background: url("https://cdn.pixabay.com/photo/2016/10/15/14/34/nantou-1742620_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Changhua {
-    background: url("https://cdn.pixabay.com/photo/2016/11/10/09/28/taiwan-1813817_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Yunlin {
-    background: url("https://cdn.pixabay.com/photo/2016/06/30/11/32/canyon-1488810__340.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Chiayi {
-    background: url("https://cdn.pixabay.com/photo/2016/01/29/14/59/chiayi-1168079_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Tainan {
-    background: url("https://cdn.pixabay.com/photo/2016/12/06/03/02/tainan-1885450_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Kaohsiung {
-    background: url("https://cdn.pixabay.com/photo/2017/09/04/18/05/formosa-boulevard-station-2714883_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Pingtung {
-    background: url("https://cdn.pixabay.com/photo/2016/10/31/16/31/taiwan-1786039_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Keelung {
-    background: url("https://cdn.pixabay.com/photo/2016/10/04/15/55/night-market-1714683_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Yilan {
-    background: url("https://cdn.pixabay.com/photo/2016/10/31/04/19/lan-yang-museum-1784871_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Hualien {
-    background: url("https://cdn.pixabay.com/photo/2017/08/26/11/48/mountain-2682878_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Taitung {
-    background: url("https://cdn.pixabay.com/photo/2016/10/03/05/20/taitung-1710938_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Matsu {
-    background: url("https://cdn.pixabay.com/photo/2015/03/04/15/33/lighthouse-658933_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Kinmen {
-    background: url("https://cdn.pixabay.com/photo/2016/05/25/07/42/kinmen-1414130_1280.jpg") center center;
-    background-size: cover;
-}
-
-.location-category .Penghu {
-    background: url("https://cdn.pixabay.com/photo/2017/10/16/16/24/penghu-2857693_1280.jpg") center center;
-    background-size: cover;
 }
 /* #endregion */
 
@@ -534,8 +388,8 @@ div.swiper-button-prev {
     }
 
     .leaseholder-section .pic {
-        background: url("https://images.unsplash.com/photo-1527359443443-84a48aec73d2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80") center center;
         background-size: cover;
+        background-position: center;
         padding-top: 70px;
         padding-bottom: 70px;
         border-radius: 5px;
@@ -559,8 +413,8 @@ div.swiper-button-prev {
 .host-section {
     padding-top: 130px;
     padding-bottom: 130px;
-    background: url("https://images.unsplash.com/photo-1588610521245-b1bad0d62832?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80") center center;
     background-size: cover;
+    background-position: center;
     border-radius: 5px;
 }
 

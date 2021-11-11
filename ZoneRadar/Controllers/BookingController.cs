@@ -44,6 +44,11 @@ namespace ZoneRadar.Controllers
                 Reviews = _reviewService.GetTargetSpaceReviews(targetSpace)
             };
 
+            ViewData["LoginModalPopup"] = TempData["LoginModalPopup"];
+            ViewData["Alert"] = TempData["Alert"];
+            ViewData["Message"] = TempData["Message"];
+            ViewData["Icon"] = TempData["Icon"];
+
             return View(model);
         }
     }

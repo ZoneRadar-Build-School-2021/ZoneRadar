@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using ZoneRadar.Utilities;
 
 namespace ZoneRadar.Models.ViewModels
@@ -34,7 +35,7 @@ namespace ZoneRadar.Models.ViewModels
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "密碼長度需為6~50字元")]
-        [Compare("RegisterPassword", ErrorMessage = "密碼不一致")]
+        [System.ComponentModel.DataAnnotations.Compare("RegisterPassword", ErrorMessage = "密碼不一致")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -90,7 +91,7 @@ namespace ZoneRadar.Models.ViewModels
         [Required(ErrorMessage = "請填寫此欄位")]
         [DataType(DataType.Password)]
         [StringLength(50, MinimumLength = 6, ErrorMessage = "密碼長度需為6~50字元")]
-        [Compare("NewPassword", ErrorMessage = "密碼不一致")]
+        [System.ComponentModel.DataAnnotations.Compare("NewPassword", ErrorMessage = "密碼不一致")]
         public string NewConfirmPassword { get; set; }
     }
 
@@ -114,5 +115,28 @@ namespace ZoneRadar.Models.ViewModels
         public string GoogleEmail { get; set; }
         public string GoogleName { get; set; }
         public string GooglePhoto { get; set; }
+    }
+
+    /// <summary>
+    /// 傳入產生連結方法的物件(Jenny)
+    /// </summary>
+    public class GenerateLink
+    {
+        public HttpRequestBase Request { get; set; }
+        public UrlHelper UrlHelper { get; set; }
+        public string UserEmail { get; set; }
+    }
+
+    /// <summary>
+    /// 傳入寄信方法的物件(Jenny)
+    /// </summary>
+    public class EmailContent
+    {
+        public HttpServerUtilityBase Server { get; set; }
+        public string UserEmail { get; set; }
+        public string EmailContentFileName { get; set; }
+        public string EmailSubject { get; set; }
+        public string OldLink { get; set; }
+        public string NewLink { get; set; }
     }
 }

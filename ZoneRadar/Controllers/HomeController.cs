@@ -48,7 +48,10 @@ namespace ZoneRadar.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
+            ViewData["LoginModalPopup"] = TempData["LoginModalPopup"];
+            ViewData["Alert"] = TempData["Alert"];
+            ViewData["Message"] = TempData["Message"];
+            ViewData["Icon"] = TempData["Icon"];
             return View();
         }
 
@@ -60,22 +63,42 @@ namespace ZoneRadar.Controllers
         }
         public ActionResult Policy()
         {
+            ViewData["LoginModalPopup"] = TempData["LoginModalPopup"];
+            ViewData["Alert"] = TempData["Alert"];
+            ViewData["Message"] = TempData["Message"];
+            ViewData["Icon"] = TempData["Icon"];
             return View();
         }
         public ActionResult FAQ()
         {
+            ViewData["LoginModalPopup"] = TempData["LoginModalPopup"];
+            ViewData["Alert"] = TempData["Alert"];
+            ViewData["Message"] = TempData["Message"];
+            ViewData["Icon"] = TempData["Icon"];
             return View();
         }
         public ActionResult NotFound404()
         {
+            ViewData["LoginModalPopup"] = TempData["LoginModalPopup"];
+            ViewData["Alert"] = TempData["Alert"];
+            ViewData["Message"] = TempData["Message"];
+            ViewData["Icon"] = TempData["Icon"];
             return View();
         }
         public ActionResult BadRequest()
         {
+            ViewData["LoginModalPopup"] = TempData["LoginModalPopup"];
+            ViewData["Alert"] = TempData["Alert"];
+            ViewData["Message"] = TempData["Message"];
+            ViewData["Icon"] = TempData["Icon"];
             return View();
         }
         public ActionResult ServerError()
         {
+            ViewData["LoginModalPopup"] = TempData["LoginModalPopup"];
+            ViewData["Alert"] = TempData["Alert"];
+            ViewData["Message"] = TempData["Message"];
+            ViewData["Icon"] = TempData["Icon"];
             return View();
         }
     }

@@ -50,8 +50,27 @@ namespace ZoneRadar.Controllers
             var hasUserInfo = _service.IsUser(email, true);
             if (hasUserInfo)
             {
+                var generateLink = new GenerateLink
+                {
+                    Request = Request,
+                    UrlHelper = Url,
+                    UserEmail = HttpUtility.HtmlEncode(email)
+                };
+                //產生信件中的連結
+                var verificationLink = _service.GenerateResetPasswordLink(generateLink);
+
+                var emailContent = new EmailContent
+                {
+                    Server = Server,
+                    UserEmail = HttpUtility.HtmlEncode(email),
+                    EmailContentFileName = "ResetPasswordEmailContent",
+                    EmailSubject = "重設您的ZONERadar密碼",
+                    OldLink = "resetLink",
+                    NewLink = verificationLink
+                };
                 //寄送重設密碼信
-                _service.SentResetPasswordEmail(Server, Request, Url, email);
+                _service.SentEmail(emailContent);
+
                 return View("HadSentResetPasswordEmail");
             }
             else
@@ -105,7 +124,7 @@ namespace ZoneRadar.Controllers
         public string ResetPassword(ResetZONERadarPasswordViewModel resetPasswordVM)
         {
             var memberResult = new MemberResult { IsSuccessful = false };
-            if (!ModelState.IsValid || resetPasswordVM.NewPassword != resetPasswordVM.NewConfirmPassword)
+            if (!ModelState.IsValid)
             {
                 //輸入格式不正確或密碼不一致
                 memberResult.ShowMessage = "輸入格式不正確或密碼不一致，請重新輸入！";
@@ -148,7 +167,7 @@ namespace ZoneRadar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register([Bind(Include = "Name, RegisterEmail, RegisterPassword, ConfirmPassword")] RegisterZONERadarViewModel registerVM)
         {
-            if (!ModelState.IsValid || registerVM.RegisterPassword != registerVM.ConfirmPassword)
+            if (!ModelState.IsValid)
             {
                 //輸入格式不正確或密碼不一致
                 TempData["Alert"] = true;
@@ -166,8 +185,26 @@ namespace ZoneRadar.Controllers
                     //測試：用Session記錄註冊資訊
                     //Session["ConfirmRegister"] = new List<string>() { registerResult.User.Email, DateTime.UtcNow.AddHours(8).AddMinutes(10).ToString() };
 
-                    //接著寄送驗證信
-                    _service.SentEmail(Server, Request, Url, memberResult.User.Email);
+                    var generateLink = new GenerateLink
+                    {
+                        Request = Request,
+                        UrlHelper = Url,
+                        UserEmail = memberResult.User.Email
+                    };
+                    //產生信件中的連結
+                    var verificationLink = _service.GenerateVerifyLink(generateLink);
+
+                    var emailContent = new EmailContent
+                    {
+                        Server = Server,
+                        UserEmail = memberResult.User.Email,
+                        EmailContentFileName = "VerificationEmailContent",
+                        EmailSubject = "ZONERadar會員確認信",
+                        OldLink = "verificationLink",
+                        NewLink = verificationLink
+                    };
+                    //寄送驗證信
+                    _service.SentEmail(emailContent);
 
                     ViewData["UserEmail"] = memberResult.User.Email;
                     return View("HadSentEmail");
@@ -206,8 +243,27 @@ namespace ZoneRadar.Controllers
             var hasRegisterInfo = _service.IsUser(email, false);
             if (hasRegisterInfo)
             {
+                var generateLink = new GenerateLink
+                {
+                    Request = Request,
+                    UrlHelper = Url,
+                    UserEmail = HttpUtility.HtmlEncode(email)
+                };
+                //產生信件中的連結
+                var verificationLink = _service.GenerateVerifyLink(generateLink);
+
+                var emailContent = new EmailContent
+                {
+                    Server = Server,
+                    UserEmail = HttpUtility.HtmlEncode(email),
+                    EmailContentFileName = "VerificationEmailContent",
+                    EmailSubject = "ZONERadar會員確認信",
+                    OldLink = "verificationLink",
+                    NewLink = verificationLink
+                };
                 //寄送驗證信
-                _service.SentEmail(Server, Request, Url, email);
+                _service.SentEmail(emailContent);
+
                 var result = new SweetAlert { Message = "已重發驗證信，請至信箱確認！", IconString = "success" };
                 var jsonResult = JsonConvert.SerializeObject(result);
                 return jsonResult;
@@ -250,13 +306,10 @@ namespace ZoneRadar.Controllers
                 //讓使用者登入，呈現登入後的畫面
                 var encryptedTicket = _service.CreateEncryptedTicket(memberResult.User);
                 _service.CreateCookie(encryptedTicket, Response);
-                //導回原本的畫面
-                var originalUrl = _service.GetOriginalUrl(memberResult.User.MemberID.ToString());
 
                 TempData["Alert"] = true;
                 TempData["Message"] = memberResult.ShowMessage;
                 TempData["Icon"] = memberResult.IsSuccessful;
-                return Redirect(originalUrl);
             }
             else
             {
@@ -264,8 +317,8 @@ namespace ZoneRadar.Controllers
                 TempData["Alert"] = true;
                 TempData["Message"] = memberResult.ShowMessage;
                 TempData["Icon"] = memberResult.IsSuccessful;
-                return RedirectToAction("Index", "Home");
             }
+            return RedirectToAction("Index", "Home");
         }
 
         /// <summary>

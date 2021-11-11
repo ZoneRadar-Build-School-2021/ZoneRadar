@@ -28,8 +28,6 @@
     <link href="~/Assets/CSS/layout/navbar-footer.css" rel="stylesheet" />
     @RenderSection("topCSS", required: false)
     @RenderSection("topJS", required: false)
-
-    <script src="~/Scripts/vue.js"></script>
 </head>
 <body>
     <!-- navbar -->
@@ -66,7 +64,7 @@
                             <h2 class="accordion-header" id="headingMyaccount">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMyaccount" aria-expanded="false" aria-controls="collapseMyaccount">
                                     <div class="user-pic d-inline-block overflow-hidden me-1">
-                                        <img class="h-100 align-top" src="@userPhoto">
+                                        <img class="" src="@userPhoto">
                                     </div>
                                 </button>
                             </h2>
@@ -110,7 +108,7 @@
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                                 <div class="user-pic d-inline-block overflow-hidden me-1">
-                                    <img class="h-100 align-top" src="@userPhoto">
+                                    <img class="" src="@userPhoto">
                                 </div>
                                 <i class="fas fa-chevron-down"></i>
                             </a>
@@ -305,9 +303,8 @@
         let customer_only = document.querySelectorAll(".customer-only");
         let member_only = document.querySelectorAll(".member-only");
         let alerting = @Json.Encode(alert);
-        //使用者按上一頁時，強制將alert改為false
         window.onpopstate = (event) => {
-            alerting = false;
+            location.reload();
         }
         if (@Json.Encode(isAuthenticated)) {
             member_only.forEach(item => {
