@@ -18,6 +18,14 @@ function changeUserPhoto(imgUrl) {
     })
 }
 
+//更換評價和收藏的路由userId
+function changeCommentAndCollectionUserId(userId) {
+    let comment_collection_link = document.querySelectorAll(".comment-and-collection");
+    comment_collection_link.forEach(item => {
+        item.setAttribute("href", `/MemberCenter/Member/${userId}`);
+    })
+}
+
 //彈出一般SweetAlert
 function originalSsweetAlert(title, icon) {
     Swal.fire({
@@ -283,6 +291,8 @@ login_btn.addEventListener("click", function () {
             icon_string = "success";
             //放上大頭貼
             changeUserPhoto(response.data.Photo);
+            //更換評價和收藏的路由userId
+            changeCommentAndCollectionUserId(response.data.MemberId);
             //登入成功後，若有ReturnUrl字串，導去該頁
             if (location.search != "") {
                 let returnUrl = getReturnUrl();
@@ -345,6 +355,8 @@ function GoogleLogin() {
                     icon_string = "success";
                     //放上大頭貼
                     changeUserPhoto(result.Photo);
+                    //更換評價和收藏的路由userId
+                    changeCommentAndCollectionUserId(result.MemberId);
                     //登入成功後，若有ReturnUrl字串，導去該頁
                     if (location.search != "") {
                         let returnUrl = getReturnUrl();

@@ -100,6 +100,7 @@ namespace ZoneRadar.Models.ViewModels
     /// </summary>
     public class JSMemberResult
     {
+        public int MemberId { get; set; }
         public string Photo { get; set; }
         public bool IsSuccessful { get; set; }
         public string ShowMessage { get; set; }

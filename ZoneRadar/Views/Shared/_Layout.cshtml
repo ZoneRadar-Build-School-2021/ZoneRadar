@@ -15,6 +15,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script>
+        window.onpageshow = function (event) {
+            console.log(event);
+            if (event.persisted) {
+                window.location.reload()
+            }
+        };
+    </script>
+    <meta http-equiv="cache-control" content="no-cache">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - ZONERadar</title>
@@ -80,7 +89,7 @@
                                             <div class="accordion-body p-0">
                                                 <a class="nav-link" href="~/UserCenter/ShopCar">預購單</a>
                                                 <a class="nav-link" href="~/UserCenter/Pending">訂單管理</a>
-                                                <a class="nav-link" href="~/MemberCenter/Member/@userId">評價和收藏</a>
+                                                <a class="nav-link comment-and-collection" href="~/MemberCenter/Member/@userId">評價和收藏</a>
                                             </div>
                                         </div>
                                     </div>
@@ -124,7 +133,7 @@
                                             <div class="accordion-body p-0">
                                                 <a class="nav-link" href="~/UserCenter/ShopCar">預購單</a>
                                                 <a class="nav-link" href="~/UserCenter/Pending">訂單管理</a>
-                                                <a class="nav-link" href="~/MemberCenter/Member/@userId">評價和收藏</a>
+                                                <a class="nav-link comment-and-collection" href="~/MemberCenter/Member/@userId">評價和收藏</a>
                                             </div>
                                         </div>
                                     </div>
@@ -303,9 +312,6 @@
         let customer_only = document.querySelectorAll(".customer-only");
         let member_only = document.querySelectorAll(".member-only");
         let alerting = @Json.Encode(alert);
-        window.onpopstate = (event) => {
-            location.reload();
-        }
         if (@Json.Encode(isAuthenticated)) {
             member_only.forEach(item => {
                 item.classList.remove("d-none");

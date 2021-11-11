@@ -386,13 +386,14 @@ namespace ZoneRadar.Controllers
             //建造cookie
             _service.CreateCookie(encryptedTicket, Response);
 
-            //導向使用者原先欲造訪的路由
+            //導向使用者原先欲造訪的路由(沒用)
             var originalUrl = _service.GetOriginalUrl(memberResult.User.MemberID.ToString());
 
             //TempData["Alert"] = true;
             //TempData["Message"] = memberResult.ShowMessage;
             //TempData["Icon"] = memberResult.IsSuccessful;
             //return Redirect(originalUrl);
+            result.MemberId = memberResult.User.MemberID;
             result.Photo = memberResult.User.Photo;
             result.IsSuccessful = memberResult.IsSuccessful;
             result.ShowMessage = memberResult.ShowMessage;
@@ -594,6 +595,7 @@ namespace ZoneRadar.Controllers
                     var encryptedTicket = _service.CreateEncryptedTicket(user);
                     _service.CreateCookie(encryptedTicket, Response);
                     result.IsSuccessful = true;
+                    result.MemberId = user.MemberID;
                     result.Photo = user.Photo;
                     result.ShowMessage = $"{user.Name}您好，歡迎您加入ZONERadar！";
                 }
@@ -610,6 +612,7 @@ namespace ZoneRadar.Controllers
                     var encryptedTicket = _service.CreateEncryptedTicket(user);
                     _service.CreateCookie(encryptedTicket, Response);
                     result.IsSuccessful = true;
+                    result.MemberId = user.MemberID;
                     result.Photo = user.Photo;
                     result.ShowMessage = $"{user.Name}您好，歡迎您加入ZONERadar！";
                 }
