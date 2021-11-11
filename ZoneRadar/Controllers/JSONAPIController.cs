@@ -18,12 +18,14 @@ namespace ZoneRadar.Controllers
     public class JSONAPIController : ApiController
     {
         private readonly SpaceService _spaceService;
+        private readonly ReviewService _reviewService;
         private readonly PreOrderService _preOrderService;
         private readonly ZONERadarRepository _repository;
         private FilterViewModel _filterDataFromIndex;
         public JSONAPIController()
         {
             _spaceService = new SpaceService();
+            _reviewService = new ReviewService();
             _preOrderService = new PreOrderService();
             _repository = new ZONERadarRepository();
             _filterDataFromIndex = new FilterViewModel();
@@ -383,5 +385,34 @@ namespace ZoneRadar.Controllers
             }
         }
 
+        /// <summary>
+        /// 取得場地更多評價(Steve)
+        /// </summary>
+        /// <param name="spaceId"></param>
+        /// <returns></returns>
+        [Route("GetMoreReview")]
+        [AcceptVerbs("GET")]
+        public APIResponse GetMoreReview(int id, int sentCount, int addCount)
+        {
+            var response = new APIResponse();
+            try
+            {
+                var reviewList = _reviewService.GetTargetSpaceMoreReviews(id, sentCount, addCount);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = reviewList;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = ex.Message;
+                response.Response = null;
+
+                return response;
+            }
+        }
     }
 }

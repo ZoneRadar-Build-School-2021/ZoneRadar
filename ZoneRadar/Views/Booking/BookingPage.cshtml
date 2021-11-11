@@ -329,6 +329,9 @@
                         </div>
                     }
                 </div>
+                <div class="spinner spinner-border d-block mx-auto my-2 d-none" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
                 @if (@reviews.Count() > BookingPageViewModel.NUM_OF_PRELOADED_REVIEW)
                 {
                     <div class="text-center mt-3">
@@ -383,6 +386,23 @@
     </div>
 </template>
 
+<template id="space-review-template">
+    <div class="review-item row mb-3 mt-3">
+        <a href="" class="user-pic col-2 col-xl-1 pe-0"><img class="rounded-circle border-blue" src=""></a>
+        <div class="review-txt col-10 col-xl-11 ps-3 ps-xl-4">
+            <h5 class="user-name"></h5>
+            <div class="review-rating">
+                <div class="row mb-3">
+                    <div class="start-group col-12 col-xl-3 pe-0 mb-2 mb-xl-0"></div>
+                    <div class="recommend col-12 col-xl-9 ps-3 ps-lx-0"></div>
+                </div>
+            </div>
+            <div class="review-content mb-3"></div>
+            <p class="review-time pb-3 border-bottom"></p>
+        </div>
+    </div>
+</template>
+
 
 @section topCSS
 {
@@ -393,6 +413,7 @@
 {
     <script>
         sessionStorage.setItem('theKey', @Html.Raw(Json.Encode(@spaceID)));
+        const preLoadedCount = @Html.Raw(BookingPageViewModel.NUM_OF_PRELOADED_REVIEW);
     </script>
     <script src="~/Assets/JS/dayjs.min.js"></script>
     <script src="~/Assets/JS/booking/booking.js"></script>

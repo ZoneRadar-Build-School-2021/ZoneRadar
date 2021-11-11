@@ -382,6 +382,10 @@ a {
     font-size: 0.8rem;
 }
 
+.spinner-border {
+    color: #049DD9;
+}
+
 @media screen and (min-width: 768px) {
     .venue-img {
         padding-bottom: 44%;

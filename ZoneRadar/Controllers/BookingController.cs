@@ -41,7 +41,7 @@ namespace ZoneRadar.Controllers
             {
                 SpaceBreifInfo = _spaceService.GetTargetSpaceBriefInfo(targetSpace),
                 SpaceDetailInfo = _spaceService.GetTargetSpaceDetail(targetSpace),
-                Reviews = _reviewService.GetTargetSpaceFirst5Reviews(targetSpace)
+                Reviews = _reviewService.GetTargetSpacePreloadReviews(targetSpace)
             };
 
             return View(model);

@@ -50,7 +50,7 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="targetSpace"></param>
         /// <returns></returns>
-        public List<SpaceReviewViewModel> GetTargetSpaceFirst5Reviews(Space targetSpace)
+        public List<SpaceReviewViewModel> GetTargetSpacePreloadReviews(Space targetSpace)
         {
             var reviewList = _repository.GetAll<Review>().Where(x => x.ToHost == true && x.Order.SpaceID == targetSpace.SpaceID).OrderByDescending(x => x.ReviewDate).ToList();
 
@@ -96,6 +96,7 @@ namespace ZoneRadar.Services
 
             return review;
         }
+
         /// <summary>
         /// 新增完成訂單(場地主)的評價(Nick)
         /// </summary>
@@ -117,6 +118,40 @@ namespace ZoneRadar.Services
             _repository.SaveChanges();
 
             return review;
+        }
+
+
+        /// <summary>
+        /// 取得更多場地評價(Steve)
+        /// </summary>
+        /// <param name="spaceId">場地ID</param>
+        /// <param name="sentCount">已經送出幾則評價</param>
+        /// <param name="addCount">要求要送出的評價</param>
+        /// <returns></returns>
+        public List<SpaceReviewViewModel> GetTargetSpaceMoreReviews(int spaceId, int sentCount, int addCount)
+        {     
+            var reviewList = _repository.GetAll<Review>().Where(x => x.ToHost == true && x.Order.SpaceID == spaceId).OrderByDescending(x => x.ReviewDate);
+            var totalCount = reviewList.Count();
+            var preLoadCount = BookingPageViewModel.NUM_OF_PRELOADED_REVIEW + sentCount;
+            var result = reviewList.Skip(preLoadCount).Take(addCount).ToList();
+
+            var spaceReviewList = new List<SpaceReviewViewModel>();
+            foreach (var review in result)
+            {
+                spaceReviewList.Add(new SpaceReviewViewModel
+                {
+                    Score = review.Score,
+                    ReviewContent = review.ReviewContent,
+                    ReviewDate = review.ReviewDate,
+                    IsRecommend = review.Recommend,
+                    ReviewedMemberName = review.Order.Member.Name,
+                    ReviewedMemberPhoto = review.Order.Member.Photo,
+                    UserID = review.Order.MemberID,
+                    NotLoadedCount = totalCount - preLoadCount - addCount,
+                });
+            }
+
+            return spaceReviewList;
         }
     }
 }
