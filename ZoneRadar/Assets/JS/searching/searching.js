@@ -1,4 +1,4 @@
-;
+﻿;
 (function () {
   // 主要節點
   const cardListNode = document.querySelector('.card-list');
@@ -150,41 +150,21 @@
 
   // 設定日曆
   function setFlatpickr(dateNode) {
-    if (filter.Date) {
-      // 如果首頁有選中日期，則日期為該日
-      flatpickr(dateNode, {
-        altInput: true,
-        altFormat: 'Y/m/d',
-        disableMobile: 'true',
-        defaultDate: filter.Date,
-        minDate: "today",
-        maxDate: new Date().fp_incr(90),
-        // change事件監聽
-        onChange: function (selectedDates, dateStr, instance) {
-          filter.Date = dateStr;
-          if (this.input.id === 'web-date-filter') {
-            requestForSpaces(filter);
-          }
-        },
-      });
-    } else {
-      // 如果首頁沒有選中日期，則日期為今日
-      flatpickr(dateNode, {
-        altInput: true,
-        altFormat: 'Y/m/d',
-        disableMobile: 'true',
-        defaultDate: "today",
-        minDate: "today",
-        maxDate: new Date().fp_incr(90),
-        // change事件監聽
-        onChange: function (selectedDates, dateStr, instance) {
-          filter.Date = dateStr;
-          if (this.input.id === 'web-date-filter') {
-            requestForSpaces(filter);
-          }
-        },
-      });
-    }
+    flatpickr(dateNode, {
+      altInput: true,
+      altFormat: 'Y/m/d',
+      disableMobile: 'true',
+      defaultDate: filter.Date || 'today',
+      minDate: "today",
+      maxDate: new Date().fp_incr(90),
+      // change事件監聽
+      onChange: function (selectedDates, dateStr, instance) {
+        filter.Date = dateStr;
+        if (this.input.id === 'web-date-filter') {
+          requestForSpaces(filter);
+        }
+      },
+    });
   }
 
   // 鎖定鄉鎮區選項

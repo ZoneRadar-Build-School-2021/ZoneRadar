@@ -1,7 +1,7 @@
 ﻿@model SpaceViewModel
 
 @{
-    ViewBag.Title = "AddSpace";
+    ViewBag.Title = "新增場地";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var spacetype = Model.SpaceTypeAraeList;
     var cancellations = Model.cancellationAraesList;
@@ -16,15 +16,16 @@
 
 }
 
-@using (Html.BeginForm("AddSpace", "HostCenter", FormMethod.Post))
-{
+@*@using (Html.BeginForm("AddSpace", "HostCenter", FormMethod.Post))
+    {*@
+<form action="/HostCenter/AddSpace" method="post" class="needs-validation" novalidate>
     @Html.AntiForgeryToken()
-    <div id="app" class="main mymain form-horizontal">
+    <div id="app" class="main mymain form-horizontal ">
         <div class="container containerForAdd ">
             <!-- 開頭問候文區 -->
             <div class="row">
                 <div class="col mb-3 mt-3">
-                    <h5 class="fs-3"> @*<span>@owner.Select(x=>x.MamberName)</span> ,*@你好！說說你的場地吧！</h5>
+                    <h5 class="fs-3"> 你好！說說你的場地吧！</h5>
                     <p>場地內容分享越詳細，能幫你拿到更多訂單</p>
                 </div>
             </div>
@@ -56,10 +57,10 @@
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <label for="country" class="form-label">國家</label>
                                             <select class="form-select " name="CountryID" id="country" required>
-                                                <option selected disabled value="">請選擇國家</option>
+                                                <option selected disabled>請選擇國家</option>
                                                 <option value="1">台灣</option>
                                             </select>
-                                            <div class="invalid-feedback">
+                                            <div class="invalid-feedback text-danger">
                                                 請選擇國家
                                             </div>
                                         </div>
@@ -69,19 +70,16 @@
                                             <div class="mb-3">
                                                 <label for="city" class="form-label mt-3">城市</label>
                                                 <select class="form-select" name="CityID" id="city" required>
-                                                    <option selected disabled value=""></option>
                                                 </select>
                                             </div>
-                                            <div class="invalid-feedback">
-                                                請填寫縣市
-                                            </div>
+
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-6 mt-3">
                                             <label for="district" class="form-label">行政區</label>
                                             <select class="form-select" name="" id="district" required>
                                                 <option selected disabled value="">請選擇行政區</option>
                                             </select>
-                                            <div class="invalid-feedback">
+                                            <div class="invalid-feedback text-danger">
                                                 請選擇行政區
                                             </div>
                                         </div>
@@ -91,13 +89,19 @@
                                             <div class="mb-3">
                                                 <label for="ZipCode"
                                                        class="form-label mt-3">郵遞區號</label>
-                                                <input type="text" readonly class="form-control" name="DistrictID" id="ZipCode" placeholder="">
+                                                <input type="text" readonly class="form-control input-group has-validation" name="DistrictID" id="ZipCode" placeholder="">
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6 col-xl-6">
                                             <div class="mb-3">
                                                 <label for="address" id="addresslabel" class="form-label mt-3">地址</label>
-                                                <input onblur="trans()" type="text" required class="form-control" name="Address" id="address" value="" placeholder="請輸入地址，從路名開始即可，例:中正路283巷45弄11號4樓" />
+                                                <input onblur="addresscheck(),trans()" type="text" required class="form-control" name="Address" id="address" value="" placeholder="請輸入地址，從路名開始即可，例:中正路283巷45弄11號4樓" />
+                                                <div class="invalid-feedback ">
+                                                    請選填寫地址,從路名開始即可。
+                                                </div>
+                                                <div id="addrinvalid" class="d-none feedback text-danger">
+                                                    請選填寫地址,從路名開始即可。
+                                                </div>
                                             </div>
                                             @*經緯度*@
                                             <input type="hidden" class="form-control" name="Lat" id="target" value="" />
@@ -152,7 +156,9 @@
                                         </div>
                                     </div>
                                 }
-
+                                <div id="typeinvalid" class="d-none feedback text-danger">
+                                    請至少勾選一個類型，如沒有合適的請勾其他。
+                                </div>
                             </div>
                             <div class="row ">
                                 <div class="col-12 col-lg-6 mt-5 ">
@@ -167,8 +173,13 @@
                                     <p><i class="me-1 far fa-lightbulb"></i>例如：“市中心閣樓享天際線景觀”</p>
                                     <div class="SpaceName">
                                         <label for="SpaceName" class="form-label "></label>
-                                        <input type="text" required class="form-control" id="SpaceName" name="SpaceName" placeholder="輸入您場地的名稱">
-
+                                        <input type="text" required onblur="spaceNamecheck()" class="form-control" id="SpaceName" name="SpaceName" placeholder="輸入您場地的名稱">
+                                    </div>
+                                    <div class="invalid-feedback ">
+                                        請選填寫場地名稱。
+                                    </div>
+                                    <div id="spaceNamecheck" class="d-none feedback text-danger">
+                                        場地名稱至少要兩個字。
                                     </div>
                                 </div>
                             </div>
@@ -185,15 +196,24 @@
                                     <p>不建議：</p>
                                     <ul>
                                         <li>聯絡訊息-請勿包含您的電話、場地名稱、地址、電子信箱跟網路連結。</li>
+                                        <li>必填欄位</li>
                                     </ul>
                                 </div>
                                 <div class="col ">
                                     @*讓文字編輯器可以抓到並寫入資料庫需要在web.config 關閉<pages validateRequest="False" />*@
                                     <div class="col col-12  pb-5">
                                         <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                        <textarea name="Introduction" class="form-control"
+                                        <textarea name="Introduction" class="form-control" required minlength="250"
                                                   id="exampleFormControlTextarea1" rows="3"></textarea>
                                     </div>
+                                    <div id="IntroductionNamecheck" class="d-none feedback text-danger">
+                                        場地介紹至少要250個字。
+                                    </div>
+                                    <div class="invalid-feedback ">
+                                        請選填寫場地介紹。
+                                    </div>
+
+
                                 </div>
                             </div>
 
@@ -209,7 +229,7 @@
                                     <div class="mb-3 w-75">
                                         <label for="area" class="form-label mt-3"></label>
                                         <input type="text" name="MeasureOfArea" required class="form-control" id="area"
-                                               placeholder="500">
+                                               placeholder="500" onblur="Numcheck()">
                                     </div>
                                     <div class="mb-3 ">
                                         <label for="exampleFormControlInput1" class="form-label mt-3 "></label>
@@ -217,14 +237,26 @@
                                                id="exampleFormControlInput1" placeholder="坪數" disabled>
                                     </div>
                                 </div>
+                                <div id="areacheck" class="col-xl-6 mt-5 d-none feedback text-danger">
+                                    場地坪數必須是非為零的數字。
+                                </div>
+                                <div class="invalid-feedback ">
+                                    請選填寫場地坪數。
+                                </div>
                             </div>
                             <div class="row mt-3">
                                 <h5>可以容納幾個人 </h5>
                                 <div class="col col-lg-6">
                                     <div class="form-floating">
-                                        <input class="form-control" name="Capacity" required placeholder="最大客人數" id="Maxpeople">
+                                        <input class="form-control" name="Capacity" onblur="Maxpeoplecheck()" required placeholder="最大人數" id="Maxpeople">
                                         <label for="Maxpeople">最大客人數</label>
                                     </div>
+                                </div>
+                                <div id="Maxpeoplecheck" class="col-xl-6 mt-4 d-none feedback text-danger">
+                                    人數必須是非為零的數字。
+                                </div>
+                                <div class="invalid-feedback ">
+                                    請選填寫可容納人數。
                                 </div>
                             </div>
 
@@ -289,7 +321,7 @@
                                     <div class="d-xl-block col-5 col-xl-2 mb-4">
                                         <label for="StateMon" class="form-label  "></label>
                                         <select id="StateMon" class="form-select fs16 MonselectL "
-                                                aria-label="Default select example" name="StartTime" disabled>
+                                                aria-label="Default select example" name="StartTime" disabled onchange="getValue()">
                                             <option id="MonStart" value="">請選擇時間</option>
                                             @foreach (var open in Operating)
                                             {
@@ -299,14 +331,14 @@
 
                                     </div>
 
-                                    <P class="col-2 mt-auto col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
+                                    <P class="col-2 mt-auto col-xl-1 d-xl-block d-none fs16 mb-auto text-center text-start">
                                         ~
                                     </P>
 
                                     <div class="col-5  d-xl-block  col-xl-2 mb-4">
                                         <label for="StateMon" class="form-label  "></label>
                                         <select id="StateMon" class="form-select fs16 MonselectR "
-                                                aria-label="Default select example" name="EndTime" disabled>
+                                                aria-label="Default select example" name="EndTime" disabled onchange="getValue()">
                                             <option id="MonEnd" value="">請選擇時間</option>
                                             @foreach (var open in Operating)
                                             {
@@ -348,8 +380,8 @@
 
                                     <div class="d-xl-block col-5 col-xl-2 mb-4">
                                         <label for="StateTue" class="form-label"></label>
-                                        <select id="StateTue" class="form-select fs16" aria-label="Default select example" name="StartTime"
-                                                disabled>
+                                        <select id="StateTue" class="form-select fs16 StateTueS" aria-label="Default select example" name="StartTime"
+                                                disabled onchange="getValue()">
                                             <option id="TueStart" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
@@ -364,8 +396,8 @@
 
                                     <div class="d-xl-block col-5 col-xl-2 mb-4">
                                         <label for="StateTue" class="form-label "></label>
-                                        <select id="StateTue" class="form-select fs16" aria-label="Default select example" name="EndTime"
-                                                disabled>
+                                        <select id="StateTue" class="form-select fs16 StateTueE" aria-label="Default select example" name="EndTime"
+                                                disabled onchange="getValue()">
                                             <option id="TueEnd" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
                                             {
@@ -407,7 +439,7 @@
 
                                     <div class="d-xl-block col-5 col-xl-2 mb-4">
                                         <label for="State" class="form-label"></label>
-                                        <select id="StateWed" class="form-select fs16" aria-label="Default select example" name="StartTime"
+                                        <select id="StateWed" class="form-select fs16 StateWedS" aria-label="Default select example" name="StartTime"
                                                 disabled>
                                             <option id="WedStart" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
@@ -423,7 +455,7 @@
 
                                     <div class="d-xl-block col-5 col-xl-2 mb-4">
                                         <label for="State" class="form-label "></label>
-                                        <select id="StateWed" class="form-select fs16" aria-label="Default select example" name="EndTime"
+                                        <select id="StateWed" class="form-select fs16 StateWedE" aria-label="Default select example" name="EndTime"
                                                 disabled>
                                             <option id="WedEnd" value="">請選擇營業時間</option>
                                             @foreach (var open in Operating)
@@ -665,38 +697,77 @@
                                         </select>
                                     </div>
                                 </div>
+                                @*營業時間驗證訊息*@
+                                <div id="OperatingDaycheck" class="d-none col-xl-6 mt-4 feedback text-danger">
+                                    營業時間至少勾選一天。
+                                </div>
+                                <div id="OperatingDaycheckTime" class="col-xl-6 mt-4 feedback text-danger">
+
+                                </div>
+                                <div class="invalid-feedback ">
+                                    請勾選場地營業時間。
+                                </div>
+
                                 <div class="row mt-5">
                                     <div class="col-12">
                                         <h5>定價</h5>
-                                        <p>每筆訂單成立,本平台會在酌收5%的服務費用</p>
+                                        <p>每筆訂單成立,本平台會在酌收10%的服務費用</p>
                                     </div>
                                     <div class="col-12 col-lg-6 price mt-3">
                                         <p>小時計費</p>
                                         <div class="form-floating">
-                                            <input class="form-control" placeholder="小時計費" name="PricePerHour" id="SpacePrice">
-                                            <label for="minSpacePrice">小時計費</label>
+                                            <input class="form-control" required placeholder="" name="PricePerHour" onblur="SpacePricecheck()" id="SpacePrice">
+                                            <label for="minSpacePrice">NT$100/hr</label>
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-6 SpacePrice mt-3">
                                         <p>最低時數</p>
                                         <div class="form-floating">
-                                            <input class="form-control" required name="MinHours" placeholder="必須是1-12小時" id="minSpacePrice">
+                                            <input class="form-control" required name="MinHours" placeholder="必須是1-12小時" id="minSpacePrice" onblur="minSpacePricecheck()">
                                             <label for="minSpacePrice">必須是1-12小時</label>
                                         </div>
                                     </div>
                                     <div class="col-10 col-lg-6 MinPrice mt-3">
                                         <p>折扣</p>
                                         <div class="form-floating">
-                                            <input class="form-control" name="Hour" required placeholder="幾小時折扣" id="hourDiscount">
+                                            <input class="form-control" name="Hour" required placeholder="幾小時折扣" id="hourDiscount" onblur="hourDiscountecheck()">
                                             <label for="hourDiscount">逾多少小時</label>
                                         </div>
                                     </div>
                                     <div class="col-10 col-lg-6 mt-3">
                                         <p>折扣數</p>
                                         <div class="form-floating">
-                                            <input class="form-control" placeholder="多少折扣" name="Discount" id="Discount">
+                                            <input class="form-control" required placeholder="多少折扣，如8折直接8即可" name="Discount" id="Discount" onblur="Discountcheck()">
                                             <label for="Discount">享多少折扣</label>
                                         </div>
+                                    </div>
+                                    @*場地價錢驗證訊息*@
+                                    <div id="SpacePricelecheck" class="d-none col-xl-3 mt-4 feedback text-danger">
+                                        場地計費必須是非為零的數字。
+                                    </div>
+                                    <div class="invalid-feedback ">
+                                        請選填寫場地計費。
+                                    </div>
+                                    @*場地最低時數驗證訊息*@
+                                    <div id="minSpacePricecheck" class="d-none col-xl-3 mt-4 feedback text-danger">
+                                        最低時數必須是非為零的數字。
+                                    </div>
+                                    <div class="invalid-feedback ">
+                                        請選填寫場地最低租借時數。
+                                    </div>
+                                    @*場地小時折扣驗證訊息*@
+                                    <div id="Discountcheck" class="d-none col-xl-3 mt-4 feedback text-danger">
+                                        折扣必須是非為零的數字。
+                                    </div>
+                                    <div class="invalid-feedback ">
+                                        請選填寫場地折扣。
+                                    </div>
+                                    @*場地折扣驗證訊息*@
+                                    <div id="hourDiscountecheck" class="d-none col-xl-3 mt-4 feedback text-danger">
+                                        逾多少小時折扣必須是非為零的數字。
+                                    </div>
+                                    <div class="invalid-feedback ">
+                                        請選填寫場地逾多少小時享折扣。
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -728,6 +799,9 @@
                                             </div>
                                         </div>
                                     }
+                                </div>
+                                <div id="AmenityDetailinvalid" class="d-none feedback text-danger">
+                                    請至少勾選桌子跟椅子這是必須的設施。
                                 </div>
                                 <div class="row mt-3">
                                     <h5>其他設施</h5>
@@ -793,7 +867,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row">
                                         <div class="col">
                                             <p>
@@ -831,15 +904,22 @@
                                             <p class="fs20">可以試試回答以下內容：</p>
                                             <ul>
                                                 <li>到達您的場地的交通訊息、附近明顯的的地標、是否有標示通道。</li>
+                                                <li>必填欄位</li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="col-12 pb-5">
                                         <label for="exampleFormControlTextarea1" class="form-label"></label>
                                         <textarea name="Traffic" class="form-control"
-                                                  id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                  id="exampleFormControlTextarea1" rows="3" required></textarea>
                                         <p class="fs16 mt-1"><i class="fas fs-6 fa-lock p-1 "></i>不用擔心，僅會在客戶完成訂單提供。</p>
                                     </div>
+                                </div>
+                                <div id="Trafficcheck" class="d-none feedback text-danger">
+                                    交通資訊至少要20個字。
+                                </div>
+                                <div class="invalid-feedback ">
+                                    請選填寫交通資訊。
                                 </div>
 
                                 <div class="row mb-3">
@@ -931,6 +1011,7 @@
                                             <li>
                                                 合同-<span class="logoS">ZONERadar</span>預定包含在我們的服務協議中。不要附在您的合同、取消政策或責任政策。
                                             </li>
+                                            <li>必填欄位</li>
                                         </ul>
                                     </div>
                                     <div class="col ">
@@ -975,6 +1056,7 @@
                                         <p class="fs16">選擇有符合條件的條件的選項</p>
                                     </div>
                                     <div class="row">
+
                                         @foreach (var cleanf in cleaningOne)
                                         {
                                             <div class="col col-12 col-lg-12 mt-1 mb-3 ">
@@ -1046,6 +1128,13 @@
                                                         </div>
                                                     </div>
                                                 }
+                                                @*場地清潔與安全設施驗證訊息*@
+                                                <div id="CleaningOptionIDcheck" class="d-none col-xl-6 mt-4 feedback text-danger">
+                                                    清潔與安全設施必須至少勾選一個 。
+                                                </div>
+                                                <div class="invalid-feedback ">
+                                                    請勾選場地清潔與安全設施。
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1071,7 +1160,7 @@
                             </button>
                         </h2>
                         <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
-                             data-bs-parent="#accordionExample">
+                             data-bs-parent="#accordionExample" onclick="openSubmitBtn()">
                             <div class="accordion-body">
                                 <div class="row ">
                                     <div class="col col-11  mt-5">
@@ -1099,7 +1188,7 @@
                                 {
                                     <div class="row">
                                         <div class="form-check col-12 col-lg-2">
-                                            <input class="form-check-input" value="@cancel.CancellationId" type="radio" name="CancellationID"
+                                            <input class="form-check-input" required value="@cancel.CancellationId" type="radio" name="CancellationID"
                                                    id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 @cancel.CancellationTitle
@@ -1112,6 +1201,14 @@
                                         </div>
                                     </div>
                                 }
+                                @*取消政策驗證訊息*@
+                                <div id="CancellationIDcheck" class="d-none col-xl-6 mt-4 feedback text-danger">
+                                    取消政策必須至少勾選一個。
+                                </div>
+                                <div class="invalid-feedback ">
+                                    請勾選場地取消政策。
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -1141,23 +1238,24 @@
                         <button type="submit" class="btn submitAdd deleteBtn" id="success">完成</button>
                     </div>
                 </div>
+                @Html.ValidationSummary()
             </div>
         </div>
     </div>
     @*<input type="hidden" value="@spaceId" id="mySpaceId">*@
     <p id="mySpaceId" name="SpaceID" class="d-none">@spaceId</p>
-    <input type="hidden"  class="imgUrl"  value=""/>
-    <input type="hidden"  class="imgUrl"  value=""/>
-    <input type="hidden"  class="imgUrl"  value=""/>
-    <input type="hidden"  class="imgUrl"  value=""/>
-    <input type="hidden"  class="imgUrl"  value=""/>
-    <input type="hidden"  class="imgUrl"  value=""/>
-    <input type="hidden"  class="imgUrl"  value=""/>
-    <input type="hidden"  class="imgUrl"  value=""/>
-    <input type="hidden"  class="imgUrl"  value=""/>
-    <input type="hidden"  class="imgUrl"  value=""/>
-
-}
+    <input type="hidden" class="imgUrl" value="" />
+    <input type="hidden" class="imgUrl" value="" />
+    <input type="hidden" class="imgUrl" value="" />
+    <input type="hidden" class="imgUrl" value="" />
+    <input type="hidden" class="imgUrl" value="" />
+    <input type="hidden" class="imgUrl" value="" />
+    <input type="hidden" class="imgUrl" value="" />
+    <input type="hidden" class="imgUrl" value="" />
+    <input type="hidden" class="imgUrl" value="" />
+    <input type="hidden" class="imgUrl" value="" />
+</form>
+@*}*@
 
 
 @section topCSS
@@ -1182,8 +1280,8 @@
     <script src="~/Assets/JS/addspace/ckeditor.js"></script>
     @*<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>*@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-
     <script src="~/Assets/JS/addspace/addspace.js"></script>
+    <script src="~/Assets/JS/addspace/validation.js"></script>
     <script src="~/Assets/JS/addspace/CityandDistrictandZipcodeJavaScript.js"></script>
     <script src="~/Assets/JS/addspace/addSpaceOperating.js"></script>
 

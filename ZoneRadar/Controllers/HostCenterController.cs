@@ -40,23 +40,27 @@ namespace ZoneRadar.Controllers
             var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
             if (isAuthenticated)
             {
-                var model = new SpaceViewModel( )
+                if (ModelState.IsValid)
                 {
-                    SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
-                    cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
+                    var model = new SpaceViewModel()
+                    {
+                        SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
+                        cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
 
-                    amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
-                    amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
+                        amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
+                        amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
 
-                    CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
-                    CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
-                    CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
-                    CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
-                    //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
-                    SpaceId=_spaceService.GetSpaceId().SpaceId,
-                    Operating = _spaceService.Operating(),
-                };
-                return View(model);
+                        CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
+                        CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
+                        CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
+                        CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
+                        //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
+                        SpaceId = _spaceService.GetSpaceId().SpaceId,
+                        Operating = _spaceService.Operating(),
+                    };
+                    return View(model);
+
+                }
             }
            
             return View();
