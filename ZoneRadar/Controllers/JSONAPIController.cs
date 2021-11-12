@@ -181,6 +181,7 @@ namespace ZoneRadar.Controllers
             }
         }
 
+
         /// <summary>
         /// 確認會員是否登入
         /// </summary>
@@ -360,7 +361,7 @@ namespace ZoneRadar.Controllers
             }
         }
 
-        /// <summary>
+        // <summary>
         /// 將上傳照片存入資料庫(Steve)
         /// </summary>
         /// <param name="SaveSpacePhotosVM"></param>
@@ -377,6 +378,36 @@ namespace ZoneRadar.Controllers
                 response.Status = "Success";
                 response.Message = string.Empty;
                 response.Response = null;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = ex.Message;
+                response.Response = null;
+
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// 取得場地更多評價(Steve)
+        /// </summary>
+        /// <param name="spaceId"></param>
+        /// <returns></returns>
+        [Route("GetMoreReview")]
+        [AcceptVerbs("GET")]
+        public APIResponse GetMoreReview(int id, int sentCount, int addCount)
+        {
+            var response = new APIResponse();
+            try
+            {
+                var reviewList = _reviewService.GetTargetSpaceMoreReviews(id, sentCount, addCount);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = reviewList;
 
                 return response;
             }
