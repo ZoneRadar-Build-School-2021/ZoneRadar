@@ -387,6 +387,11 @@ a {
     color: #049DD9;
 }
 
+.review-item .user-pic img{
+    width: 45px !important;
+    height: 45px !important;
+}
+
 @media screen and (min-width: 768px) {
     .venue-img {
         padding-bottom: 44%;
