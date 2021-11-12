@@ -23,6 +23,7 @@ let app = new Vue({
             Description: profileData.Description,
             ReceiveEDM: profileData.ReceiveEDM
         },
+        file: {}
     },
     watch: {
         inputData: {
@@ -52,4 +53,58 @@ let app = new Vue({
             }
         }
     },
+    methods: {
+        fileChange(e) {
+            var file = e.target.files[0]
+            this.profileimage = URL.createObjectURL(file)
+            this.file = file
+        },
+        imgUpload() {
+            let formData = new FormData();
+            formData.append('file', this.file);
+            formData.append('upload_preset', 'yp7sicxt');
+            axios({
+                onUploadProgress: uploadEvent => {
+                    console.log('Upload Progress: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
+                },
+                url: "https://api.cloudinary.com/v1_1/dt6vz3pav/upload",
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                data: formData
+            })
+            .then(response => {
+                let ImgUrl = {
+                    MemberID: '',
+                    ProfileImgUrl: response.data.secure_url
+                };
+                this.inputData.Photo = response.data.secure_url;
+                axios({
+                    url: "/webapi/spaces/SaveImg",
+                    method: 'POST',
+                    data: ImgUrl
+                })
+                .then(response =>
+                    console.log(response)
+                )
+            })
+            .catch(e => {
+                //...
+            })
+        },
+        removeImg() {
+            axios({
+
+                method: 'DELETE'
+            })
+            .then(response => {
+                
+            })
+            .catch(e => {
+                //...
+            })
+        }
+    }
 })
+
