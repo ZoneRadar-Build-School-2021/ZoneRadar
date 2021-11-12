@@ -1,6 +1,7 @@
 :root {
     --gray-btn: #e8e8e8;
-    --gray-btn-hover: #c7c7c7
+    --gray-btn-hover: #c7c7c7;
+    scroll-behavior: smooth;
 }
 
 img {
