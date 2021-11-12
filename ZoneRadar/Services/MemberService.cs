@@ -180,17 +180,15 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public bool IsGoogleUser(string email, string googleId, bool verified)
         {
-            email = HttpUtility.HtmlEncode(email);
-            bool isGoogleUser = false;
+            //是否有此GoogleID
+            bool hasGoogleId = _repository.GetAll<Member>().Any(x => x.GoogleID == googleId && x.IsVerify == verified);
+            if (hasGoogleId)
+            {
+                return hasGoogleId;
+            }
             //是否有此gmail
             bool hasGmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == verified);
-            //是否有此GoogleID
-            bool hasGoogleLoginId = _repository.GetAll<Member>().Any(x => x.GoogleID == googleId && x.IsVerify == verified);
-            if (hasGmail || hasGoogleLoginId)
-            {
-                isGoogleUser = true;
-            }
-            return isGoogleUser;
+            return hasGmail;
         }
 
         /// <summary>
@@ -531,7 +529,7 @@ namespace ZoneRadar.Services
                     Phone = u.Phone,
                     Description = u.Description,
                     SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
+                    Photo = u.Photo == null ? "https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png" : u.Photo
                 };
                 //會員所擁有的廠所有場地
                 var sps = _repository.GetAll<Space>().Where(x => x.MemberID == memberId && x.SpaceStatus.SpaceStatusID == 2);
@@ -583,7 +581,7 @@ namespace ZoneRadar.Services
                     Phone = u.Phone,
                     Description = u.Description,
                     SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
+                    Photo = u.Photo == null ? "https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png" : u.Photo
                 };
 
                 //會員所收藏的場地
@@ -656,7 +654,7 @@ namespace ZoneRadar.Services
                     Phone = u.Phone,
                     Description = u.Description,
                     SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
+                    Photo = u.Photo == null ? "https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png" : u.Photo
                 };
                 //找出會員是否有租借場地並且顯示 出被場地主的評價
                 var review = _repository.GetAll<Review>().Where(x => x.ToHost == false && x.Order.MemberID == u.MemberID && x.Order.OrderStatusID == 4);
@@ -695,7 +693,7 @@ namespace ZoneRadar.Services
             var result = new ProfileViewModel()
             {
                 MemberID = p.MemberID,
-                Photo = p.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : p.Photo,
+                Photo = p.Photo == null ? "https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png" : p.Photo,
                 Name = p.Name,
                 Phone = p.Phone,
                 Email = p.Email,
