@@ -7,6 +7,7 @@ using ZoneRadar.Models;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Repositories;
 using ZoneRadar.Enums;
+using System.Data.Entity;
 
 namespace ZoneRadar.Services
 {
@@ -276,18 +277,21 @@ namespace ZoneRadar.Services
 
             if (!String.IsNullOrEmpty(Date))
             {
-                var startDate = DateTime.Parse(Date);
-                var dayOfWeek = (int)startDate.DayOfWeek;
+                var theDate = DateTime.Parse(Date);
+                var pickedStartDate = theDate.Date;
+                var pickedEndDate = pickedStartDate.AddDays(1).AddSeconds(-1);
+                var dayOfWeek = (int)theDate.DayOfWeek;
                 if (dayOfWeek == 0)
                 {
                     dayOfWeek = 7;
                 }
-                operatings = operatings.Where(x => x.OperatingDay == dayOfWeek);
-                orders = orders.Where(x => DateTime.Compare(x.StartDateTime, startDate) < 0 && DateTime.Compare(x.EndDateTime, startDate) > 0 && (x.Order.OrderStatusID == 2 || x.Order.OrderStatusID == 3));
 
-                var filteredBytDate = operatings.Select(x => x.Space).Distinct();
-                var unBookedSpaces = orders.Select(x => x.Order.Space).Distinct();
-                var filterByDate = filteredBytDate.Except(unBookedSpaces);
+                // 當天有營業
+                var filteredBytDate = operatings.Where(x => x.OperatingDay == dayOfWeek).Select(x => x.Space).Distinct();
+                // 篩選時間有成立訂單(篩選時間在訂單的開始與結束時間之間)
+                var bookedSpaces = orders.Where(x => pickedStartDate < x.StartDateTime && pickedEndDate > x.EndDateTime).Select(x => x.Order.Space).Distinct();
+                // 取得當天有營業且沒有訂單的場地
+                var filterByDate = filteredBytDate.Except(bookedSpaces);
 
                 spaces = spaces.Intersect(filterByDate);
             }
