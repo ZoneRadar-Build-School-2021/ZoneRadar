@@ -1069,8 +1069,8 @@ namespace ZoneRadar.Services
                 };
                 result.CleanRuleOptionsFourList.Add(cleanRuleTemp);
             }
-            /// <summary>
-            /// 營業時間 有被選的 (Amber) 
+            ///// <summary>
+            ///// 營業時間 有被選的 (Amber) 
             int[] OperatingDays = { 1, 2, 3, 4, 5, 6, 7 };
 
             var openDays = _repository.GetAll<Operating>().Where(x => x.SpaceID == spaceId).ToList();
@@ -1209,10 +1209,10 @@ namespace ZoneRadar.Services
 
                 }
                 result.SpaceoperatingDaysList.Add(operatingday);
-               
+
             }
 
-            var Operating = new List<SelectListItem> 
+            var Operating = new List<SelectListItem>
             {
             new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
             new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
@@ -1244,7 +1244,6 @@ namespace ZoneRadar.Services
         public AddSpaceViewModel CreateSpace(AddSpaceViewModel addSpaceViewModel)
 
         {
-
             var spacecity = addSpaceViewModel.CityID;
             var city = _repository.GetAll<City>().Where(x => x.CityName == spacecity).Select(x => x.CityID).FirstOrDefault();
             var space = new Space

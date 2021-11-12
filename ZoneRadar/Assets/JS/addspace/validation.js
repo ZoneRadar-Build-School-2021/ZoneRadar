@@ -234,37 +234,37 @@ function spaceNamecheck() {
 
 
 
-var maxlength = 1000;
-_editor = CKEDITOR.replace("Introduction");
-_editor.on('change', function (event) {
-    var oldhtml = _editor.document.getBody().getHtml();
-    var description = oldhtml.replace(/<.*?>/ig, "");
-    var etop = $("#cke_1_top");
-    var _slen = maxlength - description.length;
-    console.log(description.length);
-    var canwrite = $("<label id='canwrite'>可以輸入1000字</label>");
-    if (etop.find("#canwrite").length <250) {
-        let IntroductionNamecheck = document.querySelector("#IntroductionNamecheck");
-        IntroductionNamecheck.classList.remove('d-none');
-    } 
-    if (etop.find("#canwrite").length < 1) {
-        canwrite.css({ border: '1px #f1f1f1 solid', 'line-height': '28px', color: '#999' });
-        etop.prepend(canwrite);
-        etop.keypress
-    }
-    var _label = etop.find("#canwrite");
-    if (description.length > maxlength) {
-        //alert("最多可以输入"+maxlength+"個文字，您已達到最大字數限制");
-        _editor.setData(oldhtml);
-        _label.html("還可以輸入0字");
-    } else {
-        _label.html("還可以輸入" + _slen + "字");
-    }
-    if (description.length > 250) {
-        let IntroductionNamecheck = document.querySelector("#IntroductionNamecheck");
-        IntroductionNamecheck.classList.add('d-none');
-    }
-});
+//var maxlength = 1000;
+//_editor = CKEDITOR.replace("Introduction");
+//_editor.on('change', function (event) {
+//    var oldhtml = _editor.document.getBody().getHtml();
+//    var description = oldhtml.replace(/<.*?>/ig, "");
+//    var etop = $("#cke_1_top");
+//    var _slen = maxlength - description.length;
+//    console.log(description.length);
+//    var canwrite = $("<label id='canwrite'>可以輸入1000字</label>");
+//    if (etop.find("#canwrite").length <250) {
+//        let IntroductionNamecheck = document.querySelector("#IntroductionNamecheck");
+//        IntroductionNamecheck.classList.remove('d-none');
+//    } 
+//    if (etop.find("#canwrite").length < 1) {
+//        canwrite.css({ border: '1px #f1f1f1 solid', 'line-height': '28px', color: '#999' });
+//        etop.prepend(canwrite);
+//        etop.keypress
+//    }
+//    var _label = etop.find("#canwrite");
+//    if (description.length > maxlength) {
+//        //alert("最多可以输入"+maxlength+"個文字，您已達到最大字數限制");
+//        _editor.setData(oldhtml);
+//        _label.html("還可以輸入0字");
+//    } else {
+//        _label.html("還可以輸入" + _slen + "字");
+//    }
+//    if (description.length > 250) {
+//        let IntroductionNamecheck = document.querySelector("#IntroductionNamecheck");
+//        IntroductionNamecheck.classList.add('d-none');
+//    }
+//});
 
 
 
