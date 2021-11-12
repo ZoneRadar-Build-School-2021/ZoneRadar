@@ -84,7 +84,8 @@ let app = new Vue({
                     url: "/webapi/spaces/SaveImg",
                     method: 'POST',
                     data: ImgUrl
-                }).then(response =>
+                })
+                .then(response =>
                     console.log(response)
                 )
             })
@@ -92,10 +93,15 @@ let app = new Vue({
                 //...
             })
         },
-        removeimg() {
-            then(response =>
-                console.log(response)
-            ).catch(e => {
+        removeImg() {
+            axios({
+
+                method: 'DELETE'
+            })
+            .then(response => {
+                
+            })
+            .catch(e => {
                 //...
             })
         }

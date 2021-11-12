@@ -742,15 +742,9 @@ namespace ZoneRadar.Services
         /// <param name="SaveProfileImgVM"></param>
         public void RemoveProfilePhoto(SaveProfileImgViewModel SaveProfileImgVM)
         {
-            var oriimg = _repository.GetAll<Member>().First(x => x.MemberID == SaveProfileImgVM.MemberID);
-            var imgurl = SaveProfileImgVM.ProfileImgUrl;
-
-            //imgurl = "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con";
-
-            oriimg.Photo = imgurl;
-
-            //_repository.Update(oriimg);
-            _repository.Delete(imgurl);
+            var profileimg = _repository.GetAll<Member>().First(x => x.MemberID == SaveProfileImgVM.MemberID);
+            
+            _repository.Delete(profileimg);
             _repository.SaveChanges();
             _repository.Dispose();
         }

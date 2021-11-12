@@ -469,7 +469,7 @@ namespace ZoneRadar.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("RemoveImg")]
-        [AcceptVerbs("POST")]
+        [AcceptVerbs("DELETE")]
         public APIResponse RemoveImage(SaveProfileImgViewModel SaveProfileImgVM)
         {
             var response = new APIResponse();
