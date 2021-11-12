@@ -18,15 +18,22 @@ namespace ZoneRadar.Controllers
     public class JSONAPIController : ApiController
     {
         private readonly SpaceService _spaceService;
+        private readonly ReviewService _reviewService;
         private readonly PreOrderService _preOrderService;
         private readonly ZONERadarRepository _repository;
         private FilterViewModel _filterDataFromIndex;
+        private readonly EcpayMentService _ecpaymentservice;
+        private readonly MemberService _memberService;
+
         public JSONAPIController()
         {
+            _ecpaymentservice = new EcpayMentService();
             _spaceService = new SpaceService();
+            _reviewService = new ReviewService();
             _preOrderService = new PreOrderService();
             _repository = new ZONERadarRepository();
             _filterDataFromIndex = new FilterViewModel();
+            _memberService = new MemberService();
         }
 
         /// <summary>
@@ -383,5 +390,94 @@ namespace ZoneRadar.Controllers
             }
         }
 
+        /// <summary>
+        /// 取得cloudinary參數2(昶安)
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetImagePrams")]
+        [AcceptVerbs("GET")]
+        public APIResponse GetImagePrams()
+        {
+            var response = new APIResponse();
+            try
+            {
+                int memberID = int.Parse(User.Identity.Name);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = _memberService.GetProfilePhotoFromDB(memberID);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = ex.Message;
+                response.Response = null;
+
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// 將上傳照片存入資料庫(昶安)
+        /// </summary>
+        /// <param name="SaveProfileImgVM"></param>
+        /// <returns></returns>
+        [Route("SaveImg")]
+        [AcceptVerbs("POST")]
+        public APIResponse SaveImage(SaveProfileImgViewModel SaveProfileImgVM)
+        {
+            var response = new APIResponse();
+            try
+            {
+                SaveProfileImgVM.MemberID = int.Parse(User.Identity.Name);
+                _memberService.ReflashProfilePhotoFromDB(SaveProfileImgVM);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = null;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = ex.Message;
+                response.Response = null;
+
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// 移除大頭照回預設頭像(昶安)
+        /// </summary>
+        /// <returns></returns>
+        [Route("RemoveImg")]
+        [AcceptVerbs("DELETE")]
+        public APIResponse RemoveImage(SaveProfileImgViewModel SaveProfileImgVM)
+        {
+            var response = new APIResponse();
+            try
+            {
+                SaveProfileImgVM.MemberID = int.Parse(User.Identity.Name);
+                _memberService.RemoveProfilePhoto(SaveProfileImgVM);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = null;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = ex.Message;
+                response.Response = null;
+
+                return response;
+            }
+        }
     }
 }

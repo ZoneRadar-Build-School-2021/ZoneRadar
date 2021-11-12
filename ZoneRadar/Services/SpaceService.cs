@@ -7,6 +7,7 @@ using ZoneRadar.Models;
 using ZoneRadar.Models.ViewModels;
 using ZoneRadar.Repositories;
 using ZoneRadar.Enums;
+using System.Data.Entity;
 
 namespace ZoneRadar.Services
 {
@@ -193,7 +194,8 @@ namespace ZoneRadar.Services
                 CancellationInfo = targetSpace.Cancellation.CancellationDetail,
                 HoursForDiscount = spaceDiscounts == null ? 0 : spaceDiscounts.Hour,
                 Discount = spaceDiscounts == null ? 0 : decimal.Round(1 - spaceDiscounts.Discount, 2),
-                HostEmail = targetSpace.Member.Email
+                HostEmail = targetSpace.Member.Email,
+                OtherAmenity = targetSpace.OtherAmenity
             };
 
             return result;
@@ -275,18 +277,21 @@ namespace ZoneRadar.Services
 
             if (!String.IsNullOrEmpty(Date))
             {
-                var startDate = DateTime.Parse(Date);
-                var dayOfWeek = (int)startDate.DayOfWeek;
+                var theDate = DateTime.Parse(Date);
+                var pickedStartDate = theDate.Date;
+                var pickedEndDate = pickedStartDate.AddDays(1).AddSeconds(-1);
+                var dayOfWeek = (int)theDate.DayOfWeek;
                 if (dayOfWeek == 0)
                 {
                     dayOfWeek = 7;
                 }
-                operatings = operatings.Where(x => x.OperatingDay == dayOfWeek);
-                orders = orders.Where(x => DateTime.Compare(x.StartDateTime, startDate) < 0 && DateTime.Compare(x.EndDateTime, startDate) > 0 && (x.Order.OrderStatusID == 2 || x.Order.OrderStatusID == 3));
 
-                var filteredBytDate = operatings.Select(x => x.Space).Distinct();
-                var unBookedSpaces = orders.Select(x => x.Order.Space).Distinct();
-                var filterByDate = filteredBytDate.Except(unBookedSpaces);
+                // 當天有營業
+                var filteredBytDate = operatings.Where(x => x.OperatingDay == dayOfWeek).Select(x => x.Space).Distinct();
+                // 篩選時間有成立訂單(篩選時間在訂單的開始與結束時間之間)
+                var bookedSpaces = orders.Where(x => pickedStartDate < x.StartDateTime && pickedEndDate > x.EndDateTime).Select(x => x.Order.Space).Distinct();
+                // 取得當天有營業且沒有訂單的場地
+                var filterByDate = filteredBytDate.Except(bookedSpaces);
 
                 spaces = spaces.Intersect(filterByDate);
             }
@@ -1068,8 +1073,8 @@ namespace ZoneRadar.Services
                 };
                 result.CleanRuleOptionsFourList.Add(cleanRuleTemp);
             }
-            /// <summary>
-            /// 營業時間 有被選的 (Amber) 
+            ///// <summary>
+            ///// 營業時間 有被選的 (Amber) 
             int[] OperatingDays = { 1, 2, 3, 4, 5, 6, 7 };
 
             var openDays = _repository.GetAll<Operating>().Where(x => x.SpaceID == spaceId).ToList();
@@ -1208,10 +1213,10 @@ namespace ZoneRadar.Services
 
                 }
                 result.SpaceoperatingDaysList.Add(operatingday);
-               
+
             }
 
-            var Operating = new List<SelectListItem> 
+            var Operating = new List<SelectListItem>
             {
             new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
             new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
@@ -1243,7 +1248,6 @@ namespace ZoneRadar.Services
         public AddSpaceViewModel CreateSpace(AddSpaceViewModel addSpaceViewModel)
 
         {
-
             var spacecity = addSpaceViewModel.CityID;
             var city = _repository.GetAll<City>().Where(x => x.CityName == spacecity).Select(x => x.CityID).FirstOrDefault();
             var space = new Space
@@ -1400,12 +1404,7 @@ namespace ZoneRadar.Services
             _repository.Update<SpaceDiscount>(SpaceDiscountID);
             _repository.SaveChanges();
 
-            //var imgUpdate = _repository.GetAll<SpacePhoto>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID&& x.Sort==2).FirstOrDefault();
-            //if (imgUpdate!=null)
-            //{
-            //    _repository.Delete<SpacePhoto>(imgUpdate);
-            //    _repository.SaveChanges();
-            //}
+           
 
 
             var typeOld = _repository.GetAll<SpaceType>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID).ToList();
@@ -1415,7 +1414,7 @@ namespace ZoneRadar.Services
                 _repository.Delete<SpaceType>(item);
                 _repository.SaveChanges();
             }
-            //todo
+           
 
             List<SpaceType> type = new List<SpaceType>();
             foreach (var item in addSpaceViewModel.TypeDetailID)
@@ -1426,12 +1425,7 @@ namespace ZoneRadar.Services
             _repository.CreateRange<SpaceType>(type);
             _repository.SaveChanges();
 
-            //var cleaningProtocolOld = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID).ToList();
-            //foreach (var item in cleaningProtocolOld)
-            //{
-            //    _repository.Delete<CleaningProtocol>(item);
-            //    _repository.SaveChanges();
-            //}
+           
             var cleaningProtocolOld = _repository.GetAll<CleaningProtocol>().Where(x => x.SpaceID == addSpaceViewModel.SpaceID).ToList();
             foreach (var item in cleaningProtocolOld)
             {

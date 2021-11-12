@@ -86,3 +86,81 @@ img {
     font-size: 2.2rem;
   }
 }
+/* 驗證失敗元素的樣式 */
+input:invalid {
+    border-color: #049DD9;
+    background-color: #fff;
+}
+
+input:focus:invalid {
+    outline: none;
+}
+
+
+
+
+input:valid {
+    border-color: #049DD9;
+    background-color: #fff;
+}
+
+input:focus:valid {
+    outline: #049DD9;
+}
+
+/*驗證通過*/
+.form-select.is-valid, .was-validated .form-select:valid {
+    border-color: #049DD9 !important;
+}
+.form-select.is-valid, .was-validated .form-select:valid:focus {
+    border-color: #049DD9 !important;
+    box-shadow: 0 0 0 0.25rem rgb(25 135 84 / 0%)
+    !important;
+}
+.was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"] {
+        
+    background-image: url() !important;
+}
+.was-validated .form-control:valid {
+    border-color: #049DD9 !important;
+    padding-right: calc(1.5 em + 0.75 rem );
+    background-image: url() !important;
+    background-color: #fff !important;
+}
+.was-validated .form-control:valid:focus {
+    border-color: #049DD9 !important;
+    box-shadow: 0 0 0 0.25rem rgb(25 135 84 / 0%) !important;
+    background-image: url() !important;
+}
+#address.form-control:valid {
+    background-color: #fff !important;
+}
+
+/*input:-internal-autofill-selected {
+    appearance: menulist-button;
+    background-image: none !important;
+    background-color: #fff !important;
+    color: -internal-light-dark(black, white) !important;
+}
+*//*checkbox 驗證通過
+*/
+.form-check-input.is-valid:checked, .was-validated .form-check-input:valid:checked {
+    border-color: #049DD9 !important;
+}
+.was-validated .form-check-input:valid:checked {
+    border-color: #049DD9 !important;
+}
+.was-validated .form-check-input:valid ~ .form-check-label {
+    color: black !important;
+}
+.form-check-input.is-valid:checked, .was-validated .form-check-input:valid:checked {
+    background-color: #049DD9 !important;
+    border-color: #049DD9 !important;
+}
+input {
+    box-shadow: none !important;
+
+}
+.form-check-input.is-valid, .was-validated .form-check-input:valid {
+    border-color: #049DD9 !important;
+}
