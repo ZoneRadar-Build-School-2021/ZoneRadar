@@ -30,8 +30,8 @@ namespace ZoneRadar.Models.ViewModels
 
         public List<AmenityAraeOne> amenityAraeOneList { get; set; }
         public List<AmenityAraeTwo> amenityAraeTwoList { get; set; }
-        public List<AmenityAraeThree> amenityAraeThreeList { get; set; }
 
+        public List<OtherAmenitytext> OtherAmenityList { get; set; }
 
         public List<SomeOnesRules> SomeOnesRulesList { get; set; }
 
@@ -102,6 +102,7 @@ namespace ZoneRadar.Models.ViewModels
         public DateTime PublishTime { get; set; }
 
         public bool Discontinued { get; set; }
+        public string OtherAmenitys { get; set; }
         public virtual Cancellation Cancellation { get; set; }
 
         public virtual Country Country { get; set; }

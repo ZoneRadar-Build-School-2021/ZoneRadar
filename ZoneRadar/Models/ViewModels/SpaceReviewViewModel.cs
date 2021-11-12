@@ -14,5 +14,6 @@ namespace ZoneRadar.Models.ViewModels
         public string ReviewedMemberName { get; set; }
         public string ReviewedMemberPhoto { get; set; }
         public int UserID { get; set; }
+        public int NotLoadedCount { get; set; }
     }
 }

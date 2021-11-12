@@ -18,6 +18,7 @@ namespace ZoneRadar.Controllers
     public class JSONAPIController : ApiController
     {
         private readonly SpaceService _spaceService;
+        private readonly ReviewService _reviewService;
         private readonly PreOrderService _preOrderService;
         private readonly ZONERadarRepository _repository;
         private FilterViewModel _filterDataFromIndex;
@@ -28,6 +29,7 @@ namespace ZoneRadar.Controllers
         {
             _ecpaymentservice = new EcpayMentService();
             _spaceService = new SpaceService();
+            _reviewService = new ReviewService();
             _preOrderService = new PreOrderService();
             _repository = new ZONERadarRepository();
             _filterDataFromIndex = new FilterViewModel();
@@ -327,22 +329,6 @@ namespace ZoneRadar.Controllers
 
                 return response;
             }
-        }
-
-        /// <summary>
-        /// 回復綠界
-        /// </summary>
-        /// <param name="EcpayViewModel"></param>
-        /// <returns></returns>
-        [Route("api/JSONAPI/GetEcpayData")]
-        [HttpPost]
-        public IHttpActionResult GetEcpayData(EcpayViewModel model) 
-        {
-            if (model.RtnCode == 1)
-            {
-                _ecpaymentservice.EditOrderStatus(model);
-            }
-            return Ok("1|OK");
         }
 
         /// <summary>

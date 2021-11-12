@@ -19,7 +19,7 @@ namespace ZoneRadar.Models.ViewModels
         [Required]
         public int DistrictID { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "請填寫地址")]
         public string Address { get; set; }
         public int MemberID { get; set; }
         public string SpaceName { get; set; }
@@ -38,7 +38,7 @@ namespace ZoneRadar.Models.ViewModels
         public string Lng{ get; set; }
         public int SpaceStatusID { get; set; }
         public DateTime DiscontinuedDate { get; set; }
-
+        public string OtherAmenity { get; set; }
 
         public List<int> OperatingDay { get; set; }
         public string Hours1 { get; set; }

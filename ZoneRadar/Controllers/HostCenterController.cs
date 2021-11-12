@@ -40,24 +40,27 @@ namespace ZoneRadar.Controllers
             var isAuthenticated = int.TryParse(User.Identity.Name, out userId);
             if (isAuthenticated)
             {
-                var model = new SpaceViewModel( )
+                if (ModelState.IsValid)
                 {
-                    SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
-                    cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
+                    var model = new SpaceViewModel()
+                    {
+                        SpaceTypeAraeList = _spaceService.ShowSpaceType().SpaceTypeAraeList,
+                        cancellationAraesList = _spaceService.ShowCancellations().cancellationAraesList,
 
-                    amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
-                    amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
-                    amenityAraeThreeList = _spaceService.ShowAmenityByIdThree().amenityAraeThreeList,
+                        amenityAraeOneList = _spaceService.ShowAmenityByIdOne().amenityAraeOneList,
+                        amenityAraeTwoList = _spaceService.ShowAmenityByIdTwo().amenityAraeTwoList,
 
-                    CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
-                    CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
-                    CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
-                    CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
-                    //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
-                    SpaceId=_spaceService.GetSpaceId().SpaceId,
-                    Operating = _spaceService.Operating(),
-                };
-                return View(model);
+                        CleanFisrtPartList = _spaceService.ShowCleaningCategoryByIdOne().CleanFisrtPartList,
+                        CleanSecPartList = _spaceService.ShowCleaningCategoryByIdTwo().CleanSecPartList,
+                        CleanThirdPartList = _spaceService.ShowCleaningCategoryByIdThree().CleanThirdPartList,
+                        CleanFourdPartList = _spaceService.ShowCleaningCategoryByIdFour().CleanFourdPartList,
+                        //SomeOnesSpaceNameList = _spaceService.ShowOwnerName().SomeOnesSpaceNameList,
+                        SpaceId = _spaceService.GetSpaceId().SpaceId,
+                        Operating = _spaceService.Operating(),
+                    };
+                    return View(model);
+
+                }
             }
            
             return View();
@@ -136,6 +139,18 @@ namespace ZoneRadar.Controllers
             var userid = int.Parse(User.Identity.Name);
             var model = _orderService.GetHostCenterHistoryVM(userid);
             return View(model);
+        }
+
+        /// <summary>
+        /// 場地主訂單 - 歷史訂單(Nick) 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult History(HostCenterHistoryViewModel model)
+        {
+            var userid = int.Parse(User.Identity.Name);
+            var model2 = _orderService.GetHostCenterHistoryVM(model,userid);
+            return View(model2);
         }
 
         /// <summary>
@@ -272,7 +287,7 @@ namespace ZoneRadar.Controllers
 
             if (userid == 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("BadRequest", "Home"); ;
             }
             var model = _orderService.GetHostCenterHistoryVM(userid);
 

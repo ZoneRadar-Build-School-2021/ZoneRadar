@@ -1,8 +1,4 @@
-﻿/*/*const { checked } = require("modernizr");*/
-
-/*const { forEach } = require("angular");*/
-
-//停車場的 是否
+﻿//停車場的 是否
 var yesflag = 1;
 var parkingPart = document.querySelector("#parkingPart");
 let flexSwitchCheckDefaultYes = document.querySelector("#flexSwitchCheckDefaultYes");
@@ -36,7 +32,6 @@ Yesprojection.addEventListener('click', function () {
 
 //datlist
 //datlist2
-console.log(datlist[0].OperatingDay);
 
 
 //monday~Sun
@@ -117,7 +112,6 @@ let compare=[1,2,3,4,5,6,7]
 for (var i = 0; i < datlist.length; i++) {
     Newdatalist.push(datlist[i].OperatingDay);
 }
-console.log(Newdatalist);
 
 for (var i = 0; i < Newdatalist.length; i++) {
     switch (Newdatalist[i]) {
@@ -291,7 +285,6 @@ for (var i = 0; i < Newdatalist.length; i++) {
             }
             break;
         default:
-            console.log(`Sorry, we are out of `);
             break;
 
     }
@@ -418,7 +411,6 @@ for (var i = 0; i < Newdatalist.length; i++) {
             TueHours.checked = false;
             StateTueS.disabled = true;
             StateTueE.disabled = true;
-            console.log("關")
         }
         else if (TueOpen.checked == true) {
             flagTue = 1;
@@ -427,7 +419,6 @@ for (var i = 0; i < Newdatalist.length; i++) {
             StateTueS.disabled = true;
             StateTueE.disabled = true;
             flagTue = 0;
-            console.log("打開")
         }
 
     });
@@ -525,14 +516,12 @@ for (var i = 0; i < Newdatalist.length; i++) {
             WedHours.checked = false;
             StateWedS.disabled = true;
             StateWedE.disabled = true;
-            console.log("關")
         }
         else if (WedOpen.checked == true) {
             WedAllDay.disabled = false;
             WedHours.disabled = false;
             StateWedS.disabled = true;
             StateWedE.disabled = true;
-            console.log("打開")
         }
     });
     WedAllDay.addEventListener("click", function () {
@@ -633,14 +622,12 @@ for (var i = 0; i < Newdatalist.length; i++) {
             ThuHours.checked = false;
             StateThuS.disabled = true;
             StateThuE.disabled = true;
-            console.log("關")
         }
         else if (ThuOpen.checked == true) {
             ThuAllDay.disabled = false;
             ThuHours.disabled = false;
             StateThuS.disabled = true;
             StateThuE.disabled = true;
-            console.log("打開")
         }
     });
     ThuAllDay.addEventListener("click", function () {
@@ -739,14 +726,12 @@ for (var i = 0; i < Newdatalist.length; i++) {
             FriHours.checked = false;
             StateThuS.disabled = true;
             StateThuE.disabled = true;
-            console.log("關")
         }
         else if (FriOpen.checked == true) {
             FriAllDay.disabled = false;
             FriHours.disabled = false;
             StateFriS.disabled = true;
             StateFriE.disabled = true;
-            console.log("打開")
         }
     });
     FriAllDay.addEventListener("click", function () {
@@ -842,14 +827,12 @@ for (var i = 0; i < Newdatalist.length; i++) {
             SatHours.checked = false;
             StateSatS.disabled = true;
             StateSatE.disabled = true;
-            console.log("關")
         }
         else if (SatOpen.checked == true) {
             SatAllDay.disabled = false;
             SatHours.disabled = false;
             StateSatS.disabled = true;
             StateSatE.disabled = true;
-            console.log("打開")
         }
     });
     SatAllDay.addEventListener("click", function () {
@@ -946,14 +929,12 @@ for (var i = 0; i < Newdatalist.length; i++) {
             SunHours.checked = false;
             StateSunS.disabled = true;
             StateSunE.disabled = true;
-            console.log("關")
         }
         else if (SunOpen.checked == true) {
             SunAllDay.disabled = false;
             SunHours.disabled = false;
             StateSunS.disabled = true;
             StateSunE.disabled = true;
-            console.log("打開")
         }
     });
     SunAllDay.addEventListener("click", function () {
