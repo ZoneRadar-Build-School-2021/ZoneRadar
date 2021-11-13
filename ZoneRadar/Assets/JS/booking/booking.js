@@ -266,7 +266,7 @@
       minTime: todayMinTime,
       maxTime: todayMaxTime,
       defaultDate: operationStartArr[dayIndex],
-      /*disableMobile: "true",*/
+      disableMobile: "true",
       onReady: function (selectedDates, dateStr, instance) {
         // 暫存預設的起始時間
         startTime = dateStr;
@@ -316,7 +316,7 @@
       minTime: todayMinTime,
       maxTime: todayMaxTime,
       defaultDate: todayMinTime,
-      /*disableMobile: "true",*/
+      disableMobile: "true",
       onReady: function (selectedDates, dateStr, instance) {
         // 暫存結束時間
         endTime = dateStr;
