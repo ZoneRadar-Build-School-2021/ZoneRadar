@@ -106,8 +106,9 @@ a {
     color: #cccccc;
 }
 
-.review-brief .user-pic {
-    max-width: 50px;
+.review-brief .user-pic img {
+    width: 50px;
+    height: 50px;
 }
 
 .review-brief-content::before {
@@ -388,8 +389,8 @@ a {
 }
 
 .review-item .user-pic img{
-    width: 45px !important;
-    height: 45px !important;
+    width: 45px;
+    height: 45px;
 }
 
 @media screen and (min-width: 768px) {

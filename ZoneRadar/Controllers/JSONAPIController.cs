@@ -125,9 +125,22 @@ namespace ZoneRadar.Controllers
             {
                 var queriedSpaces = _spaceService.GetFilteredSpaces(query);
 
+                // 篩選後所有場地數量
+                var totalCount = queriedSpaces.Count();
+                // 前端要求的筆數
+                var addCount = query.AddCount;
+                // 已經送出的筆數
+                var sentCount = query.SentCount;
+                // 已經渲染成功筆數，第一次為0
+                var loadedCount = 0 + sentCount;
+                // 還剩下未送出的筆數
+                var notLoadedCount = (totalCount - loadedCount - addCount).ToString();
+                // 跳過已經送出的，取要求的
+                var result = queriedSpaces.Skip(loadedCount).Take(addCount);
+
                 response.Status = "Success";
-                response.Message = string.Empty;
-                response.Response = queriedSpaces;
+                response.Message = notLoadedCount;
+                response.Response = result;
 
                 return response;
             }

@@ -2,6 +2,8 @@
 (function () {
   // ------主要節點
   const cardListNode = document.querySelector('.card-list');
+  const spinnerRow = document.querySelector('.spinner-row');
+  const logo = document.querySelector('footer .logo');
   // ------filter bar節點
   const cityOptionBarNode = document.querySelector('#web-city-filter');
   const districtOptionBarNode = document.querySelector('#web-district-filter');
@@ -34,23 +36,27 @@
     Amenities: [],
     Area: '',
     Keywords: '',
+    SentCount: 0,
+    AddCount: 0,
   };
-  // ------全域變數: 從首頁傳進來的參數
-  let keywords = {};
-  if (sessionStorage.getItem('filterVm')) {
-    keywords = JSON.parse(sessionStorage.getItem('filterVm'));
-  }
-  let type = keywords.SelectedType || '';
-  let city = keywords.SelectedCity || '';
-  let date = keywords.SelectedDate || '';
-  console.log({ type }, { city }, { date });
-  sessionStorage.clear();
-  // ------全域變數: url
-  const getFilterUrl = `/webapi/spaces/GetFilterData?type=${type}&city=${city}&date=${date}`;
+  let lastCount = 0;
   // 日曆中文化
   flatpickr.localize(flatpickr.l10ns.zh_tw);
 
   // ------functions定義
+  // 檢查使用裝置
+  function checkUsersDevice() {
+    const mobileDevice = ['Android', 'webOS', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Windows Phone']
+    let isMobileDevice = mobileDevice.some(e => navigator.userAgent.match(e))
+    if (isMobileDevice) {
+      requestOfSpaceNum = 6;
+      filter.AddCount = requestOfSpaceNum;
+    } else {
+      requestOfSpaceNum = 12;
+      filter.AddCount = requestOfSpaceNum;
+    }
+  }
+
   // 加入placeholder
   function setPlaceholder() {
     for (i = 0; i <= 7; i++) {
@@ -67,8 +73,44 @@
     });
   }
 
+  // 創建observer
+  function createObserver() {
+    const options = {
+      root: document.querySelector('#elementA'),
+      rootMargin: '0px',
+      threshold: 1.0,
+    };
+
+    const observer = new IntersectionObserver(entries => {
+      // 取得相交狀態
+      entries.forEach(item => {
+        if (lastCount <= 0) {
+          return;
+        }
+        if (item.isIntersecting && lastCount > 0) {
+          spinnerRow.classList.remove('visually-hidden');
+          setTimeout(() => {
+            scrollForSpaces(filter);
+          }, 1500);
+        }
+      });
+    }, options);
+
+    observer.observe(logo);
+  }
+
   // 取得filter所需的資料
   function getFilterData() {
+    let keywords = {};
+    if (sessionStorage.getItem('filterVm')) {
+      keywords = JSON.parse(sessionStorage.getItem('filterVm'));
+    }
+    let type = keywords.SelectedType || '';
+    let city = keywords.SelectedCity || '';
+    let date = keywords.SelectedDate || '';
+    sessionStorage.clear();
+    const getFilterUrl = `/webapi/spaces/GetFilterData?type=${type}&city=${city}&date=${date}`;
+
     axios.get(getFilterUrl).then(res => {
       let source = res.data.Response;
       // 取得從首頁傳來的篩選資料，若點選放大鏡進入則為空值
@@ -82,7 +124,8 @@
       filterAmenityIconList = source.AmenityIconList;
 
       setBarAndModalFilter();
-      requestForSpaces(filter);
+      filterForSpaces(filter);
+      createObserver();
     }).catch(err => console.log(err))
   }
 
@@ -100,7 +143,7 @@
         filter.Date = dateStr;
         // 如果是電腦版，立刻渲染場地
         if (this.input.id === 'web-date-filter') {
-          requestForSpaces(filter);
+          filterForSpaces(filter);
         }
       },
     });
@@ -123,12 +166,12 @@
     })
     searchingBarBtn.addEventListener('click', function (e) {
       e.preventDefault();
-      requestForSpaces(filter);
+      filterForSpaces(filter);
     })
     // 按Enter搜尋
     window.addEventListener('keyup', function (e) {
       if (e.key !== 'Enter') return;
-      requestForSpaces(filter);
+      filterForSpaces(filter);
     });
     // 更多選項監聽事件
     filterBtn.addEventListener('click', setFilterBtn);
@@ -193,7 +236,7 @@
     filter.District = '';
     // 如果是來自電腦版filter，立刻渲染畫面
     if (e.target.id === 'web-city-filter') {
-      requestForSpaces(filter);
+      filterForSpaces(filter);
     }
 
     // 設定鄉鎮區選單
@@ -230,7 +273,7 @@
     };
     // 如果是來自電腦版filter，立刻渲染畫面
     if (this.id === 'web-district-filter') {
-      requestForSpaces(filter);
+      filterForSpaces(filter);
     }
   }
 
@@ -266,7 +309,7 @@
     }
     // 如果是電腦版，立刻渲染畫面
     if (e.target.id === 'web-type-filter') {
-      requestForSpaces(filter);
+      filterForSpaces(filter);
     }
   }
 
@@ -372,7 +415,7 @@
       filter.Date = '';
     }
 
-    requestForSpaces(filter);
+    filterForSpaces(filter);
     bootstrap.Modal.getOrCreateInstance('#filter-modal').hide();
     document.querySelector('#filter-modal .save-btn').removeEventListener('click', saveModalFilter)
     this.removeEventListener('click', clearModalFilter)
@@ -385,34 +428,52 @@
       filter.Amenities.push(amenity.innerText);
     });
 
-    requestForSpaces(filter);
+    filterForSpaces(filter);
     bootstrap.Modal.getOrCreateInstance('#filter-modal').hide();
     document.querySelector('#filter-modal .clear-btn').removeEventListener('click', clearModalFilter)
     this.removeEventListener('click', saveModalFilter);
   }
 
-  // 跟後端要場地資料
-  function requestForSpaces(filter) {
-    console.log(filter);
+  // 篩選時發出請求
+  function filterForSpaces(filter = {}) {
     cardListNode.innerHTML = '';
+    filter.SentCount = 0;
     setPlaceholder();
+
     setTimeout(() => {
       axios.post('/webapi/spaces/GetFilteredSpaces', filter)
         .then(res => {
-          removePlaceholder();
+          lastCount = +(res.data.Message);
           let spaceList = res.data.Response;
-          if (!spaceList.length) {
+          removePlaceholder();
+
+          if (!spaceList || spaceList.length === 0) {
             showNoResult();
           } else {
             renderSpaceCards(spaceList);
           }
         })
-    }, 1000);
+    }, 500);
+  }
+
+  // 滾動時發出請求
+  function scrollForSpaces(filter = {}) {
+    if (document.querySelector('.no-result-container')) {
+      cardListNode.innerHTML = '';
+    }
+
+    filter.SentCount += requestOfSpaceNum;
+    axios.post('/webapi/spaces/GetFilteredSpaces', filter).then(res => {
+      lastCount = +(res.data.Message);
+      let spaceList = res.data.Response;
+
+      renderSpaceCards(spaceList);
+      spinnerRow.classList.add('visually-hidden');
+    }).catch(err => console.log(err))
   }
 
   // 渲染場地
   function renderSpaceCards(spaceList) {
-
     spaceList.forEach(space => {
       const templateClone = document.querySelector('#card-template').content.cloneNode(true);
       const venueLink = templateClone.querySelector('.card-link');
@@ -489,13 +550,14 @@
   // 找不到場地
   function showNoResult() {
     cardListNode.innerHTML = '';
-    let noResult = document.querySelector('#no-result').content.cloneNode(true);
+    let noResult = document.querySelector('#no-result-template').content.cloneNode(true);
     cardListNode.appendChild(noResult)
   }
 
+
   // ------執行區
+  checkUsersDevice();
   setPlaceholder();
   getFilterData();
-
 
 })();
