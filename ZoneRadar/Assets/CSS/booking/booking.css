@@ -393,6 +393,10 @@ a {
     height: 45px;
 }
 
+.hide {
+    visibility: hidden;
+}
+
 @media screen and (min-width: 768px) {
     .venue-img {
         padding-bottom: 44%;

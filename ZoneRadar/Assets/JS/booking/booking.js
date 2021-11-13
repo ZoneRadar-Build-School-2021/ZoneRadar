@@ -52,6 +52,12 @@
     spaceID = sessionStorage.getItem('theKey');
     sessionStorage.clear();
   }
+  let inputGroups = {
+    dateList: [],
+    attendeeList: [],
+    startList: [],
+    endList: [],
+  }
   let preOrderObj = {
     DatesArr: [],
     AttendeesArr: [],
@@ -177,7 +183,7 @@
         function (date) {
           return (operationDayArr.indexOf(date.getDay()) === -1 ||
             orderDateArr.indexOf(dayjs(date).format(dateFormat)) !== -1 ||
-            dayjs(date).format(dateFormat) === dayjs().format(dateFormat));
+            dayjs(date).format(dateFormat) === dayjs().format(dateFormat))
         }
       ],
       onChange: function (selectedDates, dateStr, instance) {
@@ -193,10 +199,11 @@
         setStartTime(startTimeNode, endTimeNode);
         // input來自第幾幾張卡片
         let whichCard = instance.input.parentNode.parentNode.classList[2];
-        whichCardIndex = whichCard.split('-')[1];
+        whichCardIndex = +(whichCard.split('-')[1]);
         // 確認是否開放加一天
-        inputGroups = [selectedDate, attendee, startTime, endTime];
-        checkExtendDayBtn(inputGroups, whichCardIndex);
+        inputGroups.dateList[whichCardIndex] = selectedDate;
+        checkExtendDayBtn(inputGroups);
+        checkSameDate(inputGroups, instance);
       },
     });
   }
@@ -210,13 +217,16 @@
         return;
       }
 
+      let input = this;
       let parentNode = this.parentNode.parentNode;
       let validateRow = parentNode.querySelector('.validate-row');
+      let validateText = validateRow.querySelector('.attendee-validate');
       // 只能輸入數字
       // 如果人數 > 50，數字顯示50
       if (this.value > capacity) {
         this.classList.add('not-validate');
         validateRow.classList.remove('d-none');
+        validateText.classList.remove('hide');
 
         submitBtn.setAttribute('disabled', '');
         extendDayBtn.setAttribute('disabled', '');
@@ -224,6 +234,7 @@
       } else {
         this.classList.remove('not-validate');
         validateRow.classList.add('d-none');
+        validateText.classList.add('hide');
 
         submitBtn.removeAttribute('disabled');
         extendDayBtn.removeAttribute('disabled');
@@ -231,9 +242,9 @@
       // 暫存參加人數
       attendee = this.value;
       let whichCard = e.target.parentNode.parentNode.classList[2];
-      whichCardIndex = whichCard.split('-')[1];
+      whichCardIndex = +(whichCard.split('-')[1]);
       // 確認是否開放加一天
-      inputGroups = [selectedDate, attendee, startTime, endTime];
+      inputGroups.attendeeList[whichCardIndex] = attendee;
       checkExtendDayBtn(inputGroups);
     })
   }
@@ -262,17 +273,25 @@
         // 設定結束時間
         setEndTime(endTimeNode);
         endTimeNode.removeAttribute('disabled');
+        // 變動來自第幾幾張卡片
+        let whichCard = instance.input.parentNode.parentNode.classList[2];
+        whichCardIndex = +(whichCard.split('-')[1]);
+        // 設定結束時間
+        setEndTime(endTimeNode);
+        // 確認是否開放加一天
+        inputGroups.startList[whichCardIndex] = startTime;
+        checkExtendDayBtn(inputGroups);
       },
       onClose: function (selectedDates, dateStr, instance) {
         // 暫存所選開始時間
         startTime = dateStr;
         // 變動來自第幾幾張卡片
         let whichCard = instance.input.parentNode.parentNode.classList[2];
-        whichCardIndex = whichCard.split('-')[1];
+        whichCardIndex = +(whichCard.split('-')[1]);
         // 設定結束時間
         setEndTime(endTimeNode);
         // 確認是否開放加一天
-        inputGroups = [selectedDate, attendee, startTime, endTime];
+        inputGroups.startList[whichCardIndex] = startTime;
         checkExtendDayBtn(inputGroups);
       },
     });
@@ -301,15 +320,21 @@
       onReady: function (selectedDates, dateStr, instance) {
         // 暫存結束時間
         endTime = dateStr;
+        // 值來自第幾幾張卡片
+        let whichCard = instance.input.parentNode.parentNode.classList[2];
+        whichCardIndex = whichCard.split('-')[1];
+        // 確認是否開放加一天
+        inputGroups.endList[whichCardIndex] = endTime;
+        checkExtendDayBtn(inputGroups);
       },
       onClose: function (selectedDates, dateStr, instance) {
         // 暫存結束時間
         endTime = dateStr;
         // 值來自第幾幾張卡片
         let whichCard = instance.input.parentNode.parentNode.classList[2];
-        whichCardIndex = whichCard.split('-')[1];
+        whichCardIndex = +(whichCard.split('-')[1]);
         // 確認是否開放加一天
-        inputGroups = [selectedDate, attendee, startTime, endTime];
+        inputGroups.endList[whichCardIndex] = endTime;
         checkExtendDayBtn(inputGroups);
       },
     });
@@ -318,24 +343,48 @@
   function checkExtendDayBtn(inputGroups) {
     let trueArr = [];
     // 判斷傳入的判斷陣列是否都有值
-    inputGroups.forEach(item => {
-      if (item) {
+    Object.values(inputGroups).forEach(list => {
+      if (list.length === +(whichCardIndex + 1)) {
         trueArr.push(true);
       }
     })
+
+    // 儲存日期、人數和時間到preOrderObj物件裡
+    preOrderObj.DatesArr[whichCardIndex] = inputGroups.dateList[whichCardIndex];
+    preOrderObj.AttendeesArr[whichCardIndex] = inputGroups.attendeeList[whichCardIndex];
+    preOrderObj.StartTimeArr[whichCardIndex] = inputGroups.startList[whichCardIndex];
+    preOrderObj.EndTimeArr[whichCardIndex] = inputGroups.endList[whichCardIndex];
 
     // 如果trueArr的長度為四
     if (trueArr.length === 4) {
       // 打開加一天和送出鈕
       extendDayBtn.removeAttribute('disabled');
       submitBtn.removeAttribute('disabled');
-      // 儲存日期、人數和時間到preOrderObj物件裡
-      preOrderObj.DatesArr[whichCardIndex] = inputGroups[0];
-      preOrderObj.AttendeesArr[whichCardIndex] = inputGroups[1];
-      preOrderObj.StartTimeArr[whichCardIndex] = inputGroups[2];
-      preOrderObj.EndTimeArr[whichCardIndex] = inputGroups[3];
-
       calculate(preOrderObj);
+    }
+  }
+
+  function checkSameDate(inputGroups, instance) {
+    let input = instance._positionElement;
+    let validateRow = document.querySelectorAll('.validate-row')[whichCardIndex];
+    let validateText = validateRow.querySelector('.date-validate');
+    let dateSet = [...new Set(inputGroups.dateList)];
+
+    if (dateSet.length !== inputGroups.dateList.length) {
+      validateRow.classList.remove('d-none');
+      input.blur();
+      input.classList.add('not-validate');
+      validateText.classList.remove('hide');
+
+      submitBtn.setAttribute('disabled', '');
+      extendDayBtn.removeAttribute('disabled');
+    } else {
+      validateRow.classList.add('d-none');
+      input.classList.remove('not-validate');
+      validateText.classList.add('hide');
+
+      submitBtn.removeAttribute('disabled');
+      extendDayBtn.setAttribute('disabled', '');
     }
   }
 
@@ -371,6 +420,7 @@
     cardIndex++;
 
     this.setAttribute('disabled', '');
+    submitBtn.setAttribute('disabled', '');
     removeDayBtn.classList.remove('d-none');
     setCard();
   }
@@ -383,6 +433,11 @@
     preOrderObj.AttendeesArr.length = cardIndex;
     preOrderObj.StartTimeArr.length = cardIndex;
     preOrderObj.EndTimeArr.length = cardIndex;
+    // 輸入長度減一
+    inputGroups.dateList.length = cardIndex;
+    inputGroups.attendeeList.length = cardIndex;
+    inputGroups.startList.length = cardIndex;
+    inputGroups.endList.length = cardIndex;
 
     cardIndex--;
     if (cardIndex === 0) {
@@ -391,11 +446,13 @@
     }
 
     calculate(preOrderObj);
+    checkExtendDayBtn(inputGroups);
   }
 
   function checkLogin() {
     axios.get('/webapi/spaces/CheckLogin').then(res => {
       isLogin = res.data.Response;
+      console.log(isLogin);
 
       if (isLogin === false) {
         modal.show();
@@ -405,22 +462,25 @@
   }
 
   function submitOrder(e) {
-    if (!isLogin) {
-      checkLogin();
-    }
-    else {
-      axios.post('/webapi/spaces/AddPreOrder', preOrderObj).then(res => {
-        if (res.data.Status === 'Success') {
-          Swal.fire(
-            '預約成功!',
-            '請於24小時內前往會員中心 > 我的訂單內申請付款',
-            'success'
-          );
+    checkLogin();
 
-          document.querySelector('.swal2-confirm.swal2-styled').addEventListener('click', redirectToOrderCenter);
-        }
-      })
-    }
+    preOrderObj.AttendeesArr = preOrderObj.AttendeesArr.filter(item => item);
+    preOrderObj.DatesArr = preOrderObj.DatesArr.filter(item => item);
+    preOrderObj.EndTimeArr = preOrderObj.EndTimeArr.filter(item => item);
+    preOrderObj.StartTimeArr = preOrderObj.StartTimeArr.filter(item => item);
+
+    console.log(preOrderObj);
+    axios.post('/webapi/spaces/AddPreOrder', preOrderObj).then(res => {
+      if (res.data.Status === 'Success') {
+        Swal.fire(
+          '預約成功!',
+          '請於24小時內前往會員中心 > 我的訂單內申請付款',
+          'success'
+        );
+
+        document.querySelector('.swal2-confirm.swal2-styled').addEventListener('click', redirectToOrderCenter);
+      }
+    })
   }
 
   function redirectToOrderCenter() {
