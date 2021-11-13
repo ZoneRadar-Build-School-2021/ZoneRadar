@@ -343,7 +343,7 @@ namespace ZoneRadar.Services
                 }
             }
 
-            var result = spaces.Select(x => new SearchingPageViewModel
+            var result = spaces.OrderByDescending(x => x.Order.Count).Select(x => new SearchingPageViewModel
             {
                 SpaceID = x.SpaceID,
                 SpaceName = x.SpaceName,
