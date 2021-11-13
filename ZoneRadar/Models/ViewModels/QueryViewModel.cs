@@ -17,7 +17,7 @@ namespace ZoneRadar.Models.ViewModels
         public string Area { get; set; }
         public List<string> Amenities { get; set; }
         public string Keywords { get; set; }
-        public int preNum { get; set; }
-        public int newNum { get; set; }
+        public int PreNum { get; set; }
+        public int NewNum { get; set; }
     }
 }
