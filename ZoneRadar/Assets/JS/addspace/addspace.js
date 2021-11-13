@@ -37,14 +37,6 @@ Yesprojection.addEventListener('click', function () {
 
 
 
-///文字編輯器 
-
-CKEDITOR.replace('Introduction');
-CKEDITOR.replace('HostRules');
-CKEDITOR.replace('Parking');
-CKEDITOR.replace('ShootingEquipment');
-CKEDITOR.replace('Traffic');
 
 
-///上傳照片
-FilePond.parse(document.body);
+

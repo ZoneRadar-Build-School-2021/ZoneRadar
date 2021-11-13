@@ -419,3 +419,13 @@
 .fa-star{
 	font-size:20px;
 }
+.swal2-styled.swal2-confirm:hover {
+	background-color: #0485b8;
+	color: white;
+}
+.swal2-styled.swal2-confirm {
+	background-color: #049DD9!important;
+	color: white;
+}
+
+
