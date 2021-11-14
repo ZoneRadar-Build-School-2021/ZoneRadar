@@ -695,7 +695,7 @@ namespace ZoneRadar.Services
             var result = new ProfileViewModel()
             {
                 MemberID = p.MemberID,
-                Photo = p.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : p.Photo,
+                Photo = p.Photo == null ? "https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png" : p.Photo,
                 Name = p.Name,
                 Phone = p.Phone,
                 Email = p.Email,
@@ -759,19 +759,6 @@ namespace ZoneRadar.Services
             profileimg.Photo = imgurl;
 
             _repository.Update(profileimg);
-            _repository.SaveChanges();
-            _repository.Dispose();
-        }
-
-        /// <summary>
-        /// 移除大頭照成預設頭像
-        /// </summary>
-        /// <param name="SaveProfileImgVM"></param>
-        public void RemoveProfilePhoto(SaveProfileImgViewModel SaveProfileImgVM)
-        {
-            var profileimg = _repository.GetAll<Member>().First(x => x.MemberID == SaveProfileImgVM.MemberID);
-            
-            _repository.Delete(profileimg);
             _repository.SaveChanges();
             _repository.Dispose();
         }
