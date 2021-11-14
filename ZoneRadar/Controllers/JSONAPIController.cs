@@ -420,7 +420,7 @@ namespace ZoneRadar.Controllers
         }
 
         /// <summary>
-        /// 將上傳照片存入資料庫(昶安)
+        /// 將上傳照片存入資料庫+移除大頭照(昶安)
         /// </summary>
         /// <param name="SaveProfileImgVM"></param>
         /// <returns></returns>
@@ -433,36 +433,6 @@ namespace ZoneRadar.Controllers
             {
                 SaveProfileImgVM.MemberID = int.Parse(User.Identity.Name);
                 _memberService.ReflashProfilePhotoFromDB(SaveProfileImgVM);
-
-                response.Status = "Success";
-                response.Message = string.Empty;
-                response.Response = null;
-
-                return response;
-            }
-            catch (Exception ex)
-            {
-                response.Status = "Fail";
-                response.Message = ex.Message;
-                response.Response = null;
-
-                return response;
-            }
-        }
-
-        /// <summary>
-        /// 移除大頭照回預設頭像(昶安)
-        /// </summary>
-        /// <returns></returns>
-        [Route("RemoveImg")]
-        [AcceptVerbs("DELETE")]
-        public APIResponse RemoveImage(SaveProfileImgViewModel SaveProfileImgVM)
-        {
-            var response = new APIResponse();
-            try
-            {
-                SaveProfileImgVM.MemberID = int.Parse(User.Identity.Name);
-                _memberService.RemoveProfilePhoto(SaveProfileImgVM);
 
                 response.Status = "Success";
                 response.Message = string.Empty;
