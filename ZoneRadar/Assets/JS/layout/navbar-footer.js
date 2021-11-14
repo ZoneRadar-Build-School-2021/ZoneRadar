@@ -7,7 +7,6 @@ function changeNavInterface() {
     customer_only.forEach(item => {
         item.classList.add("d-none");
     })
-
 }
 
 //放上使用者大頭貼
@@ -67,7 +66,6 @@ function sweetAlertToReturnUrl(title, icon, returnUrl) {
         }
     })
 }
-
 
 
 //#region 登入/註冊modal相連的連結
@@ -306,6 +304,26 @@ login_btn.addEventListener("click", function () {
         originalSsweetAlert(response.data.ShowMessage, icon_string);
     }).catch(error => console.log(error))
 })
+
+//讓登入modal的登入按鈕可按Enter
+login_modal.addEventListener('show.bs.modal', function (event) {
+    console.log("發生顯示modal事件");
+    console.log(event);
+    window.addEventListener("keyup", function (event) {
+        if (event.keyCode == 13) {
+            login_btn.click();
+        }
+    })
+})
+login_modal.addEventListener('hide.bs.modal', function (event) {
+    console.log("發生隱藏modal事件");
+    console.log(event);
+    window.removeEventListener("keyup", function (event) {
+        if (event.keyCode == 13) {
+            login_btn.click();
+        }
+    })
+})
 //#endregion
 
 
@@ -338,7 +356,6 @@ function GoogleSigninInit() {
 function GoogleLogin() {
     let auth2 = gapi.auth2.getAuthInstance();//取得GoogleAuth物件
     auth2.signIn().then(function (GoogleUser) {
-        console.log("Google登入成功");
         let user_id = GoogleUser.getId();//取得user id，不過要發送至Server端的話，請使用id_token
         let AuthResponse = GoogleUser.getAuthResponse(true); //回傳access token
         let id_token = AuthResponse.id_token;//取得id_token

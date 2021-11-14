@@ -93,7 +93,7 @@ namespace ZoneRadar.Controllers
         {
             DateTime.TryParse(expired, out DateTime expiredTime);
             //超過10分鐘無效
-            if (DateTime.UtcNow.AddHours(8) > expiredTime)
+            if (DateTime.UtcNow > expiredTime)
             {
                 TempData["Alert"] = true;
                 TempData["Message"] = "超過10分鐘有效時間，請重新嘗試！";
@@ -290,7 +290,7 @@ namespace ZoneRadar.Controllers
 
             DateTime.TryParse(expired, out DateTime expiredTime);
             //超過10分鐘無效
-            if (DateTime.UtcNow.AddHours(8) > expiredTime)
+            if (DateTime.UtcNow > expiredTime)
             {
                 TempData["Alert"] = true;
                 TempData["Message"] = "超過10分鐘有效時間，請重新註冊！";

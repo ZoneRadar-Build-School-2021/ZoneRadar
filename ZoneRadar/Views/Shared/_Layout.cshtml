@@ -1,15 +1,15 @@
 ﻿@{
     //透過cookie取得表單驗證的資料
     HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(FormsAuthentication.FormsCookieName);
-
     string userPhoto = "";
     int userId = 0;
     if (cookie != null)
     {
         FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(cookie.Value);
         UserInfo userInfo = Json.Decode<UserInfo>(ticket.UserData);
-        userPhoto = userInfo.MemberPhoto;
         userId = userInfo.MemberId;
+        MemberService memberService = new MemberService();
+        userPhoto = memberService.GetUserPhoto(userId);
     }
 }
 <!DOCTYPE html>
@@ -17,7 +17,6 @@
 <head>
     <script>
         window.onpageshow = function (event) {
-            console.log(event);
             if (event.persisted) {
                 window.location.reload()
             }
