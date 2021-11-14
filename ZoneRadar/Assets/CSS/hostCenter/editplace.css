@@ -151,8 +151,9 @@ p {
     width: 100%;
     padding-top: 60%;
     border-radius: 5px;
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
+    background-size: cover;
 }
 
 a.venue-link:hover {

@@ -238,7 +238,7 @@ namespace ZoneRadar.Services
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public List<SearchingPageViewModel> GetFilteredSpaces(QueryViewModel query)
+        public IQueryable<SearchingPageViewModel> GetFilteredSpaces(QueryViewModel query)
         {
             var city = query.City;
             var district = query.District;
@@ -257,7 +257,6 @@ namespace ZoneRadar.Services
             var spaceTypes = _repository.GetAll<SpaceType>();
             var operatings = _repository.GetAll<Operating>();
             var spaceAmenities = _repository.GetAll<SpaceAmenity>();
-
 
             if (!String.IsNullOrEmpty(city))
             {
@@ -343,7 +342,7 @@ namespace ZoneRadar.Services
                 }
             }
 
-            var result = spaces.Select(x => new SearchingPageViewModel
+            var result = spaces.OrderByDescending(x => x.Order.Count).Select(x => new SearchingPageViewModel
             {
                 SpaceID = x.SpaceID,
                 SpaceName = x.SpaceName,
@@ -357,7 +356,7 @@ namespace ZoneRadar.Services
                 MinHour = x.MinHours,
                 MeasurementOfArea = x.MeasureOfArea,
                 Scores = scores.Where(y => y.Order.SpaceID == x.SpaceID).Select(y => y.Score).ToList(),
-            }).ToList();
+            });
             return result;
         }
 

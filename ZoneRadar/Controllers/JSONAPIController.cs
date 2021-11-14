@@ -125,9 +125,22 @@ namespace ZoneRadar.Controllers
             {
                 var queriedSpaces = _spaceService.GetFilteredSpaces(query);
 
+                // 篩選後所有場地數量
+                var totalCount = queriedSpaces.Count();
+                // 前端要求的筆數
+                var addCount = query.AddCount;
+                // 已經送出的筆數
+                var sentCount = query.SentCount;
+                // 已經渲染成功筆數，第一次為0
+                var loadedCount = 0 + sentCount;
+                // 還剩下未送出的筆數
+                var notLoadedCount = (totalCount - loadedCount - addCount).ToString();
+                // 跳過已經送出的，取要求的
+                var result = queriedSpaces.Skip(loadedCount).Take(addCount);
+
                 response.Status = "Success";
-                response.Message = string.Empty;
-                response.Response = queriedSpaces;
+                response.Message = notLoadedCount;
+                response.Response = result;
 
                 return response;
             }
@@ -180,6 +193,7 @@ namespace ZoneRadar.Controllers
                 return response;
             }
         }
+
 
         /// <summary>
         /// 確認會員是否登入
@@ -377,6 +391,36 @@ namespace ZoneRadar.Controllers
                 response.Status = "Success";
                 response.Message = string.Empty;
                 response.Response = null;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = ex.Message;
+                response.Response = null;
+
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// 取得場地更多評價(Steve)
+        /// </summary>
+        /// <param name="spaceId"></param>
+        /// <returns></returns>
+        [Route("GetMoreReview")]
+        [AcceptVerbs("GET")]
+        public APIResponse GetMoreReview(int id, int sentCount, int addCount)
+        {
+            var response = new APIResponse();
+            try
+            {
+                var reviewList = _reviewService.GetTargetSpaceMoreReviews(id, sentCount, addCount);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = reviewList;
 
                 return response;
             }
