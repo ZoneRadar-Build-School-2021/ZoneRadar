@@ -1,6 +1,7 @@
 :root {
     --gray-btn: #e8e8e8;
-    --gray-btn-hover: #c7c7c7
+    --gray-btn-hover: #c7c7c7;
+    scroll-behavior: smooth;
 }
 
 img {
@@ -105,8 +106,9 @@ a {
     color: #cccccc;
 }
 
-.review-brief .user-pic {
-    max-width: 50px;
+.review-brief .user-pic img {
+    width: 50px;
+    height: 50px;
 }
 
 .review-brief-content::before {
@@ -384,6 +386,15 @@ a {
 
 .spinner-border {
     color: #049DD9;
+}
+
+.review-item .user-pic img{
+    width: 45px;
+    height: 45px;
+}
+
+.hide {
+    visibility: hidden;
 }
 
 @media screen and (min-width: 768px) {

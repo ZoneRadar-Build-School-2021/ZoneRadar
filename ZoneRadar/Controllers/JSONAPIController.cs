@@ -22,13 +22,18 @@ namespace ZoneRadar.Controllers
         private readonly PreOrderService _preOrderService;
         private readonly ZONERadarRepository _repository;
         private FilterViewModel _filterDataFromIndex;
+        private readonly EcpayMentService _ecpaymentservice;
+        private readonly MemberService _memberService;
+
         public JSONAPIController()
         {
+            _ecpaymentservice = new EcpayMentService();
             _spaceService = new SpaceService();
             _reviewService = new ReviewService();
             _preOrderService = new PreOrderService();
             _repository = new ZONERadarRepository();
             _filterDataFromIndex = new FilterViewModel();
+            _memberService = new MemberService();
         }
 
         /// <summary>
@@ -120,9 +125,22 @@ namespace ZoneRadar.Controllers
             {
                 var queriedSpaces = _spaceService.GetFilteredSpaces(query);
 
+                // 篩選後所有場地數量
+                var totalCount = queriedSpaces.Count();
+                // 前端要求的筆數
+                var addCount = query.AddCount;
+                // 已經送出的筆數
+                var sentCount = query.SentCount;
+                // 已經渲染成功筆數，第一次為0
+                var loadedCount = 0 + sentCount;
+                // 還剩下未送出的筆數
+                var notLoadedCount = (totalCount - loadedCount - addCount).ToString();
+                // 跳過已經送出的，取要求的
+                var result = queriedSpaces.Skip(loadedCount).Take(addCount);
+
                 response.Status = "Success";
-                response.Message = string.Empty;
-                response.Response = queriedSpaces;
+                response.Message = notLoadedCount;
+                response.Response = result;
 
                 return response;
             }
@@ -175,6 +193,7 @@ namespace ZoneRadar.Controllers
                 return response;
             }
         }
+
 
         /// <summary>
         /// 確認會員是否登入
@@ -385,8 +404,6 @@ namespace ZoneRadar.Controllers
             }
         }
 
-
-
         /// <summary>
         /// 取得場地更多評價(Steve)
         /// </summary>
@@ -404,6 +421,66 @@ namespace ZoneRadar.Controllers
                 response.Status = "Success";
                 response.Message = string.Empty;
                 response.Response = reviewList;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = ex.Message;
+                response.Response = null;
+
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// 取得cloudinary參數2(昶安)
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetImagePrams")]
+        [AcceptVerbs("GET")]
+        public APIResponse GetImagePrams()
+        {
+            var response = new APIResponse();
+            try
+            {
+                int memberID = int.Parse(User.Identity.Name);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = _memberService.GetProfilePhotoFromDB(memberID);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                response.Status = "Fail";
+                response.Message = ex.Message;
+                response.Response = null;
+
+                return response;
+            }
+        }
+
+        /// <summary>
+        /// 將上傳照片存入資料庫+移除大頭照(昶安)
+        /// </summary>
+        /// <param name="SaveProfileImgVM"></param>
+        /// <returns></returns>
+        [Route("SaveImg")]
+        [AcceptVerbs("POST")]
+        public APIResponse SaveImage(SaveProfileImgViewModel SaveProfileImgVM)
+        {
+            var response = new APIResponse();
+            try
+            {
+                SaveProfileImgVM.MemberID = int.Parse(User.Identity.Name);
+                _memberService.ReflashProfilePhotoFromDB(SaveProfileImgVM);
+
+                response.Status = "Success";
+                response.Message = string.Empty;
+                response.Response = null;
 
                 return response;
             }

@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                         }
-                        <a href="#review" class="read-review d-inline-block p-3 fw-bolder mb-3">查看更多評價</a>
+                        <a href="#" class="read-review d-inline-block p-3 fw-bolder mb-3">查看更多評價</a>
                     </div>
                 </section>
                 <div class="host col-sm-12 col-md-3 text-center pt-0 pb-4 pt-md-5">
@@ -376,8 +376,8 @@
             <input type="text" placeholder="參加人數" class="attendees form-control rounded ms-1" aria-label=".form-control attendees" disabled>
         </div>
         <div class="validate-row input-group mt-0 d-none">
-            <span class="text-danger form-control me-1 border-0 pt-0"><i class="fas fa-exclamation-circle d-none"></i></span>
-            <span class="not-validate-text text-danger form-control ms-1 border-0 ps-0 text-start pt-0"><i class="fas fa-exclamation-circle me-1"></i>@validationText</span>
+            <span class="date-validate not-validate-text text-danger form-control ms-1 border-0 ps-0 text-start pt-0 hide"><i class="fas fa-exclamation-circle me-1"></i>日期不得重複</span>
+            <span class="attendee-validate not-validate-text text-danger form-control ms-1 border-0 ps-0 text-start pt-0 hide"><i class="fas fa-exclamation-circle me-1"></i>@validationText</span>
         </div>
         <div class="input-group mb-2">
             <input type="text" placeholder="開始時間" class="start-time form-control rounded me-1" disabled>
@@ -388,7 +388,7 @@
 
 <template id="space-review-template">
     <div class="review-item row mb-3 mt-3">
-        <a href="" class="user-pic col-2 col-xl-1 pe-0"><img class="rounded-circle border-blue" src=""></a>
+        <a href="" class="user-pic col-2 col-xl-1 pe-0"><img class="rounded-circle border-blue width-55" src=""></a>
         <div class="review-txt col-10 col-xl-11 ps-3 ps-xl-4">
             <h5 class="user-name"></h5>
             <div class="review-rating">

@@ -180,15 +180,17 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public bool IsGoogleUser(string email, string googleId, bool verified)
         {
-            //是否有此GoogleID
-            bool hasGoogleId = _repository.GetAll<Member>().Any(x => x.GoogleID == googleId && x.IsVerify == verified);
-            if (hasGoogleId)
-            {
-                return hasGoogleId;
-            }
+            email = HttpUtility.HtmlEncode(email);
+            bool isGoogleUser = false;
             //是否有此gmail
-            bool hasGmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == verified);            
-            return hasGmail;
+            bool hasGmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == verified);
+            //是否有此GoogleID
+            bool hasGoogleLoginId = _repository.GetAll<Member>().Any(x => x.GoogleID == googleId && x.IsVerify == verified);
+            if (hasGmail || hasGoogleLoginId)
+            {
+                isGoogleUser = true;
+            }
+            return isGoogleUser;
         }
 
         /// <summary>
@@ -529,7 +531,7 @@ namespace ZoneRadar.Services
                     Phone = u.Phone,
                     Description = u.Description,
                     SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo == null ? "https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png" : u.Photo
+                    Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
                 };
                 //會員所擁有的廠所有場地
                 var sps = _repository.GetAll<Space>().Where(x => x.MemberID == memberId && x.SpaceStatus.SpaceStatusID == 2);
@@ -581,7 +583,7 @@ namespace ZoneRadar.Services
                     Phone = u.Phone,
                     Description = u.Description,
                     SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo == null ? "https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png" : u.Photo
+                    Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
                 };
 
                 //會員所收藏的場地
@@ -654,7 +656,7 @@ namespace ZoneRadar.Services
                     Phone = u.Phone,
                     Description = u.Description,
                     SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo == null ? "https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png" : u.Photo
+                    Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
                 };
                 //找出會員是否有租借場地並且顯示 出被場地主的評價
                 var review = _repository.GetAll<Review>().Where(x => x.ToHost == false && x.Order.MemberID == u.MemberID && x.Order.OrderStatusID == 4);
@@ -689,7 +691,7 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public ProfileViewModel GetProfileData(int memberID)
         {
-            var p = _repository.GetAll<Member>().ToList().First(x => x.MemberID == memberID);
+            var p = _repository.GetAll<Member>().First(x => x.MemberID == memberID);
             var result = new ProfileViewModel()
             {
                 MemberID = p.MemberID,
@@ -712,15 +714,15 @@ namespace ZoneRadar.Services
         public ProfileViewModel EditProfileData(ProfileViewModel edit)
         {
             //抓取 --> 編輯資料
-            var p = _repository.GetAll<Member>().ToList().First(x => x.MemberID == edit.MemberID);
-            //p.Photo = edit.Photo;
-            p.Name = edit.Name;
-            p.Phone = edit.Phone;
-            p.Description = edit.Description;
-            p.ReceiveEDM = edit.ReceiveEDM;
+            var o = _repository.GetAll<Member>().First(x => x.MemberID == edit.MemberID);
+            o.Photo = edit.Photo;
+            o.Name = edit.Name;
+            o.Phone = edit.Phone;
+            o.Description = edit.Description;
+            o.ReceiveEDM = edit.ReceiveEDM;
 
             //更新
-            _repository.Update(p);
+            _repository.Update(o);
             _repository.SaveChanges();
             _repository.Dispose();
 
@@ -728,10 +730,37 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 大頭照上傳(昶安)
+        /// 取得大頭照片(昶安)
         /// </summary>
-        /// <param name=""></param>
         /// <returns></returns>
+        public ProfileImgViewModel GetProfilePhotoFromDB(int memberID)
+        {
+            var url = _repository.GetAll<Member>().First(x => x.MemberID == memberID).Photo;
 
+            var result = new ProfileImgViewModel()
+            {
+                Name = "dt6vz3pav",
+                Preset = "yp7sicxt",
+                ProfileImgUrl = url.ToString(),
+            };
+
+            return result;
+        }
+
+        /// <summary>
+        /// 儲存照片至資料庫+移除大頭照(昶安)
+        /// </summary>
+        /// <param name="SaveProfileImgVM"></param>
+        public void ReflashProfilePhotoFromDB(SaveProfileImgViewModel SaveProfileImgVM)
+        {
+            var profileimg = _repository.GetAll<Member>().First(x => x.MemberID == SaveProfileImgVM.MemberID);
+            var imgurl = SaveProfileImgVM.ProfileImgUrl;
+
+            profileimg.Photo = imgurl;
+
+            _repository.Update(profileimg);
+            _repository.SaveChanges();
+            _repository.Dispose();
+        }
     }
 }
