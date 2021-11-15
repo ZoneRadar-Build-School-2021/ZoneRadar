@@ -93,7 +93,7 @@ namespace ZoneRadar.Controllers
         {
             DateTime.TryParse(expired, out DateTime expiredTime);
             //超過10分鐘無效
-            if (DateTime.UtcNow.AddHours(8) > expiredTime)
+            if (DateTime.UtcNow > expiredTime)
             {
                 TempData["Alert"] = true;
                 TempData["Message"] = "超過10分鐘有效時間，請重新嘗試！";
@@ -290,7 +290,7 @@ namespace ZoneRadar.Controllers
 
             DateTime.TryParse(expired, out DateTime expiredTime);
             //超過10分鐘無效
-            if (DateTime.UtcNow.AddHours(8) > expiredTime)
+            if (DateTime.UtcNow > expiredTime)
             {
                 TempData["Alert"] = true;
                 TempData["Message"] = "超過10分鐘有效時間，請重新註冊！";
@@ -386,13 +386,14 @@ namespace ZoneRadar.Controllers
             //建造cookie
             _service.CreateCookie(encryptedTicket, Response);
 
-            //導向使用者原先欲造訪的路由
+            //導向使用者原先欲造訪的路由(沒用)
             var originalUrl = _service.GetOriginalUrl(memberResult.User.MemberID.ToString());
 
             //TempData["Alert"] = true;
             //TempData["Message"] = memberResult.ShowMessage;
             //TempData["Icon"] = memberResult.IsSuccessful;
             //return Redirect(originalUrl);
+            result.MemberId = memberResult.User.MemberID;
             result.Photo = memberResult.User.Photo;
             result.IsSuccessful = memberResult.IsSuccessful;
             result.ShowMessage = memberResult.ShowMessage;
@@ -516,6 +517,7 @@ namespace ZoneRadar.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         public ActionResult EditProfile()
         {
             var userID = int.Parse(User.Identity.Name); //特定帳號
@@ -530,6 +532,7 @@ namespace ZoneRadar.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult EditProfile([Bind(Include = "MemberID,Photo,Name,Email,Phone,Description,ReceiveEDM")] ProfileViewModel edit)
         {
             if (ModelState.IsValid)
@@ -559,7 +562,7 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public async Task<string> GoogleLoginCallback(string idToken)
         {
-            var result = new JSMemberResult { IsSuccessful = false, ExceptionMsg = "ok" };
+            var result = new JSMemberResult { IsSuccessful = false, ExceptionMsg = "NoError" };
             GoogleJsonWebSignature.Payload payLoad = null;
             GoogleJsonWebSignature.ValidationSettings validationSettings = new GoogleJsonWebSignature.ValidationSettings
             {
@@ -584,7 +587,7 @@ namespace ZoneRadar.Controllers
 
 
             //第三方Google登入取得payLoad成功
-            if (result.ExceptionMsg == "ok" && payLoad != null)
+            if (result.ExceptionMsg == "NoError" && payLoad != null)
             {
                 string googleId = payLoad.Subject; //Subject為Google的userId
 
@@ -597,6 +600,7 @@ namespace ZoneRadar.Controllers
                     var encryptedTicket = _service.CreateEncryptedTicket(user);
                     _service.CreateCookie(encryptedTicket, Response);
                     result.IsSuccessful = true;
+                    result.MemberId = user.MemberID;
                     result.Photo = user.Photo;
                     result.ShowMessage = $"{user.Name}您好，歡迎您加入ZONERadar！";
                 }
@@ -613,6 +617,7 @@ namespace ZoneRadar.Controllers
                     var encryptedTicket = _service.CreateEncryptedTicket(user);
                     _service.CreateCookie(encryptedTicket, Response);
                     result.IsSuccessful = true;
+                    result.MemberId = user.MemberID;
                     result.Photo = user.Photo;
                     result.ShowMessage = $"{user.Name}您好，歡迎您加入ZONERadar！";
                 }

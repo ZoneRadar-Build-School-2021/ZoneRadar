@@ -7,7 +7,6 @@ function changeNavInterface() {
     customer_only.forEach(item => {
         item.classList.add("d-none");
     })
-
 }
 
 //放上使用者大頭貼
@@ -15,6 +14,14 @@ function changeUserPhoto(imgUrl) {
     let user_photos = document.querySelectorAll(".user-pic img");
     user_photos.forEach(item => {
         item.setAttribute("src", imgUrl);
+    })
+}
+
+//更換評價和收藏的路由userId
+function changeCommentAndCollectionUserId(userId) {
+    let comment_collection_link = document.querySelectorAll(".comment-and-collection");
+    comment_collection_link.forEach(item => {
+        item.setAttribute("href", `/MemberCenter/Member/${userId}`);
     })
 }
 
@@ -59,7 +66,6 @@ function sweetAlertToReturnUrl(title, icon, returnUrl) {
         }
     })
 }
-
 
 
 //#region 登入/註冊modal相連的連結
@@ -283,6 +289,8 @@ login_btn.addEventListener("click", function () {
             icon_string = "success";
             //放上大頭貼
             changeUserPhoto(response.data.Photo);
+            //更換評價和收藏的路由userId
+            changeCommentAndCollectionUserId(response.data.MemberId);
             //登入成功後，若有ReturnUrl字串，導去該頁
             if (location.search != "") {
                 let returnUrl = getReturnUrl();
@@ -295,6 +303,19 @@ login_btn.addEventListener("click", function () {
         //跳出提示訊息
         originalSsweetAlert(response.data.ShowMessage, icon_string);
     }).catch(error => console.log(error))
+})
+
+//讓登入modal的登入按鈕可按Enter
+function enterToLogin() {
+    if (event.keyCode === 13) {
+        login_btn.click();
+    }
+}
+login_modal.addEventListener('show.bs.modal', function () {
+    window.addEventListener("keyup", enterToLogin);
+})
+login_modal.addEventListener('hide.bs.modal', function () {
+    window.removeEventListener("keyup", enterToLogin);
 })
 //#endregion
 
@@ -327,12 +348,10 @@ function GoogleSigninInit() {
 
 function GoogleLogin() {
     let auth2 = gapi.auth2.getAuthInstance();//取得GoogleAuth物件
-    auth2.signIn().then(function (GoogleUser) {
-        console.log("Google登入成功");
-        let user_id = GoogleUser.getId();//取得user id，不過要發送至Server端的話，請使用id_token
-        let AuthResponse = GoogleUser.getAuthResponse(true); //回傳access token
-        let id_token = AuthResponse.id_token;//取得id_token
-        //將id_token傳到後端
+    auth2.signIn().then(function (google_user) {
+        let auth_response = google_user.getAuthResponse(true); //回傳access token
+        let id_token = auth_response.id_token;//取得access token中的id token
+        //將id token傳到後端
         $.ajax({
             url: id_token_to_userIDUrl,
             method: "post",
@@ -345,6 +364,8 @@ function GoogleLogin() {
                     icon_string = "success";
                     //放上大頭貼
                     changeUserPhoto(result.Photo);
+                    //更換評價和收藏的路由userId
+                    changeCommentAndCollectionUserId(result.MemberId);
                     //登入成功後，若有ReturnUrl字串，導去該頁
                     if (location.search != "") {
                         let returnUrl = getReturnUrl();
