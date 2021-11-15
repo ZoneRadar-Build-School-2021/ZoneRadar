@@ -562,7 +562,7 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public async Task<string> GoogleLoginCallback(string idToken)
         {
-            var result = new JSMemberResult { IsSuccessful = false, ExceptionMsg = "ok" };
+            var result = new JSMemberResult { IsSuccessful = false, ExceptionMsg = "NoError" };
             GoogleJsonWebSignature.Payload payLoad = null;
             GoogleJsonWebSignature.ValidationSettings validationSettings = new GoogleJsonWebSignature.ValidationSettings
             {
@@ -587,7 +587,7 @@ namespace ZoneRadar.Controllers
 
 
             //第三方Google登入取得payLoad成功
-            if (result.ExceptionMsg == "ok" && payLoad != null)
+            if (result.ExceptionMsg == "NoError" && payLoad != null)
             {
                 string googleId = payLoad.Subject; //Subject為Google的userId
 

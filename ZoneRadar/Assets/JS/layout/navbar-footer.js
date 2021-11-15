@@ -355,11 +355,10 @@ function GoogleSigninInit() {
 
 function GoogleLogin() {
     let auth2 = gapi.auth2.getAuthInstance();//取得GoogleAuth物件
-    auth2.signIn().then(function (GoogleUser) {
-        let user_id = GoogleUser.getId();//取得user id，不過要發送至Server端的話，請使用id_token
-        let AuthResponse = GoogleUser.getAuthResponse(true); //回傳access token
-        let id_token = AuthResponse.id_token;//取得id_token
-        //將id_token傳到後端
+    auth2.signIn().then(function (google_user) {
+        let auth_response = google_user.getAuthResponse(true); //回傳access token
+        let id_token = auth_response.id_token;//取得access token中的id token
+        //將id token傳到後端
         $.ajax({
             url: id_token_to_userIDUrl,
             method: "post",
