@@ -37,6 +37,13 @@
 <div class="container-fluid mt-3 mt-xl-5 px-4 px-lg-5">
     <!-- cards -->
     <div class="card-list row gx-5"></div>
+    <div class="spinner-row visually-hidden">
+        <div class="col-12 text-center mt-4">
+            <div class="spinner spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal -->
@@ -175,7 +182,7 @@
 <template id="amenity-template">
     <div class="item btn me-0 me-lg-3 mb-2"><img class="me-2" src="" alt=""><span class="d-inline-block"></span></div>
 </template>
-<template id="no-result">
+<template id="no-result-template">
     <div class="no-result-container">
         <img class="no-result d-block mx-auto" src="~/Assets/IMG/NoSearch.png" alt="no-result" />
     </div>

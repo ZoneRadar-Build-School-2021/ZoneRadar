@@ -34,6 +34,14 @@ input[type="text"]:focus {
     color: #049DD9;
 }
 
+.form-select::-webkit-scrollbar {
+    width: 5px;
+}
+
+.form-select::-webkit-scrollbar-thumb {
+    background: rgba(170, 170, 170, .7);
+}
+
 .filter-btn {
     border: 1px solid #ced4da;
 }
@@ -201,6 +209,10 @@ input[type="text"]:focus {
 .no-result-container {
     max-width: 1000px;
     margin: auto;
+}
+
+.spinner-border {
+    color: #049DD9;
 }
 
 @media screen and (min-width: 768px) {
