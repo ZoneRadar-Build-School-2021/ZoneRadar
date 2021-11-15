@@ -56,7 +56,6 @@ let app = new Vue({
     methods: {
         fileChange(e) {
             var file = e.target.files[0]
-            this.profileimage = URL.createObjectURL(file)
             this.file = file
         },
         imgUpload() {
@@ -64,15 +63,15 @@ let app = new Vue({
             formData.append('file', this.file);
             formData.append('upload_preset', 'yp7sicxt');
             axios({
-                onUploadProgress: uploadEvent => {
-                    console.log('Upload Progress: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
-                },
                 url: "https://api.cloudinary.com/v1_1/dt6vz3pav/upload",
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
-                data: formData
+                data: formData,
+                onUploadProgress: uploadEvent => {
+                    console.log('Upload Progress: ' + Math.round(uploadEvent.loaded / uploadEvent.total * 100) + '%')
+                }
             })
             .then(response => {
                 let ImgUrl = {
@@ -85,21 +84,26 @@ let app = new Vue({
                     method: 'POST',
                     data: ImgUrl
                 })
-                .then(response =>
-                    console.log(response)
-                )
+                .then(response => {
+                    //...
+                })
             })
             .catch(e => {
                 //...
             })
         },
         removeImg() {
+            let ImgUrl = {
+                MemberID: '',
+                ProfileImgUrl: ''
+            };
             axios({
-
-                method: 'DELETE'
+                url: "/webapi/spaces/SaveImg",
+                method: 'POST',
+                data: ImgUrl
             })
             .then(response => {
-                
+                this.inputData.Photo = 'https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png'; 
             })
             .catch(e => {
                 //...

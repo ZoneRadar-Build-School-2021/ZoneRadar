@@ -12,6 +12,7 @@ using ZoneRadar.Services;
 
 namespace ZoneRadar.Controllers
 {
+    [Authorize]
     public class UserCenterController : Controller
     {
         private readonly OrderService _OrderService;

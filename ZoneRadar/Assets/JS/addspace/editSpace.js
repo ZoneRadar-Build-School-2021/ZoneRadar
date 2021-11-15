@@ -1020,10 +1020,10 @@ for (var i = 0; i < Newdatalist.length; i++) {
         StateSunE.appendChild(option34);
     });
 
-    CKEDITOR.replace('Introduction');
-    CKEDITOR.replace('HostRules');
-    CKEDITOR.replace('Parking');
-    CKEDITOR.replace('ShootingEquipment');
-    CKEDITOR.replace('Traffic');
+    //CKEDITOR.replace('Introduction');
+    //CKEDITOR.replace('HostRules');
+    //CKEDITOR.replace('Parking');
+    //CKEDITOR.replace('ShootingEquipment');
+    //CKEDITOR.replace('Traffic');
     CKEDITOR.replace('OtherAmenity');
 

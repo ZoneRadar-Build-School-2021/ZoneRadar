@@ -9,6 +9,7 @@ using ZoneRadar.Services;
 
 namespace ZoneRadar.Controllers
 {
+    [Authorize]
     public class EcpayApiController : ApiController
     {
         private readonly EcpayMentService _ecpaymentservice;

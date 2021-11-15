@@ -47,8 +47,7 @@
 
 }
 
-@using (Html.BeginForm("EditSpace", "HostCenter", FormMethod.Post))
-{
+<form id="form1" action="/HostCenter/EditSpace" method="post" class="needs-validation" novalidate onsubmit="return submitCheck()">
     <div class="main mymain">
         <div class="container  containerForAdd ">
             <!-- 開頭問候文區 -->
@@ -383,7 +382,7 @@
                                         <input class="form-check-input" type="radio" value="Y1" name="Hours1"
                                                id="MonAllDay" disabled>
                                         <label class="form-check-label" for="MonAllDay">
-                                            全天(24hr)
+                                            全天
                                         </label>
                                     </div>
                                 </div>
@@ -403,23 +402,23 @@
                                             aria-label="Default select example ">
                                         <option id="StartTimeoptionMon" value=" ">選擇營業時間 </option>
                                         @*<option value="06:00:00.0000000">06:00</option>
-                        <option value="07:00:00.0000000">07:00</option>
-                        <option value="08:00:00.0000000">08:00</option>
-                        <option value="09:00:00.0000000">09:00</option>
-                        <option value="10:00:00.0000000">10:00</option>
-                        <option value="11:00:00.0000000">11:00</option>
-                        <option value="12:00:00.0000000">12:00</option>
-                        <option value="13:00:00.0000000">13:00</option>
-                        <option value="14:00:00.0000000">14:00</option>
-                        <option value="15:00:00.0000000">15:00</option>
-                        <option value="16:00:00.0000000">16:00</option>
-                        <option value="17:00:00.0000000">17:00</option>
-                        <option value="18:00:00.0000000">18:00</option>
-                        <option value="19:00:00.0000000">19:00</option>
-                        <option value="20:00:00.0000000">20:00</option>
-                        <option value="21:00:00.0000000">21:00</option>
-                        <option value="22:00:00.0000000">22:00</option>
-                        <option value="23:00:00.0000000">23:00</option>*@
+                                            <option value="07:00:00.0000000">07:00</option>
+                                            <option value="08:00:00.0000000">08:00</option>
+                                            <option value="09:00:00.0000000">09:00</option>
+                                            <option value="10:00:00.0000000">10:00</option>
+                                            <option value="11:00:00.0000000">11:00</option>
+                                            <option value="12:00:00.0000000">12:00</option>
+                                            <option value="13:00:00.0000000">13:00</option>
+                                            <option value="14:00:00.0000000">14:00</option>
+                                            <option value="15:00:00.0000000">15:00</option>
+                                            <option value="16:00:00.0000000">16:00</option>
+                                            <option value="17:00:00.0000000">17:00</option>
+                                            <option value="18:00:00.0000000">18:00</option>
+                                            <option value="19:00:00.0000000">19:00</option>
+                                            <option value="20:00:00.0000000">20:00</option>
+                                            <option value="21:00:00.0000000">21:00</option>
+                                            <option value="22:00:00.0000000">22:00</option>
+                                            <option value="23:00:00.0000000">23:00</option>*@
                                     </select>
                                 </div>
                                 <P class="col-2 mt-auto d-none col-xl-1 d-xl-block fs16 mb-auto text-center text-start">
@@ -467,7 +466,7 @@
                                         <input class="form-check-input" type="radio" value="Y2" name="Hours2"
                                                id="TueAllDay" disabled>
                                         <label class="form-check-label" for="TueAllDay">
-                                            全天(24hr)
+                                            全天
                                         </label>
                                     </div>
                                 </div>
@@ -551,7 +550,7 @@
                                         <input class="form-check-input" type="radio" disabled value="Y3" name="Hours3"
                                                id="WedAllDay">
                                         <label class="form-check-label" for="WedAllDay">
-                                            全天(24hr)
+                                            全天
                                         </label>
                                     </div>
                                 </div>
@@ -635,7 +634,7 @@
                                         <input class="form-check-input" value="Y4" disabled type="radio" name="Hours4"
                                                id="ThuAllDay">
                                         <label class="form-check-label" for="ThuAllDay">
-                                            全天(24hr)
+                                            全天
                                         </label>
                                     </div>
                                 </div>
@@ -719,7 +718,7 @@
                                         <input class="form-check-input" value="Y5" type="radio" name="Hours5"
                                                id="FriAllDay" disabled>
                                         <label class="form-check-label" for="FriAllDay">
-                                            全天(24hr)
+                                            全天
                                         </label>
                                     </div>
                                 </div>
@@ -803,7 +802,7 @@
                                         <input class="form-check-input" value="Y6" type="radio" name="Hours6"
                                                id="SatAllDay" disabled>
                                         <label class="form-check-label" for="SatAllDay">
-                                            全天(24hr)
+                                            全天
                                         </label>
                                     </div>
                                 </div>
@@ -887,7 +886,7 @@
                                         <input class="form-check-input" value="Y7" type="radio" name="Hours7"
                                                id="SunAllDay">
                                         <label class="form-check-label" for="SunAllDay" disabled>
-                                            全天(24hr)
+                                            全天
                                         </label>
                                     </div>
                                 </div>
@@ -1002,7 +1001,7 @@
                                         <p>折扣數</p>
                                         <div class="form-floating">
                                             <input class="form-control" placeholder="多少折扣" name="Discount" value="@item.Discount" id="Discount" onblur="Discountcheck()">
-                                            <label for="Discount">享多少折扣</label>
+                                            <label for="Discount">享多少折扣，如8折直接填8，95折填9.5即可。</label>
                                         </div>
                                     </div>
                                 }
@@ -1393,7 +1392,6 @@
                                                 <p class="fs16">選擇有符合條件的條件的選項</p>
                                             </div>
                                             <div class="row">
-
                                                 @foreach (var cleansec in Optionscleantwo)
                                                 {
                                                     if (cleantwo.Select(x => x.OptionDetail).Contains(cleansec.OptionDetail))
@@ -1628,18 +1626,21 @@
                 {
                     <input type="hidden" name="SpaceID" value="@item.SpaceID" />
                 }
-                @*<button type="submit" class="btn submitAdd deleteBtn" >完成</button>*@
 
             </div>
         </div>
+        <div id="Loading" class="progress d-none">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+        </div>
+
     </div>
-   
+
 
     <p id="mySpaceId" name="SpaceID" class="d-none">@adds.Select(x => x.SpaceID).FirstOrDefault()</p>
 
 
-}
-@*</form>*@
+    
+</form>
 
 @section topCSS
     {
@@ -1660,13 +1661,11 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWRDj0MF4QflzrSsWSw31qVzAvixwdk3w" type="text/javascript"></script>
     <script src="~/Assets/JS/addspace/Latitude_and_Longitude.js"></script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    <script src="~/Assets/JS/addspace/validation.js"></script>
     <script src="~/Assets/JS/addspace/CKEditor4/ckeditor/config.js"></script>
     <script src="~/Assets/JS/addspace/CKEditor4/ckeditor/ckeditor.js"></script>
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script src="~/Assets/JS/addspace/ckeditor.js"></script>
-    @*<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>*@
+    <script src="~/Assets/JS/addspace/validation.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <script src="~/Assets/JS/addspace/editSpace.js"></script>
     <script src="~/Assets/JS/addspace/EditCityandDistrictandZipcodeJavaScript.js"></script>
     <!-- Sortable -->
