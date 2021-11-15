@@ -306,23 +306,16 @@ login_btn.addEventListener("click", function () {
 })
 
 //讓登入modal的登入按鈕可按Enter
-login_modal.addEventListener('show.bs.modal', function (event) {
-    console.log("發生顯示modal事件");
-    console.log(event);
-    window.addEventListener("keyup", function (event) {
-        if (event.keyCode == 13) {
-            login_btn.click();
-        }
-    })
+function enterToLogin() {
+    if (event.keyCode === 13) {
+        login_btn.click();
+    }
+}
+login_modal.addEventListener('show.bs.modal', function () {
+    window.addEventListener("keyup", enterToLogin);
 })
-login_modal.addEventListener('hide.bs.modal', function (event) {
-    console.log("發生隱藏modal事件");
-    console.log(event);
-    window.removeEventListener("keyup", function (event) {
-        if (event.keyCode == 13) {
-            login_btn.click();
-        }
-    })
+login_modal.addEventListener('hide.bs.modal', function () {
+    window.removeEventListener("keyup", enterToLogin);
 })
 //#endregion
 
