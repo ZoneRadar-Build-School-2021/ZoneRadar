@@ -354,7 +354,7 @@ namespace ZoneRadar.Services
             var orders = _repository.GetAll<Order>().Where(x => x.Space.MemberID == userid && x.OrderStatusID == 4);
             var reviews = _repository.GetAll<Review>().Where(x => orders.Select(order => order.OrderID).Contains(x.OrderID)).ToList();
             var OrderDetails = _repository.GetAll<OrderDetail>().Where(x=>orders.Select(o=>o.OrderID).Contains(x.OrderID));
-            if (int.Parse(b) > 0) 
+            if (model.SearchDateTime.Any()) 
             { 
                 searchkey.SearchDateTime = DateTime.Parse(model.SearchDateTime);
             }
