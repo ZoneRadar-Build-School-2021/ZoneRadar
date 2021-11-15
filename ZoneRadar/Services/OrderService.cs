@@ -5,6 +5,7 @@ using System.Data.Entity.SqlServer;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using ZoneRadar.Models;
 using ZoneRadar.Models.ViewModels;
@@ -326,6 +327,7 @@ namespace ZoneRadar.Services
             }
             return result;
         }
+
         /// <summary>
         /// History篩選 (Jack)
         /// </summary>
@@ -340,8 +342,13 @@ namespace ZoneRadar.Services
             var Key = a+b+c;
             var searchkey = new SearchData();
             var result = new List<HostCenterHistoryViewModel>();
-            searchkey.SpaceName = model.SpaceName;
-            searchkey.UserName = model.UserName;
+            if (int.Parse(a) > 0) 
+            { 
+                searchkey.SpaceName = model.SpaceName.Replace(" ","");
+            }
+            if (int.Parse(c) > 0) { 
+                searchkey.UserName = model.UserName.Replace(" ","");
+            }
             //var sercharcdata = model.SearchDateTime.Any() ? model.SearchDateTime : null;
             //searchkey.SearchDateTime = DateTime.Parse(sercharcdata);
             var orders = _repository.GetAll<Order>().Where(x => x.Space.MemberID == userid && x.OrderStatusID == 4);
@@ -410,11 +417,17 @@ namespace ZoneRadar.Services
 
             return result;
         }
-
-        private static List<HostCenterHistoryViewModel> SearchDate(IQueryable<Order> os100, IEnumerable<Review> rs100)
+        
+        /// <summary>
+        /// 配合History篩選Switch Case() (Jack) 
+        /// </summary>
+        /// <param name="orders"></param>
+        /// <param name="reviews"></param>
+        /// <returns></returns>
+        private static List<HostCenterHistoryViewModel> SearchDate(IQueryable<Order> orders, IEnumerable<Review> reviews)
         {
             var result = new List<HostCenterHistoryViewModel>();
-            foreach (var order in os100.ToList())
+            foreach (var order in orders.ToList())
             {
                 var resultDetail = new List<RentDetailViewModel>();
                 foreach (var orderdetail in order.OrderDetail)
@@ -431,8 +444,8 @@ namespace ZoneRadar.Services
                     });
                 }
                 //是否評價過
-                var hasReview = rs100.Where(x => x.ToHost == false).Any(x => x.OrderID == order.OrderID);
-                var totalReviews = rs100.Where(x => x.OrderID == order.OrderID && x.ToHost);
+                var hasReview = reviews.Where(x => x.ToHost == false).Any(x => x.OrderID == order.OrderID);
+                var totalReviews = reviews.Where(x => x.OrderID == order.OrderID && x.ToHost);
                 var score = totalReviews.Any() ? totalReviews.Average(x => x.Score) : 0;
                 result.Add(new HostCenterHistoryViewModel
                 {
@@ -457,8 +470,9 @@ namespace ZoneRadar.Services
             }
             return result;
         }
+
         /// <summary>
-        /// 平均分數
+        /// 平均分數 (Jack)
         /// </summary>
         /// <param name="count"></param>
         /// <param name="score"></param>
