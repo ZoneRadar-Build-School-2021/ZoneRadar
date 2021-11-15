@@ -16,8 +16,6 @@
 
 }
 
-@*@using (Html.BeginForm("AddSpace", "HostCenter", FormMethod.Post))
-    {*@
 <form id="form1" action="/HostCenter/AddSpace" method="post" class="needs-validation" novalidate onsubmit="return submitCheck()">
     @Html.AntiForgeryToken()
     <div id="app" class="main mymain form-horizontal ">

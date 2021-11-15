@@ -47,8 +47,7 @@
 
 }
 
-@using (Html.BeginForm("EditSpace", "HostCenter", FormMethod.Post))
-{
+<form id="form1" action="/HostCenter/EditSpace" method="post" class="needs-validation" novalidate onsubmit="return submitCheck()">
     <div class="main mymain">
         <div class="container  containerForAdd ">
             <!-- 開頭問候文區 -->
@@ -1393,7 +1392,6 @@
                                                 <p class="fs16">選擇有符合條件的條件的選項</p>
                                             </div>
                                             <div class="row">
-
                                                 @foreach (var cleansec in Optionscleantwo)
                                                 {
                                                     if (cleantwo.Select(x => x.OptionDetail).Contains(cleansec.OptionDetail))
@@ -1628,21 +1626,21 @@
                 {
                     <input type="hidden" name="SpaceID" value="@item.SpaceID" />
                 }
-                <button type="submit" class="btn submitAdd deleteBtn" >完成</button>
 
             </div>
         </div>
-    </div>
-    <div id="Loading" class="progress d-none">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+        <div id="Loading" class="progress d-none">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+        </div>
+
     </div>
 
 
     <p id="mySpaceId" name="SpaceID" class="d-none">@adds.Select(x => x.SpaceID).FirstOrDefault()</p>
 
 
-}
-@*</form>*@
+    
+</form>
 
 @section topCSS
     {
@@ -1663,13 +1661,11 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWRDj0MF4QflzrSsWSw31qVzAvixwdk3w" type="text/javascript"></script>
     <script src="~/Assets/JS/addspace/Latitude_and_Longitude.js"></script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-
-    <script src="~/Assets/JS/addspace/validation.js"></script>
     <script src="~/Assets/JS/addspace/CKEditor4/ckeditor/config.js"></script>
     <script src="~/Assets/JS/addspace/CKEditor4/ckeditor/ckeditor.js"></script>
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script src="~/Assets/JS/addspace/ckeditor.js"></script>
-    @*<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>*@
+    <script src="~/Assets/JS/addspace/validation.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
     <script src="~/Assets/JS/addspace/editSpace.js"></script>
     <script src="~/Assets/JS/addspace/EditCityandDistrictandZipcodeJavaScript.js"></script>
     <!-- Sortable -->

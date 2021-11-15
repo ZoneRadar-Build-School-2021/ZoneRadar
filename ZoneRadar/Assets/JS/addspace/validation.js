@@ -233,9 +233,8 @@ function spaceNamecheck() {
 
 
 var regexpNum = new RegExp(/^(0|[1-9][0-9]*)$/);
-var regexpNum2 = new RegExp(/^(?!0+$)(?!0*\.0*$)\d{1,2}(\.\d{1,1})?$/);
+var regexpNumpoint = new RegExp(/^(?!0+$)(?!0*\.0*$)\d{1,2}(\.\d{1,1})?$/);
 
-var numcheckA = $('#area').val();
 
 let areacheckNum = $('#area').val();
 let MaxpeopleNum = $('#Maxpeople').val();
@@ -322,7 +321,7 @@ var checkDiscount;
 function Discountcheck() {
     let DiscountNum = $('#Discount').val();
     let Discountcheck = document.querySelector("#Discountcheck")
-    if (regexpNum2.test(DiscountNum) && DiscountNum!=0) {
+    if (regexpNumpoint.test(DiscountNum) && DiscountNum!=0) {
         Discountcheck.classList.add('d-none');
         let Discount = $('#Discount');
         Discount.classList.add('border-danger');
@@ -384,6 +383,7 @@ function submitCheck() {
         else if ($("#SpaceName").val() == "") {
             Swal.fire("尚未填寫場地名稱，\n請回到2.創建您的場地填寫");
             return false;
+            
         }
         else if (Introduction.getData()== "") {
             Swal.fire("尚未填寫場地介紹，\n請回到2.創建您的場地填寫");
