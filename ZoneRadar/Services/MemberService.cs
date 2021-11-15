@@ -730,7 +730,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 取得大頭照片
+        /// 取得大頭照片(昶安)
         /// </summary>
         /// <returns></returns>
         public ProfileImgViewModel GetProfilePhotoFromDB(int memberID)
@@ -748,7 +748,7 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
-        /// 儲存照片至資料庫
+        /// 儲存照片至資料庫+移除大頭照(昶安)
         /// </summary>
         /// <param name="SaveProfileImgVM"></param>
         public void ReflashProfilePhotoFromDB(SaveProfileImgViewModel SaveProfileImgVM)
