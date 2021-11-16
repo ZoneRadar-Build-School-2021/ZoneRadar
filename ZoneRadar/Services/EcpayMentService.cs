@@ -24,8 +24,8 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public String GetEcpayData(PaymentViewModel model)
         {
-            //var Url = "https://zoneradar-frontstage.azurewebsites.net";
-            var Url = "https://4dc6-1-164-226-35.ngrok.io";
+            var Url = "https://zoneradar-frontstage.azurewebsites.net";
+            //var Url = "https://4dc6-1-164-226-35.ngrok.io";
             AllInOne oPayment = new AllInOne();
             //var returnURL = "webapi/spaces/api/JSONAPI/GetEcpayData";
             /* 服務參數 */
