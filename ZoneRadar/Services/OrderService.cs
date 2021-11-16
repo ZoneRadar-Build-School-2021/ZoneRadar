@@ -360,12 +360,12 @@ namespace ZoneRadar.Services
                     result = SearchDate(orders, reviews);
                     break;
                 case "100":
-                    var os100 = orders.Where(x => x.Space.SpaceName == searchkey.SpaceName);
+                    var os100 = orders.Where(x => x.Space.SpaceName.Replace(" ","") == searchkey.SpaceName);
                     var rs100 = reviews.Where(x => os100.Select(o => o.OrderID).Contains(x.OrderID));
                     result = SearchDate(os100, rs100);
                     break;
                 case "101":
-                    var os101 = orders.Where(x => x.Space.SpaceName == searchkey.SpaceName && x.Member.Name == searchkey.UserName);
+                    var os101 = orders.Where(x => x.Space.SpaceName.Replace(" ", "") == searchkey.SpaceName && x.Member.Name == searchkey.UserName);
                     var rs101 = _repository.GetAll<Review>().Where(x => os101.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
                     result = SearchDate(os101, rs101);
                     break;
@@ -383,20 +383,23 @@ namespace ZoneRadar.Services
                     result = SearchDate(os010, rs010);
                     break;
                 case "110":
-                    var od110 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
-                    var os110 = orders.Where(x => od110.Contains(x.OrderID) && x.Space.Member.Name == searchkey.UserName);
+                    var od110 = OrderDetails.Where(x => x.StartDateTime.Date == searchkey.SearchDateTime.Date).Select(x => x.OrderID).ToList();
+                    //var od110 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
+                    var os110 = orders.Where(x => od110.Contains(x.OrderID) && x.Space.SpaceName.Replace(" ", "") == searchkey.SpaceName);
                     var rs110 = _repository.GetAll<Review>().Where(x => os110.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
                     result = SearchDate(os110, rs110);
                     break;
                 case "011":
-                    var od011 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
+                    var od011 = OrderDetails.Where(x => x.StartDateTime.Date == searchkey.SearchDateTime.Date).Select(x => x.OrderID).ToList();
+                    //var od011 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
                     var os011 = orders.Where(x => od011.Contains(x.OrderID) && x.Member.Name == searchkey.UserName);
                     var rs011 = _repository.GetAll<Review>().Where(x => os011.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
                     result = SearchDate(os011, rs011);
                     break;
                 case "111":
-                    var od111 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
-                    var os111 = orders.Where(x => od111.Contains(x.OrderID) && x.Member.Name == searchkey.UserName && x.Space.SpaceName == searchkey.SpaceName);
+                    var od111 = OrderDetails.Where(x => x.StartDateTime.Date == searchkey.SearchDateTime.Date).Select(x => x.OrderID).ToList();
+                    //var od111 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
+                    var os111 = orders.Where(x => od111.Contains(x.OrderID) && x.Member.Name == searchkey.UserName && x.Space.SpaceName.Replace(" ", "") == searchkey.SpaceName);
                     var rs111 = _repository.GetAll<Review>().Where(x => os111.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
                     result = SearchDate(os111, rs111);
                     break;
