@@ -338,7 +338,8 @@ namespace ZoneRadar.Services
         {
             var DateTimePreset = new DateTime();
             var a = (model.SpaceName == null ? 0 : 1).ToString();
-            var b = (model.SearchDateTime == DateTimePreset ? 0 : 1).ToString();
+            var b = "1";
+            //var b = (model.SearchDateTime == DateTimePreset ? 0 : 1).ToString();
             var c = (model.UserName == null ? 0 : 1).ToString();
 
             var Key = a + b + c;
