@@ -344,76 +344,58 @@ namespace ZoneRadar.Services
             var Key = a+b+c;
             var searchkey = new SearchData();
             var result = new List<HostCenterHistoryViewModel>();
-            if (int.Parse(a) > 0) 
-            { 
-                searchkey.SpaceName = model.SpaceName.Replace(" ","");
-            }
-            if (int.Parse(c) > 0) { 
-                searchkey.UserName = model.UserName.Replace(" ","");
-            }
-            //var sercharcdata = model.SearchDateTime.Any() ? model.SearchDateTime : null;
-            //searchkey.SearchDateTime = DateTime.Parse(sercharcdata);
+
+            searchkey.SpaceName = int.Parse(a) > 0 ? model.SpaceName.Replace(" ", "") : null;
+            searchkey.UserName = int.Parse(c) > 0 ? model.UserName.Replace(" ", "") : null;
+            searchkey.SearchDateTime = int.Parse(b) > 0 ? model.SearchDateTime : DataTimePreset;
+
             var orders = _repository.GetAll<Order>().Where(x => x.Space.MemberID == userid && x.OrderStatusID == 4);
             var reviews = _repository.GetAll<Review>().Where(x => orders.Select(order => order.OrderID).Contains(x.OrderID)).ToList();
             var OrderDetails = _repository.GetAll<OrderDetail>().Where(x=>orders.Select(o=>o.OrderID).Contains(x.OrderID));
-            if (int.Parse(b) > 0) 
-            {
-                searchkey.SearchDateTime = model.SearchDateTime;
-            }
 
             switch (Key)//switch (比對的運算式)
             {
-                case "000" ://狀況一走這個
+                case "000" :
                     result = SearchDate(orders,reviews);
                     break;
                 case "100":
                     var os100 = orders.Where(x => x.Space.SpaceName == searchkey.SpaceName);
-                    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
                     var rs100 = reviews.Where(x => os100.Select(o => o.OrderID).Contains(x.OrderID));
-                    result = SearchDate( os100, rs100);
+                    result = SearchDate(os100, rs100);
                     break;
                 case "101":
                     var os101 = orders.Where(x => x.Space.SpaceName == searchkey.SpaceName && x.Member.Name == searchkey.UserName);
-                    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
                     var rs101 = _repository.GetAll<Review>().Where(x => os101.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
                     result = SearchDate(os101,rs101);
                     break;
                 case "001":
                     var os001 = orders.Where(x => x.Member.Name == searchkey.UserName);
-                    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
                     var rs001 = _repository.GetAll<Review>().Where(x => os001.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
                     result = SearchDate(os001, rs001);
                     break;
                 case "010":
                     var od010 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime,searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x=>x.OrderID).ToList();
                     var os010 = orders.Where(x=> od010.Contains(x.OrderID));
-                    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
                     var rs010 = _repository.GetAll<Review>().Where(x => os010.Select(os => os.OrderID).Contains(x.OrderID));
                     result = SearchDate(os010,rs010);
                     break;
                 case "110":
                     var od110 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
                     var os110 = orders.Where(x => od110.Contains(x.OrderID) && x.Space.Member.Name == searchkey.UserName);
-                    //result = SearchDate(os010,rs010);(x => x.Space.SpaceName == searchkey.SpaceName && x.OrderDetail.Select(od=>od.StartDateTime).Contains(searchkey.SearchDateTime));
-                    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
                     var rs110 = _repository.GetAll<Review>().Where(x => os110.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
                     result = SearchDate(os110,rs110);
                     break;
                 case "011":
                     var od011 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
                     var os011 = orders.Where(x => od011.Contains(x.OrderID) && x.Member.Name == searchkey.UserName);
-                    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
                     var rs011 = _repository.GetAll<Review>().Where(x => os011.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
                     result = SearchDate(os011,rs011);
                     break;
                 case "111":
                     var od111 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
                     var os111 = orders.Where(x => od111.Contains(x.OrderID) && x.Member.Name == searchkey.UserName && x.Space.SpaceName == searchkey.SpaceName);
-                    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
                     var rs111 = _repository.GetAll<Review>().Where(x => os111.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
                     result = SearchDate(os111, rs111);
-                    break;
-                default://以上都不符合走這個
                     break;
             }
 
