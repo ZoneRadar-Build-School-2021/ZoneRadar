@@ -46,40 +46,50 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public ActionResult ForgetPassword(string email)
         {
-            //確認是否有此會員
-            var hasUserInfo = _service.IsUser(email, true);
-            if (hasUserInfo)
+            try
             {
-                var generateLink = new GenerateLink
+                //確認是否有此會員
+                var hasUserInfo = _service.IsUser(email, true);
+                if (hasUserInfo)
                 {
-                    Request = Request,
-                    UrlHelper = Url,
-                    UserEmail = HttpUtility.HtmlEncode(email)
-                };
-                //產生信件中的連結
-                var verificationLink = _service.GenerateResetPasswordLink(generateLink);
+                    var generateLink = new GenerateLink
+                    {
+                        Request = Request,
+                        UrlHelper = Url,
+                        UserEmail = HttpUtility.HtmlEncode(email)
+                    };
+                    //產生信件中的連結
+                    var verificationLink = _service.GenerateResetPasswordLink(generateLink);
 
-                var emailContent = new EmailContent
+                    var emailContent = new EmailContent
+                    {
+                        Server = Server,
+                        UserEmail = HttpUtility.HtmlEncode(email),
+                        EmailContentFileName = "ResetPasswordEmailContent",
+                        EmailSubject = "重設您的ZONERadar密碼",
+                        OldLink = "resetLink",
+                        NewLink = verificationLink
+                    };
+                    //寄送重設密碼信
+                    _service.SentEmail(emailContent);
+
+                    return View("HadSentResetPasswordEmail");
+                }
+                else
                 {
-                    Server = Server,
-                    UserEmail = HttpUtility.HtmlEncode(email),
-                    EmailContentFileName = "ResetPasswordEmailContent",
-                    EmailSubject = "重設您的ZONERadar密碼",
-                    OldLink = "resetLink",
-                    NewLink = verificationLink
-                };
-                //寄送重設密碼信
-                _service.SentEmail(emailContent);
-
-                return View("HadSentResetPasswordEmail");
+                    ViewData["Alert"] = true;
+                    ViewData["Message"] = "找不到此會員，請重新輸入！";
+                    ViewData["Icon"] = false;
+                    return View();
+                }
             }
-            else
+            catch
             {
                 ViewData["Alert"] = true;
-                ViewData["Message"] = "找不到此會員，請重新輸入！";
+                ViewData["Message"] = "伺服器發生問題，請稍後再試";
                 ViewData["Icon"] = false;
                 return View();
-            }
+            }            
         }
 
         /// <summary>
@@ -177,44 +187,54 @@ namespace ZoneRadar.Controllers
             }
             else
             {
-                //先將註冊資訊存進資料庫中
-                var memberResult = _service.RegisterMember(registerVM);
-                //如果註冊資訊成功儲存
-                if (memberResult.IsSuccessful)
+                try
                 {
-                    //測試：用Session記錄註冊資訊
-                    //Session["ConfirmRegister"] = new List<string>() { registerResult.User.Email, DateTime.UtcNow.AddHours(8).AddMinutes(10).ToString() };
-
-                    var generateLink = new GenerateLink
+                    //先將註冊資訊存進資料庫中
+                    var memberResult = _service.RegisterMember(registerVM);
+                    //如果註冊資訊成功儲存
+                    if (memberResult.IsSuccessful)
                     {
-                        Request = Request,
-                        UrlHelper = Url,
-                        UserEmail = memberResult.User.Email
-                    };
-                    //產生信件中的連結
-                    var verificationLink = _service.GenerateVerifyLink(generateLink);
+                        //測試：用Session記錄註冊資訊
+                        //Session["ConfirmRegister"] = new List<string>() { registerResult.User.Email, DateTime.UtcNow.AddHours(8).AddMinutes(10).ToString() };
 
-                    var emailContent = new EmailContent
+                        var generateLink = new GenerateLink
+                        {
+                            Request = Request,
+                            UrlHelper = Url,
+                            UserEmail = memberResult.User.Email
+                        };
+                        //產生信件中的連結
+                        var verificationLink = _service.GenerateVerifyLink(generateLink);
+
+                        var emailContent = new EmailContent
+                        {
+                            Server = Server,
+                            UserEmail = memberResult.User.Email,
+                            EmailContentFileName = "VerificationEmailContent",
+                            EmailSubject = "ZONERadar會員確認信",
+                            OldLink = "verificationLink",
+                            NewLink = verificationLink
+                        };
+                        //寄送驗證信
+                        _service.SentEmail(emailContent);
+
+                        ViewData["UserEmail"] = memberResult.User.Email;
+                        return View("HadSentEmail");
+                    }
+                    else
                     {
-                        Server = Server,
-                        UserEmail = memberResult.User.Email,
-                        EmailContentFileName = "VerificationEmailContent",
-                        EmailSubject = "ZONERadar會員確認信",
-                        OldLink = "verificationLink",
-                        NewLink = verificationLink
-                    };
-                    //寄送驗證信
-                    _service.SentEmail(emailContent);
-
-                    ViewData["UserEmail"] = memberResult.User.Email;
-                    return View("HadSentEmail");
+                        //註冊失敗
+                        TempData["Alert"] = true;
+                        TempData["Message"] = memberResult.ShowMessage;
+                        TempData["Icon"] = memberResult.IsSuccessful;
+                        return Redirect(Request.UrlReferrer.AbsolutePath);
+                    }
                 }
-                else
+                catch
                 {
-                    //註冊失敗
                     TempData["Alert"] = true;
-                    TempData["Message"] = memberResult.ShowMessage;
-                    TempData["Icon"] = memberResult.IsSuccessful;
+                    TempData["Message"] = "伺服器發生問題，請稍後再試";
+                    TempData["Icon"] = false;
                     return Redirect(Request.UrlReferrer.AbsolutePath);
                 }
             }
@@ -238,42 +258,51 @@ namespace ZoneRadar.Controllers
         [HttpPost]
         public string ResentVerificationEmail(string email)
         {
-            //Ajax
-            //確認是否有此帳號的註冊紀錄但還未驗證
-            var hasRegisterInfo = _service.IsUser(email, false);
-            if (hasRegisterInfo)
+            try
             {
-                var generateLink = new GenerateLink
+                //Ajax
+                //確認是否有此帳號的註冊紀錄但還未驗證
+                var hasRegisterInfo = _service.IsUser(email, false);
+                if (hasRegisterInfo)
                 {
-                    Request = Request,
-                    UrlHelper = Url,
-                    UserEmail = HttpUtility.HtmlEncode(email)
-                };
-                //產生信件中的連結
-                var verificationLink = _service.GenerateVerifyLink(generateLink);
+                    var generateLink = new GenerateLink
+                    {
+                        Request = Request,
+                        UrlHelper = Url,
+                        UserEmail = HttpUtility.HtmlEncode(email)
+                    };
+                    //產生信件中的連結
+                    var verificationLink = _service.GenerateVerifyLink(generateLink);
 
-                var emailContent = new EmailContent
+                    var emailContent = new EmailContent
+                    {
+                        Server = Server,
+                        UserEmail = HttpUtility.HtmlEncode(email),
+                        EmailContentFileName = "VerificationEmailContent",
+                        EmailSubject = "ZONERadar會員確認信",
+                        OldLink = "verificationLink",
+                        NewLink = verificationLink
+                    };
+                    //寄送驗證信
+                    _service.SentEmail(emailContent);
+
+                    var result = new SweetAlert { Message = "已重發驗證信，請至信箱確認！", IconString = "success" };
+                    var jsonResult = JsonConvert.SerializeObject(result);
+                    return jsonResult;
+                }
+                else
                 {
-                    Server = Server,
-                    UserEmail = HttpUtility.HtmlEncode(email),
-                    EmailContentFileName = "VerificationEmailContent",
-                    EmailSubject = "ZONERadar會員確認信",
-                    OldLink = "verificationLink",
-                    NewLink = verificationLink
-                };
-                //寄送驗證信
-                _service.SentEmail(emailContent);
-
-                var result = new SweetAlert { Message = "已重發驗證信，請至信箱確認！", IconString = "success" };
+                    var result = new SweetAlert { Message = "該帳號不符合未驗證條件，請重新註冊！", IconString = "error" };
+                    var jsonResult = JsonConvert.SerializeObject(result);
+                    return jsonResult;
+                }
+            }
+            catch
+            {
+                var result = new SweetAlert { Message = "伺服器發生問題，請稍後再試", IconString = "error" };
                 var jsonResult = JsonConvert.SerializeObject(result);
                 return jsonResult;
-            }
-            else
-            {
-                var result = new SweetAlert { Message = "該帳號不符合未驗證條件，請重新註冊！", IconString = "error" };
-                var jsonResult = JsonConvert.SerializeObject(result);
-                return jsonResult;
-            }
+            }            
         }
 
         /// <summary>

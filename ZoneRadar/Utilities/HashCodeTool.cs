@@ -9,6 +9,9 @@ namespace ZoneRadar.Utilities
 {
     public static class HashCodeTool
     {
+        private static string Key => "ujwmsnco"; //必須8碼
+        private static string Iv => "49382047"; //必須8碼
+
         //加密是不會提供還原密碼API的
         public static string MD5Hash(this string rawString)
         {
@@ -111,6 +114,61 @@ namespace ZoneRadar.Utilities
             }
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// DES加密
+        /// </summary>
+        /// <param name="original">要加密的字串</param>
+        /// <returns>加密後的字串</returns>
+        public static string EncryptDES(string original)
+        {
+            try
+            {
+                DESCryptoServiceProvider des = new DESCryptoServiceProvider
+                {
+                    Key = Encoding.ASCII.GetBytes(Key),
+                    IV = Encoding.ASCII.GetBytes(Iv)
+                };
+                byte[] s = Encoding.ASCII.GetBytes(original);
+                ICryptoTransform desencrypt = des.CreateEncryptor();
+                return BitConverter.ToString(desencrypt.TransformFinalBlock(s, 0, s.Length)).Replace("-", string.Empty);
+            }
+            catch
+            {
+                return original;
+            }
+        }
+
+        /// <summary>
+        /// DES解密
+        /// </summary>
+        /// <param name="hexString">要解密的字串</param>
+        /// <returns>解密後的字串</returns>
+        public static string DecryptDES(string hexString)
+        {
+            try
+            {
+                DESCryptoServiceProvider des = new DESCryptoServiceProvider
+                {
+                    Key = Encoding.ASCII.GetBytes(Key),
+                    IV = Encoding.ASCII.GetBytes(Iv)
+                };
+
+                byte[] s = new byte[hexString.Length / 2];
+                int j = 0;
+                for (int i = 0; i < hexString.Length / 2; i++)
+                {
+                    s[i] = byte.Parse(hexString[j].ToString() + hexString[j + 1].ToString(), System.Globalization.NumberStyles.HexNumber);
+                    j += 2;
+                }
+                ICryptoTransform desencrypt = des.CreateDecryptor();
+                return Encoding.ASCII.GetString(desencrypt.TransformFinalBlock(s, 0, s.Length));
+            }
+            catch
+            {
+                return hexString;
+            }
         }
     }
 }

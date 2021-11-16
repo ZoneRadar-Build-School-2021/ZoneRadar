@@ -145,20 +145,9 @@ namespace ZoneRadar.Services
                 BodyEncoding = Encoding.UTF8
             };
 
-            try
-            {
-                client.Send(mail);
-            }
-            catch (Exception ex)
-            {
-                //未處理
-                throw new NotImplementedException();
-            }
-            finally
-            {
-                mail.Dispose();
-                client.Dispose();
-            }
+            client.Send(mail);
+            mail.Dispose();
+            client.Dispose();
         }
 
         /// <summary>
