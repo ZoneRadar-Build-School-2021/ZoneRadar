@@ -482,7 +482,6 @@ namespace ZoneRadar.Services
                 };
                 //會員所擁有的廠所有場地
                 var sps = _repository.GetAll<Space>().Where(x => x.MemberID == memberId && x.SpaceStatus.SpaceStatusID == 2);
-
                 foreach (var s in sps)
                 {
                     resultMember.Spaces.Add(new Spaces
@@ -622,7 +621,8 @@ namespace ZoneRadar.Services
                             Recommend  = r.Recommend,
                             SpaceMemberPhoto = r.Order.Space.Member.Photo,
                             Name = r.Order.Space.Member.Name,
-                            Id = r.Order.Space.MemberID
+                            Id = r.Order.Space.MemberID,
+                            Score = r.Score
                         });
                     
                 }
