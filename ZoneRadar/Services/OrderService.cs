@@ -218,7 +218,7 @@ namespace ZoneRadar.Services
         public void DeletePendingOrder(UsercenterPendingViewModel model)
         {
             var order = _repository.GetAll<Order>().FirstOrDefault(x => x.OrderID == model.OrderId && x.MemberID == model.MemberId);
-            if(order != null)
+            if (order != null)
             {
                 order.OrderStatusID = 5;
                 order.CancelDateTime = DateTime.UtcNow.AddHours(8);
@@ -239,13 +239,13 @@ namespace ZoneRadar.Services
         /// 取得訂單使用中資訊 (Jack)
         /// </summary>
         /// <returns></returns>
-        public List<ProcessingViewModel> GetHostCenter(int id) 
+        public List<ProcessingViewModel> GetHostCenter(int id)
         {
             var result = new List<ProcessingViewModel>();
-            var Orders = _repository.GetAll<Order>().Where(x=> x.OrderStatusID == 3 && x.Space.MemberID == id);
-            foreach (var order in Orders) 
+            var Orders = _repository.GetAll<Order>().Where(x => x.OrderStatusID == 3 && x.Space.MemberID == id);
+            foreach (var order in Orders)
             {
-                var resultdetail = new ProcessingViewModel{ orderdetailesforprcess = new List<OrderDetailesforPrcess>() };
+                var resultdetail = new ProcessingViewModel { orderdetailesforprcess = new List<OrderDetailesforPrcess>() };
                 foreach (var o in order.OrderDetail)
                 {
                     resultdetail.orderdetailesforprcess.Add(new OrderDetailesforPrcess
@@ -253,7 +253,7 @@ namespace ZoneRadar.Services
                         StratTime = o.StartDateTime,
                         EndTime = o.EndDateTime,
                         People = o.Participants,
-                        SinglePrice = PayMentService.OrderDetailPrice(o.EndDateTime.Subtract(o.StartDateTime).TotalHours,o.Order.Space.PricePerHour, o.Order.Space.SpaceDiscount.Any() ? o.Order.Space.SpaceDiscount.First().Hour : 1,o.Order.Space.SpaceDiscount.Any() ? o.Order.Space.SpaceDiscount.First().Discount : 0)
+                        SinglePrice = PayMentService.OrderDetailPrice(o.EndDateTime.Subtract(o.StartDateTime).TotalHours, o.Order.Space.PricePerHour, o.Order.Space.SpaceDiscount.Any() ? o.Order.Space.SpaceDiscount.First().Hour : 1, o.Order.Space.SpaceDiscount.Any() ? o.Order.Space.SpaceDiscount.First().Discount : 0)
                     });
                 }
                 result.Add(new ProcessingViewModel
@@ -283,7 +283,7 @@ namespace ZoneRadar.Services
         {
             var result = new List<HostCenterHistoryViewModel>();
             //訂單 ( 該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中 )
-            var orders = _repository.GetAll<Order>().Where(x => x.Space.MemberID == userid && x.OrderStatusID == 4 );
+            var orders = _repository.GetAll<Order>().Where(x => x.Space.MemberID == userid && x.OrderStatusID == 4);
             var reviews = _repository.GetAll<Review>().Where(x => orders.Select(order => order.OrderID).Contains(x.OrderID)).ToList();
             foreach (var order in orders.ToList())
             {
@@ -338,8 +338,7 @@ namespace ZoneRadar.Services
         {
             var DateTimePreset = new DateTime();
             var a = (model.SpaceName == null ? 0 : 1).ToString();
-            var b = "1";
-            //var b = (model.SearchDateTime == DateTimePreset ? 0 : 1).ToString();
+            var b = (model.SearchDateTime == DateTimePreset ? 0 : 1).ToString();
             var c = (model.UserName == null ? 0 : 1).ToString();
 
             var Key = a + b + c;
@@ -353,7 +352,7 @@ namespace ZoneRadar.Services
 
             var orders = _repository.GetAll<Order>().Where(x => x.Space.MemberID == userid && x.OrderStatusID == 4);
             var reviews = _repository.GetAll<Review>().Where(x => orders.Select(order => order.OrderID).Contains(x.OrderID)).ToList();
-            var OrderDetails = _repository.GetAll<OrderDetail>().Where(x => orders.Select(o => o.OrderID).Contains(x.OrderID));
+            var OrderDetails = _repository.GetAll<OrderDetail>().Where(x => orders.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
 
             switch (Key)//switch (比對的運算式)
             {
@@ -376,23 +375,24 @@ namespace ZoneRadar.Services
                     result = SearchDate(os001, rs001);
                     break;
                 case "010":
-                    var od010 = OrderDetails.Where(x => x.StartDateTime < SearchDateTimeAddDay && x.StartDateTime >= searchkey.SearchDateTime ).Select(x=>x.OrderID).ToList();
-                    //var od010 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime,searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x=>x.OrderID).ToList();
-                    var os010 = orders.Where(x=> od010.Contains(x.OrderID));
+                    var od010 = OrderDetails.Where(x => x.StartDateTime.Date == searchkey.SearchDateTime.Date).Select(x => x.OrderID).ToList();
+                    //var od010 = OrderDetails.Where(x => x.StartDateTime < SearchDateTimeAddDay && x.StartDateTime >= searchkey.SearchDateTime).Select(x => x.OrderID).ToList();
+                    //var od010 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
+                    var os010 = orders.Where(x => od010.Contains(x.OrderID));
                     var rs010 = _repository.GetAll<Review>().Where(x => os010.Select(os => os.OrderID).Contains(x.OrderID));
-                    result = SearchDate(os010,rs010);
+                    result = SearchDate(os010, rs010);
                     break;
                 case "110":
                     var od110 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
                     var os110 = orders.Where(x => od110.Contains(x.OrderID) && x.Space.Member.Name == searchkey.UserName);
                     var rs110 = _repository.GetAll<Review>().Where(x => os110.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
-                    result = SearchDate(os110,rs110);
+                    result = SearchDate(os110, rs110);
                     break;
                 case "011":
                     var od011 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
                     var os011 = orders.Where(x => od011.Contains(x.OrderID) && x.Member.Name == searchkey.UserName);
                     var rs011 = _repository.GetAll<Review>().Where(x => os011.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
-                    result = SearchDate(os011,rs011);
+                    result = SearchDate(os011, rs011);
                     break;
                 case "111":
                     var od111 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
@@ -404,7 +404,7 @@ namespace ZoneRadar.Services
 
             return result;
         }
-        
+
         /// <summary>
         /// 配合History篩選Switch Case() (Jack) 
         /// </summary>
