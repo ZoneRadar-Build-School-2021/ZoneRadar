@@ -107,7 +107,7 @@ a {
 }
 
 .review-brief .user-pic img {
-    width: 50px;
+    max-width: 50px;
     height: 50px;
 }
 
