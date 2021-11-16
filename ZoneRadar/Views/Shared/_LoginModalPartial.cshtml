@@ -13,11 +13,11 @@
 @*}*@
 
 <form class="mb-3" id="login-form-vue">
-    <input v-model="inputData.account" type="email" id="LoginEmail" :class="{ 'is-invalid': inputDataCheck.accountError }" class="form-control form-control-lg d-block" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required>
+    <input v-model="inputData.account" type="email" id="LoginEmail" :class="{ 'is-invalid': inputDataCheck.accountError }" class="form-control form-control-lg d-block" placeholder="Email" aria-label="email" aria-describedby="basic-addon1" required v-on:keyup.enter="enterToLogin" v-on:change="checkEmail">
     <div class="invalid-feedback text-start mt-1">
         {{inputDataCheck.accountErrorMsg}}
     </div>
-    <input v-model="inputData.password" type="password" id="LoginPassword" :class="{ 'is-invalid': inputDataCheck.passwordError }" class="form-control form-control-lg d-block mt-3" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" required>
+    <input v-model="inputData.password" type="password" id="LoginPassword" :class="{ 'is-invalid': inputDataCheck.passwordError }" class="form-control form-control-lg d-block mt-3" placeholder="Password" aria-label="password" aria-describedby="basic-addon2" required v-on:keyup.enter="enterToLogin" v-on:change="checkPassword">
     <div class="invalid-feedback text-start mt-1">
         {{inputDataCheck.passwordErrorMsg}}
     </div>
