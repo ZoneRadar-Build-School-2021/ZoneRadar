@@ -93,6 +93,7 @@ namespace ZoneRadar.Services
         {
             //記錄有效的期限
             var afterTenMinutes = DateTime.UtcNow.AddMinutes(10).ToString();
+            
             var route = new RouteValueDictionary { { "email", generateLink.UserEmail }, { "expired", afterTenMinutes } };
             //製作驗證信的連結
             var verificationLink = generateLink.UrlHelper.Action("ConfirmEmail", "MemberCenter", route, generateLink.Request.Url.Scheme, generateLink.Request.Url.Host);
