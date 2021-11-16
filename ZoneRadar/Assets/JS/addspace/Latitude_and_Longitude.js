@@ -34,10 +34,10 @@ function addressToLatLng(addr) {
             console.log(lng);
         }
         else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
-            alert("您輸入的地址可能不存在!\nThis may occur if the geocoder was passed a non-existent address.");
+            Swal.fire("您輸入的地址可能不存在!");
         }
         else if (status == google.maps.GeocoderStatus.REQUEST_DENIED) {
-            alert("請求被拒絕!\nYour request was denied.");
+            Swal.fire("請求被拒絕!");
         }
         else {
             var content = $("#target").val();

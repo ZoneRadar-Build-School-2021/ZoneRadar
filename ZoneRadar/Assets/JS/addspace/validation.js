@@ -22,7 +22,7 @@ let addrinvalid = document.querySelector("#addrinvalid");
 function addresscheck() {
     var addressStr = $('#address').val();
     console.log(addressStr);
-    if (addressStr.includes("區") || addressStr.includes("市") || addressStr.includes("縣")) {
+    if (addressStr.includes("區") || addressStr.includes("市") || addressStr.includes("縣") || addressStr=="") {
         addrinvalid.classList.remove('d-none');
         address.classList.add('border-danger');
     }
