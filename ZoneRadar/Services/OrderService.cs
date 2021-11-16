@@ -476,60 +476,7 @@ namespace ZoneRadar.Services
             }
             return result;
         }
-        /// <summary>
-        /// 搜尋方法
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        //public List<HostCenterHistoryViewModel> GetHistoryData(Order orders)
-        //{
-        //    var result = new List<HostCenterHistoryViewModel>();
-        //    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
-        //    var orders = _repository.GetAll<Order>().Where(x => x.Space.MemberID == userid && x.OrderStatusID == 4);
-        //    var reviews = _repository.GetAll<Review>().Where(x => orders.Select(order => order.OrderID).Contains(x.OrderID)).ToList();
-        //    foreach (var order in orders.ToList())
-        //    {
-        //        var resultDetail = new List<RentDetailViewModel>();
-        //        foreach (var orderdetail in order.OrderDetail)
-        //        {
-        //            var totalhours = (orderdetail.EndDateTime).Subtract(orderdetail.StartDateTime).TotalHours;
-        //            resultDetail.Add(new RentDetailViewModel
-        //            {
-        //                OrderDetailId = orderdetail.OrderDetailID,
-        //                OrderId = orderdetail.OrderID,
-        //                RentTime = orderdetail.StartDateTime.ToString("yyyy-MM-dd HH:mm"),
-        //                RentBackTime = orderdetail.EndDateTime.ToString("yyyy-MM-dd HH:mm"),
-        //                People = orderdetail.Participants,
-        //                Money = PayMentService.OrderDetailPrice(totalhours, orderdetail.Order.Space.PricePerHour, orderdetail.Order.Space.SpaceDiscount.Any() ? orderdetail.Order.Space.SpaceDiscount.First().Hour : 1, orderdetail.Order.Space.SpaceDiscount.Any() ? orderdetail.Order.Space.SpaceDiscount.First().Discount : 0),
-        //            });
-        //        }
-        //        //是否評價過
-        //        var hasReview = reviews.Where(x => x.ToHost == false).Any(x => x.OrderID == order.OrderID);
-        //        var totalReviews = reviews.Where(x => x.OrderID == order.OrderID && x.ToHost);
-        //        var score = totalReviews.Any() ? totalReviews.Average(x => x.Score) : 0;
-        //        result.Add(new HostCenterHistoryViewModel
-        //        {
-        //            SpaceId = order.SpaceID,
-        //            OrderNumber = (int)order.OrderNumber,
-        //            PaidTime = ((DateTime)order.PaymentDate).ToString("yyyy-MM-dd HH:mm"),
-        //            SpaceName = order.Space.SpaceName,
-        //            SpaceUrl = order.Space.SpacePhoto.First().SpacePhotoUrl,
-        //            OwnerName = order.Space.Member.Name,
-        //            OwnerPhone = order.Space.Member.Phone,
-        //            //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
-        //            Score = score,
-        //            TotalMoney = resultDetail.Select(x => x.Money).Sum(),
-        //            Email = order.Member.Email,
-        //            OrderId = order.OrderID,
-        //            RentDetail = resultDetail,
-        //            UserName = order.Member.Name,
-        //            ContactName = order.ContactName,
-        //            ContactPhone = order.ContactPhone,
-        //            HasReview = hasReview
-        //        });
-        //    }
-        //    return result;
-        //}
+
         public class SearchData
         {
             public string SpaceName { get; set; }
