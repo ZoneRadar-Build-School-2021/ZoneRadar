@@ -4,6 +4,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.SqlServer;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -354,9 +355,9 @@ namespace ZoneRadar.Services
             var orders = _repository.GetAll<Order>().Where(x => x.Space.MemberID == userid && x.OrderStatusID == 4);
             var reviews = _repository.GetAll<Review>().Where(x => orders.Select(order => order.OrderID).Contains(x.OrderID)).ToList();
             var OrderDetails = _repository.GetAll<OrderDetail>().Where(x=>orders.Select(o=>o.OrderID).Contains(x.OrderID));
-            if (model.SearchDateTime.Any()) 
-            { 
-                searchkey.SearchDateTime = DateTime.Parse(model.SearchDateTime);
+            if (int.Parse(b) > 0) 
+            {
+                searchkey.SearchDateTime = model.SearchDateTime;
             }
 
             switch (Key)//switch (比對的運算式)
