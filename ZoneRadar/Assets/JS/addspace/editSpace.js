@@ -32,7 +32,7 @@ Yesprojection.addEventListener('click', function () {
 
 //datlist
 //datlist2
-
+let timeOptionArray = new Array();
 
 //monday~Sun
 //營業 checkbox
@@ -289,9 +289,6 @@ for (var i = 0; i < Newdatalist.length; i++) {
 
     }
    }
-
-    //todo
-
     MonOpen.addEventListener("click", function () {
         if (MonOpen.checked == false) {
             MonAllDay.disabled = true;
@@ -966,6 +963,7 @@ for (var i = 0; i < Newdatalist.length; i++) {
         let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
         let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
 
+        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
         let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
         let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
         let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
@@ -982,7 +980,6 @@ for (var i = 0; i < Newdatalist.length; i++) {
         let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
         let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
         let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
-        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
 
         StateSunS.appendChild(option1);
         StateSunS.appendChild(option2);
@@ -1020,10 +1017,5 @@ for (var i = 0; i < Newdatalist.length; i++) {
         StateSunE.appendChild(option34);
     });
 
-    CKEDITOR.replace('Introduction');
-    CKEDITOR.replace('HostRules');
-    CKEDITOR.replace('Parking');
-    CKEDITOR.replace('ShootingEquipment');
-    CKEDITOR.replace('Traffic');
     CKEDITOR.replace('OtherAmenity');
 

@@ -1,7 +1,5 @@
 ﻿(function () {
     'use strict'
-    
-
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.querySelectorAll('.needs-validation')
 
@@ -13,7 +11,6 @@
                     event.preventDefault()
                     event.stopPropagation()
                 }
-
                 form.classList.add('was-validated')
             }, false)
         })
@@ -25,7 +22,7 @@ let addrinvalid = document.querySelector("#addrinvalid");
 function addresscheck() {
     var addressStr = $('#address').val();
     console.log(addressStr);
-    if (addressStr.includes("區") || addressStr.includes("市") || addressStr.includes("縣")) {
+    if (addressStr.includes("區") || addressStr.includes("市") || addressStr.includes("縣") || addressStr=="") {
         addrinvalid.classList.remove('d-none');
         address.classList.add('border-danger');
     }
@@ -129,43 +126,43 @@ var MonStart = document.getElementsByClassName("MonselectR");
 //    else {
 //        OperatingDaycheckTime.innerHTML = "結束時間不能早於開始時間。";
 //    }
-    
 //}
 window.onmousewheel = function () {
-    if (600<window.scrollY <1000) {
+    if (600<window.scrollY <700) {
         if (typeslist[0].checked || typeslist[1].checked || typeslist[2].checked || typeslist[3].checked || typeslist[4].checked || typeslist[5].checked
             || typeslist[6].checked || typeslist[7].checked || typeslist[8].checked || typeslist[9].checked || typeslist[10].checked || typeslist[11].checked ||
             typeslist[12].checked || typeslist[13].checked || typeslist[14].checked || typeslist[15].checked || typeslist[16].checked)
         {
             typeinvalid.classList.add('d-none');
-            checktypes = 1;
         }
         else {
-            
             let typeinvalid = document.querySelector("#typeinvalid");
             typeinvalid.classList.remove('d-none');
         }
-        if (AmenityDetaillist[0].checked || AmenityDetaillist[1].checked || AmenityDetaillist[2].checked || AmenityDetaillist[3].checked || AmenityDetaillist[4].checked || AmenityDetaillist[5].checked
-            || AmenityDetaillist[6].checked || AmenityDetaillist[7].checked || AmenityDetaillist[8].checked || AmenityDetaillist[9].checked || AmenityDetaillist[10].checked || AmenityDetaillist[11].checked ||
-            AmenityDetaillist[12].checked || AmenityDetaillist[13].checked || AmenityDetaillist[14].checked || AmenityDetaillist[15].checked || AmenityDetaillist[16].checked) {
-            let AmenityDetailinvalid = document.querySelector("#AmenityDetailinvalid");
-            AmenityDetailinvalid.classList.add('d-none');
-            checkAmenity = 1;
+        if (700 < window.scrollY < 900) {
+            if (AmenityDetaillist[0].checked || AmenityDetaillist[1].checked || AmenityDetaillist[2].checked || AmenityDetaillist[3].checked || AmenityDetaillist[4].checked || AmenityDetaillist[5].checked
+                || AmenityDetaillist[6].checked || AmenityDetaillist[7].checked || AmenityDetaillist[8].checked || AmenityDetaillist[9].checked || AmenityDetaillist[10].checked || AmenityDetaillist[11].checked ||
+                AmenityDetaillist[12].checked || AmenityDetaillist[13].checked || AmenityDetaillist[14].checked || AmenityDetaillist[15].checked || AmenityDetaillist[16].checked) {
+                let AmenityDetailinvalid = document.querySelector("#AmenityDetailinvalid");
+                AmenityDetailinvalid.classList.add('d-none');
+            }
+            else {
+                let AmenityDetailinvalid = document.querySelector("#AmenityDetailinvalid");
+                AmenityDetailinvalid.classList.remove('d-none');
+            }
         }
-        else {
-            let AmenityDetailinvalid = document.querySelector("#AmenityDetailinvalid");
-            AmenityDetailinvalid.classList.remove('d-none');
-        }
-        if (CleaningOptionIDlist[0].checked || CleaningOptionIDlist[1].checked || CleaningOptionIDlist[2].checked || CleaningOptionIDlist[3].checked || CleaningOptionIDlist[4].checked || CleaningOptionIDlist[5].checked
-            || CleaningOptionIDlist[6].checked || CleaningOptionIDlist[7].checked || CleaningOptionIDlist[8].checked || CleaningOptionIDlist[9].checked || CleaningOptionIDlist[10].checked || CleaningOptionIDlist[11].checked ||
-            CleaningOptionIDlist[12].checked || CleaningOptionIDlist[13].checked || CleaningOptionIDlist[14].checked ||CleaningOptionIDlist[15].checked || CleaningOptionIDlist[16].checked || CleaningOptionIDlist[17].checked) {
-            let CleaningOptionIDcheck = document.querySelector("#CleaningOptionIDcheck");
-            CleaningOptionIDcheck.classList.add('d-none');
-            checkCleaningOption = 1;
-        }
-        else {
-            let CleaningOptionIDcheck = document.querySelector("#CleaningOptionIDcheck");
-            CleaningOptionIDcheck.classList.remove('d-none');
+        if (800 < window.scrollY < 1000) {
+            if (CleaningOptionIDlist[0].checked || CleaningOptionIDlist[1].checked || CleaningOptionIDlist[2].checked || CleaningOptionIDlist[3].checked || CleaningOptionIDlist[4].checked || CleaningOptionIDlist[5].checked
+                || CleaningOptionIDlist[6].checked || CleaningOptionIDlist[7].checked || CleaningOptionIDlist[8].checked || CleaningOptionIDlist[9].checked || CleaningOptionIDlist[10].checked || CleaningOptionIDlist[11].checked ||
+                CleaningOptionIDlist[12].checked || CleaningOptionIDlist[13].checked || CleaningOptionIDlist[14].checked || CleaningOptionIDlist[15].checked || CleaningOptionIDlist[16].checked || CleaningOptionIDlist[17].checked) {
+                let CleaningOptionIDcheck = document.querySelector("#CleaningOptionIDcheck");
+                CleaningOptionIDcheck.classList.add('d-none');
+                checkCleaningOption = 1;
+            }
+            else {
+                let CleaningOptionIDcheck = document.querySelector("#CleaningOptionIDcheck");
+                CleaningOptionIDcheck.classList.remove('d-none');
+            }
         }
         if (CancellationIDlist[0].checked || CancellationIDlist[1].checked || CancellationIDlist[2].checked || CancellationIDlist[3].checked) {
             let CancellationIDcheck = document.querySelector("#CancellationIDcheck");
@@ -206,8 +203,6 @@ window.onmousewheel = function () {
             OperatingDaycheck.classList.remove('d-none');
             OperatingDaycheck.innerHTML = "請填寫營業時間";
         }
-        
-
     }
 }
 var checkspaceName;
@@ -234,44 +229,12 @@ function spaceNamecheck() {
 
 
 
-//var maxlength = 1000;
-//_editor = CKEDITOR.replace("Introduction");
-//_editor.on('change', function (event) {
-//    var oldhtml = _editor.document.getBody().getHtml();
-//    var description = oldhtml.replace(/<.*?>/ig, "");
-//    var etop = $("#cke_1_top");
-//    var _slen = maxlength - description.length;
-//    console.log(description.length);
-//    var canwrite = $("<label id='canwrite'>可以輸入1000字</label>");
-//    if (etop.find("#canwrite").length <250) {
-//        let IntroductionNamecheck = document.querySelector("#IntroductionNamecheck");
-//        IntroductionNamecheck.classList.remove('d-none');
-//    } 
-//    if (etop.find("#canwrite").length < 1) {
-//        canwrite.css({ border: '1px #f1f1f1 solid', 'line-height': '28px', color: '#999' });
-//        etop.prepend(canwrite);
-//        etop.keypress
-//    }
-//    var _label = etop.find("#canwrite");
-//    if (description.length > maxlength) {
-//        //alert("最多可以输入"+maxlength+"個文字，您已達到最大字數限制");
-//        _editor.setData(oldhtml);
-//        _label.html("還可以輸入0字");
-//    } else {
-//        _label.html("還可以輸入" + _slen + "字");
-//    }
-//    if (description.length > 250) {
-//        let IntroductionNamecheck = document.querySelector("#IntroductionNamecheck");
-//        IntroductionNamecheck.classList.add('d-none');
-//    }
-//});
 
 
 
 var regexpNum = new RegExp(/^(0|[1-9][0-9]*)$/);
-var regexpNum2 = new RegExp(/^(?!0+$)(?!0*\.0*$)\d{1,2}(\.\d{1,1})?$/);
+var regexpNumpoint = new RegExp(/^(?!0+$)(?!0*\.0*$)\d{1,2}(\.\d{1,1})?$/);
 
-var numcheckA = $('#area').val();
 
 let areacheckNum = $('#area').val();
 let MaxpeopleNum = $('#Maxpeople').val();
@@ -290,8 +253,6 @@ function Numcheck() {
         areacheck.classList.add('border-danger');
     }
 }
-console.error(checkarea);
-var checkMaxpeople;
 function Maxpeoplecheck() {
     let MaxpeopleNum = $('#Maxpeople').val();
     let Maxpeoplecheck = document.querySelector("#Maxpeoplecheck")
@@ -360,7 +321,7 @@ var checkDiscount;
 function Discountcheck() {
     let DiscountNum = $('#Discount').val();
     let Discountcheck = document.querySelector("#Discountcheck")
-    if (regexpNum2.test(DiscountNum) && DiscountNum!=0) {
+    if (regexpNumpoint.test(DiscountNum) && DiscountNum!=0) {
         Discountcheck.classList.add('d-none');
         let Discount = $('#Discount');
         Discount.classList.add('border-danger');
@@ -373,14 +334,126 @@ function Discountcheck() {
     }
 }
 
-var addressStr = $('#address').val();
-console.log(checkAmenity);
-function openSubmitBtn() {
-    if ( checkAmenity == 1 && checktypes == 1) {
-        console.log(8);
-        var success = document.querySelector("#success");
-        success.disabled = false;
+///文字編輯器 
+var Introduction= CKEDITOR.replace('Introduction');
+var HostRules=CKEDITOR.replace('HostRules');
+var Parking= CKEDITOR.replace('Parking');
+var ShootingEquipment =CKEDITOR.replace('ShootingEquipment');
+var Traffic=CKEDITOR.replace('Traffic');
+function submitCheck() {
+    var HourslistCheck = new Array();
+    for (var i = 0; i < Hourslist.length; i++) {
+        if (Hourslist[i].checked) {
+            HourslistCheck.push(Hourslist[i]);
+        }
     }
-
+    let typeslistCheck = new Array();
+    for (var i = 0; i < typeslist.length; i++) {
+        if (typeslist[i].checked) {
+            typeslistCheck.push(typeslist[i]);
+        }
+    }
+    let  AmenityDetailCheck = new Array();
+    for (var i = 0; i < AmenityDetaillist.length; i++) {
+        if (AmenityDetaillist[i].checked) {
+            AmenityDetailCheck.push(AmenityDetaillist[i]);
+        }
+    }
+    let CleaningOptionCheck = new Array();
+    for (var i = 0; i < CleaningOptionIDlist.length; i++) {
+        if (CleaningOptionIDlist[i].checked) {
+            CleaningOptionCheck.push(CleaningOptionIDlist[i]);
+        }
+    }
+    let CancellationCheck = new Array();
+    for (var i = 0; i < CancellationIDlist.length; i++) {
+        if (CancellationIDlist[i].checked) {
+            CancellationCheck.push(CancellationIDlist[i])
+        }
+    }
+    try {
+        if ($("#address").val() == "") {
+            Swal.fire("尚未填寫地址，請回到1.位置填寫");
+            return false;
+        }
+        else if (typeslistCheck.length == 0) {
+            Swal.fire("你尚未填寫場地類型，\n請回到2.創建您的場地填寫");
+            return false;
+        }
+        else if ($("#SpaceName").val() == "") {
+            Swal.fire("尚未填寫場地名稱，\n請回到2.創建您的場地填寫");
+            return false;
+            
+        }
+        else if (Introduction.getData()== "") {
+            Swal.fire("尚未填寫場地介紹，\n請回到2.創建您的場地填寫");
+            return false;
+        }
+        else if (Introduction.getData().length<250) {
+            Swal.fire("場地介紹至少要250字，\n請回到2.創建您的場地填寫");
+            return false;
+        }
+        else if ($("#area").val() == "") {
+            Swal.fire("尚未填寫場地坪數，\n請回到2.創建您的場地填寫");
+            return false;
+        }
+        else if ($("#Maxpeople").val() == "") {
+            Swal.fire("尚未填寫場地最大客人數，\n請回到2.創建您的場地填寫");
+            return false;
+        }
+        else if ($("#SpaceName").val() == "") {
+            Swal.fire("尚未填寫場地名稱，\n請回到2.創建您的場地填寫");
+            return false;
+        }
+        else if ($("#SpacePrice").val() == "") {
+            Swal.fire("你尚未填寫場地定價，請回到3.營業時間&定價填寫");
+            return false;
+        }
+        else if (HourslistCheck.length == 0) {
+            Swal.fire("尚未填寫營業時間，請回到\n3.營業時間&定價填寫");
+            return false;
+        }
+        else if (AmenityDetailCheck.length == 0) {
+            Swal.fire("你尚未填寫場地設施，請回到3.營業時間&定價填寫");
+            return false;
+        }
+        else if ($("#minSpacePrice").val() == "") {
+            Swal.fire("尚未填寫場地最少小時數，\n請回到3.營業時間&定價填寫");
+            return false;
+        }
+        else if ($("#hourDiscount").val() == "") {
+            Swal.fire("尚未填寫逾多少小時數，\n請回到3.營業時間&定價填寫");
+            return false;
+        }
+        else if ($("#Discount").val() == "") {
+            Swal.fire("尚未填寫折扣數，\n請回到3.營業時間&定價填寫");
+            return false;
+        }
+        else if ($(".imgUrl").val() == "") {
+            Swal.fire("尚未上傳照片，\n是否忘記按上傳鈕，請回到4.上傳照片並上傳照片");
+            return false;
+        }
+        else if (Traffic.getData() == "") {
+            Swal.fire("尚未填寫交通資訊，\n請回到5.其他資訊填寫");
+            return false;
+        }
+        else if (HostRules.getData() == "") {
+            Swal.fire("尚未填寫場地規範，\n請回到6.場地規範填寫");
+            return false;
+        }
+        else if (CleaningOptionCheck.length == 0) {
+            Swal.fire("你尚未填寫場地清潔條款，請回到7.清潔條款填寫");
+            return false;
+        }
+        else if (CancellationCheck.length == 0) {
+            Swal.fire("你尚未填寫場地取消政策，請回到8.取消政策填寫");
+            return false;
+        }
+        else {
+            document.querySelector("#Loading").classList.remove('d-none');
+            return true;
+        }
+    } catch (e) {
+        return false;
+    }
 }
-openSubmitBtn();

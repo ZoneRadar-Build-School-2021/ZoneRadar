@@ -370,7 +370,6 @@ namespace ZoneRadar.Services
             {
                 SpaceId = space
             };
-
             return spacID;
         }
 
@@ -563,7 +562,6 @@ namespace ZoneRadar.Services
         {
             var Operating = new List<SelectListItem> {
             new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
-            new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
             new SelectListItem { Value = "07:00:00.0000000", Text = "07:00"},
             new SelectListItem { Value = "08:00:00.0000000", Text = "08:00"},
             new SelectListItem { Value = "09:00:00.0000000", Text = "09:00"},
@@ -581,7 +579,6 @@ namespace ZoneRadar.Services
             new SelectListItem { Value = "21:00:00.0000000", Text = "21:00"},
             new SelectListItem { Value = "22:00:00.0000000", Text = "22:00"},
             new SelectListItem { Value = "23:00:00.0000000", Text = "23:00"},
-            new SelectListItem { Value = "00:00:00.0000000", Text = "00:00"},
             };
             return Operating;
         }
@@ -1218,7 +1215,6 @@ namespace ZoneRadar.Services
             var Operating = new List<SelectListItem>
             {
             new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
-            new SelectListItem { Value = "06:00:00.0000000", Text = "06:00"},
             new SelectListItem { Value = "07:00:00.0000000", Text = "07:00"},
             new SelectListItem { Value = "08:00:00.0000000", Text = "08:00"},
             new SelectListItem { Value = "09:00:00.0000000", Text = "09:00"},
@@ -1236,7 +1232,6 @@ namespace ZoneRadar.Services
             new SelectListItem { Value = "21:00:00.0000000", Text = "21:00"},
             new SelectListItem { Value = "22:00:00.0000000", Text = "22:00"},
             new SelectListItem { Value = "23:00:00.0000000", Text = "23:00"},
-            new SelectListItem { Value = "00:00:00.0000000", Text = "00:00"},
             };
             return result;
         }
@@ -1488,10 +1483,10 @@ namespace ZoneRadar.Services
                 }
                 else
                 {
-                    int x = 0;
-                    ope[i].StartTime = TimeSpan.Parse(addSpaceViewModel.StartTime[x]);
-                    ope[i].EndTime = TimeSpan.Parse(addSpaceViewModel.EndTime[x]);
-                    x++;
+                    //int x = 0;
+                    ope[i].StartTime = TimeSpan.Parse(addSpaceViewModel.StartTime[i]);
+                    ope[i].EndTime = TimeSpan.Parse(addSpaceViewModel.EndTime[i]);
+                    //x++;
                 }
             }
             _repository.CreateRange<Operating>(ope);

@@ -12,9 +12,11 @@ namespace ZoneRadar.Controllers
     public class EcpayApiController : ApiController
     {
         private readonly EcpayMentService _ecpaymentservice;
-        public EcpayApiController() 
+        private readonly OrderService _orderservice;
+        public EcpayApiController()
         {
             _ecpaymentservice = new EcpayMentService();
+            _orderservice = new OrderService();
         }
         /// <summary>
         /// 回復綠界
@@ -32,29 +34,11 @@ namespace ZoneRadar.Controllers
             return Ok("1|OK");
         }
 
-        /// <summary>
-        /// 綠界回復
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        //[Route("api/JSONAPI/GetEcpay")]
-        //[HttpPost]
-        //public IHttpActionResult GetEcpay(EcpayViewModel model)
-        //{
-        //    return Json(model);
-        //}
-
-
-        //[Route("api/historyapi/SearchHistoryList")]
-        //[HttpPost]
-        //public IHttpActionResult SearchHistoryList(HostCenterHistoryViewModel model)
-        //{
-        //    var a = model.SpaceName;
-        //    var b = model.UserName;
-        //    var c = model.SearchDateTime;
-            
-
-        //    return Ok("1|OK");
-        //}
+        [Route("api/historyapi/SearchHistoryList")]
+        [HttpGet]
+        public IHttpActionResult SearchHistoryList()
+        {
+            return Ok(_orderservice.GetHostCenterHistoryVM(1));
+        }
     }
 }
