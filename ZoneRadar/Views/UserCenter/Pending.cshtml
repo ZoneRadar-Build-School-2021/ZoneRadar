@@ -148,28 +148,29 @@
                             <h5 class="modal-title" id="order_ModalLabel">訂單編號：<span>@Html.DisplayFor(m => item.OrderNumber)</span></h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <p class="cancel_policy">
+                        <div class="modal-body p-4">
+                            <p class="cancel_policy mb-4">
                                 依據您所租借場地之退款政策為：
-                                <span class="fw-bolder">
+                                <span class="fw-bolder fs-5">
                                     @Html.DisplayFor(m => item.CancelTitle)
                                 </span>
                             </p>
-                            <p class="cancel_policy">
+                            <p class="cancel_policy mb-4">
                                 距離您租借場地的時間還剩：
-                                <span class="fw-bolder">
+                                <span class="fw-bolder fs-5">
                                     @Html.DisplayFor(m => item.CancelTime)
                                 </span>
                             </p>
-                            <p class="cancel_policy_text">
-                                政策說明：
+                            <p class="cancel_policy_text mb-4 lh-lg">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                政策說明：<br />
                                 <span>
                                     @Html.DisplayFor(m => item.CancelDetail)
                                 </span>
                             </p>
-                            <p class="cancel_police_money">
+                            <p class="cancel_police_money mb-3 fw-bolder fs-5">
                                 退款金額：NT$
-                                <span class="fw-bolder">
+                                <span class="fw-bolder fs-5">
                                     @Html.DisplayFor(m => item.CancelMoney)
                                 </span>
                             </p>
