@@ -101,6 +101,8 @@ namespace ZoneRadar.Controllers
         [HttpGet]
         public ActionResult ResetPassword(string email, string resetCode, string expired)
         {
+            email = HashCodeTool.DecryptDES(email);
+            expired = HashCodeTool.DecryptDES(expired);
             DateTime.TryParse(expired, out DateTime expiredTime);
             //超過10分鐘無效
             if (DateTime.UtcNow > expiredTime)
@@ -316,7 +318,8 @@ namespace ZoneRadar.Controllers
             //測試：Session是否接收的到資料？(答：收不到，是null)
             //var test = (List<string>)Session["ConfirmRegister"];
             //var xxx = Request.Cookies["ConfirmRegister"].Value;
-
+            email = HashCodeTool.DecryptDES(email);
+            expired = HashCodeTool.DecryptDES(expired);
             DateTime.TryParse(expired, out DateTime expiredTime);
             //超過10分鐘無效
             if (DateTime.UtcNow > expiredTime)
