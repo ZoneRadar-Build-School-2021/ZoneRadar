@@ -92,8 +92,9 @@ namespace ZoneRadar.Services
         public string GenerateVerifyLink(GenerateLink generateLink)
         {
             //記錄有效的期限
-            var afterTenMinutes = DateTime.UtcNow.AddMinutes(10).ToString();
-            
+            var afterTenMinutes = DateTime.UtcNow.AddMinutes(10).ToString(System.Globalization.CultureInfo.CreateSpecificCulture("en-US"));
+            generateLink.UserEmail = HashCodeTool.EncryptDES(generateLink.UserEmail);
+            afterTenMinutes = HashCodeTool.EncryptDES(afterTenMinutes);
             var route = new RouteValueDictionary { { "email", generateLink.UserEmail }, { "expired", afterTenMinutes } };
             //製作驗證信的連結
             var verificationLink = generateLink.UrlHelper.Action("ConfirmEmail", "MemberCenter", route, generateLink.Request.Url.Scheme, generateLink.Request.Url.Host);
@@ -109,9 +110,12 @@ namespace ZoneRadar.Services
         {
             generateLink.UserEmail = HttpUtility.HtmlEncode(generateLink.UserEmail);
             //記錄有效的期限
-            var afterTenMinutes = DateTime.UtcNow.AddMinutes(10).ToString();
+            var afterTenMinutes = DateTime.UtcNow.AddMinutes(10).ToString(System.Globalization.CultureInfo.CreateSpecificCulture("en-US"));
             //取得亂數
             var resetCode = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == generateLink.UserEmail.ToUpper()).Password;
+            //加密
+            generateLink.UserEmail = HashCodeTool.EncryptDES(generateLink.UserEmail);
+            afterTenMinutes = HashCodeTool.EncryptDES(afterTenMinutes);
             var route = new RouteValueDictionary { { "email", generateLink.UserEmail }, { "resetCode", resetCode }, { "expired", afterTenMinutes } };
             //製作驗證信的連結
             var verificationLink = generateLink.UrlHelper.Action("ResetPassword", "MemberCenter", route, generateLink.Request.Url.Scheme, generateLink.Request.Url.Host);
