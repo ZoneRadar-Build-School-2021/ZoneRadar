@@ -336,8 +336,9 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public List<HostCenterHistoryViewModel> GetHostCenterHistoryVM(HostCenterHistoryViewModel model, int userid)
         {
+            var DataTimePreset = new DateTime();
             var a = (model.SpaceName == null ? 0 : 1).ToString();
-            var b = (model.SearchDateTime == null ? 0 : 1).ToString();
+            var b = (model.SearchDateTime == DataTimePreset ? 0 : 1).ToString();
             var c = (model.UserName == null ? 0 : 1).ToString();
 
             var Key = a+b+c;
