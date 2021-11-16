@@ -46,7 +46,7 @@
   // ------functions定義
   // 檢查使用裝置
   function checkUsersDevice() {
-    const mobileDevice = ['Android', 'webOS', 'iPhone', 'iPad', 'iPod', 'BlackBerry', 'Windows Phone']
+    const mobileDevice = ['Android', 'webOS', 'iPhone', 'iPad', 'iPod']
     let isMobileDevice = mobileDevice.some(e => navigator.userAgent.match(e))
     if (isMobileDevice) {
       requestOfSpaceNum = 6;
