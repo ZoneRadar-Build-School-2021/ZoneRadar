@@ -180,17 +180,15 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public bool IsGoogleUser(string email, string googleId, bool verified)
         {
-            email = HttpUtility.HtmlEncode(email);
-            bool isGoogleUser = false;
+            //是否有此GoogleID
+            bool hasGoogleId = _repository.GetAll<Member>().Any(x => x.GoogleID == googleId && x.IsVerify == verified);
+            if (hasGoogleId)
+            {
+                return hasGoogleId;
+            }
             //是否有此gmail
             bool hasGmail = _repository.GetAll<Member>().Any(x => x.Email.ToUpper() == email.ToUpper() && x.IsVerify == verified);
-            //是否有此GoogleID
-            bool hasGoogleLoginId = _repository.GetAll<Member>().Any(x => x.GoogleID == googleId && x.IsVerify == verified);
-            if (hasGmail || hasGoogleLoginId)
-            {
-                isGoogleUser = true;
-            }
-            return isGoogleUser;
+            return hasGmail;
         }
 
         /// <summary>
@@ -304,11 +302,11 @@ namespace ZoneRadar.Services
             //建立FormsAuthenticationTicket
             var ticket = new FormsAuthenticationTicket(
             version: 1,
-            name: user.MemberID.ToString(), //可以放使用者Id
-            issueDate: DateTime.UtcNow,//現在UTC時間
-            expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
-            isPersistent: true,// 是否要記住我 true or false
-            userData: jsonUserInfo, //可以放使用者角色名稱
+            name: user.MemberID.ToString(), //可以放使用者Id，會是User.Identity.Name的值
+            issueDate: DateTime.UtcNow, //現在UTC時間
+            expiration: DateTime.UtcNow.AddMinutes(30), //Cookie有效時間=現在時間往後+30分鐘
+            isPersistent: true, // 是否要記住我
+            userData: jsonUserInfo, //放使用者資訊
             cookiePath: FormsAuthentication.FormsCookiePath);
 
             //加密Ticket
@@ -338,60 +336,6 @@ namespace ZoneRadar.Services
         {
             var url = FormsAuthentication.GetRedirectUrl(userName, true);
             return url;
-        }
-
-        /// <summary>
-        /// 寄送重設密碼信(Jenny)
-        /// </summary>
-        /// <param name="server"></param>
-        /// <param name="request"></param>
-        /// <param name="urlHelper"></param>
-        /// <param name="userEmail"></param>
-        public void SentResetPasswordEmail(HttpServerUtilityBase server, HttpRequestBase request, UrlHelper urlHelper, string userEmail)
-        {
-            userEmail = HttpUtility.HtmlEncode(userEmail);
-            var afterTenMinutes = DateTime.UtcNow.AddMinutes(10).ToString();
-            var resetCode = _repository.GetAll<Member>().First(x => x.Email.ToUpper() == userEmail.ToUpper()).Password;
-            var route = new RouteValueDictionary { { "email", userEmail }, { "resetCode", resetCode }, { "expired", afterTenMinutes } };
-            //製作驗證信的連結
-            var resetLink = urlHelper.Action("ResetPassword", "MemberCenter", route, request.Url.Scheme, request.Url.Host);
-
-            //寄件人資訊
-            string ZONERadarAccount = "zoneradar2021@gmail.com";
-            string ZONERadarPassword = "@Bs202106";
-
-            //產生能寄信的SmtpClient執行個體
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
-            {
-                Credentials = new NetworkCredential(ZONERadarAccount, ZONERadarPassword),
-                EnableSsl = true
-            };
-
-            //產生信件，編輯信件的相關內容
-            string resetPasswordEmailContent = File.ReadAllText(Path.Combine(server.MapPath("~/Views/MemberCenter/ResetPasswordEmailContent.html")));
-            MailMessage mail = new MailMessage(ZONERadarAccount, userEmail)
-            {
-                Subject = "重設您的ZONERadar密碼",
-                SubjectEncoding = Encoding.UTF8,
-                IsBodyHtml = true,
-                Body = resetPasswordEmailContent.Replace("resetLink", resetLink),
-                BodyEncoding = Encoding.UTF8
-            };
-
-            try
-            {
-                client.Send(mail);
-            }
-            catch (Exception ex)
-            {
-                //未處理
-                throw ex;
-            }
-            finally
-            {
-                mail.Dispose();
-                client.Dispose();
-            }
         }
 
         /// <summary>
@@ -504,6 +448,19 @@ namespace ZoneRadar.Services
         }
 
         /// <summary>
+        /// 取得使用者照片(Jenny)
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public string GetUserPhoto(int userId)
+        {
+            var photoUrl = _repository.GetAll<Member>().First(x => x.MemberID == userId).Photo;
+            return photoUrl;
+        }
+
+
+
+        /// <summary>
         /// HostInfo (Jack)
         /// </summary>
         /// <returns> 取得會員資訊 & 該會員擁有的場地 </returns> 
@@ -531,11 +488,10 @@ namespace ZoneRadar.Services
                     Phone = u.Phone,
                     Description = u.Description,
                     SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
+                    Photo = u.Photo == null ? "https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png" : u.Photo
                 };
                 //會員所擁有的廠所有場地
                 var sps = _repository.GetAll<Space>().Where(x => x.MemberID == memberId && x.SpaceStatus.SpaceStatusID == 2);
-
                 foreach (var s in sps)
                 {
                     resultMember.Spaces.Add(new Spaces
@@ -583,7 +539,7 @@ namespace ZoneRadar.Services
                     Phone = u.Phone,
                     Description = u.Description,
                     SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
+                    Photo = u.Photo == null ? "https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png" : u.Photo
                 };
 
                 //會員所收藏的場地
@@ -656,7 +612,7 @@ namespace ZoneRadar.Services
                     Phone = u.Phone,
                     Description = u.Description,
                     SignUpDateTime = u.SignUpDateTime,
-                    Photo = u.Photo == null ? "https://img.88icon.com/download/jpg/20200815/cacc4178c4846c91dc1bfa1540152f93_512_512.jpg!88con" : u.Photo
+                    Photo = u.Photo == null ? "https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png" : u.Photo
                 };
                 //找出會員是否有租借場地並且顯示 出被場地主的評價
                 var review = _repository.GetAll<Review>().Where(x => x.ToHost == false && x.Order.MemberID == u.MemberID && x.Order.OrderStatusID == 4);
@@ -675,7 +631,8 @@ namespace ZoneRadar.Services
                             Recommend  = r.Recommend,
                             SpaceMemberPhoto = r.Order.Space.Member.Photo,
                             Name = r.Order.Space.Member.Name,
-                            Id = r.Order.Space.MemberID
+                            Id = r.Order.Space.MemberID,
+                            Score = r.Score
                         });
                     
                 }
