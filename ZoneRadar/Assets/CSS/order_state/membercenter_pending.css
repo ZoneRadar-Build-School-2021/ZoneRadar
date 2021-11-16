@@ -254,6 +254,17 @@ ul {
 .memberbuyer_pending_num_date {
     text-align: right;
 }
+.modal-header {
+    background-color: rgb(255, 228, 181)
+}
+
+.modal-body,
+.modal-footer {
+    background-size: 100% auto;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 222, 173, .2)
+}
 
 @media (max-width:767px) {
     .memberbuyer_pending_num_date {
