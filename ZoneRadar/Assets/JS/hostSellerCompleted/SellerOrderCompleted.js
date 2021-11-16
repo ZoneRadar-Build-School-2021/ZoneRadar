@@ -2,6 +2,6 @@
 flatpickr(".choose-date",
     {
         enableTime: false,
-        dateFormat: "Y/F/d",
+        dateFormat: "Y/m/d",
         minuteIncrement: 30,
     });
