@@ -348,7 +348,7 @@ namespace ZoneRadar.Services
             searchkey.SpaceName = int.Parse(a) > 0 ? model.SpaceName.Replace(" ", "") : null;
             searchkey.UserName = int.Parse(c) > 0 ? model.UserName.Replace(" ", "") : null;
             searchkey.SearchDateTime = int.Parse(b) > 0 ? model.SearchDateTime : DateTimePreset;
-            var SearchDateTimeAddDay = int.Parse(b) > 0 ? model.SearchDateTime.AddDays(1) : DateTimePreset;
+            //var SearchDateTimeAddDay = int.Parse(b) > 0 ? model.SearchDateTime.AddDays(1) : DateTimePreset;
 
             var orders = _repository.GetAll<Order>().Where(x => x.Space.MemberID == userid && x.OrderStatusID == 4);
             var reviews = _repository.GetAll<Review>().Where(x => orders.Select(order => order.OrderID).Contains(x.OrderID)).ToList();
