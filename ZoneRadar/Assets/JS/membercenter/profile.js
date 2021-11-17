@@ -95,7 +95,7 @@ let app = new Vue({
         removeImg() {
             let ImgUrl = {
                 MemberID: '',
-                ProfileImgUrl: ''
+                ProfileImgUrl: 'https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png'
             };
             axios({
                 url: "/webapi/spaces/SaveImg",
@@ -103,7 +103,7 @@ let app = new Vue({
                 data: ImgUrl
             })
             .then(response => {
-                this.inputData.Photo = 'https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png'; 
+                this.inputData.Photo = 'https://res.cloudinary.com/dt6vz3pav/image/upload/v1636172646/court/user-profile_pdbu9q.png';
             })
             .catch(e => {
                 //...
