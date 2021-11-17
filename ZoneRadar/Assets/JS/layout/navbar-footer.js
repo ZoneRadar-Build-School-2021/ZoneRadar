@@ -94,50 +94,50 @@ let login_form_vue = new Vue({
             passwordError: false,
             passwordErrorMsg: ""
         },
-        isVerify: false
+        isVerify: true
     },
-    watch: {
-        "inputData.account": {
-            immediate: true,
-            handler() {
-                let emailRegexp = /^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/
-                if ( this.inputData.account == "") {
-                    this.inputDataCheck.accountError = true;
-                    this.inputDataCheck.accountErrorMsg = "請填寫此欄位";
-                } else if (!emailRegexp.test(this.inputData.account)) {
-                    this.inputDataCheck.accountError = true;
-                    this.inputDataCheck.accountErrorMsg = "Email輸入格式錯誤";
-                } else {
-                    this.inputDataCheck.accountError = false;
-                    this.inputDataCheck.accountErrorMsg = "";
-                }
+    //watch: {
+    //    "inputData.account": {
+    //        immediate: true,
+    //        handler() {
+    //            let emailRegexp = /^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/
+    //            if ( this.inputData.account == "") {
+    //                this.inputDataCheck.accountError = true;
+    //                this.inputDataCheck.accountErrorMsg = "請填寫此欄位";
+    //            } else if (!emailRegexp.test(this.inputData.account)) {
+    //                this.inputDataCheck.accountError = true;
+    //                this.inputDataCheck.accountErrorMsg = "Email輸入格式錯誤";
+    //            } else {
+    //                this.inputDataCheck.accountError = false;
+    //                this.inputDataCheck.accountErrorMsg = "";
+    //            }
 
-                this.checkVerify();
-            }
-        },
-        "inputData.password": {
-            immediate: true,
-            handler() {
-                let passwordRegexp = /^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/
-                if ( this.inputData.password == "") {
-                    this.inputDataCheck.passwordError = true;
-                    this.inputDataCheck.passwordErrorMsg = "請填寫此欄位";
-                } else if (this.inputData.password.length < 6 || this.inputData.password.length > 50) {
-                    this.inputDataCheck.passwordError = true;
-                    this.inputDataCheck.passwordErrorMsg = "密碼長度需為6~50字元";
-                } else if (!passwordRegexp.test(this.inputData.password)) {
-                    this.inputDataCheck.passwordError = true;
-                    this.inputDataCheck.passwordErrorMsg = "密碼必須包含至少1個數字、小寫英文和大寫英文";
-                }
-                else {
-                    this.inputDataCheck.passwordError = false;
-                    this.inputDataCheck.passwordErrorMsg = "";
-                }
+    //            this.checkVerify();
+    //        }
+    //    },
+    //    "inputData.password": {
+    //        immediate: true,
+    //        handler() {
+    //            let passwordRegexp = /^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/
+    //            if ( this.inputData.password == "") {
+    //                this.inputDataCheck.passwordError = true;
+    //                this.inputDataCheck.passwordErrorMsg = "請填寫此欄位";
+    //            } else if (this.inputData.password.length < 6 || this.inputData.password.length > 50) {
+    //                this.inputDataCheck.passwordError = true;
+    //                this.inputDataCheck.passwordErrorMsg = "密碼長度需為6~50字元";
+    //            } else if (!passwordRegexp.test(this.inputData.password)) {
+    //                this.inputDataCheck.passwordError = true;
+    //                this.inputDataCheck.passwordErrorMsg = "密碼必須包含至少1個數字、小寫英文和大寫英文";
+    //            }
+    //            else {
+    //                this.inputDataCheck.passwordError = false;
+    //                this.inputDataCheck.passwordErrorMsg = "";
+    //            }
 
-                this.checkVerify();
-            }
-        }
-    },
+    //            this.checkVerify();
+    //        }
+    //    }
+    //},
     methods: {
         checkVerify() {
             for (let prop in this.inputDataCheck) {
@@ -147,6 +147,38 @@ let login_form_vue = new Vue({
                 }
             }
             this.isVerify = true;
+        },
+        checkEmail() {
+            let emailRegexp = /^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/
+            if (this.inputData.account == "") {
+                this.inputDataCheck.accountError = true;
+                this.inputDataCheck.accountErrorMsg = "請填寫此欄位";
+            } else if (!emailRegexp.test(this.inputData.account)) {
+                this.inputDataCheck.accountError = true;
+                this.inputDataCheck.accountErrorMsg = "Email輸入格式錯誤";
+            } else {
+                this.inputDataCheck.accountError = false;
+                this.inputDataCheck.accountErrorMsg = "";
+            }
+            this.checkVerify();
+        },
+        checkPassword() {
+            let passwordRegexp = /^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/
+            if (this.inputData.password == "") {
+                this.inputDataCheck.passwordError = true;
+                this.inputDataCheck.passwordErrorMsg = "請填寫此欄位";
+            } else if (this.inputData.password.length < 6 || this.inputData.password.length > 50) {
+                this.inputDataCheck.passwordError = true;
+                this.inputDataCheck.passwordErrorMsg = "密碼長度需為6~50字元";
+            } else if (!passwordRegexp.test(this.inputData.password)) {
+                this.inputDataCheck.passwordError = true;
+                this.inputDataCheck.passwordErrorMsg = "密碼必須包含至少1個數字、小寫英文和大寫英文";
+            }
+            else {
+                this.inputDataCheck.passwordError = false;
+                this.inputDataCheck.passwordErrorMsg = "";
+            }
+            this.checkVerify();
         }
     }
 })
@@ -173,82 +205,81 @@ let register_form_vue = new Vue({
             confirmPasswordError: false,
             confirmPasswordErrorMsg: ""
         },
-        isVerify: false
+        isVerify: true
     },
-    watch: {
-        "inputData.name": {
-            immediate: true,
-            handler() {
-                if (this.inputData.name == "") {
-                    this.inputDataCheck.nameError = true;
-                    this.inputDataCheck.nameErrorMsg = "請填寫此欄位";
-                } else {
-                    this.inputDataCheck.nameError = false;
-                    this.inputDataCheck.nameErrorMsg = "";
-                }
+    //watch: {
+    //    "inputData.name": {
+    //        immediate: true,
+    //        handler() {
+    //            if (this.inputData.name == "") {
+    //                this.inputDataCheck.nameError = true;
+    //                this.inputDataCheck.nameErrorMsg = "請填寫此欄位";
+    //            } else {
+    //                this.inputDataCheck.nameError = false;
+    //                this.inputDataCheck.nameErrorMsg = "";
+    //            }
 
-                this.checkVerify();
-            }
-        },
-        "inputData.account": {
-            immediate: true,
-            handler() {
-                let emailRegexp = /^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/
-                if (this.inputData.account == "") {
-                    this.inputDataCheck.accountError = true;
-                    this.inputDataCheck.accountErrorMsg = "請填寫此欄位";
-                } else if (!emailRegexp.test(this.inputData.account)) {
-                    this.inputDataCheck.accountError = true;
-                    this.inputDataCheck.accountErrorMsg = "Email輸入格式錯誤";
-                } else {
-                    this.inputDataCheck.accountError = false;
-                    this.inputDataCheck.accountErrorMsg = "";
-                }
+    //            this.checkVerify();
+    //        }
+    //    },
+    //    "inputData.account": {
+    //        immediate: true,
+    //        handler() {
+    //            let emailRegexp = /^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/
+    //            if (this.inputData.account == "") {
+    //                this.inputDataCheck.accountError = true;
+    //                this.inputDataCheck.accountErrorMsg = "請填寫此欄位";
+    //            } else if (!emailRegexp.test(this.inputData.account)) {
+    //                this.inputDataCheck.accountError = true;
+    //                this.inputDataCheck.accountErrorMsg = "Email輸入格式錯誤";
+    //            } else {
+    //                this.inputDataCheck.accountError = false;
+    //                this.inputDataCheck.accountErrorMsg = "";
+    //            }
 
-                this.checkVerify();
-            }
-        },
-        "inputData.password": {
-            immediate: true,
-            handler() {
-                let passwordRegexp = /^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/
-                if (this.inputData.password == "") {
-                    this.inputDataCheck.passwordError = true;
-                    this.inputDataCheck.passwordErrorMsg = "請填寫此欄位";
-                } else if (this.inputData.password.length < 6 || this.inputData.password.length > 50) {
-                    this.inputDataCheck.passwordError = true;
-                    this.inputDataCheck.passwordErrorMsg = "密碼長度需為6~50字元";
-                } else if (!passwordRegexp.test(this.inputData.password)) {
-                    this.inputDataCheck.passwordError = true;
-                    this.inputDataCheck.passwordErrorMsg = "密碼必須包含至少1個數字、小寫英文和大寫英文";
-                }
-                else {
-                    this.inputDataCheck.passwordError = false;
-                    this.inputDataCheck.passwordErrorMsg = "";
-                }
+    //            this.checkVerify();
+    //        }
+    //    },
+    //    "inputData.password": {
+    //        immediate: true,
+    //        handler() {
+    //            let passwordRegexp = /^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/
+    //            if (this.inputData.password == "") {
+    //                this.inputDataCheck.passwordError = true;
+    //                this.inputDataCheck.passwordErrorMsg = "請填寫此欄位";
+    //            } else if (this.inputData.password.length < 6 || this.inputData.password.length > 50) {
+    //                this.inputDataCheck.passwordError = true;
+    //                this.inputDataCheck.passwordErrorMsg = "密碼長度需為6~50字元";
+    //            } else if (!passwordRegexp.test(this.inputData.password)) {
+    //                this.inputDataCheck.passwordError = true;
+    //                this.inputDataCheck.passwordErrorMsg = "密碼必須包含至少1個數字、小寫英文和大寫英文";
+    //            }
+    //            else {
+    //                this.inputDataCheck.passwordError = false;
+    //                this.inputDataCheck.passwordErrorMsg = "";
+    //            }
 
-                this.checkVerify();
-            }
-        },
-        "inputData.confirmPassword": {
-            immediate: true,
-            handler() {
-                let passwordRegexp = /^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/
-                if (this.inputData.password == "") {
-                    this.inputDataCheck.confirmPasswordError = true;
-                    this.inputDataCheck.confirmPasswordErrorMsg = "請填寫此欄位";
-                } else if (this.inputData.confirmPassword !== this.inputData.password) {
-                    this.inputDataCheck.confirmPasswordError = true;
-                    this.inputDataCheck.confirmPasswordErrorMsg = "密碼不一致";
-                } else {
-                    this.inputDataCheck.confirmPasswordError = false;
-                    this.inputDataCheck.confirmPasswordErrorMsg = "";
-                }
+    //            this.checkVerify();
+    //        }
+    //    },
+    //    "inputData.confirmPassword": {
+    //        immediate: true,
+    //        handler() {
+    //            if (this.inputData.password == "") {
+    //                this.inputDataCheck.confirmPasswordError = true;
+    //                this.inputDataCheck.confirmPasswordErrorMsg = "請填寫此欄位";
+    //            } else if (this.inputData.confirmPassword !== this.inputData.password) {
+    //                this.inputDataCheck.confirmPasswordError = true;
+    //                this.inputDataCheck.confirmPasswordErrorMsg = "密碼不一致";
+    //            } else {
+    //                this.inputDataCheck.confirmPasswordError = false;
+    //                this.inputDataCheck.confirmPasswordErrorMsg = "";
+    //            }
 
-                this.checkVerify();
-            }
-        }
-    },
+    //            this.checkVerify();
+    //        }
+    //    }
+    //},
     methods: {
         checkVerify() {
             for (let prop in this.inputDataCheck) {
@@ -258,6 +289,61 @@ let register_form_vue = new Vue({
                 }
             }
             this.isVerify = true;
+        },
+        checkName() {
+            if (this.inputData.name == "") {
+                this.inputDataCheck.nameError = true;
+                this.inputDataCheck.nameErrorMsg = "請填寫此欄位";
+            } else {
+                this.inputDataCheck.nameError = false;
+                this.inputDataCheck.nameErrorMsg = "";
+            }
+            this.checkVerify();
+        },
+        checkEmail() {
+            let emailRegexp = /^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/
+            if (this.inputData.account == "") {
+                this.inputDataCheck.accountError = true;
+                this.inputDataCheck.accountErrorMsg = "請填寫此欄位";
+            } else if (!emailRegexp.test(this.inputData.account)) {
+                this.inputDataCheck.accountError = true;
+                this.inputDataCheck.accountErrorMsg = "Email輸入格式錯誤";
+            } else {
+                this.inputDataCheck.accountError = false;
+                this.inputDataCheck.accountErrorMsg = "";
+            }
+            this.checkVerify();
+        },
+        checkPassword() {
+            let passwordRegexp = /^(?!.*[^\x21-\x7e])(?=.{6,50})(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/
+            if (this.inputData.password == "") {
+                this.inputDataCheck.passwordError = true;
+                this.inputDataCheck.passwordErrorMsg = "請填寫此欄位";
+            } else if (this.inputData.password.length < 6 || this.inputData.password.length > 50) {
+                this.inputDataCheck.passwordError = true;
+                this.inputDataCheck.passwordErrorMsg = "密碼長度需為6~50字元";
+            } else if (!passwordRegexp.test(this.inputData.password)) {
+                this.inputDataCheck.passwordError = true;
+                this.inputDataCheck.passwordErrorMsg = "密碼必須包含至少1個數字、小寫英文和大寫英文";
+            }
+            else {
+                this.inputDataCheck.passwordError = false;
+                this.inputDataCheck.passwordErrorMsg = "";
+            }
+            this.checkVerify();
+        },
+        checkConfirmPassword() {
+            if (this.inputData.password == "") {
+                this.inputDataCheck.confirmPasswordError = true;
+                this.inputDataCheck.confirmPasswordErrorMsg = "請填寫此欄位";
+            } else if (this.inputData.confirmPassword !== this.inputData.password) {
+                this.inputDataCheck.confirmPasswordError = true;
+                this.inputDataCheck.confirmPasswordErrorMsg = "密碼不一致";
+            } else {
+                this.inputDataCheck.confirmPasswordError = false;
+                this.inputDataCheck.confirmPasswordErrorMsg = "";
+            }
+            this.checkVerify();
         }
     }
 })
@@ -311,12 +397,12 @@ function enterToLogin() {
         login_btn.click();
     }
 }
-login_modal.addEventListener('show.bs.modal', function () {
-    window.addEventListener("keyup", enterToLogin);
-})
-login_modal.addEventListener('hide.bs.modal', function () {
-    window.removeEventListener("keyup", enterToLogin);
-})
+//login_modal.addEventListener('show.bs.modal', function () {
+//    window.addEventListener("keyup", enterToLogin);
+//})
+//login_modal.addEventListener('hide.bs.modal', function () {
+//    window.removeEventListener("keyup", enterToLogin);
+//})
 //#endregion
 
 
