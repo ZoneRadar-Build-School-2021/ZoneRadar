@@ -48,6 +48,7 @@ namespace ZoneRadar.Controllers
         //    ViewData["EcPay"] = _ecpaymentservice.GetEcpayData(model);
         //    return View();
         //}
+
         [AcceptVerbs(HttpVerbs.Post)]
         [Authorize]
         public ActionResult EcPayment(PaymentViewModel model)
