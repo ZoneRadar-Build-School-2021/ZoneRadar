@@ -76,7 +76,7 @@
   // 創建observer
   function createObserver() {
     const options = {
-      root: document.querySelector('#elementA'),
+      root: null,
       rootMargin: '0px',
       threshold: 1.0,
     };
