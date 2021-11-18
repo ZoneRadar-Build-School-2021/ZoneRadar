@@ -112,8 +112,8 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public int Get(int num) 
         {
-            var y = _repository.GetAll<Order>().FirstOrDefault(x=>x.OrderNumber == num );
-            if (y != null) 
+            var searchnum = _repository.GetAll<Order>().FirstOrDefault(x=>x.OrderNumber == num );
+            if (searchnum != null) 
             {
                 return Get(num++);
             }
