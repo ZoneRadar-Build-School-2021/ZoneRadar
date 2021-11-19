@@ -1,7 +1,7 @@
 ﻿//停車場的 是否
 var yesflag = 1;
 var parkingPart = document.querySelector("#parkingPart");
-let flexSwitchCheckDefaultYes = document.querySelector("#flexSwitchCheckDefaultYes");
+var flexSwitchCheckDefaultYes = document.querySelector("#flexSwitchCheckDefaultYes");
 flexSwitchCheckDefaultYes.addEventListener("click", function () {
 
     if (yesflag == 0) {
@@ -14,8 +14,8 @@ flexSwitchCheckDefaultYes.addEventListener("click", function () {
     }
 });
 //攝影機 是
-let projectionflag =1;
-let Yesprojection = document.querySelector("#Yesprojection");
+var projectionflag =1;
+var Yesprojection = document.querySelector("#Yesprojection");
 var projectionPart = document.querySelector('#projectionPart');
 Yesprojection.addEventListener('click', function () {
     if (projectionflag == 0) {
@@ -32,83 +32,83 @@ Yesprojection.addEventListener('click', function () {
 
 //datlist
 //datlist2
-let timeOptionArray = new Array();
+var timeOptionArray = new Array();
 
 //monday~Sun
 //營業 checkbox
-let MonOpen = document.querySelector("#MonOpen");
-let TueOpen = document.querySelector("#TueOpen");
-let WedOpen = document.querySelector("#WedOpen");
-let ThuOpen = document.querySelector("#ThuOpen");
-let FriOpen = document.querySelector("#FriOpen");
-let SatOpen = document.querySelector("#SatOpen");
-let SunOpen = document.querySelector("#SunOpen");
+var MonOpen = document.querySelector("#MonOpen");
+var TueOpen = document.querySelector("#TueOpen");
+var WedOpen = document.querySelector("#WedOpen");
+var ThuOpen = document.querySelector("#ThuOpen");
+var FriOpen = document.querySelector("#FriOpen");
+var SatOpen = document.querySelector("#SatOpen");
+var SunOpen = document.querySelector("#SunOpen");
 
 //全天 monday~Sun radio
-let MonAllDay = document.querySelector("#MonAllDay");
-let TueAllDay = document.querySelector("#TueAllDay");
-let WedAllDay = document.querySelector("#WedAllDay");
-let ThuAllDay = document.querySelector("#ThuAllDay");
-let FriAllDay = document.querySelector("#FriAllDay");
-let SatAllDay = document.querySelector("#SatAllDay");
-let SunAllDay = document.querySelector("#SunAllDay");
+var MonAllDay = document.querySelector("#MonAllDay");
+var TueAllDay = document.querySelector("#TueAllDay");
+var WedAllDay = document.querySelector("#WedAllDay");
+var ThuAllDay = document.querySelector("#ThuAllDay");
+var FriAllDay = document.querySelector("#FriAllDay");
+var SatAllDay = document.querySelector("#SatAllDay");
+var SunAllDay = document.querySelector("#SunAllDay");
 
 //小時 monday~Sun radio
-let MonHours = document.querySelector("#MonHours");
-let TueHours = document.querySelector("#TueHours");
-let WedHours = document.querySelector("#WedHours");
-let ThuHours = document.querySelector("#ThuHours");
-let FriHours = document.querySelector("#FriHours");
-let SatHours = document.querySelector("#SatHours");
-let SunHours = document.querySelector("#SunHours");
+var MonHours = document.querySelector("#MonHours");
+var TueHours = document.querySelector("#TueHours");
+var WedHours = document.querySelector("#WedHours");
+var ThuHours = document.querySelector("#ThuHours");
+var FriHours = document.querySelector("#FriHours");
+var SatHours = document.querySelector("#SatHours");
+var SunHours = document.querySelector("#SunHours");
 
 //選擇營業時間的 下拉選單開始 結束 monday~Sun Select
-let StateMonS = document.querySelector("#StateMonS");
-let StateMonE = document.querySelector("#StateMonE");
+var StateMonS = document.querySelector("#StateMonS");
+var StateMonE = document.querySelector("#StateMonE");
 
-let StateTueS = document.querySelector("#StateTueS");
-let StateTueE = document.querySelector("#StateTueE");
+var StateTueS = document.querySelector("#StateTueS");
+var StateTueE = document.querySelector("#StateTueE");
 
-let StateWedS = document.querySelector("#StateWedS");
-let StateWedE = document.querySelector("#StateWedE");
+var StateWedS = document.querySelector("#StateWedS");
+var StateWedE = document.querySelector("#StateWedE");
 
-let StateThuS = document.querySelector("#StateThuS");
-let StateThuE = document.querySelector("#StateThuE");
+var StateThuS = document.querySelector("#StateThuS");
+var StateThuE = document.querySelector("#StateThuE");
 
-let StateFriS = document.querySelector("#StateFriS");
-let StateFriE = document.querySelector("#StateFriE");
+var StateFriS = document.querySelector("#StateFriS");
+var StateFriE = document.querySelector("#StateFriE");
 
-let StateSatS = document.querySelector("#StateSatS");
-let StateSatE = document.querySelector("#StateSatE");
+var StateSatS = document.querySelector("#StateSatS");
+var StateSatE = document.querySelector("#StateSatE");
 
-let StateSunS = document.querySelector("#StateSunS");
-let StateSunE = document.querySelector("#StateSunE");
+var StateSunS = document.querySelector("#StateSunS");
+var StateSunE = document.querySelector("#StateSunE");
 
 //選擇營業時間的一開始顯示資料庫的 要修改的時候變成時間 下拉選單開始 結束 monday~Sun Select
-let StartTimeoptionMon = document.querySelector("#StartTimeoptionMon");
-let EndTimeoptionMon = document.querySelector("#EndTimeoptionMon");
+var StartTimeoptionMon = document.querySelector("#StartTimeoptionMon");
+var EndTimeoptionMon = document.querySelector("#EndTimeoptionMon");
 
-let StartTimeoptionTue = document.querySelector("#StartTimeoptionTue");
-let EndTimeoptionTue = document.querySelector("#EndTimeoptionTue");
+var StartTimeoptionTue = document.querySelector("#StartTimeoptionTue");
+var EndTimeoptionTue = document.querySelector("#EndTimeoptionTue");
 
-let StarTimeoptionWed = document.querySelector("#StarTimeoptionWed");
-let EndTimeoptionWed = document.querySelector("#EndTimeoptionWed");
+var StarTimeoptionWed = document.querySelector("#StarTimeoptionWed");
+var EndTimeoptionWed = document.querySelector("#EndTimeoptionWed");
 
-let StartTimeoptionThu = document.querySelector("#StartTimeoptionThu");
-let EndTimeoptionThu = document.querySelector("#EndTimeoptionThu");
+var StartTimeoptionThu = document.querySelector("#StartTimeoptionThu");
+var EndTimeoptionThu = document.querySelector("#EndTimeoptionThu");
 
-let StartTimeoptionFri = document.querySelector("#StartTimeoptionFri");
-let EndTimeoptionFri = document.querySelector("#EndTimeoptionFri");
+var StartTimeoptionFri = document.querySelector("#StartTimeoptionFri");
+var EndTimeoptionFri = document.querySelector("#EndTimeoptionFri");
 
-let StartTimeoptionSat = document.querySelector("#StartTimeoptionSat");
-let EndTimeoptionSat = document.querySelector("#EndTimeoptionSat");
+var StartTimeoptionSat = document.querySelector("#StartTimeoptionSat");
+var EndTimeoptionSat = document.querySelector("#EndTimeoptionSat");
 
-let StartTimeoptionSun = document.querySelector("#StartTimeoptionSun");
-let EndTimeoptionSun = document.querySelector("#EndTimeoptionSun");
+var StartTimeoptionSun = document.querySelector("#StartTimeoptionSun");
+var EndTimeoptionSun = document.querySelector("#EndTimeoptionSun");
 
 console.log(datlist[0]);
-let Newdatalist = new Array();
-let compare=[1,2,3,4,5,6,7]
+var Newdatalist = new Array();
+var compare=[1,2,3,4,5,6,7]
 for (var i = 0; i < datlist.length; i++) {
     Newdatalist.push(datlist[i].OperatingDay);
 }
@@ -325,41 +325,41 @@ for (var i = 0; i < Newdatalist.length; i++) {
         StateMonE.disabled = false;
         StartTimeoptionMon.innerHTML = "06:00";
         EndTimeoptionMon.innerHTML = "23:00";
-        let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
-        let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
-        let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
-        let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
-        let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
-        let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
-        let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
-        let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
-        let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
-        let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
-        let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
-        let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
-        let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
-        let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
-        let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
-        let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
-        let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
+        var option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
+        var option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
+        var option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
+        var option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
+        var option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
+        var option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
+        var option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
+        var option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
+        var option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
+        var option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
+        var option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
+        var option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
+        var option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
+        var option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
+        var option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
+        var option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
+        var option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
 
-        let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
-        let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
-        let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
-        let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
-        let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
-        let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
-        let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
-        let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
-        let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
-        let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
-        let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
-        let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
-        let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
-        let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
-        let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
-        let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
-        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
+        var option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
+        var option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
+        var option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
+        var option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
+        var option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
+        var option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
+        var option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
+        var option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
+        var option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
+        var option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
+        var option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
+        var option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
+        var option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
+        var option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
+        var option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
+        var option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
+        var option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
 
         StateMonS.appendChild(option1);
         StateMonS.appendChild(option2);
@@ -430,41 +430,41 @@ for (var i = 0; i < Newdatalist.length; i++) {
     TueHours.addEventListener('click', function () {
         StateTueS.disabled = false;
         StateTueE.disabled = false;
-        let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
-        let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
-        let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
-        let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
-        let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
-        let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
-        let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
-        let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
-        let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
-        let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
-        let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
-        let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
-        let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
-        let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
-        let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
-        let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
-        let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
+        var option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
+        var option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
+        var option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
+        var option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
+        var option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
+        var option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
+        var option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
+        var option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
+        var option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
+        var option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
+        var option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
+        var option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
+        var option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
+        var option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
+        var option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
+        var option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
+        var option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
 
-        let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
-        let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
-        let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
-        let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
-        let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
-        let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
-        let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
-        let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
-        let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
-        let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
-        let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
-        let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
-        let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
-        let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
-        let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
-        let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
-        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
+        var option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
+        var option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
+        var option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
+        var option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
+        var option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
+        var option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
+        var option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
+        var option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
+        var option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
+        var option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
+        var option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
+        var option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
+        var option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
+        var option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
+        var option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
+        var option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
+        var option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
 
         StateTueS.appendChild(option1);
         StateTueS.appendChild(option2);
@@ -532,41 +532,41 @@ for (var i = 0; i < Newdatalist.length; i++) {
     WedHours.addEventListener('click', function () {
         StateWedS.disabled = false;
         StateWedE.disabled = false;
-        let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
-        let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
-        let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
-        let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
-        let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
-        let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
-        let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
-        let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
-        let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
-        let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
-        let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
-        let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
-        let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
-        let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
-        let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
-        let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
-        let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
+        var option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
+        var option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
+        var option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
+        var option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
+        var option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
+        var option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
+        var option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
+        var option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
+        var option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
+        var option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
+        var option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
+        var option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
+        var option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
+        var option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
+        var option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
+        var option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
+        var option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
 
-        let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
-        let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
-        let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
-        let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
-        let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
-        let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
-        let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
-        let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
-        let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
-        let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
-        let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
-        let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
-        let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
-        let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
-        let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
-        let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
-        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
+        var option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
+        var option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
+        var option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
+        var option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
+        var option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
+        var option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
+        var option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
+        var option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
+        var option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
+        var option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
+        var option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
+        var option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
+        var option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
+        var option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
+        var option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
+        var option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
+        var option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
 
         StateWedS.appendChild(option1);
         StateWedS.appendChild(option2);
@@ -638,41 +638,41 @@ for (var i = 0; i < Newdatalist.length; i++) {
     ThuHours.addEventListener('click', function () {
         StateThuS.disabled = false;
         StateThuE.disabled = false;
-        let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
-        let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
-        let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
-        let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
-        let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
-        let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
-        let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
-        let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
-        let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
-        let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
-        let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
-        let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
-        let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
-        let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
-        let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
-        let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
-        let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
+        var option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
+        var option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
+        var option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
+        var option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
+        var option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
+        var option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
+        var option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
+        var option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
+        var option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
+        var option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
+        var option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
+        var option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
+        var option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
+        var option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
+        var option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
+        var option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
+        var option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
 
-        let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
-        let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
-        let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
-        let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
-        let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
-        let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
-        let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
-        let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
-        let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
-        let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
-        let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
-        let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
-        let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
-        let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
-        let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
-        let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
-        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
+        var option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
+        var option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
+        var option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
+        var option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
+        var option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
+        var option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
+        var option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
+        var option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
+        var option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
+        var option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
+        var option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
+        var option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
+        var option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
+        var option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
+        var option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
+        var option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
+        var option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
 
         StateThuS.appendChild(option1);
         StateThuS.appendChild(option2);
@@ -742,41 +742,41 @@ for (var i = 0; i < Newdatalist.length; i++) {
     FriHours.addEventListener('click', function () {
         StateFriS.disabled = false;
         StateFriE.disabled = false;
-        let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
-        let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
-        let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
-        let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
-        let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
-        let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
-        let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
-        let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
-        let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
-        let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
-        let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
-        let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
-        let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
-        let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
-        let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
-        let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
-        let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
+        var option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
+        var option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
+        var option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
+        var option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
+        var option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
+        var option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
+        var option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
+        var option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
+        var option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
+        var option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
+        var option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
+        var option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
+        var option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
+        var option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
+        var option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
+        var option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
+        var option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
 
-        let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
-        let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
-        let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
-        let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
-        let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
-        let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
-        let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
-        let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
-        let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
-        let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
-        let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
-        let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
-        let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
-        let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
-        let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
-        let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
-        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
+        var option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
+        var option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
+        var option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
+        var option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
+        var option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
+        var option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
+        var option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
+        var option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
+        var option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
+        var option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
+        var option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
+        var option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
+        var option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
+        var option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
+        var option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
+        var option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
+        var option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
 
         StateFriS.appendChild(option1);
         StateFriS.appendChild(option2);
@@ -843,41 +843,41 @@ for (var i = 0; i < Newdatalist.length; i++) {
     SatHours.addEventListener('click', function () {
         StateSatS.disabled = false;
         StateSatE.disabled = false;
-        let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
-        let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
-        let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
-        let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
-        let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
-        let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
-        let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
-        let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
-        let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
-        let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
-        let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
-        let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
-        let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
-        let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
-        let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
-        let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
-        let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
+        var option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
+        var option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
+        var option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
+        var option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
+        var option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
+        var option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
+        var option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
+        var option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
+        var option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
+        var option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
+        var option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
+        var option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
+        var option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
+        var option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
+        var option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
+        var option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
+        var option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
 
-        let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
-        let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
-        let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
-        let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
-        let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
-        let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
-        let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
-        let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
-        let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
-        let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
-        let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
-        let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
-        let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
-        let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
-        let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
-        let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
-        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
+        var option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
+        var option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
+        var option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
+        var option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
+        var option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
+        var option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
+        var option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
+        var option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
+        var option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
+        var option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
+        var option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
+        var option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
+        var option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
+        var option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
+        var option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
+        var option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
+        var option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
 
         StateSatS.appendChild(option1);
         StateSatS.appendChild(option2);
@@ -945,41 +945,41 @@ for (var i = 0; i < Newdatalist.length; i++) {
     SunHours.addEventListener('click', function () {
         StateSunS.disabled = false;
         StateSunE.disabled = false;
-        let option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
-        let option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
-        let option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
-        let option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
-        let option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
-        let option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
-        let option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
-        let option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
-        let option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
-        let option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
-        let option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
-        let option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
-        let option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
-        let option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
-        let option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
-        let option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
-        let option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
+        var option1 = document.createElement("option"); option1.innerHTML = "07:00"; option1.value = "07:00";
+        var option2 = document.createElement("option"); option2.innerHTML = "08:00"; option2.value = "08:00";
+        var option3 = document.createElement("option"); option3.innerHTML = "09:00"; option3.value = "09:00";
+        var option4 = document.createElement("option"); option4.innerHTML = "10:00"; option4.value = "10:00";
+        var option5 = document.createElement("option"); option5.innerHTML = "11:00"; option5.value = "11:00";
+        var option6 = document.createElement("option"); option6.innerHTML = "12:00"; option6.value = "12:00";
+        var option7 = document.createElement("option"); option7.innerHTML = "13:00"; option7.value = "13:00";
+        var option8 = document.createElement("option"); option8.innerHTML = "14:00"; option8.value = "14:00";
+        var option9 = document.createElement("option"); option9.innerHTML = "15:00"; option9.value = "15:00";
+        var option10 = document.createElement("option"); option10.innerHTML = "16:00"; option10.value = "16:00";
+        var option11 = document.createElement("option"); option11.innerHTML = "17:00"; option11.value = "17:00";
+        var option12 = document.createElement("option"); option12.innerHTML = "18:00"; option12.value = "18:00";
+        var option13 = document.createElement("option"); option13.innerHTML = "19:00"; option13.value = "19:00";
+        var option14 = document.createElement("option"); option14.innerHTML = "20:00"; option14.value = "20:00";
+        var option15 = document.createElement("option"); option15.innerHTML = "21:00"; option15.value = "21:00";
+        var option16 = document.createElement("option"); option16.innerHTML = "22:00"; option16.value = "22:00";
+        var option17 = document.createElement("option"); option17.innerHTML = "23:00"; option17.value = "23:00";
 
-        let option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
-        let option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
-        let option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
-        let option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
-        let option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
-        let option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
-        let option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
-        let option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
-        let option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
-        let option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
-        let option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
-        let option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
-        let option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
-        let option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
-        let option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
-        let option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
-        let option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
+        var option34 = document.createElement("option"); option34.innerHTML = "06:00"; option34.value = "06:00";
+        var option18 = document.createElement("option"); option18.innerHTML = "07:00"; option18.value = "07:00";
+        var option19 = document.createElement("option"); option19.innerHTML = "08:00"; option19.value = "08:00";
+        var option20 = document.createElement("option"); option20.innerHTML = "09:00"; option20.value = "09:00";
+        var option21 = document.createElement("option"); option21.innerHTML = "10:00"; option21.value = "10:00";
+        var option22 = document.createElement("option"); option22.innerHTML = "11:00"; option22.value = "11:00";
+        var option23 = document.createElement("option"); option23.innerHTML = "12:00"; option23.value = "12:00";
+        var option24 = document.createElement("option"); option24.innerHTML = "13:00"; option24.value = "13:00";
+        var option25 = document.createElement("option"); option25.innerHTML = "14:00"; option25.value = "14:00";
+        var option26 = document.createElement("option"); option26.innerHTML = "15:00"; option26.value = "15:00";
+        var option27 = document.createElement("option"); option27.innerHTML = "16:00"; option27.value = "16:00";
+        var option28 = document.createElement("option"); option28.innerHTML = "17:00"; option28.value = "17:00";
+        var option29 = document.createElement("option"); option29.innerHTML = "18:00"; option29.value = "18:00";
+        var option30 = document.createElement("option"); option30.innerHTML = "19:00"; option30.value = "19:00";
+        var option31 = document.createElement("option"); option31.innerHTML = "20:00"; option31.value = "20:00";
+        var option32 = document.createElement("option"); option32.innerHTML = "21:00"; option32.value = "21:00";
+        var option33 = document.createElement("option"); option33.innerHTML = "22:00"; option33.value = "22:00";
 
         StateSunS.appendChild(option1);
         StateSunS.appendChild(option2);
