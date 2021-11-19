@@ -1262,7 +1262,7 @@ namespace ZoneRadar.Services
                 CityID = city,
                 DistrictID = addSpaceViewModel.DistrictID,
                 Address = addSpaceViewModel.Address,
-                PublishTime = DateTime.Today,
+                PublishTime = DateTime.UtcNow,
                 Latitude = addSpaceViewModel.Lat,
                 Longitude = addSpaceViewModel.Lng,
                 SpaceStatusID = 2,
@@ -1273,7 +1273,7 @@ namespace ZoneRadar.Services
             _repository.Create<Space>(space);
             _repository.SaveChanges();
 
-            var spaceid = _repository.GetAll<Space>().Where(x => x.SpaceName== addSpaceViewModel.SpaceName).Select(x => x.SpaceID).FirstOrDefault();
+            var spaceid = _repository.GetAll<Space>().Where(x => x.SpaceID == space.SpaceID).Select(x => x.SpaceID).First();
             var spaceDiscount=new SpaceDiscount
             {
                 SpaceID = spaceid,

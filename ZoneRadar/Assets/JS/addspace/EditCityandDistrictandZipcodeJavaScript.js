@@ -1,5 +1,6 @@
 ﻿const urlZipcode =
-    'https://raw.githubusercontent.com/NickWang841231/NickWang841231.github.io/master/JS%E4%B8%8A%E8%AA%B2/TaiwanAddress_simple/TaiwanAddress_simple.json';
+   // /*'https://raw.githubusercontent.com/NickWang841231/NickWang841231.github.io/master/JS%E4%B8%8A%E8%AA%B2/TaiwanAddress_simple/TaiwanAddress_simple.json';*/
+   "https://raw.githubusercontent.com/Amber1908/Amber1908.github.io/master/Zipcode";
 
 let citySelect, districtSelect, ZipCode;
 

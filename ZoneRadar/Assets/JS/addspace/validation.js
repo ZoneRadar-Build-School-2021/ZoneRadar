@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict'
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.querySelectorAll('.needs-validation')
+    let forms = document.querySelectorAll('.needs-validation')
 
     // Loop over them and prevent submission
     Array.prototype.slice.call(forms)
@@ -20,7 +20,7 @@
 let address = document.querySelector("#address");
 let addrinvalid = document.querySelector("#addrinvalid");
 function addresscheck() {
-    var addressStr = $('#address').val();
+    let addressStr = $('#address').val();
     console.log(addressStr);
     if (addressStr.includes("區") || addressStr.includes("市") || addressStr.includes("縣") || addressStr=="") {
         addrinvalid.classList.remove('d-none');
@@ -31,47 +31,47 @@ function addresscheck() {
         address.classList.remove('border-danger');
     }
 }
-var types = document.getElementsByName('TypeDetailId');
+let types = document.getElementsByName('TypeDetailId');
 let typeslist = new Array();
-var checktypes;
-var checkAmenity;
-var checkCleaningOption;
-var checkCancellation;
-var checkHours;
+let checktypes;
+let checkAmenity;
+let checkCleaningOption;
+let checkCancellation;
+let checkHours;
 types.forEach(function (item) {
     typeslist.push(item)
 });
-var AmenityDetails = document.getElementsByName('AmenityDetailID');
+let AmenityDetails = document.getElementsByName('AmenityDetailID');
 let AmenityDetaillist = new Array();
 
 AmenityDetails.forEach(function (item) {
     AmenityDetaillist.push(item)
 });
-var CleaningOptionIDs = document.getElementsByName('CleaningOptionID');
+let CleaningOptionIDs = document.getElementsByName('CleaningOptionID');
 let CleaningOptionIDlist = new Array();
 
 CleaningOptionIDs.forEach(function (item) {
     CleaningOptionIDlist.push(item)
 });
-var CancellationIDs = document.getElementsByName('CancellationID');
+let CancellationIDs = document.getElementsByName('CancellationID');
 let CancellationIDlist = new Array();
 
 CancellationIDs.forEach(function (item) {
     CancellationIDlist.push(item)
 });
-var OperatingDays = document.getElementsByName('OperatingDay');
+let OperatingDays = document.getElementsByName('OperatingDay');
 let OperatingDaylist = new Array();
 
 OperatingDays.forEach(function (item) {
     OperatingDaylist.push(item)
 });
-var Hours1 = document.getElementsByName('Hours1');
-var Hours2 = document.getElementsByName('Hours2');
-var Hours3 = document.getElementsByName('Hours3');
-var Hours4 = document.getElementsByName('Hours4');
-var Hours5 = document.getElementsByName('Hours5');
-var Hours6 = document.getElementsByName('Hours6');
-var Hours7 = document.getElementsByName('Hours7');
+let Hours1 = document.getElementsByName('Hours1');
+let Hours2 = document.getElementsByName('Hours2');
+let Hours3 = document.getElementsByName('Hours3');
+let Hours4 = document.getElementsByName('Hours4');
+let Hours5 = document.getElementsByName('Hours5');
+let Hours6 = document.getElementsByName('Hours6');
+let Hours7 = document.getElementsByName('Hours7');
 let  Hourslist = new Array();
 
 Hours1.forEach(function (item) {
@@ -95,21 +95,21 @@ Hours6.forEach(function (item) {
 Hours7.forEach(function (item) {
     Hourslist.push(item)
 });
-var MonStart = document.getElementsByClassName("MonselectR");
+let MonStart = document.getElementsByClassName("MonselectR");
 
 //function getValue() {
-//    var MonStart = $(".MonselectL").val();
-//    var MonEnd = $(".MonselectR").val();
-//    var MonEndNum = parseInt(MonEnd);
-//    var MonStartNum = parseInt(MonStart);
-//    var StateTueS = $('.StateTueS').val();
-//    var StateTueE = $('.StateTueE').val();
-//    var StateTueSNum = parseInt(StateTueS);
-//    var StateTueENum = parseInt(StateTueE);
-//    var StateWedS = $('.StateWedS').val();
-//    var StateWedE = $('.StateWedE').val();
-//    var StateWedSNum = parseInt(StateWedS);
-//    var StateWedENum = parseInt(StateWedE);
+//    let MonStart = $(".MonselectL").val();
+//    let MonEnd = $(".MonselectR").val();
+//    let MonEndNum = parseInt(MonEnd);
+//    let MonStartNum = parseInt(MonStart);
+//    let StateTueS = $('.StateTueS').val();
+//    let StateTueE = $('.StateTueE').val();
+//    let StateTueSNum = parseInt(StateTueS);
+//    let StateTueENum = parseInt(StateTueE);
+//    let StateWedS = $('.StateWedS').val();
+//    let StateWedE = $('.StateWedE').val();
+//    let StateWedSNum = parseInt(StateWedS);
+//    let StateWedENum = parseInt(StateWedE);
 //    let OperatingDaycheckTime = document.querySelector("#OperatingDaycheckTime");
 //    if (MonEndNum > MonStartNum) {
 //        OperatingDaycheckTime.innerHTML = " ";
@@ -205,7 +205,7 @@ window.onmousewheel = function () {
         }
     }
 }
-var checkspaceName;
+let checkspaceName;
 function spaceNamecheck() {
     let spaceNamecheck = document.querySelector("#spaceNamecheck");
     let SpaceNameinput = document.querySelector("#SpaceName");
@@ -232,14 +232,14 @@ function spaceNamecheck() {
 
 
 
-var regexpNum = new RegExp(/^(0|[1-9][0-9]*)$/);
-var regexpNumpoint = new RegExp(/^(?!0+$)(?!0*\.0*$)\d{1,2}(\.\d{1,1})?$/);
+let regexpNum = new RegExp(/^(0|[1-9][0-9]*)$/);
+let regexpNumpoint = new RegExp(/^(?!0+$)(?!0*\.0*$)\d{1,2}(\.\d{1,1})?$/);
 
 
 let areacheckNum = $('#area').val();
 let MaxpeopleNum = $('#Maxpeople').val();
 
-var checkarea;
+let checkarea;
 function Numcheck() {
     let areacheckNum = $('#area').val();
     let areacheck = document.querySelector("#areacheck")
@@ -268,7 +268,7 @@ function Maxpeoplecheck() {
         Maxpeople.classList.add('border-danger');
     }
 }
-var checkSpacePrice;
+let checkSpacePrice;
 function SpacePricecheck() {
     let SpacePriceNum = $('#SpacePrice').val();
     let SpacePricelecheck= document.querySelector("#SpacePricelecheck")
@@ -284,7 +284,7 @@ function SpacePricecheck() {
         SpacePrice.classList.add('border-danger');
     }
 }
-var checkminSpacePrice;
+let checkminSpacePrice;
 function minSpacePricecheck() {
     let minSpacePriceNum = $('#minSpacePrice').val();
     let minSpacePricecheck = document.querySelector("#minSpacePricecheck")
@@ -300,7 +300,7 @@ function minSpacePricecheck() {
         minSpacePrice.classList.add('border-danger');
     }
 }
-var checkhourDiscounte;
+let checkhourDiscounte;
 function hourDiscountecheck() {
     let hourDiscountNum = $('#hourDiscount').val();
     let hourDiscountecheck = document.querySelector("#hourDiscountecheck")
@@ -317,7 +317,7 @@ function hourDiscountecheck() {
         hourDiscount.classList.add('border-danger');
     }
 }
-var checkDiscount;
+let checkDiscount;
 function Discountcheck() {
     let DiscountNum = $('#Discount').val();
     let Discountcheck = document.querySelector("#Discountcheck")
@@ -341,32 +341,32 @@ var Parking= CKEDITOR.replace('Parking');
 var ShootingEquipment =CKEDITOR.replace('ShootingEquipment');
 var Traffic=CKEDITOR.replace('Traffic');
 function submitCheck() {
-    var HourslistCheck = new Array();
-    for (var i = 0; i < Hourslist.length; i++) {
+    let HourslistCheck = new Array();
+    for (let i = 0; i < Hourslist.length; i++) {
         if (Hourslist[i].checked) {
             HourslistCheck.push(Hourslist[i]);
         }
     }
     let typeslistCheck = new Array();
-    for (var i = 0; i < typeslist.length; i++) {
+    for (let i = 0; i < typeslist.length; i++) {
         if (typeslist[i].checked) {
             typeslistCheck.push(typeslist[i]);
         }
     }
     let  AmenityDetailCheck = new Array();
-    for (var i = 0; i < AmenityDetaillist.length; i++) {
+    for (let i = 0; i < AmenityDetaillist.length; i++) {
         if (AmenityDetaillist[i].checked) {
             AmenityDetailCheck.push(AmenityDetaillist[i]);
         }
     }
     let CleaningOptionCheck = new Array();
-    for (var i = 0; i < CleaningOptionIDlist.length; i++) {
+    for (let i = 0; i < CleaningOptionIDlist.length; i++) {
         if (CleaningOptionIDlist[i].checked) {
             CleaningOptionCheck.push(CleaningOptionIDlist[i]);
         }
     }
     let CancellationCheck = new Array();
-    for (var i = 0; i < CancellationIDlist.length; i++) {
+    for (let i = 0; i < CancellationIDlist.length; i++) {
         if (CancellationIDlist[i].checked) {
             CancellationCheck.push(CancellationIDlist[i])
         }

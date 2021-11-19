@@ -1,10 +1,10 @@
-﻿var i;
-var split;
+﻿let i;
+let split;
 //抓地址的資料
 function trans() {
     i = 0;
     $("#target").val("");
-    var content = $('#city').val() + $('#district').val() + $('#address').val();
+    let content = $('#city').val() + $('#district').val() + $('#address').val();
     console.log(content);
     split = content.split("\n");
     delayedLoop();
@@ -20,16 +20,16 @@ function delayedLoop() {
 
 
 function addressToLatLng(addr) {
-    var geocoder = new google.maps.Geocoder();
+    let geocoder = new google.maps.Geocoder();
     geocoder.geocode({
         "address": addr
     }, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-            var content = $("#target").val();
+            let content = $("#target").val();
             $("#target").val(content + results[0].geometry.location.lat());
             $("#target2").val(content + results[0].geometry.location.lng());
-            var lat = $('#target').val();
-            var lng = $('#target2').val();
+            let lat = $('#target').val();
+            let lng = $('#target2').val();
             console.log(lat);
             console.log(lng);
         }
@@ -40,7 +40,7 @@ function addressToLatLng(addr) {
             Swal.fire("請求被拒絕!");
         }
         else {
-            var content = $("#target").val();
+            let content = $("#target").val();
 
             $("#target").val(content + addr + "查無經緯度，或系統發生錯誤！" + "\n");
         }
