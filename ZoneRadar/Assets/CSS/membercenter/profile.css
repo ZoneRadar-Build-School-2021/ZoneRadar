@@ -70,7 +70,10 @@ img {
         width: 50%;
     }
 }
-.saved-button{
+.form-control.is-invalid:focus, .was-validated .form-control:invalid:focus {
+    box-shadow: none !important;
+}
+.saved-button {
     margin-top: 5px;
 }
 .email-information{

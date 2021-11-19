@@ -1,8 +1,14 @@
 ﻿@model IEnumerable<HostCenterHistoryViewModel>
 @{
+    var a = Model.ToList();
+    var json = Newtonsoft.Json.JsonConvert.SerializeObject(a);
     ViewBag.Title = "SellerOrderCompleted";
 }
 
+
+<script>
+    console.log(@Html.Raw(Json.Encode(a)));
+</script>
 
 <div class="host-order container my-5">
     <div class="row">
@@ -225,7 +231,7 @@
 }
 
 <script>
-    let submit = document.querySelector("#search-date");
-    submit.addEventListener("click",)
+    //let submit = document.querySelector("#search-date");
+    //submit.addEventListener("click",)
     
 </script>

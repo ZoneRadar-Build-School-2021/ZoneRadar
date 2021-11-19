@@ -24,8 +24,8 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public String GetEcpayData(PaymentViewModel model)
         {
-            //var Url = "https://zoneradar-frontstage.azurewebsites.net";
-            var Url = "https://4dc6-1-164-226-35.ngrok.io";
+            var Url = "https://zoneradar-frontstage.azurewebsites.net";
+            //var Url = "https://4dc6-1-164-226-35.ngrok.io";
             AllInOne oPayment = new AllInOne();
             //var returnURL = "webapi/spaces/api/JSONAPI/GetEcpayData";
             /* 服務參數 */
@@ -39,7 +39,8 @@ namespace ZoneRadar.Services
             oPayment.Send.ReturnURL = Url + "/api/EcpayAPI/GetEcpayData";//付款完成通知回傳的網址
             oPayment.Send.ClientBackURL = Url +"/UserCenter/Pending";//瀏覽器端返回的廠商網址
             oPayment.Send.OrderResultURL = "";//瀏覽器端回傳付款結果網址
-            oPayment.Send.MerchantTradeNo = "ZoneRadar" + new Random().Next(0, 9).ToString() + DateTime.UtcNow.AddHours(8).ToString("yyMMddHHmm");//廠商的交易編號
+            oPayment.Send.MerchantTradeNo = "ZoneRadar" + new Random().Next(0, 9).ToString() + DateTime.UtcNow.AddHours(8).ToString("yyMMddHHmm");
+            //廠商的交易編號
             oPayment.Send.MerchantTradeDate = DateTime.UtcNow.AddHours(8).ToString("yyyy/MM/dd HH:mm:ss");//廠商的交易時間。
             oPayment.Send.TotalAmount = model.TotalMoney;//交易總金額
             oPayment.Send.TradeDesc = "交易描述";//交易描述
@@ -111,8 +112,8 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public int Get(int num) 
         {
-            var y = _repository.GetAll<Order>().FirstOrDefault(x=>x.OrderNumber == num );
-            if (y != null) 
+            var searchnum = _repository.GetAll<Order>().FirstOrDefault(x=>x.OrderNumber == num );
+            if (searchnum != null) 
             {
                 return Get(num++);
             }

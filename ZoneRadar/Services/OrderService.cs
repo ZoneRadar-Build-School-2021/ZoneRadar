@@ -218,7 +218,7 @@ namespace ZoneRadar.Services
         public void DeletePendingOrder(UsercenterPendingViewModel model)
         {
             var order = _repository.GetAll<Order>().FirstOrDefault(x => x.OrderID == model.OrderId && x.MemberID == model.MemberId);
-            if(order != null)
+            if (order != null)
             {
                 order.OrderStatusID = 5;
                 order.CancelDateTime = DateTime.UtcNow.AddHours(8);
@@ -239,13 +239,13 @@ namespace ZoneRadar.Services
         /// 取得訂單使用中資訊 (Jack)
         /// </summary>
         /// <returns></returns>
-        public List<ProcessingViewModel> GetHostCenter(int id) 
+        public List<ProcessingViewModel> GetHostCenter(int id)
         {
             var result = new List<ProcessingViewModel>();
-            var Orders = _repository.GetAll<Order>().Where(x=> x.OrderStatusID == 3 && x.Space.MemberID == id);
-            foreach (var order in Orders) 
+            var Orders = _repository.GetAll<Order>().Where(x => x.OrderStatusID == 3 && x.Space.MemberID == id);
+            foreach (var order in Orders)
             {
-                var resultdetail = new ProcessingViewModel{ orderdetailesforprcess = new List<OrderDetailesforPrcess>() };
+                var resultdetail = new ProcessingViewModel { orderdetailesforprcess = new List<OrderDetailesforPrcess>() };
                 foreach (var o in order.OrderDetail)
                 {
                     resultdetail.orderdetailesforprcess.Add(new OrderDetailesforPrcess
@@ -253,7 +253,7 @@ namespace ZoneRadar.Services
                         StratTime = o.StartDateTime,
                         EndTime = o.EndDateTime,
                         People = o.Participants,
-                        SinglePrice = PayMentService.OrderDetailPrice(o.EndDateTime.Subtract(o.StartDateTime).TotalHours,o.Order.Space.PricePerHour, o.Order.Space.SpaceDiscount.Any() ? o.Order.Space.SpaceDiscount.First().Hour : 1,o.Order.Space.SpaceDiscount.Any() ? o.Order.Space.SpaceDiscount.First().Discount : 0)
+                        SinglePrice = PayMentService.OrderDetailPrice(o.EndDateTime.Subtract(o.StartDateTime).TotalHours, o.Order.Space.PricePerHour, o.Order.Space.SpaceDiscount.Any() ? o.Order.Space.SpaceDiscount.First().Hour : 1, o.Order.Space.SpaceDiscount.Any() ? o.Order.Space.SpaceDiscount.First().Discount : 0)
                     });
                 }
                 result.Add(new ProcessingViewModel
@@ -283,7 +283,7 @@ namespace ZoneRadar.Services
         {
             var result = new List<HostCenterHistoryViewModel>();
             //訂單 ( 該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中 )
-            var orders = _repository.GetAll<Order>().Where(x => x.Space.MemberID == userid && x.OrderStatusID == 4 );
+            var orders = _repository.GetAll<Order>().Where(x => x.Space.MemberID == userid && x.OrderStatusID == 4);
             var reviews = _repository.GetAll<Review>().Where(x => orders.Select(order => order.OrderID).Contains(x.OrderID)).ToList();
             foreach (var order in orders.ToList())
             {
@@ -336,90 +336,78 @@ namespace ZoneRadar.Services
         /// <returns></returns>
         public List<HostCenterHistoryViewModel> GetHostCenterHistoryVM(HostCenterHistoryViewModel model, int userid)
         {
-            var DataTimePreset = new DateTime();
+            var DateTimePreset = new DateTime();
             var a = (model.SpaceName == null ? 0 : 1).ToString();
-            var b = (model.SearchDateTime == DataTimePreset ? 0 : 1).ToString();
+            var b = (model.SearchDateTime == DateTimePreset ? 0 : 1).ToString();
             var c = (model.UserName == null ? 0 : 1).ToString();
 
-            var Key = a+b+c;
+            var Key = a + b + c;
             var searchkey = new SearchData();
             var result = new List<HostCenterHistoryViewModel>();
-            if (int.Parse(a) > 0) 
-            { 
-                searchkey.SpaceName = model.SpaceName.Replace(" ","");
-            }
-            if (int.Parse(c) > 0) { 
-                searchkey.UserName = model.UserName.Replace(" ","");
-            }
-            //var sercharcdata = model.SearchDateTime.Any() ? model.SearchDateTime : null;
-            //searchkey.SearchDateTime = DateTime.Parse(sercharcdata);
+
+            searchkey.SpaceName = int.Parse(a) > 0 ? model.SpaceName.Replace(" ", "") : null;
+            searchkey.UserName = int.Parse(c) > 0 ? model.UserName.Replace(" ", "") : null;
+            searchkey.SearchDateTime = int.Parse(b) > 0 ? model.SearchDateTime : DateTimePreset;
+            //var SearchDateTimeAddDay = int.Parse(b) > 0 ? model.SearchDateTime.AddDays(1) : DateTimePreset;
+
             var orders = _repository.GetAll<Order>().Where(x => x.Space.MemberID == userid && x.OrderStatusID == 4);
             var reviews = _repository.GetAll<Review>().Where(x => orders.Select(order => order.OrderID).Contains(x.OrderID)).ToList();
-            var OrderDetails = _repository.GetAll<OrderDetail>().Where(x=>orders.Select(o=>o.OrderID).Contains(x.OrderID));
-            if (int.Parse(b) > 0) 
-            {
-                searchkey.SearchDateTime = model.SearchDateTime;
-            }
+            var OrderDetails = _repository.GetAll<OrderDetail>().Where(x => orders.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
 
             switch (Key)//switch (比對的運算式)
             {
-                case "000" ://狀況一走這個
-                    result = SearchDate(orders,reviews);
+                case "000":
+                    result = SearchDate(orders, reviews);
                     break;
                 case "100":
-                    var os100 = orders.Where(x => x.Space.SpaceName == searchkey.SpaceName);
-                    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
+                    var os100 = orders.Where(x => x.Space.SpaceName.Replace(" ","") == searchkey.SpaceName);
                     var rs100 = reviews.Where(x => os100.Select(o => o.OrderID).Contains(x.OrderID));
-                    result = SearchDate( os100, rs100);
+                    result = SearchDate(os100, rs100);
                     break;
                 case "101":
-                    var os101 = orders.Where(x => x.Space.SpaceName == searchkey.SpaceName && x.Member.Name == searchkey.UserName);
-                    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
+                    var os101 = orders.Where(x => x.Space.SpaceName.Replace(" ", "") == searchkey.SpaceName && x.Member.Name == searchkey.UserName);
                     var rs101 = _repository.GetAll<Review>().Where(x => os101.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
-                    result = SearchDate(os101,rs101);
+                    result = SearchDate(os101, rs101);
                     break;
                 case "001":
                     var os001 = orders.Where(x => x.Member.Name == searchkey.UserName);
-                    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
                     var rs001 = _repository.GetAll<Review>().Where(x => os001.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
                     result = SearchDate(os001, rs001);
                     break;
                 case "010":
-                    var od010 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime,searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x=>x.OrderID).ToList();
-                    var os010 = orders.Where(x=> od010.Contains(x.OrderID));
-                    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
+                    var od010 = OrderDetails.Where(x => x.StartDateTime.Date == searchkey.SearchDateTime.Date).Select(x => x.OrderID).ToList();
+                    //var od010 = OrderDetails.Where(x => x.StartDateTime < SearchDateTimeAddDay && x.StartDateTime >= searchkey.SearchDateTime).Select(x => x.OrderID).ToList();
+                    //var od010 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
+                    var os010 = orders.Where(x => od010.Contains(x.OrderID));
                     var rs010 = _repository.GetAll<Review>().Where(x => os010.Select(os => os.OrderID).Contains(x.OrderID));
-                    result = SearchDate(os010,rs010);
+                    result = SearchDate(os010, rs010);
                     break;
                 case "110":
-                    var od110 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
-                    var os110 = orders.Where(x => od110.Contains(x.OrderID) && x.Space.Member.Name == searchkey.UserName);
-                    //result = SearchDate(os010,rs010);(x => x.Space.SpaceName == searchkey.SpaceName && x.OrderDetail.Select(od=>od.StartDateTime).Contains(searchkey.SearchDateTime));
-                    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
+                    var od110 = OrderDetails.Where(x => x.StartDateTime.Date == searchkey.SearchDateTime.Date).Select(x => x.OrderID).ToList();
+                    //var od110 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
+                    var os110 = orders.Where(x => od110.Contains(x.OrderID) && x.Space.SpaceName.Replace(" ", "") == searchkey.SpaceName);
                     var rs110 = _repository.GetAll<Review>().Where(x => os110.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
-                    result = SearchDate(os110,rs110);
+                    result = SearchDate(os110, rs110);
                     break;
                 case "011":
-                    var od011 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
+                    var od011 = OrderDetails.Where(x => x.StartDateTime.Date == searchkey.SearchDateTime.Date).Select(x => x.OrderID).ToList();
+                    //var od011 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
                     var os011 = orders.Where(x => od011.Contains(x.OrderID) && x.Member.Name == searchkey.UserName);
-                    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
                     var rs011 = _repository.GetAll<Review>().Where(x => os011.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
-                    result = SearchDate(os011,rs011);
+                    result = SearchDate(os011, rs011);
                     break;
                 case "111":
-                    var od111 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
-                    var os111 = orders.Where(x => od111.Contains(x.OrderID) && x.Member.Name == searchkey.UserName && x.Space.SpaceName == searchkey.SpaceName);
-                    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
+                    var od111 = OrderDetails.Where(x => x.StartDateTime.Date == searchkey.SearchDateTime.Date).Select(x => x.OrderID).ToList();
+                    //var od111 = OrderDetails.Where(x => (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) <= 1 && (int)SqlFunctions.DateDiff("day", x.StartDateTime, searchkey.SearchDateTime) >= 0).Select(x => x.OrderID).ToList();
+                    var os111 = orders.Where(x => od111.Contains(x.OrderID) && x.Member.Name == searchkey.UserName && x.Space.SpaceName.Replace(" ", "") == searchkey.SpaceName);
                     var rs111 = _repository.GetAll<Review>().Where(x => os111.Select(o => o.OrderID).Contains(x.OrderID)).ToList();
                     result = SearchDate(os111, rs111);
-                    break;
-                default://以上都不符合走這個
                     break;
             }
 
             return result;
         }
-        
+
         /// <summary>
         /// 配合History篩選Switch Case() (Jack) 
         /// </summary>
@@ -492,60 +480,7 @@ namespace ZoneRadar.Services
             }
             return result;
         }
-        /// <summary>
-        /// 搜尋方法
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        //public List<HostCenterHistoryViewModel> GetHistoryData(Order orders)
-        //{
-        //    var result = new List<HostCenterHistoryViewModel>();
-        //    //訂單(該會員ID 且 訂單狀態是已完成 且 場地狀態是上架中)
-        //    var orders = _repository.GetAll<Order>().Where(x => x.Space.MemberID == userid && x.OrderStatusID == 4);
-        //    var reviews = _repository.GetAll<Review>().Where(x => orders.Select(order => order.OrderID).Contains(x.OrderID)).ToList();
-        //    foreach (var order in orders.ToList())
-        //    {
-        //        var resultDetail = new List<RentDetailViewModel>();
-        //        foreach (var orderdetail in order.OrderDetail)
-        //        {
-        //            var totalhours = (orderdetail.EndDateTime).Subtract(orderdetail.StartDateTime).TotalHours;
-        //            resultDetail.Add(new RentDetailViewModel
-        //            {
-        //                OrderDetailId = orderdetail.OrderDetailID,
-        //                OrderId = orderdetail.OrderID,
-        //                RentTime = orderdetail.StartDateTime.ToString("yyyy-MM-dd HH:mm"),
-        //                RentBackTime = orderdetail.EndDateTime.ToString("yyyy-MM-dd HH:mm"),
-        //                People = orderdetail.Participants,
-        //                Money = PayMentService.OrderDetailPrice(totalhours, orderdetail.Order.Space.PricePerHour, orderdetail.Order.Space.SpaceDiscount.Any() ? orderdetail.Order.Space.SpaceDiscount.First().Hour : 1, orderdetail.Order.Space.SpaceDiscount.Any() ? orderdetail.Order.Space.SpaceDiscount.First().Discount : 0),
-        //            });
-        //        }
-        //        //是否評價過
-        //        var hasReview = reviews.Where(x => x.ToHost == false).Any(x => x.OrderID == order.OrderID);
-        //        var totalReviews = reviews.Where(x => x.OrderID == order.OrderID && x.ToHost);
-        //        var score = totalReviews.Any() ? totalReviews.Average(x => x.Score) : 0;
-        //        result.Add(new HostCenterHistoryViewModel
-        //        {
-        //            SpaceId = order.SpaceID,
-        //            OrderNumber = (int)order.OrderNumber,
-        //            PaidTime = ((DateTime)order.PaymentDate).ToString("yyyy-MM-dd HH:mm"),
-        //            SpaceName = order.Space.SpaceName,
-        //            SpaceUrl = order.Space.SpacePhoto.First().SpacePhotoUrl,
-        //            OwnerName = order.Space.Member.Name,
-        //            OwnerPhone = order.Space.Member.Phone,
-        //            //評分 = 訂單到評分表 找到 場地ID = 訂單場地ID 且 Tohost是True的
-        //            Score = score,
-        //            TotalMoney = resultDetail.Select(x => x.Money).Sum(),
-        //            Email = order.Member.Email,
-        //            OrderId = order.OrderID,
-        //            RentDetail = resultDetail,
-        //            UserName = order.Member.Name,
-        //            ContactName = order.ContactName,
-        //            ContactPhone = order.ContactPhone,
-        //            HasReview = hasReview
-        //        });
-        //    }
-        //    return result;
-        //}
+
         public class SearchData
         {
             public string SpaceName { get; set; }

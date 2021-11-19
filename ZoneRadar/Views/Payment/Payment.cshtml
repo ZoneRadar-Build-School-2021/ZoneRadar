@@ -84,7 +84,7 @@
                 @*@Html.TextBox("聯絡人", ViewBag.StartDate as string, new { placeholder = "Start Date" })
                     @Html.TextBox("聯絡人電話", ViewBag.EndDate as string, new { placeholder = "End Date" })*@
 
-                <form action="~/Payment/Ecpayment" method="post" data-toggle="validator" id="Myform" onsubmit="return checkboxOnclick(this)">
+                <form action="~/Payment/Ecpayment" method="post" data-toggle="validator" id="Myform" class="was-validated">
                     <div class="row mb-3 mt-3">
                         <label for="validationServerUsername" class="col-2 form-label">聯絡人 </label>
                         <div class="col-6 col-sm-6">
